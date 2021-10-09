@@ -1,0 +1,68 @@
+body.rtl {
+  direction: rtl;
+  text-align: right;
+  overflow-x: hidden;
+}
+.rtl .list-inline {
+  padding-right: 0;
+}
+
+.rtl .list-unstyled {
+  padding-right: 0;
+}
+
+.rtl .dropdown-menu {
+  text-align: right;
+}
+
+.rtl .custom-control {
+  padding-right: 1.5rem;
+  padding-left: 0;
+}
+
+.rtl .custom-control-label::after,
+.rtl .custom-control-label::before {
+  right: -1.5rem;
+  left: auto;
+}
+
+.rtl .custom-switch .custom-control-label::after {
+  left: calc(-0.25rem + 2px);
+  right: auto;
+}
+
+.rtl .custom-checkbox input[type="checkbox"] {
+  margin: 7px -22px 0 3px;
+}
+
+.rtl .custom-checkbox label:before {
+  margin-left: 10px;
+  margin-right: 0;
+}
+
+.rtl .custom-checkbox input[type="checkbox"]:checked + label:after {
+  right: -24px;
+  top: 4px;
+}
+
+.rtl .custom-control {
+  padding-right: 1.5rem;
+  padding-left: 0;
+}
+
+.rtl .custom-control-label::after,
+.rtl .custom-control-label::before {
+  right: -1.5rem;
+  left: auto;
+}
+
+.rtl .custom-switch .custom-control-label::after {
+  left: calc(-0.25rem + 2px);
+  right: auto;
+}
+
+.rtl .sora-item .sora-num {
+  margin-left: 6px;
+  margin-right: 0;
+}
+

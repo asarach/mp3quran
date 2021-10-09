@@ -1,0 +1,383 @@
+body {
+	font-family: 'Droid Arabic Kufi', 'Open Sans', sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+	text-align: left;
+	background-color: #F0F1F5;
+}
+
+body.rtl {
+	text-align: right;
+	direction: rtl;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+.uni-icon {
+	width: 18px;
+}
+
+.list-unstyled {
+	padding: 0;
+}
+
+.multiselect {
+	min-height: 32px !important;
+}
+
+.multiselect__select {
+	width: 100% !important;
+	height: 32px !important;
+}
+
+.multiselect--active .multiselect__select {
+	transform: none !important;
+}
+
+.multiselect__select:before {
+	position: absolute !important;
+	left: 10px !important;
+	top: 10px !important;
+	right: auto !important;
+	border-width: 0.25em 0.25em 0 !important;
+	border-color: #212529 transparent transparent !important;
+	z-index: 1000;
+}
+
+.multiselect__placeholder {
+	margin-bottom: 0 !important;
+	padding-top: 0 !important;
+}
+
+.multiselect__input,
+.multiselect__single {
+	margin-bottom: 2px !important;
+	overflow: hidden;
+	height: 11px;
+}
+
+.multiselect__tags {
+	border-radius: 4px !important;
+	border: 1px solid rgba(0, 0, 0, 0.175) !important;
+	box-shadow: 0 -2px 0 rgba(0, 0, 0, 0.0375) inset;
+	min-height: 32px !important;
+	padding: 0.25rem 0.5rem 0.25rem 1.25rem !important;
+	text-align: right;
+}
+
+.multiselect__content-wrapper {
+	box-shadow: rgba(0, 0, 0, 0.125) 0 4px 8px !important;
+	background-color: rgb(255, 255, 255) !important;
+	border: 1px solid rgb(174, 186, 204) !important;
+	border-radius: 4px !important;
+	padding: 0.25rem !important;
+	text-align: right;
+}
+/*------------- notifications -----------------*/
+.iziToast-wrapper .iziToast {
+	background-color: $white;
+	border-radius: 2px;
+	overflow: hidden;
+	min-height: 65px;
+	padding: 14px 0 15px 45px;
+}
+
+.iziToast-wrapper .iziToast-capsule {
+	text-align: left !important;
+}
+
+.iziToast-wrapper .iziToast:after {
+	box-shadow: none;
+}
+
+.iziToast-wrapper .iziToast .iziToast-cover {
+	box-shadow: none;
+	border-radius: 50px;
+	margin-right: -55px;
+	background-color: $primary;
+	width: 65px !important;
+}
+
+.iziToast-wrapper .iziToast.danger .iziToast-cover {
+	background-color: $danger;
+}
+
+.iziToast-wrapper .iziToast.info .iziToast-cover {
+	background-color: $info;
+}
+
+.iziToast-wrapper .iziToast.warning .iziToast-cover {
+	background-color: $warning;
+}
+
+.iziToast-wrapper .iziToast.success .iziToast-cover {
+	background-color: $success;
+}
+/*------------- confirmation -----------------*/
+.confirmation .modal-content {
+	border: none;
+	border-radius: 4px;
+	background-color: $white;
+	box-shadow: 0 4px 8px rgba(0,0,0,0.125);
+}
+
+.confirmation .modal-title {
+	text-align: center;
+	font-size: 1.1rem;
+}
+
+.confirmation .modal-body {
+	padding: 2rem;
+	text-align: center;
+}
+
+.confirmation .modal-footer {
+	border: 0;
+	padding: 0.5rem !important;
+}
+
+.confirmation .modal-footer .confirm_btns {
+	margin: 0 auto;
+}
+
+.confirmation .modal-footer .btn {
+	margin: 10px;
+	padding: 5px 0;
+}
+
+.confirmation .modal-footer .btn img {
+	width: 21px;
+}
+
+.confirmation .modal-footer .btn-info {
+	float: right;
+}
+
+.rtl .confirmation .modal-footer .btn-info {
+	float: left;
+}
+
+.confirmation .modal-footer .btn-danger {
+	float: left;
+}
+
+.rtl .confirmation .modal-footer .btn-danger {
+	float: right;
+}
+/*------------- load-more -----------------*/
+
+.load-more {
+	width: 200px;
+	margin: 0 auto;
+	text-align: center;
+	padding: 2px;
+	border: 2px solid $white;
+	border-radius: 50px;
+}
+
+.load-more .btn {
+	width: 100%;
+	border-radius: 50px;
+	background-color: #fff;
+	border: none;
+}
+
+.load-more .btn:hover {
+	background-color: $blue;
+	color: $white;
+}
+/*------------- seo-bolat -----------------*/
+
+.seo-bolat {}
+
+.seo-bolat ul li {
+	margin-bottom: 10px;
+}
+
+.seo-bolat ul li div {
+	display: inline-block;
+}
+
+.seo-bolat ul li strong {
+	color: $blue;
+}
+
+.seo-bolat ul li span {
+	width: 10px;
+	height: 10px;
+	display: inline-block;
+	border-radius: 50%;
+	margin-left: 10px;
+}
+/*------------- loading-spinner -----------------*/
+.loading-spinner {
+	padding: 6rem 0;
+	text-align: center;
+}
+
+#content {
+	//display: none;
+}
+/*------------- loading-spinner -----------------*/
+
+.content-header {
+	h1 {
+		font-size: 24px;
+		line-height: 1.6;
+		margin-bottom: 0.5rem;
+	}
+}
+
+.content-header .breadcrumb {
+	background: #fff;
+	font-size: 13px;
+	padding: 0.625rem 0.75rem;
+}
+
+.content-header .breadcrumb .breadcrumb-item.active {
+	color: #d4dae0;
+}
+
+.content-header .breadcrumb-item + .breadcrumb-item::before {
+	color: #d4dae0;
+	padding-left: 0.5rem;
+}
+
+.ltr .content-header .breadcrumb-item + .breadcrumb-item::before {
+	padding-left: auto;
+	padding-right: 0.5rem;
+}
+
+.content-header .header-options {
+	position: absolute;
+	left: 0;
+	bottom: 1rem;
+	display: flex;
+
+	span {
+		margin: 0.5rem;
+		min-width: 4rem;
+		font-weight: 500;
+		color: #fff;
+		padding: 0.35rem;
+		border-radius: 20px;
+		cursor: pointer;
+	}
+}
+
+.index-stats {
+	text-align: center;
+	padding: 1rem;
+}
+
+.cookie__buttons__button--decline[data-v-7a32d5aa] {
+	margin-left: 10px;
+}
+
+.tip {
+	cursor: pointer;
+}
+
+.wp-120 {
+	width: 120px;
+}
+
+.form-prices {
+	background: #eee;
+	padding: 0.5rem 1rem 0;
+	border-radius: 12px;
+}
+
+.page-error {
+	background: #fff;
+	border-radius: 0.25rem;
+	padding: 4rem;
+	text-align: center;
+	box-shadow: 0 2px 3px rgba(0, 0, 0, 0.033);
+
+	.uni-icon {
+		width: 64px;
+	}
+}
+
+.change-role {
+	.dropdown-toggle {
+		width: 120px;
+		text-align: right;
+		position: relative;
+	}
+
+	.dropdown-toggle::after {
+		position: absolute;
+		left: 6px;
+		top: 12px;
+	}
+
+	.dropdown-menu {
+		text-align: right;
+
+		.dropdown-item {
+			font-weight: 500;
+			font-size: 14px;
+			padding: 6px 12px;
+		}
+	}
+}
+
+.vue-notification-group{
+	margin-bottom: 50px;
+  }
+  .mobile-notifications,
+  .desktop-notifications {
+	border-radius: 10px;
+	padding: 10px;
+	margin: 0 1rem 1rem;
+	font-size: 12px;
+	box-shadow: 0px 2px 8px 0px #a2a2a230;
+	border-right: 3px solid $primary;
+	color: #333;
+	text-align: right !important;
+  
+	.notification-title {
+	  // Style for title line
+	}
+  
+	.notification-content {
+	  // Style for content
+	}
+  
+	&.warn {
+	  border-right-color: $warning;
+	}
+  
+	&.error {
+	  border-right-color: $danger;
+	}
+  
+	&.success {
+	  border-right-color: $success;
+	}
+  }
+
+/* Large Devices, Wide Screens */
+@media only screen and (max-width : 1199.98px) {}
+/* Medium Devices, Desktops */
+@media only screen and (max-width : 991.98px) {}
+/* Small Devices, Tablets */
+@media only screen and (max-width : 767.98px) {
+	.content-header {
+		margin-bottom: 1.5rem;
+	}
+}
+/* Extra Small Devices, Phones */
+@media only screen and (max-width : 575.98px) {
+	.content-header .breadcrumb {
+		font-size: 14px;
+	}
+}
+/* Custom, iPhone Retina */
+@media only screen and (max-width : 320px) {
+	.content-header .breadcrumb {
+		font-size: 12px;
+	}
+}

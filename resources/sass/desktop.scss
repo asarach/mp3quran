@@ -1,0 +1,74 @@
+.desktop-ui {
+  background-color: #ebedee;
+
+  .top-bar {
+    height: 50px;
+  }
+
+  .main {
+    margin-top: 50px;
+    padding-bottom: 50px;
+  }
+
+  .desktop-sidebar {
+    padding: 1rem 0;
+    background: #fff;
+    box-shadow: 0px 2px 8px 0px #a2a2a230;
+    margin-bottom: 0.75rem;
+    border-radius: 10px;
+    margin-top: 1rem;
+    //z-index: 9999 !important;
+    display: block;
+    //height: 400px;
+
+    .menu-link {
+      display: block;
+      padding: 6px 8px;
+      color: #636a6f;
+      font-size: 13px;
+      span {
+        margin-right: 5px;
+      }
+      svg {
+        width: 20px;
+        fill: #636a6f;
+      }
+    }
+    .menu-link:hover,
+    .menu-link.active {
+      background-color: #f2f3f4;
+      border-right: 2px solid $primary;
+      margin-right: -2px;
+      color: #1d1f21;
+      svg {
+        width: 20px;
+        fill: $primary;
+        filter: drop-shadow(0 0px 2px #74a8bb5e);
+      }
+    }
+  }
+
+  footer {
+    padding: 0 0 4rem;
+    .container {
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid #eee;
+    }
+    .helpful-links {
+      text-align: center;
+      display: flex;
+      align-items: center;
+      ul {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+.rtl .desktop-ui .desktop-sidebar .menu-link {
+  font-size: 14px;
+}
+.rtl .desktop-ui .desktop-sidebar .menu-link span {
+  margin-left: 5px;
+}

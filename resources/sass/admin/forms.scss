@@ -1,0 +1,109 @@
+
+/* Custom checkbox */
+.custom-checkbox {
+  position: relative;
+}
+.custom-checkbox input[type="checkbox"] {
+  opacity: 0;
+  position: absolute;
+  margin: 5px 0 0 3px;
+  z-index: 9;
+}
+.custom-checkbox label:before{
+  width: 18px;
+  height: 18px;
+}
+.custom-checkbox label:before {
+  content: '';
+  margin-right: 10px;
+  display: inline-block;
+  vertical-align: text-top;
+  background: white;
+  border: 1px solid #bbb;
+  border-radius: 2px;
+  box-sizing: border-box;
+  z-index: 2;
+}
+.custom-checkbox input[type="checkbox"]:checked + label:after {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: 3px;
+  width: 6px;
+  height: 11px;
+  border: solid #000;
+  border-width: 0 3px 3px 0;
+  transform: inherit;
+  z-index: 3;
+  transform: rotateZ(45deg);
+}
+.custom-checkbox input[type="checkbox"]:checked + label:before {
+  border-color: #03A9F4;
+  background: #03A9F4;
+}
+.custom-checkbox input[type="checkbox"]:checked + label:after {
+  border-color: #fff;
+}
+.custom-checkbox input[type="checkbox"]:disabled + label:before {
+  color: #b8b8b8;
+  cursor: auto;
+  box-shadow: none;
+  background: #ddd;
+}
+
+.rtl .custom-control{
+      padding-right: 1.5rem;
+          padding-left: 0;
+}
+.rtl .custom-control-label::after,
+.rtl .custom-control-label::before{
+        right: -1.5rem;
+        left: auto;
+}
+
+.rtl .custom-switch .custom-control-label::after{
+  left: calc(-0.25rem + 2px);
+  right: auto;
+
+}
+.vdatetime-input{
+  width: 100% !important;
+}
+.soar-checkboxs{
+  .custom-checkbox{
+    display: inline-block;
+    width: 150px;
+    margin-top: .5rem;
+    border-bottom: 1px solid #dfdfdf;
+    .custom-control-input{
+      right: -.5rem;
+      left: auto;
+      cursor: pointer;
+    }
+    .custom-control-label::after{
+      right: -1.5rem;
+      top: .35rem !important;
+    }
+    .custom-control-label::before{
+      right: -2.5rem;
+    }
+  }
+  .custom-checkbox:first-child{
+    margin-left: -5px;
+  }
+  .dropdown{
+    position: absolute;
+    top: 0;
+    left: 15px;
+    .dropdown-toggle{
+      padding: 2px 4px;
+      line-height: 1;
+      background: #ed4054;
+      border: none;
+      font-weight: 700;
+    }
+    .dropdown-toggle::after{
+      display: none;
+    }
+  }
+}

@@ -1,0 +1,115 @@
+.tadabor-index {
+  .show-filters {
+    .form-group {
+      width: 240px;
+      margin: 0;
+    }
+
+    .multiselect__tags {
+      border-radius: 12px;
+    }
+  }
+  
+}
+.tadabor-pagination{
+  nav {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+}
+.tadabor-item {
+  padding: 0;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0px 2px 8px 0px #a2a2a230;
+  margin-bottom: 0.75rem;
+  border-radius: 10px;
+
+  .databor-image {
+    display: flex;
+    background: #f8f4e8;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      width: 100%;
+      max-width: 420px;
+    }
+  }
+
+  .databor-text {
+    padding: 1rem;
+    font-size: 22px;
+    line-height: 30px;
+    text-align: center;
+    font-family: Kitab, sans-serif;
+  }
+  .databor-options {
+    display: flex;
+    justify-content: center;
+    width: 360px;
+    margin: 1rem auto;
+    background-color: #ebedee4d;
+    border-bottom: 1px solid #e6e6e6;
+    border-radius: 30px;
+    box-shadow: 0px 2px 8px 0px #a2a2a247;
+
+    
+
+    .option-btn {
+      width: 50px;
+      cursor: pointer;
+      border-left: 1px solid #e6e6e6;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .ply-btn {
+      border-radius: 100px;
+      width: 32px;
+      height: 32px;
+      border: 2px solid #f5b44b;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+
+      .v-scale{
+        margin: 1px !important;
+        background-color: #e69e29 !important;
+      }
+
+      svg {
+        width: 28px;
+        height: 28px;
+        fill: #e69e29;
+      }
+    }
+
+    .show-share {
+      display: flex;
+      justify-content: center;
+
+      svg {
+        width: 32px;
+        height: 44px;
+      }
+    }
+    .show-share > span {
+      width: 50px;
+      height: 44px;
+      cursor: pointer;
+      border-left: 1px solid #e6e6e6;
+      text-align: center;
+    }
+    .show-share > span:last-child {
+      border-left: none;
+    }
+  }
+}
+
+.tadabor-show {
+}

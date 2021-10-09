@@ -1,0 +1,2713 @@
+[
+  {
+    "key": "getKeywords",
+    "content": {
+      "Description": [
+        {
+          "name": "API Name",
+          "val": "getKeywords"
+        },
+        {
+          "name": "Description",
+          "val": "This API lists out all the keywords that is used by the mp3quran.net for a specific language. These are the keywords which are required to be translated in the target language in order to use the mp3quran.net API's in the new language. For instance, in order for you to use the api in arabic, the following words are required to be tranlsated in the arabic language and saved in the mp3quran.net database. The below api is illustrated with an example of how the api would be look when the keywords are translated in arabic language. Following are the list of supported languages.<br> -----<br> العربية<br> English<br> Français<br> Русский<br> Deutsch<br> Español<br> Türkçe<br> 中文<br> ไทย<br> اردو<br> বাংলা<br> Bosanski<br> ئۇيغۇرچە<br> فارسى<br> Тоҷикӣ<br> മലയാളം<br> Tagalog<br> Indonesia<br> Português<br> Hausa<br> Kiswahili"
+        },
+        {
+          "name": "API Method",
+          "val": "HTTP GET<br> The below is illustrated with English and arabic as the target language of translation."
+        },
+        {
+          "name": "API Endpoint",
+          "val": "http://api.mp3quran.net/api/translations"
+        }
+      ],
+      "Inputs": [
+        {
+          "root": "",
+          "parameters": "languages",
+          "description": "\"Contains the language against which the API was invoked . \t\t\t\t\t\t\t\t\nValid values include the 21 languages which the API supports\"",
+          "ocuurances": "Minimum 1",
+          "example": "ar, en, fr, ru, de, es, tr, cn, th, ur, bn, bs, ug, fa, tg, ml, tl, id, pt, ha, sw \t\t\t\t\t\t\t\t\nEx: http://api.mp3quran.net/api/translations?languages=en"
+        }
+      ],
+      "Outputs": [
+        {
+          "root": "validLanguage",
+          "parameters": "language",
+          "description": "The translation of the word 'language' in the target language.",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "For instance, the translation of the word language in arabic is اللغة , and in english is 'language' itself ."
+        },
+        {
+          "root": "",
+          "parameters": "quran",
+          "description": "The translation of the word 'Quran' in the target language.",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "For instance , quran can be called as    \"القران الكريم\"   in arabic or 'The Noble Quran' in english."
+        },
+        {
+          "root": "",
+          "parameters": "reciters",
+          "description": "The translation of the word 'reciters' in the target language.",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "For instance the word 'reciters' can be translated as \"القرا in arabic, and as reciters in ENGLISH."
+        },
+        {
+          "root": "",
+          "parameters": "sura",
+          "description": "The translation of the word 'sura' in the target language.",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "Surah (in english) , سورة (in arabic)"
+        },
+        {
+          "root": "",
+          "parameters": "suras",
+          "description": "The translation of the word 'suras' in the target language.",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "Suras (in english) , السور (In arabic)"
+        },
+        {
+          "root": "",
+          "parameters": "surah_no",
+          "description": "The translation of the word 'surah_no' in the target language. Refers to the number of the surah.",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "Surah No. (in english) , رقم السورة (in arabic)"
+        },
+        {
+          "root": "",
+          "parameters": "surah_name",
+          "description": "The translation of the word 'Surah Name ' in the target language.",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "Surah Name (in english) , اسم السورة (in arabic)"
+        },
+        {
+          "root": "",
+          "parameters": "complete_quran",
+          "description": "The translation of the word 'Complete Qur'an ' in the target language.",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'المصحف كاملا'"
+        },
+        {
+          "root": "",
+          "parameters": "listen",
+          "description": "The translation of the word 'Listen ' in the target language.",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'للاستماع'"
+        },
+        {
+          "root": "",
+          "parameters": "download",
+          "description": "The translation of the word 'Download  ' in the target language.",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'اضغط هنا للتحميل'"
+        },
+        {
+          "root": "",
+          "parameters": "email1",
+          "description": "Information shown in display screen as \"To send a message please  complete the form \"",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'لارسال رسالة الى ادارة الموقع فضلاً تعبئة الحقول التالية ثم الضغط على ارسال.'"
+        },
+        {
+          "root": "",
+          "parameters": "name",
+          "description": "The translation of the word 'Name ' in the target language. This is used in the form when submitting.",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'الاسم'"
+        },
+        {
+          "root": "",
+          "parameters": "email",
+          "description": "The translation of the word 'Email ' in the target language. This is used in the form when submitting.",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'البريد الالكتروني'"
+        },
+        {
+          "root": "",
+          "parameters": "subject",
+          "description": "The translation of the word 'Subject ' in the target language. This is used in the form when submitting.",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'عنوان الرسالة'"
+        },
+        {
+          "root": "",
+          "parameters": "select_subject",
+          "description": "The translation of the word 'Please select one ' in the target language.",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'اختر العنوان المناسب من القائمة'"
+        },
+        {
+          "root": "",
+          "parameters": "suggestion",
+          "description": "The translation of the word 'Suggestion ' in the target language. This is used in the form when submitting the suggestion.",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'اقتراح'"
+        },
+        {
+          "root": "",
+          "parameters": "sampleing_reciter",
+          "description": "The translation of the word 'Requesting reciter   ' in the target language.",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'طلب اضافة قارئ'"
+        },
+        {
+          "root": "",
+          "parameters": "error",
+          "description": "The translation of the word 'Error' in the target language.",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'رابط لا يعمل'"
+        },
+        {
+          "root": "",
+          "parameters": "complaint",
+          "description": "The translation of the word 'Complaint' in the target language.",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'شكوى'"
+        },
+        {
+          "root": "",
+          "parameters": "compliment",
+          "description": "The translation of the word 'Compliment' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'شكر'"
+        },
+        {
+          "root": "",
+          "parameters": "others",
+          "description": "The translation of the word 'Others ' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'أخرى'"
+        },
+        {
+          "root": "",
+          "parameters": "message",
+          "description": "The translation of the word 'Message' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'الرسالة'"
+        },
+        {
+          "root": "",
+          "parameters": "send",
+          "description": "The translation of the word 'Send' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'إرسال'"
+        },
+        {
+          "root": "",
+          "parameters": "email_thanks",
+          "description": "The translation of the word 'Thank you.... Your message  has been sent successfully ' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'شكراً لك ،،، لقد تم ارسال رسالتك و سنقوم بالرد عليك قريباً'"
+        },
+        {
+          "root": "",
+          "parameters": "donate",
+          "description": "The translation of the word 'Donate' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'التبرع للموقع'"
+        },
+        {
+          "root": "",
+          "parameters": "donate_text",
+          "description": "Thank You! Dear Brothers & Sisters. We have created an account to collect any donations you wish to make to support MP3quran.net.",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'للتبرع للموقع يمكنك الضغط على هذا الرابط و اختيار المبلغ الذي ترغب بالتبرع به للموقع.'"
+        },
+        {
+          "root": "",
+          "parameters": "add",
+          "description": "The translation of the word 'Add' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'أضف'"
+        },
+        {
+          "root": "",
+          "parameters": "add_playlist",
+          "description": "The translation of the word 'Add PlayList' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'أضافة قائمة تشغيل'"
+        },
+        {
+          "root": "",
+          "parameters": "cancel",
+          "description": "The translation of the word 'Cancel' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'إلغاء'"
+        },
+        {
+          "root": "",
+          "parameters": "email_provider",
+          "description": "The translation of the word 'Choose an email provider:' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'اختر مزود خدمة البريد الإلكتروني:'"
+        },
+        {
+          "root": "",
+          "parameters": "create_new_playlist",
+          "description": "The translation of the word 'Create new PlayList' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'إنشاء قائمة جديدة'"
+        },
+        {
+          "root": "",
+          "parameters": "delete",
+          "description": "The translation of the word 'Delete' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'حذف'"
+        },
+        {
+          "root": "",
+          "parameters": "developed_by",
+          "description": "The translation of the word 'Developed by' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'تصميم وتطوير'"
+        },
+        {
+          "root": "",
+          "parameters": "ok",
+          "description": "The translation of the word 'Ok' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'موافق'"
+        },
+        {
+          "root": "",
+          "parameters": "change_language_restart",
+          "description": "The translation of the word 'Change language and restart the app ?' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'سيتم تغيير اللغة وإعادة تشغيل التطبيق، استمرار؟'"
+        },
+        {
+          "root": "",
+          "parameters": "change_language",
+          "description": "The translation of the word 'Change language' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'تغيير اللغة'"
+        },
+        {
+          "root": "",
+          "parameters": "deleting_tracks",
+          "description": "The translation of the word 'Deleting Tracks' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'حذف الملفات الصوتية'"
+        },
+        {
+          "root": "",
+          "parameters": "continue_tilawa_till",
+          "description": "The translation of the word 'Continue Tilawa till' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'متابعة التلاوة حتى'"
+        },
+        {
+          "root": "",
+          "parameters": "minutes",
+          "description": "The translation of the word 'Minute(s)' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'دقيقة'"
+        },
+        {
+          "root": "",
+          "parameters": "can_not_empty",
+          "description": "The translation of the word 'Can not be empty' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'يجب أن لا تبقى فارغة'"
+        },
+        {
+          "root": "",
+          "parameters": "about",
+          "description": "The translation of the word 'About' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'عن التطبيق'"
+        },
+        {
+          "root": "",
+          "parameters": "browse_quran",
+          "description": "The translation of the word 'Browse Quran' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'تصفح المصحف'"
+        },
+        {
+          "root": "",
+          "parameters": "favorite",
+          "description": "The translation of the word 'Favourites' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'المفضلة'"
+        },
+        {
+          "root": "",
+          "parameters": "live_broadcast",
+          "description": "The translation of the word 'Live BroadCast' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'البث المباشر'"
+        },
+        {
+          "root": "",
+          "parameters": "my_quran",
+          "description": "The translation of the word 'My Quran' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'مصحفي'"
+        },
+        {
+          "root": "",
+          "parameters": "playlist",
+          "description": "The translation of the word 'Play List' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) ' قائمة التشغيل'"
+        },
+        {
+          "root": "",
+          "parameters": "quran_radio",
+          "description": "The translation of the word 'Quran Radio' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'إذاعات القرآن الكريم'"
+        },
+        {
+          "root": "",
+          "parameters": "settings",
+          "description": "The translation of the word 'Settings' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'الإعدادات'"
+        },
+        {
+          "root": "",
+          "parameters": "video",
+          "description": "The translation of the word 'Video' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'الفيديو'"
+        },
+        {
+          "root": "",
+          "parameters": "edit",
+          "description": "The translation of the word 'Edit' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'تعديل'"
+        },
+        {
+          "root": "",
+          "parameters": "edit_playlist",
+          "description": "The translation of the word 'Edit PlayList' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'تعديل القائمة'"
+        },
+        {
+          "root": "",
+          "parameters": "playlist_name",
+          "description": "The translation of the word 'Please Enter PlayList Name' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'رجاء، أدخل اسم القائمة'"
+        },
+        {
+          "root": "",
+          "parameters": "empty_list",
+          "description": "The translation of the word 'empty list' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'القائمة فارغة'"
+        },
+        {
+          "root": "",
+          "parameters": "listen_to",
+          "description": "The translation of the word 'Listen to' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'استمع لـ'"
+        },
+        {
+          "root": "",
+          "parameters": "server_connection_failed",
+          "description": "The translation of the word 'Server Connection Failed' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'فشل الإتصال بالسيرفر'"
+        },
+        {
+          "root": "",
+          "parameters": "download_completed",
+          "description": "The translation of the word 'Download Completed' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'التحميل اكتمل'"
+        },
+        {
+          "root": "",
+          "parameters": "download_failed",
+          "description": "The translation of the word 'Download failed' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'التحميل فشل'"
+        },
+        {
+          "root": "",
+          "parameters": "no_tilawa_downloaded",
+          "description": "The translation of the word 'There is no Tilawa downloaded' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'لم يتم تحميل أي تلاوات'"
+        },
+        {
+          "root": "",
+          "parameters": "no_playlist_added",
+          "description": "The translation of the word 'There is no playlist added' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'لم يتم إضافة أي قوائم'"
+        },
+        {
+          "root": "",
+          "parameters": "re_download_file",
+          "description": "The translation of the word 'Please re-download the file as it was deleted from memory' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'برجاء إعادة التحميل لانه تم حذف المادة من الذاكرة'"
+        },
+        {
+          "root": "",
+          "parameters": "continue_now",
+          "description": "The translation of the word 'You can continue now' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'يمكنك المتابعة الآن'"
+        },
+        {
+          "root": "",
+          "parameters": "download_permission",
+          "description": "The translation of the word 'Can not download without a permission' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'للتحميل، ينبغي أخذ الأذن لذلك'"
+        },
+        {
+          "root": "",
+          "parameters": "external_storage",
+          "description": "The translation of the word 'External storage needed for downloads' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'الذاكرة الخارجية مطلوبة لحفظ التحميلات'"
+        },
+        {
+          "root": "",
+          "parameters": "sampleing_data",
+          "description": "The translation of the word 'Requesting data' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'جاري تحديث البيانات'"
+        },
+        {
+          "root": "",
+          "parameters": "already_exists_playlist",
+          "description": "The translation of the word 'Track already exists in this playlist!' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'السورة موجودة بالفعل في قائمه التشغيل هذه'"
+        },
+        {
+          "root": "",
+          "parameters": "no_internet_available",
+          "description": "The translation of the word ' No Internet Connection Available' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'الاتصال بالإنترنت غير متاح'"
+        },
+        {
+          "root": "",
+          "parameters": "update",
+          "description": "The translation of the word 'Update' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'تحديث'"
+        },
+        {
+          "root": "",
+          "parameters": "play_queue",
+          "description": "The translation of the word 'Play queue' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'قائمة التشغيل الحالية'"
+        },
+        {
+          "root": "",
+          "parameters": "choose_playlist",
+          "description": "The translation of the word 'Choose Playlist' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'اختر قائمة تشغيل'"
+        },
+        {
+          "root": "",
+          "parameters": "no_playlist_currently",
+          "description": "The translation of the word 'You do not have any playlist currently' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'قوائم التشغيل الحالية فارغة'"
+        },
+        {
+          "root": "",
+          "parameters": "radio",
+          "description": "The translation of the word 'Radio' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'إذاعة'"
+        },
+        {
+          "root": "",
+          "parameters": "reciter",
+          "description": "The translation of the word 'Reciter' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'القارىء'"
+        },
+        {
+          "root": "",
+          "parameters": "no_reciters",
+          "description": "The translation of the word 'no reciters' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'لا يوجد قراء'"
+        },
+        {
+          "root": "",
+          "parameters": "service_not_available",
+          "description": "The translation of the word 'Service is not available' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'الخدمة غير متاحة'"
+        },
+        {
+          "root": "",
+          "parameters": "autoplay_next_surahs",
+          "description": "The translation of the word 'AutoPlay Next Surahs' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'التشغيل التلقائى للسورة التالية'"
+        },
+        {
+          "root": "",
+          "parameters": "download_android_app",
+          "description": "The translation of the word 'Download Android app:' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'حمّل التطبيق للأندرويد:'"
+        },
+        {
+          "root": "",
+          "parameters": "download_ios_app",
+          "description": "The translation of the word 'Download iOS app:' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'حمّل التطبيق للأيفون:'"
+        },
+        {
+          "root": "",
+          "parameters": "stop",
+          "description": "The translation of the word 'Stop' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'إيقاف'"
+        },
+        {
+          "root": "",
+          "parameters": "surah",
+          "description": "The translation of the word 'Surah' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'سورة'"
+        },
+        {
+          "root": "",
+          "parameters": "bookmarks",
+          "description": "The translation of the word 'Bookmarks' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'الفواصل'"
+        },
+        {
+          "root": "",
+          "parameters": "surah_index",
+          "description": "The translation of the word 'Surah Index' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'الفهرس'"
+        },
+        {
+          "root": "",
+          "parameters": "filter",
+          "description": "The translation of the word 'filter' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'بحث'"
+        },
+        {
+          "root": "",
+          "parameters": "version",
+          "description": "The translation of the word 'Version' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'الإصدار'"
+        },
+        {
+          "root": "",
+          "parameters": "waiting",
+          "description": "The translation of the word 'Waiting...' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'يرجى الإنتظار...'"
+        },
+        {
+          "root": "",
+          "parameters": "downloads",
+          "description": "The translation of the word 'Downloads' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'مصحفي'"
+        },
+        {
+          "root": "",
+          "parameters": "contact_us",
+          "description": "The translation of the word 'Contact us' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'تواصل معنا'"
+        },
+        {
+          "root": "",
+          "parameters": "chapters_list",
+          "description": "The translation of the word 'Chapters list' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) ' قائمة السور'"
+        },
+        {
+          "root": "",
+          "parameters": "back",
+          "description": "The translation of the word 'Back' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) ' رجوع'"
+        },
+        {
+          "root": "",
+          "parameters": "hide",
+          "description": "The translation of the word 'Hide' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) ' إخفاء'"
+        },
+        {
+          "root": "",
+          "parameters": "currently_no_downloads",
+          "description": "The translation of the word 'You Currently Have No Downloads' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'لم يتم تحميل أي تلاوات'"
+        },
+        {
+          "root": "",
+          "parameters": "currently_no_playlists",
+          "description": "The translation of the word 'You Currently Have No Playlists' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'ليس لديك قوائم تشغيل حاليا'"
+        },
+        {
+          "root": "",
+          "parameters": "add_new_playlist",
+          "description": "The translation of the word 'Add new Playlist' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) ' إضافة قائمة تشغيل'"
+        },
+        {
+          "root": "",
+          "parameters": "options",
+          "description": "The translation of the word 'Options' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) ' الخيارات'"
+        },
+        {
+          "root": "",
+          "parameters": "next_surah",
+          "description": "The translation of the word 'Next Surah' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'السورة التالية'"
+        },
+        {
+          "root": "",
+          "parameters": "previous_surah",
+          "description": "The translation of the word 'Previous Surah' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'السورة السابقة'"
+        },
+        {
+          "root": "",
+          "parameters": "download_surah",
+          "description": "The translation of the word 'Download Surah' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'تحميل السورة '"
+        },
+        {
+          "root": "",
+          "parameters": "pause_surah_downloading",
+          "description": "The translation of the word 'Pause Surah Downloading' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'إيقاف مؤقت لتحميل السورة'"
+        },
+        {
+          "root": "",
+          "parameters": "resume_surah_downloading",
+          "description": "The translation of the word 'Resume Surah Downloading' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'استكمال تحميل السورة'"
+        },
+        {
+          "root": "",
+          "parameters": "add_to_playlist",
+          "description": "The translation of the word 'Add to Playlist' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'إضافة لقائمة تشغيل'"
+        },
+        {
+          "root": "",
+          "parameters": "save",
+          "description": "The translation of the word 'Save' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'حفظ'"
+        },
+        {
+          "root": "",
+          "parameters": "listen_to_surah",
+          "description": "The translation of the word 'Listen to Surah' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'استمع إلى سورة'"
+        },
+        {
+          "root": "",
+          "parameters": "dismiss",
+          "description": "The translation of the word 'Dismiss' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'إغلاق'"
+        },
+        {
+          "root": "",
+          "parameters": "downloading_started",
+          "description": "The translation of the word 'Downloading Started' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'جاري بدء التحميل'"
+        },
+        {
+          "root": "",
+          "parameters": "downloading_resumed",
+          "description": "The translation of the word 'Downloading Resumed' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'جاري استكمال التحميل '"
+        },
+        {
+          "root": "",
+          "parameters": "downloading_completed",
+          "description": "The translation of the word 'Downloading Completed' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'التحميل اكتمل'"
+        },
+        {
+          "root": "",
+          "parameters": "add_files_playlist",
+          "description": "The translation of the word 'Add Files To Play List ' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'إضافة قائمة تجمع فيها سورك المفضلة'"
+        },
+        {
+          "root": "",
+          "parameters": "added_to_playlist",
+          "description": "The translation of the word 'Added to Playlist' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'تم الإضافة الي قائمه التشغيل'"
+        },
+        {
+          "root": "",
+          "parameters": "allow_download_3g",
+          "description": "The translation of the word 'Allow download using 3G' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'السماح بالتحميل على 3G'"
+        },
+        {
+          "root": "",
+          "parameters": "search",
+          "description": "The translation of the word 'Search' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'بحث'"
+        },
+        {
+          "root": "",
+          "parameters": "internet_connection_failure",
+          "description": "The translation of the word 'Internet Connection Failure' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'فشل الاتصال بالانترنت'"
+        },
+        {
+          "root": "",
+          "parameters": "server_connection_error",
+          "description": "The translation of the word 'Server Connection Error' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'فشل الإتصال بالسرفير'"
+        },
+        {
+          "root": "",
+          "parameters": "check_internet_connection",
+          "description": "The translation of the word 'Check Internet Connection' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'رجاء ، فحص الإتصال بالإنترنت'"
+        },
+        {
+          "root": "",
+          "parameters": "choose_language",
+          "description": "The translation of the word 'Choose Language' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'اختر لغة'"
+        },
+        {
+          "root": "",
+          "parameters": "downloading_not_available",
+          "description": "The translation of the word 'Downloading Is Not Available' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'التحميل غير مُفْعَل'"
+        },
+        {
+          "root": "",
+          "parameters": "resume_download_3g",
+          "description": "The translation of the word 'Resume Download On 3G' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'استكمال التحميل على الشبكة الخلوية'"
+        },
+        {
+          "root": "",
+          "parameters": "downloading_stoped",
+          "description": "The translation of the word 'Downloading Stoped ' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'تم إيقاف التحميل'"
+        },
+        {
+          "root": "",
+          "parameters": "delete_selected_track",
+          "description": "You are going to delete selected track, continue?",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'سيتم حذف الملف المحدد، استمرار؟'"
+        },
+        {
+          "root": "",
+          "parameters": "connection_settings",
+          "description": "\"Connection may be not allow to establish this downloading session, you may review settings\\r\\n page to enable downloading over cellular connection\"",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "\"(In arabic) 'ربما يكونالاتصال غير مهيأ لإجراء عملية التحميل هذه ، ربما تحتاج لمراجعة صفحة الإعدادات"
+        },
+        {
+          "root": "لتمكين التحميل من خلال الشبكة الخلوية'\"",
+          "parameters": "",
+          "description": "",
+          "ocuurances": "",
+          "example": ""
+        },
+        {
+          "root": "",
+          "parameters": "playlist_rules",
+          "description": "The translation of the word 'Playlist name must be more than 2 characters' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'اسم القائمة لابد يكون أكبر من حرفين'"
+        },
+        {
+          "root": "",
+          "parameters": "mail_not_available",
+          "description": "The translation of the word 'Mail services are not available' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'خدمة الإيميل غير متوفرة'"
+        },
+        {
+          "root": "",
+          "parameters": "Im_listing_surah",
+          "description": "The translation of the word 'I'm Listing to Surah: ' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'أنا أستمع إلى سورة'"
+        },
+        {
+          "root": "",
+          "parameters": "for_reciter",
+          "description": "The translation of the word 'For Reciter' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'للقارئ: '"
+        },
+        {
+          "root": "",
+          "parameters": "using_mp3quran",
+          "description": "The translation of the word 'Using MP3Quran' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'بواسطة تطبيق MP3Quran'"
+        },
+        {
+          "root": "",
+          "parameters": "re_connect_again",
+          "description": "The translation of the word 'Please Try to Re-Connect Again!' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'من فضلك، أعد الاتصال مرة أخرى'"
+        },
+        {
+          "root": "",
+          "parameters": "makkah_tv",
+          "description": "The translation of the word 'Qur'an TV Channel (Makkah)' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'قناة القرآن الكريم (مكة المكرمة)'"
+        },
+        {
+          "root": "",
+          "parameters": "madinah_tv",
+          "description": "The translation of the word 'Sunnah TV Channel ( Madinah)' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'قناة السنة النبوية (المدينة المنورة)'"
+        },
+        {
+          "root": "",
+          "parameters": "adding_done_susseccfully",
+          "description": "The translation of the word 'Adding Done Susseccfully' in the target language",
+          "ocuurances": "Minimum 1 to maximum 3 words.",
+          "example": "(In arabic) 'تمت عملية الإضافة بنجاح'"
+        },
+        {
+          "root": "",
+          "parameters": "sura1",
+          "description": "The name of Surah  'Al-Fatihah' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'الفاتحة'"
+        },
+        {
+          "root": "",
+          "parameters": "sura2",
+          "description": "The name of Surah  'Al-Baqarah' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'البقرة'"
+        },
+        {
+          "root": "",
+          "parameters": "sura3",
+          "description": "The name of Surah  'Al-Imran' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'آل عمران'"
+        },
+        {
+          "root": "",
+          "parameters": "sura4",
+          "description": "The name of Surah  'An-Nisa'' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'النساء'"
+        },
+        {
+          "root": "",
+          "parameters": "sura5",
+          "description": "The name of Surah  'Al-Ma'idah' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'المائدة'"
+        },
+        {
+          "root": "",
+          "parameters": "sura6",
+          "description": "The name of Surah  'Al-An'am' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'الأنعام'"
+        },
+        {
+          "root": "",
+          "parameters": "sura7",
+          "description": "The name of Surah  'Al-A'raf' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'الأعراف'"
+        },
+        {
+          "root": "",
+          "parameters": "sura8",
+          "description": "The name of Surah  'Al-Anfal' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'الأنفال'"
+        },
+        {
+          "root": "",
+          "parameters": "sura9",
+          "description": "The name of Surah  'At-Taubah' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'التوبة'"
+        },
+        {
+          "root": "",
+          "parameters": "sura10",
+          "description": "The name of Surah  'Yunus' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'يونس'"
+        },
+        {
+          "root": "",
+          "parameters": "sura11",
+          "description": "The name of Surah  'Hood' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'هود'"
+        },
+        {
+          "root": "",
+          "parameters": "sura12",
+          "description": "The name of Surah  'Yusuf' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'يوسف'"
+        },
+        {
+          "root": "",
+          "parameters": "sura13",
+          "description": "The name of Surah  'Ar-Ra'd' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'الرعد'"
+        },
+        {
+          "root": "",
+          "parameters": "sura14",
+          "description": "The name of Surah  'Ibrahim' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'إبراهيم'"
+        },
+        {
+          "root": "",
+          "parameters": "sura15",
+          "description": "The name of Surah  'Al-Hijr' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'الحجر'"
+        },
+        {
+          "root": "",
+          "parameters": "sura16",
+          "description": "The name of Surah  'An-Nahl' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'النحل'"
+        },
+        {
+          "root": "",
+          "parameters": "sura17",
+          "description": "The name of Surah  'Al-Isra' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'الإسراء'"
+        },
+        {
+          "root": "",
+          "parameters": "sura18",
+          "description": "The name of Surah  'Al-Kahf' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'الكهف'"
+        },
+        {
+          "root": "",
+          "parameters": "sura19",
+          "description": "The name of Surah  'Maryam' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'مريم'"
+        },
+        {
+          "root": "",
+          "parameters": "sura20",
+          "description": "The name of Surah  'Ta­Ha' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'طه'"
+        },
+        {
+          "root": "",
+          "parameters": "sura21",
+          "description": "The name of Surah  'Al-Anbiya'' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'الأنبياء'"
+        },
+        {
+          "root": "",
+          "parameters": "sura22",
+          "description": "The name of Surah  'Al-Hajj' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'الحج'"
+        },
+        {
+          "root": "",
+          "parameters": "sura23",
+          "description": "The name of Surah  'Al-Mu'minun' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'المؤمنون'"
+        },
+        {
+          "root": "",
+          "parameters": "sura24",
+          "description": "The name of Surah  'An-Nur' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'النّور'"
+        },
+        {
+          "root": "",
+          "parameters": "sura25",
+          "description": "The name of Surah  'Al-Furqan' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'الفرقان'"
+        },
+        {
+          "root": "",
+          "parameters": "sura26",
+          "description": "The name of Surah  'Ash-Shu'ara'' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'الشعراء'"
+        },
+        {
+          "root": "",
+          "parameters": "sura27",
+          "description": "The name of Surah  'An-Naml' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'النّمل'"
+        },
+        {
+          "root": "",
+          "parameters": "sura28",
+          "description": "The name of Surah  'Al-Qasas' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'القصص'"
+        },
+        {
+          "root": "",
+          "parameters": "sura29",
+          "description": "The name of Surah  'Al-'Ankabut' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'العنكبوت'"
+        },
+        {
+          "root": "",
+          "parameters": "sura30",
+          "description": "The name of Surah  'Ar­Room' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'الرّوم'"
+        },
+        {
+          "root": "",
+          "parameters": "sura31",
+          "description": "The name of Surah  'Luqman' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'لقمان'"
+        },
+        {
+          "root": "",
+          "parameters": "sura32",
+          "description": "The name of Surah  'As­Sajdah' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'السجدة'"
+        },
+        {
+          "root": "",
+          "parameters": "sura33",
+          "description": "The name of Surah  'Al­Ahzab' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'الأحزاب'"
+        },
+        {
+          "root": "",
+          "parameters": "sura34",
+          "description": "The name of Surah  'Saba'' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'سبأ'"
+        },
+        {
+          "root": "",
+          "parameters": "sura35",
+          "description": "The name of Surah  'Fatir' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'فاطر'"
+        },
+        {
+          "root": "",
+          "parameters": "sura36",
+          "description": "The name of Surah  'Ya­Sin' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'يس'"
+        },
+        {
+          "root": "",
+          "parameters": "sura37",
+          "description": "The name of Surah  'As-Saffat' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'الصافات'"
+        },
+        {
+          "root": "",
+          "parameters": "sura38",
+          "description": "The name of Surah  'Sad' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'ص'"
+        },
+        {
+          "root": "",
+          "parameters": "sura39",
+          "description": "The name of Surah  'Az-Zumar' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'الزمر'"
+        },
+        {
+          "root": "",
+          "parameters": "sura40",
+          "description": "The name of Surah  'Ghafir' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'غافر'"
+        },
+        {
+          "root": "",
+          "parameters": "sura41",
+          "description": "The name of Surah  'Fussilat' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'فصّلت'"
+        },
+        {
+          "root": "",
+          "parameters": "sura42",
+          "description": "The name of Surah  'Ash-Shura' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'الشورى'"
+        },
+        {
+          "root": "",
+          "parameters": "sura43",
+          "description": "The name of Surah  'Az-Zukhruf' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'الزخرف'"
+        },
+        {
+          "root": "",
+          "parameters": "sura44",
+          "description": "The name of Surah  'Ad-Dukhan' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'الدّخان'"
+        },
+        {
+          "root": "",
+          "parameters": "sura45",
+          "description": "The name of Surah  'Al-Jathiya' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'الجاثية'"
+        },
+        {
+          "root": "",
+          "parameters": "sura46",
+          "description": "The name of Surah  'Al-Ahqaf' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'الأحقاف'"
+        },
+        {
+          "root": "",
+          "parameters": "sura47",
+          "description": "The name of Surah  'Muhammad' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'محمد'"
+        },
+        {
+          "root": "",
+          "parameters": "sura48",
+          "description": "The name of Surah  'Al-Fath' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'الفتح'"
+        },
+        {
+          "root": "",
+          "parameters": "sura49",
+          "description": "The name of Surah  'Al-Hujurat' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'الحجرات'"
+        },
+        {
+          "root": "",
+          "parameters": "sura50",
+          "description": "The name of Surah  'Qaf' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'ق'"
+        },
+        {
+          "root": "",
+          "parameters": "sura51",
+          "description": "The name of Surah  'Az-Zariyat' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'الذاريات'"
+        },
+        {
+          "root": "",
+          "parameters": "sura52",
+          "description": "The name of Surah  'At-Tur' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'الطور'"
+        },
+        {
+          "root": "",
+          "parameters": "sura53",
+          "description": "The name of Surah  'An-Najm' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'النجم'"
+        },
+        {
+          "root": "",
+          "parameters": "sura54",
+          "description": "The name of Surah  'Al-Qamar' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'القمر'"
+        },
+        {
+          "root": "",
+          "parameters": "sura55",
+          "description": "The name of Surah  'Ar-Rahman' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'الرحمن'"
+        },
+        {
+          "root": "",
+          "parameters": "sura56",
+          "description": "The name of Surah  'Al-Waqi'ah' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'الواقعة'"
+        },
+        {
+          "root": "",
+          "parameters": "sura57",
+          "description": "The name of Surah  'Al-Hadid' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'الحديد'"
+        },
+        {
+          "root": "",
+          "parameters": "sura58",
+          "description": "The name of Surah  'Al-Mujadilah' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'المجادلة'"
+        },
+        {
+          "root": "",
+          "parameters": "sura59",
+          "description": "The name of Surah  'Al-Hashr' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'الحشر'"
+        },
+        {
+          "root": "",
+          "parameters": "sura60",
+          "description": "The name of Surah  'Al-Mumtahinah' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'الممتحنة'"
+        },
+        {
+          "root": "",
+          "parameters": "sura61",
+          "description": "The name of Surah  'As-Saff' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'الصف'"
+        },
+        {
+          "root": "",
+          "parameters": "sura62",
+          "description": "The name of Surah  'Al-Jumu'ah' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'الجمعة'"
+        },
+        {
+          "root": "",
+          "parameters": "sura63",
+          "description": "The name of Surah  'Al-Munafiqun' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'المنافقون'"
+        },
+        {
+          "root": "",
+          "parameters": "sura64",
+          "description": "The name of Surah  'At-Taghabun' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'التغابن'"
+        },
+        {
+          "root": "",
+          "parameters": "sura65",
+          "description": "The name of Surah  'At-Talaq' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'الطلاق'"
+        },
+        {
+          "root": "",
+          "parameters": "sura66",
+          "description": "The name of Surah  'At-Tahrim' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'التحريم'"
+        },
+        {
+          "root": "",
+          "parameters": "sura67",
+          "description": "The name of Surah  'Al-Mulk' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'الملك'"
+        },
+        {
+          "root": "",
+          "parameters": "sura68",
+          "description": "The name of Surah  'Al-Qalam' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'القلم'"
+        },
+        {
+          "root": "",
+          "parameters": "sura69",
+          "description": "The name of Surah  'Al-Haqqah' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'الحاقة'"
+        },
+        {
+          "root": "",
+          "parameters": "sura70",
+          "description": "The name of Surah  'Al-Ma'arij' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'المعارج'"
+        },
+        {
+          "root": "",
+          "parameters": "sura71",
+          "description": "The name of Surah  'Nooh' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'نوح'"
+        },
+        {
+          "root": "",
+          "parameters": "sura72",
+          "description": "The name of Surah  'Al-Jinn' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'الجن'"
+        },
+        {
+          "root": "",
+          "parameters": "sura73",
+          "description": "The name of Surah  'Al-Muzzammil' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'المزّمّل'"
+        },
+        {
+          "root": "",
+          "parameters": "sura74",
+          "description": "The name of Surah  'Al-Muddaththir' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'المدّثر'"
+        },
+        {
+          "root": "",
+          "parameters": "sura75",
+          "description": "The name of Surah  'Al-Qiyamah' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'القيامة'"
+        },
+        {
+          "root": "",
+          "parameters": "sura76",
+          "description": "The name of Surah  'Al-Insan' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'الإنسان'"
+        },
+        {
+          "root": "",
+          "parameters": "sura77",
+          "description": "The name of Surah  'Al-Mursalat' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'المرسلات'"
+        },
+        {
+          "root": "",
+          "parameters": "sura78",
+          "description": "The name of Surah  'An-Naba'' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'النبأ'"
+        },
+        {
+          "root": "",
+          "parameters": "sura79",
+          "description": "The name of Surah  'An-Nazi'at' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'النازعات'"
+        },
+        {
+          "root": "",
+          "parameters": "sura80",
+          "description": "The name of Surah  ''Abasa' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'عبس'"
+        },
+        {
+          "root": "",
+          "parameters": "sura81",
+          "description": "The name of Surah  'At-Takwir' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'التكوير'"
+        },
+        {
+          "root": "",
+          "parameters": "sura82",
+          "description": "The name of Surah  'Al-Infitar' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'الإنفطار'"
+        },
+        {
+          "root": "",
+          "parameters": "sura83",
+          "description": "The name of Surah  'Al-Mutaffifin' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'المطفّفين'"
+        },
+        {
+          "root": "",
+          "parameters": "sura84",
+          "description": "The name of Surah  'Al-Inshiqaq' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'الإنشقاق'"
+        },
+        {
+          "root": "",
+          "parameters": "sura85",
+          "description": "The name of Surah  'Al-Buruj' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'البروج'"
+        },
+        {
+          "root": "",
+          "parameters": "sura86",
+          "description": "The name of Surah  'At-Tariq' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'الطارق'"
+        },
+        {
+          "root": "",
+          "parameters": "sura87",
+          "description": "The name of Surah  'Al-A'la' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'الأعلى'"
+        },
+        {
+          "root": "",
+          "parameters": "sura88",
+          "description": "The name of Surah  'Al-Ghashiyah' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'الغاشية'"
+        },
+        {
+          "root": "",
+          "parameters": "sura89",
+          "description": "The name of Surah  'Al-Fajr' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'الفجر'"
+        },
+        {
+          "root": "",
+          "parameters": "sura90",
+          "description": "The name of Surah  'Al-Balad' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'البلد'"
+        },
+        {
+          "root": "",
+          "parameters": "sura91",
+          "description": "The name of Surah  'Ash-Shams' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'الشمس'"
+        },
+        {
+          "root": "",
+          "parameters": "sura92",
+          "description": "The name of Surah  'Al-Lail' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'الليل'"
+        },
+        {
+          "root": "",
+          "parameters": "sura93",
+          "description": "The name of Surah  'Ad-Duha' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'الضحى'"
+        },
+        {
+          "root": "",
+          "parameters": "sura94",
+          "description": "The name of Surah  'Ash-Sharh' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'الشرح'"
+        },
+        {
+          "root": "",
+          "parameters": "sura95",
+          "description": "The name of Surah  'At-Tin' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'التين'"
+        },
+        {
+          "root": "",
+          "parameters": "sura96",
+          "description": "The name of Surah  'Al-'Alaq' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'العلق'"
+        },
+        {
+          "root": "",
+          "parameters": "sura97",
+          "description": "The name of Surah  'Al-Qadr' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'القدر'"
+        },
+        {
+          "root": "",
+          "parameters": "sura98",
+          "description": "The name of Surah  'Al-Baiyinah' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'البينة'"
+        },
+        {
+          "root": "",
+          "parameters": "sura99",
+          "description": "The name of Surah  'Az-Zalzalah' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'الزلزلة'"
+        },
+        {
+          "root": "",
+          "parameters": "sura100",
+          "description": "The name of Surah  'Al-'Adiyat' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'العاديات'"
+        },
+        {
+          "root": "",
+          "parameters": "sura101",
+          "description": "The name of Surah  'Al-Qari'ah' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'القارعة'"
+        },
+        {
+          "root": "",
+          "parameters": "sura102",
+          "description": "The name of Surah  'At-Takathur' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'التكاثر'"
+        },
+        {
+          "root": "",
+          "parameters": "sura103",
+          "description": "The name of Surah  'Al-'Asr' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'العصر'"
+        },
+        {
+          "root": "",
+          "parameters": "sura104",
+          "description": "The name of Surah  'Al-Humazah' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'الهمزة'"
+        },
+        {
+          "root": "",
+          "parameters": "sura105",
+          "description": "The name of Surah  'Al-Fil' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'الفيل'"
+        },
+        {
+          "root": "",
+          "parameters": "sura106",
+          "description": "The name of Surah  'Quraish' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'قريش'"
+        },
+        {
+          "root": "",
+          "parameters": "sura107",
+          "description": "The name of Surah  'Al-Ma'un' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'الماعون'"
+        },
+        {
+          "root": "",
+          "parameters": "sura108",
+          "description": "The name of Surah  'Al-Kauthar' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'الكوثر'"
+        },
+        {
+          "root": "",
+          "parameters": "sura109",
+          "description": "The name of Surah  'Al-Kafirun' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'الكافرون'"
+        },
+        {
+          "root": "",
+          "parameters": "sura110",
+          "description": "The name of Surah  'An-Nasr' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'النصر'"
+        },
+        {
+          "root": "",
+          "parameters": "sura111",
+          "description": "The name of Surah  'Al-Masad' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'المسد'"
+        },
+        {
+          "root": "",
+          "parameters": "sura112",
+          "description": "The name of Surah  'Al-Ikhlas' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'الإخلاص'"
+        },
+        {
+          "root": "",
+          "parameters": "sura113",
+          "description": "The name of Surah  'Al-Falaq' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'الفلق'"
+        },
+        {
+          "root": "",
+          "parameters": "sura114",
+          "description": "The name of Surah  'An-Nas' in the target language",
+          "ocuurances": "Minimum 1 and maximum 1",
+          "example": "(In arabic) 'النّاس'"
+        }
+      ]
+    }
+  },
+  {
+    "key": "getSupportedLanguages",
+    "content": {
+      "Description": [
+        {
+          "name": "API Name",
+          "val": "getSupportedLanguages"
+        },
+        {
+          "name": "Description",
+          "val": "\"This API lists the languages supported by the mp3quran system and provides the url link to the surahs in the supported languages.<br>The API currently supports 21 languages.\""
+        },
+        {
+          "name": "API Method",
+          "val": "HTTP GET"
+        },
+        {
+          "name": "API Endpoint",
+          "val": "http://mp3quran.net/api/get_json.php"
+        }
+      ],
+      "Inputs": [],
+      "Outputs": [
+        {
+          "root": "language",
+          "parameters": "language",
+          "description": "The root node of the API listing all the languages below it.",
+          "response": "",
+          "sample": ""
+        },
+        {
+          "root": "",
+          "parameters": "id",
+          "description": "Internal id of the language  in the mp3Quran database.",
+          "response": "1",
+          "sample": ""
+        },
+        {
+          "root": "",
+          "parameters": "language",
+          "description": "Name of the language",
+          "response": "\"arabic/english/french/russian/german/spanish/turkish/chinese/thai/urdu/bengali/bosnian",
+          "sample": ""
+        },
+        {
+          "root": "uyghur/persian/tajik/malayalam/tagalog/indonesian/portuguese/hausa/swahili\"",
+          "parameters": "https://mp3quran.net/api/arabic.json",
+          "description": "",
+          "response": "",
+          "sample": ""
+        },
+        {
+          "root": "",
+          "parameters": "json",
+          "description": "The json url of the api in the target language",
+          "response": "https://mp3quran.net/api/.json",
+          "sample": ""
+        },
+        {
+          "root": "",
+          "parameters": "sura_name",
+          "description": "The json url of the surah api in the target language . This url will list out the name of the surahs in the target language.",
+          "response": "https://mp3quran.net/api/_sura.json",
+          "sample": ""
+        },
+        {
+          "root": "",
+          "parameters": "",
+          "description": "",
+          "response": "",
+          "sample": ""
+        }
+      ]
+    }
+  },
+  {
+    "key": "Verse By Verse",
+    "content": {
+      "Description": [
+        {
+          "name": "API Name",
+          "val": "get each ayah (verse) in one file"
+        },
+        {
+          "name": "Description",
+          "val": "This API gets the list of reciters whose recitatation is available for verse by verse recitation. there are 3 types of bit rates (32,64 and 128), currently we have 40 reciters."
+        },
+        {
+          "name": "API Method",
+          "val": "Main API:<br> http://api.mp3quran.net/verse/verse.php<br><br> Example of arabic version:<br> http://api.mp3quran.net/verse/verse_ar.json"
+        },
+        {
+          "name": "API Endpoint",
+          "val": "HTTP GET<br> The below is illustrated with arabic as the target language of translation."
+        }
+      ],
+      "Inputs": [],
+      "Outputs": [
+        {
+          "root": "reciters_verse",
+          "parameters": "reciters_verse",
+          "description": "Represents the list of reciters available in the mp3 quran system.",
+          "response": "",
+          "sample": ""
+        },
+        {
+          "root": "",
+          "parameters": "id",
+          "description": "Internal id of the reciter in the mp3Quran database.",
+          "response": "49",
+          "sample": ""
+        },
+        {
+          "root": "",
+          "parameters": "name",
+          "description": "Name of the reciter in the target langauge,",
+          "response": "Yasser Al-Dosari",
+          "sample": ""
+        },
+        {
+          "root": "",
+          "parameters": "audio_url",
+          "description": "Url of the reciter",
+          "response": "https://verse.mp3quran.net/data/Yasser_Ad-Dussary_128kbps",
+          "sample": ""
+        },
+        {
+          "root": "",
+          "parameters": "is_completed",
+          "description": "Yes/No. Representing if the recitation is available in full.",
+          "response": "Yes",
+          "sample": ""
+        },
+        {
+          "root": "",
+          "parameters": "surah_total",
+          "description": "Total number of surahs that has been recited .",
+          "response": "114",
+          "sample": ""
+        },
+        {
+          "root": "",
+          "parameters": "bit_rate",
+          "description": "The bit rate of the audio",
+          "response": "64KBPS",
+          "sample": ""
+        },
+        {
+          "root": "",
+          "parameters": "rewaya",
+          "description": "Represents the riwaya , in which the recitation is available",
+          "response": "Rewayat Hafs A'n Assem",
+          "sample": ""
+        },
+        {
+          "root": "",
+          "parameters": "musshaf_type",
+          "description": "Murattal/Mujawad mushaf",
+          "response": "Murattal",
+          "sample": ""
+        }
+      ]
+    }
+  },
+  {
+    "key": "getReciters",
+    "content": {
+      "Description": [
+        {
+          "name": "API Name",
+          "val": "getReciters"
+        },
+        {
+          "name": "Description",
+          "val": "\"This API gets the list of reciters available in the mp3quran system. The details of the reciters are available in the target language .\""
+        },
+        {
+          "name": "API Method",
+          "val": "HTTP GET\n The below is illustrated with English as the target language of translation."
+        },
+        {
+          "name": "API Endpoint",
+          "val": "http://mp3quran.net/api/_english.php\n You can use the getSupportedLanguages API to get the list of lanugages supported."
+        }
+      ],
+      "Inputs": [
+        {
+          "root": "",
+          "parameters": "language",
+          "description": "\"Contains the language against which the API was invoked .",
+          "example": "",
+          "comments": "",
+          "sample": ""
+        },
+        {
+          "root": "Valid values include the 21 languages which the API supports\"",
+          "parameters": "en,ar,fr,",
+          "description": "Mandatory",
+          "example": "http://mp3quran.net/api/_english.php",
+          "comments": "",
+          "sample": ""
+        },
+        {
+          "root": "",
+          "parameters": "surah",
+          "description": "surah = valid value includes from 1 to 114 [Represents the chapter number of the Quran]",
+          "example": "surah=1",
+          "comments": "Mandatory",
+          "sample": ""
+        }
+      ],
+      "Outputs": [
+        {
+          "root": "reciters",
+          "parameters": "reciters",
+          "description": "Represents the list of reciters available in the mp3 quran system.",
+          "response": "",
+          "sample": "http://mp3quran.net/api/_english.php"
+        },
+        {
+          "root": "",
+          "parameters": "id",
+          "description": "Internal id of the reciter in the mp3Quran database.",
+          "response": "49",
+          "sample": ""
+        },
+        {
+          "root": "",
+          "parameters": "name",
+          "description": "Name of the reciter in the target langauge,",
+          "response": "Abdelbari Al-Toubayti",
+          "sample": "http://mp3quran.net/api/_english.php"
+        },
+        {
+          "root": "",
+          "parameters": "Server",
+          "description": "Represents the name of the chapter (surah) in arabic language.",
+          "response": "https://server6.mp3quran.net/thubti",
+          "sample": ""
+        },
+        {
+          "root": "",
+          "parameters": "rewaya",
+          "description": "Represents the riwayah of the current recitation.",
+          "response": "Rewayat Hafs A'n Assem\"",
+          "sample": "http://mp3quran.net/api/_english.php"
+        },
+        {
+          "root": "",
+          "parameters": "count",
+          "description": "Represents the total number of surahs avaiable for recitation by the current reciter.",
+          "response": "114",
+          "sample": ""
+        },
+        {
+          "root": "",
+          "parameters": "letter",
+          "description": "First letter of the name of the reciter . Helps in listing the reciter in alphabetical order.",
+          "response": "A",
+          "sample": "http://mp3quran.net/api/_english.php"
+        },
+        {
+          "root": "",
+          "parameters": "suras",
+          "description": "Comma seperated values of surah number that are avaiable for recitation by the current reciter.",
+          "response": "\"1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114",
+          "sample": ""
+        }
+      ]
+    }
+  },
+  {
+    "key": "getChapter",
+    "content": {
+      "Description": [
+        {
+          "name": "API Name",
+          "val": "getSurah/getChapter"
+        },
+        {
+          "name": "Description",
+          "val": "This API gets the translation of the Surah in the requested language.<br> The API has a default translation , against which the translation of the Surah is rendered ."
+        },
+        {
+          "name": "API Method",
+          "val": "HTTP GET<br> The below is illustrated with English as the target language of translation."
+        },
+        {
+          "name": "API Endpoint",
+          "val": "http://api.mp3quran.net/api/surah"
+        }
+      ],
+      "Inputs": [
+        {
+          "root": "",
+          "parameters": "language",
+          "description": "\"Contains the language against which the API was invoked .",
+          "example": "",
+          "comments": "",
+          "sample": ""
+        },
+        {
+          "root": "Valid values include the 21 languages which the API supports\"",
+          "parameters": "en,ar,fr,",
+          "description": "Mandatory",
+          "example": "\"http://api.mp3quran.net/api/surah?surah=&language=",
+          "comments": "",
+          "sample": ""
+        },
+        {
+          "root": "example :",
+          "parameters": "",
+          "description": "",
+          "example": "",
+          "comments": "",
+          "sample": ""
+        },
+        {
+          "root": "http://api.mp3quran.net/api/surah?surah=1&language=en\"",
+          "parameters": "",
+          "description": "",
+          "example": "",
+          "comments": "",
+          "sample": ""
+        },
+        {
+          "root": "",
+          "parameters": "surah",
+          "description": "surah = valid value includes from 1 to 114 [Represents the chapter number of the Quran]",
+          "example": "surah=1",
+          "comments": "Mandatory",
+          "sample": ""
+        }
+      ],
+      "Outputs": [
+        {
+          "root": "ayahNumber",
+          "parameters": "ayahNumber",
+          "description": "Represents the ayah (verse) , about which the information is given,",
+          "response": "1",
+          "sample": "http://api.mp3quran.net/api/surah?surah=1&language=en"
+        },
+        {
+          "root": "",
+          "parameters": "lang",
+          "description": "Represents the language against which the translation is provided. This field represents the abbrivated language that was passed in the sample,",
+          "response": "\"English",
+          "sample": ""
+        },
+        {
+          "root": "[In the current example, the input parameter that was passed was 'en', hence the output was English.]\"",
+          "parameters": "http://api.mp3quran.net/api/surah?surah=1&language=en",
+          "description": "",
+          "response": "",
+          "sample": ""
+        },
+        {
+          "root": "",
+          "parameters": "lang_native",
+          "description": "",
+          "response": "",
+          "sample": ""
+        },
+        {
+          "root": "",
+          "parameters": "surah_id",
+          "description": "Represents the surah number of the sample",
+          "response": "1",
+          "sample": ""
+        },
+        {
+          "root": "",
+          "parameters": "aya_id",
+          "description": "Represents the verse number  [Similair to ayahNumber mentioned above]",
+          "response": "1",
+          "sample": "http://api.mp3quran.net/api/surah?surah=1&language=en"
+        },
+        {
+          "root": "",
+          "parameters": "surahs_name",
+          "description": "Represents the name of the chapter (surah) in arabic language.",
+          "response": "\"الفاتحة",
+          "sample": ""
+        },
+        {
+          "root": "\"",
+          "parameters": "http://api.mp3quran.net/api/surah?surah=1&language=en",
+          "description": "",
+          "response": "",
+          "sample": ""
+        },
+        {
+          "root": "",
+          "parameters": "image_url",
+          "description": "URL to the arabic snippet image of the ayah",
+          "response": "http://api.mp3quran.net/ayah_image/001001.png",
+          "sample": ""
+        },
+        {
+          "root": "",
+          "parameters": "surah_name_lang",
+          "description": "Represents the name of the chapter (surah) in the selected language.",
+          "response": "Al-Fatihah",
+          "sample": "http://api.mp3quran.net/api/surah?surah=1&language=en"
+        },
+        {
+          "root": "",
+          "parameters": "ayah_text",
+          "description": "Represents the verse (ayah)  from the chapter  (surah) in arabic language.",
+          "response": "\"    \"\"بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ\"\",",
+          "sample": ""
+        },
+        {
+          "root": "\"",
+          "parameters": "http://api.mp3quran.net/api/surah?surah=1&language=en",
+          "description": "",
+          "response": "",
+          "sample": ""
+        },
+        {
+          "root": "",
+          "parameters": "translation",
+          "description": "Represents the verse (ayah)  from the chapter  (surah) in target language.",
+          "response": "In the name of Allah, the Entirely Merciful, the Especially Merciful.",
+          "sample": "http://api.mp3quran.net/api/surah?surah=1&language=en"
+        },
+        {
+          "root": "",
+          "parameters": "hamish_lang",
+          "description": "Contains the additional explanation/tafseer of the ayah in the target language.",
+          "response": "\"1- Al-Fatiha: The Opening (of the Quran). Note: Surah titles are not an integral part of the Quran. A distinguishing word in a particular Surah or a word defining its subject matter often became a common means of identification among the Prophet's companions and later scholars. Although some names, such as al-Fatiha, were used by the Prophet in reference to a particular Surah, they were not specifically designated by him as titles. 2- Allah is a proper name belonging only to the one Almighty God, Creator and Sustainer of the heavens and the earth and all that is within them, the Eternal and Absolute, to whom alone all worship is due. 3- Ar-Rahman and ar-Raheem are two names of Allah derived from the word \\\"rahmah\\\" (mercy). In Arabic grammar both are intensive forms of \\\"merciful\\\" (i.e., extremely merciful). A complimentary and comprehensive meaning is intended by using both together. Rahman is used only to describe Allah, while raheem might be used to describe a person as well. The Prophet was described in the Quran as raheem. Rahman is above the human level (i.e., intensely merciful). Since one usually understands intensity to be something of short duration, Allah describes Himself also as raheem (i.e., continually merciful). Rahman also carries a wider meaning - merciful to all creation. Justice is a part of this mercy. Raheem includes the concept of speciality - especially and specifically merciful to the believers. Forgiveness is a part of this mercy. In addition, Rahman is adjectival, referring to an attribute of Allah and is part of His essence. Raheem is verbal, indicating what He does: i.e., bestowing and implementing mercy.\"",
+          "sample": "http://api.mp3quran.net/api/surah?surah=1&language=en"
+        },
+        {
+          "root": "",
+          "parameters": "author_name_lang",
+          "description": "Details of the translation that is used to translate the ayah. Typically refers to the name of the translation.",
+          "response": "International's Translation-Al-Muntada Al-Islami",
+          "sample": "http://api.mp3quran.net/api/surah?surah=1&language=en"
+        },
+        {
+          "root": "",
+          "parameters": "",
+          "description": "",
+          "response": "",
+          "sample": ""
+        },
+        {
+          "root": "",
+          "parameters": "audio_url_arabic",
+          "description": "URL to the recitation of the specific ayah",
+          "response": "",
+          "sample": ""
+        },
+        {
+          "root": "",
+          "parameters": "bitrate",
+          "description": "Bitrate of the MP3 recitation of the ayah",
+          "response": "64",
+          "sample": ""
+        }
+      ]
+    }
+  },
+  {
+    "key": "getSingleVerse",
+    "content": {
+      "Description": [
+        {
+          "name": "API Name",
+          "val": "getAyah/getSingleVerse"
+        },
+        {
+          "name": "Description",
+          "val": "\"This API gets the translation of one single verse (ayah) in the requested language.<br> The API has a default translation , against which the translation of the ayah is rendered . \""
+        },
+        {
+          "name": "API Method",
+          "val": "HTTP GET<br> The below is illustrated with English as the target language of translation."
+        },
+        {
+          "name": "API Endpoint",
+          "val": "http://api.mp3quran.net/api/aya"
+        }
+      ],
+      "Inputs": [
+        {
+          "root": "",
+          "parameters": "language",
+          "description": "\"Contains the language against which the API was invoked .",
+          "example": "",
+          "comments": "",
+          "sample": ""
+        },
+        {
+          "root": "Valid values include the 21 languages which the API supports\"",
+          "parameters": "en,ar,fr,",
+          "description": "Mandatory",
+          "example": "\"http://api.mp3quran.net/api/aya?surah=&language=",
+          "comments": "",
+          "sample": ""
+        },
+        {
+          "root": "example :",
+          "parameters": "",
+          "description": "",
+          "example": "",
+          "comments": "",
+          "sample": ""
+        },
+        {
+          "root": "http://api.mp3quran.net/api/aya?surah=1&aya=1&language=en\"",
+          "parameters": "",
+          "description": "",
+          "example": "",
+          "comments": "",
+          "sample": ""
+        },
+        {
+          "root": "",
+          "parameters": "surah",
+          "description": "surah = valid value includes from 1 to 114 [Represents the chapter number of the Quran]",
+          "example": "surah=1",
+          "comments": "Mandatory",
+          "sample": ""
+        },
+        {
+          "root": "",
+          "parameters": "aya",
+          "description": "aya=valid value of the verse of the sampleed surah",
+          "example": "aya=1",
+          "comments": "Mandatory",
+          "sample": ""
+        }
+      ],
+      "Outputs": [
+        {
+          "root": "ayahNumber",
+          "parameters": "ayahNumber",
+          "description": "Represents the ayah (verse) , about which the information is given. [In this api, it refers to the aya number that was passed in the sample]",
+          "response": "1",
+          "sample": "http://api.mp3quran.net/api/aya?surah=1&aya=1&language=en"
+        },
+        {
+          "root": "",
+          "parameters": "lang",
+          "description": "Represents the language against which the translation is provided. This field represents the abbrivated language that was passed in the sample,",
+          "response": "\"English",
+          "sample": ""
+        },
+        {
+          "root": "[In the current example, the input parameter that was passed was 'en', hence the output was English.]\"",
+          "parameters": "http://api.mp3quran.net/api/aya?surah=1&aya=1&language=en",
+          "description": "",
+          "response": "",
+          "sample": ""
+        },
+        {
+          "root": "",
+          "parameters": "lang_native",
+          "description": "",
+          "response": "",
+          "sample": "http://api.mp3quran.net/api/aya?surah=1&aya=1&language=en"
+        },
+        {
+          "root": "",
+          "parameters": "surah_id",
+          "description": "Represents the surah number of the sample",
+          "response": "1",
+          "sample": "http://api.mp3quran.net/api/aya?surah=1&aya=1&language=en"
+        },
+        {
+          "root": "",
+          "parameters": "aya_id",
+          "description": "Represents the verse number  [Similair to ayahNumber mentioned above]",
+          "response": "1",
+          "sample": "http://api.mp3quran.net/api/aya?surah=1&aya=1&language=en"
+        },
+        {
+          "root": "",
+          "parameters": "surahs_name",
+          "description": "Represents the name of the chapter (surah) in arabic language.",
+          "response": "\"الفاتحة",
+          "sample": ""
+        },
+        {
+          "root": "\"",
+          "parameters": "http://api.mp3quran.net/api/aya?surah=1&aya=1&language=en",
+          "description": "",
+          "response": "",
+          "sample": ""
+        },
+        {
+          "root": "",
+          "parameters": "image_url",
+          "description": "URL to the arabic snippet image of the ayah",
+          "response": "http://api.mp3quran.net/ayah_image/001001.png",
+          "sample": "http://api.mp3quran.net/api/aya?surah=1&aya=1&language=en"
+        },
+        {
+          "root": "",
+          "parameters": "surah_name_lang",
+          "description": "Represents the name of the chapter (surah) in the selected language.",
+          "response": "Al-Fatihah",
+          "sample": "http://api.mp3quran.net/api/aya?surah=1&aya=1&language=en"
+        },
+        {
+          "root": "",
+          "parameters": "ayah_text",
+          "description": "Represents the verse (ayah)  from the chapter  (surah) in arabic language.",
+          "response": "\"    \"\"بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ\"\",",
+          "sample": ""
+        },
+        {
+          "root": "\"",
+          "parameters": "http://api.mp3quran.net/api/aya?surah=1&aya=1&language=en",
+          "description": "",
+          "response": "",
+          "sample": ""
+        },
+        {
+          "root": "",
+          "parameters": "translation",
+          "description": "Represents the verse (ayah)  from the chapter  (surah) in target language.",
+          "response": "In the name of Allah, the Entirely Merciful, the Especially Merciful.",
+          "sample": "http://api.mp3quran.net/api/aya?surah=1&aya=1&language=en"
+        },
+        {
+          "root": "",
+          "parameters": "hamish_lang",
+          "description": "Contains the additional explanation/tafseer of the ayah in the target language.",
+          "response": "\"1- Al-Fatiha: The Opening (of the Quran). Note: Surah titles are not an integral part of the Quran. A distinguishing word in a particular Surah or a word defining its subject matter often became a common means of identification among the Prophet's companions and later scholars. Although some names, such as al-Fatiha, were used by the Prophet in reference to a particular Surah, they were not specifically designated by him as titles. 2- Allah is a proper name belonging only to the one Almighty God, Creator and Sustainer of the heavens and the earth and all that is within them, the Eternal and Absolute, to whom alone all worship is due. 3- Ar-Rahman and ar-Raheem are two names of Allah derived from the word \\\"rahmah\\\" (mercy). In Arabic grammar both are intensive forms of \\\"merciful\\\" (i.e., extremely merciful). A complimentary and comprehensive meaning is intended by using both together. Rahman is used only to describe Allah, while raheem might be used to describe a person as well. The Prophet was described in the Quran as raheem. Rahman is above the human level (i.e., intensely merciful). Since one usually understands intensity to be something of short duration, Allah describes Himself also as raheem (i.e., continually merciful). Rahman also carries a wider meaning - merciful to all creation. Justice is a part of this mercy. Raheem includes the concept of speciality - especially and specifically merciful to the believers. Forgiveness is a part of this mercy. In addition, Rahman is adjectival, referring to an attribute of Allah and is part of His essence. Raheem is verbal, indicating what He does: i.e., bestowing and implementing mercy.\"",
+          "sample": "http://api.mp3quran.net/api/aya?surah=1&aya=1&language=en"
+        },
+        {
+          "root": "",
+          "parameters": "author_name_lang",
+          "description": "Details of the translation that is used to translate the ayah. Typically refers to the name of the translation.",
+          "response": "International's Translation-Al-Muntada Al-Islami",
+          "sample": "http://api.mp3quran.net/api/aya?surah=1&aya=1&language=en"
+        },
+        {
+          "root": "",
+          "parameters": "",
+          "description": "",
+          "response": "",
+          "sample": "http://api.mp3quran.net/api/aya?surah=1&aya=1&language=en"
+        },
+        {
+          "root": "",
+          "parameters": "audio_url_arabic",
+          "description": "URL to the recitation of the specific ayah",
+          "response": "",
+          "sample": "http://api.mp3quran.net/api/aya?surah=1&aya=1&language=en"
+        },
+        {
+          "root": "",
+          "parameters": "bitrate",
+          "description": "Bitrate of the MP3 recitation of the ayah",
+          "response": "64",
+          "sample": "http://api.mp3quran.net/api/aya?surah=1&aya=1&language=en"
+        }
+      ]
+    }
+  },
+  {
+    "key": "getVersesByRange",
+    "content": {
+      "Description": [
+        {
+          "name": "API Name",
+          "val": "getAyat/getVersesByRange"
+        },
+        {
+          "name": "Description",
+          "val": "\"This API gets the translation of many verses (ayats) in the requested language by specifiying the range.<br>The API has a default translation , against which the translation of the ayah is rendered . \""
+        },
+        {
+          "name": "API Method",
+          "val": "HTTP GET<br> The below is illustrated with English as the target language of translation."
+        },
+        {
+          "name": "API Endpoint",
+          "val": "http://api.mp3quran.net/api/ayat"
+        }
+      ],
+      "Inputs": [
+        {
+          "root": "",
+          "parameters": "language",
+          "description": "\"Contains the language against which the API was invoked .",
+          "example": "",
+          "comments": "",
+          "sample": ""
+        },
+        {
+          "root": "Valid values include the 21 languages which the API supports\"",
+          "parameters": "en,ar,fr,",
+          "description": "Mandatory",
+          "example": "\"http://api.mp3quran.net/api/ayat?surah=&from&to=&language=",
+          "comments": "",
+          "sample": ""
+        },
+        {
+          "root": "example :",
+          "parameters": "",
+          "description": "",
+          "example": "",
+          "comments": "",
+          "sample": ""
+        },
+        {
+          "root": "http://api.mp3quran.net/api/ayat?surah=1&from=1&to=2&language=en\"",
+          "parameters": "",
+          "description": "",
+          "example": "",
+          "comments": "",
+          "sample": ""
+        },
+        {
+          "root": "",
+          "parameters": "surah",
+          "description": "surah = valid value includes from 1 to 114 [Represents the chapter number of the Quran]",
+          "example": "surah=1",
+          "comments": "Mandatory",
+          "sample": ""
+        },
+        {
+          "root": "",
+          "parameters": "from",
+          "description": "ayaNumber ith respective to the surah chosen",
+          "example": "from=1",
+          "comments": "Mandatory",
+          "sample": ""
+        },
+        {
+          "root": "",
+          "parameters": "to",
+          "description": "ayaNumber ith respective to the surah chosen",
+          "example": "to=2",
+          "comments": "Mandatory",
+          "sample": ""
+        }
+      ],
+      "Outputs": [
+        {
+          "root": "ayahNumber",
+          "parameters": "ayahNumber",
+          "description": "Represents the ayah (verse) , about which the information is given . [In this API, it refers to the range specified in the sample]",
+          "response": "1",
+          "example": "http://api.mp3quran.net/api/ayat?surah=1&from=1&to=2&language=en"
+        },
+        {
+          "root": "",
+          "parameters": "lang",
+          "description": "Represents the language against which the translation is provided. This field represents the abbrivated language that was passed in the sample,",
+          "response": "\"English",
+          "example": ""
+        },
+        {
+          "root": "[In the current example, the input parameter that was passed was 'en', hence the output was English.]\"",
+          "parameters": "http://api.mp3quran.net/api/ayat?surah=1&from=1&to=2&language=en",
+          "description": "",
+          "response": "",
+          "example": ""
+        },
+        {
+          "root": "",
+          "parameters": "lang_native",
+          "description": "",
+          "response": "",
+          "example": "http://api.mp3quran.net/api/ayat?surah=1&from=1&to=2&language=en"
+        },
+        {
+          "root": "",
+          "parameters": "surah_id",
+          "description": "Represents the surah number of the sample",
+          "response": "1",
+          "example": "http://api.mp3quran.net/api/ayat?surah=1&from=1&to=2&language=en"
+        },
+        {
+          "root": "",
+          "parameters": "aya_id",
+          "description": "Represents the verse number  [Similair to ayahNumber mentioned above]",
+          "response": "1",
+          "example": "http://api.mp3quran.net/api/ayat?surah=1&from=1&to=2&language=en"
+        },
+        {
+          "root": "",
+          "parameters": "surahs_name",
+          "description": "Represents the name of the chapter (surah) in arabic language.",
+          "response": "\"الفاتحة",
+          "example": ""
+        },
+        {
+          "root": "\"",
+          "parameters": "http://api.mp3quran.net/api/ayat?surah=1&from=1&to=2&language=en",
+          "description": "",
+          "response": "",
+          "example": ""
+        },
+        {
+          "root": "",
+          "parameters": "image_url",
+          "description": "URL to the arabic snippet image of the ayah",
+          "response": "http://api.mp3quran.net/ayah_image/001001.png",
+          "example": "http://api.mp3quran.net/api/ayat?surah=1&from=1&to=2&language=en"
+        },
+        {
+          "root": "",
+          "parameters": "surah_name_lang",
+          "description": "Represents the name of the chapter (surah) in the selected language.",
+          "response": "Al-Fatihah",
+          "example": "http://api.mp3quran.net/api/ayat?surah=1&from=1&to=2&language=en"
+        },
+        {
+          "root": "",
+          "parameters": "ayah_text",
+          "description": "Represents the verse (ayah)  from the chapter  (surah) in arabic language.",
+          "response": "\"    \"\"بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ\"\",",
+          "example": ""
+        },
+        {
+          "root": "\"",
+          "parameters": "http://api.mp3quran.net/api/ayat?surah=1&from=1&to=2&language=en",
+          "description": "",
+          "response": "",
+          "example": ""
+        },
+        {
+          "root": "",
+          "parameters": "translation",
+          "description": "Represents the verse (ayah)  from the chapter  (surah) in target language.",
+          "response": "In the name of Allah, the Entirely Merciful, the Especially Merciful.",
+          "example": "http://api.mp3quran.net/api/ayat?surah=1&from=1&to=2&language=en"
+        },
+        {
+          "root": "",
+          "parameters": "hamish_lang",
+          "description": "Contains the additional explanation/tafseer of the ayah in the target language.",
+          "response": "\"1- Al-Fatiha: The Opening (of the Quran). Note: Surah titles are not an integral part of the Quran. A distinguishing word in a particular Surah or a word defining its subject matter often became a common means of identification among the Prophet's companions and later scholars. Although some names, such as al-Fatiha, were used by the Prophet in reference to a particular Surah, they were not specifically designated by him as titles. 2- Allah is a proper name belonging only to the one Almighty God, Creator and Sustainer of the heavens and the earth and all that is within them, the Eternal and Absolute, to whom alone all worship is due. 3- Ar-Rahman and ar-Raheem are two names of Allah derived from the word \\\"rahmah\\\" (mercy). In Arabic grammar both are intensive forms of \\\"merciful\\\" (i.e., extremely merciful). A complimentary and comprehensive meaning is intended by using both together. Rahman is used only to describe Allah, while raheem might be used to describe a person as well. The Prophet was described in the Quran as raheem. Rahman is above the human level (i.e., intensely merciful). Since one usually understands intensity to be something of short duration, Allah describes Himself also as raheem (i.e., continually merciful). Rahman also carries a wider meaning - merciful to all creation. Justice is a part of this mercy. Raheem includes the concept of speciality - especially and specifically merciful to the believers. Forgiveness is a part of this mercy. In addition, Rahman is adjectival, referring to an attribute of Allah and is part of His essence. Raheem is verbal, indicating what He does: i.e., bestowing and implementing mercy.\"",
+          "example": "http://api.mp3quran.net/api/ayat?surah=1&from=1&to=2&language=en"
+        },
+        {
+          "root": "",
+          "parameters": "author_name_lang",
+          "description": "Details of the translation that is used to translate the ayah. Typically refers to the name of the translation.",
+          "response": "International's Translation-Al-Muntada Al-Islami",
+          "example": "http://api.mp3quran.net/api/ayat?surah=1&from=1&to=2&language=en"
+        },
+        {
+          "root": "",
+          "parameters": "",
+          "description": "",
+          "response": "",
+          "example": "http://api.mp3quran.net/api/ayat?surah=1&from=1&to=2&language=en"
+        },
+        {
+          "root": "",
+          "parameters": "audio_url_arabic",
+          "description": "URL to the recitation of the specific ayah",
+          "response": "",
+          "example": "http://api.mp3quran.net/api/ayat?surah=1&from=1&to=2&language=en"
+        },
+        {
+          "root": "",
+          "parameters": "bitrate",
+          "description": "Bitrate of the MP3 recitation of the ayah",
+          "response": "64",
+          "example": "http://api.mp3quran.net/api/ayat?surah=1&from=1&to=2&language=en"
+        }
+      ]
+    }
+  },
+  {
+    "key": "getRadio",
+    "content": {
+      "Description": [
+        {
+          "name": "API Name",
+          "val": "getRadio"
+        },
+        {
+          "name": "Description",
+          "val": "\"Lists the radio streaming serivce in the supported language .<br> The api provides the base url for the streams as per the requested language.\""
+        },
+        {
+          "name": "API Method",
+          "val": "HTTP GET"
+        },
+        {
+          "name": "API Endpoint",
+          "val": "http://api.mp3quran.net/radios/get_radios.php"
+        }
+      ],
+      "Inputs": [],
+      "Outputs": [
+        {
+          "description": "Represents the list of language available in the mp3 quran system for radio streaming.",
+          "response": "",
+          "sample": ""
+        },
+        {
+          "description": "Internal id of the radio in the mp3Quran database.",
+          "response": "1",
+          "sample": ""
+        },
+        {
+          "description": "Language in which the radio will be streamed.",
+          "response": "english",
+          "sample": ""
+        },
+        {
+          "description": "URL for the radio streaming service,.",
+          "response": "http://api.mp3quran.net/radios/radio_english.json",
+          "sample": ""
+        }
+      ]
+    }
+  },
+  {
+    "key": "getRadioDetails",
+    "content": {
+      "Description": [
+        {
+          "name": "API Name",
+          "val": "getRadioDetails"
+        },
+        {
+          "name": "Description",
+          "val": "\"This api gets the list of streaming radio services for a given set of languages.<br> [Note 1 : Refer the getRadio API to see the supported languages .] \""
+        },
+        {
+          "name": "API Method",
+          "val": "HTTP GET"
+        },
+        {
+          "name": "API Endpoint",
+          "val": "http://api.mp3quran.net/radios/radio_.json"
+        }
+      ],
+      "Inputs": [
+        {
+          "root": "",
+          "parameters": "",
+          "description": "",
+          "example": "http://api.mp3quran.net/radios/radio_english.json",
+          "comments": "",
+          "sample": ""
+        }
+      ],
+      "Outputs": [
+        {
+          "root": "radios",
+          "parameters": "radios",
+          "description": "Root node of the radio streaming services in the desired language",
+          "response": "",
+          "sample": ""
+        },
+        {
+          "root": "",
+          "parameters": "name",
+          "description": "Name of the radio streaming .[ Represents the reciters name / show name]",
+          "response": "Quran tafseer",
+          "sample": ""
+        },
+        {
+          "root": "",
+          "parameters": "",
+          "description": "",
+          "response": "",
+          "sample": ""
+        },
+        {
+          "root": "",
+          "parameters": "radio_url",
+          "description": "URL for the radio streaming show.",
+          "response": "http://live.mp3quran.net:9718",
+          "sample": ""
+        }
+      ]
+    }
+  }
+]

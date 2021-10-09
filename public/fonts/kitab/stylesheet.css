@@ -1,0 +1,26 @@
+@font-face {
+    font-family: 'Kitab';
+    src: url('Kitab-Regular.eot');
+    src: url('Kitab-Regular.eot?#iefix') format('embedded-opentype'),
+        url('Kitab-Regular.woff2') format('woff2'),
+        url('Kitab-Regular.woff') format('woff'),
+        url('Kitab-Regular.ttf') format('truetype'),
+        url('Kitab-Regular.svg#Kitab-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Kitab';
+    src: url('Kitab-Bold.eot');
+    src: url('Kitab-Bold.eot?#iefix') format('embedded-opentype'),
+        url('Kitab-Bold.woff2') format('woff2'),
+        url('Kitab-Bold.woff') format('woff'),
+        url('Kitab-Bold.ttf') format('truetype'),
+        url('Kitab-Bold.svg#Kitab-Bold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+

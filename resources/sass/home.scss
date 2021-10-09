@@ -1,0 +1,181 @@
+/**************reciters*************/
+.home-show {
+  
+  .home-reads.letters {
+    display: flex;
+    .side-letters {
+      margin-right: 0.5rem;
+      width: 32px;
+      top: 85px;
+      ul{
+        padding-bottom: 60px;
+      }
+      li {
+        background: #fcfcfc;
+        color: #529608;
+        width: 32px;
+        height: 32px;
+        border-radius: 30px;
+        font-size: 16px;
+        margin-top: 3px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+    .reads-list {
+      width: 100%;
+      h3 {
+        background: #64ad15;
+        color: #fff;
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        border-radius: 10px 10px 10px 0;
+        font-size: 16px;
+        font-weight: 100;
+        padding: 5px;
+        margin-top: 1rem;
+        text-align: center;
+        box-shadow: 0px 2px 8px 0px #64ad1578;
+      }
+      .home-read-group {
+        padding-top: 60px;
+        margin-top: -60px;
+      }
+      .home-read-group:first-child {
+        padding-top: 0;
+        margin-top: 0;
+      }
+      
+      .card-rewaya-name {
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+.home-page {
+  section {
+    padding: 3rem 0;
+
+    .card {
+      box-shadow: none;
+      border-radius: 0;
+    }
+
+    .card-body {
+      padding: 8px;
+    }
+
+    h3 {
+      font-size: 18px;
+      line-height: 1.6;
+      margin: 0;
+    }
+  }
+}
+
+.home-top {
+  background: url("../img/bg-2.png") no-repeat;
+  padding: 3rem 0 0 !important;
+
+  .home-search {
+    text-align: center;
+    margin-bottom: 3rem;
+
+    h1 {
+      font-size: 26px;
+      margin-bottom: 2rem;
+    }
+
+    form {
+      position: relative;
+      width: 320px;
+      margin: 0 auto;
+    }
+
+    .form-control {
+      border: none;
+      border-radius: 30px;
+      width: 300px;
+      box-shadow: 0 8px 8px $box_shadow_1;
+      height: 40px;
+    }
+
+    .btn {
+      left: 14px;
+      position: absolute;
+      border: none;
+      background: $primary;
+      border-radius: 30px;
+      top: 2px;
+      color: $white;
+      width: 36px;
+      height: 36px;
+      padding: 3px;
+    }
+  }
+
+  .home-logo {
+    text-align: center;
+    margin-bottom: 2rem;
+
+    img {
+      width: 350px;
+    }
+  }
+
+  .home-about {
+    margin-bottom: 2rem;
+
+    p {
+      margin-bottom: 0.25rem;
+    }
+
+    .btn {
+      padding: 0.5rem 0;
+    }
+  }
+
+  .home-dr-image {
+    position: relative;
+
+    img {
+      position: absolute;
+      bottom: 1rem;
+      left: 1rem;
+      width: 250px;
+    }
+  }
+}
+
+.home-contact {
+  background: $secondary;
+  padding: 5rem 0;
+
+  .home-title {
+    color: $white;
+  }
+
+  .card-title {
+    padding: 0.75rem;
+    text-align: center;
+  }
+
+  .contact-title {
+    padding: 0.25rem;
+    text-align: center;
+    color: $white;
+    margin: 0;
+  }
+
+  .contact-info {
+    padding: 0.75rem;
+    text-align: center;
+    color: $white;
+    margin-bottom: 1rem;
+    letter-spacing: 2px;
+    font-size: 18px;
+  }
+}

@@ -1,0 +1,47 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans::300,400,500,700");
+@import url("https://fonts.googleapis.com/css?family=Almarai:300,400,700&display=swap&subset=arabic");
+
+@font-face {
+  font-family: "Greta";
+  font-weight: 500;
+  src: url(../fonts/Greta.eot);
+  src: url(../fonts/Greta.eot?#iefix) format("embedded-opentype"), url(../fonts/Greta.woff) format("woff"),
+    url(../fonts/Greta.otf) format("opentype");
+}
+
+@font-face {
+  font-family: 'Kitab';
+  src: url('../fonts/kitab/Kitab-Regular.eot');
+  src: url('../fonts/kitab/Kitab-Regular.eot?#iefix') format('embedded-opentype'),
+      url('../fonts/kitab/Kitab-Regular.woff2') format('woff2'),
+      url('../fonts/kitab/Kitab-Regular.woff') format('woff'),
+      url('../fonts/kitab/Kitab-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Kitab';
+  src: url('../fonts/kitab/Kitab-Bold.eot');
+  src: url('../fonts/kitab/Kitab-Bold.eot?#iefix') format('embedded-opentype'),
+      url('../fonts/kitab/Kitab-Bold.woff2') format('woff2'),
+      url('../fonts/kitab/Kitab-Bold.woff') format('woff'),
+      url('../fonts/kitab/Kitab-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+// Variables
+@import "variables";
+@import "~bootstrap/scss/bootstrap";
+
+@import "general";
+@import "master";
+@import "mobile";
+@import "desktop";
+
+@import "rtl";
+@import "ltr";
+

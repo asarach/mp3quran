@@ -1,0 +1,31 @@
+.btn {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    letter-spacing: -0.1px;
+    text-overflow: '';
+    outline: 0;
+    font-size: 0.875rem;
+    border-radius: 4px;
+    padding: .25rem .5rem;
+    border: 1px solid rgba(0,0,0,0.175);
+    box-shadow: 0 -2px 0 rgba(0,0,0,0.0375) inset;
+    font-weight: 400;
+    line-height: 1.6;
+    box-sizing: border-box;
+    margin: 0;
+    transition: all 0.175s cubic-bezier(.25, .8, .25, 1);
+    position: relative;
+    justify-content: flex-start;
+    cursor: pointer;
+}
+
+.btn-info {
+    background: $info;
+    color: #fff;
+}
+
+.btn-warning {
+    background: $warning;
+    color: #fff;
+    margin-right: 0.5rem;
+}

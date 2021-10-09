@@ -1,0 +1,74 @@
+.ltr {
+  .top-bar .tb-logo {
+    margin-right: 1rem;
+    margin-left: 0;
+  }
+  .top-bar .tb-search .btn-search {
+    margin-left: -2.15rem;
+    margin-right: 2rem;
+  }
+  .top-bar .tb-radio .btn {
+    margin-right: 0.5rem;
+  }
+  .top-bar .tb-social {
+    margin-right: initial;
+    margin-left: auto;
+  }
+  .top-bar .tb-social ul li {
+    margin: 0 0.5rem 0 0;
+  }
+  .home-show .home-reads.letters .side-letters {
+    margin-left: 0.5rem;
+    margin-right: 0;
+  }
+  .mr-auto {
+    margin-left: auto !important;
+    margin-right: initial !important;
+  }
+  .ml-auto {
+    margin-right: auto !important;
+    margin-left: initial !important;
+  }
+  .main .show-filters .deslike-btn,
+  .main .show-filters .like-btn {
+    margin-left: auto;
+    margin-right: initial;
+  }
+  .card-radio .more-btn,
+  .sora-item .more-btn {
+    right: 0.5rem;
+    left: auto;
+  }
+  .card-radio .radio-options,
+  .sora-item .sora-options {
+    right: 2.5rem;
+    left: auto;
+  }
+  .card-reciter {
+    text-align: left;
+  }
+  .contact-show form {
+    border-radius: 0 10px 10px 0;
+    margin: -31px -31px -32px 0;
+  }
+  .sitemap-show .show-body h3{
+    padding-left: 30px;
+  }
+  .top-bar .tb-languages .tbl-dropdown.opened{
+    right: 0;
+    left: auto;
+  }
+  .mobile-ui .top-bar .tb-languages{
+    margin-right: 0;
+    margin-left: auto;
+  }
+  .main .show-filters .dropdown-toggle::after{
+    margin: 0 -0.5rem 0 0.5rem;
+  }
+}
+@media only screen and (min-width: 767.98px) {
+  .ltr .mobile-ui .contact-show form{
+    margin: -16px -16px -16px 0;
+  }
+}
+

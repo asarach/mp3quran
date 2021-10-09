@@ -1,0 +1,67 @@
+.card {
+    background: #fff;
+    margin-bottom: 1rem;
+    border-radius: 3px;
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    border: 0;
+}
+
+.card-head {
+    padding-bottom: 15px;
+    background: #435d7d;
+    color: #fff;
+    padding: 0.75rem 1rem;
+    border-radius: 3px 3px 0 0;
+    display: flex;
+}
+
+.card-head h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.card-head .card-tools {
+    margin-left: auto;
+}
+
+.rtl .card-head .card-tools {
+    margin-right: auto;
+    margin-left: 0;
+}
+
+.card-head .btn {
+    color: #fff;
+    float: right;
+    font-size: 13px;
+    border: none;
+    min-width: 36px;
+    border-radius: 2px;
+    border: none;
+    outline: none !important;
+    margin-right: 10px;
+}
+
+.card-head .btn i {
+    float: left;
+    font-size: 16px;
+    margin-right: 5px;
+    padding: 2px 7px 2px 2px;
+}
+
+.card-head .btn span {
+    float: left;
+    margin-top: 2px;
+}
+
+.card-body {
+    overflow-x: initial;
+
+    .vue-tags-input {
+        direction: ltr;
+        max-width: initial !important;
+    }
+}
+
+.card-footer {
+    min-height: 55px;
+}

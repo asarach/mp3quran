@@ -1,0 +1,324 @@
+.card {
+  max-width: 100%;
+  margin-bottom: 1.25rem !important;
+  border-radius: 3px;
+  position: relative;
+  border: none;
+  box-shadow: 0 8px 8px #d8c5dd38;
+  border-radius: 12px;
+
+  .card-image {
+    position: relative;
+    max-height: 160px;
+    background: $white;
+    overflow: hidden;
+    border-radius: 8px;
+    margin: 0.5rem;
+
+    .card-img {
+    }
+  }
+
+  .card-header {
+    padding: 6px;
+    display: flex;
+  }
+
+  .card-footer {
+    background-color: transparent;
+    position: relative;
+  }
+
+  .card-body {
+    position: relative;
+    padding: 12px;
+  }
+
+  .card-title {
+    margin-bottom: 0;
+    color: $primary;
+    display: block;
+    overflow: hidden;
+    max-height: 84px;
+    text-decoration: none;
+    font-size: 16px;
+    /* font-family: "Greta"; */
+    margin: 0;
+    padding: 0;
+    line-height: 1.5;
+  }
+
+  .card-title:hover {
+    color: #df0c9f;
+  }
+
+  .card-date {
+    margin-right: auto;
+    font-size: 15px;
+    color: $gray-100;
+    font-size: 13px;
+    display: inline-block;
+  }
+
+  .card-views {
+    position: absolute;
+    top: 0.75rem;
+    left: 1rem;
+    color: $gray-100;
+  }
+
+  .card-sora {
+    margin: 0;
+    display: inline-block;
+
+    a {
+      color: #9a9fa8;
+      padding: 0;
+      font-size: 12px;
+      margin-left: 16px;
+    }
+
+    a:hover {
+      color: $secondary;
+    }
+  }
+}
+
+.card-card.large {
+  padding: 6px;
+  margin-bottom: 12px !important;
+
+  .card-header {
+    padding: 0;
+  }
+
+  .card-body {
+    padding: 0 0 0 20px;
+    position: initial;
+  }
+
+  .card-title {
+    line-height: 1.3;
+  }
+
+  .card-image {
+    height: 100px;
+    background: none;
+    border-radius: 8px;
+
+    .card-img {
+      border-radius: 8px;
+    }
+  }
+
+  ul {
+    margin-bottom: 0 !important;
+    bottom: 0 !important;
+  }
+
+  .card-share {
+    bottom: 0;
+  }
+
+  .card-favorite {
+    bottom: 0;
+  }
+}
+
+.card-single {
+  padding: 1rem;
+
+  .card-header {
+    position: relative;
+    background: none;
+    border: none;
+    padding: 0;
+  }
+
+  .card-views {
+    top: 0;
+  }
+
+  .card-date {
+    margin-right: 0;
+  }
+
+  .card-title {
+    font-size: 22px;
+    margin: 0;
+  }
+
+  .card-image {
+    border-radius: 0;
+    max-height: initial;
+    text-align: center;
+    .card-img {
+      max-width: 100%;
+      width: auto;
+    }
+  }
+
+  .card-meta {
+    height: 40px;
+    background: #e9e6e9;
+    display: flex;
+    padding: 4px 1rem;
+    margin: 0 -1rem;
+
+    .font-decrease,
+    .font-increase,
+    .font-reset {
+      font-size: 22px;
+      margin-right: 6px;
+      cursor: pointer;
+      color: $primary;
+    }
+
+    .font-decrease:hover,
+    .font-increase:hover,
+    .font-reset:hover {
+      color: #333;
+    }
+
+    .font-increase {
+      font-size: 22px;
+    }
+
+    .font-reset {
+      font-size: 18px;
+    }
+
+    .font-decrease {
+      font-size: 14px;
+    }
+  }
+
+  .card-share {
+    margin-right: auto;
+  }
+
+  .share-item {
+    height: 32px;
+    width: 32px;
+    display: inline-block;
+    padding: 6px;
+    font-size: 21px;
+    line-height: 1;
+    background: $white;
+    border-radius: 12px;
+    cursor: pointer;
+  }
+
+  .card-body {
+    padding: 1rem;
+    line-height: 1.6;
+
+    p {
+      margin-bottom: 16px;
+      font-size: 18px;
+      font-family: "Greta";
+    }
+
+    h1 {
+      font-size: 26px;
+    }
+
+    h2 {
+      font-size: 24px;
+    }
+
+    h3 {
+      font-size: 22px;
+    }
+
+    h4 {
+      font-size: 20px;
+    }
+
+    h5 {
+      font-size: 18px;
+    }
+
+    h6 {
+      font-size: 15px;
+    }
+
+    li {
+      font-size: 16px;
+    }
+
+    pre {
+      font-size: 16px;
+    }
+
+    figcaption {
+      font-size: 14px;
+    }
+
+    blockquote {
+      padding: 25px 25px 25px 20px;
+      background: #f4f4f4;
+      margin: 20px 20px 30px;
+    }
+    iframe,
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+
+  .card-edit {
+    padding: 8px;
+    border-top: 1px solid rgba(0, 0, 0, 0.125);
+    margin: 0 -1rem -1rem;
+    text-align: left;
+
+    .btn {
+      padding: 4px 16px;
+      line-height: 1;
+      font-size: 14px;
+      border: 0;
+      color: #fff;
+      border-radius: 12px;
+    }
+  }
+}
+
+.recommendations_listing {
+  margin-bottom: 2rem;
+
+  .recommendations-title {
+    margin: 0;
+  }
+
+  h3 {
+    display: inline-block;
+    border-bottom: 2px solid #aedfdb;
+    font-size: 17px;
+    margin-bottom: 1rem;
+    padding: 0.25rem 1rem;
+  }
+
+  .card-recommendation {
+    border: none;
+    border-radius: 0;
+    padding: 12px;
+    max-width: 257px;
+
+    .card-image {
+      background: #eee;
+      overflow: hidden;
+    }
+
+    .card-body {
+      padding: 0;
+    }
+
+    h5 {
+      font-size: 15px;
+      line-height: 1.6;
+      padding: 0.5rem 0;
+      margin: 0;
+    }
+  }
+}

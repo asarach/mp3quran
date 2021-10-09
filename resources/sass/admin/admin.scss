@@ -1,0 +1,31 @@
+@font-face {
+  font-family: 'Droid Arabic Kufi';
+  font-style: normal;
+  font-weight: 500;
+  src: url('../fonts/DroidKufi-Regular.ttf');
+}
+
+// Variables
+@import "variables";
+@import "~bootstrap/scss/bootstrap";
+
+@import "general";
+@import "main-header";
+@import "buttons";
+@import "uploader";
+@import "sidebar";
+@import "cards";
+@import "tables";
+@import "badges";
+@import "forms";
+@import "modal";
+@import "pagination";
+@import "filtering";
+@import "others";
+@import "medias";
+@import "reservation";
+@import "source";
+
+.asa{
+  background: red;
+}

@@ -1,0 +1,23 @@
+.reservation-card {
+    padding: 0;
+
+    .reservation-info {
+        background-color: #dfe1e7;
+
+      
+
+        p {
+            margin-bottom: 0.5rem;
+        }
+    }
+
+    .reservation-product {
+        background-color: #f0f1f5;
+        border-radius: 4px;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        ul{
+          margin: 0;
+        }
+    }
+}

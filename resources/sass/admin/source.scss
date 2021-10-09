@@ -1,0 +1,68 @@
+.test-alert {
+    background: #fff;
+    font-size: 13px;
+    padding: 0.625rem 0.75rem;
+    border: none;
+
+    ul {
+        margin: 0;
+
+        li {
+            border-right: 5px solid #ee4d4d;
+            padding: 5px 15px;
+            margin-bottom: 2px;
+            background: #fef2f2;
+            overflow: hidden;
+        }
+    }
+}
+
+.test-alert.alert-danger {
+    ul {
+        li {
+            border-right: 5px solid #ee4d4d;
+            background: #fef2f2;
+        }
+    }
+}
+
+.test-alert.alert-info {
+    ul {
+        li {
+            border-right: 5px solid #17a2b8;
+            background: #eef3f3;
+        }
+    }
+}
+
+.form-help {
+    direction: ltr;
+    text-align: left;
+    margin-top: -.75rem;
+
+    .btn {
+        background: none;
+        padding: 2px 12px;
+        color: #c8c8c8;
+        font-size: 12px;
+        box-shadow: none;
+    }
+
+    .btn:focus,
+    .btn:hover {
+        color: #555;
+        text-decoration: none;
+    }
+
+    .info-card {
+        font-size: 12px;
+        padding: 0.5rem;
+        border-radius: 4px;
+        background: #eff0f1;
+        margin-top: 1px;
+
+        p {
+          margin-bottom: 6px;
+        }
+    }
+}

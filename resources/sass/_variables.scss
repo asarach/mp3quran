@@ -1,0 +1,53 @@
+
+$top-bar-hight:              60px !default;
+$grid-columns: 24 !default;
+$grid-gutter-width: 16px !default;
+$side-menu-width: 300px !default;
+$side-menu-width-2: 260px !default;
+$side-menu-width-3: 240px !default;
+
+// Body
+$body-bg: #f8fafc;
+
+// Typography
+$font-size-base: 0.9rem;
+$line-height-base: 1.6;
+$font_stack_1: 'Roboto', sans-serif;
+$font_stack_2: 'Poppins', sans-serif;
+$font_stack_3: 'Martel', serif;
+
+// Colors
+
+// stylelint-disable
+$white:    #fff !default;
+$gray-100: #fafaf9 !default;
+$gray-200: #f7f9fb !default;
+$gray-300: #dee2e6 !default;
+$gray-400: #ced4da !default;
+$gray-500: #787d84 !default;
+$gray-600: #6c757d !default;
+$gray-700: #495057 !default;
+$gray-800: #343a40 !default;
+$gray-900: #02070e !default;
+$black:    #000 !default;
+
+$blue: #14aae2;
+$indigo: #6574cd;
+$purple: #9561e2;
+$pink: #D14E9A;
+$red: #ff6a6a;
+$orange: #f5b44b;
+$yellow: #ffed4a;
+$green: #38c172;
+$teal: #17a497;
+$cyan: #6cb2eb;
+$box_shadow_1: rgba(185, 172, 200, 0.25);
+
+$primary:       $blue !default;
+$secondary:     $orange !default;
+$success:       $green !default;
+$info:          $cyan !default;
+$warning:       $yellow !default;
+$danger:        $red !default;
+$light:         $gray-100 !default;
+$dark:          $gray-800 !default;

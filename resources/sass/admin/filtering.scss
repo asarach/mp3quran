@@ -1,0 +1,76 @@
+.filtering {
+    padding: 12px 12px 0;
+    display: flex;
+    .btn{
+        height: 32px;
+    }
+}
+
+.fiters-wrap{
+    width: 64%;
+}
+
+.filtering-label {
+    padding: 5px;
+    font-weight: 700;
+    color: #73869e;
+}
+
+.filter {
+    margin-right: 0.5rem;
+    display: inline-block;
+    margin-bottom: .5rem;
+}
+
+.filter .text-muted {
+    color: #989da0 !important;
+}
+
+.filter .form-group {
+    margin: 0.5rem;
+    min-width: 220px;
+}
+
+.filter .dropdown-toggle {
+    text-align: right;
+    position: relative;
+}
+
+.filter .dropdown-toggle::after {
+    position: absolute;
+    left: 8px;
+    top: 12px;
+}
+
+.filtering .dropdown-menu {
+    text-align: right;
+}
+
+.filtering .dropdown-item {
+  padding: 0.4rem 1rem .4rem 2rem;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.change-status .btn-secondary:not(:disabled):not(.disabled).active,
+.change-status .btn-secondary:not(:disabled):not(.disabled):active,
+.change-status .show > .btn-secondary.dropdown-toggle,
+.filtering .btn-secondary:not(:disabled):not(.disabled).active,
+.filtering .btn-secondary:not(:disabled):not(.disabled):active,
+.filtering .show > .btn-secondary.dropdown-toggle {
+    border: 1px solid rgba(0,0,0,0.175);
+    background-color: #fbfbfb;
+    box-shadow: 0 -2px 0 rgba(0,0,0,0.0375) inset;
+    color: #555;
+}
+
+.filtering .multiselect__tags {
+    width: 120px;
+}
+.filtering .multiselect__input,
+.filtering .multiselect__single {
+	width: 128px;
+}
+.filtering .multiselect__content-wrapper{
+  width: auto !important;
+}

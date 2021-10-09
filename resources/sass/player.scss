@@ -1,0 +1,513 @@
+.audio-player {
+  position: fixed;
+  bottom: 58px;
+  z-index: 99;
+  width: 100%;
+
+  .ply-controls {
+    margin: 0 auto;
+    display: flex;
+    width: 25%;
+  }
+
+  .ply-progress,
+  .fply-progress {
+    width: 100%;
+  }
+
+  .ply-btn {
+    width: 24px;
+    margin: 0;
+    color: $gray-700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+  .ply-btn.disabled {
+    cursor: initial;
+    svg {
+      fill: #bcbfc1;
+    }
+  }
+  .ply-item-info {
+    width: 50%;
+    display: flex;
+    color: $gray-700;
+    position: relative;
+    text-align: center;
+    padding: 2px;
+    .ply-reader {
+      font-weight: 700;
+    }
+    .ply-sora {
+      width: 100%;
+      font-size: 13px;
+    }
+  }
+  .ply-timer {
+    margin-left: auto;
+    border-right: 1px solid $gray-700;
+    margin-right: 0.25rem;
+    padding-right: 0.25rem;
+    height: 12px;
+    line-height: 1;
+    font-size: 12px;
+  }
+  .ply-duration {
+    height: 12px;
+    line-height: 1;
+    font-size: 12px;
+  }
+  .ply-options {
+    display: flex;
+    width: 25%;
+    justify-content: right;
+    align-items: center;
+    position: relative;
+    svg {
+      width: 20px;
+    }
+    .btn-volume {
+      margin-left: auto;
+      .volume-selector {
+        position: absolute;
+        bottom: 28px;
+        background: #f7f9fb;
+        right: 30px;
+        height: 140px;
+        padding: 8px;
+        border-radius: 0.25rem;
+        display: none;
+        border: 1px solid #d9dde2;
+      }
+    }
+    .btn-volume:hover {
+      margin-left: auto;
+      .volume-selector {
+        display: flex;
+      }
+    }
+    .btn-list {
+      margin-left: 0.5rem;
+      margin-right: 0.25rem;
+      margin-top: 4px;
+    }
+  }
+
+  .ply-playlist {
+    position: absolute;
+    bottom: -400px;
+    width: calc(100% - 1rem);
+    background: $white;
+    right: 0.5rem;
+    padding: 0;
+    transition: all 0.3s ease;
+    z-index: -1;
+    border-radius: 10px;
+    border: 1px solid #dee4ea;
+    .ply-list-header {
+      padding: 0.75rem;
+      display: flex;
+      border-bottom: 1px solid $gray-200;
+      box-shadow: 0px 2px 10px 0px #3333330f;
+      .ply-btn {
+        margin-right: 0.5rem;
+      }
+    }
+    svg {
+      width: 20px;
+    }
+    ul {
+      max-height: 260px;
+      overflow-y: scroll;
+      padding-top: .5rem;
+    }
+    ul::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ul::-webkit-scrollbar-track {
+      background: #ecf4f6;
+      width: 3px;
+      border-radius: 5px;
+    }
+
+    ul::-webkit-scrollbar-thumb {
+      border-radius: 5px;
+      width: 3px;
+      background: rgb(199, 219, 234);
+    }
+    li {
+      display: flex;
+      direction: rtl;
+      padding: 8px 4px;
+      position: relative;
+      .drag-handle.bg {
+        display: block;
+        background: url(../img/icons/drag_handle.png) no-repeat;
+        width: 14px;
+        height: 35px;
+        visibility: visible;
+        background-repeat: no-repeat;
+        background-position: 50%;
+        background-size: 6px 15px;
+        margin-left: 2px;
+        cursor: move;
+      }
+      .playlist-avatar {
+        height: 36px;
+        width: 36px;
+        background: #f5b44b;
+        margin-left: 0.5rem;
+        padding: 0;
+        position: relative;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0px 0px 6px 0px #f5b44b87;
+        .v-spinner .v-scale {
+          margin: 1px !important;
+        }
+        svg {
+          fill: #fff;
+        }
+        .ply-btn {
+          color: $white;
+          i {
+            background: #00000038;
+            border-radius: 30px;
+          }
+        }
+      }
+      .read-num {
+        float: right;
+        padding: 0;
+        line-height: 1;
+        font-size: 13px;
+        margin-top: 1px;
+      }
+      .read-sora {
+        margin-right: 30px;
+        line-height: 1;
+        margin-bottom: 3px;
+        /* margin-top: 2px; */
+        text-align: right;
+        width: 75px;
+        font-size: 13px;
+      }
+      .read-reciter {
+        font-size: 11px;
+        line-height: 1;
+        color: $gray-500;
+      }
+      .read-info {
+        width: 80%;
+        padding: 5px 0 0;
+      }
+      .read-options {
+        display: flex;
+        padding: 12px 0;
+        width: 36px;
+        overflow: hidden;
+        position: absolute;
+        left: 6px;
+        top: 0;
+        background: #fff;
+        transition: all 0.3s ease;
+        .ply-btn {
+          margin-right: 0.5rem;
+        }
+      }
+      .read-options.opened {
+        width: 192px;
+      }
+    }
+    li.playing {
+      background-color: $gray-200;
+      .read-options{
+        background-color: #f7f9fb;
+      }
+    }
+  }
+  .ply-playlist.opened {
+    bottom: 57px;
+  }
+}
+
+.mobile-player {
+  display: flex;
+  background: $white;
+  padding: 0.75rem 0.5rem 0.5rem;
+  direction: ltr;
+  border-bottom: 1px solid #f0f4f8;
+
+  border-top: 1px solid #dee4ea;
+  margin-bottom: 2px;
+  position: relative;
+  box-shadow: 0px -2px 8px 2px #a2a2a230;
+  .sply-progress {
+    height: 2px;
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    background: #00a2ff;
+  }
+  .ply-item-info {
+    margin: -0.65rem 0 -0.25rem;
+    display: block;
+  }
+
+  .ply-fullplayer {
+    position: fixed;
+    bottom: -100vh;
+    background: #0f4861;
+    width: 100%;
+    z-index: 999;
+    margin: 0;
+    height: calc(100vh - 50px);
+    left: 0;
+    padding: 4rem 1rem 1rem;
+    transition: all 0.5s ease;
+    .fply-close {
+      position: absolute;
+      bottom: 1.5rem;
+      background: #ffffff40;
+      left: 50%;
+      width: 38px;
+      height: 38px;
+      border-radius: 27px;
+      margin-left: -16px;
+      padding: 5px 2px;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  .ply-fullplayer::after {
+    position: absolute;
+    background: url(../img/ply_bg.jpg) no-repeat;
+    height: calc(100vh - 50px);
+    left: 0;
+    top: 0;
+    content: "";
+    display: block;
+    width: 100%;
+    background-position: center bottom;
+    background-size: 100% auto;
+    z-index: -1;
+  }
+  .ply-fullplayer.opened {
+    bottom: 60px;
+  }
+  .fply-header {
+    height: 20vh;
+  }
+  .fply-sora {
+    font-size: 32px;
+
+    color: $white;
+
+    text-align: center;
+
+    margin: 1rem 0;
+    font-weight: 100;
+  }
+  .fply-rewaya,
+  .fply-reader {
+    text-align: right;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 200;
+    margin-bottom: 3px;
+    line-height: 1;
+    span {
+      background: #00000040;
+      padding: 0.35rem 0.5rem;
+      display: inline-block;
+    }
+  }
+  .fply-rewaya {
+    font-size: 14px;
+    margin-bottom: 2rem;
+  }
+  #fply-siri {
+    text-align: center;
+    margin: 0 -1rem;
+    canvas {
+      width: 100% !important;
+      height: 16vh !important;
+    }
+  }
+  .fply-body {
+    height: 5vh;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    .fply-duration,
+    .fply-timer {
+      color: #fff;
+    }
+    .fply-progress {
+      padding: 0 1rem;
+    }
+
+    .ply-btn {
+      color: $white;
+      margin: 0 auto;
+    }
+  }
+  .fply-controls {
+    display: flex;
+    padding: 0 5rem;
+    height: 13vh;
+    justify-content: space-around;
+    align-items: center;
+
+    .btn-play-pause {
+      background: #f5b44b;
+      border-radius: 40px;
+      width: 40px;
+      height: 40px;
+      /* padding-top: 3px; */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  .fply-footer {
+    height: 30vh;
+    overflow-y: scroll;
+    ul {
+      padding-right: 8px;
+    }
+    li {
+      display: flex;
+      padding: 3px;
+      direction: rtl;
+      margin-bottom: 5px;
+      cursor: pointer;
+    }
+    li.playing {
+      background: #fff3;
+    }
+    .read-info {
+      display: flex;
+      color: #fff;
+      width: 100%;
+      text-align: center;
+    }
+    .read-sora {
+      margin-left: 0.5rem;
+      /* border-left: 1px solid #fff; */
+      line-height: 1;
+      display: inline-block;
+      /* width: 24%; */
+      padding: 2px 5px;
+    }
+    .read-reciter {
+      line-height: 1;
+      color: #d3e7f7;
+      padding: 2px 5px;
+      font-size: 14px;
+    }
+    .read-options {
+      margin-right: auto;
+    }
+    .ply-btn {
+      color: $white;
+    }
+  }
+
+  .fply-footer::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .fply-footer::-webkit-scrollbar-track {
+    background: #83adc0;
+    width: 3px;
+    border-radius: 5px;
+  }
+
+  .fply-footer::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    width: 3px;
+    background: #dae5e9;
+  }
+}
+.desktop-player {
+  display: flex;
+  background: $white;
+  padding: 0.5rem 0.5rem 0.5rem;
+  direction: ltr;
+  border-top: 1px solid #dee4ea;
+  margin-bottom: -58px;
+  height: 50px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  box-shadow: 0px -2px 8px 2px #a2a2a230;
+  .container {
+    position: relative;
+  }
+  .ply-playlist {
+    width: 360px;
+    right: 0;
+    box-shadow: 0px 0px 6px 3px #3333331f;
+  }
+  .ply-btn {
+    width: 28px;
+    height: 28px;
+  }
+  .ply-controls {
+    width: 100px;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+  }
+
+  .btn-play-pause {
+    box-shadow: 0px 2px 8px 0px #74a8bb5e;
+
+    background: $secondary;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 0.5rem;
+    cursor: pointer;
+    svg {
+      fill: #fff;
+      width: 20px;
+    }
+  }
+  .ply-body {
+    display: flex;
+    width: calc(100% - 380px);
+    align-items: center;
+    padding: 0 1rem;
+    .ply-timer {
+      border: none;
+      margin-right: 0.5rem;
+    }
+    .ply-duration {
+      margin-left: 0.5rem;
+    }
+    .ply-progress {
+      position: initial;
+    }
+  }
+  .ply-item-info {
+    width: 220px;
+    display: block;
+    margin: -0.5rem 0;
+    background: #ebedee;
+    padding: 0.25rem 1rem;
+  }
+
+  .ply-options {
+    width: 60px;
+  }
+}
