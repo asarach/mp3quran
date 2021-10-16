@@ -164,7 +164,7 @@ return [
         Illuminate\Redis\RedisServiceProvider::class,
         Illuminate\Auth\Passwords\PasswordResetServiceProvider::class,
         Illuminate\Session\SessionServiceProvider::class,
-        //     Waavi\Translation\TranslationServiceProvider::class,
+        Waavi\Translation\TranslationServiceProvider::class,
         Illuminate\Translation\TranslationServiceProvider::class,
 
         Illuminate\Validation\ValidationServiceProvider::class,

@@ -214,10 +214,10 @@ class Upload
     {
         if (isset($input['filename'])) {
             $extension = '.' . pathinfo($input['filename'], PATHINFO_EXTENSION);
-            $file_name_slug = str_slug(pathinfo($input['filename'], PATHINFO_FILENAME));
+            $file_name_slug = Str::slug(pathinfo($input['filename'], PATHINFO_FILENAME));
         } else {
             $file_name = $input['file']->getClientOriginalName();
-            $file_name_slug = str_slug(pathinfo($file_name, PATHINFO_FILENAME));
+            $file_name_slug = Str::slug(pathinfo($file_name, PATHINFO_FILENAME));
             $extension = '.' . $input['file']->getClientOriginalExtension();
         }
         $original_name = $file_name_slug;

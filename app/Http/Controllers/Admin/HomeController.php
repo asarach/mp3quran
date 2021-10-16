@@ -20,6 +20,8 @@ class HomeController extends Controller
      */
     public function index()
     {
+       
+
         $stats = Cache::remember('admin_home_stats', 86400 * 300, function () {
             $stats = [];
             $stats['radios'] = Radio::count();

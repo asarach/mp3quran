@@ -7,7 +7,7 @@ use Laravel\Scout\Searchable;
 use Heroicpixels\Filterable\FilterableTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use CyrildeWit\EloquentViewable\Contracts\Viewable as ViewableContract;
-use CyrildeWit\EloquentViewable\Viewable;
+use CyrildeWit\EloquentViewable\InteractsWithViews;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Kyslik\ColumnSortable\Sortable;
 use Lang;
@@ -15,7 +15,7 @@ use LaravelLocalization;
 
 class Tadabor extends Model implements ViewableContract
 {
-    use FilterableTrait, Searchable, Viewable, SoftDeletes, Sortable;
+    use FilterableTrait, Searchable, InteractsWithViews, SoftDeletes, Sortable;
 
     protected $fillable = ['title', 'url',  'status'];
 

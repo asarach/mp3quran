@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Heroicpixels\Filterable\FilterableTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use CyrildeWit\EloquentViewable\Contracts\Viewable as ViewableContract;
-use CyrildeWit\EloquentViewable\Viewable;
+use CyrildeWit\EloquentViewable\InteractsWithViews;
 use Kyslik\ColumnSortable\Sortable;
 use Laravel\Scout\Searchable;
 use Lang;
