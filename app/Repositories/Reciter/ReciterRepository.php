@@ -1,6 +1,6 @@
 <?php
 
-namespace Mp3quran\Repositories\Reciter;
+namespace App\Repositories\Reciter;
 
 interface ReciterRepository {
 

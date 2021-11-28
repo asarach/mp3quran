@@ -1,6 +1,6 @@
 <?php
 
-namespace Mp3quran\Repositories\Link;
+namespace App\Repositories\Link;
 
 interface LinkRepository {
 

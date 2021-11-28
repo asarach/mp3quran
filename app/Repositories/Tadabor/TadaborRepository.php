@@ -1,6 +1,6 @@
 <?php
 
-namespace Mp3quran\Repositories\Tadabor;
+namespace App\Repositories\Tadabor;
 
 interface TadaborRepository {
 

@@ -1,13 +1,13 @@
 <?php
 
-namespace Mp3quran\Repositories\Newsletter;
+namespace App\Repositories\Newsletter;
 
-use Mp3quran\Models\NlMessage;
-use Mp3quran\Models\NlTemplate;
-use Mp3quran\Models\Newsletter;
-use Mp3quran\Models\NlSubscriber;
+use App\Models\NlMessage;
+use App\Models\NlTemplate;
+use App\Models\Newsletter;
+use App\Models\NlSubscriber;
 use Waavi\Translation\Models\Language;
-use Mp3quran\Repositories\EloquentRepository;
+use App\Repositories\EloquentRepository;
 
 class EloquentNewsletterRepository extends EloquentRepository implements NewsletterRepository
 {

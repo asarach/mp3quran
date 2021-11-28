@@ -1,6 +1,6 @@
 <?php
 
-namespace Mp3quran\Providers;
+namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Locale;

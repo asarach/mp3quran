@@ -1,6 +1,6 @@
 <?php
 
-namespace Mp3quran\Repositories\Mushaf;
+namespace App\Repositories\Mushaf;
 
 interface MushafRepository {
 

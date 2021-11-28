@@ -1,10 +1,10 @@
 <?php
 
-namespace Mp3quran\Console\Commands;
+namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use DB;
-use Mp3quran\Rewaya;
+use App\Rewaya;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Mp3quran\Models;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -18,7 +18,7 @@ class NlSubscriber extends Model
      */
     public function newsletters()
     {
-        return $this->belongsToMany("Mp3quran\Models\Newsletter", 'nl_subscriptions', 'subscriber_id', 'newsletter_id');
+        return $this->belongsToMany("App\Models\Newsletter", 'nl_subscriptions', 'subscriber_id', 'newsletter_id');
     }
 }
 

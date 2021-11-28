@@ -100,6 +100,9 @@
     text-align: center;
     background: $secondary;
     border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     svg {
       width: 18px;
       fill: $white;
@@ -423,6 +426,11 @@
     width: 25px;
     height: 25px;
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f2f3f4;
+    border-radius: 10px;
     svg {
       fill: $secondary;
     }
@@ -488,6 +496,10 @@
       .btn {
         margin: 0;
         box-shadow: 0px 2px 8px 0px #f7b95269;
+        padding: 0 20px;
+        .uni-icon{
+          margin: 0;
+        }
       }
     }
   }
@@ -547,6 +559,9 @@
       svg {
         width: 20px;
       }
+    }
+    span.uni-icon{
+      font-size: 20px;
     }
   }
   .fb-controle.top {

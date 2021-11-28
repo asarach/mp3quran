@@ -1,10 +1,10 @@
 <?php
 
-namespace Mp3quran\Repositories\Tadabor;
+namespace App\Repositories\Tadabor;
 
-use Mp3quran\Repositories\EloquentRepository;
-use Mp3quran\Tadabor;
-use Mp3quran\Services\Search;
+use App\Repositories\EloquentRepository;
+use App\Tadabor;
+use App\Services\Search;
 
 class EloquentTadaborRepository extends EloquentRepository implements TadaborRepository
 {

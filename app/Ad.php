@@ -1,6 +1,6 @@
 <?php
 
-namespace Mp3quran;
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Heroicpixels\Filterable\FilterableTrait;
@@ -47,7 +47,7 @@ class Ad extends Model
      */
     public function images()
     {
-        return $this->morphToMany('Mp3quran\Media', 'mediable', 'mediable');
+        return $this->morphToMany('App\Media', 'mediable', 'mediable');
     }
 
     public function getImage($size = 'lg')

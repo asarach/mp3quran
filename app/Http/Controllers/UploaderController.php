@@ -1,50 +1,15 @@
 <?php
 
-namespace Mp3quran\Http\Controllers;
+namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use Illuminate\Support\Str;
-use Illuminate\Http\Request;
-use Mp3quran\Http\Requests\UploaderRequest;
+use App\Http\Requests\UploaderRequest;
 
 
 class UploaderController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-    }
 
-    public function show()
-    {
-
-        $uploads = [];
-        $page_title = 'File Uploader';
-        $page = 'uploader';
-
-        if (request()->ajax()) {
-            return compact('page', 'uploads','page_title');
-        }
-        $params = get_params(compact('page','uploads', 'page_title'));
-        $params['metas'] = getMetas([
-            'seo_title' => 'File Uploader',
-            'seo_description' => 'File Uploader',
-            'seo_keywords' => 'File Uploader'
-        ]);
-
-        return view('layouts.app', $params);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function upload(UploaderRequest $request)
     {
         $input = $request->all();

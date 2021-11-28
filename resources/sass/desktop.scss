@@ -23,11 +23,15 @@
 
     .menu-link {
       display: block;
-      padding: 6px 8px;
+      padding: 8px;
       color: #636a6f;
       font-size: 13px;
+      display: flex;
+      align-items: center;
+      line-height: 1;
       span {
         margin-right: 5px;
+        font-size: 22px;
       }
       svg {
         width: 20px;

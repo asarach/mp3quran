@@ -1,6 +1,6 @@
 <?php
 
-namespace  Mp3quran\Http\Requests;
+namespace  App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 

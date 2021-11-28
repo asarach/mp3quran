@@ -1,9 +1,9 @@
 <?php
 
-namespace Mp3quran\Repositories\Link;
+namespace App\Repositories\Link;
 
-use Mp3quran\Repositories\EloquentRepository;
-use Mp3quran\Link;
+use App\Repositories\EloquentRepository;
+use App\Link;
 
 class EloquentLinkRepository extends EloquentRepository implements LinkRepository
 {

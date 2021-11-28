@@ -1,12 +1,15 @@
 <?php
 
-namespace Mp3quran\Http\ViewComposers;
+namespace App\Http\ViewComposers;
 
-use Mp3quran\Ad;
+use App\Ad;
 use Carbon\Carbon;
+use Jenssegers\Agent\Agent;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Cache;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class AppComposer
 {
@@ -51,7 +54,12 @@ class AppComposer
         }
         $popup = $popup->orderBy('order_num', 'asc')
             ->first();
+        $languages  = Cache::rememberForever('languages', function () {
+            return LaravelLocalization::getSupportedLocales();
+        });
 
-        $view->with(compact('popup'));
+
+
+        $view->with(compact('popup', 'languages'));
     }
 }

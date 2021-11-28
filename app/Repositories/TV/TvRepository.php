@@ -1,6 +1,6 @@
 <?php
 
-namespace Mp3quran\Repositories\Tv;
+namespace App\Repositories\Tv;
 
 interface TvRepository {
 

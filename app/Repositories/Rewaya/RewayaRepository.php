@@ -1,6 +1,6 @@
 <?php
 
-namespace Mp3quran\Repositories\Rewaya;
+namespace App\Repositories\Rewaya;
 
 interface RewayaRepository {
 

@@ -177,15 +177,15 @@ return [
         /*
          * Application Service Providers...
          */
-        Mp3quran\Providers\AppServiceProvider::class,
-        Mp3quran\Providers\AuthServiceProvider::class,
-        Mp3quran\Providers\ConfigServiceProvider::class,
+        App\Providers\AppServiceProvider::class,
+        App\Providers\AuthServiceProvider::class,
+        App\Providers\ConfigServiceProvider::class,
 
-        // Mp3quran\Providers\BroadcastServiceProvider::class,
-        Mp3quran\Providers\EventServiceProvider::class,
-        Mp3quran\Providers\RouteServiceProvider::class,
-        Mp3quran\Providers\RepositoriesServiceProvider::class,
-        Mp3quran\Providers\ComposerServiceProvider::class,
+        // App\Providers\BroadcastServiceProvider::class,
+        App\Providers\EventServiceProvider::class,
+        App\Providers\RouteServiceProvider::class,
+        App\Providers\RepositoriesServiceProvider::class,
+        App\Providers\ComposerServiceProvider::class,
 
     ],
 

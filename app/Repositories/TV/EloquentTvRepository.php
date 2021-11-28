@@ -1,10 +1,10 @@
 <?php
 
-namespace Mp3quran\Repositories\Tv;
+namespace App\Repositories\Tv;
 
-use Mp3quran\Repositories\EloquentRepository;
-use Mp3quran\Tv;
-use Mp3quran\Services\Search;
+use App\Repositories\EloquentRepository;
+use App\Tv;
+use App\Services\Search;
 
 class EloquentTvRepository extends EloquentRepository implements TvRepository
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Mp3quran;
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
@@ -72,7 +72,7 @@ class Tv extends Model implements ViewableContract
      */
     public function images()
     {
-        return $this->morphToMany('Mp3quran\Media', 'mediable', 'mediable');
+        return $this->morphToMany('App\Media', 'mediable', 'mediable');
     }
 
     public function getLocaleName()

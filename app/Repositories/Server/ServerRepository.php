@@ -1,6 +1,6 @@
 <?php
 
-namespace Mp3quran\Repositories\Server;
+namespace App\Repositories\Server;
 
 interface ServerRepository {
 

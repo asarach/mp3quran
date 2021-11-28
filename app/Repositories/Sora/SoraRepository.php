@@ -1,6 +1,6 @@
 <?php
 
-namespace Mp3quran\Repositories\Sora;
+namespace App\Repositories\Sora;
 
 interface SoraRepository {
 

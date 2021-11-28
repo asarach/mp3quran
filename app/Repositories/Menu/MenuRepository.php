@@ -1,6 +1,6 @@
 <?php
 
-namespace Mp3quran\Repositories\Menu;
+namespace App\Repositories\Menu;
     
 interface MenuRepository
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Mp3quran\Repositories\Read;
+namespace App\Repositories\Read;
 
 interface ReadRepository {
 

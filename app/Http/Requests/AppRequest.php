@@ -1,6 +1,6 @@
 <?php
 
-namespace Mp3quran\Http\Requests;
+namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -30,7 +30,6 @@ class AppRequest extends FormRequest
 
         return [
           'title' => 'required|string|max:255',
-          'url1' => 'required',
           'order_num' => 'required',
           'image' => 'required',
         ];
@@ -40,7 +39,6 @@ class AppRequest extends FormRequest
       case 'PUT':
         return [
           'title' => 'required|string|max:255',
-          'url1' => 'required',
           'order_num' => 'required',
           'image' => 'required',
         ];

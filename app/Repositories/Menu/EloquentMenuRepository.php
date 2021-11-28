@@ -1,9 +1,9 @@
 <?php
 
-namespace  Mp3quran\Repositories\Menu;
+namespace  App\Repositories\Menu;
 
-use Mp3quran\Repositories\EloquentRepository;
-use Mp3quran\Menu;
+use App\Repositories\EloquentRepository;
+use App\Menu;
 
 class EloquentMenuRepository extends EloquentRepository implements MenuRepository
 {

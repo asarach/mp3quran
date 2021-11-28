@@ -1,6 +1,6 @@
 <?php
 
-namespace Mp3quran;
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
@@ -59,7 +59,7 @@ class Reciter extends Model
     */
     public function reads()
     {
-        return $this->hasMany('Mp3quran\Read');
+        return $this->hasMany('App\Read');
     }
 
 

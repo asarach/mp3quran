@@ -1,10 +1,10 @@
 <?php
 
-namespace Mp3quran\Http\Controllers;
+namespace App\Http\Controllers;
 
 use Newsletter;
 use Illuminate\Http\Request;
-use Mp3quran\Repositories\Newsletter\NewsletterRepository;
+use App\Repositories\Newsletter\NewsletterRepository;
 
 class NewsletterController extends Controller
 {
@@ -17,35 +17,7 @@ class NewsletterController extends Controller
     {
         $this->newsletterRepo = $newsletterRepo;
     }
-    /**
-     * Show the application dashboard.
-     *
-     */
-    public function subscribe(Request $request)
-    {
-        $channel = config('newsletter.channel');
-        $input = $request->all();
-        if ($channel == 'local') {
-            if (!isset($input['name'])) {
-                $input['name'] = 'none';
-            }
-            if (!isset($input['newsletter'])) {
-                $input['newsletter'] = 'main';
-            }
-            $this->newsletterRepo->subscribe($input);
-        }else{
-            Newsletter::subscribe($input['email']);
-        }
-
-        session(['newsletters_subscribed' => true]);
-
-        return ['success' => true];
-    }
-
-    /**
-     * Show the application dashboard.
-     *
-     */
+    
     public function unsubscribe(Request $request)
     {
         $channel = config('newsletter.channel');
@@ -60,29 +32,5 @@ class NewsletterController extends Controller
         }
 
         return redirect('/');
-    }
-    /**
-     * Show the application dashboard.
-     *
-     */
-    public function show(Request $request)
-    {
-        
-        $page_title = trans("text.newsletter");
-
-        $page = 'newsletter';
-        if (request()->ajax()) {
-            return compact('page',  'page_title');
-        }
-        
-        $params = get_params(compact('page', 'page_title'));
-       
-        $params['metas'] = getMetas([
-            'seo_title' => trans("text.newsletter"),
-            'seo_description' => trans("text.newsletter"),
-            'seo_keywords' => trans("text.newsletter")
-        ]);
-        // dd('asa');
-        return view('layouts.app', $params);
     }
 }

@@ -1,9 +1,9 @@
 <?php
 
-namespace Mp3quran\Repositories\Sora;
+namespace App\Repositories\Sora;
 
-use Mp3quran\Repositories\EloquentRepository;
-use Mp3quran\Sora;
+use App\Repositories\EloquentRepository;
+use App\Sora;
 
 class EloquentSoraRepository extends EloquentRepository implements SoraRepository
 {

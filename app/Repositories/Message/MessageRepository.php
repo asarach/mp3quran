@@ -1,6 +1,6 @@
 <?php
 
-namespace Mp3quran\Repositories\Message;
+namespace App\Repositories\Message;
 
 interface MessageRepository
 {

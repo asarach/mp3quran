@@ -1,10 +1,10 @@
 <?php
 
-namespace Mp3quran\Repositories\Video;
+namespace App\Repositories\Video;
 
-use Mp3quran\Repositories\EloquentRepository;
-use Mp3quran\Video;
-use Mp3quran\Services\Search;
+use App\Repositories\EloquentRepository;
+use App\Video;
+use App\Services\Search;
 
 class EloquentVideoRepository extends EloquentRepository implements VideoRepository
 {

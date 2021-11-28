@@ -1,9 +1,9 @@
 <?php
 
-namespace Mp3quran\Repositories\Setting;
+namespace App\Repositories\Setting;
 
-use Mp3quran\Repositories\EloquentRepository;
-use Mp3quran\Setting;
+use App\Repositories\EloquentRepository;
+use App\Setting;
 
 class EloquentSettingRepository extends EloquentRepository implements SettingRepository
 {

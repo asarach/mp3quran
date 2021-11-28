@@ -54,37 +54,37 @@
           <small class="form-text text-danger" v-if="errors.has('type')">{{errors.get('type')}}</small>
         </div>
         <div class="form-group">
-          <label class="col-form-label">{{ trans('admin.app-url-1')}}</label>
+          <label class="col-form-label">Android</label>
           <input
             type="text"
-            name="url1"
+            name="android"
             class="form-control"
-            v-model="app.url1"
-            @keydown="errors.clear('url1')"
+            v-model="app.android"
+            @keydown="errors.clear('android')"
           />
-          <small class="form-text text-danger" v-if="errors.has('url1')">{{errors.get('url1')}}</small>
+          <small class="form-text text-danger" v-if="errors.has('android')">{{errors.get('android')}}</small>
         </div>
         <div class="form-group">
-          <label class="col-form-label">{{ trans('admin.app-url-2')}}</label>
+          <label class="col-form-label">Ios Apple</label>
           <input
             type="text"
-            name="url2"
+            name="apple"
             class="form-control"
-            v-model="app.url2"
-            @keydown="errors.clear('url2')"
+            v-model="app.apple"
+            @keydown="errors.clear('apple')"
           />
-          <small class="form-text text-danger" v-if="errors.has('url2')">{{errors.get('url2')}}</small>
+          <small class="form-text text-danger" v-if="errors.has('apple')">{{errors.get('apple')}}</small>
         </div>
         <div class="form-group">
-          <label class="col-form-label">{{ trans('admin.app-url-3')}}</label>
+          <label class="col-form-label">Huawei</label>
           <input
             type="text"
-            name="url3"
+            name="huawei"
             class="form-control"
-            v-model="app.url3"
-            @keydown="errors.clear('url3')"
+            v-model="app.huawei"
+            @keydown="errors.clear('huawei')"
           />
-          <small class="form-text text-danger" v-if="errors.has('url3')">{{errors.get('url3')}}</small>
+          <small class="form-text text-danger" v-if="errors.has('huawei')">{{errors.get('huawei')}}</small>
         </div>
         <div class="form-group">
           <label class="col-form-label">{{ trans("admin.order_num") }}</label>

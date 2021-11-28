@@ -1,6 +1,6 @@
 <?php
 
-namespace Mp3quran\Repositories\Radio;
+namespace App\Repositories\Radio;
 
 interface RadioRepository {
 

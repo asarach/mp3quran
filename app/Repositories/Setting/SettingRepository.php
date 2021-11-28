@@ -1,6 +1,6 @@
 <?php
 
-namespace Mp3quran\Repositories\Setting;
+namespace App\Repositories\Setting;
 
 interface SettingRepository
 {

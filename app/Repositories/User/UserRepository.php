@@ -1,6 +1,6 @@
 <?php
 
-namespace Mp3quran\Repositories\User;
+namespace App\Repositories\User;
 
 interface UserRepository
 {

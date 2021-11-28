@@ -1,9 +1,9 @@
 <?php
 
-namespace Mp3quran\Console\Commands;
+namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use Mp3quran\Read;
+use App\Read;
 use Carbon\Carbon;
 use DB;
 class CheckReads extends Command

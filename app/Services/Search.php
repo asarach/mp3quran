@@ -1,6 +1,6 @@
 <?php
 
-namespace Mp3quran\Services;
+namespace App\Services;
 
 use TeamTNT\TNTSearch\TNTSearch;
 

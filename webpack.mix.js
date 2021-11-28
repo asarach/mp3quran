@@ -10,8 +10,8 @@ const mix = require('laravel-mix');
  | file for the application as well as bundling up all the JS files.
  |
  */
-mix.js('resources/js/app-client.js', "public/js/app-client3.js")
-    .js('resources/js/app-server.js', 'public/js/app-server.js')
+mix.js('resources/js/app.js', 'public/js/app.js')
+    .js('resources/js/player/player.js', 'public/js/player.js')
     .sass('resources/sass/app.scss', 'public/css/app.css')
     .sass('resources/sass/errors.scss', 'public/css/errors.css')
     .version()

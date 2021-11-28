@@ -1,6 +1,6 @@
 <?php
 
-namespace Mp3quran;
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Heroicpixels\Filterable\FilterableTrait;
@@ -75,7 +75,7 @@ class Read extends Model
 
     public function radio()
     {
-        return $this->hasOne('Mp3quran\Radio');
+        return $this->hasOne('App\Radio');
     }
 
     /**
@@ -83,7 +83,7 @@ class Read extends Model
      */
     public function reciter()
     {
-        return $this->belongsTo('Mp3quran\Reciter');
+        return $this->belongsTo('App\Reciter');
     }
 
     /**
@@ -91,7 +91,7 @@ class Read extends Model
      */
     public function rewaya()
     {
-        return $this->belongsTo('Mp3quran\Rewaya');
+        return $this->belongsTo('App\Rewaya');
     }
 
     /**
@@ -99,7 +99,7 @@ class Read extends Model
      */
     public function server()
     {
-        return $this->belongsTo('Mp3quran\Server');
+        return $this->belongsTo('App\Server');
     }
 
     /**
@@ -107,7 +107,7 @@ class Read extends Model
      */
     public function mushaf()
     {
-        return $this->belongsTo('Mp3quran\Mushaf');
+        return $this->belongsTo('App\Mushaf');
     }
 
     /**
@@ -115,7 +115,7 @@ class Read extends Model
      */
     public function soar()
     {
-        return $this->belongsToMany('Mp3quran\Sora', 'sura_read', 'read_id', 'sura_id')->withPivot('duration', 'filename', 'report');
+        return $this->belongsToMany('App\Sora', 'sura_read', 'read_id', 'sura_id')->withPivot('duration', 'filename', 'report');
     }
 
     public function getLocaleTitle()

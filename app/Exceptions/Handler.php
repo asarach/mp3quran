@@ -1,6 +1,6 @@
 <?php
 
-namespace Mp3quran\Exceptions;
+namespace App\Exceptions;
 
 use Throwable;
 

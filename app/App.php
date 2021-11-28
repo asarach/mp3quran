@@ -1,6 +1,6 @@
 <?php
 
-namespace Mp3quran;
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Heroicpixels\Filterable\FilterableTrait;
@@ -24,14 +24,19 @@ class App extends Model
         if (strpos(url()->current(), 'admin') !== false) {
             $array = parent::ToArray();
         } else {
-            $image = $this->images()->first();
+
             $array = [
                 'id' => $this->id,
-                'url' =>json_decode($this->url)[0],
+                'url' => json_decode($this->url)[0],
                 'type' => $this->type,
-                'image' => $image->getImage('apps', 'lg'),
+                'image' => '',
                 'title' => $this->getLocaleTitle(),
             ];
+
+            $image = $this->images()->first();
+            if ($image) {
+                $array['image'] = $image->getImage('apps', 'lg');
+            }
         }
 
         return $array;
@@ -42,9 +47,18 @@ class App extends Model
      */
     public function images()
     {
-        return $this->morphToMany('Mp3quran\Media', 'mediable', 'mediable');
+        return $this->morphToMany('App\Media', 'mediable', 'mediable');
     }
 
+    public function getImage()
+    {
+        $image = $this->images()->first();
+        if ($image) {
+            return $image->getImage('apps', 'lg');
+        } else {
+            return '';
+        }
+    }
     public function getLocaleTitle()
     {
         $title = trans('app-title.' . $this->id);

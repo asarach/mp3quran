@@ -1,12 +1,12 @@
 <?php
 
-namespace Mp3quran\Repositories\Read;
+namespace App\Repositories\Read;
 
-use Mp3quran\Repositories\EloquentRepository;
-use Mp3quran\Read;
-use Mp3quran\Sora;
+use App\Repositories\EloquentRepository;
+use App\Read;
+use App\Sora;
 use Auth;
-use Mp3quran\Services\Search;
+use App\Services\Search;
 
 class EloquentReadRepository extends EloquentRepository implements ReadRepository
 {

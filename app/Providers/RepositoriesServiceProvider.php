@@ -1,6 +1,6 @@
 <?php
 
-namespace Mp3quran\Providers;
+namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -24,98 +24,98 @@ class RepositoriesServiceProvider extends ServiceProvider
         public function register()
         {
                 $this->app->singleton(
-                        "Mp3quran\Repositories\Newsletter\NewsletterRepository",
-                        "Mp3quran\Repositories\Newsletter\EloquentNewsletterRepository"
+                        "App\Repositories\Newsletter\NewsletterRepository",
+                        "App\Repositories\Newsletter\EloquentNewsletterRepository"
                 );
                 $this->app->singleton(
-                        'Mp3quran\Repositories\Sora\SoraRepository',
-                        'Mp3quran\Repositories\Sora\EloquentSoraRepository'
+                        'App\Repositories\Sora\SoraRepository',
+                        'App\Repositories\Sora\EloquentSoraRepository'
                 );
                 $this->app->singleton(
-                        'Mp3quran\Repositories\Language\LanguageRepository',
-                        'Mp3quran\Repositories\Language\EloquentLanguageRepository'
-                );
-
-                $this->app->singleton(
-                        "Mp3quran\Repositories\Menu\MenuRepository",
-                        "Mp3quran\Repositories\Menu\EloquentMenuRepository"
+                        'App\Repositories\Language\LanguageRepository',
+                        'App\Repositories\Language\EloquentLanguageRepository'
                 );
 
                 $this->app->singleton(
-                        'Mp3quran\Repositories\Message\MessageRepository',
-                        'Mp3quran\Repositories\Message\EloquentMessageRepository'
+                        "App\Repositories\Menu\MenuRepository",
+                        "App\Repositories\Menu\EloquentMenuRepository"
+                );
+
+                $this->app->singleton(
+                        'App\Repositories\Message\MessageRepository',
+                        'App\Repositories\Message\EloquentMessageRepository'
                 );
                 $this->app->singleton(
-                        'Mp3quran\Repositories\Page\PageRepository',
-                        'Mp3quran\Repositories\Page\EloquentPageRepository'
+                        'App\Repositories\Page\PageRepository',
+                        'App\Repositories\Page\EloquentPageRepository'
                 );
                 $this->app->singleton(
-                        'Mp3quran\Repositories\Media\MediaRepository',
-                        'Mp3quran\Repositories\Media\EloquentMediaRepository'
+                        'App\Repositories\Media\MediaRepository',
+                        'App\Repositories\Media\EloquentMediaRepository'
                 );
                 $this->app->singleton(
-                        'Mp3quran\Repositories\App\AppRepository',
-                        'Mp3quran\Repositories\App\EloquentAppRepository'
+                        'App\Repositories\App\AppRepository',
+                        'App\Repositories\App\EloquentAppRepository'
                 );
                 $this->app->singleton(
-                        'Mp3quran\Repositories\Read\ReadRepository',
-                        'Mp3quran\Repositories\Read\EloquentReadRepository'
+                        'App\Repositories\Read\ReadRepository',
+                        'App\Repositories\Read\EloquentReadRepository'
                 );
                 $this->app->singleton(
-                        'Mp3quran\Repositories\Radio\RadioRepository',
-                        'Mp3quran\Repositories\Radio\EloquentRadioRepository'
+                        'App\Repositories\Radio\RadioRepository',
+                        'App\Repositories\Radio\EloquentRadioRepository'
                 );
                 $this->app->singleton(
-                        'Mp3quran\Repositories\Tadabor\TadaborRepository',
-                        'Mp3quran\Repositories\Tadabor\EloquentTadaborRepository'
+                        'App\Repositories\Tadabor\TadaborRepository',
+                        'App\Repositories\Tadabor\EloquentTadaborRepository'
                 );
                 $this->app->singleton(
-                        'Mp3quran\Repositories\Reciter\ReciterRepository',
-                        'Mp3quran\Repositories\Reciter\EloquentReciterRepository'
+                        'App\Repositories\Reciter\ReciterRepository',
+                        'App\Repositories\Reciter\EloquentReciterRepository'
                 );
                 $this->app->singleton(
-                        'Mp3quran\Repositories\Ad\AdRepository',
-                        'Mp3quran\Repositories\Ad\EloquentAdRepository'
+                        'App\Repositories\Ad\AdRepository',
+                        'App\Repositories\Ad\EloquentAdRepository'
                 );
                 $this->app->singleton(
-                        'Mp3quran\Repositories\Link\LinkRepository',
-                        'Mp3quran\Repositories\Link\EloquentLinkRepository'
+                        'App\Repositories\Link\LinkRepository',
+                        'App\Repositories\Link\EloquentLinkRepository'
                 );
                 $this->app->singleton(
-                        'Mp3quran\Repositories\Video\VideoRepository',
-                        'Mp3quran\Repositories\Video\EloquentVideoRepository'
+                        'App\Repositories\Video\VideoRepository',
+                        'App\Repositories\Video\EloquentVideoRepository'
                 );
                 $this->app->singleton(
-                        'Mp3quran\Repositories\Tv\TvRepository',
-                        'Mp3quran\Repositories\Tv\EloquentTvRepository'
+                        'App\Repositories\Tv\TvRepository',
+                        'App\Repositories\Tv\EloquentTvRepository'
                 );
                 $this->app->singleton(
-                        'Mp3quran\Repositories\Server\ServerRepository',
-                        'Mp3quran\Repositories\Server\EloquentServerRepository'
+                        'App\Repositories\Server\ServerRepository',
+                        'App\Repositories\Server\EloquentServerRepository'
                 );
                 $this->app->singleton(
-                        'Mp3quran\Repositories\Mushaf\MushafRepository',
-                        'Mp3quran\Repositories\Mushaf\EloquentMushafRepository'
+                        'App\Repositories\Mushaf\MushafRepository',
+                        'App\Repositories\Mushaf\EloquentMushafRepository'
                 );
                 $this->app->singleton(
-                        'Mp3quran\Repositories\Vgroup\VgroupRepository',
-                        'Mp3quran\Repositories\Vgroup\EloquentVgroupRepository'
+                        'App\Repositories\Vgroup\VgroupRepository',
+                        'App\Repositories\Vgroup\EloquentVgroupRepository'
                 );
                 $this->app->singleton(
-                        'Mp3quran\Repositories\Rewaya\RewayaRepository',
-                        'Mp3quran\Repositories\Rewaya\EloquentRewayaRepository'
+                        'App\Repositories\Rewaya\RewayaRepository',
+                        'App\Repositories\Rewaya\EloquentRewayaRepository'
                 );
                 $this->app->singleton(
-                        'Mp3quran\Repositories\Setting\SettingRepository',
-                        'Mp3quran\Repositories\Setting\EloquentSettingRepository'
+                        'App\Repositories\Setting\SettingRepository',
+                        'App\Repositories\Setting\EloquentSettingRepository'
                 );
                 $this->app->singleton(
-                        'Mp3quran\Repositories\User\UserRepository',
-                        'Mp3quran\Repositories\User\EloquentUserRepository'
+                        'App\Repositories\User\UserRepository',
+                        'App\Repositories\User\EloquentUserRepository'
                 );
                 $this->app->singleton(
-                        'Mp3quran\Repositories\Translation\TranslationRepository',
-                        'Mp3quran\Repositories\Translation\EloquentTranslationRepository'
+                        'App\Repositories\Translation\TranslationRepository',
+                        'App\Repositories\Translation\EloquentTranslationRepository'
                 );
         }
 }

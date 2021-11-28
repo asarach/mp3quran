@@ -1,6 +1,6 @@
 <?php
 
-namespace Mp3quran;
+namespace App;
 
 use CyrildeWit\EloquentViewable\Support\Period;
 use Illuminate\Database\Eloquent\Builder;
@@ -48,15 +48,13 @@ class Radio extends Model
         } else {
             $array = [
                 'id' => $this->id,
-                'url' => $this->url,
-                'slug' => $this->slug,
                 'name' => $this->getLocaleName(),
-                'sort_name' => $this->getSortName(),
                 'rewaya_name' => $this->getRewaya(),
-                'mushaf_name' => $this->getMushaf(),
+                'slug' => $this->slug,
+                'url' => $this->url,
                 'share_description' => $this->getLocaleShareDescription(),
                 'share_title' => $this->getLocaleShareTitle(),
-                'share_url' => route('radio.index')
+                'share_url' => route('radio.index')                
             ];
         }
 
@@ -81,7 +79,7 @@ class Radio extends Model
      */
     public function images()
     {
-        return $this->morphToMany('Mp3quran\Media', 'mediable', 'mediable');
+        return $this->morphToMany('App\Media', 'mediable', 'mediable');
     }
 
     /**
@@ -89,7 +87,7 @@ class Radio extends Model
      */
     public function read()
     {
-        return $this->belongsTo('Mp3quran\Read');
+        return $this->belongsTo('App\Read');
     }
 
     /**
@@ -97,7 +95,7 @@ class Radio extends Model
      */
     public function rewaya()
     {
-        return $this->belongsTo('Mp3quran\Rewaya');
+        return $this->belongsTo('App\Rewaya');
     }
 
     public function getLocaleName()

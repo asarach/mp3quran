@@ -1,9 +1,9 @@
 <?php
 
-namespace Mp3quran\Repositories\Rewaya;
+namespace App\Repositories\Rewaya;
 
-use Mp3quran\Repositories\EloquentRepository;
-use Mp3quran\Rewaya;
+use App\Repositories\EloquentRepository;
+use App\Rewaya;
 
 class EloquentRewayaRepository extends EloquentRepository implements RewayaRepository
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Mp3quran;
+namespace App;
 
 use Laravel\Scout\Searchable;
 use Kyslik\ColumnSortable\Sortable;

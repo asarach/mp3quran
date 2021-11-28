@@ -1,9 +1,9 @@
 <?php
 
-namespace Mp3quran\Repositories\Page;
+namespace App\Repositories\Page;
 
-use Mp3quran\Repositories\EloquentRepository;
-use Mp3quran\Page;
+use App\Repositories\EloquentRepository;
+use App\Page;
 
 class EloquentPageRepository extends EloquentRepository implements PageRepository {
 

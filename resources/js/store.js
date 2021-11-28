@@ -1,42 +1,17 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import index from './modules/index'
-import reciter from './modules/reciter'
-import tv from './modules/tv'
-import app from './modules/app'
-import uploader from './modules/uploader'
-import radio from './modules/radio'
-import tadabor from './modules/tadabor'
-import download from './modules/download'
-import search from './modules/search'
-import video from './modules/video'
+
 import quran from './modules/quran'
-import page from './modules/page'
-import player from './modules/player'
 import favorite from './modules/favorite'
-import report from './modules/report'
-import list from './modules/list'
+import download from './modules/download'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   modules: {
-    index,
-    reciter,
-    tv,
-    app,
-    uploader,
-    radio,
-    tadabor,
-    video,
-    download,
     quran,
-    search,
-    player,
     favorite,
-    report,
-    list,
-    page,
+    download
   },
   state: {
     current_menu: {
@@ -45,14 +20,19 @@ export default new Vuex.Store({
       location: '',
     },
     initial: true,
+    playing: false,
+    playing_item:  window.appFoolter.$store.state.source.id,
+    playing_type: 'sora',
+    playing_state: '',
     subscribed: false,
     stats: {},
     settings: {},
+    languages_test: [],
     languages: [],
     all_ads: [],
     current_language: '',
     page_title: '',
-    trans: {},
+    trans: window.trans,
     main_menu: [],
     posts_metas: [],
     last_comments: [],
@@ -60,6 +40,22 @@ export default new Vuex.Store({
     loading: false,
   },
   getters: {
+    isPlaying: (state, getters) => (item) => {
+      if (state.playing_item == item.id && state.playing) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    isLoading: (state, getters) => (item) => {
+      if (state.playing_item == item.id && state.playing_state == 'loading') {
+        return true;
+      }
+      if (item.type == 'radio' && state.playing_item == item.id && state.playing_state == 'unloaded') {
+        return true;
+      }
+      return false;
+    },
     getTrans: (state) => (string, args) => {
       var string = string.split(".");
       let value = state.trans[string[0]][string[1]];
@@ -82,7 +78,7 @@ export default new Vuex.Store({
       axios
         .post(vm.url, data)
         .then((response) => {
-          commit('setSubscribed', {subscribed: true})
+          commit('setSubscribed', { subscribed: true })
           Vue.notify({
             group: 'app',
             title: this.getters.getTrans('text.you-subscribed'),
@@ -130,6 +126,52 @@ export default new Vuex.Store({
         type: 'success',
         text: this.getters.getTrans('text.code-copied')
       })
+    },
+    reportSora({ commit, state }, item) {
+      let self = this;
+      axios
+        .get(
+          item.prefix +
+          "/" +
+          item.read +
+          "/" +
+          item.sora +
+          "/report"
+        )
+        .then(function (response) {
+          if (response.data.success) {
+            Vue.notify({
+              group: "app",
+              title: self.getters.getTrans("text.reported"),
+              type: "success",
+              text: self.getters.getTrans("text.sora-reported-success"),
+            });
+          } else {
+            Vue.notify({
+              group: "app",
+              title: self.getters.getTrans("text.not-reported"),
+              type: "warn",
+              text: self.getters.getTrans("text.sora-reported-warn"),
+            });
+          }
+        })
+        .catch(function (error) {
+          Vue.notify({
+            group: "app",
+            title: self.getters.getTrans("text.not-reported"),
+            type: "warn",
+            text: self.getters.getTrans("text.sora-reported-warn"),
+          });
+        });
+    },
+
+    notify({ commit, state }, note) {
+      Vue.notify({
+        group: note.group,
+        title: note.title,
+        type: note.type,
+        text: note.text
+      })
     }
   },
 
@@ -148,6 +190,9 @@ export default new Vuex.Store({
     },
     setLanguages(state, { languages }) {
       state.languages = languages;
+    },
+    addLanguagesTets(state, { language }) {
+      state.languages_test.push(language);
     },
     setSubscribed(state, { subscribed }) {
       state.subscribed = subscribed;

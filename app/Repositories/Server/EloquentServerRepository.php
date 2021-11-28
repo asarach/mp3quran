@@ -1,9 +1,9 @@
 <?php
 
-namespace Mp3quran\Repositories\Server;
+namespace App\Repositories\Server;
 
-use Mp3quran\Repositories\EloquentRepository;
-use Mp3quran\Server;
+use App\Repositories\EloquentRepository;
+use App\Server;
 
 class EloquentServerRepository extends EloquentRepository implements ServerRepository
 {

@@ -88,9 +88,9 @@ export default {
         title: "",
         order_num: "",
         url: "",
-        url1: "",
-        url2: "",
-        url3: "",
+        android: "",
+        apple: "",
+        huawei: "",
         image: "",
         type: "",
         status: 0

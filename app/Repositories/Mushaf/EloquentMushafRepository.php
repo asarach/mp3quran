@@ -1,9 +1,9 @@
 <?php
 
-namespace Mp3quran\Repositories\Mushaf;
+namespace App\Repositories\Mushaf;
 
-use Mp3quran\Repositories\EloquentRepository;
-use Mp3quran\Mushaf;
+use App\Repositories\EloquentRepository;
+use App\Mushaf;
 
 class EloquentMushafRepository extends EloquentRepository implements MushafRepository
 {

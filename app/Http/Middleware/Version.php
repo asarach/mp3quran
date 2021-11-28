@@ -1,9 +1,10 @@
 <?php
 
-namespace Mp3quran\Http\Middleware;
-use Jenssegers\Agent\Agent;
-
+namespace App\Http\Middleware;
 use Closure;
+
+use Jenssegers\Agent\Agent;
+use Illuminate\Support\Facades\View;
 
 class Version
 {
@@ -16,16 +17,8 @@ class Version
      */
     public function handle($request, Closure $next)
     {
-        $version = request()->cookie('style_version');
-        if(is_null($version)){
-            $agent = new Agent();
-            if($agent->isMobile()){
-                $version = 'm';
-            }else{
-                $version = 'r';
-            }
-        }
-        session(['style_version' => $version]);
+        
+        
         return $next($request);
     }
 }

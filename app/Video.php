@@ -1,6 +1,6 @@
 <?php
 
-namespace Mp3quran;
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
@@ -75,7 +75,7 @@ class Video extends Model implements ViewableContract
      */
     public function images()
     {
-        return $this->morphToMany('Mp3quran\Media', 'mediable', 'mediable');
+        return $this->morphToMany('App\Media', 'mediable', 'mediable');
     }
 
     /**
@@ -83,12 +83,12 @@ class Video extends Model implements ViewableContract
      */
     public function reciter()
     {
-        return $this->belongsTo('Mp3quran\Reciter');
+        return $this->belongsTo('App\Reciter');
     }
 
     public function vgroup()
     {
-        return $this->belongsTo('Mp3quran\Vgroup');
+        return $this->belongsTo('App\Vgroup');
     }
 
 

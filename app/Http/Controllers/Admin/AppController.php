@@ -1,10 +1,10 @@
 <?php
 
-namespace Mp3quran\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin;
 
-use Mp3quran\Http\Controllers\Controller;
-use Mp3quran\Http\Requests\AppRequest;
-use Mp3quran\Repositories\App\AppRepository;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\AppRequest;
+use App\Repositories\App\AppRepository;
 use Illuminate\Http\Request;
 use DB;
 
@@ -53,12 +53,6 @@ class AppController extends Controller
     public function store(AppRequest $request)
     {
         $input = $request->all();
-        $url = [
-            $input['url1'],
-            $input['url2'],
-            $input['url3']
-        ];
-        $input['url'] = json_encode($url);
         $app = $this->app->create($input);
         return compact('app');
     }
@@ -74,11 +68,6 @@ class AppController extends Controller
     public function edit($id)
     {
         $app = $this->app->model->findOrFail($id);
-
-        $url = json_decode($app->url);
-        $app->url1 = $url[0];
-        $app->url2 = $url[1];
-        $app->url3 = $url[2];
 
         $image = $app->images()->first();
         if ($image) {
@@ -112,12 +101,6 @@ class AppController extends Controller
     public function update(AppRequest $request, $id)
     {
         $input = $request->all();
-        $url = [
-            $input['url1'],
-            $input['url2'],
-            $input['url3']
-        ];
-        $input['url'] = json_encode($url);
         $app = $this->app->update($id, $input);
         return compact('app');
     }

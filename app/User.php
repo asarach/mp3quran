@@ -1,6 +1,6 @@
 <?php
 
-namespace Mp3quran;
+namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Heroicpixels\Filterable\FilterableTrait;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Mp3quran\Providers;
+namespace App\Providers;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
@@ -15,7 +15,8 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    protected $namespace = 'Mp3quran\Http\Controllers';
+    protected $namespace = 'App\Http\Controllers';
+    protected $namespaceLivewire = 'App\Http\Livewire';
 
     /**
      * Define your route model bindings, pattern filters, etc.
@@ -44,18 +45,16 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapApiRoutes();
 
-        $this->mapWebAjaxRoutes();
+        $this->mapRedirectRoutes();
+
+        $this->mapAjaxRoutes();
 
         $this->mapWebRoutes();
+
+        $this->mapLivewireRoutes();
+
     }
 
-    /**
-     * Define the "web" routes for the application.
-     *
-     * These routes all receive session state, CSRF protection, etc.
-     *
-     * @return void
-     */
     protected function mapAdminAjaxRoutes()
     {
         Route::prefix(LaravelLocalization::setLocale() .'/admin/ajax')
@@ -64,13 +63,7 @@ class RouteServiceProvider extends ServiceProvider
             ->namespace($this->namespace . '\Admin')
             ->group(base_path('routes/admin.php'));
     }
-    /**
-     * Define the "web" routes for the application.
-     *
-     * These routes all receive session state, CSRF protection, etc.
-     *
-     * @return void
-     */
+   
     protected function mapAdminRoutes()
     {
         Route::prefix(LaravelLocalization::setLocale() .'/admin')
@@ -79,13 +72,8 @@ class RouteServiceProvider extends ServiceProvider
             ->namespace($this->namespace . '\Admin')
             ->group(base_path('routes/admin.php'));
     }
-    /**
-     * Define the "web" routes for the application.
-     *
-     * These routes all receive session state, CSRF protection, etc.
-     *
-     * @return void
-     */
+    
+    
     protected function mapWebRoutes()
     {
         Route::prefix(LaravelLocalization::setLocale())
@@ -94,13 +82,7 @@ class RouteServiceProvider extends ServiceProvider
             ->group(base_path('routes/web.php'));
     }
 
-    /**
-     * Define the "web" routes for the application.
-     *
-     * These routes all receive session state, CSRF protection, etc.
-     *
-     * @return void
-     */
+    
     protected function mapApiRoutes()
     {
         Route::middleware('web', 'front' )
@@ -108,14 +90,6 @@ class RouteServiceProvider extends ServiceProvider
             ->group(base_path('routes/api.php'));
     }
 
-
-    /**
-     * Define the "web" routes for the application.
-     *
-     * These routes all receive session state, CSRF protection, etc.
-     *
-     * @return void
-     */
     protected function mapAuthRoutes()
     {
         Route::prefix(LaravelLocalization::setLocale())
@@ -124,19 +98,29 @@ class RouteServiceProvider extends ServiceProvider
             ->group(base_path('routes/auth.php'));
     }
 
-    /**
-     * Define the "ajax" routes for the application.
-     *
-     * These routes are typically stateless.
-     *
-     * @return void
-     */
-    protected function mapWebAjaxRoutes()
+    protected function mapAjaxRoutes()
     {
         Route::prefix(LaravelLocalization::setLocale() .'/ajax')
             ->name('ajax::')
             ->middleware('web', 'front', 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath')
             ->namespace($this->namespace)
-            ->group(base_path('routes/web.php'));
+            ->group(base_path('routes/ajax.php'));
+    }
+
+    
+    protected function mapRedirectRoutes()
+    {
+        Route::middleware('web', 'front', 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath')
+            ->prefix(LaravelLocalization::setLocale())
+            ->namespace($this->namespaceLivewire)
+            ->group(base_path('routes/redirect.php'));
+    }
+    
+    protected function mapLivewireRoutes()
+    {
+        Route::middleware('web', 'front', 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath')
+            ->prefix(LaravelLocalization::setLocale())
+            ->namespace($this->namespaceLivewire)
+            ->group(base_path('routes/livewire.php'));
     }
 }

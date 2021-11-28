@@ -1,8 +1,8 @@
 <?php
 
-namespace Mp3quran\Repositories\Translation;
+namespace App\Repositories\Translation;
 
-use Mp3quran\Repositories\EloquentRepository;
+use App\Repositories\EloquentRepository;
 use Waavi\Translation\Models\Translation;
 use Waavi\Translation\Models\Language;
 
@@ -12,14 +12,14 @@ class EloquentTranslationRepository extends EloquentRepository implements Transl
     /**
      * The eloquent model instance.
      *
-     * @var \Mp3quran\Models\Incident
+     * @var \App\Models\Incident
      */
     protected $model;
 
     /**
      * Create a new eloquent incident repository instance.
      *
-     * @param \Mp3quran\Models\Incident $model
+     * @param \App\Models\Incident $model
      */
     public function __construct(Translation $model, Language $language)
     {

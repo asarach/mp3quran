@@ -1,9 +1,9 @@
 <?php
 
-namespace Mp3quran\Repositories\Vgroup;
+namespace App\Repositories\Vgroup;
 
-use Mp3quran\Repositories\EloquentRepository;
-use Mp3quran\Vgroup;
+use App\Repositories\EloquentRepository;
+use App\Vgroup;
 
 class EloquentVgroupRepository extends EloquentRepository implements VgroupRepository
 {

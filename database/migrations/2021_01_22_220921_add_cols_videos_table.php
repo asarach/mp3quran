@@ -16,6 +16,7 @@ class AddColsVideosTable extends Migration
         Schema::table('videos', function (Blueprint $table) {
             $table->tinyInteger('type');
             $table->string('youtube_id', 100);
+            $table->boolean('uploaded')->default(0);
         });
     }
 

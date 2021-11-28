@@ -75,15 +75,15 @@ Route::post("/nl_template/actions",               array("as"   => "nl_template.a
 
 
 /* Country  */
-Route::get('/countries', array('as' => 'country.index', 'uses' => 'CountryController@index'));
-Route::post('/country', array('as' => 'country.store', 'uses' => 'CountryController@store'));
-Route::post('/country/translations/{id}', array('as' => 'country.store', 'uses' => 'CountryController@translations'));
-Route::get('/country/edit/{id}', array('as' => 'country.edit', 'uses' => 'CountryController@edit'));
-Route::put('/country/{id}', array('as' => 'country.update', 'uses' => 'CountryController@update'));
-Route::delete('/country/{id}', array('as' => 'country.destroy', 'uses' => 'CountryController@destroy'));
-Route::get('/country/restore/{id}', array('as' => 'country.restore', 'uses' => 'CountryController@restore'));
-Route::get('/country/{id}/status/{status}', array('as' => 'country.status', 'uses' => 'CountryController@changeStatus'));
-Route::post('/country/actions', array('as' => 'country.actions', 'uses' => 'CountryController@actions'));
+// Route::get('/countries', array('as' => 'country.index', 'uses' => 'CountryController@index'));
+// Route::post('/country', array('as' => 'country.store', 'uses' => 'CountryController@store'));
+// Route::post('/country/translations/{id}', array('as' => 'country.store', 'uses' => 'CountryController@translations'));
+// Route::get('/country/edit/{id}', array('as' => 'country.edit', 'uses' => 'CountryController@edit'));
+// Route::put('/country/{id}', array('as' => 'country.update', 'uses' => 'CountryController@update'));
+// Route::delete('/country/{id}', array('as' => 'country.destroy', 'uses' => 'CountryController@destroy'));
+// Route::get('/country/restore/{id}', array('as' => 'country.restore', 'uses' => 'CountryController@restore'));
+// Route::get('/country/{id}/status/{status}', array('as' => 'country.status', 'uses' => 'CountryController@changeStatus'));
+// Route::post('/country/actions', array('as' => 'country.actions', 'uses' => 'CountryController@actions'));
 
 /*  Language */
 Route::get('/languages', array('as' => 'language.index', 'uses' => 'LanguageController@index'));

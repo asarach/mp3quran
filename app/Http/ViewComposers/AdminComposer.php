@@ -1,20 +1,20 @@
 <?php
 
-namespace Mp3quran\Http\ViewComposers;
+namespace App\Http\ViewComposers;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Cache;
 use Auth;
-use Mp3quran\Read;
-use Mp3quran\App;
-use Mp3quran\Radio;
-use Mp3quran\Reciter;
-use Mp3quran\Tv;
-use Mp3quran\Video;
-use Mp3quran\Mushaf;
-use Mp3quran\Rewaya;
-use Mp3quran\Tadabor;
+use App\Read;
+use App\App;
+use App\Radio;
+use App\Reciter;
+use App\Tv;
+use App\Video;
+use App\Mushaf;
+use App\Rewaya;
+use App\Tadabor;
 
 class AdminComposer
 {

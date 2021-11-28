@@ -10,7 +10,7 @@
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="/plugins/fontawesome/css/all.min.css">
-  <link rel="stylesheet" href="/plugins/icomoon/styles.css">
+  <link rel="stylesheet" href="/plugins/icomoon_admin/styles.css">
 
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ mix('css/admin.css') }}">
@@ -98,41 +98,41 @@
             </li>
             <li>
               <router-link :to="prefix">
-                <i class="icon-home4"></i>
+                <i class="uni-icon icon-home4"></i>
                 <span>{{ trans('front.index')}}</span>
               </router-link>
             </li>
             <li>
               <router-link :to="prefix + 'reciters'">
-                <i class="icon-users4"></i>
+                <i class="uni-icon icon-users4"></i>
                 <span>{{ trans('text.reciters')}}</span>
                 <span class="badge badge-pill badge-info">{{$counts['reciters']}}</span>
               </router-link>
             </li>
             <li>
               <router-link :to="prefix + 'reads'">
-                <i class="icon-mic2"></i>
+                <i class="uni-icon icon-mic2"></i>
                 <span>{{ trans('text.reads')}}</span>
                 <span class="badge badge-pill badge-info">{{$counts['reads']}}</span>
               </router-link>
             </li>
             <li>
               <router-link :to="prefix + 'videos'">
-                <i class="icon-clapboard-play"></i>
+                <i class="uni-icon icon-clapboard-play"></i>
                 <span>{{ trans('text.videos')}}</span>
                 <span class="badge badge-pill badge-info">{{$counts['videos']}}</span>
               </router-link>
             </li>
             <li>
               <router-link :to="prefix + 'radios'">
-                <i class="icon-radio"></i>
+                <i class="uni-icon icon-radio"></i>
                 <span>{{ trans('text.radios')}}</span>
                 <span class="badge badge-pill badge-info">{{$counts['radios']}}</span>
               </router-link>
             </li>
             <li>
               <router-link :to="prefix + 'tvs'">
-                <i class="icon-tv"></i>
+                <i class="uni-icon icon-tv"></i>
                 <span>{{ trans('text.tvs')}}</span>
                 <span class="badge badge-pill badge-info">{{$counts['tvs']}}</span>
               </router-link>
@@ -151,31 +151,31 @@
             </li>
             <li>
               <router-link :to="prefix + 'menus'">
-                <i class="icon-more2"></i>
+                <i class="uni-icon icon-more2"></i>
                 <span>{{ trans('front.menu')}}</span>
               </router-link>
             </li>
             <li>
               <router-link :to="prefix + 'nl_messages'">
-                <i class="icon-megaphone"></i>
+                <i class="uni-icon icon-megaphone"></i>
                 <span>{{ trans('front.newsletters')}}</span>
               </router-link>
             </li>
             <li>
               <router-link :to="prefix + 'rewayat'">
-                <i class="icon-stack2"></i>
+                <i class="uni-icon icon-stack2"></i>
                 <span>{{ trans('front.rewayat')}}</span>
               </router-link>
             </li>
             <li>
               <router-link :to="prefix + 'mushafs'">
-                <i class="icon-more2"></i>
+                <i class="uni-icon icon-more2"></i>
                 <span>{{ trans('front.mushafs')}}</span>
               </router-link>
             </li>
             <li>
               <router-link :to="prefix + 'vgroups'">
-                <i class="icon-more2"></i>
+                <i class="uni-icon icon-more2"></i>
                 <span>{{ trans('front.vgroups')}}</span>
               </router-link>
             </li>
@@ -187,13 +187,13 @@
             </li>
             <li>
               <router-link :to="prefix + 'servers'">
-                <i class="icon-server"></i>
+                <i class="uni-icon icon-server"></i>
                 <span>{{ trans('front.servers')}}</span>
               </router-link>
             </li>
             <li>
               <router-link :to="prefix + 'apps'">
-                <i class="icon-iphone"></i>
+                <i class="uni-icon icon-iphone"></i>
                 <span>{{ trans('text.apps')}}</span>
               </router-link>
             </li>
@@ -212,7 +212,7 @@
             </li>
             <li>
               <router-link :to="prefix + 'ads'" exact>
-                <i class="icon-megaphone"></i>
+                <i class="uni-icon icon-megaphone"></i>
                 <span>{{ trans('front.ads')}}</span>
               </router-link>
             </li>
@@ -224,7 +224,7 @@
             </li>
             <li>
               <router-link :to="prefix + 'languages'">
-                <i class="icon-earth"></i>
+                <i class="uni-icon icon-earth"></i>
                 <span>{{ trans('front.languages')}}</span>
               </router-link>
             </li>

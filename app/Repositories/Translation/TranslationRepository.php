@@ -1,6 +1,6 @@
 <?php
 
-namespace Mp3quran\Repositories\Translation;
+namespace App\Repositories\Translation;
 
 interface TranslationRepository
 {

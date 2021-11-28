@@ -1,6 +1,6 @@
 <?php
 
-namespace Mp3quran\Repositories\Ad;
+namespace App\Repositories\Ad;
 
 interface AdRepository
 {

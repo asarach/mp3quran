@@ -1,6 +1,6 @@
 <?php
 
-namespace Mp3quran\Repositories\Language;
+namespace App\Repositories\Language;
 
 interface LanguageRepository {
 

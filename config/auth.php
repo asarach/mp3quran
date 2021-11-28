@@ -68,7 +68,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => Mp3quran\User::class,
+            'model' => App\User::class,
         ],
 
         // 'users' => [

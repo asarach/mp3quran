@@ -1,10 +1,10 @@
 <?php
 
-use Mp3quran\Ad;
+use App\Ad;
 use Carbon\Carbon;
-use Mp3quran\Menu;
-use Mp3quran\Media;
-use Mp3quran\Setting;
+use App\Menu;
+use App\Media;
+use App\Setting;
 use Jenssegers\Agent\Agent;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;
@@ -24,6 +24,19 @@ function getAssetTimestamp()
     return $html;
 }
 
+function style_version()
+{
+    $version = request()->cookie('style_version');
+    if (is_null($version)) {
+        $agent = new Agent();
+        if ($agent->isMobile()) {
+            $version = 'm';
+        } else {
+            $version = 'r';
+        }
+    }
+    return $version;
+}
 function get_params($data)
 {
     $settings = Cache::rememberForever('settings', function () {
@@ -42,7 +55,7 @@ function get_params($data)
     //$settings['main_radio'] =  'https://rfcmedia.streamguys1.com/MusicPulse.mp3';
 
     $settings['csrfToken'] =  csrf_token();
-   
+
 
 
     $agent = new Agent();
@@ -85,7 +98,7 @@ function get_params($data)
         return ['text' => Lang::get('text')];
     });
     $data['main_menu']  = getMainMenu($data['current_language'],  $settings['style_version']);
-   
+
     try {
         $ssr =  ssr('js/app-server.js')
             ->context($data)
@@ -276,8 +289,8 @@ function getPageViews()
 function getLinkableTypes()
 {
     $array = [
-        'Mp3quran\Sora' => trans('text.sora'),
-        'Mp3quran\Page' => trans('text.page'),
+        'App\Sora' => trans('text.sora'),
+        'App\Page' => trans('text.page'),
         'Url' => trans('text.url'),
         'Divider' => trans('text.divider'),
     ];

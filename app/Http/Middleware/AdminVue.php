@@ -1,5 +1,5 @@
 <?php
-namespace Mp3quran\Http\Middleware;
+namespace App\Http\Middleware;
 use Closure;
 
 class AdminVue {

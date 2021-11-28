@@ -1,9 +1,9 @@
 <?php
 
-namespace Mp3quran\Repositories\Message;
+namespace App\Repositories\Message;
 
-use Mp3quran\Repositories\EloquentRepository;
-use Mp3quran\Message;
+use App\Repositories\EloquentRepository;
+use App\Message;
 
 class EloquentMessageRepository extends EloquentRepository implements MessageRepository
 {

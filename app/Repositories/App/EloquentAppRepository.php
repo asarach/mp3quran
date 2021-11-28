@@ -1,10 +1,10 @@
 <?php
 
-namespace Mp3quran\Repositories\App;
+namespace App\Repositories\App;
 
-use Mp3quran\Repositories\EloquentRepository;
-use Mp3quran\App;
-use Mp3quran\Sora;
+use App\Repositories\EloquentRepository;
+use App\App;
+use App\Sora;
 
 class EloquentAppRepository extends EloquentRepository implements AppRepository
 {
@@ -22,6 +22,9 @@ class EloquentAppRepository extends EloquentRepository implements AppRepository
 
         $item->title = $data['title'];
         $item->order_num = $data['order_num'];
+        $item->android = $data['android'];
+        $item->apple = $data['apple'];
+        $item->huawei = $data['huawei'];
         $item->url = $data['url'];
         $item->type = $data['type'];
         $item->status = $data['status'];
@@ -40,6 +43,9 @@ class EloquentAppRepository extends EloquentRepository implements AppRepository
 
         $item->title = $data['title'];
         $item->order_num = $data['order_num'];
+        $item->android = $data['android'];
+        $item->apple = $data['apple'];
+        $item->huawei = $data['huawei'];
         $item->url = $data['url'];
         $item->type = $data['type'];
         $item->status = $data['status'];

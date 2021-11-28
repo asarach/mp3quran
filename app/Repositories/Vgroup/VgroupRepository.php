@@ -1,6 +1,6 @@
 <?php
 
-namespace Mp3quran\Repositories\Vgroup;
+namespace App\Repositories\Vgroup;
 
 interface VgroupRepository {
 

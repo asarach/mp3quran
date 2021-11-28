@@ -1,6 +1,6 @@
 <?php
 
-namespace Mp3quran\Providers;
+namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use \View;
@@ -15,8 +15,9 @@ class ComposerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        View::composer(['layouts.admin'], 'Mp3quran\Http\ViewComposers\AdminComposer');
-        View::composer(['layouts.app'], 'Mp3quran\Http\ViewComposers\AppComposer');
+        View::composer(['layouts.admin'], 'App\Http\ViewComposers\AdminComposer');
+        View::composer(['layouts.app'], 'App\Http\ViewComposers\AppComposer');
+        View::composer(['components.desktop-sidebar'], 'App\Http\ViewComposers\MenuComposer');
     }
 
     /**

@@ -1,12 +1,12 @@
 <?php
 
-namespace Mp3quran\Console\Commands;
+namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use DB;
 
 use Cviebrock\EloquentSluggable\Services\SlugService;
-use Mp3quran\Mushaf;
+use App\Mushaf;
 
 class FixeMushafs extends Command
 {

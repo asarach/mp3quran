@@ -1,11 +1,11 @@
 <?php
 
-namespace Mp3quran\Console\Commands;
+namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use DB;
 use Carbon\Carbon;
-use Mp3quran\Read;
+use App\Read;
 
 class FixeReadsUrl extends Command
 {

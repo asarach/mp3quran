@@ -1,10 +1,10 @@
 <?php
 
-namespace Mp3quran\Repositories\Reciter;
+namespace App\Repositories\Reciter;
 
-use Mp3quran\Repositories\EloquentRepository;
-use Mp3quran\Reciter;
-use Mp3quran\Services\Search;
+use App\Repositories\EloquentRepository;
+use App\Reciter;
+use App\Services\Search;
 
 class EloquentReciterRepository extends EloquentRepository implements ReciterRepository
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace Mp3quran\Repositories\Radio;
+namespace App\Repositories\Radio;
 
-use Mp3quran\Repositories\EloquentRepository;
-use Mp3quran\Radio;
-use Mp3quran\Services\Search;
+use App\Repositories\EloquentRepository;
+use App\Radio;
+use App\Services\Search;
 
 class EloquentRadioRepository extends EloquentRepository implements RadioRepository
 {

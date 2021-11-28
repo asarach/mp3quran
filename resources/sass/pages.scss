@@ -17,12 +17,20 @@
   .header-options {
     .btn {
       border-radius: 20px;
-      padding: 2px 16px;
+      padding: 0px 6px 0 20px;
       margin-left: 1rem;
       font-size: 14px;
       line-height: 1;
       margin-top: 1rem;
       box-shadow: 0px 2px 8px 0px #74a8bb5e;
+      display: flex;
+      height: 32px;
+      align-items: center;
+      width: fit-content;
+      .uni-icon{
+        color: rgb(255, 255, 255);
+        margin-left: 8px;
+      }
     }
   }
   /**** header-ads ****/
@@ -85,6 +93,7 @@
         margin-bottom: 0.75rem;
         border-radius: 10px 10px 0 0;
         height: 39px;
+        margin: 0;
       }
       .nav-link:hover,
       .nav-link:focus {
@@ -290,6 +299,75 @@
 
 /**************apps*************/
 .apps-show {
+}
+.app-show {
+  .card-app{
+    padding: 2rem;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0px 2px 8px 0px #a2a2a230;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+    min-height: 420px;
+    text-align: center;
+    flex-direction: column;
+    justify-content: space-evenly;
+    .app-btn-apple,
+    .app-btn-huawei,
+    .app-btn-android{
+      .btn{
+        background: #a4c639;
+        border: #99bb2f 1px solid;
+        box-shadow: 0px 2px 8px 0px #a4c6395e;
+        padding: 0.5rem 0;
+        font-size: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 200px;
+
+        .icon-android{
+          font-size: 24px;
+          margin-left: 1rem;
+        }
+      }
+    }
+    .app-btn-huawei{
+      .btn{
+        background: #f00;
+        border: #db391f 1px solid;
+        box-shadow: 0px 2px 8px 0px #f5220029;
+        .icon-huawei:before{
+          color: #fff;
+        }
+      }
+    }
+    .app-btn-apple{
+      .btn{
+        background: #9da8b6;
+        border: #8a97a7 1px solid;
+        box-shadow: 0px 2px 8px 0px #9da8b654;
+      }
+    }
+    .app-btn-android:hover{
+      .btn{
+        background: #99bb2f;
+      }
+    }
+    .app-btn-huawei:hover{
+      .btn{
+        background: #db391f;
+      }
+    }
+    
+    .app-btn-apple:hover{
+      .btn{
+        background: #8a97a7;
+      }
+    }
+  }
 }
 
 /**************contact*************/

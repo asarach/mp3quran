@@ -1,6 +1,6 @@
 <?php
 
-namespace Mp3quran\Http\Requests;
+namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -33,8 +33,6 @@ class MessageRequest extends FormRequest
                     'body' => 'required',
                     'subject' => 'required',
                     'email' => 'required|email',
-                    'mp3quran_hony'   => 'honeypot',
-                    'my_time'   => 'required|honeytime:5'
                     //recaptchaFieldName() => recaptchaRuleName()
                 ];
 

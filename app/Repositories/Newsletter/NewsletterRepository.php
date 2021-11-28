@@ -1,6 +1,6 @@
 <?php
 
-namespace Mp3quran\Repositories\Newsletter;
+namespace App\Repositories\Newsletter;
 
 interface NewsletterRepository
 {

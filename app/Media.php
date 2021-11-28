@@ -1,6 +1,6 @@
 <?php
 
-namespace Mp3quran;
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,7 +13,7 @@ class Media extends Model
      */
     public function app()
     {
-        return $this->morphedByMany('Mp3quran\App', 'mediable', 'mediable');
+        return $this->morphedByMany('App\App', 'mediable', 'mediable');
     }
 
     /**

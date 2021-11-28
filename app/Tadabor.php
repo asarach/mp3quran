@@ -1,6 +1,6 @@
 <?php
 
-namespace Mp3quran;
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
@@ -57,7 +57,7 @@ class Tadabor extends Model implements ViewableContract
 
                 'share_description' => $this->getLocaleShareDescription(),
                 'share_title' => $this->getLocaleShareTitle(),
-                'share_url' =>  route('tadabor.show', ['id' => $this->id])
+                'share_url' =>  route('tadabor.show', ['slug' => $this->id])
             ];
         }
 
@@ -82,7 +82,7 @@ class Tadabor extends Model implements ViewableContract
      */
     public function images()
     {
-        return $this->morphToMany('Mp3quran\Media', 'mediable', 'mediable');
+        return $this->morphToMany('App\Media', 'mediable', 'mediable');
     }
 
     /**
@@ -90,7 +90,7 @@ class Tadabor extends Model implements ViewableContract
      */
     public function reciter()
     {
-        return $this->belongsTo('Mp3quran\Reciter');
+        return $this->belongsTo('App\Reciter');
     }
 
     /**
@@ -98,7 +98,7 @@ class Tadabor extends Model implements ViewableContract
      */
     public function sora()
     {
-        return $this->belongsTo('Mp3quran\Sora', 'sura_id');
+        return $this->belongsTo('App\Sora', 'sura_id');
     }
 
     /**
@@ -106,7 +106,7 @@ class Tadabor extends Model implements ViewableContract
      */
     public function rewaya()
     {
-        return $this->belongsTo('Mp3quran\Rewaya');
+        return $this->belongsTo('App\Rewaya');
     }
 
     public function getLocaleTitle()

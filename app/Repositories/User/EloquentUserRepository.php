@@ -1,9 +1,9 @@
 <?php
 
-namespace Mp3quran\Repositories\User;
+namespace App\Repositories\User;
 
-use Mp3quran\Repositories\EloquentRepository;
-use Mp3quran\User;
+use App\Repositories\EloquentRepository;
+use App\User;
 use Hash;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Auth;

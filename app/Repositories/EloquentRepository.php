@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Mp3quran\Repositories;
+namespace App\Repositories;
 
 abstract class EloquentRepository {
 

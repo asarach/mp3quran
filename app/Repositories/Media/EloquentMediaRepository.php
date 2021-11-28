@@ -1,9 +1,9 @@
 <?php
 
-namespace Mp3quran\Repositories\Media;
+namespace App\Repositories\Media;
 
-use Mp3quran\Repositories\EloquentRepository;
-use Mp3quran\Media;
+use App\Repositories\EloquentRepository;
+use App\Media;
 use File;
 
 class EloquentMediaRepository extends EloquentRepository implements MediaRepository
@@ -12,14 +12,14 @@ class EloquentMediaRepository extends EloquentRepository implements MediaReposit
     /**
      * The eloquent model instance.
      *
-     * @var \Mp3quran\Models\Incident
+     * @var \App\Models\Incident
      */
     protected $model;
 
     /**
      * Create a new eloquent incident repository instance.
      *
-     * @param \Mp3quran\Models\Incident $model
+     * @param \App\Models\Incident $model
      */
     public function __construct(Media $model)
     {

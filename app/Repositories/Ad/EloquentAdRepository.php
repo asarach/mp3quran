@@ -1,8 +1,8 @@
 <?php
-namespace Mp3quran\Repositories\Ad;
+namespace App\Repositories\Ad;
 
-use Mp3quran\Repositories\EloquentRepository;
-use Mp3quran\Ad;
+use App\Repositories\EloquentRepository;
+use App\Ad;
 
 class EloquentAdRepository extends EloquentRepository implements AdRepository
 {
