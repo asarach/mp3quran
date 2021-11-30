@@ -1,5 +1,5 @@
 <template>
-  <div class="desktop-player">
+  <div class="desktop-player" v-click-outside="closePlaylist">
     <div class="container d-flex">
       <audio ref="audiofile" :src="source.file" style="display: none"></audio>
       <div class="ply-controls">
@@ -7,11 +7,7 @@
           class="ply-btn btn-previous"
           :class="{ disabled: currentPosition() < 1 }"
         >
-          <span
-            class="uni-icon icon-skip_previous"
-           
-            @click="prev"
-          ></span>
+          <span class="uni-icon icon-skip_previous" @click="prev"></span>
         </div>
         <div
           class="ply-btn btn-play-pause"
@@ -33,11 +29,7 @@
           class="ply-btn btn-next"
           :class="{ disabled: currentPosition() >= playlist.length - 1 }"
         >
-          <span
-            class="uni-icon icon-skip_next"
-            @click="next"
-           
-          ></span>
+          <span class="uni-icon icon-skip_next" @click="next"></span>
         </div>
       </div>
       <div class="ply-body">
@@ -55,26 +47,16 @@
 
       <div class="ply-options">
         <div class="ply-btn btn-volume">
-          <span
-            class="uni-icon icon-volume_off"
-            v-if="volume === 0"
-           
-          ></span>
+          <span class="uni-icon icon-volume_off" v-if="volume === 0"></span>
           <span
             class="uni-icon icon-volume_mute"
             v-else-if="volume <= 15"
-           
           ></span>
           <span
             class="uni-icon icon-volume_down"
             v-else-if="volume <= 65"
-           
           ></span>
-          <span
-            class="uni-icon icon-volume_up"
-            v-else
-           
-          ></span>
+          <span class="uni-icon icon-volume_up" v-else></span>
           <div class="volume-selector">
             <vue-slider
               v-model="volume"
@@ -85,23 +67,16 @@
             />
           </div>
         </div>
-        <div class="ply-btn btn-list">
+        <div v-if="playlist.length > 0" class="ply-btn btn-list">
           <span
             class="uni-icon icon-playlist_play"
-            v-if="playlist.length > 0"
-           
             @click="toggelePlaylist"
           ></span>
         </div>
       </div>
       <div class="ply-item-info">
         <a
-          :href="
-            '/' +
-            $store.state.current_language +
-            '/' +
-            source.share_url.split('/').slice(-1)
-          "
+          :href="prefix + source.page_url"
           rel="alternate"
           :hreflang="$store.state.current_language"
         >
@@ -120,10 +95,7 @@
             <span class="uni-icon icon-clear"></span>
           </div>
           <div class="ply-btn btn-next" @click="clearPlaylist">
-            <span
-              class="uni-icon icon-delete_sweep"
-             
-            ></span>
+            <span class="uni-icon icon-delete_sweep"></span>
           </div>
         </div>
         <ul class="list-unstyled">
@@ -148,16 +120,10 @@
                     class="ply-btn btn-pause"
                     @click="pause()"
                   >
-                    <span
-                      class="uni-icon icon-pause"
-                     
-                    ></span>
+                    <span class="uni-icon icon-pause"></span>
                   </div>
                   <div v-else class="ply-btn btn-play" @click="playItem(audio)">
-                    <span
-                      class="uni-icon icon-play_arrow1"
-                     
-                    ></span>
+                    <span class="uni-icon icon-play_arrow1"></span>
                   </div>
                 </div>
 
@@ -182,22 +148,17 @@
                     class="ply-btn read-more-btn"
                     @click="toggeleMoreoptions(audio.id)"
                   >
-                    <span
-                      class="uni-icon icon-more-horizontal"
-                     
-                    ></span>
+                    <span class="uni-icon icon-more-horizontal"></span>
                   </div>
                   <div class="ply-btn">
                     <span
                       class="uni-icon icon-delete"
-                     
                       @click="removeFromPlaylist(index)"
                     ></span>
                   </div>
                   <div class="ply-btn">
                     <span
                       class="uni-icon icon-share"
-                     
                       @click="
                         shareItem(
                           audio.share_title,
@@ -213,39 +174,27 @@
                     v-clipboard:error="clipboardErrorHandler"
                     v-clipboard:success="clipboardSuccessHandler"
                   >
-                    <span
-                      class="uni-icon icon-link"
-                     
-                    ></span>
+                    <span class="uni-icon icon-link"></span>
                   </div>
                   <div
                     class="ply-btn"
                     @click="downloadMp3({ url: audio.file, num: audio.num })"
                   >
-                    <span
-                      class="uni-icon icon-cloud_download"
-                     
-                    ></span>
+                    <span class="uni-icon icon-cloud_download"></span>
                   </div>
                   <div
                     class="ply-btn"
                     v-if="soarIncludes"
                     @click="removeSoraFavorite(audio.id)"
                   >
-                    <span
-                      class="uni-icon icon-favorite"
-                     
-                    ></span>
+                    <span class="uni-icon icon-favorite"></span>
                   </div>
                   <div
                     class="ply-btn"
                     v-else
                     @click="addSoraFavorite(audio.id)"
                   >
-                    <span
-                      class="uni-icon icon-favorite_outline"
-                     
-                    ></span>
+                    <span class="uni-icon icon-favorite_outline"></span>
                   </div>
                 </div>
               </li>

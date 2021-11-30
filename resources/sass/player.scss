@@ -28,8 +28,8 @@
   }
   .ply-btn.disabled {
     cursor: initial;
-    svg {
-      fill: #bcbfc1;
+    .uni-icon {
+      color: #bcbfc1;
     }
   }
   .ply-item-info {
