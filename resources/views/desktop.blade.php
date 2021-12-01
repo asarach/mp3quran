@@ -70,7 +70,7 @@
                                 <span class="uni-icon icon-clear"></span>
                             </div>
                             <div class="row">
-                                @foreach ($languages as $language)
+                                @foreach ($languages as  $key => $language)
                                 <div class="col-8">
                                     <a href="'/' {{ $key }}"  class="tbl-item">{{ $language['native'] }}</a>
                                 </div>
