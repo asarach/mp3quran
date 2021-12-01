@@ -72,7 +72,7 @@
                             <div class="row">
                                 @foreach ($languages as $language)
                                 <div class="col-8">
-                                    <a href="'/' + key" class="tbl-item">{{ $language['native'] }}</a>
+                                    <a href="'/' {{ $key }}"  class="tbl-item">{{ $language['native'] }}</a>
                                 </div>
                                 @endforeach
                             </div>

@@ -10,11 +10,7 @@
         class="ply-btn btn-previous"
         :class="{ disabled: currentPosition() < 1 }"
       >
-        <span
-          class="uni-icon icon-skip_previous"
-         
-          @click="prev"
-        ></span>
+        <span class="uni-icon icon-skip_previous" @click="prev"></span>
       </div>
       <div
         class="ply-btn btn-play-pause"
@@ -28,11 +24,7 @@
         class="ply-btn btn-next"
         :class="{ disabled: currentPosition() >= playlist.length - 1 }"
       >
-        <span
-          class="uni-icon icon-skip_next"
-          @click="next"
-         
-        ></span>
+        <span class="uni-icon icon-skip_next" @click="next"></span>
       </div>
     </div>
     <div class="ply-item-info" @click="showFullplayer">
@@ -41,22 +33,9 @@
     </div>
     <div class="ply-options">
       <div class="ply-btn btn-volume">
-        <span class="uni-icon icon-volume_off"></span>
-        <span
-          class="uni-icon icon-volume_off"
-          v-if="volume === 0"
-         
-        ></span>
-        <span
-          class="uni-icon icon-volume_mute"
-          v-else-if="volume <= 15"
-         
-        ></span>
-        <span
-          class="uni-icon icon-volume_down"
-          v-else-if="volume <= 65"
-         
-        ></span>
+        <span class="uni-icon icon-volume_off" v-if="volume === 0"></span>
+        <span class="uni-icon icon-volume_mute" v-else-if="volume <= 15"></span>
+        <span class="uni-icon icon-volume_down" v-else-if="volume <= 65"></span>
         <span class="uni-icon icon-volume_up" v-else></span>
 
         <div class="volume-selector">
@@ -104,13 +83,21 @@
           :title="playing ? 'Pause' : 'Play'"
         >
           <span class="uni-icon icon-pause" v-if="playing"></span>
-          <span class="uni-icon icon-play_arrow1" v-else style="color: #fff"></span>
+          <span
+            class="uni-icon icon-play_arrow1"
+            v-else
+            style="color: #fff"
+          ></span>
         </div>
         <div
           class="ply-btn btn-next"
           :class="{ disabled: currentPosition() >= playlist.length - 1 }"
         >
-          <span class="uni-icon icon-skip_next" @click="next" style="color: #fff"></span>
+          <span
+            class="uni-icon icon-skip_next"
+            @click="next"
+            style="color: #fff"
+          ></span>
         </div>
       </div>
       <div class="fply-footer">
@@ -131,21 +118,30 @@
                 v-if="soarIncludes(audio.id)"
                 @click="removeSoraFavorite(audio.id)"
               >
-                <span class="uni-icon icon-favorite" style="color: #f5b44b"></span>
+                <span
+                  class="uni-icon icon-favorite"
+                  style="color: #f5b44b"
+                ></span>
               </div>
               <div
                 class="ply-btn read-like-btn"
                 v-else
                 @click="addSoraFavorite(audio.id)"
               >
-                <span class="uni-icon icon-favorite_outline" style="color: #fff"></span>
+                <span
+                  class="uni-icon icon-favorite_outline"
+                  style="color: #fff"
+                ></span>
               </div>
             </div>
           </li>
         </ul>
       </div>
       <div class="fply-close" @click="closeFullplayer">
-        <span class="uni-icon icon-keyboard_arrow_down" style="color: #fff"></span>
+        <span
+          class="uni-icon icon-keyboard_arrow_down"
+          style="color: #fff"
+        ></span>
       </div>
     </div>
     <div class="ply-playlist" :class="{ opened: show_playlist }">
@@ -158,138 +154,133 @@
         </div>
       </div>
       <ul class="list-unstyled">
-        <draggable v-model="playlist" handle=".drag-handle">
-          <li
-            v-for="(audio, index) in playlist"
-            :key="audio.id"
-            :class="{ playing: playing && currentPosition() == index }"
-          >
-            <div class="drag-handle bg"></div>
-            <div class="playlist-avatar drag-handle">
-              <div v-if="isLoading(audio)" class="ply-btn btn-play">
-                <scale-loader
-                  color="#fff"
-                  height="10px"
-                  width="2px"
-                ></scale-loader>
-              </div>
-              <div
-                v-else-if="playing && currentPosition() == index"
-                class="ply-btn btn-pause"
-                @click="pause"
-              >
-                <span class="uni-icon icon-pause"></span>
-              </div>
-              <div v-else class="ply-btn btn-play" @click="playItem(audio)">
-                <span class="uni-icon icon-play_arrow"></span>
-              </div>
-            </div>
-            <div class="read-info">
-              <div class="read-num">{{ audio.num }}</div>
-              <div class="read-sora">{{ audio.name }}</div>
-              <div class="read-reciter">
-                {{ audio.reciter }}
-                <template v-if="audio.rewaya"> ({{ audio.rewaya }}) </template>
-              </div>
-            </div>
-            <div
-              class="read-options"
+        <Container @drop="onDrop">
+          <Draggable v-for="(audio, index) in playlist" :key="audio.id">
+            <li
               :class="{
-                opened: show_moreoptions && show_moreoptions_item == audio.id,
+                playing: playing && currentPosition() == index,
               }"
             >
-              <div
-                class="ply-btn read-more-btn"
-                @click="toggeleMoreoptions(audio.id)"
-              >
-                <span
-                  class="uni-icon icon-more-horizontal"
-                 
-                ></span>
+              <div class="drag-handle bg"></div>
+              <div class="playlist-avatar drag-handle">
+                <div v-if="isLoading(audio)" class="ply-btn btn-play">
+                  <scale-loader
+                    color="#fff"
+                    height="10px"
+                    width="2px"
+                  ></scale-loader>
+                </div>
+                <div
+                  v-else-if="playing && currentPosition() == index"
+                  class="ply-btn btn-pause"
+                  @click="pause"
+                >
+                  <span class="uni-icon icon-pause"></span>
+                </div>
+                <div v-else class="ply-btn btn-play" @click="playItem(audio)">
+                  <span class="uni-icon icon-play_arrow"></span>
+                </div>
               </div>
-              <div class="ply-btn">
-                <span
-                  class="uni-icon icon-delete"
-                 
-                  @click="removeItem(index)"
-                ></span>
-              </div>
-              <div class="ply-btn">
-                <span
-                  class="uni-icon icon-share"
-                 
-                  @click="
-                    shareItem(
-                      audio.share_title,
-                      audio.share_url,
-                      audio.share_description
-                    )
-                  "
-                ></span>
-              </div>
-              <div
-                class="ply-btn"
-                v-clipboard:copy="audio.file"
-                v-clipboard:error="clipboardErrorHandler"
-                v-clipboard:success="clipboardSuccessHandler"
-              >
-                <span class="uni-icon icon-link"></span>
+              <div class="read-info">
+                <div class="read-num">{{ audio.num }}</div>
+                <div class="read-sora">{{ audio.name }}</div>
+                <div class="read-reciter">
+                  {{ audio.reciter }}
+                  <template v-if="audio.rewaya">
+                    ({{ audio.rewaya }})
+                  </template>
+                </div>
               </div>
               <div
-                class="ply-btn"
-                @click="downloadMp3({ url: audio.file, num: audio.num })"
+                class="read-options"
+                :class="{
+                  opened: show_moreoptions && show_moreoptions_item == audio.id,
+                }"
               >
-                <span class="uni-icon icon-cloud_download"></span>
+                <div
+                  class="ply-btn read-more-btn"
+                  @click="toggeleMoreoptions(audio.id)"
+                >
+                  <span class="uni-icon icon-more-horizontal"></span>
+                </div>
+                <div class="ply-btn">
+                  <span
+                    class="uni-icon icon-delete"
+                    @click="removeItem(index)"
+                  ></span>
+                </div>
+                <div class="ply-btn">
+                  <span
+                    class="uni-icon icon-share"
+                    @click="
+                      shareItem(
+                        audio.share_title,
+                        audio.share_url,
+                        audio.share_description
+                      )
+                    "
+                  ></span>
+                </div>
+                <div
+                  class="ply-btn"
+                  v-clipboard:copy="audio.file"
+                  v-clipboard:error="clipboardErrorHandler"
+                  v-clipboard:success="clipboardSuccessHandler"
+                >
+                  <span class="uni-icon icon-link"></span>
+                </div>
+                <div
+                  class="ply-btn"
+                  @click="downloadMp3({ url: audio.file, num: audio.num })"
+                >
+                  <span class="uni-icon icon-cloud_download"></span>
+                </div>
+                <div
+                  class="ply-btn"
+                  v-if="soarIncludes(audio.id)"
+                  @click="removeSoraFavorite(audio.id)"
+                >
+                  <span class="uni-icon icon-favorite"></span>
+                </div>
+                <div class="ply-btn" v-else @click="addSoraFavorite(audio.id)">
+                  <span class="uni-icon icon-favorite_outline"></span>
+                </div>
               </div>
-              <div
-                class="ply-btn"
-                v-if="soarIncludes(audio.id)"
-                @click="removeSoraFavorite(audio.id)"
-              >
-                <span class="uni-icon icon-favorite"></span>
-              </div>
-              <div class="ply-btn" v-else @click="addSoraFavorite(audio.id)">
-                <span
-                  class="uni-icon icon-favorite_outline"
-                 
-                ></span>
-              </div>
-            </div>
-          </li>
-        </draggable>
+            </li>
+          </Draggable>
+        </Container>
       </ul>
     </div>
   </div>
 </template>
 
 <script>
-import draggable from "vuedraggable";
+import { Container, Draggable } from "vue-smooth-dnd";
+
 import { mapState, mapActions, mapGetters } from "vuex";
 const convertTimeHHMMSS = (val) => {
   let hhmmss = new Date(val * 1000).toISOString().substr(11, 8);
-
   return hhmmss.indexOf("00:") === 0 ? hhmmss.substr(3) : hhmmss;
 };
 
 export default {
   components: {
-    draggable,
+    Container,
+    Draggable,
   },
-  data() {
-    return {
-      audio: undefined,
-      currentSeconds: 0,
-      durationSeconds: 0,
-      loaded: false,
-      dragging: false,
-      playing: false,
-      volume: 60,
-      show_playlist: false,
-      show_moreoptions: false,
-      show_moreoptions_item: false,
-      show_fullplayer: false,
-    };
-  },
+  data: () => ({
+    audio: undefined,
+    currentSeconds: 0,
+    durationSeconds: 0,
+    loaded: false,
+    dragging: false,
+    playing: false,
+    volume: 60,
+    show_playlist: false,
+    show_moreoptions: false,
+    show_moreoptions_item: false,
+    show_fullplayer: false,
+  }),
   computed: {
     currentTime() {
       return convertTimeHHMMSS(this.currentSeconds);
@@ -325,16 +316,35 @@ export default {
       source: (state) => state.source,
     }),
     ...mapGetters({
-      soarIncludes: "favorite/soarIncludes",
+      soarIncludes: "soarIncludes",
       currentPosition: "currentPosition",
       isLoading: "isLoading",
     }),
   },
   methods: {
+    onDrop(dragResult) {
+      const { removedIndex, addedIndex, payload } = dragResult;
+      if (removedIndex === null && addedIndex === null) return this.playlist;
+
+      const result = [...this.playlist];
+      let itemToAdd = payload;
+
+      if (removedIndex !== null) {
+        itemToAdd = result.splice(removedIndex, 1)[0];
+      }
+
+      if (addedIndex !== null) {
+        result.splice(addedIndex, 0, itemToAdd);
+      }
+      this.$store.commit("setPlaylist", { playlist: result });
+    },
     load() {
       if (this.audio.readyState >= 2) {
         this.loaded = true;
         this.durationSeconds = parseInt(this.audio.duration);
+        if (!this.durationSeconds) {
+          this.durationSeconds = 0;
+        }
         this.$store.commit("setState", { player_state: "loaded" });
         return (this.playing = this.autoPlay);
       }
@@ -392,12 +402,18 @@ export default {
     },
     shareItem(title, url, description) {
       if (typeof window !== "undefined") {
-        Event.$emit("share", title, url, description);
+        AppEvent.$emit("share", title, url, description);
       }
     },
-    ...mapActions("download", {
-      downloadMp3: "downloadMp3",
-    }),
+    addSoraFavorite(id) {
+      window.appMain.$store.dispatch("favorite/addSora", id);
+    },
+    removeSoraFavorite(id) {
+      window.appMain.$store.dispatch("favorite/removeSora", id);
+    },
+    downloadMp3(item) {
+      window.appMain.$store.dispatch("download/downloadMp3", item);
+    },
     download(url) {
       var filename = url.substring(url.lastIndexOf("/") + 1).split("?")[0];
       var xhr = new XMLHttpRequest();
@@ -413,15 +429,16 @@ export default {
       xhr.open("GET", url);
       xhr.send();
     },
-    ...mapActions(["clipboardErrorHandler", "clipboardSuccessHandler", "removeItem"]),
-    ...mapActions("favorite", {
-      addSoraFavorite: "addSora",
-      removeSoraFavorite: "removeSora",
-    }),
+    ...mapActions([
+      "clipboardErrorHandler",
+      "clipboardSuccessHandler",
+      "removeItem",
+    ]),
   },
   mounted() {
     this.audio = this.$refs.audiofile;
     this.audio.addEventListener("timeupdate", this.update);
+    this.audio.addEventListener("ended", this.next);
     this.audio.addEventListener("loadeddata", this.load);
     this.audio.addEventListener("pause", () => {
       this.playing = false;

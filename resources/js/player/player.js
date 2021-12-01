@@ -4,13 +4,11 @@ import VuexPersist from 'vuex-persist'
 
 window.PlayerEvent = new Vue();
 window.PlayerVue = Vue
+window.appMain = {}
 
 new VuexPersist({
   key: 'mp3quranb.net_player',
-  storage: window.localStorage,
-  // reducer: (state) => ({
-  //   player: state,
-  // }),
+  storage: window.localStorage
 }).plugin(store)
 
 

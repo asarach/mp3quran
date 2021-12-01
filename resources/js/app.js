@@ -14,7 +14,6 @@ new VuexPersist({
   key: 'mp3quranb.net',
   storage: window.localStorage,
   reducer: (state) => ({
-    player: state.player,
     favorite: state.favorite,
   }),
 }).plugin(store)
@@ -151,6 +150,9 @@ function initiateVue() {
         this.show_languages = false;
       },
     },
+    mounted(){
+      window.appFoolter.$store.commit('setFavorite',{favorite: this.$store.state.favorite})
+    }
   });
 }
 

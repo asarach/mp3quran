@@ -153,7 +153,7 @@
                   <div class="ply-btn">
                     <span
                       class="uni-icon icon-delete"
-                      @click="removeFromPlaylist(index)"
+                      @click="removeItem(index)"
                     ></span>
                   </div>
                   <div class="ply-btn">
@@ -184,7 +184,7 @@
                   </div>
                   <div
                     class="ply-btn"
-                    v-if="soarIncludes"
+                    v-if="soarIncludes(audio.id)"
                     @click="removeSoraFavorite(audio.id)"
                   >
                     <span class="uni-icon icon-favorite"></span>
@@ -224,13 +224,10 @@ export default {
     audio: undefined,
     currentSeconds: 0,
     durationSeconds: 0,
-    loaded: false,
-    dragging: false,
     playing: false,
     volume: 60,
     show_playlist: false,
     show_moreoptions: false,
-    show_moreoptions_item: false,
     show_moreoptions_item: false,
   }),
 
@@ -257,24 +254,19 @@ export default {
         this.audio.currentTime = parseInt(cal);
       },
     },
-
-    // playlist: {
-    //   get() {
-    //     return this.$store.state.playlist;
-    //   },
-    //   set(playlist) {
-    //     this.$store.commit("setPlaylist", { playlist: playlist });
-    //   },
-    // },
-    soarIncludes: function () {
-      return false;
-      // return this.$store.state.favorite.soar.includes(this.audio.id);
+    playlist: {
+      get() {
+        return this.$store.state.playlist;
+      },
+      set(playlist) {
+        this.$store.commit("setPlaylist", { playlist: playlist });
+      },
     },
     ...mapState({
       source: (state) => state.source,
-      playlist: (state) => state.playlist,
     }),
     ...mapGetters({
+      soarIncludes: "soarIncludes",
       currentPosition: "currentPosition",
       isLoading: "isLoading",
     }),
@@ -304,17 +296,14 @@ export default {
         if (!this.durationSeconds) {
           this.durationSeconds = 0;
         }
-
         this.$store.commit("setState", { player_state: "loaded" });
         return (this.playing = this.autoPlay);
       }
-
       throw new Error("Failed to load sound file.");
     },
     update(e) {
       this.currentSeconds = parseInt(this.audio.currentTime);
     },
-
     play() {
       this.playing = true;
     },
@@ -334,9 +323,17 @@ export default {
     playItem(item) {
       this.$store.dispatch("playItem", item);
     },
-
     toggelePlaylist() {
       this.show_playlist = !this.show_playlist;
+    },
+    toggeleMoreoptions(id) {
+      if (this.show_moreoptions_item == id) {
+        this.show_moreoptions_item = false;
+        this.show_moreoptions = false;
+      } else {
+        this.show_moreoptions_item = id;
+        this.show_moreoptions = true;
+      }
     },
     closePlaylist() {
       this.show_playlist = false;
@@ -348,23 +345,20 @@ export default {
       this.$store.commit("setSource", { source: source });
       this.$store.commit("setPlaylist", { playlist: [] });
     },
-    toggeleMoreoptions(id) {
-      if (this.show_moreoptions_item == id) {
-        this.show_moreoptions_item = false;
-        this.show_moreoptions = false;
-      } else {
-        this.show_moreoptions_item = id;
-        this.show_moreoptions = true;
-      }
-    },
     shareItem(title, url, description) {
       if (typeof window !== "undefined") {
-        Event.$emit("share", title, url, description);
+        AppEvent.$emit("share", title, url, description);
       }
     },
-    ...mapActions("download", {
-      downloadMp3: "downloadMp3",
-    }),
+    addSoraFavorite(id) {
+      window.appMain.$store.dispatch("favorite/addSora", id);
+    },
+    removeSoraFavorite(id) {
+      window.appMain.$store.dispatch("favorite/removeSora", id);
+    },
+    downloadMp3(item) {
+      window.appMain.$store.dispatch("download/downloadMp3", item);
+    },
     download(url) {
       var filename = url.substring(url.lastIndexOf("/") + 1).split("?")[0];
       var xhr = new XMLHttpRequest();
@@ -385,10 +379,18 @@ export default {
       "clipboardSuccessHandler",
       "removeItem",
     ]),
-    ...mapActions("favorite", {
-      addSoraFavorite: "addSora",
-      removeSoraFavorite: "removeSora",
-    }),
+  },
+  mounted() {
+    this.audio = this.$refs.audiofile;
+    this.audio.addEventListener("timeupdate", this.update);
+    this.audio.addEventListener("ended", this.next);
+    this.audio.addEventListener("loadeddata", this.load);
+    this.audio.addEventListener("pause", () => {
+      this.playing = false;
+    });
+    this.audio.addEventListener("play", () => {
+      this.playing = true;
+    });
   },
   created() {
     var self = this;
@@ -407,19 +409,6 @@ export default {
       });
     }
   },
-  mounted() {
-    this.audio = this.$refs.audiofile;
-    this.audio.addEventListener("timeupdate", this.update);
-    this.audio.addEventListener("ended", this.next);
-    this.audio.addEventListener("loadeddata", this.load);
-    this.audio.addEventListener("pause", () => {
-      this.playing = false;
-    });
-    this.audio.addEventListener("play", () => {
-      this.playing = true;
-    });
-  },
-
   watch: {
     playing(value) {
       this.$store.commit("setPlaying", { playing: value });

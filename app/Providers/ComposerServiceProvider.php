@@ -18,6 +18,7 @@ class ComposerServiceProvider extends ServiceProvider
         View::composer(['layouts.admin'], 'App\Http\ViewComposers\AdminComposer');
         View::composer(['layouts.app'], 'App\Http\ViewComposers\AppComposer');
         View::composer(['components.desktop-sidebar'], 'App\Http\ViewComposers\MenuComposer');
+        View::composer(['mobile'], 'App\Http\ViewComposers\MenuComposer');
     }
 
     /**

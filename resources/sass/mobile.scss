@@ -8,13 +8,13 @@
     .tb-logo {
       height: 30px;
     }
-    .tb-back-button{
+    .tb-back-button {
       margin-right: auto;
     }
-    .tb-search{
+    .tb-search {
       display: block;
     }
-    .tb-search .btn-search{
+    .tb-search .btn-search {
       margin-left: 0rem;
     }
     .tb-languages {
@@ -28,11 +28,11 @@
   .top-bar.navbar--hidden {
     top: -50px;
   }
-  .tb-languages .tbl-dropdown{
+  .tb-languages .tbl-dropdown {
     position: fixed;
     top: 3rem;
-    left: .5rem;
-    width: calc(100% - 1rem );
+    left: 0.5rem;
+    width: calc(100% - 1rem);
   }
 
   .main {
@@ -43,8 +43,8 @@
       h1 {
         margin: 1.5rem 0 0;
       }
-      .header-ads .ha-item{
-        margin: .5rem 0;
+      .header-ads .ha-item {
+        margin: 0.5rem 0;
       }
     }
     .show-body {
@@ -82,7 +82,7 @@
     padding: 0;
     box-shadow: none;
   }
-  .reciters-show  .show-filters{
+  .reciters-show .show-filters {
     display: block;
   }
   .reciters-show .reciters-list {
@@ -102,8 +102,8 @@
   .api-show .show-body .api-content {
     margin-top: 0;
   }
-  .contact-show form{
-    padding: .75rem;
+  .contact-show form {
+    padding: 0.75rem;
     margin: 0 -1rem -1rem;
     border-radius: 0 0 10px 10px;
   }
@@ -150,7 +150,7 @@
     border-top: 1px solid #a2d4f5;
     box-shadow: 0 -4px 8px 0px #a2a2a230;
 
-    .row{
+    .row {
       justify-content: center;
     }
   }
@@ -167,20 +167,12 @@
     line-height: 1;
     color: $gray-700;
     position: relative;
-    .material-design-icon {
+    .uni-icon {
       display: block;
       font-size: 1.25rem;
       height: 1.75rem;
-      margin-bottom: 0.25rem;
-      .material-design-icon__svg {
-        height: 22px;
-        width: 22px;
-        fill: $gray-700;
-        position: absolute;
-        margin-right: -0.75rem;
-        right: 50%;
-        top: 0.25rem;
-      }
+      color: $gray-700;
+      top: 0.25rem;
     }
   }
 

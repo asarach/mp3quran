@@ -15,8 +15,18 @@ export default new Vuex.Store({
       id: '',
     },
     playlist: [],
+    favorite: {
+      videos: [],
+      radios: [],
+      reads: [],
+      soar: [],
+    },
   },
   mutations: {
+    setFavorite(state, { favorite }) {
+      console.log(favorite);
+      state.favorite = favorite;
+    },
     setPlaylist(state, { playlist }) {
       state.playlist = playlist;
     },
@@ -34,12 +44,12 @@ export default new Vuex.Store({
     },
   },
   getters: {
-    isPlaying: (state, getters) => () => {
-      // if (state.source.id == item && state.playing) {
-      //   return true;
-      // } else {
-        return state.playing;
-      // }
+    soarIncludes: (state, getters) => (item) => {
+      if (state.favorite.soar.includes(item)) {
+        return true;
+      } else {
+        return false;
+      }
     },
     currentPosition: (state, getters) => (item) => {
       let index = -1;
@@ -49,6 +59,13 @@ export default new Vuex.Store({
         }
       }
       return index;
+    },
+    isPlaying: (state, getters) => () => {
+      if (state.source.id == item && state.playing) {
+        return true;
+      } else {
+        return false;
+      }
     },
     isLoading: (state, getters) => (item) => {
       if (state.source.id == item.id && state.player_state == 'loading') {
@@ -91,7 +108,8 @@ export default new Vuex.Store({
 
     },
     removeItem({ commit, state }, index) {
-      state.playlist.splice(index, 1);
+      let new_playlist  = state.playlist.splice(index, 1);
+      commit('setPlaylist', { playlist: new_playlist })
     },
 
     nextItem({ commit, state }) {
@@ -165,6 +183,22 @@ export default new Vuex.Store({
         })
         .catch(function (error) {
         });
+    },
+    clipboardSuccessHandler({ commit, state }, products) {
+      window.appMain.$store.dispatch("notify", {//tofixe
+        group: 'app',
+        title: this._vm.trans('text.copied'),
+        type: 'success',
+        text: this._vm.trans('text.text-copied')
+      })
+    },
+    clipboardErrorHandler({ commit, state }, products) {
+      window.appMain.$store.dispatch("notify", {//tofixe  
+        group: 'app',
+        title: this._vm.trans('text.error'),
+        type: 'error',
+        text: this._vm.trans('text.error-copying-text')
+      })
     },
   },
 });
