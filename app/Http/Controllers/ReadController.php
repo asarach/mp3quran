@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Read;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use Illuminate\Support\Facades\Cache;
 
 class ReadController extends Controller
 {
@@ -15,14 +17,18 @@ class ReadController extends Controller
     public function list()
     {
         $sora = request('s');
-        $reads = Read::where('status', 1);
-        if ($sora) {
-            $reads = $reads
-            ->leftJoin('sura_read', 'reads.id', '=', 'sura_read.read_id')
-            ->where('sura_read.sura_id', $sora);
-        }
+        $cache_name = 'reads_list_sora_' .  $sora  . '_long_' .  LaravelLocalization::getCurrentLocale();
+        // Cache::forget($cache_name);
+        $reads  =  Cache::rememberForever($cache_name, function () use ($sora) {
+            $reads = Read::where('status', 1);
+            if ($sora) {
+                $reads = $reads
+                    ->leftJoin('sura_read', 'reads.id', '=', 'sura_read.read_id')
+                    ->where('sura_read.sura_id', $sora);
+            }
 
-        $reads = $reads->get();
+            return $reads->get()->toArray();
+        });
 
         return compact('reads');
     }
