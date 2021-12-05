@@ -2,12 +2,27 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 Vue.use(Vuex)
+const convertTimeHHMMSS = (val) => {
+  let hhmmss = new Date(val * 1000).toISOString().substr(11, 8);
+  return hhmmss.indexOf("00:") === 0 ? hhmmss.substr(3) : hhmmss;
+};
+
 
 export default new Vuex.Store({
 
   state: {
-    player_state: '',
+    audio: undefined,
+    currentSeconds: 0,
+    durationSeconds: 0,
     playing: false,
+    volume: 60,
+    show_playlist: false,
+    show_moreoptions: false,
+    show_moreoptions_item: false,
+    loaded: false,
+    dragging: false,
+    show_fullplayer: false,
+    player_state: '',
     playing_item: 1,
     source: {
       file: 'empty',
@@ -44,6 +59,12 @@ export default new Vuex.Store({
     },
   },
   getters: {
+    currentTime: (state) => () => {
+      return convertTimeHHMMSS(state.currentSeconds);
+    },
+    durationTime: (state) => () => {
+      return convertTimeHHMMSS(state.durationSeconds);
+    },
     soarIncludes: (state, getters) => (item) => {
       if (state.favorite.soar.includes(item)) {
         return true;
@@ -78,6 +99,63 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    update({ state }) {
+      state.currentSeconds = parseInt(state.audio.currentTime);
+    },
+
+    onDrop({ commit, state }, dragResult) {
+      const { removedIndex, addedIndex, payload } = dragResult;
+      if (removedIndex === null && addedIndex === null) return this.playlist;
+
+      const result = [...this.playlist];
+      let itemToAdd = payload;
+
+      if (removedIndex !== null) {
+        itemToAdd = result.splice(removedIndex, 1)[0];
+      }
+
+      if (addedIndex !== null) {
+        result.splice(addedIndex, 0, itemToAdd);
+      }
+      this.$store.commit("setPlaylist", { playlist: result });
+    },
+    load({ commit, state }, item) {
+      if (this.audio.readyState >= 2) {
+        this.loaded = true;
+        this.durationSeconds = parseInt(this.audio.duration);
+        if (!this.durationSeconds) {
+          this.durationSeconds = 0;
+        }
+        this.$store.commit("setState", { player_state: "loaded" });
+        return (this.playing = this.autoPlay);
+      }
+      throw new Error("Failed to load sound file.");
+    },
+    load({ commit, state }, id) {
+      if (this.show_moreoptions_item == id) {
+        this.show_moreoptions_item = false;
+        this.show_moreoptions = false;
+      } else {
+        this.show_moreoptions_item = id;
+        this.show_moreoptions = true;
+      }
+    },
+    download({ commit, state }, url) {
+      var filename = url.substring(url.lastIndexOf("/") + 1).split("?")[0];
+      var xhr = new XMLHttpRequest();
+      xhr.responseType = "blob";
+      xhr.onload = function () {
+        var a = document.createElement("a");
+        a.href = window.URL.createObjectURL(xhr.response);
+        a.download = filename;
+        a.style.display = "none";
+        document.body.appendChild(a);
+        a.click();
+      };
+      xhr.open("GET", url);
+      xhr.send();
+    },
+
     addItem({ commit, state }, item) {
       var new_playlist = state.playlist
       var exist = new_playlist.find(function (itm) {
@@ -108,7 +186,7 @@ export default new Vuex.Store({
 
     },
     removeItem({ commit, state }, index) {
-      let new_playlist  = state.playlist.splice(index, 1);
+      let new_playlist = state.playlist.splice(index, 1);
       commit('setPlaylist', { playlist: new_playlist })
     },
 
@@ -200,5 +278,55 @@ export default new Vuex.Store({
         text: this._vm.trans('text.error-copying-text')
       })
     },
+
+
+    play({ commit, state }, products) {
+      this.playing = true;
+    },
+    pause({ commit, state }, products) {
+      this.playing = false;
+    },
+    stop({ commit, state }, products) {
+      this.playing = false;
+      this.audio.currentTime = 0;
+    },
+    prev({ commit, state }, products) {
+      this.$store.dispatch("prevItem");
+    },
+    next({ commit, state }, products) {
+      this.$store.dispatch("nextItem");
+    },
+    playItem({ commit, state }, products) {
+      this.$store.dispatch("playItem", item);
+    },
+    toggelePlaylist({ commit, state }, products) {
+      this.show_playlist = !this.show_playlist;
+    },
+
+    closePlaylist({ commit, state }, products) {
+      this.show_playlist = false;
+    },
+    clearPlaylist({ commit, state }, products) {
+      var source = {
+        file: "empty",
+      };
+      this.$store.commit("setSource", { source: source });
+      this.$store.commit("setPlaylist", { playlist: [] });
+    },
+    shareItem({ commit, state }, title, url, description) {
+      if (typeof window !== "undefined") {
+        AppEvent.$emit("share", title, url, description);
+      }
+    },
+    addSoraFavorite({ commit, state }, id) {
+      window.appMain.$store.dispatch("favorite/addSora", id);
+    },
+    removeSoraFavorite({ commit, state }, id) {
+      window.appMain.$store.dispatch("favorite/removeSora", id);
+    },
+    downloadMp3({ commit, state }, item) {
+      window.appMain.$store.dispatch("download/downloadMp3", item);
+    },
+
   },
 });

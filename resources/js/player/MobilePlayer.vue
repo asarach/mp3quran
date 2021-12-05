@@ -268,19 +268,6 @@ export default {
     Container,
     Draggable,
   },
-  data: () => ({
-    audio: undefined,
-    currentSeconds: 0,
-    durationSeconds: 0,
-    loaded: false,
-    dragging: false,
-    playing: false,
-    volume: 60,
-    show_playlist: false,
-    show_moreoptions: false,
-    show_moreoptions_item: false,
-    show_fullplayer: false,
-  }),
   computed: {
     currentTime() {
       return convertTimeHHMMSS(this.currentSeconds);
@@ -314,6 +301,16 @@ export default {
     },
     ...mapState({
       source: (state) => state.source,
+      audio: (state) => state.audio,
+      currentSeconds: (state) => state.currentSeconds,
+      durationSeconds: (state) => state.durationSeconds,
+      playing: (state) => state.playing,
+      volume: (state) => state.volume,
+      show_playlist: (state) => state.show_playlist,
+      show_moreoptions: (state) => state.show_moreoptions,
+      show_moreoptions_item: (state) => state.show_moreoptions_item,
+      show_fullplayer: (state) => state.show_fullplayer,
+      loaded: (state) => state.loaded
     }),
     ...mapGetters({
       soarIncludes: "soarIncludes",
