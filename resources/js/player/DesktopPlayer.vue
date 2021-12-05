@@ -7,11 +7,11 @@
           class="ply-btn btn-previous"
           :class="{ disabled: currentPosition() < 1 }"
         >
-          <span class="uni-icon icon-skip_previous" @click="prev"></span>
+          <span class="uni-icon icon-skip_previous" @click="prevItem"></span>
         </div>
         <div
           class="ply-btn btn-play-pause"
-          v-on:click.prevent="playing = !playing"
+          @click.prevent="toggelItem"
           :title="playing ? 'Pause' : 'Play'"
         >
           <span
@@ -29,7 +29,7 @@
           class="ply-btn btn-next"
           :class="{ disabled: currentPosition() >= playlist.length - 1 }"
         >
-          <span class="uni-icon icon-skip_next" @click="next"></span>
+          <span class="uni-icon icon-skip_next" @click="nextItem"></span>
         </div>
       </div>
       <div class="ply-body">
@@ -59,7 +59,7 @@
           <span class="uni-icon icon-volume_up" v-else></span>
           <div class="volume-selector">
             <vue-slider
-              v-model="volume"
+              v-model="currentVolume"
               direction="btt"
               height="120"
               style="display: inline-block; margin: 12px 2px"
@@ -78,7 +78,7 @@
         <a
           :href="prefix + source.page_url"
           rel="alternate"
-          :hreflang="$store.state.current_language"
+          :hreflang="current_language"
         >
           {{ source.reciter }}
         </a>
@@ -216,8 +216,16 @@ export default {
   },
 
   computed: {
+    currentVolume: {
+      get() {
+        return this.$store.state.volume;
+      },
+      set(value) {
+        this.$store.dispatch("changeVolume", value);
+      },
+    },
     percentComplete: {
-      get: function () {
+      get() {
         const value = parseInt(
           (this.currentSeconds / this.durationSeconds) * 100
         );
@@ -227,12 +235,13 @@ export default {
           return 0;
         }
       },
-      set: function (newValue) {
-        let cal = (newValue * this.audio.duration) / 100;
-        this.audio.currentTime = parseInt(cal);
+      set(value) {
+        this.$store.dispatch("setPercentComplete", value);
       },
     },
+
     ...mapState({
+      current_language: (state) => state.current_language,
       source: (state) => state.source,
       audio: (state) => state.audio,
       playlist: (state) => state.playlist,
@@ -245,6 +254,8 @@ export default {
       show_moreoptions_item: (state) => state.show_moreoptions_item,
     }),
     ...mapGetters({
+      durationTime: "durationTime",
+      currentTime: "currentTime",
       soarIncludes: "soarIncludes",
       currentPosition: "currentPosition",
       isLoading: "isLoading",
@@ -255,57 +266,40 @@ export default {
     ...mapActions([
       "onDrop",
       "load",
+      "pause",
+      "nextItem",
+      "prevItem",
+      "playItem",
+      "toggelItem",
+      "changeVolume",
+      "clearPlaylist",
+      "toggelePlaylist",
+      "closePlaylist",
       "toggeleMoreoptions",
       "clipboardErrorHandler",
       "clipboardSuccessHandler",
+      "removeSoraFavorite",
+      "addSoraFavorite",
       "removeItem",
     ]),
   },
   mounted() {
-    this.audio = this.$refs.audiofile;
-    this.audio.addEventListener("timeupdate", this.update);
-    this.audio.addEventListener("ended", this.next);
-    this.audio.addEventListener("loadeddata", this.load);
-    this.audio.addEventListener("pause", () => {
-      this.playing = false;
-    });
-    this.audio.addEventListener("play", () => {
-      this.playing = true;
-    });
+    this.$store.dispatch("setAudio", this.$refs.audiofile);
   },
   created() {
     var self = this;
     PlayerEvent.$on("player_play", function () {
-      self.play();
+      self.$store.dispatch("play");
     });
     PlayerEvent.$on("player_stop", function () {
-      self.stop();
+      self.$store.dispatch("stop");
     });
     PlayerEvent.$on("player_toggel", function () {
-      self.playing = !self.playing;
+      self.$store.dispatch("toggel");
     });
     PlayerEvent.$on("player_pause", function () {
-      self.pause();
+      self.$store.dispatch("pause");
     });
-  },
-  watch: {
-    playing(value) {
-      this.$store.commit("setPlaying", { playing: value });
-      if (value) {
-        return this.audio.play();
-      }
-      this.audio.pause();
-    },
-    source(value) {
-      let self = this;
-      this.$store.commit("setState", { player_state: "loading" });
-      self.audio.oncanplay = function () {
-        self.audio.play();
-      };
-    },
-    volume(value) {
-      this.audio.volume = this.volume / 100;
-    },
   },
 };
 </script>

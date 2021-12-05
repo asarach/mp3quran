@@ -39,11 +39,16 @@ export default new Vuex.Store({
   },
   mutations: {
     setFavorite(state, { favorite }) {
-      console.log(favorite);
       state.favorite = favorite;
     },
     setPlaylist(state, { playlist }) {
       state.playlist = playlist;
+    },
+    setVolume(state, { volume }) {
+      state.volume = volume;
+    },
+    setCurrentSeconds(state, { currentSeconds }) {
+      state.currentSeconds = currentSeconds;
     },
     setSource(state, { source }) {
       state.source = source;
@@ -59,10 +64,10 @@ export default new Vuex.Store({
     },
   },
   getters: {
-    currentTime: (state) => () => {
+    currentTime: (state) => {
       return convertTimeHHMMSS(state.currentSeconds);
     },
-    durationTime: (state) => () => {
+    durationTime: (state) => {
       return convertTimeHHMMSS(state.durationSeconds);
     },
     soarIncludes: (state, getters) => (item) => {
@@ -72,6 +77,7 @@ export default new Vuex.Store({
         return false;
       }
     },
+
     currentPosition: (state, getters) => (item) => {
       let index = -1;
       for (var i = 0; i < state.playlist.length; i++) {
@@ -99,15 +105,36 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    update({ state }) {
-      state.currentSeconds = parseInt(state.audio.currentTime);
+    setAudio({ state, dispatch }, audio) {
+      audio.addEventListener("timeupdate", () => {
+        dispatch("update");
+      });
+      audio.addEventListener("ended", () => {
+        dispatch("next");
+      });
+      audio.addEventListener("loadeddata", () => {
+        dispatch("load");
+      });
+      audio.addEventListener("pause", () => {
+        dispatch("pause");
+      });
+      audio.addEventListener("play", () => {
+        dispatch("play");
+      });
+      state.audio = audio;
+      state.audio.volume = state.volume / 100;
+      state.audio.currentTime = state.currentSeconds;
+    },
+
+    update({ state, commit }) {
+      commit("setCurrentSeconds", { currentSeconds: parseInt(state.audio.currentTime) });
     },
 
     onDrop({ commit, state }, dragResult) {
       const { removedIndex, addedIndex, payload } = dragResult;
-      if (removedIndex === null && addedIndex === null) return this.playlist;
+      if (removedIndex === null && addedIndex === null) return state.playlist;
 
-      const result = [...this.playlist];
+      const result = [...state.playlist];
       let itemToAdd = payload;
 
       if (removedIndex !== null) {
@@ -117,28 +144,32 @@ export default new Vuex.Store({
       if (addedIndex !== null) {
         result.splice(addedIndex, 0, itemToAdd);
       }
-      this.$store.commit("setPlaylist", { playlist: result });
+      commit("setPlaylist", { playlist: result });
     },
     load({ commit, state }, item) {
-      if (this.audio.readyState >= 2) {
-        this.loaded = true;
-        this.durationSeconds = parseInt(this.audio.duration);
-        if (!this.durationSeconds) {
-          this.durationSeconds = 0;
+      if (state.audio.readyState >= 2) {
+        state.loaded = true;
+        state.durationSeconds = parseInt(state.audio.duration);
+        if (!state.durationSeconds) {
+          state.durationSeconds = 0;
         }
-        this.$store.commit("setState", { player_state: "loaded" });
-        return (this.playing = this.autoPlay);
+        commit("setState", { player_state: "loaded" });
+        return (state.playing = state.autoPlay);
       }
       throw new Error("Failed to load sound file.");
     },
-    load({ commit, state }, id) {
-      if (this.show_moreoptions_item == id) {
-        this.show_moreoptions_item = false;
-        this.show_moreoptions = false;
+    toggeleMoreoptions({ commit, state }, id) {
+      if (state.show_moreoptions_item == id) {
+        state.show_moreoptions_item = false;
+        state.show_moreoptions = false;
       } else {
-        this.show_moreoptions_item = id;
-        this.show_moreoptions = true;
+        state.show_moreoptions_item = id;
+        state.show_moreoptions = true;
       }
+    },
+    setPercentComplete({ state }, value) {
+      let cal = (value * state.audio.duration) / 100;
+      state.audio.currentTime = parseInt(cal);
     },
     download({ commit, state }, url) {
       var filename = url.substring(url.lastIndexOf("/") + 1).split("?")[0];
@@ -156,7 +187,7 @@ export default new Vuex.Store({
       xhr.send();
     },
 
-    addItem({ commit, state }, item) {
+    addItem({ commit, state, dispatch }, item) {
       var new_playlist = state.playlist
       var exist = new_playlist.find(function (itm) {
         if (itm.id == item.id)
@@ -166,22 +197,23 @@ export default new Vuex.Store({
         new_playlist.push(item);
         window.appMain.$store.dispatch("notify", {//tofixe
           group: 'app',
-          title: this._vm.trans('text.added'),
+          title: state._vm.trans('text.added'),
           type: 'success',
-          text: this._vm.trans('text.item-added-playlist')
+          text: state._vm.trans('text.item-added-playlist')
         });
       } else {
         window.appMain.$store.dispatch("notify", {//tofixe
           group: 'app',
-          title: this._vm.trans('text.not-added'),
+          title: state._vm.trans('text.not-added'),
           type: 'warn',
-          text: this._vm.trans('text.item-exists-in-playlist')
+          text: state._vm.trans('text.item-exists-in-playlist')
         });
       }
 
       commit('setPlaylist', { playlist: new_playlist })
       if (state.source.file == 'empty') {
         commit('setSource', { source: item });
+        dispatch("changeSource", item);
       }
 
     },
@@ -190,7 +222,7 @@ export default new Vuex.Store({
       commit('setPlaylist', { playlist: new_playlist })
     },
 
-    nextItem({ commit, state }) {
+    nextItem({ commit, state, dispatch }) {
       let index = -1;
       for (var i = 0; i < state.playlist.length; i++) {
         if (state.playlist[i].file === state.source.file) {
@@ -205,8 +237,9 @@ export default new Vuex.Store({
       var source = state.playlist[playlistIndex];
 
       commit('setSource', { source: source });
+      dispatch("changeSource", source);
     },
-    prevItem({ commit, state }) {
+    prevItem({ commit, state, dispatch }) {
       let index = -1;
       for (var i = 0; i < state.playlist.length; i++) {
         if (state.playlist[i].file === state.source.file) {
@@ -220,9 +253,11 @@ export default new Vuex.Store({
       )
       var source = state.playlist[playlistIndex];
       commit('setSource', { source: source });
+      dispatch("changeSource", source);
     },
-    playItem({ commit, state }, item) {
+    playItem({ commit, dispatch }, item) {
       commit('setSource', { source: item });
+      dispatch("changeSource", item);
     },
     getItemAndPlay({ dispatch, state }, url) {
       axios.get(url).then(function (response) {
@@ -230,7 +265,7 @@ export default new Vuex.Store({
       }).catch(function (error) {
       });
     },
-    addPlayItem({ commit, state }, item) {
+    addPlayItem({ commit, state, dispatch }, item) {
       var found = false;
       for (var i = 0; i < state.playlist.length; i++) {
         if (state.playlist[i].id == item.id) {
@@ -248,6 +283,7 @@ export default new Vuex.Store({
         PlayerEvent.$emit("player_toggel");
       } else {
         commit('setSource', { source: item });
+        dispatch("changeSource", item);
       }
     },
     getAddPlayItem({ dispatch }, url) {
@@ -265,53 +301,61 @@ export default new Vuex.Store({
     clipboardSuccessHandler({ commit, state }, products) {
       window.appMain.$store.dispatch("notify", {//tofixe
         group: 'app',
-        title: this._vm.trans('text.copied'),
+        title: state._vm.trans('text.copied'),
         type: 'success',
-        text: this._vm.trans('text.text-copied')
+        text: state._vm.trans('text.text-copied')
       })
     },
     clipboardErrorHandler({ commit, state }, products) {
       window.appMain.$store.dispatch("notify", {//tofixe  
         group: 'app',
-        title: this._vm.trans('text.error'),
+        title: state._vm.trans('text.error'),
         type: 'error',
-        text: this._vm.trans('text.error-copying-text')
+        text: state._vm.trans('text.error-copying-text')
       })
     },
-
-
-    play({ commit, state }, products) {
-      this.playing = true;
+    changeSource({ commit, state }, source) {
+      commit("setState", { player_state: "loading" });
+      state.audio.oncanplay = function () {
+        state.audio.play();
+      };
     },
-    pause({ commit, state }, products) {
-      this.playing = false;
+    changeVolume({ commit, state }, volume) {
+      commit("setVolume", { volume: volume });
+      state.audio.volume = volume / 100;
+    },
+    play({ state }) {
+      state.playing = true;
+      state.audio.play();
+    },
+    pause({ state }) {
+      state.playing = false;
+      state.audio.pause();
+    },
+    toggelItem({ dispatch, state }) {
+      if (state.playing) {
+        dispatch("pause");
+      } else {
+        dispatch("play");
+      }
     },
     stop({ commit, state }, products) {
-      this.playing = false;
-      this.audio.currentTime = 0;
-    },
-    prev({ commit, state }, products) {
-      this.$store.dispatch("prevItem");
-    },
-    next({ commit, state }, products) {
-      this.$store.dispatch("nextItem");
-    },
-    playItem({ commit, state }, products) {
-      this.$store.dispatch("playItem", item);
+      state.playing = false;
+      state.audio.currentTime = 0;
     },
     toggelePlaylist({ commit, state }, products) {
-      this.show_playlist = !this.show_playlist;
+      state.show_playlist = !state.show_playlist;
     },
 
     closePlaylist({ commit, state }, products) {
-      this.show_playlist = false;
+      state.show_playlist = false;
     },
     clearPlaylist({ commit, state }, products) {
       var source = {
         file: "empty",
       };
-      this.$store.commit("setSource", { source: source });
-      this.$store.commit("setPlaylist", { playlist: [] });
+      commit("setSource", { source: source });
+      commit("setPlaylist", { playlist: [] });
     },
     shareItem({ commit, state }, title, url, description) {
       if (typeof window !== "undefined") {

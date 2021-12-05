@@ -383,6 +383,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     Draggable: vue_smooth_dnd__WEBPACK_IMPORTED_MODULE_0__["Draggable"]
   },
   computed: _objectSpread(_objectSpread({
+    currentVolume: {
+      get: function get() {
+        return this.$store.state.volume;
+      },
+      set: function set(value) {
+        this.$store.dispatch("changeVolume", value);
+      }
+    },
     percentComplete: {
       get: function get() {
         var value = parseInt(this.currentSeconds / this.durationSeconds * 100);
@@ -393,12 +401,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           return 0;
         }
       },
-      set: function set(newValue) {
-        var cal = newValue * this.audio.duration / 100;
-        this.audio.currentTime = parseInt(cal);
+      set: function set(value) {
+        this.$store.dispatch("setPercentComplete", value);
       }
     }
   }, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])({
+    current_language: function current_language(state) {
+      return state.current_language;
+    },
     source: function source(state) {
       return state.source;
     },
@@ -430,65 +440,30 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return state.show_moreoptions_item;
     }
   })), Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])({
+    durationTime: "durationTime",
+    currentTime: "currentTime",
     soarIncludes: "soarIncludes",
     currentPosition: "currentPosition",
     isLoading: "isLoading"
   })),
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])(["onDrop", "load", "toggeleMoreoptions", "clipboardErrorHandler", "clipboardSuccessHandler", "removeItem"])),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])(["onDrop", "load", "pause", "nextItem", "prevItem", "playItem", "toggelItem", "changeVolume", "clearPlaylist", "toggelePlaylist", "closePlaylist", "toggeleMoreoptions", "clipboardErrorHandler", "clipboardSuccessHandler", "removeSoraFavorite", "addSoraFavorite", "removeItem"])),
   mounted: function mounted() {
-    var _this = this;
-
-    this.audio = this.$refs.audiofile;
-    this.audio.addEventListener("timeupdate", this.update);
-    this.audio.addEventListener("ended", this.next);
-    this.audio.addEventListener("loadeddata", this.load);
-    this.audio.addEventListener("pause", function () {
-      _this.playing = false;
-    });
-    this.audio.addEventListener("play", function () {
-      _this.playing = true;
-    });
+    this.$store.dispatch("setAudio", this.$refs.audiofile);
   },
   created: function created() {
     var self = this;
     PlayerEvent.$on("player_play", function () {
-      self.play();
+      self.$store.dispatch("play");
     });
     PlayerEvent.$on("player_stop", function () {
-      self.stop();
+      self.$store.dispatch("stop");
     });
     PlayerEvent.$on("player_toggel", function () {
-      self.playing = !self.playing;
+      self.$store.dispatch("toggel");
     });
     PlayerEvent.$on("player_pause", function () {
-      self.pause();
+      self.$store.dispatch("pause");
     });
-  },
-  watch: {
-    playing: function playing(value) {
-      this.$store.commit("setPlaying", {
-        playing: value
-      });
-
-      if (value) {
-        return this.audio.play();
-      }
-
-      this.audio.pause();
-    },
-    source: function source(value) {
-      var self = this;
-      this.$store.commit("setState", {
-        player_state: "loading"
-      });
-
-      self.audio.oncanplay = function () {
-        self.audio.play();
-      };
-    },
-    volume: function volume(value) {
-      this.audio.volume = this.volume / 100;
-    }
   }
 });
 
@@ -19898,7 +19873,7 @@ var render = function() {
             [
               _c("span", {
                 staticClass: "uni-icon icon-skip_previous",
-                on: { click: _vm.prev }
+                on: { click: _vm.prevItem }
               })
             ]
           ),
@@ -19911,7 +19886,7 @@ var render = function() {
               on: {
                 click: function($event) {
                   $event.preventDefault()
-                  _vm.playing = !_vm.playing
+                  return _vm.toggelItem.apply(null, arguments)
                 }
               }
             },
@@ -19939,7 +19914,7 @@ var render = function() {
             [
               _c("span", {
                 staticClass: "uni-icon icon-skip_next",
-                on: { click: _vm.next }
+                on: { click: _vm.nextItem }
               })
             ]
           )
@@ -19995,11 +19970,11 @@ var render = function() {
                   staticStyle: { display: "inline-block", margin: "12px 2px" },
                   attrs: { direction: "btt", height: "120", tooltip: "none" },
                   model: {
-                    value: _vm.volume,
+                    value: _vm.currentVolume,
                     callback: function($$v) {
-                      _vm.volume = $$v
+                      _vm.currentVolume = $$v
                     },
-                    expression: "volume"
+                    expression: "currentVolume"
                   }
                 })
               ],
@@ -20024,7 +19999,7 @@ var render = function() {
               attrs: {
                 href: _vm.prefix + _vm.source.page_url,
                 rel: "alternate",
-                hreflang: _vm.$store.state.current_language
+                hreflang: _vm.current_language
               }
             },
             [_vm._v("\n        " + _vm._s(_vm.source.reciter) + "\n      ")]
@@ -35326,10 +35301,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-var _actions;
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -35382,39 +35353,42 @@ var convertTimeHHMMSS = function convertTimeHHMMSS(val) {
   mutations: {
     setFavorite: function setFavorite(state, _ref) {
       var favorite = _ref.favorite;
-      console.log(favorite);
       state.favorite = favorite;
     },
     setPlaylist: function setPlaylist(state, _ref2) {
       var playlist = _ref2.playlist;
       state.playlist = playlist;
     },
-    setSource: function setSource(state, _ref3) {
-      var source = _ref3.source;
+    setVolume: function setVolume(state, _ref3) {
+      var volume = _ref3.volume;
+      state.volume = volume;
+    },
+    setCurrentSeconds: function setCurrentSeconds(state, _ref4) {
+      var currentSeconds = _ref4.currentSeconds;
+      state.currentSeconds = currentSeconds;
+    },
+    setSource: function setSource(state, _ref5) {
+      var source = _ref5.source;
       state.source = source;
       window.appMain.$store.state.playing_item = source.id;
     },
-    setPlaying: function setPlaying(state, _ref4) {
-      var playing = _ref4.playing;
+    setPlaying: function setPlaying(state, _ref6) {
+      var playing = _ref6.playing;
       state.playing = playing;
       window.appMain.$store.state.playing = playing;
     },
-    setState: function setState(state, _ref5) {
-      var player_state = _ref5.player_state;
+    setState: function setState(state, _ref7) {
+      var player_state = _ref7.player_state;
       state.player_state = player_state;
       window.appMain.$store.state.playing_state = player_state;
     }
   },
   getters: {
     currentTime: function currentTime(state) {
-      return function () {
-        return convertTimeHHMMSS(state.currentSeconds);
-      };
+      return convertTimeHHMMSS(state.currentSeconds);
     },
     durationTime: function durationTime(state) {
-      return function () {
-        return convertTimeHHMMSS(state.durationSeconds);
-      };
+      return convertTimeHHMMSS(state.durationSeconds);
     },
     soarIncludes: function soarIncludes(state, getters) {
       return function (item) {
@@ -35461,20 +35435,45 @@ var convertTimeHHMMSS = function convertTimeHHMMSS(val) {
       };
     }
   },
-  actions: (_actions = {
-    update: function update(_ref6) {
-      var state = _ref6.state;
-      state.currentSeconds = parseInt(state.audio.currentTime);
+  actions: {
+    setAudio: function setAudio(_ref8, audio) {
+      var state = _ref8.state,
+          dispatch = _ref8.dispatch;
+      audio.addEventListener("timeupdate", function () {
+        dispatch("update");
+      });
+      audio.addEventListener("ended", function () {
+        dispatch("next");
+      });
+      audio.addEventListener("loadeddata", function () {
+        dispatch("load");
+      });
+      audio.addEventListener("pause", function () {
+        dispatch("pause");
+      });
+      audio.addEventListener("play", function () {
+        dispatch("play");
+      });
+      state.audio = audio;
+      state.audio.volume = state.volume / 100;
+      state.audio.currentTime = state.currentSeconds;
     },
-    onDrop: function onDrop(_ref7, dragResult) {
-      var commit = _ref7.commit,
-          state = _ref7.state;
+    update: function update(_ref9) {
+      var state = _ref9.state,
+          commit = _ref9.commit;
+      commit("setCurrentSeconds", {
+        currentSeconds: parseInt(state.audio.currentTime)
+      });
+    },
+    onDrop: function onDrop(_ref10, dragResult) {
+      var commit = _ref10.commit,
+          state = _ref10.state;
       var removedIndex = dragResult.removedIndex,
           addedIndex = dragResult.addedIndex,
           payload = dragResult.payload;
-      if (removedIndex === null && addedIndex === null) return this.playlist;
+      if (removedIndex === null && addedIndex === null) return state.playlist;
 
-      var result = _toConsumableArray(this.playlist);
+      var result = _toConsumableArray(state.playlist);
 
       var itemToAdd = payload;
 
@@ -35486,263 +35485,316 @@ var convertTimeHHMMSS = function convertTimeHHMMSS(val) {
         result.splice(addedIndex, 0, itemToAdd);
       }
 
-      this.$store.commit("setPlaylist", {
+      commit("setPlaylist", {
         playlist: result
       });
     },
-    load: function load(_ref8, item) {
-      var commit = _ref8.commit,
-          state = _ref8.state;
+    load: function load(_ref11, item) {
+      var commit = _ref11.commit,
+          state = _ref11.state;
 
-      if (this.audio.readyState >= 2) {
-        this.loaded = true;
-        this.durationSeconds = parseInt(this.audio.duration);
+      if (state.audio.readyState >= 2) {
+        state.loaded = true;
+        state.durationSeconds = parseInt(state.audio.duration);
 
-        if (!this.durationSeconds) {
-          this.durationSeconds = 0;
+        if (!state.durationSeconds) {
+          state.durationSeconds = 0;
         }
 
-        this.$store.commit("setState", {
+        commit("setState", {
           player_state: "loaded"
         });
-        return this.playing = this.autoPlay;
+        return state.playing = state.autoPlay;
       }
 
       throw new Error("Failed to load sound file.");
-    }
-  }, _defineProperty(_actions, "load", function load(_ref9, id) {
-    var commit = _ref9.commit,
-        state = _ref9.state;
+    },
+    toggeleMoreoptions: function toggeleMoreoptions(_ref12, id) {
+      var commit = _ref12.commit,
+          state = _ref12.state;
 
-    if (this.show_moreoptions_item == id) {
-      this.show_moreoptions_item = false;
-      this.show_moreoptions = false;
-    } else {
-      this.show_moreoptions_item = id;
-      this.show_moreoptions = true;
-    }
-  }), _defineProperty(_actions, "download", function download(_ref10, url) {
-    var commit = _ref10.commit,
-        state = _ref10.state;
-    var filename = url.substring(url.lastIndexOf("/") + 1).split("?")[0];
-    var xhr = new XMLHttpRequest();
-    xhr.responseType = "blob";
-
-    xhr.onload = function () {
-      var a = document.createElement("a");
-      a.href = window.URL.createObjectURL(xhr.response);
-      a.download = filename;
-      a.style.display = "none";
-      document.body.appendChild(a);
-      a.click();
-    };
-
-    xhr.open("GET", url);
-    xhr.send();
-  }), _defineProperty(_actions, "addItem", function addItem(_ref11, item) {
-    var commit = _ref11.commit,
-        state = _ref11.state;
-    var new_playlist = state.playlist;
-    var exist = new_playlist.find(function (itm) {
-      if (itm.id == item.id) return true;
-    });
-
-    if (exist == undefined) {
-      new_playlist.push(item);
-      window.appMain.$store.dispatch("notify", {
-        //tofixe
-        group: 'app',
-        title: this._vm.trans('text.added'),
-        type: 'success',
-        text: this._vm.trans('text.item-added-playlist')
-      });
-    } else {
-      window.appMain.$store.dispatch("notify", {
-        //tofixe
-        group: 'app',
-        title: this._vm.trans('text.not-added'),
-        type: 'warn',
-        text: this._vm.trans('text.item-exists-in-playlist')
-      });
-    }
-
-    commit('setPlaylist', {
-      playlist: new_playlist
-    });
-
-    if (state.source.file == 'empty') {
-      commit('setSource', {
-        source: item
-      });
-    }
-  }), _defineProperty(_actions, "removeItem", function removeItem(_ref12, index) {
-    var commit = _ref12.commit,
-        state = _ref12.state;
-    var new_playlist = state.playlist.splice(index, 1);
-    commit('setPlaylist', {
-      playlist: new_playlist
-    });
-  }), _defineProperty(_actions, "nextItem", function nextItem(_ref13) {
-    var commit = _ref13.commit,
-        state = _ref13.state;
-    var index = -1;
-
-    for (var i = 0; i < state.playlist.length; i++) {
-      if (state.playlist[i].file === state.source.file) {
-        index = i;
+      if (state.show_moreoptions_item == id) {
+        state.show_moreoptions_item = false;
+        state.show_moreoptions = false;
+      } else {
+        state.show_moreoptions_item = id;
+        state.show_moreoptions = true;
       }
-    }
+    },
+    setPercentComplete: function setPercentComplete(_ref13, value) {
+      var state = _ref13.state;
+      var cal = value * state.audio.duration / 100;
+      state.audio.currentTime = parseInt(cal);
+    },
+    download: function download(_ref14, url) {
+      var commit = _ref14.commit,
+          state = _ref14.state;
+      var filename = url.substring(url.lastIndexOf("/") + 1).split("?")[0];
+      var xhr = new XMLHttpRequest();
+      xhr.responseType = "blob";
 
-    var playlistIndex = Math.min(state.playlist.length - 1, index + 1);
-    var source = state.playlist[playlistIndex];
-    commit('setSource', {
-      source: source
-    });
-  }), _defineProperty(_actions, "prevItem", function prevItem(_ref14) {
-    var commit = _ref14.commit,
-        state = _ref14.state;
-    var index = -1;
+      xhr.onload = function () {
+        var a = document.createElement("a");
+        a.href = window.URL.createObjectURL(xhr.response);
+        a.download = filename;
+        a.style.display = "none";
+        document.body.appendChild(a);
+        a.click();
+      };
 
-    for (var i = 0; i < state.playlist.length; i++) {
-      if (state.playlist[i].file === state.source.file) {
-        index = i;
-      }
-    }
-
-    var playlistIndex = Math.max(0, index - 1);
-    var source = state.playlist[playlistIndex];
-    commit('setSource', {
-      source: source
-    });
-  }), _defineProperty(_actions, "playItem", function playItem(_ref15, item) {
-    var commit = _ref15.commit,
-        state = _ref15.state;
-    commit('setSource', {
-      source: item
-    });
-  }), _defineProperty(_actions, "getItemAndPlay", function getItemAndPlay(_ref16, url) {
-    var dispatch = _ref16.dispatch,
-        state = _ref16.state;
-    axios.get(url).then(function (response) {
-      dispatch('addPlayItem', response.data);
-    })["catch"](function (error) {});
-  }), _defineProperty(_actions, "addPlayItem", function addPlayItem(_ref17, item) {
-    var commit = _ref17.commit,
-        state = _ref17.state;
-    var found = false;
-
-    for (var i = 0; i < state.playlist.length; i++) {
-      if (state.playlist[i].id == item.id) {
-        found = true;
-        break;
-      }
-    }
-
-    if (!found) {
+      xhr.open("GET", url);
+      xhr.send();
+    },
+    addItem: function addItem(_ref15, item) {
+      var commit = _ref15.commit,
+          state = _ref15.state,
+          dispatch = _ref15.dispatch;
       var new_playlist = state.playlist;
-      new_playlist.push(item);
+      var exist = new_playlist.find(function (itm) {
+        if (itm.id == item.id) return true;
+      });
+
+      if (exist == undefined) {
+        new_playlist.push(item);
+        window.appMain.$store.dispatch("notify", {
+          //tofixe
+          group: 'app',
+          title: state._vm.trans('text.added'),
+          type: 'success',
+          text: state._vm.trans('text.item-added-playlist')
+        });
+      } else {
+        window.appMain.$store.dispatch("notify", {
+          //tofixe
+          group: 'app',
+          title: state._vm.trans('text.not-added'),
+          type: 'warn',
+          text: state._vm.trans('text.item-exists-in-playlist')
+        });
+      }
+
       commit('setPlaylist', {
         playlist: new_playlist
       });
-    }
 
-    if (item.id == state.source.id) {
-      PlayerEvent.$emit("player_toggel");
-    } else {
+      if (state.source.file == 'empty') {
+        commit('setSource', {
+          source: item
+        });
+        dispatch("changeSource", item);
+      }
+    },
+    removeItem: function removeItem(_ref16, index) {
+      var commit = _ref16.commit,
+          state = _ref16.state;
+      var new_playlist = state.playlist.splice(index, 1);
+      commit('setPlaylist', {
+        playlist: new_playlist
+      });
+    },
+    nextItem: function nextItem(_ref17) {
+      var commit = _ref17.commit,
+          state = _ref17.state,
+          dispatch = _ref17.dispatch;
+      var index = -1;
+
+      for (var i = 0; i < state.playlist.length; i++) {
+        if (state.playlist[i].file === state.source.file) {
+          index = i;
+        }
+      }
+
+      var playlistIndex = Math.min(state.playlist.length - 1, index + 1);
+      var source = state.playlist[playlistIndex];
+      commit('setSource', {
+        source: source
+      });
+      dispatch("changeSource", source);
+    },
+    prevItem: function prevItem(_ref18) {
+      var commit = _ref18.commit,
+          state = _ref18.state,
+          dispatch = _ref18.dispatch;
+      var index = -1;
+
+      for (var i = 0; i < state.playlist.length; i++) {
+        if (state.playlist[i].file === state.source.file) {
+          index = i;
+        }
+      }
+
+      var playlistIndex = Math.max(0, index - 1);
+      var source = state.playlist[playlistIndex];
+      commit('setSource', {
+        source: source
+      });
+      dispatch("changeSource", source);
+    },
+    playItem: function playItem(_ref19, item) {
+      var commit = _ref19.commit,
+          dispatch = _ref19.dispatch;
       commit('setSource', {
         source: item
       });
-    }
-  }), _defineProperty(_actions, "getAddPlayItem", function getAddPlayItem(_ref18, url) {
-    var dispatch = _ref18.dispatch;
-    axios.get(url).then(function (response) {
-      dispatch("addPlayItem", response.data);
-    })["catch"](function (error) {});
-  }), _defineProperty(_actions, "clipboardSuccessHandler", function clipboardSuccessHandler(_ref19, products) {
-    var commit = _ref19.commit,
-        state = _ref19.state;
-    window.appMain.$store.dispatch("notify", {
-      //tofixe
-      group: 'app',
-      title: this._vm.trans('text.copied'),
-      type: 'success',
-      text: this._vm.trans('text.text-copied')
-    });
-  }), _defineProperty(_actions, "clipboardErrorHandler", function clipboardErrorHandler(_ref20, products) {
-    var commit = _ref20.commit,
-        state = _ref20.state;
-    window.appMain.$store.dispatch("notify", {
-      //tofixe  
-      group: 'app',
-      title: this._vm.trans('text.error'),
-      type: 'error',
-      text: this._vm.trans('text.error-copying-text')
-    });
-  }), _defineProperty(_actions, "play", function play(_ref21, products) {
-    var commit = _ref21.commit,
-        state = _ref21.state;
-    this.playing = true;
-  }), _defineProperty(_actions, "pause", function pause(_ref22, products) {
-    var commit = _ref22.commit,
-        state = _ref22.state;
-    this.playing = false;
-  }), _defineProperty(_actions, "stop", function stop(_ref23, products) {
-    var commit = _ref23.commit,
-        state = _ref23.state;
-    this.playing = false;
-    this.audio.currentTime = 0;
-  }), _defineProperty(_actions, "prev", function prev(_ref24, products) {
-    var commit = _ref24.commit,
-        state = _ref24.state;
-    this.$store.dispatch("prevItem");
-  }), _defineProperty(_actions, "next", function next(_ref25, products) {
-    var commit = _ref25.commit,
-        state = _ref25.state;
-    this.$store.dispatch("nextItem");
-  }), _defineProperty(_actions, "playItem", function playItem(_ref26, products) {
-    var commit = _ref26.commit,
-        state = _ref26.state;
-    this.$store.dispatch("playItem", item);
-  }), _defineProperty(_actions, "toggelePlaylist", function toggelePlaylist(_ref27, products) {
-    var commit = _ref27.commit,
-        state = _ref27.state;
-    this.show_playlist = !this.show_playlist;
-  }), _defineProperty(_actions, "closePlaylist", function closePlaylist(_ref28, products) {
-    var commit = _ref28.commit,
-        state = _ref28.state;
-    this.show_playlist = false;
-  }), _defineProperty(_actions, "clearPlaylist", function clearPlaylist(_ref29, products) {
-    var commit = _ref29.commit,
-        state = _ref29.state;
-    var source = {
-      file: "empty"
-    };
-    this.$store.commit("setSource", {
-      source: source
-    });
-    this.$store.commit("setPlaylist", {
-      playlist: []
-    });
-  }), _defineProperty(_actions, "shareItem", function shareItem(_ref30, title, url, description) {
-    var commit = _ref30.commit,
-        state = _ref30.state;
+      dispatch("changeSource", item);
+    },
+    getItemAndPlay: function getItemAndPlay(_ref20, url) {
+      var dispatch = _ref20.dispatch,
+          state = _ref20.state;
+      axios.get(url).then(function (response) {
+        dispatch('addPlayItem', response.data);
+      })["catch"](function (error) {});
+    },
+    addPlayItem: function addPlayItem(_ref21, item) {
+      var commit = _ref21.commit,
+          state = _ref21.state,
+          dispatch = _ref21.dispatch;
+      var found = false;
 
-    if (typeof window !== "undefined") {
-      AppEvent.$emit("share", title, url, description);
+      for (var i = 0; i < state.playlist.length; i++) {
+        if (state.playlist[i].id == item.id) {
+          found = true;
+          break;
+        }
+      }
+
+      if (!found) {
+        var new_playlist = state.playlist;
+        new_playlist.push(item);
+        commit('setPlaylist', {
+          playlist: new_playlist
+        });
+      }
+
+      if (item.id == state.source.id) {
+        PlayerEvent.$emit("player_toggel");
+      } else {
+        commit('setSource', {
+          source: item
+        });
+        dispatch("changeSource", item);
+      }
+    },
+    getAddPlayItem: function getAddPlayItem(_ref22, url) {
+      var dispatch = _ref22.dispatch;
+      axios.get(url).then(function (response) {
+        dispatch("addPlayItem", response.data);
+      })["catch"](function (error) {});
+    },
+    clipboardSuccessHandler: function clipboardSuccessHandler(_ref23, products) {
+      var commit = _ref23.commit,
+          state = _ref23.state;
+      window.appMain.$store.dispatch("notify", {
+        //tofixe
+        group: 'app',
+        title: state._vm.trans('text.copied'),
+        type: 'success',
+        text: state._vm.trans('text.text-copied')
+      });
+    },
+    clipboardErrorHandler: function clipboardErrorHandler(_ref24, products) {
+      var commit = _ref24.commit,
+          state = _ref24.state;
+      window.appMain.$store.dispatch("notify", {
+        //tofixe  
+        group: 'app',
+        title: state._vm.trans('text.error'),
+        type: 'error',
+        text: state._vm.trans('text.error-copying-text')
+      });
+    },
+    changeSource: function changeSource(_ref25, source) {
+      var commit = _ref25.commit,
+          state = _ref25.state;
+      commit("setState", {
+        player_state: "loading"
+      });
+
+      state.audio.oncanplay = function () {
+        state.audio.play();
+      };
+    },
+    changeVolume: function changeVolume(_ref26, volume) {
+      var commit = _ref26.commit,
+          state = _ref26.state;
+      commit("setVolume", {
+        volume: volume
+      });
+      state.audio.volume = volume / 100;
+    },
+    play: function play(_ref27) {
+      var state = _ref27.state;
+      state.playing = true;
+      state.audio.play();
+    },
+    pause: function pause(_ref28) {
+      var state = _ref28.state;
+      state.playing = false;
+      state.audio.pause();
+    },
+    toggelItem: function toggelItem(_ref29) {
+      var dispatch = _ref29.dispatch,
+          state = _ref29.state;
+
+      if (state.playing) {
+        dispatch("pause");
+      } else {
+        dispatch("play");
+      }
+    },
+    stop: function stop(_ref30, products) {
+      var commit = _ref30.commit,
+          state = _ref30.state;
+      state.playing = false;
+      state.audio.currentTime = 0;
+    },
+    toggelePlaylist: function toggelePlaylist(_ref31, products) {
+      var commit = _ref31.commit,
+          state = _ref31.state;
+      state.show_playlist = !state.show_playlist;
+    },
+    closePlaylist: function closePlaylist(_ref32, products) {
+      var commit = _ref32.commit,
+          state = _ref32.state;
+      state.show_playlist = false;
+    },
+    clearPlaylist: function clearPlaylist(_ref33, products) {
+      var commit = _ref33.commit,
+          state = _ref33.state;
+      var source = {
+        file: "empty"
+      };
+      commit("setSource", {
+        source: source
+      });
+      commit("setPlaylist", {
+        playlist: []
+      });
+    },
+    shareItem: function shareItem(_ref34, title, url, description) {
+      var commit = _ref34.commit,
+          state = _ref34.state;
+
+      if (typeof window !== "undefined") {
+        AppEvent.$emit("share", title, url, description);
+      }
+    },
+    addSoraFavorite: function addSoraFavorite(_ref35, id) {
+      var commit = _ref35.commit,
+          state = _ref35.state;
+      window.appMain.$store.dispatch("favorite/addSora", id);
+    },
+    removeSoraFavorite: function removeSoraFavorite(_ref36, id) {
+      var commit = _ref36.commit,
+          state = _ref36.state;
+      window.appMain.$store.dispatch("favorite/removeSora", id);
+    },
+    downloadMp3: function downloadMp3(_ref37, item) {
+      var commit = _ref37.commit,
+          state = _ref37.state;
+      window.appMain.$store.dispatch("download/downloadMp3", item);
     }
-  }), _defineProperty(_actions, "addSoraFavorite", function addSoraFavorite(_ref31, id) {
-    var commit = _ref31.commit,
-        state = _ref31.state;
-    window.appMain.$store.dispatch("favorite/addSora", id);
-  }), _defineProperty(_actions, "removeSoraFavorite", function removeSoraFavorite(_ref32, id) {
-    var commit = _ref32.commit,
-        state = _ref32.state;
-    window.appMain.$store.dispatch("favorite/removeSora", id);
-  }), _defineProperty(_actions, "downloadMp3", function downloadMp3(_ref33, item) {
-    var commit = _ref33.commit,
-        state = _ref33.state;
-    window.appMain.$store.dispatch("download/downloadMp3", item);
-  }), _actions)
+  }
 }));
 
 /***/ }),
