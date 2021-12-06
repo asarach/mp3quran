@@ -1,5 +1,5 @@
 <template>
-  <div class="sora-item sora-show-item">
+  <div class="sora-item sora-show-item showoptions">
     <div
       class="ply-btn"
       @click="
@@ -9,12 +9,16 @@
       "
     >
       <scale-loader
-        v-if="isLoading({type : 'sora', id: sora.id})"
+        v-if="isLoading({ type: 'sora', id: sora.id })"
         color="#0D3A4D"
         height="10px"
         width="2px"
       ></scale-loader>
-      <span v-else-if="isPlaying({type : 'sora', id: sora.id})" class="uni-icon icon-pause" style="color: #fff"></span>
+      <span
+        v-else-if="isPlaying({ type: 'sora', id: sora.id })"
+        class="uni-icon icon-pause"
+        style="color: #fff"
+      ></span>
       <span v-else class="uni-icon icon-play_arrow" style="color: #fff"></span>
     </div>
     <div class="sora-info">
@@ -52,19 +56,23 @@
       >
         <img :src="'/img/icons/downloading.svg'" width="60" alt="" />
       </div>
-      <div
+      <a
         v-else
         class="sora-btn download-btn"
         v-tooltip="trans('text.download')"
-        @click="downloadMp3({ url: sora.file, num: sora.num })"
-      >
-        <span class="uni-icon icon-cloud_download"></span>
-      </div>
+        :href="sora.file"
+        target="_blank"
+        ><span class="uni-icon icon-cloud_download"></span
+      ></a>
 
       <div
         class="sora-btn playlist-add"
         v-tooltip="trans('text.add-to-playlist')"
-        @click="addItem(ajax_prefix + '/soar/item?r=' + sora.read_id + '&s=' + sora.sora_id)"
+        @click="
+          addItem(
+            ajax_prefix + '/soar/item?r=' + sora.read_id + '&s=' + sora.sora_id
+          )
+        "
       >
         <span class="uni-icon icon-playlist_add"></span>
       </div>
@@ -144,7 +152,11 @@ export default {
           console.log(error);
         });
     },
-    ...mapActions(["reportSora","clipboardErrorHandler", "clipboardSuccessHandler"]),
+    ...mapActions([
+      "reportSora",
+      "clipboardErrorHandler",
+      "clipboardSuccessHandler",
+    ]),
 
     ...mapActions("download", {
       downloadMp3: "downloadMp3",

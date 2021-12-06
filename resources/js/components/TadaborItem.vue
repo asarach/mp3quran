@@ -54,17 +54,14 @@
             width="2px"
           ></scale-loader>
         </div>
-        <div
-          v-else
-          class="sora-btn download-btn"
-          v-tooltip.top="trans('text.download-tadabor')"
-          @click="download(item.audio_url)"
-        >
-          <span
-            class="uni-icon icon-cloud_download"
-           
-          ></span>
-        </div>
+        <a
+        v-else
+        class="sora-btn download-btn"
+        v-tooltip.top="trans('text.download-tadabor')"
+        :href="item.audio_url"
+        target="_blank"
+        ><span class="uni-icon icon-cloud_download"></span
+      ></a>
       </div>
       <div class="option-btn">
         <div

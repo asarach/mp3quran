@@ -31,7 +31,7 @@ class Index extends Component
             $radios = $this->getRadios();
         } else {
             $cache_name = 'radios_index_rewaya' . $this->selected_rewaya['id'] . '_long_' .  LaravelLocalization::getCurrentLocale();
-            // Cache::forget($cache_name);
+            Cache::forget($cache_name);
             $radios = Cache::rememberForever($cache_name, function () {
                 return $this->getRadios();
             });
@@ -69,10 +69,10 @@ class Index extends Component
         if ($this->search) {
             $q = $this->preparword($this->search);
             $radios = $radios->filter(function ($item) use ($q) {
-                return false !== stristr($this->preparword($item['sort_name']), $q);
+                return false !== stristr($this->preparword($item['name']), $q);
             });
         }
 
-        return $radios->sortBy('sort_name')->values();
+        return $radios->sortBy('name')->values();
     }
 }

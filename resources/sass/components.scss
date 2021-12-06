@@ -158,12 +158,11 @@
   }
 }
 
-
 /**** tv ****/
 
-.sora-show-item{
+.sora-show-item {
   display: block;
-  .ply-btn{
+  .ply-btn {
     margin: 1rem auto;
     border: 3px solid #ffe2b3;
     border-radius: 18px;
@@ -173,43 +172,43 @@
     align-items: center;
     display: flex;
     background: #f5b44b;
-    svg{
+    svg {
       width: 24px;
       fill: #fff;
     }
   }
-  .ply-btn:hover{
+  .ply-btn:hover {
     border: 3px solid #eca32b;
   }
-  .sora-info{
+  .sora-info {
     display: block;
     text-align: center;
   }
-  .sora-reciter{
+  .sora-reciter {
     font-size: 16px;
     font-weight: 600;
   }
-  .sora-rewaya{
+  .sora-rewaya {
     color: #8e8e8e;
     display: inline;
     font-size: 13px;
     font-weight: 500;
   }
-  .sora-options{
+  .sora-options {
     position: relative;
     opacity: 1;
     justify-content: center;
     left: 0;
     margin: 1rem -1rem;
     background: #eee;
-    .sora-btn{
+    .sora-btn {
       border-radius: 0;
-    /* padding: .5rem; */
-    height: 40px;
-    width: 40px;
+      /* padding: .5rem; */
+      height: 40px;
+      width: 40px;
     }
   }
-  .sora-name{
+  .sora-name {
     font-size: 24px;
     color: #33aee4;
   }
@@ -320,11 +319,11 @@
   .w-25 {
     width: 25% !important;
   }
-  .sortable-col{
+  .sortable-col {
     display: flex;
     justify-content: center;
     align-items: center;
-    svg{
+    svg {
       fill: $primary;
     }
   }
@@ -345,8 +344,8 @@
   }
   .th-download {
     width: 10%;
-    .btn{
-      padding: .35rem 0 !important;
+    .btn {
+      padding: 0.35rem 0 !important;
       width: 100px;
     }
   }
@@ -497,7 +496,7 @@
         margin: 0;
         box-shadow: 0px 2px 8px 0px #f7b95269;
         padding: 0 20px;
-        .uni-icon{
+        .uni-icon {
           margin: 0;
         }
       }
@@ -560,7 +559,7 @@
         width: 20px;
       }
     }
-    span.uni-icon{
+    span.uni-icon {
       font-size: 20px;
     }
   }
@@ -1261,5 +1260,19 @@
   }
   .popupBox img {
     width: 100%;
+  }
+}
+@media (max-width: 767.98px) {
+  .sora-item .sora-options {
+    opacity: 1;
+    width: 0;
+    overflow: hidden;
+  }
+  .sora-item:hover .more-btn{
+    opacity: 1;
+  }
+  .sora-item.showoptions .sora-options {
+    width: auto;
+    overflow: initial;
   }
 }

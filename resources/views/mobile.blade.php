@@ -84,6 +84,9 @@
     </div>
   </div>
   <div id="appFooter" data-turbolinks-permanent>
+    <div id="MainLoading">
+      <circle-spin></circle-spin>
+  </div>
     <audio-player type="mobile" class="audio-player"></audio-player>
   </div>
   <div class="expend-menu">
@@ -142,7 +145,6 @@
 <script type="text/javascript">
   $(document).ready(function () {
   $('#languagesToggl').click(function (e) { 
-    console.log('uni-icon icon-earth');
     e.preventDefault();
     $('.tb-languages .tbl-dropdown').toggleClass('opened');
     $('#footer .expend-menu').removeClass('expended');

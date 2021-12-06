@@ -1,6 +1,6 @@
 
 <template>
-  <div v-if="source.file != 'empty'" class="audio-player">
+  <div v-show="source.file != 'empty'" class="audio-player">
     <desktop-player
       v-if="type == 'desktop'"
       :sources="source.file"

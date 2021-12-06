@@ -31,7 +31,7 @@
                   'urlBase' => url('/'),
                   'style_version' => style_version() ,
                   'current_language' => LaravelLocalization::getCurrentLocale(),
-          ]) !!};
+          ]) !!};          
     </script>
     @livewireScripts
     <script src="https://cdn.jsdelivr.net/gh/livewire/turbolinks@v0.1.x/dist/livewire-turbolinks.js" data-turbolinks-eval="false"></script>

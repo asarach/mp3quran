@@ -150,15 +150,23 @@ function initiateVue() {
         this.show_languages = false;
       },
     },
-    mounted(){
-      window.appFoolter.$store.commit('setFavorite',{favorite: this.$store.state.favorite})
+    mounted() {
+      var MainLoading = document.getElementById("MainLoading");
+      MainLoading.style.display = "none";
+      console.log('MainLoading');
+      window.appFoolter.$store.commit('setFavorite', { favorite: this.$store.state.favorite })
     }
   });
 }
 
 initiateVue();
 
+document.addEventListener("turbolinks:before-visit", function (event) {
+  var MainLoading = document.getElementById("MainLoading");
+  MainLoading.style.display = "flex";
+});
 document.addEventListener("turbolinks:render", function (event) {
+
   initiateVue();
 });
 

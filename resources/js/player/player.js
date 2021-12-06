@@ -37,6 +37,7 @@ PlayerVue.use(VueClipboard)
 
 PlayerVue.directive('click-outside', {
   bind: function (el, binding, vnode) {
+    console.log(el);
     el.clickOutsideEvent = function (event) {
       // here I check that click was outside the el and his childrens
       if (!(el == event.target || el.contains(event.target))) {
@@ -54,7 +55,7 @@ PlayerVue.directive('click-outside', {
 PlayerVue.component('audio-player', require('./AudioPlayer.vue').default);
 PlayerVue.component('mobile-player', require('./MobilePlayer.vue').default);
 PlayerVue.component('desktop-player', require('./DesktopPlayer.vue').default);
-
+PlayerVue.component('circle-spin', require('../components/CircleSpin.vue').default);
 window.appFoolter = new PlayerVue({
   el: '#appFooter',
   store: store

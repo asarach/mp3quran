@@ -10471,7 +10471,7 @@ a:hover {
 
 .uni-icon {
   font-size: 20px;
-  color: #0D3A4D;
+  color: #0d3a4d;
 }
 
 [v-cloak] {
@@ -10496,6 +10496,19 @@ a:hover {
 
 .vcp-container {
   display: block;
+}
+
+#MainLoading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  background: #f5f6f6;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 99;
 }
 
 .loading-page {

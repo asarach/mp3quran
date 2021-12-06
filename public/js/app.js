@@ -3589,11 +3589,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["sora", "share", "read_id", "reciter", "rewaya"],
   data: function data() {
     return {
+      showoptions: false,
       audio: {
         id: this.sora.id,
         read_id: this.sora.read_id,
@@ -3624,6 +3628,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   })),
   methods: _objectSpread(_objectSpread(_objectSpread({
+    closeOptions: function closeOptions() {
+      this.showoptions = false;
+    },
     shareItem: function shareItem(title, url, description) {
       AppEvent.$emit("share", title, url, description);
     },
@@ -3668,6 +3675,14 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3835,9 +3850,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
-//
-//
 //
 //
 //
@@ -62432,289 +62444,304 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "sora-item" }, [
-    _c(
-      "div",
-      {
-        staticClass: "ply-btn",
-        on: {
-          click: function($event) {
-            return _vm.getItemAndPlay(
-              _vm.ajax_prefix +
-                "/soar/item?r=" +
-                _vm.read_id +
-                "&s=" +
-                _vm.sora.sora_id
-            )
-          }
+  return _c(
+    "div",
+    {
+      directives: [
+        {
+          name: "click-outside",
+          rawName: "v-click-outside",
+          value: _vm.closeOptions,
+          expression: "closeOptions"
         }
-      },
-      [
-        _vm.isLoading({ type: "sora", id: _vm.sora.id })
-          ? _c("scale-loader", {
-              attrs: { color: "#0D3A4D", height: "10px", width: "2px" }
-            })
-          : _vm.isPlaying({ type: "sora", id: _vm.sora.id })
-          ? _c("span", {
-              staticClass: "uni-icon icon-pause",
-              staticStyle: { color: "#fff" }
-            })
-          : _c("span", {
-              staticClass: "uni-icon icon-play_arrow1",
-              staticStyle: { color: "#fff" }
-            })
       ],
-      1
-    ),
-    _vm._v(" "),
-    _c("div", { staticClass: "sora-info" }, [
-      _c("div", { staticClass: "sora-num" }, [
-        _vm._v(_vm._s(_vm.sora.sora_num))
-      ]),
-      _vm._v(" "),
-      _vm.sora.reciter_name
-        ? _c("div", { staticClass: "sora-num" }, [
-            _vm._v("\n      " + _vm._s(_vm.sora.reciter_name) + "\n    ")
-          ])
-        : _vm._e(),
-      _vm._v(" "),
-      _c("div", { staticClass: "sora-name" }, [
-        _c(
-          "a",
-          {
-            staticClass: "card-reciter-name",
-            attrs: {
-              href: _vm.prefix + _vm.sora.read_slug + "/" + _vm.sora.sora_id,
-              rel: "alternate",
-              hreflang: _vm.$store.state.current_language
-            }
-          },
-          [_vm._v("\n        " + _vm._s(_vm.sora.sora_name) + "\n      ")]
-        )
-      ])
-    ]),
-    _vm._v(" "),
-    _vm._m(0),
-    _vm._v(" "),
-    _c("div", { staticClass: "sora-options" }, [
+      staticClass: "sora-item",
+      class: { showoptions: _vm.showoptions }
+    },
+    [
       _c(
         "div",
         {
-          directives: [
-            {
-              name: "tooltip",
-              rawName: "v-tooltip",
-              value: _vm.trans("text.share"),
-              expression: "trans('text.share')"
-            }
-          ],
-          staticClass: "sora-btn share-btn",
+          staticClass: "ply-btn",
           on: {
             click: function($event) {
-              return _vm.shareItem(
-                _vm.share.title,
-                _vm.share.sora_link,
-                _vm.share.description
-              )
-            }
-          }
-        },
-        [_c("span", { staticClass: "uni-icon icon-share" })]
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          directives: [
-            {
-              name: "tooltip",
-              rawName: "v-tooltip",
-              value: _vm.trans("text.copy-link"),
-              expression: "trans('text.copy-link')"
-            },
-            {
-              name: "clipboard",
-              rawName: "v-clipboard:copy",
-              value: _vm.sora.share_url,
-              expression: "sora.share_url",
-              arg: "copy"
-            },
-            {
-              name: "clipboard",
-              rawName: "v-clipboard:error",
-              value: _vm.clipboardErrorHandler,
-              expression: "clipboardErrorHandler",
-              arg: "error"
-            },
-            {
-              name: "clipboard",
-              rawName: "v-clipboard:success",
-              value: _vm.clipboardSuccessHandler,
-              expression: "clipboardSuccessHandler",
-              arg: "success"
-            }
-          ],
-          staticClass: "sora-btn link-btn"
-        },
-        [_c("span", { staticClass: "uni-icon icon-link" })]
-      ),
-      _vm._v(" "),
-      _vm.downloading
-        ? _c(
-            "div",
-            {
-              directives: [
-                {
-                  name: "tooltip",
-                  rawName: "v-tooltip",
-                  value: _vm.trans("text.downloading"),
-                  expression: "trans('text.downloading')"
-                }
-              ],
-              staticClass: "sora-btn downloading"
-            },
-            [
-              _c("img", {
-                attrs: {
-                  src: "/img/icons/downloading.svg",
-                  width: "60",
-                  alt: ""
-                }
-              })
-            ]
-          )
-        : _c(
-            "div",
-            {
-              directives: [
-                {
-                  name: "tooltip",
-                  rawName: "v-tooltip",
-                  value: _vm.trans("text.download"),
-                  expression: "trans('text.download')"
-                }
-              ],
-              staticClass: "sora-btn download-btn",
-              on: {
-                click: function($event) {
-                  return _vm.downloadMp3({
-                    url: _vm.sora.sora_audio,
-                    num: _vm.sora.num
-                  })
-                }
-              }
-            },
-            [_c("span", { staticClass: "uni-icon icon-cloud_download" })]
-          ),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          directives: [
-            {
-              name: "tooltip",
-              rawName: "v-tooltip",
-              value: _vm.trans("text.add-to-playlist"),
-              expression: "trans('text.add-to-playlist')"
-            }
-          ],
-          staticClass: "sora-btn playlist-add",
-          on: {
-            click: function($event) {
-              return _vm.addItem(
+              return _vm.getItemAndPlay(
                 _vm.ajax_prefix +
                   "/soar/item?r=" +
-                  _vm.sora.read_id +
+                  _vm.read_id +
                   "&s=" +
                   _vm.sora.sora_id
               )
             }
           }
         },
-        [_c("span", { staticClass: "uni-icon icon-playlist_add" })]
+        [
+          _vm.isLoading({ type: "sora", id: _vm.sora.id })
+            ? _c("scale-loader", {
+                attrs: { color: "#0D3A4D", height: "10px", width: "2px" }
+              })
+            : _vm.isPlaying({ type: "sora", id: _vm.sora.id })
+            ? _c("span", {
+                staticClass: "uni-icon icon-pause",
+                staticStyle: { color: "#fff" }
+              })
+            : _c("span", {
+                staticClass: "uni-icon icon-play_arrow1",
+                staticStyle: { color: "#fff" }
+              })
+        ],
+        1
       ),
       _vm._v(" "),
-      _vm.soarIncludes
-        ? _c(
-            "div",
+      _c("div", { staticClass: "sora-info" }, [
+        _c("div", { staticClass: "sora-num" }, [
+          _vm._v(_vm._s(_vm.sora.sora_num))
+        ]),
+        _vm._v(" "),
+        _vm.sora.reciter_name
+          ? _c("div", { staticClass: "sora-num" }, [
+              _vm._v("\n      " + _vm._s(_vm.sora.reciter_name) + "\n    ")
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _c("div", { staticClass: "sora-name" }, [
+          _c(
+            "a",
             {
-              directives: [
-                {
-                  name: "tooltip",
-                  rawName: "v-tooltip",
-                  value: _vm.trans("text.remove-from-favorite"),
-                  expression: "trans('text.remove-from-favorite')"
-                }
-              ],
-              staticClass: "sora-btn ike-btn",
-              on: {
-                click: function($event) {
-                  return _vm.removeSoraFavorite(_vm.sora.id)
-                }
+              staticClass: "card-reciter-name",
+              attrs: {
+                href: _vm.prefix + _vm.sora.read_slug + "/" + _vm.sora.sora_id,
+                rel: "alternate",
+                hreflang: _vm.$store.state.current_language
               }
             },
-            [_c("span", { staticClass: "uni-icon icon-favorite" })]
+            [_vm._v("\n        " + _vm._s(_vm.sora.sora_name) + "\n      ")]
           )
-        : _c(
-            "div",
-            {
-              directives: [
-                {
-                  name: "tooltip",
-                  rawName: "v-tooltip",
-                  value: _vm.trans("text.add-to-favorite"),
-                  expression: "trans('text.add-to-favorite')"
-                }
-              ],
-              staticClass: "sora-btn deslike-btn",
-              on: {
-                click: function($event) {
-                  return _vm.addSoraFavorite(_vm.sora.id)
-                }
-              }
-            },
-            [_c("span", { staticClass: "uni-icon icon-favorite_outline" })]
-          ),
+        ])
+      ]),
       _vm._v(" "),
-      _vm.sora.sora_report != "-1"
-        ? _c(
-            "div",
-            {
-              directives: [
-                {
-                  name: "tooltip",
-                  rawName: "v-tooltip",
-                  value: _vm.trans("text.report-sora"),
-                  expression: "trans('text.report-sora')"
-                }
-              ],
-              staticClass: "sora-btn report-btn",
-              on: {
-                click: function($event) {
-                  return _vm.reportSora({
-                    read: _vm.sora.read_slug,
-                    sora: _vm.sora.id,
-                    prefix: _vm.ajax_prefix
-                  })
-                }
+      _c(
+        "div",
+        {
+          staticClass: "sora-btn more-btn",
+          on: {
+            click: function($event) {
+              _vm.showoptions = !_vm.showoptions
+            }
+          }
+        },
+        [_c("span", { staticClass: "uni-icon icon-more-horizontal" })]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "sora-options" }, [
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "tooltip",
+                rawName: "v-tooltip",
+                value: _vm.trans("text.share"),
+                expression: "trans('text.share')"
               }
-            },
-            [_c("span", { staticClass: "uni-icon icon-warning" })]
-          )
-        : _vm._e()
-    ])
-  ])
+            ],
+            staticClass: "sora-btn share-btn",
+            on: {
+              click: function($event) {
+                return _vm.shareItem(
+                  _vm.share.title,
+                  _vm.share.sora_link,
+                  _vm.share.description
+                )
+              }
+            }
+          },
+          [_c("span", { staticClass: "uni-icon icon-share" })]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "tooltip",
+                rawName: "v-tooltip",
+                value: _vm.trans("text.copy-link"),
+                expression: "trans('text.copy-link')"
+              },
+              {
+                name: "clipboard",
+                rawName: "v-clipboard:copy",
+                value: _vm.share.url,
+                expression: "share.url",
+                arg: "copy"
+              },
+              {
+                name: "clipboard",
+                rawName: "v-clipboard:error",
+                value: _vm.clipboardErrorHandler,
+                expression: "clipboardErrorHandler",
+                arg: "error"
+              },
+              {
+                name: "clipboard",
+                rawName: "v-clipboard:success",
+                value: _vm.clipboardSuccessHandler,
+                expression: "clipboardSuccessHandler",
+                arg: "success"
+              }
+            ],
+            staticClass: "sora-btn link-btn"
+          },
+          [_c("span", { staticClass: "uni-icon icon-link" })]
+        ),
+        _vm._v(" "),
+        _vm.downloading
+          ? _c(
+              "div",
+              {
+                directives: [
+                  {
+                    name: "tooltip",
+                    rawName: "v-tooltip",
+                    value: _vm.trans("text.downloading"),
+                    expression: "trans('text.downloading')"
+                  }
+                ],
+                staticClass: "sora-btn downloading"
+              },
+              [
+                _c("img", {
+                  attrs: {
+                    src: "/img/icons/downloading.svg",
+                    width: "60",
+                    alt: ""
+                  }
+                })
+              ]
+            )
+          : _c(
+              "a",
+              {
+                directives: [
+                  {
+                    name: "tooltip",
+                    rawName: "v-tooltip",
+                    value: _vm.trans("text.download"),
+                    expression: "trans('text.download')"
+                  }
+                ],
+                staticClass: "sora-btn download-btn",
+                attrs: { href: _vm.sora.sora_audio, target: "_blank" }
+              },
+              [_c("span", { staticClass: "uni-icon icon-cloud_download" })]
+            ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "tooltip",
+                rawName: "v-tooltip",
+                value: _vm.trans("text.add-to-playlist"),
+                expression: "trans('text.add-to-playlist')"
+              }
+            ],
+            staticClass: "sora-btn playlist-add",
+            on: {
+              click: function($event) {
+                return _vm.addItem(
+                  _vm.ajax_prefix +
+                    "/soar/item?r=" +
+                    _vm.sora.read_id +
+                    "&s=" +
+                    _vm.sora.sora_id
+                )
+              }
+            }
+          },
+          [_c("span", { staticClass: "uni-icon icon-playlist_add" })]
+        ),
+        _vm._v(" "),
+        _vm.soarIncludes
+          ? _c(
+              "div",
+              {
+                directives: [
+                  {
+                    name: "tooltip",
+                    rawName: "v-tooltip",
+                    value: _vm.trans("text.remove-from-favorite"),
+                    expression: "trans('text.remove-from-favorite')"
+                  }
+                ],
+                staticClass: "sora-btn ike-btn",
+                on: {
+                  click: function($event) {
+                    return _vm.removeSoraFavorite(_vm.sora.id)
+                  }
+                }
+              },
+              [
+                _c("span", {
+                  staticClass: "uni-icon icon-favorite",
+                  staticStyle: { color: "#f2a01b" }
+                })
+              ]
+            )
+          : _c(
+              "div",
+              {
+                directives: [
+                  {
+                    name: "tooltip",
+                    rawName: "v-tooltip",
+                    value: _vm.trans("text.add-to-favorite"),
+                    expression: "trans('text.add-to-favorite')"
+                  }
+                ],
+                staticClass: "sora-btn deslike-btn",
+                on: {
+                  click: function($event) {
+                    return _vm.addSoraFavorite(_vm.sora.id)
+                  }
+                }
+              },
+              [_c("span", { staticClass: "uni-icon icon-favorite_outline" })]
+            ),
+        _vm._v(" "),
+        _vm.sora.sora_report != "-1"
+          ? _c(
+              "div",
+              {
+                directives: [
+                  {
+                    name: "tooltip",
+                    rawName: "v-tooltip",
+                    value: _vm.trans("text.report-sora"),
+                    expression: "trans('text.report-sora')"
+                  }
+                ],
+                staticClass: "sora-btn report-btn",
+                on: {
+                  click: function($event) {
+                    return _vm.reportSora({
+                      read: _vm.sora.read_slug,
+                      sora: _vm.sora.id,
+                      prefix: _vm.ajax_prefix
+                    })
+                  }
+                }
+              },
+              [_c("span", { staticClass: "uni-icon icon-warning" })]
+            )
+          : _vm._e()
+      ])
+    ]
+  )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "sora-btn more-btn" }, [
-      _c("span", { staticClass: "uni-icon icon-more-horizontal" })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -62736,7 +62763,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "sora-item sora-show-item" }, [
+  return _c("div", { staticClass: "sora-item sora-show-item showoptions" }, [
     _c(
       "div",
       {
@@ -62873,7 +62900,7 @@ var render = function() {
             ]
           )
         : _c(
-            "div",
+            "a",
             {
               directives: [
                 {
@@ -62884,14 +62911,7 @@ var render = function() {
                 }
               ],
               staticClass: "sora-btn download-btn",
-              on: {
-                click: function($event) {
-                  return _vm.downloadMp3({
-                    url: _vm.sora.file,
-                    num: _vm.sora.num
-                  })
-                }
-              }
+              attrs: { href: _vm.sora.file, target: "_blank" }
             },
             [_c("span", { staticClass: "uni-icon icon-cloud_download" })]
           ),
@@ -63117,7 +63137,7 @@ var render = function() {
                 1
               )
             : _c(
-                "div",
+                "a",
                 {
                   directives: [
                     {
@@ -63129,11 +63149,7 @@ var render = function() {
                     }
                   ],
                   staticClass: "sora-btn download-btn",
-                  on: {
-                    click: function($event) {
-                      return _vm.download(_vm.item.audio_url)
-                    }
-                  }
+                  attrs: { href: _vm.item.audio_url, target: "_blank" }
                 },
                 [_c("span", { staticClass: "uni-icon icon-cloud_download" })]
               )
@@ -79707,6 +79723,9 @@ function initiateVue() {
       }
     },
     mounted: function mounted() {
+      var MainLoading = document.getElementById("MainLoading");
+      MainLoading.style.display = "none";
+      console.log('MainLoading');
       window.appFoolter.$store.commit('setFavorite', {
         favorite: this.$store.state.favorite
       });
@@ -79715,6 +79734,10 @@ function initiateVue() {
 }
 
 initiateVue();
+document.addEventListener("turbolinks:before-visit", function (event) {
+  var MainLoading = document.getElementById("MainLoading");
+  MainLoading.style.display = "flex";
+});
 document.addEventListener("turbolinks:render", function (event) {
   initiateVue();
 });
@@ -82089,14 +82112,14 @@ __webpack_require__.r(__webpack_exports__);
         new_soar.push(item);
       }
 
+      commit('setSoar', {
+        soar: new_soar
+      });
       vue__WEBPACK_IMPORTED_MODULE_0___default.a.notify({
         group: 'app',
         title: this.getters.getTrans('text.added'),
         type: 'success',
         text: this.getters.getTrans('text.sora-added-favorites')
-      });
-      commit('setSoar', {
-        soar: new_soar
       });
     },
     removeSora: function removeSora(_ref27, item) {
@@ -82432,6 +82455,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     clipboardErrorHandler: function clipboardErrorHandler(_ref2, products) {
       var commit = _ref2.commit,
           state = _ref2.state;
+      console.log('copy');
       vue__WEBPACK_IMPORTED_MODULE_0___default.a.notify({
         group: 'app',
         title: this.getters.getTrans('text.error'),

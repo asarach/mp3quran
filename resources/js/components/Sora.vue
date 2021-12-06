@@ -1,5 +1,9 @@
 <template>
-  <div class="sora-item">
+  <div
+    class="sora-item"
+    :class="{ showoptions: showoptions }"
+    v-click-outside="closeOptions"
+  >
     <div
       class="ply-btn"
       @click="
@@ -9,13 +13,13 @@
       "
     >
       <scale-loader
-        v-if="isLoading({type : 'sora', id: sora.id})"
+        v-if="isLoading({ type: 'sora', id: sora.id })"
         color="#0D3A4D"
         height="10px"
         width="2px"
       ></scale-loader>
       <span
-        v-else-if="isPlaying({type : 'sora', id: sora.id})"
+        v-else-if="isPlaying({ type: 'sora', id: sora.id })"
         class="uni-icon icon-pause"
         style="color: #fff"
       ></span>
@@ -37,7 +41,7 @@
         </a>
       </div>
     </div>
-    <div class="sora-btn more-btn">
+    <div class="sora-btn more-btn" @click="showoptions = !showoptions">
       <span class="uni-icon icon-more-horizontal"></span>
     </div>
     <div class="sora-options">
@@ -51,7 +55,7 @@
       <div
         class="sora-btn link-btn"
         v-tooltip="trans('text.copy-link')"
-        v-clipboard:copy="sora.share_url"
+        v-clipboard:copy="share.url"
         v-clipboard:error="clipboardErrorHandler"
         v-clipboard:success="clipboardSuccessHandler"
       >
@@ -64,22 +68,23 @@
       >
         <img :src="'/img/icons/downloading.svg'" width="60" alt="" />
       </div>
-      <div
+      <a
         v-else
         class="sora-btn download-btn"
         v-tooltip="trans('text.download')"
-        @click="downloadMp3({ url: sora.sora_audio, num: sora.num })"
-      >
-        <span
-          class="uni-icon icon-cloud_download"
-         
-        ></span>
-      </div>
+        :href="sora.sora_audio"
+        target="_blank"
+        ><span class="uni-icon icon-cloud_download"></span
+      ></a>
 
       <div
         class="sora-btn playlist-add"
         v-tooltip="trans('text.add-to-playlist')"
-        @click="addItem(ajax_prefix + '/soar/item?r=' + sora.read_id + '&s=' + sora.sora_id)"
+        @click="
+          addItem(
+            ajax_prefix + '/soar/item?r=' + sora.read_id + '&s=' + sora.sora_id
+          )
+        "
       >
         <span class="uni-icon icon-playlist_add"></span>
       </div>
@@ -89,7 +94,7 @@
         v-tooltip="trans('text.remove-from-favorite')"
         @click="removeSoraFavorite(sora.id)"
       >
-        <span class="uni-icon icon-favorite"></span>
+        <span class="uni-icon icon-favorite" style="color: #f2a01b"></span>
       </div>
       <div
         class="sora-btn deslike-btn"
@@ -97,10 +102,7 @@
         v-else
         @click="addSoraFavorite(sora.id)"
       >
-        <span
-          class="uni-icon icon-favorite_outline"
-         
-        ></span>
+        <span class="uni-icon icon-favorite_outline"></span>
       </div>
       <div
         class="sora-btn report-btn"
@@ -111,7 +113,8 @@
             read: sora.read_slug,
             sora: sora.id,
             prefix: ajax_prefix,
-          })"
+          })
+        "
       >
         <span class="uni-icon icon-warning"></span>
       </div>
@@ -125,6 +128,7 @@ export default {
   props: ["sora", "share", "read_id", "reciter", "rewaya"],
   data() {
     return {
+      showoptions: false,
       audio: {
         id: this.sora.id,
         read_id: this.sora.read_id,
@@ -153,7 +157,9 @@ export default {
     }),
   },
   methods: {
-    
+    closeOptions() {
+      this.showoptions = false;
+    },
     shareItem(title, url, description) {
       AppEvent.$emit("share", title, url, description);
     },
@@ -177,7 +183,11 @@ export default {
           console.log(error);
         });
     },
-    ...mapActions(["clipboardErrorHandler", "clipboardSuccessHandler", "reportSora"]),
+    ...mapActions([
+      "clipboardErrorHandler",
+      "clipboardSuccessHandler",
+      "reportSora",
+    ]),
     ...mapActions("download", {
       downloadMp3: "downloadMp3",
     }),

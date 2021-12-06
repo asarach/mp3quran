@@ -11,7 +11,7 @@
         </div>
         <div
           class="ply-btn btn-play-pause"
-          @click.prevent="toggelItem"
+          @click.prevent="toggele"
           :title="playing ? 'Pause' : 'Play'"
         >
           <span
@@ -76,7 +76,7 @@
       </div>
       <div class="ply-item-info">
         <a
-          :href="prefix + source.page_url"
+          :href="prefix + source.read_slug"
           rel="alternate"
           :hreflang="current_language"
         >
@@ -100,7 +100,7 @@
         </div>
         <ul class="list-unstyled">
           <Container @drop="onDrop">
-            <Draggable v-for="(audio, index) in playlist" :key="audio.id">
+            <Draggable v-for="(item, index) in playlist" :key="item.id">
               <li
                 :class="{
                   playing: playing && currentPosition() == index,
@@ -108,7 +108,7 @@
               >
                 <div class="drag-handle bg"></div>
                 <div class="playlist-avatar drag-handle">
-                  <div v-if="isLoading(audio)" class="ply-btn btn-play">
+                  <div v-if="isLoading(item)" class="ply-btn btn-play">
                     <scale-loader
                       color="#fff"
                       height="10px"
@@ -122,18 +122,18 @@
                   >
                     <span class="uni-icon icon-pause"></span>
                   </div>
-                  <div v-else class="ply-btn btn-play" @click="playItem(audio)">
+                  <div v-else class="ply-btn btn-play" @click="playItem(item)">
                     <span class="uni-icon icon-play_arrow1"></span>
                   </div>
                 </div>
 
                 <div class="read-info">
-                  <div class="read-num">{{ audio.num }}</div>
-                  <div class="read-sora">{{ audio.name }}</div>
+                  <div class="read-num">{{ item.num }}</div>
+                  <div class="read-sora">{{ item.name }}</div>
                   <div class="read-reciter">
-                    {{ audio.reciter }}
-                    <template v-if="audio.rewaya">
-                      ({{ audio.rewaya }})
+                    {{ item.reciter }}
+                    <template v-if="item.rewaya">
+                      ({{ item.rewaya }})
                     </template>
                   </div>
                 </div>
@@ -141,12 +141,12 @@
                   class="read-options"
                   :class="{
                     opened:
-                      show_moreoptions && show_moreoptions_item == audio.id,
+                      show_moreoptions && show_moreoptions_item == item.id,
                   }"
                 >
                   <div
                     class="ply-btn read-more-btn"
-                    @click="toggeleMoreoptions(audio.id)"
+                    @click="toggeleMoreoptions(item.id)"
                   >
                     <span class="uni-icon icon-more-horizontal"></span>
                   </div>
@@ -161,39 +161,36 @@
                       class="uni-icon icon-share"
                       @click="
                         shareItem(
-                          audio.share_title,
-                          audio.share_url,
-                          audio.share_description
+                          item.share_title,
+                          item.share_url,
+                          item.share_description
                         )
                       "
                     ></span>
                   </div>
                   <div
                     class="ply-btn"
-                    v-clipboard:copy="audio.file"
+                    v-clipboard:copy="item.file"
                     v-clipboard:error="clipboardErrorHandler"
                     v-clipboard:success="clipboardSuccessHandler"
                   >
                     <span class="uni-icon icon-link"></span>
                   </div>
+                  <a class="ply-btn" :href="item.file" target="_blank"
+                    ><span class="uni-icon icon-cloud_download"></span
+                  ></a>
+
                   <div
                     class="ply-btn"
-                    @click="downloadMp3({ url: audio.file, num: audio.num })"
+                    v-if="soarIncludes(item.id)"
+                    @click="removeSoraFavorite(item.id)"
                   >
-                    <span class="uni-icon icon-cloud_download"></span>
+                    <span
+                      class="uni-icon icon-favorite"
+                      style="color: #f2a01b"
+                    ></span>
                   </div>
-                  <div
-                    class="ply-btn"
-                    v-if="soarIncludes(audio.id)"
-                    @click="removeSoraFavorite(audio.id)"
-                  >
-                    <span class="uni-icon icon-favorite"></span>
-                  </div>
-                  <div
-                    class="ply-btn"
-                    v-else
-                    @click="addSoraFavorite(audio.id)"
-                  >
+                  <div class="ply-btn" v-else @click="addSoraFavorite(item.id)">
                     <span class="uni-icon icon-favorite_outline"></span>
                   </div>
                 </div>
@@ -251,6 +248,7 @@ export default {
       volume: (state) => state.volume,
       show_playlist: (state) => state.show_playlist,
       show_moreoptions: (state) => state.show_moreoptions,
+      show_fullplayer: (state) => state.show_fullplayer,
       show_moreoptions_item: (state) => state.show_moreoptions_item,
     }),
     ...mapGetters({
@@ -270,7 +268,7 @@ export default {
       "nextItem",
       "prevItem",
       "playItem",
-      "toggelItem",
+      "toggele",
       "changeVolume",
       "clearPlaylist",
       "toggelePlaylist",
@@ -280,7 +278,10 @@ export default {
       "clipboardSuccessHandler",
       "removeSoraFavorite",
       "addSoraFavorite",
+      "shareItem",
       "removeItem",
+      "showFullplayer",
+      "closeFullplayer",
     ]),
   },
   mounted() {
@@ -295,7 +296,7 @@ export default {
       self.$store.dispatch("stop");
     });
     PlayerEvent.$on("player_toggel", function () {
-      self.$store.dispatch("toggel");
+      self.$store.dispatch("toggele");
     });
     PlayerEvent.$on("player_pause", function () {
       self.$store.dispatch("pause");

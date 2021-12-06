@@ -63,6 +63,8 @@ class Show extends Component
             'description' => trans('read.description-' . $read->id),
             'keywords' => trans('read.keywords-' . $read->id)
         ];
+
+
         return view('livewire.reciter.show', compact('soar_part_a', 'soar_part_b', 'reciter_reads', 'reciter', 'active_read', 'read', 'page'));
     }
     public function preparword($q)
@@ -83,9 +85,9 @@ class Show extends Component
             $read_item['slug'] = $readItem->slug;
             $read_item['torrent'] = $readItem->torrent;
             if ($readItem->radio) {
-                $read_item['radio_url'] = $readItem->radio->url;
+                $read_item['radio'] = $readItem->radio->id;
             } else {
-                $read_item['radio_url'] = '';
+                $read_item['radio'] = '';
             }
 
 

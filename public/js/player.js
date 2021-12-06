@@ -86,6 +86,51 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CircleSpin.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/CircleSpin.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    size: {
+      "default": '40px'
+    }
+  },
+  computed: {
+    innerStyles: function innerStyles() {
+      var size = parseInt(this.size);
+      return {
+        transform: 'scale(' + size / 44 + ')'
+      };
+    },
+    styles: function styles() {
+      return {
+        width: this.size,
+        height: this.size
+      };
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/player/AudioPlayer.vue?vue&type=script&lang=js&":
 /*!******************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/player/AudioPlayer.vue?vue&type=script&lang=js& ***!
@@ -372,9 +417,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -436,6 +478,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     show_moreoptions: function show_moreoptions(state) {
       return state.show_moreoptions;
     },
+    show_fullplayer: function show_fullplayer(state) {
+      return state.show_fullplayer;
+    },
     show_moreoptions_item: function show_moreoptions_item(state) {
       return state.show_moreoptions_item;
     }
@@ -446,7 +491,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     currentPosition: "currentPosition",
     isLoading: "isLoading"
   })),
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])(["onDrop", "load", "pause", "nextItem", "prevItem", "playItem", "toggelItem", "changeVolume", "clearPlaylist", "toggelePlaylist", "closePlaylist", "toggeleMoreoptions", "clipboardErrorHandler", "clipboardSuccessHandler", "removeSoraFavorite", "addSoraFavorite", "removeItem"])),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])(["onDrop", "load", "pause", "nextItem", "prevItem", "playItem", "toggele", "changeVolume", "clearPlaylist", "toggelePlaylist", "closePlaylist", "toggeleMoreoptions", "clipboardErrorHandler", "clipboardSuccessHandler", "removeSoraFavorite", "addSoraFavorite", "shareItem", "removeItem", "showFullplayer", "closeFullplayer"])),
   mounted: function mounted() {
     this.$store.dispatch("setAudio", this.$refs.audiofile);
   },
@@ -459,7 +504,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       self.$store.dispatch("stop");
     });
     PlayerEvent.$on("player_toggel", function () {
-      self.$store.dispatch("toggel");
+      self.$store.dispatch("toggele");
     });
     PlayerEvent.$on("player_pause", function () {
       self.$store.dispatch("pause");
@@ -480,18 +525,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_smooth_dnd__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-smooth-dnd */ "./node_modules/vue-smooth-dnd/dist/vue-smooth-dnd.esm.js");
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -753,14 +786,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
-
-
-var convertTimeHHMMSS = function convertTimeHHMMSS(val) {
-  var hhmmss = new Date(val * 1000).toISOString().substr(11, 8);
-  return hhmmss.indexOf("00:") === 0 ? hhmmss.substr(3) : hhmmss;
-};
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -768,11 +794,13 @@ var convertTimeHHMMSS = function convertTimeHHMMSS(val) {
     Draggable: vue_smooth_dnd__WEBPACK_IMPORTED_MODULE_0__["Draggable"]
   },
   computed: _objectSpread(_objectSpread({
-    currentTime: function currentTime() {
-      return convertTimeHHMMSS(this.currentSeconds);
-    },
-    durationTime: function durationTime() {
-      return convertTimeHHMMSS(this.durationSeconds);
+    currentVolume: {
+      get: function get() {
+        return this.$store.state.volume;
+      },
+      set: function set(value) {
+        this.$store.dispatch("changeVolume", value);
+      }
     },
     percentComplete: {
       get: function get() {
@@ -784,27 +812,22 @@ var convertTimeHHMMSS = function convertTimeHHMMSS(val) {
           return 0;
         }
       },
-      set: function set(newValue) {
-        var cal = newValue * this.audio.duration / 100;
-        this.audio.currentTime = parseInt(cal);
-      }
-    },
-    playlist: {
-      get: function get() {
-        return this.$store.state.playlist;
-      },
-      set: function set(playlist) {
-        this.$store.commit("setPlaylist", {
-          playlist: playlist
-        });
+      set: function set(value) {
+        this.$store.dispatch("setPercentComplete", value);
       }
     }
   }, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])({
+    current_language: function current_language(state) {
+      return state.current_language;
+    },
     source: function source(state) {
       return state.source;
     },
     audio: function audio(state) {
       return state.audio;
+    },
+    playlist: function playlist(state) {
+      return state.playlist;
     },
     currentSeconds: function currentSeconds(state) {
       return state.currentSeconds;
@@ -824,203 +847,37 @@ var convertTimeHHMMSS = function convertTimeHHMMSS(val) {
     show_moreoptions: function show_moreoptions(state) {
       return state.show_moreoptions;
     },
-    show_moreoptions_item: function show_moreoptions_item(state) {
-      return state.show_moreoptions_item;
-    },
     show_fullplayer: function show_fullplayer(state) {
       return state.show_fullplayer;
     },
-    loaded: function loaded(state) {
-      return state.loaded;
+    show_moreoptions_item: function show_moreoptions_item(state) {
+      return state.show_moreoptions_item;
     }
   })), Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])({
+    durationTime: "durationTime",
+    currentTime: "currentTime",
     soarIncludes: "soarIncludes",
     currentPosition: "currentPosition",
     isLoading: "isLoading"
   })),
-  methods: _objectSpread({
-    onDrop: function onDrop(dragResult) {
-      var removedIndex = dragResult.removedIndex,
-          addedIndex = dragResult.addedIndex,
-          payload = dragResult.payload;
-      if (removedIndex === null && addedIndex === null) return this.playlist;
-
-      var result = _toConsumableArray(this.playlist);
-
-      var itemToAdd = payload;
-
-      if (removedIndex !== null) {
-        itemToAdd = result.splice(removedIndex, 1)[0];
-      }
-
-      if (addedIndex !== null) {
-        result.splice(addedIndex, 0, itemToAdd);
-      }
-
-      this.$store.commit("setPlaylist", {
-        playlist: result
-      });
-    },
-    load: function load() {
-      if (this.audio.readyState >= 2) {
-        this.loaded = true;
-        this.durationSeconds = parseInt(this.audio.duration);
-
-        if (!this.durationSeconds) {
-          this.durationSeconds = 0;
-        }
-
-        this.$store.commit("setState", {
-          player_state: "loaded"
-        });
-        return this.playing = this.autoPlay;
-      }
-
-      throw new Error("Failed to load sound file.");
-    },
-    update: function update(e) {
-      this.currentSeconds = parseInt(this.audio.currentTime);
-    },
-    play: function play() {
-      this.playing = true;
-    },
-    pause: function pause() {
-      this.playing = false;
-    },
-    stop: function stop() {
-      this.playing = false;
-      this.audio.currentTime = 0;
-    },
-    prev: function prev() {
-      this.$store.dispatch("prevItem");
-    },
-    next: function next() {
-      this.$store.dispatch("nextItem");
-    },
-    playItem: function playItem(item) {
-      this.$store.dispatch("playItem", item);
-    },
-    showFullplayer: function showFullplayer() {
-      this.show_fullplayer = true;
-    },
-    closeFullplayer: function closeFullplayer() {
-      this.show_fullplayer = false;
-    },
-    toggelePlaylist: function toggelePlaylist() {
-      this.show_playlist = !this.show_playlist;
-    },
-    toggeleMoreoptions: function toggeleMoreoptions(id) {
-      if (this.show_moreoptions_item == id) {
-        this.show_moreoptions_item = false;
-        this.show_moreoptions = false;
-      } else {
-        this.show_moreoptions_item = id;
-        this.show_moreoptions = true;
-      }
-    },
-    closePlaylist: function closePlaylist() {
-      this.show_playlist = false;
-    },
-    clearPlaylist: function clearPlaylist() {
-      var source = {
-        file: "empty"
-      };
-      this.$store.commit("setSource", {
-        source: source
-      });
-      this.$store.commit("setPlaylist", {
-        playlist: []
-      });
-    },
-    shareItem: function shareItem(title, url, description) {
-      if (typeof window !== "undefined") {
-        AppEvent.$emit("share", title, url, description);
-      }
-    },
-    addSoraFavorite: function addSoraFavorite(id) {
-      window.appMain.$store.dispatch("favorite/addSora", id);
-    },
-    removeSoraFavorite: function removeSoraFavorite(id) {
-      window.appMain.$store.dispatch("favorite/removeSora", id);
-    },
-    downloadMp3: function downloadMp3(item) {
-      window.appMain.$store.dispatch("download/downloadMp3", item);
-    },
-    download: function download(url) {
-      var filename = url.substring(url.lastIndexOf("/") + 1).split("?")[0];
-      var xhr = new XMLHttpRequest();
-      xhr.responseType = "blob";
-
-      xhr.onload = function () {
-        var a = document.createElement("a");
-        a.href = window.URL.createObjectURL(xhr.response);
-        a.download = filename;
-        a.style.display = "none";
-        document.body.appendChild(a);
-        a.click();
-      };
-
-      xhr.open("GET", url);
-      xhr.send();
-    }
-  }, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])(["clipboardErrorHandler", "clipboardSuccessHandler", "removeItem"])),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])(["onDrop", "load", "pause", "nextItem", "prevItem", "playItem", "toggele", "changeVolume", "clearPlaylist", "toggelePlaylist", "closePlaylist", "toggeleMoreoptions", "clipboardErrorHandler", "clipboardSuccessHandler", "removeSoraFavorite", "addSoraFavorite", "shareItem", "removeItem", "showFullplayer", "closeFullplayer"])),
   mounted: function mounted() {
-    var _this = this;
-
-    this.audio = this.$refs.audiofile;
-    this.audio.addEventListener("timeupdate", this.update);
-    this.audio.addEventListener("ended", this.next);
-    this.audio.addEventListener("loadeddata", this.load);
-    this.audio.addEventListener("pause", function () {
-      _this.playing = false;
-    });
-    this.audio.addEventListener("play", function () {
-      _this.playing = true;
-    });
+    this.$store.dispatch("setAudio", this.$refs.audiofile);
   },
   created: function created() {
     var self = this;
-
-    if (typeof window !== "undefined") {
-      PlayerEvent.$on("player_play", function () {
-        self.play();
-      });
-      PlayerEvent.$on("player_stop", function () {
-        self.stop();
-      });
-      PlayerEvent.$on("player_toggel", function () {
-        self.playing = !self.playing;
-      });
-      PlayerEvent.$on("player_pause", function () {
-        self.pause();
-      });
-    }
-  },
-  watch: {
-    playing: function playing(value) {
-      this.$store.commit("setPlaying", {
-        playing: value
-      });
-
-      if (value) {
-        return this.audio.play();
-      }
-
-      this.audio.pause();
-    },
-    source: function source(value) {
-      var self = this;
-      this.$store.commit("setState", {
-        player_state: "loading"
-      });
-
-      self.audio.oncanplay = function () {
-        self.audio.play();
-      };
-    },
-    volume: function volume(value) {
-      this.audio.volume = this.volume / 100;
-    }
+    PlayerEvent.$on("player_play", function () {
+      self.$store.dispatch("play");
+    });
+    PlayerEvent.$on("player_stop", function () {
+      self.$store.dispatch("stop");
+    });
+    PlayerEvent.$on("player_toggel", function () {
+      self.$store.dispatch("toggele");
+    });
+    PlayerEvent.$on("player_pause", function () {
+      self.$store.dispatch("pause");
+    });
   }
 });
 
@@ -1040,6 +897,25 @@ var convertTimeHHMMSS = function convertTimeHHMMSS(val) {
  * Licensed MIT © Zeno Rocha
  */
 !function(t,e){ true?module.exports=e():undefined}(this,function(){return n={134:function(t,e,n){"use strict";n.d(e,{default:function(){return r}});var e=n(279),i=n.n(e),e=n(370),a=n.n(e),e=n(817),o=n.n(e);function c(t){return(c="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(t){return typeof t}:function(t){return t&&"function"==typeof Symbol&&t.constructor===Symbol&&t!==Symbol.prototype?"symbol":typeof t})(t)}function u(t,e){for(var n=0;n<e.length;n++){var r=e[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(t,r.key,r)}}var l=function(){function e(t){!function(t){if(!(t instanceof e))throw new TypeError("Cannot call a class as a function")}(this),this.resolveOptions(t),this.initSelection()}var t,n,r;return t=e,(n=[{key:"resolveOptions",value:function(){var t=0<arguments.length&&void 0!==arguments[0]?arguments[0]:{};this.action=t.action,this.container=t.container,this.emitter=t.emitter,this.target=t.target,this.text=t.text,this.trigger=t.trigger,this.selectedText=""}},{key:"initSelection",value:function(){this.text?this.selectFake():this.target&&this.selectTarget()}},{key:"createFakeElement",value:function(){var t="rtl"===document.documentElement.getAttribute("dir");this.fakeElem=document.createElement("textarea"),this.fakeElem.style.fontSize="12pt",this.fakeElem.style.border="0",this.fakeElem.style.padding="0",this.fakeElem.style.margin="0",this.fakeElem.style.position="absolute",this.fakeElem.style[t?"right":"left"]="-9999px";t=window.pageYOffset||document.documentElement.scrollTop;return this.fakeElem.style.top="".concat(t,"px"),this.fakeElem.setAttribute("readonly",""),this.fakeElem.value=this.text,this.fakeElem}},{key:"selectFake",value:function(){var t=this,e=this.createFakeElement();this.fakeHandlerCallback=function(){return t.removeFake()},this.fakeHandler=this.container.addEventListener("click",this.fakeHandlerCallback)||!0,this.container.appendChild(e),this.selectedText=o()(e),this.copyText(),this.removeFake()}},{key:"removeFake",value:function(){this.fakeHandler&&(this.container.removeEventListener("click",this.fakeHandlerCallback),this.fakeHandler=null,this.fakeHandlerCallback=null),this.fakeElem&&(this.container.removeChild(this.fakeElem),this.fakeElem=null)}},{key:"selectTarget",value:function(){this.selectedText=o()(this.target),this.copyText()}},{key:"copyText",value:function(){var e;try{e=document.execCommand(this.action)}catch(t){e=!1}this.handleResult(e)}},{key:"handleResult",value:function(t){this.emitter.emit(t?"success":"error",{action:this.action,text:this.selectedText,trigger:this.trigger,clearSelection:this.clearSelection.bind(this)})}},{key:"clearSelection",value:function(){this.trigger&&this.trigger.focus(),document.activeElement.blur(),window.getSelection().removeAllRanges()}},{key:"destroy",value:function(){this.removeFake()}},{key:"action",set:function(){var t=0<arguments.length&&void 0!==arguments[0]?arguments[0]:"copy";if(this._action=t,"copy"!==this._action&&"cut"!==this._action)throw new Error('Invalid "action" value, use either "copy" or "cut"')},get:function(){return this._action}},{key:"target",set:function(t){if(void 0!==t){if(!t||"object"!==c(t)||1!==t.nodeType)throw new Error('Invalid "target" value, use a valid Element');if("copy"===this.action&&t.hasAttribute("disabled"))throw new Error('Invalid "target" attribute. Please use "readonly" instead of "disabled" attribute');if("cut"===this.action&&(t.hasAttribute("readonly")||t.hasAttribute("disabled")))throw new Error('Invalid "target" attribute. You can\'t cut text from elements with "readonly" or "disabled" attributes');this._target=t}},get:function(){return this._target}}])&&u(t.prototype,n),r&&u(t,r),e}();function s(t){return(s="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(t){return typeof t}:function(t){return t&&"function"==typeof Symbol&&t.constructor===Symbol&&t!==Symbol.prototype?"symbol":typeof t})(t)}function f(t,e){for(var n=0;n<e.length;n++){var r=e[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(t,r.key,r)}}function h(t,e){return(h=Object.setPrototypeOf||function(t,e){return t.__proto__=e,t})(t,e)}function d(n){var r=function(){if("undefined"==typeof Reflect||!Reflect.construct)return!1;if(Reflect.construct.sham)return!1;if("function"==typeof Proxy)return!0;try{return Date.prototype.toString.call(Reflect.construct(Date,[],function(){})),!0}catch(t){return!1}}();return function(){var t,e=p(n);return t=r?(t=p(this).constructor,Reflect.construct(e,arguments,t)):e.apply(this,arguments),e=this,!(t=t)||"object"!==s(t)&&"function"!=typeof t?function(t){if(void 0!==t)return t;throw new ReferenceError("this hasn't been initialised - super() hasn't been called")}(e):t}}function p(t){return(p=Object.setPrototypeOf?Object.getPrototypeOf:function(t){return t.__proto__||Object.getPrototypeOf(t)})(t)}function y(t,e){t="data-clipboard-".concat(t);if(e.hasAttribute(t))return e.getAttribute(t)}var r=function(){!function(t,e){if("function"!=typeof e&&null!==e)throw new TypeError("Super expression must either be null or a function");t.prototype=Object.create(e&&e.prototype,{constructor:{value:t,writable:!0,configurable:!0}}),e&&h(t,e)}(o,i());var t,e,n,r=d(o);function o(t,e){var n;return function(t){if(!(t instanceof o))throw new TypeError("Cannot call a class as a function")}(this),(n=r.call(this)).resolveOptions(e),n.listenClick(t),n}return t=o,n=[{key:"isSupported",value:function(){var t=0<arguments.length&&void 0!==arguments[0]?arguments[0]:["copy","cut"],t="string"==typeof t?[t]:t,e=!!document.queryCommandSupported;return t.forEach(function(t){e=e&&!!document.queryCommandSupported(t)}),e}}],(e=[{key:"resolveOptions",value:function(){var t=0<arguments.length&&void 0!==arguments[0]?arguments[0]:{};this.action="function"==typeof t.action?t.action:this.defaultAction,this.target="function"==typeof t.target?t.target:this.defaultTarget,this.text="function"==typeof t.text?t.text:this.defaultText,this.container="object"===s(t.container)?t.container:document.body}},{key:"listenClick",value:function(t){var e=this;this.listener=a()(t,"click",function(t){return e.onClick(t)})}},{key:"onClick",value:function(t){t=t.delegateTarget||t.currentTarget;this.clipboardAction&&(this.clipboardAction=null),this.clipboardAction=new l({action:this.action(t),target:this.target(t),text:this.text(t),container:this.container,trigger:t,emitter:this})}},{key:"defaultAction",value:function(t){return y("action",t)}},{key:"defaultTarget",value:function(t){t=y("target",t);if(t)return document.querySelector(t)}},{key:"defaultText",value:function(t){return y("text",t)}},{key:"destroy",value:function(){this.listener.destroy(),this.clipboardAction&&(this.clipboardAction.destroy(),this.clipboardAction=null)}}])&&f(t.prototype,e),n&&f(t,n),o}()},828:function(t){var e;"undefined"==typeof Element||Element.prototype.matches||((e=Element.prototype).matches=e.matchesSelector||e.mozMatchesSelector||e.msMatchesSelector||e.oMatchesSelector||e.webkitMatchesSelector),t.exports=function(t,e){for(;t&&9!==t.nodeType;){if("function"==typeof t.matches&&t.matches(e))return t;t=t.parentNode}}},438:function(t,e,n){var a=n(828);function i(t,e,n,r,o){var i=function(e,n,t,r){return function(t){t.delegateTarget=a(t.target,n),t.delegateTarget&&r.call(e,t)}}.apply(this,arguments);return t.addEventListener(n,i,o),{destroy:function(){t.removeEventListener(n,i,o)}}}t.exports=function(t,e,n,r,o){return"function"==typeof t.addEventListener?i.apply(null,arguments):"function"==typeof n?i.bind(null,document).apply(null,arguments):("string"==typeof t&&(t=document.querySelectorAll(t)),Array.prototype.map.call(t,function(t){return i(t,e,n,r,o)}))}},879:function(t,n){n.node=function(t){return void 0!==t&&t instanceof HTMLElement&&1===t.nodeType},n.nodeList=function(t){var e=Object.prototype.toString.call(t);return void 0!==t&&("[object NodeList]"===e||"[object HTMLCollection]"===e)&&"length"in t&&(0===t.length||n.node(t[0]))},n.string=function(t){return"string"==typeof t||t instanceof String},n.fn=function(t){return"[object Function]"===Object.prototype.toString.call(t)}},370:function(t,e,n){var l=n(879),s=n(438);t.exports=function(t,e,n){if(!t&&!e&&!n)throw new Error("Missing required arguments");if(!l.string(e))throw new TypeError("Second argument must be a String");if(!l.fn(n))throw new TypeError("Third argument must be a Function");if(l.node(t))return c=e,u=n,(a=t).addEventListener(c,u),{destroy:function(){a.removeEventListener(c,u)}};if(l.nodeList(t))return r=t,o=e,i=n,Array.prototype.forEach.call(r,function(t){t.addEventListener(o,i)}),{destroy:function(){Array.prototype.forEach.call(r,function(t){t.removeEventListener(o,i)})}};if(l.string(t))return t=t,e=e,n=n,s(document.body,t,e,n);throw new TypeError("First argument must be a String, HTMLElement, HTMLCollection, or NodeList");var r,o,i,a,c,u}},817:function(t){t.exports=function(t){var e,n="SELECT"===t.nodeName?(t.focus(),t.value):"INPUT"===t.nodeName||"TEXTAREA"===t.nodeName?((e=t.hasAttribute("readonly"))||t.setAttribute("readonly",""),t.select(),t.setSelectionRange(0,t.value.length),e||t.removeAttribute("readonly"),t.value):(t.hasAttribute("contenteditable")&&t.focus(),n=window.getSelection(),(e=document.createRange()).selectNodeContents(t),n.removeAllRanges(),n.addRange(e),n.toString());return n}},279:function(t){function e(){}e.prototype={on:function(t,e,n){var r=this.e||(this.e={});return(r[t]||(r[t]=[])).push({fn:e,ctx:n}),this},once:function(t,e,n){var r=this;function o(){r.off(t,o),e.apply(n,arguments)}return o._=e,this.on(t,o,n)},emit:function(t){for(var e=[].slice.call(arguments,1),n=((this.e||(this.e={}))[t]||[]).slice(),r=0,o=n.length;r<o;r++)n[r].fn.apply(n[r].ctx,e);return this},off:function(t,e){var n=this.e||(this.e={}),r=n[t],o=[];if(r&&e)for(var i=0,a=r.length;i<a;i++)r[i].fn!==e&&r[i].fn._!==e&&o.push(r[i]);return o.length?n[t]=o:delete n[t],this}},t.exports=e,t.exports.TinyEmitter=e}},o={},r.n=function(t){var e=t&&t.__esModule?function(){return t.default}:function(){return t};return r.d(e,{a:e}),e},r.d=function(t,e){for(var n in e)r.o(e,n)&&!r.o(t,n)&&Object.defineProperty(t,n,{enumerable:!0,get:e[n]})},r.o=function(t,e){return Object.prototype.hasOwnProperty.call(t,e)},r(134).default;function r(t){if(o[t])return o[t].exports;var e=o[t]={exports:{}};return n[t](e,e.exports,r),e.exports}var n,o});
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CircleSpin.vue?vue&type=style&index=0&id=5869f646&lang=scss&scoped=true&":
+/*!********************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--9-2!./node_modules/sass-loader/dist/cjs.js??ref--9-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/CircleSpin.vue?vue&type=style&index=0&id=5869f646&lang=scss&scoped=true& ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".spinner[data-v-5869f646] {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.spinner *[data-v-5869f646] {\n  line-height: 0;\n  box-sizing: border-box;\n}\n.ball-container[data-v-5869f646] {\n  -webkit-animation: animball_two-data-v-5869f646 1.5s infinite;\n          animation: animball_two-data-v-5869f646 1.5s infinite;\n  width: 44px;\n  height: 44px;\n  flex-shrink: 0;\n  position: relative;\n}\n.contener_mixte[data-v-5869f646] {\n  width: 44px;\n  height: 44px;\n  position: absolute;\n}\n.ballcolor[data-v-5869f646] {\n  width: 20px;\n  height: 20px;\n  border-radius: 50%;\n}\n.ball_1[data-v-5869f646], .ball_2[data-v-5869f646], .ball_3[data-v-5869f646], .ball_4[data-v-5869f646] {\n  position: absolute;\n  -webkit-animation: animball_one-data-v-5869f646 1.5s infinite ease;\n          animation: animball_one-data-v-5869f646 1.5s infinite ease;\n}\n.ball_1[data-v-5869f646] {\n  background-color: #f7484e;\n  top: 0;\n  left: 0;\n}\n.ball_2[data-v-5869f646] {\n  background-color: #f8b334;\n  top: 0;\n  left: 24px;\n}\n.ball_3[data-v-5869f646] {\n  background-color: #41b883;\n  top: 24px;\n  left: 0;\n}\n.ball_4[data-v-5869f646] {\n  background-color: #34495e;\n  top: 24px;\n  left: 24px;\n}\n@-webkit-keyframes animball_one-data-v-5869f646 {\n0% {\n    position: absolute;\n}\n50% {\n    top: 12px;\n    left: 12px;\n    position: absolute;\n    opacity: 0.5;\n}\n100% {\n    position: absolute;\n}\n}\n@keyframes animball_one-data-v-5869f646 {\n0% {\n    position: absolute;\n}\n50% {\n    top: 12px;\n    left: 12px;\n    position: absolute;\n    opacity: 0.5;\n}\n100% {\n    position: absolute;\n}\n}\n@-webkit-keyframes animball_two-data-v-5869f646 {\n0% {\n    transform: rotate(0deg) scale(1);\n}\n50% {\n    transform: rotate(360deg) scale(1.3);\n}\n100% {\n    transform: rotate(720deg) scale(1);\n}\n}\n@keyframes animball_two-data-v-5869f646 {\n0% {\n    transform: rotate(0deg) scale(1);\n}\n50% {\n    transform: rotate(360deg) scale(1.3);\n}\n100% {\n    transform: rotate(720deg) scale(1);\n}\n}", ""]);
+
+// exports
+
 
 /***/ }),
 
@@ -18917,6 +18793,36 @@ process.umask = function() { return 0; };
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CircleSpin.vue?vue&type=style&index=0&id=5869f646&lang=scss&scoped=true&":
+/*!************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--9-2!./node_modules/sass-loader/dist/cjs.js??ref--9-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/CircleSpin.vue?vue&type=style&index=0&id=5869f646&lang=scss&scoped=true& ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--9-2!../../../node_modules/sass-loader/dist/cjs.js??ref--9-3!../../../node_modules/vue-loader/lib??vue-loader-options!./CircleSpin.vue?vue&type=style&index=0&id=5869f646&lang=scss&scoped=true& */ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CircleSpin.vue?vue&type=style&index=0&id=5869f646&lang=scss&scoped=true&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./node_modules/vue-spinner/src/ScaleLoader.vue?vue&type=style&index=0&lang=css&":
 /*!**************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--8-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--8-2!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/vue-spinner/src/ScaleLoader.vue?vue&type=style&index=0&lang=css& ***!
@@ -19778,6 +19684,61 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CircleSpin.vue?vue&type=template&id=5869f646&scoped=true&":
+/*!*************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/CircleSpin.vue?vue&type=template&id=5869f646&scoped=true& ***!
+  \*************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "spinner spinner--circle-8", style: _vm.styles },
+    [
+      _c("div", { staticClass: "spinner-inner", style: _vm.innerStyles }, [
+        _vm._m(0)
+      ])
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "ball-container" }, [
+      _c("div", { staticClass: "contener_mixte" }, [
+        _c("div", { staticClass: "ballcolor ball_1" }, [_vm._v(" ")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "contener_mixte" }, [
+        _c("div", { staticClass: "ballcolor ball_2" }, [_vm._v(" ")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "contener_mixte" }, [
+        _c("div", { staticClass: "ballcolor ball_3" }, [_vm._v(" ")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "contener_mixte" }, [
+        _c("div", { staticClass: "ballcolor ball_4" }, [_vm._v(" ")])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/player/AudioPlayer.vue?vue&type=template&id=3f1fb2f2&":
 /*!**********************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/player/AudioPlayer.vue?vue&type=template&id=3f1fb2f2& ***!
@@ -19793,32 +19754,40 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.source.file != "empty"
-    ? _c(
-        "div",
-        { staticClass: "audio-player" },
-        [
-          _vm.type == "desktop"
-            ? _c("desktop-player", {
-                attrs: {
-                  sources: _vm.source.file,
-                  formats: ["mp3"],
-                  autoplay: true,
-                  html5: true
-                }
-              })
-            : _c("mobile-player", {
-                attrs: {
-                  sources: _vm.source.file,
-                  formats: ["mp3"],
-                  autoplay: true,
-                  html5: true
-                }
-              })
-        ],
-        1
-      )
-    : _vm._e()
+  return _c(
+    "div",
+    {
+      directives: [
+        {
+          name: "show",
+          rawName: "v-show",
+          value: _vm.source.file != "empty",
+          expression: "source.file != 'empty'"
+        }
+      ],
+      staticClass: "audio-player"
+    },
+    [
+      _vm.type == "desktop"
+        ? _c("desktop-player", {
+            attrs: {
+              sources: _vm.source.file,
+              formats: ["mp3"],
+              autoplay: true,
+              html5: true
+            }
+          })
+        : _c("mobile-player", {
+            attrs: {
+              sources: _vm.source.file,
+              formats: ["mp3"],
+              autoplay: true,
+              html5: true
+            }
+          })
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -19886,7 +19855,7 @@ var render = function() {
               on: {
                 click: function($event) {
                   $event.preventDefault()
-                  return _vm.toggelItem.apply(null, arguments)
+                  return _vm.toggele.apply(null, arguments)
                 }
               }
             },
@@ -19997,7 +19966,7 @@ var render = function() {
             "a",
             {
               attrs: {
-                href: _vm.prefix + _vm.source.page_url,
+                href: _vm.prefix + _vm.source.read_slug,
                 rel: "alternate",
                 hreflang: _vm.current_language
               }
@@ -20052,8 +20021,8 @@ var render = function() {
                 _c(
                   "Container",
                   { on: { drop: _vm.onDrop } },
-                  _vm._l(_vm.playlist, function(audio, index) {
-                    return _c("Draggable", { key: audio.id }, [
+                  _vm._l(_vm.playlist, function(item, index) {
+                    return _c("Draggable", { key: item.id }, [
                       _c(
                         "li",
                         {
@@ -20069,7 +20038,7 @@ var render = function() {
                             "div",
                             { staticClass: "playlist-avatar drag-handle" },
                             [
-                              _vm.isLoading(audio)
+                              _vm.isLoading(item)
                                 ? _c(
                                     "div",
                                     { staticClass: "ply-btn btn-play" },
@@ -20107,7 +20076,7 @@ var render = function() {
                                       staticClass: "ply-btn btn-play",
                                       on: {
                                         click: function($event) {
-                                          return _vm.playItem(audio)
+                                          return _vm.playItem(item)
                                         }
                                       }
                                     },
@@ -20122,11 +20091,11 @@ var render = function() {
                           _vm._v(" "),
                           _c("div", { staticClass: "read-info" }, [
                             _c("div", { staticClass: "read-num" }, [
-                              _vm._v(_vm._s(audio.num))
+                              _vm._v(_vm._s(item.num))
                             ]),
                             _vm._v(" "),
                             _c("div", { staticClass: "read-sora" }, [
-                              _vm._v(_vm._s(audio.name))
+                              _vm._v(_vm._s(item.name))
                             ]),
                             _vm._v(" "),
                             _c(
@@ -20135,14 +20104,14 @@ var render = function() {
                               [
                                 _vm._v(
                                   "\n                  " +
-                                    _vm._s(audio.reciter) +
+                                    _vm._s(item.reciter) +
                                     "\n                  "
                                 ),
-                                audio.rewaya
+                                item.rewaya
                                   ? [
                                       _vm._v(
                                         "\n                    (" +
-                                          _vm._s(audio.rewaya) +
+                                          _vm._s(item.rewaya) +
                                           ")\n                  "
                                       )
                                     ]
@@ -20159,7 +20128,7 @@ var render = function() {
                               class: {
                                 opened:
                                   _vm.show_moreoptions &&
-                                  _vm.show_moreoptions_item == audio.id
+                                  _vm.show_moreoptions_item == item.id
                               }
                             },
                             [
@@ -20169,7 +20138,7 @@ var render = function() {
                                   staticClass: "ply-btn read-more-btn",
                                   on: {
                                     click: function($event) {
-                                      return _vm.toggeleMoreoptions(audio.id)
+                                      return _vm.toggeleMoreoptions(item.id)
                                     }
                                   }
                                 },
@@ -20197,9 +20166,9 @@ var render = function() {
                                   on: {
                                     click: function($event) {
                                       return _vm.shareItem(
-                                        audio.share_title,
-                                        audio.share_url,
-                                        audio.share_description
+                                        item.share_title,
+                                        item.share_url,
+                                        item.share_description
                                       )
                                     }
                                   }
@@ -20213,8 +20182,8 @@ var render = function() {
                                     {
                                       name: "clipboard",
                                       rawName: "v-clipboard:copy",
-                                      value: audio.file,
-                                      expression: "audio.file",
+                                      value: item.file,
+                                      expression: "item.file",
                                       arg: "copy"
                                     },
                                     {
@@ -20242,17 +20211,10 @@ var render = function() {
                               ),
                               _vm._v(" "),
                               _c(
-                                "div",
+                                "a",
                                 {
                                   staticClass: "ply-btn",
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.downloadMp3({
-                                        url: audio.file,
-                                        num: audio.num
-                                      })
-                                    }
-                                  }
+                                  attrs: { href: item.file, target: "_blank" }
                                 },
                                 [
                                   _c("span", {
@@ -20261,22 +20223,21 @@ var render = function() {
                                 ]
                               ),
                               _vm._v(" "),
-                              _vm.soarIncludes(audio.id)
+                              _vm.soarIncludes(item.id)
                                 ? _c(
                                     "div",
                                     {
                                       staticClass: "ply-btn",
                                       on: {
                                         click: function($event) {
-                                          return _vm.removeSoraFavorite(
-                                            audio.id
-                                          )
+                                          return _vm.removeSoraFavorite(item.id)
                                         }
                                       }
                                     },
                                     [
                                       _c("span", {
-                                        staticClass: "uni-icon icon-favorite"
+                                        staticClass: "uni-icon icon-favorite",
+                                        staticStyle: { color: "#f2a01b" }
                                       })
                                     ]
                                   )
@@ -20286,7 +20247,7 @@ var render = function() {
                                       staticClass: "ply-btn",
                                       on: {
                                         click: function($event) {
-                                          return _vm.addSoraFavorite(audio.id)
+                                          return _vm.addSoraFavorite(item.id)
                                         }
                                       }
                                     },
@@ -20358,7 +20319,7 @@ var render = function() {
         [
           _c("span", {
             staticClass: "uni-icon icon-skip_previous",
-            on: { click: _vm.prev }
+            on: { click: _vm.prevItem }
           })
         ]
       ),
@@ -20371,7 +20332,7 @@ var render = function() {
           on: {
             click: function($event) {
               $event.preventDefault()
-              _vm.playing = !_vm.playing
+              return _vm.toggele.apply(null, arguments)
             }
           }
         },
@@ -20391,7 +20352,7 @@ var render = function() {
         [
           _c("span", {
             staticClass: "uni-icon icon-skip_next",
-            on: { click: _vm.next }
+            on: { click: _vm.nextItem }
           })
         ]
       )
@@ -20501,7 +20462,7 @@ var render = function() {
               _c("span", {
                 staticClass: "uni-icon icon-skip_previous",
                 staticStyle: { color: "#fff" },
-                on: { click: _vm.prev }
+                on: { click: _vm.prevItem }
               })
             ]
           ),
@@ -20514,7 +20475,7 @@ var render = function() {
               on: {
                 click: function($event) {
                   $event.preventDefault()
-                  _vm.playing = !_vm.playing
+                  return _vm.toggele.apply(null, arguments)
                 }
               }
             },
@@ -20540,7 +20501,7 @@ var render = function() {
               _c("span", {
                 staticClass: "uni-icon icon-skip_next",
                 staticStyle: { color: "#fff" },
-                on: { click: _vm.next }
+                on: { click: _vm.nextItem }
               })
             ]
           )
@@ -20844,17 +20805,10 @@ var render = function() {
                           ),
                           _vm._v(" "),
                           _c(
-                            "div",
+                            "a",
                             {
                               staticClass: "ply-btn",
-                              on: {
-                                click: function($event) {
-                                  return _vm.downloadMp3({
-                                    url: audio.file,
-                                    num: audio.num
-                                  })
-                                }
-                              }
+                              attrs: { href: audio.file, target: "_blank" }
                             },
                             [
                               _c("span", {
@@ -20876,7 +20830,8 @@ var render = function() {
                                 },
                                 [
                                   _c("span", {
-                                    staticClass: "uni-icon icon-favorite"
+                                    staticClass: "uni-icon icon-favorite",
+                                    staticStyle: { color: "#f2a01b" }
                                   })
                                 ]
                               )
@@ -35002,6 +34957,93 @@ module.exports = function(module) {
 
 /***/ }),
 
+/***/ "./resources/js/components/CircleSpin.vue":
+/*!************************************************!*\
+  !*** ./resources/js/components/CircleSpin.vue ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _CircleSpin_vue_vue_type_template_id_5869f646_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CircleSpin.vue?vue&type=template&id=5869f646&scoped=true& */ "./resources/js/components/CircleSpin.vue?vue&type=template&id=5869f646&scoped=true&");
+/* harmony import */ var _CircleSpin_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CircleSpin.vue?vue&type=script&lang=js& */ "./resources/js/components/CircleSpin.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _CircleSpin_vue_vue_type_style_index_0_id_5869f646_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./CircleSpin.vue?vue&type=style&index=0&id=5869f646&lang=scss&scoped=true& */ "./resources/js/components/CircleSpin.vue?vue&type=style&index=0&id=5869f646&lang=scss&scoped=true&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _CircleSpin_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _CircleSpin_vue_vue_type_template_id_5869f646_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _CircleSpin_vue_vue_type_template_id_5869f646_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "5869f646",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/CircleSpin.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/CircleSpin.vue?vue&type=script&lang=js&":
+/*!*************************************************************************!*\
+  !*** ./resources/js/components/CircleSpin.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CircleSpin_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./CircleSpin.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CircleSpin.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CircleSpin_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/CircleSpin.vue?vue&type=style&index=0&id=5869f646&lang=scss&scoped=true&":
+/*!**********************************************************************************************************!*\
+  !*** ./resources/js/components/CircleSpin.vue?vue&type=style&index=0&id=5869f646&lang=scss&scoped=true& ***!
+  \**********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_9_2_node_modules_sass_loader_dist_cjs_js_ref_9_3_node_modules_vue_loader_lib_index_js_vue_loader_options_CircleSpin_vue_vue_type_style_index_0_id_5869f646_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--9-2!../../../node_modules/sass-loader/dist/cjs.js??ref--9-3!../../../node_modules/vue-loader/lib??vue-loader-options!./CircleSpin.vue?vue&type=style&index=0&id=5869f646&lang=scss&scoped=true& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CircleSpin.vue?vue&type=style&index=0&id=5869f646&lang=scss&scoped=true&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_9_2_node_modules_sass_loader_dist_cjs_js_ref_9_3_node_modules_vue_loader_lib_index_js_vue_loader_options_CircleSpin_vue_vue_type_style_index_0_id_5869f646_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_9_2_node_modules_sass_loader_dist_cjs_js_ref_9_3_node_modules_vue_loader_lib_index_js_vue_loader_options_CircleSpin_vue_vue_type_style_index_0_id_5869f646_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_9_2_node_modules_sass_loader_dist_cjs_js_ref_9_3_node_modules_vue_loader_lib_index_js_vue_loader_options_CircleSpin_vue_vue_type_style_index_0_id_5869f646_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_9_2_node_modules_sass_loader_dist_cjs_js_ref_9_3_node_modules_vue_loader_lib_index_js_vue_loader_options_CircleSpin_vue_vue_type_style_index_0_id_5869f646_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_9_2_node_modules_sass_loader_dist_cjs_js_ref_9_3_node_modules_vue_loader_lib_index_js_vue_loader_options_CircleSpin_vue_vue_type_style_index_0_id_5869f646_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/components/CircleSpin.vue?vue&type=template&id=5869f646&scoped=true&":
+/*!*******************************************************************************************!*\
+  !*** ./resources/js/components/CircleSpin.vue?vue&type=template&id=5869f646&scoped=true& ***!
+  \*******************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CircleSpin_vue_vue_type_template_id_5869f646_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./CircleSpin.vue?vue&type=template&id=5869f646&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CircleSpin.vue?vue&type=template&id=5869f646&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CircleSpin_vue_vue_type_template_id_5869f646_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CircleSpin_vue_vue_type_template_id_5869f646_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/player/AudioPlayer.vue":
 /*!*********************************************!*\
   !*** ./resources/js/player/AudioPlayer.vue ***!
@@ -35264,6 +35306,8 @@ PlayerVue.component('scale-loader', vue_spinner_src_ScaleLoader_vue__WEBPACK_IMP
 PlayerVue.use(vue_clipboard2__WEBPACK_IMPORTED_MODULE_6___default.a);
 PlayerVue.directive('click-outside', {
   bind: function bind(el, binding, vnode) {
+    console.log(el);
+
     el.clickOutsideEvent = function (event) {
       // here I check that click was outside the el and his childrens
       if (!(el == event.target || el.contains(event.target))) {
@@ -35282,6 +35326,7 @@ PlayerVue.directive('click-outside', {
 PlayerVue.component('audio-player', __webpack_require__(/*! ./AudioPlayer.vue */ "./resources/js/player/AudioPlayer.vue")["default"]);
 PlayerVue.component('mobile-player', __webpack_require__(/*! ./MobilePlayer.vue */ "./resources/js/player/MobilePlayer.vue")["default"]);
 PlayerVue.component('desktop-player', __webpack_require__(/*! ./DesktopPlayer.vue */ "./resources/js/player/DesktopPlayer.vue")["default"]);
+PlayerVue.component('circle-spin', __webpack_require__(/*! ../components/CircleSpin.vue */ "./resources/js/components/CircleSpin.vue")["default"]);
 window.appFoolter = new PlayerVue({
   el: '#appFooter',
   store: _store__WEBPACK_IMPORTED_MODULE_1__["default"]
@@ -35301,6 +35346,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function _objectDestructuringEmpty(obj) { if (obj == null) throw new TypeError("Cannot destructure undefined"); }
+
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -35338,9 +35385,18 @@ var convertTimeHHMMSS = function convertTimeHHMMSS(val) {
     player_state: '',
     playing_item: 1,
     source: {
-      file: 'empty',
-      share_url: '',
-      id: ''
+      file: "empty",
+      id: "",
+      name: "",
+      num: "",
+      read_id: "",
+      read_slug: "",
+      reciter: "",
+      share_description: "",
+      share_title: "",
+      share_url: "",
+      sora_id: "",
+      type: ""
     },
     playlist: [],
     favorite: {
@@ -35351,34 +35407,39 @@ var convertTimeHHMMSS = function convertTimeHHMMSS(val) {
     }
   },
   mutations: {
-    setFavorite: function setFavorite(state, _ref) {
-      var favorite = _ref.favorite;
+    setCurrentTime: function setCurrentTime(state, _ref) {
+      var currentTime = _ref.currentTime;
+      console.log(currentTime);
+      state.currentTime = currentTime;
+    },
+    setFavorite: function setFavorite(state, _ref2) {
+      var favorite = _ref2.favorite;
       state.favorite = favorite;
     },
-    setPlaylist: function setPlaylist(state, _ref2) {
-      var playlist = _ref2.playlist;
+    setPlaylist: function setPlaylist(state, _ref3) {
+      var playlist = _ref3.playlist;
       state.playlist = playlist;
     },
-    setVolume: function setVolume(state, _ref3) {
-      var volume = _ref3.volume;
+    setVolume: function setVolume(state, _ref4) {
+      var volume = _ref4.volume;
       state.volume = volume;
     },
-    setCurrentSeconds: function setCurrentSeconds(state, _ref4) {
-      var currentSeconds = _ref4.currentSeconds;
+    setCurrentSeconds: function setCurrentSeconds(state, _ref5) {
+      var currentSeconds = _ref5.currentSeconds;
       state.currentSeconds = currentSeconds;
     },
-    setSource: function setSource(state, _ref5) {
-      var source = _ref5.source;
+    setSource: function setSource(state, _ref6) {
+      var source = _ref6.source;
       state.source = source;
       window.appMain.$store.state.playing_item = source.id;
     },
-    setPlaying: function setPlaying(state, _ref6) {
-      var playing = _ref6.playing;
+    setPlaying: function setPlaying(state, _ref7) {
+      var playing = _ref7.playing;
       state.playing = playing;
       window.appMain.$store.state.playing = playing;
     },
-    setState: function setState(state, _ref7) {
-      var player_state = _ref7.player_state;
+    setState: function setState(state, _ref8) {
+      var player_state = _ref8.player_state;
       state.player_state = player_state;
       window.appMain.$store.state.playing_state = player_state;
     }
@@ -35436,14 +35497,172 @@ var convertTimeHHMMSS = function convertTimeHHMMSS(val) {
     }
   },
   actions: {
-    setAudio: function setAudio(_ref8, audio) {
-      var state = _ref8.state,
-          dispatch = _ref8.dispatch;
+    getItemAndPlay: function getItemAndPlay(_ref9, url) {
+      var dispatch = _ref9.dispatch,
+          state = _ref9.state;
+      axios.get(url).then(function (response) {
+        dispatch('addPlayItem', response.data);
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    addPlayItem: function addPlayItem(_ref10, item) {
+      var commit = _ref10.commit,
+          state = _ref10.state,
+          dispatch = _ref10.dispatch;
+      var found = false;
+
+      for (var i = 0; i < state.playlist.length; i++) {
+        if (state.playlist[i].id == item.id) {
+          found = true;
+          break;
+        }
+      }
+
+      if (!found) {
+        var new_playlist = state.playlist;
+        new_playlist.push(item);
+        commit('setPlaylist', {
+          playlist: new_playlist
+        });
+      }
+
+      if (item.id == state.source.id) {
+        dispatch("toggele");
+      } else {
+        dispatch("playItem", item);
+      }
+    },
+    addItem: function addItem(_ref11, item) {
+      var commit = _ref11.commit,
+          state = _ref11.state;
+      var new_playlist = state.playlist;
+      var exist = new_playlist.find(function (itm) {
+        if (itm.id == item.id) return true;
+      });
+
+      if (exist == undefined) {
+        new_playlist.push(item);
+        window.appMain.$store.dispatch("notify", {
+          //tofixe
+          group: 'app',
+          title: window.appFoolter.trans('text.added'),
+          type: 'success',
+          text: window.appFoolter.trans('text.item-added-playlist')
+        });
+      } else {
+        window.appMain.$store.dispatch("notify", {
+          //tofixe
+          group: 'app',
+          title: window.appFoolter.trans('text.not-added'),
+          type: 'warn',
+          text: window.appFoolter.trans('text.item-exists-in-playlist')
+        });
+      }
+
+      commit('setPlaylist', {
+        playlist: new_playlist
+      });
+
+      if (state.source.file == 'empty') {
+        commit('setSource', {
+          source: item
+        });
+      }
+    },
+    removeItem: function removeItem(_ref12, index) {
+      var commit = _ref12.commit,
+          state = _ref12.state;
+      var new_playlist = state.playlist;
+      new_playlist.splice(index, 1);
+      commit('setPlaylist', {
+        playlist: new_playlist
+      });
+    },
+    playItem: function playItem(_ref13, item) {
+      var commit = _ref13.commit,
+          dispatch = _ref13.dispatch,
+          state = _ref13.state;
+      commit('setSource', {
+        source: item
+      });
+
+      state.audio.oncanplay = function () {
+        dispatch("play");
+      };
+    },
+    nextItem: function nextItem(_ref14) {
+      var state = _ref14.state,
+          dispatch = _ref14.dispatch;
+      var index = -1;
+
+      for (var i = 0; i < state.playlist.length; i++) {
+        if (state.playlist[i].file === state.source.file) {
+          index = i;
+        }
+      }
+
+      var playlistIndex = Math.min(state.playlist.length - 1, index + 1);
+      var item = state.playlist[playlistIndex];
+      dispatch("playItem", item);
+    },
+    prevItem: function prevItem(_ref15) {
+      var state = _ref15.state,
+          dispatch = _ref15.dispatch;
+      var index = -1;
+
+      for (var i = 0; i < state.playlist.length; i++) {
+        if (state.playlist[i].file === state.source.file) {
+          index = i;
+        }
+      }
+
+      var playlistIndex = Math.max(0, index - 1);
+      var item = state.playlist[playlistIndex];
+      dispatch("playItem", item);
+    },
+    play: function play(_ref16) {
+      var commit = _ref16.commit,
+          state = _ref16.state;
+      commit("setPlaying", {
+        playing: true
+      });
+      state.audio.play();
+    },
+    pause: function pause(_ref17) {
+      var commit = _ref17.commit,
+          state = _ref17.state;
+      commit("setPlaying", {
+        playing: false
+      });
+      state.audio.pause();
+    },
+    toggele: function toggele(_ref18) {
+      var dispatch = _ref18.dispatch,
+          state = _ref18.state;
+
+      if (state.playing) {
+        dispatch("pause");
+      } else {
+        dispatch("play");
+      }
+    },
+    stop: function stop(_ref19, products) {
+      var commit = _ref19.commit,
+          state = _ref19.state;
+      commit("setPlaying", {
+        playing: false
+      });
+      state.audio.currentTime = 0;
+    },
+    setAudio: function setAudio(_ref20, audio) {
+      var state = _ref20.state,
+          dispatch = _ref20.dispatch;
       audio.addEventListener("timeupdate", function () {
         dispatch("update");
       });
       audio.addEventListener("ended", function () {
-        dispatch("next");
+        dispatch("nextItem");
       });
       audio.addEventListener("loadeddata", function () {
         dispatch("load");
@@ -35458,16 +35677,63 @@ var convertTimeHHMMSS = function convertTimeHHMMSS(val) {
       state.audio.volume = state.volume / 100;
       state.audio.currentTime = state.currentSeconds;
     },
-    update: function update(_ref9) {
-      var state = _ref9.state,
-          commit = _ref9.commit;
+    update: function update(_ref21) {
+      var state = _ref21.state,
+          commit = _ref21.commit;
       commit("setCurrentSeconds", {
         currentSeconds: parseInt(state.audio.currentTime)
       });
     },
-    onDrop: function onDrop(_ref10, dragResult) {
-      var commit = _ref10.commit,
-          state = _ref10.state;
+    load: function load(_ref22, item) {
+      var commit = _ref22.commit,
+          state = _ref22.state;
+
+      if (state.audio.readyState >= 2) {
+        state.loaded = true;
+        state.durationSeconds = parseInt(state.audio.duration);
+
+        if (!state.durationSeconds) {
+          state.durationSeconds = 0;
+        }
+
+        commit("setState", {
+          player_state: "loaded"
+        });
+        return state.playing = state.autoPlay;
+      }
+
+      throw new Error("Failed to load sound file.");
+    },
+    //audio controles
+    setPercentComplete: function setPercentComplete(_ref23, value) {
+      var state = _ref23.state;
+      var cal = value * state.audio.duration / 100;
+      state.audio.currentTime = parseInt(cal);
+    },
+    changeVolume: function changeVolume(_ref24, volume) {
+      var commit = _ref24.commit,
+          state = _ref24.state;
+      commit("setVolume", {
+        volume: volume
+      });
+      state.audio.volume = volume / 100;
+    },
+    //Additional actions
+    toggeleMoreoptions: function toggeleMoreoptions(_ref25, id) {
+      var commit = _ref25.commit,
+          state = _ref25.state;
+
+      if (state.show_moreoptions_item == id) {
+        state.show_moreoptions_item = false;
+        state.show_moreoptions = false;
+      } else {
+        state.show_moreoptions_item = id;
+        state.show_moreoptions = true;
+      }
+    },
+    onDrop: function onDrop(_ref26, dragResult) {
+      var commit = _ref26.commit,
+          state = _ref26.state;
       var removedIndex = dragResult.removedIndex,
           addedIndex = dragResult.addedIndex,
           payload = dragResult.payload;
@@ -35489,46 +35755,9 @@ var convertTimeHHMMSS = function convertTimeHHMMSS(val) {
         playlist: result
       });
     },
-    load: function load(_ref11, item) {
-      var commit = _ref11.commit,
-          state = _ref11.state;
-
-      if (state.audio.readyState >= 2) {
-        state.loaded = true;
-        state.durationSeconds = parseInt(state.audio.duration);
-
-        if (!state.durationSeconds) {
-          state.durationSeconds = 0;
-        }
-
-        commit("setState", {
-          player_state: "loaded"
-        });
-        return state.playing = state.autoPlay;
-      }
-
-      throw new Error("Failed to load sound file.");
-    },
-    toggeleMoreoptions: function toggeleMoreoptions(_ref12, id) {
-      var commit = _ref12.commit,
-          state = _ref12.state;
-
-      if (state.show_moreoptions_item == id) {
-        state.show_moreoptions_item = false;
-        state.show_moreoptions = false;
-      } else {
-        state.show_moreoptions_item = id;
-        state.show_moreoptions = true;
-      }
-    },
-    setPercentComplete: function setPercentComplete(_ref13, value) {
-      var state = _ref13.state;
-      var cal = value * state.audio.duration / 100;
-      state.audio.currentTime = parseInt(cal);
-    },
-    download: function download(_ref14, url) {
-      var commit = _ref14.commit,
-          state = _ref14.state;
+    download: function download(_ref27, url) {
+      var commit = _ref27.commit,
+          state = _ref27.state;
       var filename = url.substring(url.lastIndexOf("/") + 1).split("?")[0];
       var xhr = new XMLHttpRequest();
       xhr.responseType = "blob";
@@ -35545,224 +35774,51 @@ var convertTimeHHMMSS = function convertTimeHHMMSS(val) {
       xhr.open("GET", url);
       xhr.send();
     },
-    addItem: function addItem(_ref15, item) {
-      var commit = _ref15.commit,
-          state = _ref15.state,
-          dispatch = _ref15.dispatch;
-      var new_playlist = state.playlist;
-      var exist = new_playlist.find(function (itm) {
-        if (itm.id == item.id) return true;
-      });
-
-      if (exist == undefined) {
-        new_playlist.push(item);
-        window.appMain.$store.dispatch("notify", {
-          //tofixe
-          group: 'app',
-          title: state._vm.trans('text.added'),
-          type: 'success',
-          text: state._vm.trans('text.item-added-playlist')
-        });
-      } else {
-        window.appMain.$store.dispatch("notify", {
-          //tofixe
-          group: 'app',
-          title: state._vm.trans('text.not-added'),
-          type: 'warn',
-          text: state._vm.trans('text.item-exists-in-playlist')
-        });
-      }
-
-      commit('setPlaylist', {
-        playlist: new_playlist
-      });
-
-      if (state.source.file == 'empty') {
-        commit('setSource', {
-          source: item
-        });
-        dispatch("changeSource", item);
-      }
-    },
-    removeItem: function removeItem(_ref16, index) {
-      var commit = _ref16.commit,
-          state = _ref16.state;
-      var new_playlist = state.playlist.splice(index, 1);
-      commit('setPlaylist', {
-        playlist: new_playlist
-      });
-    },
-    nextItem: function nextItem(_ref17) {
-      var commit = _ref17.commit,
-          state = _ref17.state,
-          dispatch = _ref17.dispatch;
-      var index = -1;
-
-      for (var i = 0; i < state.playlist.length; i++) {
-        if (state.playlist[i].file === state.source.file) {
-          index = i;
-        }
-      }
-
-      var playlistIndex = Math.min(state.playlist.length - 1, index + 1);
-      var source = state.playlist[playlistIndex];
-      commit('setSource', {
-        source: source
-      });
-      dispatch("changeSource", source);
-    },
-    prevItem: function prevItem(_ref18) {
-      var commit = _ref18.commit,
-          state = _ref18.state,
-          dispatch = _ref18.dispatch;
-      var index = -1;
-
-      for (var i = 0; i < state.playlist.length; i++) {
-        if (state.playlist[i].file === state.source.file) {
-          index = i;
-        }
-      }
-
-      var playlistIndex = Math.max(0, index - 1);
-      var source = state.playlist[playlistIndex];
-      commit('setSource', {
-        source: source
-      });
-      dispatch("changeSource", source);
-    },
-    playItem: function playItem(_ref19, item) {
-      var commit = _ref19.commit,
-          dispatch = _ref19.dispatch;
-      commit('setSource', {
-        source: item
-      });
-      dispatch("changeSource", item);
-    },
-    getItemAndPlay: function getItemAndPlay(_ref20, url) {
-      var dispatch = _ref20.dispatch,
-          state = _ref20.state;
-      axios.get(url).then(function (response) {
-        dispatch('addPlayItem', response.data);
-      })["catch"](function (error) {});
-    },
-    addPlayItem: function addPlayItem(_ref21, item) {
-      var commit = _ref21.commit,
-          state = _ref21.state,
-          dispatch = _ref21.dispatch;
-      var found = false;
-
-      for (var i = 0; i < state.playlist.length; i++) {
-        if (state.playlist[i].id == item.id) {
-          found = true;
-          break;
-        }
-      }
-
-      if (!found) {
-        var new_playlist = state.playlist;
-        new_playlist.push(item);
-        commit('setPlaylist', {
-          playlist: new_playlist
-        });
-      }
-
-      if (item.id == state.source.id) {
-        PlayerEvent.$emit("player_toggel");
-      } else {
-        commit('setSource', {
-          source: item
-        });
-        dispatch("changeSource", item);
-      }
-    },
-    getAddPlayItem: function getAddPlayItem(_ref22, url) {
-      var dispatch = _ref22.dispatch;
-      axios.get(url).then(function (response) {
-        dispatch("addPlayItem", response.data);
-      })["catch"](function (error) {});
-    },
-    clipboardSuccessHandler: function clipboardSuccessHandler(_ref23, products) {
-      var commit = _ref23.commit,
-          state = _ref23.state;
+    clipboardSuccessHandler: function clipboardSuccessHandler(_ref28, products) {
+      var commit = _ref28.commit,
+          state = _ref28.state;
       window.appMain.$store.dispatch("notify", {
         //tofixe
         group: 'app',
-        title: state._vm.trans('text.copied'),
+        title: window.appFoolter.trans('text.copied'),
         type: 'success',
-        text: state._vm.trans('text.text-copied')
+        text: window.appFoolter.trans('text.text-copied')
       });
     },
-    clipboardErrorHandler: function clipboardErrorHandler(_ref24, products) {
-      var commit = _ref24.commit,
-          state = _ref24.state;
+    clipboardErrorHandler: function clipboardErrorHandler(_ref29, products) {
+      var commit = _ref29.commit,
+          state = _ref29.state;
       window.appMain.$store.dispatch("notify", {
         //tofixe  
         group: 'app',
-        title: state._vm.trans('text.error'),
+        title: window.appFoolter.trans('text.error'),
         type: 'error',
-        text: state._vm.trans('text.error-copying-text')
+        text: window.appFoolter.trans('text.error-copying-text')
       });
     },
-    changeSource: function changeSource(_ref25, source) {
-      var commit = _ref25.commit,
-          state = _ref25.state;
-      commit("setState", {
-        player_state: "loading"
-      });
-
-      state.audio.oncanplay = function () {
-        state.audio.play();
-      };
-    },
-    changeVolume: function changeVolume(_ref26, volume) {
-      var commit = _ref26.commit,
-          state = _ref26.state;
-      commit("setVolume", {
-        volume: volume
-      });
-      state.audio.volume = volume / 100;
-    },
-    play: function play(_ref27) {
-      var state = _ref27.state;
-      state.playing = true;
-      state.audio.play();
-    },
-    pause: function pause(_ref28) {
-      var state = _ref28.state;
-      state.playing = false;
-      state.audio.pause();
-    },
-    toggelItem: function toggelItem(_ref29) {
-      var dispatch = _ref29.dispatch,
-          state = _ref29.state;
-
-      if (state.playing) {
-        dispatch("pause");
-      } else {
-        dispatch("play");
-      }
-    },
-    stop: function stop(_ref30, products) {
-      var commit = _ref30.commit,
-          state = _ref30.state;
-      state.playing = false;
-      state.audio.currentTime = 0;
-    },
-    toggelePlaylist: function toggelePlaylist(_ref31, products) {
-      var commit = _ref31.commit,
-          state = _ref31.state;
+    toggelePlaylist: function toggelePlaylist(_ref30) {
+      var state = _ref30.state;
       state.show_playlist = !state.show_playlist;
     },
-    closePlaylist: function closePlaylist(_ref32, products) {
-      var commit = _ref32.commit,
-          state = _ref32.state;
+    closePlaylist: function closePlaylist(_ref31) {
+      var state = _ref31.state;
       state.show_playlist = false;
     },
-    clearPlaylist: function clearPlaylist(_ref33, products) {
-      var commit = _ref33.commit,
-          state = _ref33.state;
+    clearPlaylist: function clearPlaylist(_ref32) {
+      var commit = _ref32.commit;
       var source = {
-        file: "empty"
+        file: "empty",
+        id: "",
+        name: "",
+        num: "",
+        read_id: "",
+        read_slug: "",
+        reciter: "",
+        share_description: "",
+        share_title: "",
+        share_url: "",
+        sora_id: "",
+        type: ""
       };
       commit("setSource", {
         source: source
@@ -35771,28 +35827,33 @@ var convertTimeHHMMSS = function convertTimeHHMMSS(val) {
         playlist: []
       });
     },
-    shareItem: function shareItem(_ref34, title, url, description) {
-      var commit = _ref34.commit,
-          state = _ref34.state;
+    shareItem: function shareItem(_ref33, title, url, description) {
+      _objectDestructuringEmpty(_ref33);
 
-      if (typeof window !== "undefined") {
-        AppEvent.$emit("share", title, url, description);
-      }
+      AppEvent.$emit("share", title, url, description);
     },
-    addSoraFavorite: function addSoraFavorite(_ref35, id) {
-      var commit = _ref35.commit,
-          state = _ref35.state;
+    addSoraFavorite: function addSoraFavorite(_ref34, id) {
+      _objectDestructuringEmpty(_ref34);
+
       window.appMain.$store.dispatch("favorite/addSora", id);
     },
-    removeSoraFavorite: function removeSoraFavorite(_ref36, id) {
-      var commit = _ref36.commit,
-          state = _ref36.state;
+    removeSoraFavorite: function removeSoraFavorite(_ref35, id) {
+      _objectDestructuringEmpty(_ref35);
+
       window.appMain.$store.dispatch("favorite/removeSora", id);
     },
-    downloadMp3: function downloadMp3(_ref37, item) {
-      var commit = _ref37.commit,
-          state = _ref37.state;
+    downloadMp3: function downloadMp3(_ref36, item) {
+      _objectDestructuringEmpty(_ref36);
+
       window.appMain.$store.dispatch("download/downloadMp3", item);
+    },
+    showFullplayer: function showFullplayer(_ref37) {
+      var state = _ref37.state;
+      state.show_fullplayer = true;
+    },
+    closeFullplayer: function closeFullplayer(_ref38) {
+      var state = _ref38.state;
+      state.show_fullplayer = false;
     }
   }
 }));

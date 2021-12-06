@@ -62,7 +62,7 @@
 
                     <div class="tb-languages">
                         <div class="tbl-btn" @click="toggelLanguages()">
-                            <span class="uni-icon icon-b5bbbf" style="color: #b5bbbf"></span>
+                            <span class="uni-icon icon-earth" style="color: #b5bbbf"></span>
                             English
                         </div>
                         <div class="tbl-dropdown" :class="{ opened: show_languages }">
@@ -70,9 +70,9 @@
                                 <span class="uni-icon icon-clear"></span>
                             </div>
                             <div class="row">
-                                @foreach ($languages as  $key => $language)
+                                @foreach ($languages as $key => $language)
                                 <div class="col-8">
-                                    <a href="'/' {{ $key }}"  class="tbl-item">{{ $language['native'] }}</a>
+                                    <a href="/{{ $key }}" class="tbl-item">{{ $language['native'] }}</a>
                                 </div>
                                 @endforeach
                             </div>
@@ -84,14 +84,15 @@
             <div>
                 {{ $slot }}
             </div>
-
             <notifications position="bottom left" group="app" animation-type="velocity" :animation="animation" classes="desktop-notifications" />
-
         </div>
     </div>
 
     <div id="appFooter">
         <footer id="footer" data-turbolinks-permanent>
+            <div id="MainLoading">
+                <circle-spin></circle-spin>
+            </div>
             <div class="container d-flex">
                 <div class="helpful-links">
                     <ul class="list-inline">

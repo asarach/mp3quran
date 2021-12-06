@@ -15,8 +15,8 @@
         <div class="col-lg-13">
           <h1>{{$reciter['name']}} - {{$reciter_reads[$active_read]['rewaya_name']}}</h1>
           <div class="header-options">
-            @if ($reciter_reads[$active_read]['rewaya_name'])
-            <button type="button" class="btn btn-primary" @click="toggelRadio()">
+            @if ($reciter_reads[$active_read]['radio'])
+            <button type="button" class="btn btn-primary"@click.prevent="getItemAndPlay(ajax_prefix + '/radio/item?id=' + {{ $reciter_reads[$active_read]['radio'] }})">
               <span class="uni-icon icon-radio" style="color: #fff"></span>
               {{trans('text.listen-to-radio')}}
             </button>

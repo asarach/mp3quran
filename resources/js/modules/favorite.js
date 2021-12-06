@@ -268,13 +268,14 @@ export default {
             if (!new_soar.includes(item)) {
                 new_soar.push(item)
             }
+            commit('setSoar', { soar: new_soar })
             Vue.notify({
                 group: 'app',
                 title: this.getters.getTrans('text.added'),
                 type: 'success',
                 text: this.getters.getTrans('text.sora-added-favorites')
             })
-            commit('setSoar', { soar: new_soar })
+            
         },
         removeSora({ commit, state }, item) {
             var i = state.soar.indexOf(item);

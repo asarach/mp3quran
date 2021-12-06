@@ -10,11 +10,11 @@
         class="ply-btn btn-previous"
         :class="{ disabled: currentPosition() < 1 }"
       >
-        <span class="uni-icon icon-skip_previous" @click="prev"></span>
+        <span class="uni-icon icon-skip_previous" @click="prevItem"></span>
       </div>
       <div
         class="ply-btn btn-play-pause"
-        v-on:click.prevent="playing = !playing"
+        v-on:click.prevent="toggele"
         :title="playing ? 'Pause' : 'Play'"
       >
         <span class="uni-icon icon-pause" v-if="playing"></span>
@@ -24,7 +24,7 @@
         class="ply-btn btn-next"
         :class="{ disabled: currentPosition() >= playlist.length - 1 }"
       >
-        <span class="uni-icon icon-skip_next" @click="next"></span>
+        <span class="uni-icon icon-skip_next" @click="nextItem"></span>
       </div>
     </div>
     <div class="ply-item-info" @click="showFullplayer">
@@ -73,13 +73,13 @@
         >
           <span
             class="uni-icon icon-skip_previous"
-            @click="prev"
+            @click="prevItem"
             style="color: #fff"
           ></span>
         </div>
         <div
           class="ply-btn btn-play-pause"
-          v-on:click.prevent="playing = !playing"
+          v-on:click.prevent="toggele"
           :title="playing ? 'Pause' : 'Play'"
         >
           <span class="uni-icon icon-pause" v-if="playing"></span>
@@ -95,7 +95,7 @@
         >
           <span
             class="uni-icon icon-skip_next"
-            @click="next"
+            @click="nextItem"
             style="color: #fff"
           ></span>
         </div>
@@ -229,18 +229,18 @@
                 >
                   <span class="uni-icon icon-link"></span>
                 </div>
-                <div
-                  class="ply-btn"
-                  @click="downloadMp3({ url: audio.file, num: audio.num })"
-                >
-                  <span class="uni-icon icon-cloud_download"></span>
-                </div>
+                <a class="ply-btn" :href="audio.file" target="_blank"
+                  ><span class="uni-icon icon-cloud_download"></span
+                ></a>
                 <div
                   class="ply-btn"
                   v-if="soarIncludes(audio.id)"
                   @click="removeSoraFavorite(audio.id)"
                 >
-                  <span class="uni-icon icon-favorite"></span>
+                  <span
+                    class="uni-icon icon-favorite"
+                    style="color: #f2a01b"
+                  ></span>
                 </div>
                 <div class="ply-btn" v-else @click="addSoraFavorite(audio.id)">
                   <span class="uni-icon icon-favorite_outline"></span>
@@ -253,30 +253,27 @@
     </div>
   </div>
 </template>
-
 <script>
 import { Container, Draggable } from "vue-smooth-dnd";
-
 import { mapState, mapActions, mapGetters } from "vuex";
-const convertTimeHHMMSS = (val) => {
-  let hhmmss = new Date(val * 1000).toISOString().substr(11, 8);
-  return hhmmss.indexOf("00:") === 0 ? hhmmss.substr(3) : hhmmss;
-};
 
 export default {
   components: {
     Container,
     Draggable,
   },
+
   computed: {
-    currentTime() {
-      return convertTimeHHMMSS(this.currentSeconds);
-    },
-    durationTime() {
-      return convertTimeHHMMSS(this.durationSeconds);
+    currentVolume: {
+      get() {
+        return this.$store.state.volume;
+      },
+      set(value) {
+        this.$store.dispatch("changeVolume", value);
+      },
     },
     percentComplete: {
-      get: function () {
+      get() {
         const value = parseInt(
           (this.currentSeconds / this.durationSeconds) * 100
         );
@@ -286,199 +283,75 @@ export default {
           return 0;
         }
       },
-      set: function (newValue) {
-        let cal = (newValue * this.audio.duration) / 100;
-        this.audio.currentTime = parseInt(cal);
+      set(value) {
+        this.$store.dispatch("setPercentComplete", value);
       },
     },
-    playlist: {
-      get() {
-        return this.$store.state.playlist;
-      },
-      set(playlist) {
-        this.$store.commit("setPlaylist", { playlist: playlist });
-      },
-    },
+
     ...mapState({
+      current_language: (state) => state.current_language,
       source: (state) => state.source,
       audio: (state) => state.audio,
+      playlist: (state) => state.playlist,
       currentSeconds: (state) => state.currentSeconds,
       durationSeconds: (state) => state.durationSeconds,
       playing: (state) => state.playing,
       volume: (state) => state.volume,
       show_playlist: (state) => state.show_playlist,
       show_moreoptions: (state) => state.show_moreoptions,
-      show_moreoptions_item: (state) => state.show_moreoptions_item,
       show_fullplayer: (state) => state.show_fullplayer,
-      loaded: (state) => state.loaded
+      show_moreoptions_item: (state) => state.show_moreoptions_item,
     }),
     ...mapGetters({
+      durationTime: "durationTime",
+      currentTime: "currentTime",
       soarIncludes: "soarIncludes",
       currentPosition: "currentPosition",
       isLoading: "isLoading",
     }),
   },
+
   methods: {
-    onDrop(dragResult) {
-      const { removedIndex, addedIndex, payload } = dragResult;
-      if (removedIndex === null && addedIndex === null) return this.playlist;
-
-      const result = [...this.playlist];
-      let itemToAdd = payload;
-
-      if (removedIndex !== null) {
-        itemToAdd = result.splice(removedIndex, 1)[0];
-      }
-
-      if (addedIndex !== null) {
-        result.splice(addedIndex, 0, itemToAdd);
-      }
-      this.$store.commit("setPlaylist", { playlist: result });
-    },
-    load() {
-      if (this.audio.readyState >= 2) {
-        this.loaded = true;
-        this.durationSeconds = parseInt(this.audio.duration);
-        if (!this.durationSeconds) {
-          this.durationSeconds = 0;
-        }
-        this.$store.commit("setState", { player_state: "loaded" });
-        return (this.playing = this.autoPlay);
-      }
-      throw new Error("Failed to load sound file.");
-    },
-    update(e) {
-      this.currentSeconds = parseInt(this.audio.currentTime);
-    },
-    play() {
-      this.playing = true;
-    },
-    pause() {
-      this.playing = false;
-    },
-    stop() {
-      this.playing = false;
-      this.audio.currentTime = 0;
-    },
-    prev() {
-      this.$store.dispatch("prevItem");
-    },
-    next() {
-      this.$store.dispatch("nextItem");
-    },
-    playItem(item) {
-      this.$store.dispatch("playItem", item);
-    },
-    showFullplayer() {
-      this.show_fullplayer = true;
-    },
-    closeFullplayer() {
-      this.show_fullplayer = false;
-    },
-    toggelePlaylist() {
-      this.show_playlist = !this.show_playlist;
-    },
-    toggeleMoreoptions(id) {
-      if (this.show_moreoptions_item == id) {
-        this.show_moreoptions_item = false;
-        this.show_moreoptions = false;
-      } else {
-        this.show_moreoptions_item = id;
-        this.show_moreoptions = true;
-      }
-    },
-    closePlaylist() {
-      this.show_playlist = false;
-    },
-    clearPlaylist() {
-      var source = {
-        file: "empty",
-      };
-      this.$store.commit("setSource", { source: source });
-      this.$store.commit("setPlaylist", { playlist: [] });
-    },
-    shareItem(title, url, description) {
-      if (typeof window !== "undefined") {
-        AppEvent.$emit("share", title, url, description);
-      }
-    },
-    addSoraFavorite(id) {
-      window.appMain.$store.dispatch("favorite/addSora", id);
-    },
-    removeSoraFavorite(id) {
-      window.appMain.$store.dispatch("favorite/removeSora", id);
-    },
-    downloadMp3(item) {
-      window.appMain.$store.dispatch("download/downloadMp3", item);
-    },
-    download(url) {
-      var filename = url.substring(url.lastIndexOf("/") + 1).split("?")[0];
-      var xhr = new XMLHttpRequest();
-      xhr.responseType = "blob";
-      xhr.onload = function () {
-        var a = document.createElement("a");
-        a.href = window.URL.createObjectURL(xhr.response);
-        a.download = filename;
-        a.style.display = "none";
-        document.body.appendChild(a);
-        a.click();
-      };
-      xhr.open("GET", url);
-      xhr.send();
-    },
     ...mapActions([
+      "onDrop",
+      "load",
+      "pause",
+      "nextItem",
+      "prevItem",
+      "playItem",
+      "toggele",
+      "changeVolume",
+      "clearPlaylist",
+      "toggelePlaylist",
+      "closePlaylist",
+      "toggeleMoreoptions",
       "clipboardErrorHandler",
       "clipboardSuccessHandler",
+      "removeSoraFavorite",
+      "addSoraFavorite",
+      "shareItem",
       "removeItem",
+      "showFullplayer",
+      "closeFullplayer",
     ]),
   },
   mounted() {
-    this.audio = this.$refs.audiofile;
-    this.audio.addEventListener("timeupdate", this.update);
-    this.audio.addEventListener("ended", this.next);
-    this.audio.addEventListener("loadeddata", this.load);
-    this.audio.addEventListener("pause", () => {
-      this.playing = false;
-    });
-    this.audio.addEventListener("play", () => {
-      this.playing = true;
-    });
+    this.$store.dispatch("setAudio", this.$refs.audiofile);
   },
   created() {
     var self = this;
-    if (typeof window !== "undefined") {
-      PlayerEvent.$on("player_play", function () {
-        self.play();
-      });
-      PlayerEvent.$on("player_stop", function () {
-        self.stop();
-      });
-      PlayerEvent.$on("player_toggel", function () {
-        self.playing = !self.playing;
-      });
-      PlayerEvent.$on("player_pause", function () {
-        self.pause();
-      });
-    }
-  },
-  watch: {
-    playing(value) {
-      this.$store.commit("setPlaying", { playing: value });
-      if (value) {
-        return this.audio.play();
-      }
-      this.audio.pause();
-    },
-    source(value) {
-      let self = this;
-      this.$store.commit("setState", { player_state: "loading" });
-      self.audio.oncanplay = function () {
-        self.audio.play();
-      };
-    },
-    volume(value) {
-      this.audio.volume = this.volume / 100;
-    },
+    PlayerEvent.$on("player_play", function () {
+      self.$store.dispatch("play");
+    });
+    PlayerEvent.$on("player_stop", function () {
+      self.$store.dispatch("stop");
+    });
+    PlayerEvent.$on("player_toggel", function () {
+      self.$store.dispatch("toggele");
+    });
+    PlayerEvent.$on("player_pause", function () {
+      self.$store.dispatch("pause");
+    });
   },
 };
 </script>
