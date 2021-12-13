@@ -25,7 +25,7 @@ export default new Vuex.Store({
     player_state: '',
     playing_item: 1,
     source: {
-      file: "empty",
+      file: "https://server8.mp3quran.net/ahmad_huth/002.mp3",
       id: "",
       name: "",
       num: "",
@@ -181,9 +181,9 @@ export default new Vuex.Store({
     },
     playItem({ commit, dispatch, state }, item) {
       commit('setSource', { source: item });
-      state.audio.oncanplay = function () {
+      // state.audio.oncanplay = function () {
         dispatch("play");
-      };
+      // };
     },
     nextItem({ state, dispatch }) {
       let index = -1;

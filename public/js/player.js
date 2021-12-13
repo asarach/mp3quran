@@ -35385,7 +35385,7 @@ var convertTimeHHMMSS = function convertTimeHHMMSS(val) {
     player_state: '',
     playing_item: 1,
     source: {
-      file: "empty",
+      file: "https://server8.mp3quran.net/ahmad_huth/002.mp3",
       id: "",
       name: "",
       num: "",
@@ -35585,11 +35585,9 @@ var convertTimeHHMMSS = function convertTimeHHMMSS(val) {
           state = _ref13.state;
       commit('setSource', {
         source: item
-      });
+      }); // state.audio.oncanplay = function () {
 
-      state.audio.oncanplay = function () {
-        dispatch("play");
-      };
+      dispatch("play"); // };
     },
     nextItem: function nextItem(_ref14) {
       var state = _ref14.state,
