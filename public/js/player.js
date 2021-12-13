@@ -35385,7 +35385,7 @@ var convertTimeHHMMSS = function convertTimeHHMMSS(val) {
     player_state: '',
     playing_item: 1,
     source: {
-      file: "https://server8.mp3quran.net/ahmad_huth/002.mp3",
+      file: "empty",
       id: "",
       name: "",
       num: "",
@@ -35583,9 +35583,17 @@ var convertTimeHHMMSS = function convertTimeHHMMSS(val) {
       var commit = _ref13.commit,
           dispatch = _ref13.dispatch,
           state = _ref13.state;
-      // commit('setSource', { source: item });
-      // state.audio.oncanplay = function () {
-      dispatch("play"); // };
+      commit('setSource', {
+        source: item
+      });
+      console.log(state.audio);
+      console.log(item.file);
+      state.audio.pause();
+      state.audio.setAttribute('src', item.file);
+      state.audio.load();
+      state.audio.play(); // state.audio.oncanplay = function () {
+      //   dispatch("play");
+      // };
     },
     nextItem: function nextItem(_ref14) {
       var state = _ref14.state,
@@ -35651,25 +35659,31 @@ var convertTimeHHMMSS = function convertTimeHHMMSS(val) {
       });
       state.audio.currentTime = 0;
     },
-    setAudio: function setAudio(_ref20, audio) {
+    setAudio: function setAudio(_ref20, audioold) {
       var state = _ref20.state,
           dispatch = _ref20.dispatch;
-      audio.addEventListener("timeupdate", function () {
+      state.audio = document.createElement('audio');
+      state.audio.addEventListener("timeupdate", function () {
         dispatch("update");
       });
-      audio.addEventListener("ended", function () {
+      state.audio.addEventListener("ended", function () {
         dispatch("nextItem");
       });
-      audio.addEventListener("loadeddata", function () {
+      state.audio.addEventListener("loadeddata", function () {
         dispatch("load");
       });
-      audio.addEventListener("pause", function () {
+      state.audio.addEventListener("pause", function () {
         dispatch("pause");
       });
-      audio.addEventListener("play", function () {
+      state.audio.addEventListener("play", function () {
         dispatch("play");
-      });
-      state.audio = audio;
+      }); // state.audio.setAttribute('src', 'music/' + songs[track] + audioType);
+
+      state.audio.setAttribute('controls', 'controls');
+      state.audio.setAttribute('id', 'audioPlayer');
+      $('body').append(state.audio); // state.audio.load();
+      // state.audio.play();
+
       state.audio.volume = state.volume / 100;
       state.audio.currentTime = state.currentSeconds;
     },

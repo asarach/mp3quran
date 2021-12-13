@@ -25,7 +25,7 @@ export default new Vuex.Store({
     player_state: '',
     playing_item: 1,
     source: {
-      file: "https://server8.mp3quran.net/ahmad_huth/002.mp3",
+      file: "empty",
       id: "",
       name: "",
       num: "",
@@ -180,9 +180,16 @@ export default new Vuex.Store({
       commit('setPlaylist', { playlist: new_playlist })
     },
     playItem({ commit, dispatch, state }, item) {
-      // commit('setSource', { source: item });
+      commit('setSource', { source: item });
+      console.log(state.audio);
+      console.log(item.file);
+      state.audio.pause();
+      state.audio.setAttribute('src', item.file);
+      state.audio.load();
+      state.audio.play();
+
       // state.audio.oncanplay = function () {
-        dispatch("play");
+      //   dispatch("play");
       // };
     },
     nextItem({ state, dispatch }) {
@@ -235,23 +242,31 @@ export default new Vuex.Store({
       state.audio.currentTime = 0;
     },
 
-    setAudio({ state, dispatch }, audio) {
-      audio.addEventListener("timeupdate", () => {
+    setAudio({ state, dispatch }, audioold) {
+      state.audio = document.createElement('audio');
+      state.audio.addEventListener("timeupdate", () => {
         dispatch("update");
       });
-      audio.addEventListener("ended", () => {
+      state.audio.addEventListener("ended", () => {
         dispatch("nextItem");
       });
-      audio.addEventListener("loadeddata", () => {
+      state.audio.addEventListener("loadeddata", () => {
         dispatch("load");
       });
-      audio.addEventListener("pause", () => {
+      state.audio.addEventListener("pause", () => {
         dispatch("pause");
       });
-      audio.addEventListener("play", () => {
+      state.audio.addEventListener("play", () => {
         dispatch("play");
       });
-      state.audio = audio;
+
+      // state.audio.setAttribute('src', 'music/' + songs[track] + audioType);
+      state.audio.setAttribute('controls', 'controls');
+      state.audio.setAttribute('id', 'audioPlayer');
+      $('body').append(state.audio);
+      // state.audio.load();
+      // state.audio.play();
+
       state.audio.volume = state.volume / 100;
       state.audio.currentTime = state.currentSeconds;
     },
