@@ -180,7 +180,24 @@ export default new Vuex.Store({
     },
     playItem({ commit, dispatch, state }, item) {
       commit('setSource', { source: item });
+      state.audio.pause();
+      state.audio.setAttribute('src', state.source.file);
+      state.audio.load();
       dispatch("play");
+    },
+    load({ commit, state }, item) {
+      console.log('load');
+      console.log(state.audio.readyState);
+      if (state.audio.readyState >= 2) {
+        state.loaded = true;
+        state.durationSeconds = parseInt(state.audio.duration);
+        if (!state.durationSeconds) {
+          state.durationSeconds = 0;
+        }
+        commit("setState", { player_state: "loaded" });
+        return true;
+      }
+      throw new Error("Failed to load sound file.");
     },
     nextItem({ state, dispatch }) {
       let index = -1;
@@ -213,18 +230,13 @@ export default new Vuex.Store({
       dispatch("playItem", item);
     },
     play({ commit, state }) {
-      commit("setPlaying", { playing: true });
-      state.audio.pause();
-      console.log(state.source.file);
-      state.audio.setAttribute('src', state.source.file);
-      console.log('play');
-      state.audio.load();
+      
       state.audio.play();
+      commit("setPlaying", { playing: true });
     },
     pause({ commit, state }) {
-      commit("setPlaying", { playing: false });
-      console.log('ps');
       state.audio.pause();
+      commit("setPlaying", { playing: false });
     },
     toggele({ dispatch, state }) {
       console.log(state.playing);
@@ -241,15 +253,15 @@ export default new Vuex.Store({
 
     setAudio({ state, dispatch }, audioold) {
       state.audio = document.createElement('audio');
-      // state.audio.addEventListener("timeupdate", () => {
-      //   dispatch("update");
-      // });
+      state.audio.addEventListener("timeupdate", () => {
+        dispatch("update");
+      });
       state.audio.addEventListener("ended", () => {
         dispatch("nextItem");
       });
-      // state.audio.addEventListener("loadeddata", () => {
-      //   dispatch("load");
-      // });
+      state.audio.addEventListener("loadeddata", () => {
+        dispatch("load");
+      });
       // state.audio.addEventListener("pause", () => {
       //   dispatch("pause");
       // });
@@ -257,31 +269,16 @@ export default new Vuex.Store({
       //   dispatch("play");
       // });
 
-      // state.audio.setAttribute('src', 'music/' + songs[track] + audioType);
       state.audio.setAttribute('controls', 'controls');
       state.audio.setAttribute('id', 'audioPlayer');
       $('body').append(state.audio);
-      // state.audio.load();
-      // state.audio.play();
-
+      
       state.audio.volume = state.volume / 100;
       state.audio.currentTime = state.currentSeconds;
     },
+
     update({ state, commit }) {
       commit("setCurrentSeconds", { currentSeconds: parseInt(state.audio.currentTime) });
-    },
-    load({ commit, state }, item) {
-      console.log('load');
-      if (state.audio.readyState >= 2) {
-        state.loaded = true;
-        state.durationSeconds = parseInt(state.audio.duration);
-        if (!state.durationSeconds) {
-          state.durationSeconds = 0;
-        }
-        commit("setState", { player_state: "loaded" });
-        return (state.playing = state.autoPlay);
-      }
-      throw new Error("Failed to load sound file.");
     },
 
 

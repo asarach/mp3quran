@@ -35571,118 +35571,16 @@ var convertTimeHHMMSS = function convertTimeHHMMSS(val) {
       commit('setSource', {
         source: item
       });
+      state.audio.pause();
+      state.audio.setAttribute('src', state.source.file);
+      state.audio.load();
       dispatch("play");
     },
-    nextItem: function nextItem(_ref14) {
-      var state = _ref14.state,
-          dispatch = _ref14.dispatch;
-      var index = -1;
-
-      for (var i = 0; i < state.playlist.length; i++) {
-        if (state.playlist[i].file === state.source.file) {
-          index = i;
-        }
-      }
-
-      var playlistIndex = Math.min(state.playlist.length - 1, index + 1);
-      var item = state.playlist[playlistIndex];
-      dispatch("playItem", item);
-    },
-    prevItem: function prevItem(_ref15) {
-      var state = _ref15.state,
-          dispatch = _ref15.dispatch;
-      var index = -1;
-
-      for (var i = 0; i < state.playlist.length; i++) {
-        if (state.playlist[i].file === state.source.file) {
-          index = i;
-        }
-      }
-
-      var playlistIndex = Math.max(0, index - 1);
-      var item = state.playlist[playlistIndex];
-      dispatch("playItem", item);
-    },
-    play: function play(_ref16) {
-      var commit = _ref16.commit,
-          state = _ref16.state;
-      commit("setPlaying", {
-        playing: true
-      });
-      state.audio.pause();
-      console.log(state.source.file);
-      state.audio.setAttribute('src', state.source.file);
-      console.log('play');
-      state.audio.load();
-      state.audio.play();
-    },
-    pause: function pause(_ref17) {
-      var commit = _ref17.commit,
-          state = _ref17.state;
-      commit("setPlaying", {
-        playing: false
-      });
-      console.log('ps');
-      state.audio.pause();
-    },
-    toggele: function toggele(_ref18) {
-      var dispatch = _ref18.dispatch,
-          state = _ref18.state;
-      console.log(state.playing);
-
-      if (state.playing) {
-        dispatch("pause");
-      } else {
-        dispatch("play");
-      }
-    },
-    stop: function stop(_ref19, products) {
-      var commit = _ref19.commit,
-          state = _ref19.state;
-      commit("setPlaying", {
-        playing: false
-      });
-      state.audio.currentTime = 0;
-    },
-    setAudio: function setAudio(_ref20, audioold) {
-      var state = _ref20.state,
-          dispatch = _ref20.dispatch;
-      state.audio = document.createElement('audio'); // state.audio.addEventListener("timeupdate", () => {
-      //   dispatch("update");
-      // });
-
-      state.audio.addEventListener("ended", function () {
-        dispatch("nextItem");
-      }); // state.audio.addEventListener("loadeddata", () => {
-      //   dispatch("load");
-      // });
-      // state.audio.addEventListener("pause", () => {
-      //   dispatch("pause");
-      // });
-      // state.audio.addEventListener("play", () => {
-      //   dispatch("play");
-      // });
-      // state.audio.setAttribute('src', 'music/' + songs[track] + audioType);
-
-      state.audio.setAttribute('controls', 'controls');
-      state.audio.setAttribute('id', 'audioPlayer');
-      $('body').append(state.audio); // state.audio.load();
-      // state.audio.play();
-
-      state.audio.volume = state.volume / 100;
-      state.audio.currentTime = state.currentSeconds;
-    },
-    update: function update(_ref21) {
-      var state = _ref21.state,
-          commit = _ref21.commit;
-      commit("setCurrentSeconds", {
-        currentSeconds: parseInt(state.audio.currentTime)
-      });
-    },
-    load: function load(_ref22, item) {
-      var commit = _ref22.commit,
-          state = _ref22.state;
+    load: function load(_ref14, item) {
+      var commit = _ref14.commit,
+          state = _ref14.state;
       console.log('load');
+      console.log(state.audio.readyState);
 
       if (state.audio.readyState >= 2) {
         state.loaded = true;
@@ -35695,10 +35593,107 @@ var convertTimeHHMMSS = function convertTimeHHMMSS(val) {
         commit("setState", {
           player_state: "loaded"
         });
-        return state.playing = state.autoPlay;
+        return true;
       }
 
       throw new Error("Failed to load sound file.");
+    },
+    nextItem: function nextItem(_ref15) {
+      var state = _ref15.state,
+          dispatch = _ref15.dispatch;
+      var index = -1;
+
+      for (var i = 0; i < state.playlist.length; i++) {
+        if (state.playlist[i].file === state.source.file) {
+          index = i;
+        }
+      }
+
+      var playlistIndex = Math.min(state.playlist.length - 1, index + 1);
+      var item = state.playlist[playlistIndex];
+      dispatch("playItem", item);
+    },
+    prevItem: function prevItem(_ref16) {
+      var state = _ref16.state,
+          dispatch = _ref16.dispatch;
+      var index = -1;
+
+      for (var i = 0; i < state.playlist.length; i++) {
+        if (state.playlist[i].file === state.source.file) {
+          index = i;
+        }
+      }
+
+      var playlistIndex = Math.max(0, index - 1);
+      var item = state.playlist[playlistIndex];
+      dispatch("playItem", item);
+    },
+    play: function play(_ref17) {
+      var commit = _ref17.commit,
+          state = _ref17.state;
+      state.audio.play();
+      commit("setPlaying", {
+        playing: true
+      });
+    },
+    pause: function pause(_ref18) {
+      var commit = _ref18.commit,
+          state = _ref18.state;
+      state.audio.pause();
+      commit("setPlaying", {
+        playing: false
+      });
+    },
+    toggele: function toggele(_ref19) {
+      var dispatch = _ref19.dispatch,
+          state = _ref19.state;
+      console.log(state.playing);
+
+      if (state.playing) {
+        dispatch("pause");
+      } else {
+        dispatch("play");
+      }
+    },
+    stop: function stop(_ref20, products) {
+      var commit = _ref20.commit,
+          state = _ref20.state;
+      commit("setPlaying", {
+        playing: false
+      });
+      state.audio.currentTime = 0;
+    },
+    setAudio: function setAudio(_ref21, audioold) {
+      var state = _ref21.state,
+          dispatch = _ref21.dispatch;
+      state.audio = document.createElement('audio');
+      state.audio.addEventListener("timeupdate", function () {
+        dispatch("update");
+      });
+      state.audio.addEventListener("ended", function () {
+        dispatch("nextItem");
+      });
+      state.audio.addEventListener("loadeddata", function () {
+        dispatch("load");
+      }); // state.audio.addEventListener("pause", () => {
+      //   dispatch("pause");
+      // });
+      // state.audio.addEventListener("play", () => {
+      //   dispatch("play");
+      // });
+
+      state.audio.setAttribute('controls', 'controls');
+      state.audio.setAttribute('id', 'audioPlayer');
+      $('body').append(state.audio);
+      state.audio.volume = state.volume / 100;
+      state.audio.currentTime = state.currentSeconds;
+    },
+    update: function update(_ref22) {
+      var state = _ref22.state,
+          commit = _ref22.commit;
+      commit("setCurrentSeconds", {
+        currentSeconds: parseInt(state.audio.currentTime)
+      });
     },
     //audio controles
     setPercentComplete: function setPercentComplete(_ref23, value) {
