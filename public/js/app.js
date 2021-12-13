@@ -3635,6 +3635,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       AppEvent.$emit("share", title, url, description);
     },
     getItemAndPlay: function getItemAndPlay(url) {
+      window.appFoolter.$store.commit("setState", 'loading');
       axios.get(url).then(function (response) {
         window.appFoolter.$store.dispatch("addPlayItem", response.data);
       })["catch"](function (error) {

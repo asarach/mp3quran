@@ -1,7 +1,6 @@
 <template>
   <div class="desktop-player" v-click-outside="closePlaylist">
     <div class="container d-flex">
-      <audio ref="audiofile" :src="source.file" style="display: none"></audio>
       <div class="ply-controls">
         <div
           class="ply-btn btn-previous"

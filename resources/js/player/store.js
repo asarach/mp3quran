@@ -48,7 +48,6 @@ export default new Vuex.Store({
   },
   mutations: {
     setCurrentTime(state, { currentTime }) {
-      console.log(currentTime);
       state.currentTime = currentTime;
     },
     setFavorite(state, { favorite }) {
@@ -181,16 +180,7 @@ export default new Vuex.Store({
     },
     playItem({ commit, dispatch, state }, item) {
       commit('setSource', { source: item });
-      console.log(state.audio);
-      console.log(item.file);
-      state.audio.pause();
-      state.audio.setAttribute('src', item.file);
-      state.audio.load();
-      state.audio.play();
-
-      // state.audio.oncanplay = function () {
-      //   dispatch("play");
-      // };
+      dispatch("play");
     },
     nextItem({ state, dispatch }) {
       let index = -1;
@@ -224,13 +214,20 @@ export default new Vuex.Store({
     },
     play({ commit, state }) {
       commit("setPlaying", { playing: true });
+      state.audio.pause();
+      console.log(state.source.file);
+      state.audio.setAttribute('src', state.source.file);
+      console.log('play');
+      state.audio.load();
       state.audio.play();
     },
     pause({ commit, state }) {
       commit("setPlaying", { playing: false });
+      console.log('ps');
       state.audio.pause();
     },
     toggele({ dispatch, state }) {
+      console.log(state.playing);
       if (state.playing) {
         dispatch("pause");
       } else {
@@ -244,21 +241,21 @@ export default new Vuex.Store({
 
     setAudio({ state, dispatch }, audioold) {
       state.audio = document.createElement('audio');
-      state.audio.addEventListener("timeupdate", () => {
-        dispatch("update");
-      });
+      // state.audio.addEventListener("timeupdate", () => {
+      //   dispatch("update");
+      // });
       state.audio.addEventListener("ended", () => {
         dispatch("nextItem");
       });
-      state.audio.addEventListener("loadeddata", () => {
-        dispatch("load");
-      });
-      state.audio.addEventListener("pause", () => {
-        dispatch("pause");
-      });
-      state.audio.addEventListener("play", () => {
-        dispatch("play");
-      });
+      // state.audio.addEventListener("loadeddata", () => {
+      //   dispatch("load");
+      // });
+      // state.audio.addEventListener("pause", () => {
+      //   dispatch("pause");
+      // });
+      // state.audio.addEventListener("play", () => {
+      //   dispatch("play");
+      // });
 
       // state.audio.setAttribute('src', 'music/' + songs[track] + audioType);
       state.audio.setAttribute('controls', 'controls');
@@ -274,6 +271,7 @@ export default new Vuex.Store({
       commit("setCurrentSeconds", { currentSeconds: parseInt(state.audio.currentTime) });
     },
     load({ commit, state }, item) {
+      console.log('load');
       if (state.audio.readyState >= 2) {
         state.loaded = true;
         state.durationSeconds = parseInt(state.audio.duration);

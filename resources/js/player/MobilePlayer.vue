@@ -1,6 +1,5 @@
 <template>
   <div class="mobile-player">
-    <audio ref="audiofile" :src="source.file" style="display: none"></audio>
     <div
       class="sply-progress"
       :style="'width: ' + percentComplete + '%;'"

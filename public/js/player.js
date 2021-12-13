@@ -416,7 +416,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -531,7 +530,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
 //
 //
 //
@@ -19826,12 +19824,6 @@ var render = function() {
     },
     [
       _c("div", { staticClass: "container d-flex" }, [
-        _c("audio", {
-          ref: "audiofile",
-          staticStyle: { display: "none" },
-          attrs: { src: _vm.source.file }
-        }),
-        _vm._v(" "),
         _c("div", { staticClass: "ply-controls" }, [
           _c(
             "div",
@@ -20298,12 +20290,6 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "mobile-player" }, [
-    _c("audio", {
-      ref: "audiofile",
-      staticStyle: { display: "none" },
-      attrs: { src: _vm.source.file }
-    }),
-    _vm._v(" "),
     _c("div", {
       staticClass: "sply-progress",
       style: "width: " + _vm.percentComplete + "%;"
@@ -35409,7 +35395,6 @@ var convertTimeHHMMSS = function convertTimeHHMMSS(val) {
   mutations: {
     setCurrentTime: function setCurrentTime(state, _ref) {
       var currentTime = _ref.currentTime;
-      console.log(currentTime);
       state.currentTime = currentTime;
     },
     setFavorite: function setFavorite(state, _ref2) {
@@ -35586,14 +35571,7 @@ var convertTimeHHMMSS = function convertTimeHHMMSS(val) {
       commit('setSource', {
         source: item
       });
-      console.log(state.audio);
-      console.log(item.file);
-      state.audio.pause();
-      state.audio.setAttribute('src', item.file);
-      state.audio.load();
-      state.audio.play(); // state.audio.oncanplay = function () {
-      //   dispatch("play");
-      // };
+      dispatch("play");
     },
     nextItem: function nextItem(_ref14) {
       var state = _ref14.state,
@@ -35631,6 +35609,11 @@ var convertTimeHHMMSS = function convertTimeHHMMSS(val) {
       commit("setPlaying", {
         playing: true
       });
+      state.audio.pause();
+      console.log(state.source.file);
+      state.audio.setAttribute('src', state.source.file);
+      console.log('play');
+      state.audio.load();
       state.audio.play();
     },
     pause: function pause(_ref17) {
@@ -35639,11 +35622,13 @@ var convertTimeHHMMSS = function convertTimeHHMMSS(val) {
       commit("setPlaying", {
         playing: false
       });
+      console.log('ps');
       state.audio.pause();
     },
     toggele: function toggele(_ref18) {
       var dispatch = _ref18.dispatch,
           state = _ref18.state;
+      console.log(state.playing);
 
       if (state.playing) {
         dispatch("pause");
@@ -35662,22 +35647,22 @@ var convertTimeHHMMSS = function convertTimeHHMMSS(val) {
     setAudio: function setAudio(_ref20, audioold) {
       var state = _ref20.state,
           dispatch = _ref20.dispatch;
-      state.audio = document.createElement('audio');
-      state.audio.addEventListener("timeupdate", function () {
-        dispatch("update");
-      });
+      state.audio = document.createElement('audio'); // state.audio.addEventListener("timeupdate", () => {
+      //   dispatch("update");
+      // });
+
       state.audio.addEventListener("ended", function () {
         dispatch("nextItem");
-      });
-      state.audio.addEventListener("loadeddata", function () {
-        dispatch("load");
-      });
-      state.audio.addEventListener("pause", function () {
-        dispatch("pause");
-      });
-      state.audio.addEventListener("play", function () {
-        dispatch("play");
-      }); // state.audio.setAttribute('src', 'music/' + songs[track] + audioType);
+      }); // state.audio.addEventListener("loadeddata", () => {
+      //   dispatch("load");
+      // });
+      // state.audio.addEventListener("pause", () => {
+      //   dispatch("pause");
+      // });
+      // state.audio.addEventListener("play", () => {
+      //   dispatch("play");
+      // });
+      // state.audio.setAttribute('src', 'music/' + songs[track] + audioType);
 
       state.audio.setAttribute('controls', 'controls');
       state.audio.setAttribute('id', 'audioPlayer');
@@ -35697,6 +35682,7 @@ var convertTimeHHMMSS = function convertTimeHHMMSS(val) {
     load: function load(_ref22, item) {
       var commit = _ref22.commit,
           state = _ref22.state;
+      console.log('load');
 
       if (state.audio.readyState >= 2) {
         state.loaded = true;

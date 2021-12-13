@@ -164,6 +164,7 @@ export default {
       AppEvent.$emit("share", title, url, description);
     },
     getItemAndPlay(url) {
+      window.appFoolter.$store.commit("setState", 'loading');
       axios
         .get(url)
         .then(function (response) {
