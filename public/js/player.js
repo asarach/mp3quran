@@ -35583,10 +35583,8 @@ var convertTimeHHMMSS = function convertTimeHHMMSS(val) {
       var commit = _ref13.commit,
           dispatch = _ref13.dispatch,
           state = _ref13.state;
-      commit('setSource', {
-        source: item
-      }); // state.audio.oncanplay = function () {
-
+      // commit('setSource', { source: item });
+      // state.audio.oncanplay = function () {
       dispatch("play"); // };
     },
     nextItem: function nextItem(_ref14) {

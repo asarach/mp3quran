@@ -180,7 +180,7 @@ export default new Vuex.Store({
       commit('setPlaylist', { playlist: new_playlist })
     },
     playItem({ commit, dispatch, state }, item) {
-      commit('setSource', { source: item });
+      // commit('setSource', { source: item });
       // state.audio.oncanplay = function () {
         dispatch("play");
       // };
