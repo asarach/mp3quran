@@ -89,16 +89,6 @@ body.sidebar-toggled .sidebar-wrapper {
     height: 100vh;
     overflow: scroll;
 }
-@media screen and (min-width: 768px) {
-    body.sidebar-toggled .page-content {
-        padding-left: 260px;
-    }
-
-    body.rtl.sidebar-toggled .page-content {
-        padding-right: 260px;
-        padding-left: 0;
-    }
-}
 /*----------------sidebar-wrapper----------------*/
 .sidebar-wrapper {
     top: 0;

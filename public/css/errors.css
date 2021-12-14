@@ -11368,9 +11368,3 @@ body.rtl {
 .ltr .main .show-filters .dropdown-toggle::after {
   margin: 0 -0.5rem 0 0.5rem;
 }
-
-@media only screen and (min-width: 767.98px) {
-  .ltr .mobile-ui .contact-show form {
-    margin: -16px -16px -16px 0;
-  }
-}
