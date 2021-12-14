@@ -13,7 +13,7 @@
       </div>
       <div
         class="ply-btn btn-play-pause"
-        v-on:click.prevent="toggele"
+        v-on:click.prevent="toggeleItem"
         :title="playing ? 'Pause' : 'Play'"
       >
         <span class="uni-icon icon-pause" v-if="playing"></span>
@@ -78,7 +78,7 @@
         </div>
         <div
           class="ply-btn btn-play-pause"
-          v-on:click.prevent="toggele"
+          v-on:click.prevent="toggeleItem"
           :title="playing ? 'Pause' : 'Play'"
         >
           <span class="uni-icon icon-pause" v-if="playing"></span>
@@ -105,7 +105,7 @@
             v-for="(audio, index) in playlist"
             :key="audio.id"
             :class="{ playing: playing && currentPosition() == index }"
-            @click="playItem(audio)"
+            @click="loadAndPlayItem(audio)"
           >
             <div class="read-info">
               <div class="read-sora">{{ audio.name }}</div>
@@ -176,7 +176,7 @@
                 >
                   <span class="uni-icon icon-pause"></span>
                 </div>
-                <div v-else class="ply-btn btn-play" @click="playItem(audio)">
+                <div v-else class="ply-btn btn-play" @click="loadAndPlayItem(audio)">
                   <span class="uni-icon icon-play_arrow"></span>
                 </div>
               </div>
@@ -317,8 +317,8 @@ export default {
       "pause",
       "nextItem",
       "prevItem",
-      "playItem",
-      "toggele",
+      "loadAndPlayItem",
+      "toggeleItem",
       "changeVolume",
       "clearPlaylist",
       "toggelePlaylist",
@@ -346,7 +346,7 @@ export default {
       self.$store.dispatch("stop");
     });
     PlayerEvent.$on("player_toggel", function () {
-      self.$store.dispatch("toggele");
+      self.$store.dispatch("toggeleItem");
     });
     PlayerEvent.$on("player_pause", function () {
       self.$store.dispatch("pause");

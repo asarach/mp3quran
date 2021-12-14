@@ -3220,14 +3220,32 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["radio"],
-  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["isPlaying", "isLoading"])), {}, {
+  computed: _objectSpread(_objectSpread({
     radiosIncludes: function radiosIncludes() {
       return this.$store.state.favorite.radios.includes(this.radio.id);
     }
-  }),
+  }, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["isPlaying", "isLoading"])), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])({
+    current_playing_item: function current_playing_item(state) {
+      return state.playing_item;
+    }
+  })),
   methods: _objectSpread(_objectSpread({
     shareItem: function shareItem(title, url, description) {
       if (typeof window !== "undefined") {
@@ -3251,9 +3269,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       xhr.open("GET", url);
       xhr.send();
     },
-    getItemAndPlay: function getItemAndPlay(url) {
+    getItemAndPlay: function getItemAndPlay(url, playing_item) {
+      console.log(playing_item);
+
+      if (this.current_playing_item != playing_item) {
+        window.appFoolter.$store.commit("setState", {
+          playing_state: "loading",
+          playing_item: playing_item,
+          playing_type: "radio"
+        });
+      }
+
       axios.get(url).then(function (response) {
-        window.appFoolter.$store.dispatch("addPlayItem", response.data);
+        window.appFoolter.$store.dispatch("addAndPlayItem", response.data);
       })["catch"](function (error) {
         console.log(error);
       });
@@ -3592,6 +3620,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["sora", "share", "read_id", "reciter", "rewaya"],
@@ -3620,6 +3649,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return this.$store.state.favorite.soar.includes(this.sora.id);
     }
   }, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["isPlaying", "isLoading"])), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])({
+    current_playing_item: function current_playing_item(state) {
+      return state.playing_item;
+    },
     current_language: function current_language(state) {
       return state.current_language;
     },
@@ -3634,10 +3666,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     shareItem: function shareItem(title, url, description) {
       AppEvent.$emit("share", title, url, description);
     },
-    getItemAndPlay: function getItemAndPlay(url) {
-      window.appFoolter.$store.commit("setState", 'loading');
+    getItemAndPlay: function getItemAndPlay(url, playing_item) {
+      if (this.current_playing_item != playing_item) {
+        window.appFoolter.$store.commit("setState", {
+          playing_state: "loading",
+          playing_item: playing_item,
+          playing_type: "sora"
+        });
+      }
+
       axios.get(url).then(function (response) {
-        window.appFoolter.$store.dispatch("addPlayItem", response.data);
+        window.appFoolter.$store.dispatch("addAndPlayItem", response.data);
       })["catch"](function (error) {
         console.log(error);
       });
@@ -3787,6 +3826,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["sora"],
@@ -3795,6 +3835,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return this.$store.state.favorite.soar.includes(this.sora.id);
     }
   }, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["isPlaying", "isLoading"])), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])({
+    current_playing_item: function current_playing_item(state) {
+      return state.playing_item;
+    },
     style_version: function style_version(state) {
       return state.settings.style_version;
     },
@@ -3815,9 +3858,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         console.log(error);
       });
     },
-    getItemAndPlay: function getItemAndPlay(url) {
+    getItemAndPlay: function getItemAndPlay(url, playing_item) {
+      if (this.current_playing_item != playing_item) {
+        window.appFoolter.$store.commit("setState", {
+          playing_state: "loading",
+          playing_item: playing_item,
+          playing_type: "sora"
+        });
+      }
+
       axios.get(url).then(function (response) {
-        window.appFoolter.$store.dispatch("addPlayItem", response.data);
+        window.appFoolter.$store.dispatch("addAndPlayItem", response.data);
       })["catch"](function (error) {
         console.log(error);
       });
@@ -61963,7 +62014,8 @@ var render = function() {
           click: function($event) {
             $event.preventDefault()
             return _vm.getItemAndPlay(
-              _vm.ajax_prefix + "/radio/item?id=" + _vm.radio.id
+              _vm.ajax_prefix + "/radio/item?id=" + _vm.radio.id,
+              "100002-" + _vm.radio.id
             )
           }
         }
@@ -61994,7 +62046,8 @@ var render = function() {
           click: function($event) {
             $event.preventDefault()
             return _vm.getItemAndPlay(
-              _vm.ajax_prefix + "/radio/item?id=" + _vm.radio.id
+              _vm.ajax_prefix + "/radio/item?id=" + _vm.radio.id,
+              "100002-" + _vm.radio.id
             )
           }
         }
@@ -62471,7 +62524,8 @@ var render = function() {
                   "/soar/item?r=" +
                   _vm.read_id +
                   "&s=" +
-                  _vm.sora.sora_id
+                  _vm.sora.sora_id,
+                _vm.sora.id
               )
             }
           }
@@ -62776,7 +62830,8 @@ var render = function() {
                 "/soar/item?r=" +
                 _vm.sora.read_id +
                 "&s=" +
-                _vm.sora.sora_id
+                _vm.sora.sora_id,
+              _vm.sora.id
             )
           }
         }
@@ -79713,7 +79768,7 @@ function initiateVue() {
       emitEvent: function emitEvent() {},
       getItemAndPlay: function getItemAndPlay(url) {
         axios.get(url).then(function (response) {
-          window.appFoolter.$store.dispatch("addPlayItem", response.data);
+          window.appFoolter.$store.dispatch("addAndPlayItem", response.data);
         })["catch"](function (error) {
           console.log(error);
         });
@@ -82367,8 +82422,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     },
     initial: true,
     playing: false,
-    playing_item: window.appFoolter.$store.state.source.id,
-    playing_type: 'sora',
+    playing_item: '',
+    playing_type: '',
     playing_state: '',
     subscribed: false,
     stats: {},
@@ -82401,7 +82456,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
           return true;
         }
 
-        if (item.type == 'radio' && state.playing_item == item.id && state.playing_state == 'unloaded') {
+        if (state.playing_type == 'radio' && state.playing_item == item.id && state.playing_state == 'unloaded') {
           return true;
         }
 

@@ -4,7 +4,8 @@
       class="ply-btn"
       @click="
         getItemAndPlay(
-          ajax_prefix + '/soar/item?r=' + sora.read_id + '&s=' + sora.sora_id
+          ajax_prefix + '/soar/item?r=' + sora.read_id + '&s=' + sora.sora_id,
+          sora.id
         )
       "
     >
@@ -121,6 +122,7 @@ export default {
     },
     ...mapGetters(["isPlaying", "isLoading"]),
     ...mapState({
+      current_playing_item: (state) => state.playing_item,
       style_version: (state) => state.settings.style_version,
       downloading: (state) => state.download.downloading,
     }),
@@ -142,11 +144,18 @@ export default {
           console.log(error);
         });
     },
-    getItemAndPlay(url) {
+    getItemAndPlay(url, playing_item) {
+      if (this.current_playing_item != playing_item) {
+        window.appFoolter.$store.commit("setState", {
+          playing_state: "loading",
+          playing_item: playing_item,
+          playing_type: "sora",
+        });
+      }
       axios
         .get(url)
         .then(function (response) {
-          window.appFoolter.$store.dispatch("addPlayItem", response.data);
+          window.appFoolter.$store.dispatch("addAndPlayItem", response.data);
         })
         .catch(function (error) {
           console.log(error);

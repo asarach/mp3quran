@@ -490,7 +490,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     currentPosition: "currentPosition",
     isLoading: "isLoading"
   })),
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])(["onDrop", "load", "pause", "nextItem", "prevItem", "playItem", "toggele", "changeVolume", "clearPlaylist", "toggelePlaylist", "closePlaylist", "toggeleMoreoptions", "clipboardErrorHandler", "clipboardSuccessHandler", "removeSoraFavorite", "addSoraFavorite", "shareItem", "removeItem", "showFullplayer", "closeFullplayer"])),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])(["onDrop", "load", "pause", "nextItem", "prevItem", "loadAndPlayItem", "toggeleItem", "changeVolume", "clearPlaylist", "toggelePlaylist", "closePlaylist", "toggeleMoreoptions", "clipboardErrorHandler", "clipboardSuccessHandler", "removeSoraFavorite", "addSoraFavorite", "shareItem", "removeItem", "showFullplayer", "closeFullplayer"])),
   mounted: function mounted() {
     this.$store.dispatch("setAudio", this.$refs.audiofile);
   },
@@ -503,7 +503,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       self.$store.dispatch("stop");
     });
     PlayerEvent.$on("player_toggel", function () {
-      self.$store.dispatch("toggele");
+      self.$store.dispatch("toggeleItem");
     });
     PlayerEvent.$on("player_pause", function () {
       self.$store.dispatch("pause");
@@ -858,7 +858,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     currentPosition: "currentPosition",
     isLoading: "isLoading"
   })),
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])(["onDrop", "load", "pause", "nextItem", "prevItem", "playItem", "toggele", "changeVolume", "clearPlaylist", "toggelePlaylist", "closePlaylist", "toggeleMoreoptions", "clipboardErrorHandler", "clipboardSuccessHandler", "removeSoraFavorite", "addSoraFavorite", "shareItem", "removeItem", "showFullplayer", "closeFullplayer"])),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])(["onDrop", "load", "pause", "nextItem", "prevItem", "loadAndPlayItem", "toggeleItem", "changeVolume", "clearPlaylist", "toggelePlaylist", "closePlaylist", "toggeleMoreoptions", "clipboardErrorHandler", "clipboardSuccessHandler", "removeSoraFavorite", "addSoraFavorite", "shareItem", "removeItem", "showFullplayer", "closeFullplayer"])),
   mounted: function mounted() {
     this.$store.dispatch("setAudio", this.$refs.audiofile);
   },
@@ -871,7 +871,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       self.$store.dispatch("stop");
     });
     PlayerEvent.$on("player_toggel", function () {
-      self.$store.dispatch("toggele");
+      self.$store.dispatch("toggeleItem");
     });
     PlayerEvent.$on("player_pause", function () {
       self.$store.dispatch("pause");
@@ -19847,7 +19847,7 @@ var render = function() {
               on: {
                 click: function($event) {
                   $event.preventDefault()
-                  return _vm.toggele.apply(null, arguments)
+                  return _vm.toggeleItem.apply(null, arguments)
                 }
               }
             },
@@ -20068,7 +20068,7 @@ var render = function() {
                                       staticClass: "ply-btn btn-play",
                                       on: {
                                         click: function($event) {
-                                          return _vm.playItem(item)
+                                          return _vm.loadAndPlayItem(item)
                                         }
                                       }
                                     },
@@ -20318,7 +20318,7 @@ var render = function() {
           on: {
             click: function($event) {
               $event.preventDefault()
-              return _vm.toggele.apply(null, arguments)
+              return _vm.toggeleItem.apply(null, arguments)
             }
           }
         },
@@ -20461,7 +20461,7 @@ var render = function() {
               on: {
                 click: function($event) {
                   $event.preventDefault()
-                  return _vm.toggele.apply(null, arguments)
+                  return _vm.toggeleItem.apply(null, arguments)
                 }
               }
             },
@@ -20507,7 +20507,7 @@ var render = function() {
                   },
                   on: {
                     click: function($event) {
-                      return _vm.playItem(audio)
+                      return _vm.loadAndPlayItem(audio)
                     }
                   }
                 },
@@ -20660,7 +20660,7 @@ var render = function() {
                                   staticClass: "ply-btn btn-play",
                                   on: {
                                     click: function($event) {
-                                      return _vm.playItem(audio)
+                                      return _vm.loadAndPlayItem(audio)
                                     }
                                   }
                                 },
@@ -35368,8 +35368,9 @@ var convertTimeHHMMSS = function convertTimeHHMMSS(val) {
     loaded: false,
     dragging: false,
     show_fullplayer: false,
-    player_state: '',
-    playing_item: 1,
+    playing_state: '',
+    playing_item: '',
+    playing_type: '',
     source: {
       file: "empty",
       id: "",
@@ -35424,9 +35425,15 @@ var convertTimeHHMMSS = function convertTimeHHMMSS(val) {
       window.appMain.$store.state.playing = playing;
     },
     setState: function setState(state, _ref8) {
-      var player_state = _ref8.player_state;
-      state.player_state = player_state;
-      window.appMain.$store.state.playing_state = player_state;
+      var playing_state = _ref8.playing_state,
+          playing_item = _ref8.playing_item,
+          playing_type = _ref8.playing_type;
+      state.playing_type = playing_type;
+      window.appMain.$store.state.playing_type = playing_type;
+      state.playing_item = playing_item;
+      window.appMain.$store.state.playing_item = playing_item;
+      state.playing_state = playing_state;
+      window.appMain.$store.state.playing_state = playing_state;
     }
   },
   getters: {
@@ -35469,11 +35476,11 @@ var convertTimeHHMMSS = function convertTimeHHMMSS(val) {
     },
     isLoading: function isLoading(state, getters) {
       return function (item) {
-        if (state.source.id == item.id && state.player_state == 'loading') {
+        if (state.source.id == item.id && state.playing_state == 'loading') {
           return true;
         }
 
-        if (item.type == 'radio' && state.source.id == item.id && state.player_state == 'unloaded') {
+        if (item.type == 'radio' && state.source.id == item.id && state.playing_state == 'unloaded') {
           return true;
         }
 
@@ -35486,12 +35493,12 @@ var convertTimeHHMMSS = function convertTimeHHMMSS(val) {
       var dispatch = _ref9.dispatch,
           state = _ref9.state;
       axios.get(url).then(function (response) {
-        dispatch('addPlayItem', response.data);
+        dispatch('addAndPlayItem', response.data);
       })["catch"](function (error) {
         console.log(error);
       });
     },
-    addPlayItem: function addPlayItem(_ref10, item) {
+    addAndPlayItem: function addAndPlayItem(_ref10, item) {
       var commit = _ref10.commit,
           state = _ref10.state,
           dispatch = _ref10.dispatch;
@@ -35513,9 +35520,9 @@ var convertTimeHHMMSS = function convertTimeHHMMSS(val) {
       }
 
       if (item.id == state.source.id) {
-        dispatch("toggele");
+        dispatch("toggeleItem");
       } else {
-        dispatch("playItem", item);
+        dispatch("loadAndPlayItem", item);
       }
     },
     addItem: function addItem(_ref11, item) {
@@ -35564,23 +35571,40 @@ var convertTimeHHMMSS = function convertTimeHHMMSS(val) {
         playlist: new_playlist
       });
     },
-    playItem: function playItem(_ref13, item) {
+    loadAndPlayItem: function loadAndPlayItem(_ref13, item) {
       var commit = _ref13.commit,
           dispatch = _ref13.dispatch,
           state = _ref13.state;
+      commit("setState", {
+        playing_state: "loading",
+        playing_item: item.id,
+        playing_type: state.playing_type
+      });
       commit('setSource', {
         source: item
       });
+      commit('setCurrentTime', {
+        currentTime: 0
+      });
+      state.audio.currentTime = 0;
       state.audio.pause();
       state.audio.setAttribute('src', state.source.file);
       state.audio.load();
       dispatch("play");
     },
-    load: function load(_ref14, item) {
-      var commit = _ref14.commit,
+    toggeleItem: function toggeleItem(_ref14) {
+      var dispatch = _ref14.dispatch,
           state = _ref14.state;
-      console.log('load');
-      console.log(state.audio.readyState);
+
+      if (state.playing) {
+        dispatch("pause");
+      } else {
+        dispatch("play");
+      }
+    },
+    load: function load(_ref15, item) {
+      var commit = _ref15.commit,
+          state = _ref15.state;
 
       if (state.audio.readyState >= 2) {
         state.loaded = true;
@@ -35590,30 +35614,18 @@ var convertTimeHHMMSS = function convertTimeHHMMSS(val) {
           state.durationSeconds = 0;
         }
 
+        console.log('playing_state load');
         commit("setState", {
-          player_state: "loaded"
+          playing_state: 'loaded',
+          playing_item: state.playing_item,
+          playing_type: state.playing_type
         });
         return true;
       }
 
       throw new Error("Failed to load sound file.");
     },
-    nextItem: function nextItem(_ref15) {
-      var state = _ref15.state,
-          dispatch = _ref15.dispatch;
-      var index = -1;
-
-      for (var i = 0; i < state.playlist.length; i++) {
-        if (state.playlist[i].file === state.source.file) {
-          index = i;
-        }
-      }
-
-      var playlistIndex = Math.min(state.playlist.length - 1, index + 1);
-      var item = state.playlist[playlistIndex];
-      dispatch("playItem", item);
-    },
-    prevItem: function prevItem(_ref16) {
+    nextItem: function nextItem(_ref16) {
       var state = _ref16.state,
           dispatch = _ref16.dispatch;
       var index = -1;
@@ -35624,36 +35636,40 @@ var convertTimeHHMMSS = function convertTimeHHMMSS(val) {
         }
       }
 
+      var playlistIndex = Math.min(state.playlist.length - 1, index + 1);
+      var item = state.playlist[playlistIndex];
+      dispatch("loadAndPlayItem", item);
+    },
+    prevItem: function prevItem(_ref17) {
+      var state = _ref17.state,
+          dispatch = _ref17.dispatch;
+      var index = -1;
+
+      for (var i = 0; i < state.playlist.length; i++) {
+        if (state.playlist[i].file === state.source.file) {
+          index = i;
+        }
+      }
+
       var playlistIndex = Math.max(0, index - 1);
       var item = state.playlist[playlistIndex];
-      dispatch("playItem", item);
+      dispatch("loadAndPlayItem", item);
     },
-    play: function play(_ref17) {
-      var commit = _ref17.commit,
-          state = _ref17.state;
+    play: function play(_ref18) {
+      var commit = _ref18.commit,
+          state = _ref18.state;
       state.audio.play();
       commit("setPlaying", {
         playing: true
       });
     },
-    pause: function pause(_ref18) {
-      var commit = _ref18.commit,
-          state = _ref18.state;
+    pause: function pause(_ref19) {
+      var commit = _ref19.commit,
+          state = _ref19.state;
       state.audio.pause();
       commit("setPlaying", {
         playing: false
       });
-    },
-    toggele: function toggele(_ref19) {
-      var dispatch = _ref19.dispatch,
-          state = _ref19.state;
-      console.log(state.playing);
-
-      if (state.playing) {
-        dispatch("pause");
-      } else {
-        dispatch("play");
-      }
     },
     stop: function stop(_ref20, products) {
       var commit = _ref20.commit,
@@ -35665,7 +35681,10 @@ var convertTimeHHMMSS = function convertTimeHHMMSS(val) {
     },
     setAudio: function setAudio(_ref21, audioold) {
       var state = _ref21.state,
-          dispatch = _ref21.dispatch;
+          dispatch = _ref21.dispatch,
+          commit = _ref21.commit;
+      // commit("setPlaying", { playing: false });
+      state.playing = false;
       state.audio = document.createElement('audio');
       state.audio.addEventListener("timeupdate", function () {
         dispatch("update");
@@ -35676,14 +35695,18 @@ var convertTimeHHMMSS = function convertTimeHHMMSS(val) {
       state.audio.addEventListener("loadeddata", function () {
         dispatch("load");
       }); // state.audio.addEventListener("pause", () => {
-      //   dispatch("pause");
       // });
       // state.audio.addEventListener("play", () => {
-      //   dispatch("play");
       // });
 
       state.audio.setAttribute('controls', 'controls');
       state.audio.setAttribute('id', 'audioPlayer');
+
+      if (state.source.file !== 'empty') {
+        state.audio.setAttribute('src', state.source.file);
+        state.audio.load();
+      }
+
       $('body').append(state.audio);
       state.audio.volume = state.volume / 100;
       state.audio.currentTime = state.currentSeconds;

@@ -3,12 +3,22 @@
     margin-right: 1rem;
     margin-left: 0;
   }
+  .top-bar .tb-search {
+    margin-right: 1rem;
+    margin-left: initial;
+  }
   .top-bar .tb-search .btn-search {
-    margin-left: -2.15rem;
-    margin-right: 2rem;
+    right: 1rem;
+    left: auto;
+    top: 5px;
   }
   .top-bar .tb-radio .btn {
     margin-right: 0.5rem;
+    margin-left: 0;
+  }
+  .top-bar .tb-radio .btn .uni-icon {
+    margin-left: 0;
+    margin-right: 6px;
   }
   .top-bar .tb-social {
     margin-right: initial;
@@ -17,9 +27,25 @@
   .top-bar .tb-social ul li {
     margin: 0 0.5rem 0 0;
   }
+  .header-newsletters .form-control {
+    border-radius: 10px 0 0 10px;
+  }
+  .tb-languages .tbl-btn .uni-icon {
+    margin-right: 0.5rem;
+    margin-left: 0;
+  }
+  .header-newsletters .btn-subscribe {
+    margin-left: -2.5rem;
+    margin-right: 0;
+    padding-left: 3rem;
+    padding-right: 0.5rem;
+  }
   .home-show .home-reads.letters .side-letters {
     margin-left: 0.5rem;
     margin-right: 0;
+  }
+  .home-show .home-reads.letters .reads-list h3 {
+    border-radius: 10px 10px 0 10px;
   }
   .mr-auto {
     margin-left: auto !important;
@@ -34,10 +60,23 @@
     margin-left: auto;
     margin-right: initial;
   }
+  .main .header-options .btn {
+    padding: 0px 20px 0 6px;
+    margin-right: 1rem;
+    margin-left: 0;
+  }
+  .main .header-options .btn .uni-icon {
+    margin-right: 8px;
+    margin-left: 0;
+  }
   .card-radio .more-btn,
   .sora-item .more-btn {
     right: 0.5rem;
     left: auto;
+  }
+  .sora-item .ply-btn{
+    margin-right: 6px;
+    margin-left: 0;
   }
   .card-radio .radio-options,
   .sora-item .sora-options {
@@ -51,24 +90,67 @@
     border-radius: 0 10px 10px 0;
     margin: -31px -31px -32px 0;
   }
-  .sitemap-show .show-body h3{
+  .sitemap-show .show-body h3 {
     padding-left: 30px;
   }
-  .top-bar .tb-languages .tbl-dropdown.opened{
+  .top-bar .tb-languages .tbl-dropdown.opened {
     right: 0;
     left: auto;
   }
-  .mobile-ui .top-bar .tb-languages{
+  .mobile-ui .top-bar .tb-languages {
     margin-right: 0;
     margin-left: auto;
   }
-  .main .show-filters .dropdown-toggle::after{
+  .main .show-filters .dropdown-toggle::after {
     margin: 0 -0.5rem 0 0.5rem;
+  }
+  .desktop-ui .desktop-sidebar .menu-link span {
+    margin-right: 5px;
+    margin-left: 0;
+  }
+  .desktop-ui .desktop-sidebar .menu-link:hover,
+  .desktop-ui .desktop-sidebar .menu-link.active {
+    border-left: 2px solid #14aae2;
+    margin-left: -2px;
+    border-right: 0;
+    margin-right: 0;
+  }
+  .footer-social{
+    margin-left: auto;
+    margin-right: initial;
+  }
+  .audio-player .ply-playlist li{
+    direction: ltr;
+  }
+  .audio-player .ply-playlist li .drag-handle.bg{
+    margin-right: 2px;
+    margin-left: 0;
+  }
+  .audio-player .ply-playlist li .playlist-avatar{
+    margin-right: 0.5rem;
+    margin-left: 0;
+  }
+  .audio-player .ply-playlist li .read-sora{
+    text-align: left;
+  }
+  .audio-player .ply-playlist li .read-options{
+    left: initial;
+    right: 6px;
+  }
+  .audio-player .ply-playlist li .read-options .ply-btn{
+    margin-left: 0.5rem;
+    margin-right: 0;
+  }
+  .sora-show-item .ply-btn{
+    margin: 1rem auto;
+  }
+  .card-radio .ply-btn{
+    margin-left: 0;
+    margin-right: 6px;
   }
 }
 @media only screen and (min-width: 767.98px) {
-  .ltr .mobile-ui .contact-show form{
+  .ltr .mobile-ui .contact-show form {
     margin: -16px -16px -16px 0;
   }
 }
-

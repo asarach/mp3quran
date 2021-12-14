@@ -137,7 +137,7 @@ function initiateVue() {
           .get(url)
           .then(function (response) {
             window.appFoolter.$store.dispatch(
-              "addPlayItem",
+              "addAndPlayItem",
               response.data
             );
           })
