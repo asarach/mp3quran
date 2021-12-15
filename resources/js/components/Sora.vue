@@ -91,7 +91,7 @@
       </div>
       <div
         class="sora-btn ike-btn"
-        v-if="soarIncludes"
+        v-if="soarIncludes(sora.id)"
         v-tooltip="trans('text.remove-from-favorite')"
         @click="removeSoraFavorite(sora.id)"
       >
@@ -148,9 +148,7 @@ export default {
     };
   },
   computed: {
-    soarIncludes: function () {
-      return this.$store.state.favorite.soar.includes(this.sora.id);
-    },
+    ...mapGetters("favorite", ["soarIncludes"]),
     ...mapGetters(["isPlaying", "isLoading"]),
     ...mapState({
       current_playing_item: (state) => state.playing_item,

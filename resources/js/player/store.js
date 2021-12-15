@@ -87,12 +87,24 @@ export default new Vuex.Store({
     durationTime: (state) => {
       return convertTimeHHMMSS(state.durationSeconds);
     },
-    soarIncludes: (state, getters) => (item) => {
-      if (state.favorite.soar.includes(item)) {
-        return true;
-      } else {
-        return false;
+    favoriteIncludes: (state, getters) => (item, type) => {
+      let includ = false;
+      if (window.appMain.$store) {
+        switch (type) {
+          case 'sora':
+            if (window.appMain.$store.state.favorite.soar.includes(item)) {
+              includ = true;
+            }
+            break;
+          case 'radio':
+            if (window.appMain.$store.state.favorite.radios.includes(item)) {
+              includ = true;
+            }
+            break;
+        }
       }
+
+      return includ;
     },
 
     currentPosition: (state, getters) => (item) => {
@@ -188,7 +200,7 @@ export default new Vuex.Store({
         playing_item: item.id,
         playing_type: state.playing_type,
       });
-    
+
       commit('setSource', { source: item });
       commit('setCurrentTime', { currentTime: 0 });
       state.audio.currentTime = 0;
@@ -260,7 +272,7 @@ export default new Vuex.Store({
       state.audio.pause();
       commit("setPlaying", { playing: false });
     },
-    
+
     stop({ commit, state }, products) {
       commit("setPlaying", { playing: false });
       state.audio.currentTime = 0;
@@ -286,7 +298,7 @@ export default new Vuex.Store({
 
       state.audio.setAttribute('controls', 'controls');
       state.audio.setAttribute('id', 'audioPlayer');
-      if ( state.source.file !== 'empty') {
+      if (state.source.file !== 'empty') {
         state.audio.setAttribute('src', state.source.file);
         state.audio.load();
       }
@@ -397,11 +409,27 @@ export default new Vuex.Store({
     shareItem({ }, title, url, description) {
       AppEvent.$emit("share", title, url, description);
     },
-    addSoraFavorite({ }, id) {
-      window.appMain.$store.dispatch("favorite/addSora", id);
+    addItemFavorite({ }, { item, type }) {
+
+      switch (type) {
+        case 'sora':
+          window.appMain.$store.dispatch("favorite/addSora", item);
+          break;
+        case 'radio':
+          window.appMain.$store.dispatch("favorite/addRadio", item);
+          break;
+      }
+
     },
-    removeSoraFavorite({ }, id) {
-      window.appMain.$store.dispatch("favorite/removeSora", id);
+    removeItemFavorite({ }, { item, type }) {
+      switch (type) {
+        case 'sora':
+          window.appMain.$store.dispatch("favorite/removeSora", item);
+          break;
+        case 'radio':
+          window.appMain.$store.dispatch("favorite/removeRadio", item);
+          break;
+      }
     },
     downloadMp3({ }, item) {
       window.appMain.$store.dispatch("download/downloadMp3", item);

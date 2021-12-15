@@ -26,6 +26,7 @@ export default {
         },
         setSoar(state, { soar }) {
             state.soar = soar;
+            console.log(soar);
         },
         setShowVideos(state, { videos }) {
             state.show.videos = videos;

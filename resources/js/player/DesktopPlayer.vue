@@ -121,7 +121,11 @@
                   >
                     <span class="uni-icon icon-pause"></span>
                   </div>
-                  <div v-else class="ply-btn btn-play" @click="loadAndPlayItem(item)">
+                  <div
+                    v-else
+                    class="ply-btn btn-play"
+                    @click="loadAndPlayItem(item)"
+                  >
                     <span class="uni-icon icon-play_arrow1"></span>
                   </div>
                 </div>
@@ -181,15 +185,17 @@
 
                   <div
                     class="ply-btn"
-                    v-if="soarIncludes(item.id)"
-                    @click="removeSoraFavorite(item.id)"
+                    v-if="favoriteIncludes(item.id, item.type)"
+                    @click="
+                      removeItemFavorite({ item: item.id, type: item.type })
+                    "
                   >
                     <span
                       class="uni-icon icon-favorite"
                       style="color: #f2a01b"
                     ></span>
                   </div>
-                  <div class="ply-btn" v-else @click="addSoraFavorite(item.id)">
+                  <div class="ply-btn" v-else @click="addItemFavorite({ item: item.id, type: item.type })">
                     <span class="uni-icon icon-favorite_outline"></span>
                   </div>
                 </div>
@@ -253,7 +259,7 @@ export default {
     ...mapGetters({
       durationTime: "durationTime",
       currentTime: "currentTime",
-      soarIncludes: "soarIncludes",
+      favoriteIncludes: "favoriteIncludes",
       currentPosition: "currentPosition",
       isLoading: "isLoading",
     }),
@@ -275,8 +281,8 @@ export default {
       "toggeleMoreoptions",
       "clipboardErrorHandler",
       "clipboardSuccessHandler",
-      "removeSoraFavorite",
-      "addSoraFavorite",
+      "removeItemFavorite",
+      "addItemFavorite",
       "shareItem",
       "removeItem",
       "showFullplayer",

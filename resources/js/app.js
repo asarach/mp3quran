@@ -153,8 +153,8 @@ function initiateVue() {
     mounted() {
       var MainLoading = document.getElementById("MainLoading");
       MainLoading.style.display = "none";
-      console.log('MainLoading');
-      window.appFoolter.$store.commit('setFavorite', { favorite: this.$store.state.favorite })
+      // console.log('MainLoading');
+      // window.appFoolter.$store.commit('setFavorite', { favorite: this.$store.state.favorite })
     }
   });
 }

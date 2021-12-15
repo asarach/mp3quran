@@ -114,8 +114,10 @@
             <div class="read-options">
               <div
                 class="ply-btn read-like-btn"
-                v-if="soarIncludes(audio.id)"
-                @click="removeSoraFavorite(audio.id)"
+                v-if="favoriteIncludes(audio.id, audio.type)"
+                @click="
+                  removeItemFavorite({ item: audio.id, type: audio.type })
+                "
               >
                 <span
                   class="uni-icon icon-favorite"
@@ -125,7 +127,7 @@
               <div
                 class="ply-btn read-like-btn"
                 v-else
-                @click="addSoraFavorite(audio.id)"
+                @click="addItemFavorite({ item: audio.id, type: audio.type })"
               >
                 <span
                   class="uni-icon icon-favorite_outline"
@@ -176,7 +178,11 @@
                 >
                   <span class="uni-icon icon-pause"></span>
                 </div>
-                <div v-else class="ply-btn btn-play" @click="loadAndPlayItem(audio)">
+                <div
+                  v-else
+                  class="ply-btn btn-play"
+                  @click="loadAndPlayItem(audio)"
+                >
                   <span class="uni-icon icon-play_arrow"></span>
                 </div>
               </div>
@@ -233,15 +239,21 @@
                 ></a>
                 <div
                   class="ply-btn"
-                  v-if="soarIncludes(audio.id)"
-                  @click="removeSoraFavorite(audio.id)"
+                  v-if="favoriteIncludes(audio.id, audio.type)"
+                  @click="
+                    removeItemFavorite({ item: audio.id, type: audio.type })
+                  "
                 >
                   <span
                     class="uni-icon icon-favorite"
                     style="color: #f2a01b"
                   ></span>
                 </div>
-                <div class="ply-btn" v-else @click="addSoraFavorite(audio.id)">
+                <div
+                  class="ply-btn"
+                  v-else
+                  @click="addItemFavorite({ item: audio.id, type: audio.type })"
+                >
                   <span class="uni-icon icon-favorite_outline"></span>
                 </div>
               </div>
@@ -304,7 +316,7 @@ export default {
     ...mapGetters({
       durationTime: "durationTime",
       currentTime: "currentTime",
-      soarIncludes: "soarIncludes",
+      favoriteIncludes: "favoriteIncludes",
       currentPosition: "currentPosition",
       isLoading: "isLoading",
     }),
@@ -326,8 +338,8 @@ export default {
       "toggeleMoreoptions",
       "clipboardErrorHandler",
       "clipboardSuccessHandler",
-      "removeSoraFavorite",
-      "addSoraFavorite",
+      "removeItemFavorite",
+      "addItemFavorite",
       "shareItem",
       "removeItem",
       "showFullplayer",
