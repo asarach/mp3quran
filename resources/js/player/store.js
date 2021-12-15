@@ -274,8 +274,10 @@ export default new Vuex.Store({
     },
 
     stop({ commit, state }, products) {
-      commit("setPlaying", { playing: false });
+      state.audio.pause();
       state.audio.currentTime = 0;
+      commit("setPlaying", { playing: false });
+      
     },
 
     setAudio({ state, dispatch, commit }, audioold) {
@@ -388,7 +390,7 @@ export default new Vuex.Store({
     closePlaylist({ state }) {
       state.show_playlist = false;
     },
-    clearPlaylist({ commit }) {
+    clearPlaylist({ commit, dispatch }) {
       var source = {
         file: "empty",
         id: "",
@@ -405,6 +407,7 @@ export default new Vuex.Store({
       };
       commit("setSource", { source: source });
       commit("setPlaylist", { playlist: [] });
+      dispatch("stop");
     },
     shareItem({ }, title, url, description) {
       AppEvent.$emit("share", title, url, description);
