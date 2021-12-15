@@ -11,7 +11,7 @@
     </li>
     @else
     <li>
-      <a href="{{ LaravelLocalization::localizeUrl($menu['slug']) }}" class="menu-link">
+      <a href="{{ LaravelLocalization::localizeUrl($menu['slug']) }}" class="menu-link  @if(request()->url()  == LaravelLocalization::localizeUrl($menu['slug']) ) active @endif">
         {!! $menu['icon'] !!}
         {{trans('text.' . $menu['title'])}}
       </a>

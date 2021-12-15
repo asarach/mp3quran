@@ -21,7 +21,8 @@
                             <span class="uni-icon icon-radio" style="color: #fff"></span>
                             {{ trans("text.live-radio") }}
                         </button>
-                        {{ trans("text.listen-to-radio") }}
+                        <span class="tb-radio-txt">{{ trans("text.listen-to-radio") }}</span>
+                        
                     </div>
                     @if (1)
                     <div class="header-newsletters mr-auto">
@@ -72,7 +73,7 @@
                             <div class="row">
                                 @foreach ($languages as $key => $language)
                                 <div class="col-8">
-                                    <a href="/{{ $key }}" class="tbl-item">{{ $language['native'] }}</a>
+                                    <a href="/{{ $key }}" data-turbolinks="false" class="tbl-item">{{ $language['native'] }}</a>
                                 </div>
                                 @endforeach
                             </div>

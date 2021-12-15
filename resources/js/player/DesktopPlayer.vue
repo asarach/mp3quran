@@ -10,7 +10,7 @@
         </div>
         <div
           class="ply-btn btn-play-pause"
-          @click.prevent="toggele"
+          @click.prevent="toggeleItem"
           :title="playing ? 'Pause' : 'Play'"
         >
           <span
@@ -121,7 +121,7 @@
                   >
                     <span class="uni-icon icon-pause"></span>
                   </div>
-                  <div v-else class="ply-btn btn-play" @click="playItem(item)">
+                  <div v-else class="ply-btn btn-play" @click="loadAndPlayItem(item)">
                     <span class="uni-icon icon-play_arrow1"></span>
                   </div>
                 </div>
@@ -266,8 +266,8 @@ export default {
       "pause",
       "nextItem",
       "prevItem",
-      "playItem",
-      "toggele",
+      "loadAndPlayItem",
+      "toggeleItem",
       "changeVolume",
       "clearPlaylist",
       "toggelePlaylist",
@@ -295,7 +295,7 @@ export default {
       self.$store.dispatch("stop");
     });
     PlayerEvent.$on("player_toggel", function () {
-      self.$store.dispatch("toggele");
+      self.$store.dispatch("toggeleItem");
     });
     PlayerEvent.$on("player_pause", function () {
       self.$store.dispatch("pause");

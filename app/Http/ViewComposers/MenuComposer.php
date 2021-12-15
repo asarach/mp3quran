@@ -41,7 +41,6 @@ class MenuComposer
     public function compose(View $view)
     {
         $main_menu  = getMainMenu(LaravelLocalization::getCurrentLocale(),  style_version());
-
         $view->with(compact('main_menu'));
     }
 }

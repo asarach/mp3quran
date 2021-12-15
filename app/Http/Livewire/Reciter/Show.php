@@ -30,7 +30,9 @@ class Show extends Component
         if ($this->search) {
             $reciter_reads = $this->getReciterReads($reciter, $read);
         } else {
-            $cache_name = 'reciter_reads_index_read' . $read->id . '_long_' .  LaravelLocalization::getCurrentLocale();
+            
+            $cache_name = 'reciter_reads_index_read_' . $read->id . '_long_' .  LaravelLocalization::getCurrentLocale();
+            // dd($cache_name);
             // Cache::forget($cache_name);
             $reciter_reads = Cache::rememberForever($cache_name, function () use ($reciter, $read) {
                 return $this->getReciterReads($reciter, $read);

@@ -12,7 +12,7 @@
             </option>
           </select>
         </div>
-        <div class="form-group mr-md-2">
+        <div class="form-group">
           <select
             class="custom-select"
             v-model="read"
@@ -33,7 +33,7 @@
             </option>
           </select>
         </div>
-        <div class="form-group mr-auto">
+        <div class="form-group">
           <select class="custom-select" v-model="pageNum">
             <option value="0" class="d-none" disabled selected>
               {{ trans("text.part") }}

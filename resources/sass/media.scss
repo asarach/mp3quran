@@ -79,6 +79,20 @@
   .top-bar .top-search .form-control {
     width: 180px;
   }
+  .top-bar .tb-logo {
+    margin-left: 0.5rem;
+  }
+  .top-bar .tb-search {
+    margin-left: 0.5rem;
+  }
+  .top-bar .tb-radio {
+    min-width: 300px;
+  }
+  .top-bar .tb-radio .btn {
+    font-size: 13px;
+    font-weight: 700 !important;
+    min-width: 108px;
+  }
 
   .header.small-header .header-manu .nav-link,
   .header.sticky-header .header-manu .nav-link {
@@ -123,9 +137,6 @@
   }
   .desktop-ui .desktop-sidebar {
     width: 185px !important;
-  }
-  .top-bar .tb-search .btn-search {
-    margin-left: 1rem;
   }
   .fliping-book .book {
     height: 540px;
@@ -262,6 +273,12 @@
 }
 /* Small Devices, Tablets */
 @media only screen and (max-width: 767.98px) {
+  .mobile-ui .main {
+    margin-top: 0;
+  }
+  .quick-access .modal .modal-body .form-group {
+    margin-bottom: 0.5rem;
+  }
   .content-header {
     margin-bottom: 1.5rem;
   }
@@ -506,6 +523,21 @@
   .mobile-ui .contact-show form {
     margin: -1rem 0rem -1rem -1rem;
   }
+  .ltr .card-radio .radio-options,
+  .ltr .sora-item .sora-options {
+    right: auto !important;
+    left: auto !important;
+  }
+  .ltr .audio-player .ply-playlist li .read-num {
+    float: left;
+  }
+  .ltr .audio-player .ply-playlist li {
+    text-align: left;
+  }
+  .dropdown-menu {
+    max-height: 60vh;
+    overflow: scroll;
+  }
 }
 /* Extra Small Devices, Phones */
 @media only screen and (max-width: 575.98px) {
@@ -702,6 +734,9 @@
   .popupBox img {
     width: 100%;
   }
+  .dropdown-menu {
+    width: 390px;
+  }
 }
 
 @media only screen and (max-width: 399.98px) {
@@ -725,6 +760,20 @@
   .video-show .card-video iframe {
     height: 230px;
   }
+  .dropdown-menu {
+    width: 340px;
+  }
+  .main .show-filters .form-control {
+    max-width: 150px;
+    min-width: 150px;
+  }
+  .main .show-filters .dropdown-toggle {
+    max-width: 150px;
+    min-width: 150px;
+    overflow: hidden;
+    padding: 0.35rem 0.5rem;
+    margin-right: 0 !important;
+  }
 }
 @media only screen and (max-width: 349.98px) {
   .mobile-ui .contact-show form .recaptcha-container {
@@ -734,6 +783,9 @@
   }
   .video-show .card-video iframe {
     height: 210px;
+  }
+  .dropdown-menu {
+    width: 310px;
   }
 }
 
@@ -765,5 +817,8 @@
   }
   .content-header .breadcrumb {
     font-size: 12px;
+  }
+  .dropdown-menu {
+    width: 260px;
   }
 }

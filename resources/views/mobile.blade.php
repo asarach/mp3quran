@@ -86,7 +86,7 @@
   <div id="appFooter" data-turbolinks-permanent>
     <div id="MainLoading">
       <circle-spin></circle-spin>
-  </div>
+    </div>
     <audio-player type="mobile" class="audio-player"></audio-player>
   </div>
   <div class="expend-menu">
@@ -154,5 +154,11 @@
     $('#footer .expend-menu').toggleClass('expended');
     $('.tb-languages .tbl-dropdown').removeClass('opened');
   });
+  // $('#footer .expend-menu').click(function (e) { 
+  //   $('.ply-fullplayer').removeClass('opened');
+  // });
+  // $('#footer .main-menu').click(function (e) { 
+  //   $('.ply-fullplayer').removeClass('opened');
+  // });
  });
 </script>

@@ -3,22 +3,36 @@
     <div
       class="ply-btn"
       @click.prevent="
-        getItemAndPlay(ajax_prefix + '/radio/item?id=' + radio.id)
+        getItemAndPlay(
+          ajax_prefix + '/radio/item?id=' + radio.id,
+          '100002-' + radio.id
+        )
       "
     >
       <scale-loader
-        v-if="isLoading({type : 'radio', id: '100002-' + radio.id})"
+        v-if="isLoading({ type: 'radio', id: '100002-' + radio.id })"
         color="#0D3A4D"
         height="10px"
         width="2px"
       ></scale-loader>
-      <span v-else-if="isPlaying({type : 'radio', id: '100002-' + radio.id})" class="uni-icon icon-pause" style="color: #f5b44b;"></span>
-      <span v-else class="uni-icon icon-play_arrow" style="color: #f5b44b;"></span>
+      <span
+        v-else-if="isPlaying({ type: 'radio', id: '100002-' + radio.id })"
+        class="uni-icon icon-pause"
+        style="color: #f5b44b"
+      ></span>
+      <span
+        v-else
+        class="uni-icon icon-play_arrow"
+        style="color: #f5b44b"
+      ></span>
     </div>
     <div
       class="radio-info"
       @click.prevent="
-        getItemAndPlay(ajax_prefix + '/radio/item?id=' + radio.id)
+        getItemAndPlay(
+          ajax_prefix + '/radio/item?id=' + radio.id,
+          '100002-' + radio.id
+        )
       "
     >
       <div class="radio-name">
@@ -71,15 +85,18 @@
   </div>
 </template>
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters, mapState } from "vuex";
 
 export default {
   props: ["radio"],
   computed: {
-    ...mapGetters(["isPlaying", "isLoading"]),
     radiosIncludes: function () {
       return this.$store.state.favorite.radios.includes(this.radio.id);
     },
+    ...mapGetters(["isPlaying", "isLoading"]),
+    ...mapState({
+      current_playing_item: (state) => state.playing_item,
+    }),
   },
   methods: {
     shareItem(title, url, description) {
@@ -102,14 +119,19 @@ export default {
       xhr.open("GET", url);
       xhr.send();
     },
-    getItemAndPlay(url) {
+    getItemAndPlay(url, playing_item) {
+      console.log(playing_item);
+      if (this.current_playing_item != playing_item) {
+        window.appFoolter.$store.commit("setState", {
+          playing_state: "loading",
+          playing_item: playing_item,
+          playing_type: "radio",
+        });
+      }
       axios
         .get(url)
         .then(function (response) {
-          window.appFoolter.$store.dispatch(
-            "addPlayItem",
-            response.data
-          );
+          window.appFoolter.$store.dispatch("addAndPlayItem", response.data);
         })
         .catch(function (error) {
           console.log(error);
@@ -123,8 +145,6 @@ export default {
       removeRadioFavorite: "removeRadio",
     }),
   },
-  mounted(){
-    
-  }
+  mounted() {},
 };
 </script>

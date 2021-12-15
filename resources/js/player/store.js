@@ -22,8 +22,9 @@ export default new Vuex.Store({
     loaded: false,
     dragging: false,
     show_fullplayer: false,
-    player_state: '',
-    playing_item: 1,
+    playing_state: '',
+    playing_item: '',
+    playing_type: '',
     source: {
       file: "empty",
       id: "",
@@ -70,9 +71,13 @@ export default new Vuex.Store({
       state.playing = playing;
       window.appMain.$store.state.playing = playing
     },
-    setState(state, { player_state }) {
-      state.player_state = player_state;
-      window.appMain.$store.state.playing_state = player_state
+    setState(state, { playing_state, playing_item, playing_type }) {
+      state.playing_type = playing_type;
+      window.appMain.$store.state.playing_type = playing_type;
+      state.playing_item = playing_item;
+      window.appMain.$store.state.playing_item = playing_item;
+      state.playing_state = playing_state;
+      window.appMain.$store.state.playing_state = playing_state;
     },
   },
   getters: {
@@ -107,10 +112,10 @@ export default new Vuex.Store({
       }
     },
     isLoading: (state, getters) => (item) => {
-      if (state.source.id == item.id && state.player_state == 'loading') {
+      if (state.source.id == item.id && state.playing_state == 'loading') {
         return true;
       }
-      if (item.type == 'radio' && state.source.id == item.id && state.player_state == 'unloaded') {
+      if (item.type == 'radio' && state.source.id == item.id && state.playing_state == 'unloaded') {
         return true;
       }
       return false;
@@ -119,12 +124,12 @@ export default new Vuex.Store({
   actions: {
     getItemAndPlay({ dispatch, state }, url) {
       axios.get(url).then(function (response) {
-        dispatch('addPlayItem', response.data);
+        dispatch('addAndPlayItem', response.data);
       }).catch(function (error) {
         console.log(error);
       });
     },
-    addPlayItem({ commit, state, dispatch }, item) {
+    addAndPlayItem({ commit, state, dispatch }, item) {
       var found = false;
       for (var i = 0; i < state.playlist.length; i++) {
         if (state.playlist[i].id == item.id) {
@@ -137,11 +142,10 @@ export default new Vuex.Store({
         new_playlist.push(item)
         commit('setPlaylist', { playlist: new_playlist })
       }
-
       if (item.id == state.source.id) {
-        dispatch("toggele");
+        dispatch("toggeleItem");
       } else {
-        dispatch("playItem", item);
+        dispatch("loadAndPlayItem", item);
       }
     },
 
@@ -178,23 +182,42 @@ export default new Vuex.Store({
       new_playlist.splice(index, 1)
       commit('setPlaylist', { playlist: new_playlist })
     },
-    playItem({ commit, dispatch, state }, item) {
+    loadAndPlayItem({ commit, dispatch, state }, item) {
+      commit("setState", {
+        playing_state: "loading",
+        playing_item: item.id,
+        playing_type: state.playing_type,
+      });
+    
       commit('setSource', { source: item });
+      commit('setCurrentTime', { currentTime: 0 });
+      state.audio.currentTime = 0;
       state.audio.pause();
       state.audio.setAttribute('src', state.source.file);
       state.audio.load();
       dispatch("play");
     },
+    toggeleItem({ dispatch, state }) {
+      if (state.playing) {
+        dispatch("pause");
+      } else {
+        dispatch("play");
+      }
+    },
     load({ commit, state }, item) {
-      console.log('load');
-      console.log(state.audio.readyState);
       if (state.audio.readyState >= 2) {
         state.loaded = true;
         state.durationSeconds = parseInt(state.audio.duration);
         if (!state.durationSeconds) {
           state.durationSeconds = 0;
         }
-        commit("setState", { player_state: "loaded" });
+        console.log('playing_state load');
+        commit("setState", {
+          playing_state: 'loaded',
+          playing_item: state.playing_item,
+          playing_type: state.playing_type,
+        });
+
         return true;
       }
       throw new Error("Failed to load sound file.");
@@ -212,7 +235,7 @@ export default new Vuex.Store({
         index + 1
       )
       var item = state.playlist[playlistIndex];
-      dispatch("playItem", item);
+      dispatch("loadAndPlayItem", item);
     },
     prevItem({ state, dispatch }) {
       let index = -1;
@@ -227,10 +250,9 @@ export default new Vuex.Store({
         index - 1
       )
       var item = state.playlist[playlistIndex];
-      dispatch("playItem", item);
+      dispatch("loadAndPlayItem", item);
     },
     play({ commit, state }) {
-      
       state.audio.play();
       commit("setPlaying", { playing: true });
     },
@@ -238,20 +260,15 @@ export default new Vuex.Store({
       state.audio.pause();
       commit("setPlaying", { playing: false });
     },
-    toggele({ dispatch, state }) {
-      console.log(state.playing);
-      if (state.playing) {
-        dispatch("pause");
-      } else {
-        dispatch("play");
-      }
-    },
+    
     stop({ commit, state }, products) {
       commit("setPlaying", { playing: false });
       state.audio.currentTime = 0;
     },
 
-    setAudio({ state, dispatch }, audioold) {
+    setAudio({ state, dispatch, commit }, audioold) {
+      // commit("setPlaying", { playing: false });
+      state.playing = false;
       state.audio = document.createElement('audio');
       state.audio.addEventListener("timeupdate", () => {
         dispatch("update");
@@ -263,16 +280,18 @@ export default new Vuex.Store({
         dispatch("load");
       });
       // state.audio.addEventListener("pause", () => {
-      //   dispatch("pause");
       // });
       // state.audio.addEventListener("play", () => {
-      //   dispatch("play");
       // });
 
       state.audio.setAttribute('controls', 'controls');
       state.audio.setAttribute('id', 'audioPlayer');
+      if ( state.source.file !== 'empty') {
+        state.audio.setAttribute('src', state.source.file);
+        state.audio.load();
+      }
       $('body').append(state.audio);
-      
+
       state.audio.volume = state.volume / 100;
       state.audio.currentTime = state.currentSeconds;
     },

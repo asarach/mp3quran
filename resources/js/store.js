@@ -21,8 +21,8 @@ export default new Vuex.Store({
     },
     initial: true,
     playing: false,
-    playing_item:  window.appFoolter.$store.state.source.id,
-    playing_type: 'sora',
+    playing_item: '',
+    playing_type: '',
     playing_state: '',
     subscribed: false,
     stats: {},
@@ -51,7 +51,7 @@ export default new Vuex.Store({
       if (state.playing_item == item.id && state.playing_state == 'loading') {
         return true;
       }
-      if (item.type == 'radio' && state.playing_item == item.id && state.playing_state == 'unloaded') {
+      if (state.playing_type == 'radio' && state.playing_item == item.id && state.playing_state == 'unloaded') {
         return true;
       }
       return false;
