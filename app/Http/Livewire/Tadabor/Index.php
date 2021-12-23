@@ -10,19 +10,24 @@ use App\Page;
 class Index extends Component
 {
     public $search = null;
-    public $selected_sora = ['id' => false, 'name' => ''];
+    public $selected_sora = '';
     public $limitPerPage = 10;
+    public $sora;
+
+    protected $queryString = ['sora'];
 
 
     public function render()
     {
         $columns = ['s' => 'tadabors.sura_id'];
-        if ($this->selected_sora['id'] == false) {
-            $this->selected_sora['name'] = trans('text.all');
+        if ($this->sora) {
+            $this->selected_sora = Sora::where('id', $this->sora)->where('status', 1)->first()->name;
+        }else{
+            $this->selected_sora = trans('text.all');
         }
        
-        if ($this->selected_sora['id']) {
-            $items =  Tadabor::where('sura_id', $this->selected_sora['id'] )->paginate($this->limitPerPage);
+        if ($this->sora) {
+            $items =  Tadabor::where('sura_id', $this->sora )->paginate($this->limitPerPage);
         }else{
             $items =  Tadabor::paginate($this->limitPerPage);
         }
@@ -38,10 +43,6 @@ class Index extends Component
         
 
         return view('livewire.tadabor.index', compact('page', 'items', 'soar'));
-    }
-    public function selectSora($sora)
-    {
-        $this->selected_sora = $sora;
     }
     public function loadMore()
     {

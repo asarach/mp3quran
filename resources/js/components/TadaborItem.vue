@@ -30,16 +30,8 @@
             height="10px"
             width="2px"
           ></scale-loader>
-          <span
-            v-else-if="isPlaying"
-            class="uni-icon icon-pause"
-           
-          ></span>
-          <span
-            v-else
-            class="uni-icon icon-play_arrow1"
-           
-          ></span>
+          <span v-else-if="isPlaying" class="uni-icon icon-pause"></span>
+          <span v-else class="uni-icon icon-play_arrow1"></span>
         </div>
       </div>
       <div class="option-btn">
@@ -55,13 +47,13 @@
           ></scale-loader>
         </div>
         <a
-        v-else
-        class="sora-btn download-btn"
-        v-tooltip.top="trans('text.download-tadabor')"
-        :href="item.audio_url"
-        target="_blank"
-        ><span class="uni-icon icon-cloud_download"></span
-      ></a>
+          v-else
+          class="sora-btn download-btn"
+          v-tooltip.top="trans('text.download-tadabor')"
+          :href="item.audio_url"
+          target="_blank"
+          ><span class="uni-icon icon-cloud_download"></span
+        ></a>
       </div>
       <div class="option-btn">
         <div
@@ -94,7 +86,10 @@
               class="share-icon whatsapp"
               v-tooltip.top="trans('text.share-whatsapp')"
             >
-              <span class="uni-icon icon-whatsapp" style="color: #43cc63"></span>
+              <span
+                class="uni-icon icon-whatsapp"
+                style="color: #43cc63"
+              ></span>
             </div>
           </network>
           <network network="facebook" class="facebook">
@@ -102,7 +97,10 @@
               class="share-icon facebook"
               v-tooltip.top="trans('text.share-facebook')"
             >
-              <span class="uni-icon icon-facebook" style="color: #4b69b0"></span>
+              <span
+                class="uni-icon icon-facebook"
+                style="color: #4b69b0"
+              ></span>
             </div>
           </network>
           <network network="telegram" class="telegram">
@@ -110,7 +108,10 @@
               class="share-icon telegram"
               v-tooltip.top="trans('text.share-telegram')"
             >
-              <span class="uni-icon icon-telegram" style="color: #2c9bdb"></span>
+              <span
+                class="uni-icon icon-telegram"
+                style="color: #2c9bdb"
+              ></span>
             </div>
           </network>
         </div>
@@ -122,7 +123,7 @@
 import { mapState, mapActions, mapGetters } from "vuex";
 
 export default {
-  props: ["item", "islink"],
+  props: ["item", "islink", "showitem"],
   data() {
     return {
       downloading: false,
@@ -134,7 +135,7 @@ export default {
     },
     isLoading: function () {
       return false;
-    }
+    },
   },
   methods: {
     shareItem(title, url, description) {
@@ -167,8 +168,7 @@ export default {
         .then(function (response) {
           window.appFoolter.$store.dispatch("addAndPlayItem", response.data);
         })
-        .catch(function (error) {
-        });
+        .catch(function (error) {});
     },
     ...mapActions(["clipboardErrorHandlerText", "clipboardSuccessHandlerText"]),
     ...mapActions("favorite", {

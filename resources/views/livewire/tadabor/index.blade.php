@@ -35,11 +35,11 @@
             <div class="filter-sora mr-auto">
               <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="triggerIdsora" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  {{ $selected_sora['name'] }}
+                  {{ $selected_sora }}
                 </button>
                 <div class="dropdown-menu" aria-labelledby="triggerIdsora">
                   @foreach ($soar as $sora)
-                  <a class="dropdown-item" href="#" wire:click.prevent="selectSora({{ json_encode($sora) }})">{{ $sora['name'] }}</a>
+                  <a class="dropdown-item" href="{{ route('tadabor.index') . '?sora=' . $sora['id']}}">{{ $sora['name'] }}</a>
                   @endforeach
                 </div>
               </div>
