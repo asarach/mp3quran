@@ -380,13 +380,19 @@ body.sidebar-toggled .sidebar-wrapper {
     width: 100%;
     padding-left: 50px;
     padding-top: 0;
-        margin-top: 50px;
+    margin-top: 50px;
+}
+.sidebar-toggled .page-wrapper .page-content{
+    padding-left: 265px;
 }
 
 .rtl .page-wrapper .page-content {
     padding-right: 50px;
+    padding-left: 0;
 }
-
+.rtl.sidebar-toggled .page-wrapper .page-content{
+    padding-right: 265px;
+}
 .page-wrapper .page-content > div {
     padding: 20px;
 }
@@ -438,7 +444,7 @@ body.sidebar-toggled .sidebar-wrapper {
 }
 /*-----------------------------chiller-theme-------------------------------------------------*/
 .chiller-theme .sidebar-wrapper {
-    background: #31353D;
+    background: #31353d;
 }
 
 .chiller-theme .sidebar-wrapper .sidebar-header,
@@ -471,7 +477,7 @@ body.sidebar-toggled .sidebar-wrapper {
 
 .chiller-theme .sidebar-wrapper .sidebar-dropdown .sidebar-submenu li a:hover:before,
 .chiller-theme .sidebar-wrapper .sidebar-menu .sidebar-dropdown.active a i,
-.chiller-theme .sidebar-wrapper .sidebar-search input.search-menu:focus+span,
+.chiller-theme .sidebar-wrapper .sidebar-search input.search-menu:focus + span,
 .chiller-theme .sidebar-wrapper ul li:hover a i {
     color: #16c7ff;
     text-shadow: 0 0 10px rgba(22, 199, 255, 0.5);
