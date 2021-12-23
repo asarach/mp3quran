@@ -112,11 +112,11 @@ class Video extends Model implements ViewableContract
 
     public function geVgroupName()
     {
-        if ($this->vgroup) {
-            return trans('vgroup-name.' . $this->vgroup->id);
-        } else {
-            return '';
+        $name = trans('vgroup-name.' . $this->vgroup->id);
+        if (strpos($name, 'vgroup-name.') !== false) {
+            return $this->vgroup->name;
         }
+        return $name;
     }
 
 

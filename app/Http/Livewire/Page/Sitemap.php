@@ -12,7 +12,7 @@ class Sitemap extends Component
     {
         $page_content = [];
 
-        
+
         $page_content[] = ['text' => trans('text.home'), 'url' => route('index'), 'sublinks' => []];
         $page_content[] = ['text' => trans('text.about'), 'url' => route('page.about'), 'sublinks' => []];
         $page_content[] = ['text' => trans('text.apps'), 'url' => route('apps.index'), 'sublinks' => []];
@@ -30,14 +30,13 @@ class Sitemap extends Component
             $re_sublinks[] = ['text' => $read->getLocaleTitle(), 'url' => route('reciter.show', ['slug' => $read->slug])];
         }
         $page_content[] = ['text' => trans('text.reciters'), 'url' => route('reciter.index'), 'sublinks' => $re_sublinks];
-        
+
         $vi_sublinks = [];
-        $videos = Video::where('status', 1)->get();
+        $videos = Video::where('status', 1)->orderBy('vgroup_id', 'asc')->get();
         foreach ($videos as $video) {
-            $vi_sublinks[] = ['text' => $video->getLocaleTitle(), 'url' => route('video.show', ['slug' => $video->slug])];
+            $vi_sublinks[] = ['text' => $video->geVgroupName() . ' - ' . $video->geReciterName(), 'url' => route('video.show', ['slug' => $video->slug])];
         }
         $page_content[] = ['text' => trans('text.videos'), 'url' => route('video.index'), 'sublinks' => $vi_sublinks];
-        // dd($page_content);    
         $page['title'] = trans('text.sitemap') . ' | MP3 Quran';
         $page['description'] = trans('text.sitemap-description');
         $page['keywords'] = trans('text.sitemap-keywords');
