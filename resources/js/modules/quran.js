@@ -62,7 +62,6 @@ export default {
                 commit('setPageShare', { page_share: response.data.page_share })
                 commit('changelaoding', { loading: false }, { root: true })
             }).catch(function (error) {
-                console.log(error);
             });
         },
         setDownloadsData({ commit, state }, vm) {

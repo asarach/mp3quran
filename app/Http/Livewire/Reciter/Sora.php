@@ -42,6 +42,9 @@ class Sora extends Component
         $sora['read_slug'] =  $read->slug;
         $sora['duration'] = $soar_item->pivot->duration;
         $sora['file'] = $read->getAudioUrl($soar_item->id);       
+        $sora['share_title'] = $read->getLocaleShareTitle();      
+        $sora['share_url'] = route('reciter.sora', ['slug' => $read->slug,'sora_id' => $soar_item->id]);    
+        $sora['share_description'] = $read->getLocaleShareDescription();      
 
         $page = [
             'title' => $read->getLocaleTitle() . ' - ' . $sora['name'] . ' | MP3 Quran',

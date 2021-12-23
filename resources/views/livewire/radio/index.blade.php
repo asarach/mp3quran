@@ -51,7 +51,7 @@
             <ul class="list-unstyled">
               @foreach ($radios as $radio)
               <li>
-                <card-radio :radio="{{ json_encode($radio) }}">
+                <card-radio :radio="{{ json_encode($radio) }}" :key="{{ $radio['id'] }}">
                   <div class="card-radio">
                     <div class="radio-info">
                       <div class="radio-name">{{$radio['name']}}<span> - {{$radio['rewaya_name']}}</span></div>

@@ -125,7 +125,7 @@ class Read extends Model
             try {
                 $title = trans('reciter-name.' . $this->reciter->id);
             } catch (\Throwable $th) {
-                $title = 'reciter-name.asa';
+                $title = '';
             }
             if (strpos($title, 'reciter-name.') !== false) {
                 return $this->title;

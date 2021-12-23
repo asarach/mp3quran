@@ -195,7 +195,11 @@
                       style="color: #f2a01b"
                     ></span>
                   </div>
-                  <div class="ply-btn" v-else @click="addItemFavorite({ item: item.id, type: item.type })">
+                  <div
+                    class="ply-btn"
+                    v-else
+                    @click="addItemFavorite({ item: item.id, type: item.type })"
+                  >
                     <span class="uni-icon icon-favorite_outline"></span>
                   </div>
                 </div>

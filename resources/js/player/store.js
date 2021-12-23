@@ -138,7 +138,6 @@ export default new Vuex.Store({
       axios.get(url).then(function (response) {
         dispatch('addAndPlayItem', response.data);
       }).catch(function (error) {
-        console.log(error);
       });
     },
     addAndPlayItem({ commit, state, dispatch }, item) {
@@ -223,7 +222,6 @@ export default new Vuex.Store({
         if (!state.durationSeconds) {
           state.durationSeconds = 0;
         }
-        console.log('playing_state load');
         commit("setState", {
           playing_state: 'loaded',
           playing_item: state.playing_item,

@@ -33,7 +33,7 @@
             </option>
           </select>
         </div>
-        <div class="form-group">
+        <div class="form-group  mr-auto">
           <select class="custom-select" v-model="pageNum">
             <option value="0" class="d-none" disabled selected>
               {{ trans("text.part") }}
@@ -102,7 +102,7 @@ export default {
     },
     getAddPlayItem(item) {
       var url = this.ajax_prefix +'/soar/item?r=' + item.read + '&s=' + item.sora;
-      window.appFoolter.$store.dispatch("getAddPlayItem", url);
+      window.appFoolter.$store.dispatch("getItemAndPlay", url);
     },
   },
   mounted() {

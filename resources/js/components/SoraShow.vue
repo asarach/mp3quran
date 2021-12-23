@@ -37,7 +37,7 @@
       <div
         class="sora-btn share-btn"
         v-tooltip="trans('text.share')"
-        @click="shareItem(sora.title, sora.url, sora.description)"
+        @click="shareItem(sora.share_title, sora.share_url, sora.share_description)"
       >
         <span class="uni-icon icon-share"></span>
       </div>
@@ -141,7 +141,6 @@ export default {
           window.appFoolter.$store.dispatch("addItem", response.data);
         })
         .catch(function (error) {
-          console.log(error);
         });
     },
     getItemAndPlay(url, playing_item) {
@@ -158,7 +157,6 @@ export default {
           window.appFoolter.$store.dispatch("addAndPlayItem", response.data);
         })
         .catch(function (error) {
-          console.log(error);
         });
     },
     ...mapActions([

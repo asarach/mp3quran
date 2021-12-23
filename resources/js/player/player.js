@@ -37,7 +37,6 @@ PlayerVue.use(VueClipboard)
 
 PlayerVue.directive('click-outside', {
   bind: function (el, binding, vnode) {
-    console.log(el);
     el.clickOutsideEvent = function (event) {
       // here I check that click was outside the el and his childrens
       if (!(el == event.target || el.contains(event.target))) {

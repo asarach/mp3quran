@@ -19,7 +19,7 @@
           </select>
         </div>
         <div
-          class="btn share-btn"
+          class="btn share-btn mr-auto"
           @click="
             shareItem(page_share.title, page_share.url, page_share.description)
           "
@@ -77,7 +77,7 @@ export default {
     },
     getAddPlayItem(item) {
       var url = this.ajax_prefix +'/soar/item?r=' + item.read + '&s=' + item.sora;
-      window.appFoolter.$store.dispatch("getAddPlayItem", url);
+      window.appFoolter.$store.dispatch("getItemAndPlay", url);
     },
   },
 

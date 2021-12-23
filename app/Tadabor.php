@@ -30,7 +30,7 @@ class Tadabor extends Model implements ViewableContract
         return 'tadabors_index';
     }
 
-    public function sluggable():array
+    public function sluggable(): array
     {
         return [
             'slug' => [
@@ -116,11 +116,10 @@ class Tadabor extends Model implements ViewableContract
             try {
                 $title = trans('reciter-title.' . $this->read->reciter->id);
             } catch (\Throwable $th) {
-
                 $title = 'reciter-title.asa';
             }
             if (strpos($title, 'reciter-title.') !== false) {
-                return $this->title;
+                return trans('tadabor-title.tadabor-item');
             }
         }
         return $title;
@@ -134,7 +133,7 @@ class Tadabor extends Model implements ViewableContract
             if (strpos($name, 'sora-name.') !== false) {
                 $name =  $this->sora->name;
             }
-        }else{
+        } else {
             $name = '';
         }
 
@@ -148,7 +147,7 @@ class Tadabor extends Model implements ViewableContract
             if (strpos($name, 'rewaya-name.') !== false) {
                 $name =  $this->rewaya->name;
             }
-        }else{
+        } else {
             $name = '';
         }
 
@@ -162,7 +161,7 @@ class Tadabor extends Model implements ViewableContract
             if (strpos($name, 'reciter-name.') !== false) {
                 $name =  $this->reciter->name;
             }
-        }else{
+        } else {
             $name = '';
         }
 
@@ -204,5 +203,16 @@ class Tadabor extends Model implements ViewableContract
             return  $this->rewaya->getLocaleTitle();
         }
         return '';
+    }
+
+    public function getNum()
+    {
+        if ($this->id < 10) {
+            return '00' . $this->id;
+        } elseif ($this->id < 100) {
+            return '0' . $this->id;
+        }
+
+        return $this->id;
     }
 }

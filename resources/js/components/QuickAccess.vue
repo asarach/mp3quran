@@ -109,7 +109,6 @@ export default {
           self.soar = response.data.soar;
         })
         .catch(function (error) {
-          console.log(error);
         });
     },
     setReads() {
@@ -120,17 +119,15 @@ export default {
           self.reads = response.data.reads;
         })
         .catch(function (error) {
-          console.log(error);
         });
     },
     getItemAndPlay(url) {
       axios
         .get(url)
         .then(function (response) {
-          window.appFoolter.$store.dispatch("addPlayItem", response.data);
+          window.appFoolter.$store.dispatch("addAndPlayItem", response.data);
         })
         .catch(function (error) {
-          console.log(error);
         });
     },
   },

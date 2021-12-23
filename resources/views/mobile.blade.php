@@ -114,7 +114,7 @@
       <div class="row">
         @foreach ($languages as $key => $language)
         <div class="col-8">
-          <a href="/{{ $key }}" class="tbl-item">{{ $language['native'] }}</a>
+          <a href="{{ LaravelLocalization::getLocalizedURL($key)}}" data-turbolinks="false" class="tbl-item">{{ $language['native'] }}</a>
         </div>
         @endforeach
       </div>

@@ -78,8 +78,6 @@ export default {
 
     changePage(page) {
       let self = this;
-      console.log('page' + page);
-      console.log('current_page' + self.current_page);
       if (page % 2 === 0) {
         self.current_page = page - 1;
 
@@ -143,7 +141,6 @@ export default {
       odd = 1;
       add = 0;
     }
-    console.log('odd' + odd);
     let first_page = Math.max(this.part.start - add , this.page - 5 - odd);
     let last_page = Math.min(this.part.count  + add, this.page + 29 - odd);
 

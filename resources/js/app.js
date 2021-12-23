@@ -142,7 +142,6 @@ function initiateVue() {
             );
           })
           .catch(function (error) {
-            console.log(error);
           });
       },
       handleAbort() { },
@@ -153,8 +152,6 @@ function initiateVue() {
     mounted() {
       var MainLoading = document.getElementById("MainLoading");
       MainLoading.style.display = "none";
-      // console.log('MainLoading');
-      // window.appFoolter.$store.commit('setFavorite', { favorite: this.$store.state.favorite })
     }
   });
 }
@@ -166,7 +163,6 @@ document.addEventListener("turbolinks:before-visit", function (event) {
   MainLoading.style.display = "flex";
 });
 document.addEventListener("turbolinks:render", function (event) {
-
   initiateVue();
 });
 

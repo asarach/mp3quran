@@ -1,5 +1,5 @@
 <template>
-  <div class="card-radio">
+  <div class="card-radio" :class="{show: radio.show}">
     <div
       class="ply-btn"
       @click.prevent="
@@ -47,11 +47,7 @@
         class="radio-btn share-btn"
         v-tooltip="trans('text.share')"
         @click="
-          shareItem(
-            radio.share_title,
-            radio.share_url + '?play=' + radio.slug,
-            radio.share_description
-          )
+          shareItem(radio.share_title, radio.share_url, radio.share_description)
         "
       >
         <span class="uni-icon icon-share"></span>
@@ -100,9 +96,7 @@ export default {
   },
   methods: {
     shareItem(title, url, description) {
-      if (typeof window !== "undefined") {
-        AppEvent.$emit("share", title, url, description);
-      }
+      AppEvent.$emit("share", title, url, description);
     },
     download(url) {
       var filename = url.substring(url.lastIndexOf("/") + 1).split("?")[0];
@@ -120,7 +114,6 @@ export default {
       xhr.send();
     },
     getItemAndPlay(url, playing_item) {
-      console.log(playing_item);
       if (this.current_playing_item != playing_item) {
         window.appFoolter.$store.commit("setState", {
           playing_state: "loading",

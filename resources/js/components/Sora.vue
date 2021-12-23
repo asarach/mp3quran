@@ -1,7 +1,7 @@
 <template>
   <div
     class="sora-item"
-    :class="{ showoptions: showoptions }"
+    :class="{show: sora.show }"
     v-click-outside="closeOptions"
   >
     <div
@@ -49,14 +49,16 @@
       <div
         class="sora-btn share-btn"
         v-tooltip="trans('text.share')"
-        @click="shareItem(share.title, share.sora_link, share.description)"
+        @click="
+          shareItem(sora.share_title, sora.share_url, sora.share_description)
+        "
       >
         <span class="uni-icon icon-share"></span>
       </div>
       <div
         class="sora-btn link-btn"
         v-tooltip="trans('text.copy-link')"
-        v-clipboard:copy="share.url"
+        v-clipboard:copy="sora.share_url"
         v-clipboard:error="clipboardErrorHandler"
         v-clipboard:success="clipboardSuccessHandler"
       >
@@ -126,25 +128,10 @@
 import { mapState, mapActions, mapGetters } from "vuex";
 
 export default {
-  props: ["sora", "share", "read_id", "reciter", "rewaya"],
+  props: ["sora", "read_id", "reciter", "rewaya"],
   data() {
     return {
       showoptions: false,
-      audio: {
-        id: this.sora.id,
-        read_id: this.sora.read_id,
-        sora_id: this.read_id,
-        num: this.sora.sora_num,
-        name: this.sora.sora_name,
-        reciter: this.reciter,
-        url: this.share.url,
-        rewaya: this.rewaya,
-        description: this.share.description,
-        file: this.sora.sora_audio,
-        share_description: this.share.description,
-        share_title: this.share.title,
-        share_url: this.share.url,
-      },
     };
   },
   computed: {
@@ -177,7 +164,6 @@ export default {
           window.appFoolter.$store.dispatch("addAndPlayItem", response.data);
         })
         .catch(function (error) {
-          console.log(error);
         });
     },
     addItem(url) {
@@ -187,7 +173,6 @@ export default {
           window.appFoolter.$store.dispatch("addItem", response.data);
         })
         .catch(function (error) {
-          console.log(error);
         });
     },
     ...mapActions([

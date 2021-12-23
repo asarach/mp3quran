@@ -162,7 +162,6 @@ export default {
          self.translations = response.data.translations;
         })
         .catch(error => {
-          console.log(error);
         });
     },
     translatePage() {

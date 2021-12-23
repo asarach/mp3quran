@@ -52,7 +52,6 @@ export default {
   },
   mounted() {
     let self = this;
-    console.log('share mounted');
     AppEvent.$on("share", function (title, url, description) {
       self.title = title;
       self.url = url;

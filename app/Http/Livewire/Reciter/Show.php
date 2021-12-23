@@ -18,7 +18,7 @@ class Show extends Component
     }
 
     public function render()
-    {      
+    {
         $read = Read::where('slug', $this->slug)
             ->where('status', 1)
             ->firstOrFail();
@@ -30,10 +30,10 @@ class Show extends Component
         if ($this->search) {
             $reciter_reads = $this->getReciterReads($reciter, $read);
         } else {
-            
+
             $cache_name = 'reciter_reads_index_read_' . $read->id . '_long_' .  LaravelLocalization::getCurrentLocale();
             // dd($cache_name);
-            // Cache::forget($cache_name);
+            Cache::forget($cache_name);
             $reciter_reads = Cache::rememberForever($cache_name, function () use ($reciter, $read) {
                 return $this->getReciterReads($reciter, $read);
             });
@@ -54,7 +54,7 @@ class Show extends Component
             }
             $i++;
         }
-        
+
         $len = count($reciter_reads[$active_read]['soar']);
 
         $soar_part_a = array_slice($reciter_reads[$active_read]['soar'], 0, $len / 2);
@@ -118,16 +118,19 @@ class Show extends Component
                 $soar_item['sora_duration'] = $sora->pivot->duration;
                 $soar_item['sora_link'] = route('reciter.sora', ['slug' => $read->slug, 'sora_id' => $sora->id]);
                 $soar_item['sora_audio'] = $readItem->getAudioUrl($sora->id);
-                if ($query) {
-                    if (strpos(make_query($soar_item['sora_name']), make_query($query)) !== false) {
-                        $read_item['soar'][] = $soar_item;
-                    }
+
+                $soar_item['share_url'] = route('reciter.sora', ['slug' => $read->slug, 'sora_id' => $sora->id]);
+                $soar_item['share_title'] = $read->getLocaleShareTitle($sora->getLocaleName());
+                $soar_item['share_description'] = $read->getLocaleShareDescription($sora->getLocaleName());
+                if (!$query || ($query && strpos(make_query($soar_item['sora_name']), make_query($query)) !== false)) {
+                    $soar_item['show'] = true;
                 } else {
-                    $read_item['soar'][] = $soar_item;
+                    $soar_item['show'] = false;
                 }
+                $read_item['soar'][] = $soar_item;
             }
             // if (!empty($read_item['soar'])) {
-                $reciter_reads[] = $read_item;
+            $reciter_reads[] = $read_item;
             // }
         }
 

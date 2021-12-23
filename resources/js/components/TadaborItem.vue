@@ -165,10 +165,9 @@ export default {
       axios
         .get(url)
         .then(function (response) {
-          window.appFoolter.$store.dispatch("addPlayItem", response.data);
+          window.appFoolter.$store.dispatch("addAndPlayItem", response.data);
         })
         .catch(function (error) {
-          console.log(error);
         });
     },
     ...mapActions(["clipboardErrorHandlerText", "clipboardSuccessHandlerText"]),

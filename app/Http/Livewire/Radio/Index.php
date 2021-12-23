@@ -60,17 +60,26 @@ class Index extends Component
     }
     public function getRadios()
     {
-        $radios = Radio::where('status', 1);
-        if ($this->selected_rewaya['id']) {
-            $radios =  $radios->where('rewaya_id', $this->selected_rewaya['id']);
-        }
-        $radios =  $radios->get()->toArray();
+        $radios = Radio::where('status', 1)->get()->toArray();
         $radios = collect($radios);
+        if ($this->selected_rewaya['id']) {
+            foreach ($radios as $key => $radio) {
+                if ($radio['rewaya_id'] != $this->selected_rewaya['id']) {
+                    $radio['show'] = false;
+                    $radios[$key] = $radio;
+                }
+            }
+        }
+
         if ($this->search) {
             $q = $this->preparword($this->search);
-            $radios = $radios->filter(function ($item) use ($q) {
-                return false !== stristr($this->preparword($item['name']), $q);
-            });
+            foreach ($radios as $key => $radio) {
+                if (false === stristr($this->preparword($radio['name']), $q)) {
+                    $radio['show'] = false;
+                    $radios[$key] = $radio;
+                }
+
+            }
         }
 
         return $radios->sortBy('name')->values();

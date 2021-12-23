@@ -230,7 +230,6 @@
 
     li {
       padding: 0 0.5rem;
-      display: inline-block;
       width: 100%;
     }
   }
@@ -481,9 +480,9 @@
       display: flex;
       align-items: center;
       line-height: 1;
-      margin-right: auto;
       width: 36px;
       margin-right: 0.5rem;
+      justify-content: center;
 
       span.fullscreen-icon,
       span.share-icon {
@@ -499,6 +498,7 @@
       box-shadow: 0px 2px 8px 0px #f7b95269;
       background-color: #f5b44b;
       border-color: #f5b44b;
+      width: auto;
     }
     .form-group {
       display: flex;
@@ -506,6 +506,7 @@
       width: 100%;
       margin-bottom: 0;
       margin-right: 0.5rem;
+      max-width: 200px;
       label {
         margin: 0 0.5rem;
       }
@@ -517,6 +518,7 @@
         background: #fafafa;
         border: 1px solid #eaebeb;
         box-shadow: 0px 0px 3px 0px #ebedee;
+        
       }
     }
   }

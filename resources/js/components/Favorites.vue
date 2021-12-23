@@ -69,11 +69,6 @@
                 :rewaya="sora.rewaya_name"
                 :read_id="sora.read_id"
                 :reciter="sora.reciter_name"
-                :share="{
-                  title: sora.share_title,
-                  url: sora.share_url,
-                  description: sora.share_description,
-                }"
               ></card-sora>
             </li>
           </ul>
@@ -93,11 +88,6 @@
         <card-radio
           v-for="radio in radios.data"
           :key="radio.id"
-          :share="{
-            title: radio.share_title,
-            url: radio.share_url,
-            description: radio.share_description,
-          }"
           :radio="radio"
         ></card-radio>
         <button

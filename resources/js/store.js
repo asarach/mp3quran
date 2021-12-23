@@ -96,7 +96,6 @@ export default new Vuex.Store({
         });
     },
     clipboardErrorHandler({ commit, state }, products) {
-      console.log('copy');
       Vue.notify({
         group: 'app',
         title: this.getters.getTrans('text.error'),

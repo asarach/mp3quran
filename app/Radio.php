@@ -52,9 +52,11 @@ class Radio extends Model
                 'rewaya_name' => $this->getRewaya(),
                 'slug' => $this->slug,
                 'url' => $this->url,
+                'rewaya_id' => $this->rewaya_id,
+                'show' => true,
                 'share_description' => $this->getLocaleShareDescription(),
                 'share_title' => $this->getLocaleShareTitle(),
-                'share_url' => route('radio.index')                
+                'share_url' => route('radio.index')  . '?play=' . $this->slug
             ];
         }
 
