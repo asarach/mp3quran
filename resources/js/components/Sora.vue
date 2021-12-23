@@ -1,7 +1,7 @@
 <template>
   <div
     class="sora-item"
-    :class="{show: sora.show }"
+    :class="{ showoptions: showoptions, show: sora.show }"
     v-click-outside="closeOptions"
   >
     <div
