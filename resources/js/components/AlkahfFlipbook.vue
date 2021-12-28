@@ -48,7 +48,6 @@ export default {
 
   computed: {
     ...mapState({
-      style_version: (state) => state.settings.style_version,
       read_soar: (state) => state.quran.read_soar,
       page_share: (state) => state.quran.page_share,
     }),

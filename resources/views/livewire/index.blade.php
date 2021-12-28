@@ -43,7 +43,7 @@
                             @endif
                             @if (style_version() == 'm')
                             <li class="nav-item">
-                                <a class="nav-link" href="'/' + $store.state.current_language + '/newsletter'" exact>
+                                <a class="nav-link" href="{{ route('newsletter.show') }}" exact>
                                     {{ trans("text.newsletter") }}
                                 </a>
                             </li>

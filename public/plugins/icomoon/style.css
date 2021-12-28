@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?siaujd');
-  src:  url('fonts/icomoon.eot?siaujd#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?siaujd') format('truetype'),
-    url('fonts/icomoon.woff?siaujd') format('woff'),
-    url('fonts/icomoon.svg?siaujd#icomoon') format('svg');
+  src:  url('fonts/icomoon.eot?ib4yp9');
+  src:  url('fonts/icomoon.eot?ib4yp9#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?ib4yp9') format('truetype'),
+    url('fonts/icomoon.woff?ib4yp9') format('woff'),
+    url('fonts/icomoon.svg?ib4yp9#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -25,54 +25,11 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-huawei:before {
-  content: "\e942";
-  color: #f00;
+.icon-apps:before {
+  content: "\e945";
 }
-.icon-apple:before {
-  content: "\e943";
-}
-.icon-search:before {
-  content: "\e940";
-}
-.icon-magnifier:before {
-  content: "\e940";
-}
-.icon-magnifying-glass:before {
-  content: "\e940";
-}
-.icon-inspect:before {
-  content: "\e940";
-}
-.icon-find:before {
-  content: "\e940";
-}
-.icon-whatsapp:before {
-  content: "\e93f";
-}
-.icon-brand:before {
-  content: "\e93f";
-}
-.icon-social:before {
-  content: "\e93f";
-}
-.icon-headphones:before {
-  content: "\e93e";
-}
-.icon-earth:before {
-  content: "\e9ca";
-}
-.icon-instagram:before {
-  content: "\ea92";
-}
-.icon-telegram:before {
-  content: "\ea95";
-}
-.icon-youtube:before {
-  content: "\ea9d";
-}
-.icon-soundcloud:before {
-  content: "\eac3";
+.icon-api:before {
+  content: "\e946";
 }
 .icon-android:before {
   content: "\e944";
@@ -263,6 +220,21 @@
 .icon-account_circle1:before {
   content: "\e935";
 }
+.icon-envelope:before {
+  content: "\e947";
+}
+.icon-email:before {
+  content: "\e947";
+}
+.icon-mail:before {
+  content: "\e947";
+}
+.icon-letter:before {
+  content: "\e947";
+}
+.icon-contact:before {
+  content: "\e947";
+}
 .icon-notebook:before {
   content: "\e941";
 }
@@ -283,6 +255,55 @@
 }
 .icon-notebook1:before {
   content: "\e902";
+}
+.icon-huawei:before {
+  content: "\e942";
+  color: #f00;
+}
+.icon-apple:before {
+  content: "\e943";
+}
+.icon-search:before {
+  content: "\e940";
+}
+.icon-magnifier:before {
+  content: "\e940";
+}
+.icon-magnifying-glass:before {
+  content: "\e940";
+}
+.icon-inspect:before {
+  content: "\e940";
+}
+.icon-find:before {
+  content: "\e940";
+}
+.icon-whatsapp:before {
+  content: "\e93f";
+}
+.icon-brand:before {
+  content: "\e93f";
+}
+.icon-social:before {
+  content: "\e93f";
+}
+.icon-headphones:before {
+  content: "\e93e";
+}
+.icon-earth:before {
+  content: "\e9ca";
+}
+.icon-instagram:before {
+  content: "\ea92";
+}
+.icon-telegram:before {
+  content: "\ea95";
+}
+.icon-youtube:before {
+  content: "\ea9d";
+}
+.icon-soundcloud:before {
+  content: "\eac3";
 }
 .icon-twitter:before {
   content: "\e936";

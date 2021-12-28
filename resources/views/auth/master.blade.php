@@ -29,7 +29,7 @@
   <link href="{{ asset('plugins/icomoon/styles.css') }}" rel="stylesheet">
 
   <!-- Styles -->
-  <link href="{{ mix('css/app.css') }}" rel="stylesheet" type="text/css" charset="utf-8">
+  <link href="{{ mix('css/app2.0.css') }}" rel="stylesheet" type="text/css" charset="utf-8">
 
   <script>
     window.App = {
