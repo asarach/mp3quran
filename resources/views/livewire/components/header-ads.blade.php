@@ -1,5 +1,5 @@
-@if ($header_ads)
 <div class="header-ads">
+    @if ($header_ads)
     @foreach ($header_ads as $had)
     <div class="ha-item">
         <a href="{{ $had['url'] }}" target="_blank">
@@ -7,5 +7,5 @@
         </a>
     </div>
     @endforeach
+    @endif
 </div>
-@endif
