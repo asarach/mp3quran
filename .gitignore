@@ -15,6 +15,7 @@
 /public/podcast
 /public/quranRead.php
 /public/sabda_rasul
+public/betamp3.zip
 /storage/app/video_progress
 /storage/*.key
 /storage/*.index
