@@ -28,7 +28,7 @@
     <script>
         window.App = {!! json_encode([
                   'csrfToken' => csrf_token(),
-                  'urlBase' => url('/'),
+                  'urlBase' => getFrontUrlBase(),
                   'style_version' => style_version() ,
                   'current_language' => LaravelLocalization::getCurrentLocale(),
           ]) !!};          
@@ -41,6 +41,15 @@
     <script defer src="{{ mix('js/player2.0.js') }}" data-turbolinks-eval="false"></script>
     <script src="{{ mix('js/app2.0.js') }}" defer data-turbolinks-eval="true" data-turbolinks-track="reload"></script>
     @yield('headerScripts')
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GB8TGFQ4MG"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-GB8TGFQ4MG');
+    </script>
 </head>
 
 <body class="{{ LocaleDirection() }}" dir="{{ LocaleDirection() }}">

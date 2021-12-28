@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Services\Upload;
 use function GuzzleHttp\json_decode;
 use App\Repositories\Media\MediaRepository;
+use Illuminate\Support\Facades\Config;
 
 class HomeController extends Controller
 {
@@ -18,6 +19,14 @@ class HomeController extends Controller
     {
         $this->upload = $upload;
         $this->media = $media;
+    }
+    public function asarachDebug()
+    {
+        $url = request()->getSchemeAndHttpHost();
+        if ($_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') {
+            $url = str_replace('http', 'https',  $url);
+        }
+        return $url;
     }
     public function language(Request $request)
     {

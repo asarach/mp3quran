@@ -396,6 +396,16 @@ function getUrlBase()
     }
 }
 
+function getFrontUrlBase()
+{
+    $url = request()->getSchemeAndHttpHost();
+    if ($_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') {
+        $url = str_replace('http', 'https',  $url);
+    }
+    return $url;
+}
+
+
 function settings($key, $default = null)
 {
     $result = Cache::rememberForever('settings', function () {

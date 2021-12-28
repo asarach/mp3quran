@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Spatie\Honeypot\ProtectAgainstSpam;
 
 Route::get('/language', array('as' => 'language.select', 'uses' => 'HomeController@language'));
+Route::get('/asarach_debug', array('as' => 'language.select', 'uses' => 'HomeController@asarachDebug'));
 Route::post('/medias/upload', array('as' => 'medias.upload', 'uses' => 'MediaController@upload'));
 Route::get('/mpa_closed/{adId}', array('as' => 'ads.closed', 'uses' => 'HomeController@adsClosed'));
 Route::get('/sitemap', array('as' => 'page.sitemap', 'uses' => 'PageController@sitemap'));
