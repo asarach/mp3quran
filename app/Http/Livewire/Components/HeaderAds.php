@@ -20,7 +20,8 @@ class HeaderAds extends Component
             ->where('place', 1)
             ->where('locale', $locale)
             ->orderBy('order_num', 'ASC')
-            ->get();
+            ->get()
+            ->toArray();
 
         return view('livewire.components.header-ads', compact('header_ads'));
     }
