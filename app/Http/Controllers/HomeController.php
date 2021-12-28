@@ -26,6 +26,7 @@ class HomeController extends Controller
         if ($_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') {
             $url = str_replace('http', 'https',  $url);
         }
+        dd($url);
         return $url;
     }
     public function language(Request $request)

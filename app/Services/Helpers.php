@@ -399,8 +399,8 @@ function getUrlBase()
 function getFrontUrlBase()
 {
     $url = request()->getSchemeAndHttpHost();
-    if ($_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') {
-        $url = str_replace('http', 'https',  $url);
+    if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') {
+        $url = str_replace('http:', 'https:',  $url);
     }
     return $url;
 }
