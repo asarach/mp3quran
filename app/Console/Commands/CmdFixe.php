@@ -41,12 +41,27 @@ class CmdFixe extends Command
     {
 
         //checkUrls$this->fixRadios();
-        $this->fixSoraRead();
+        $this->fixMediable();
+        // $this->fixSoraRead();
         // $this->fixTadabor();
         // $this->fixDownloadTransltion();
         // $this->fixSoar();
     }
 
+    public function fixMediable(){
+        $items = DB::table('mediable')->get();
+        foreach ($items as $item) {
+            $type = str_replace("Mp3quran\\", "App\\", $item->mediable_type);
+
+            DB::table('mediable')
+            ->where('media_id',$item->media_id)
+            ->where('mediable_id',$item->mediable_id)
+            ->where('mediable_type',$item->mediable_type)
+            ->update([
+                'mediable_type' => $type,
+            ]);
+        }
+    }
     public function fixSoraRead(){
         $items = DB::table('sura_read')->get();
         foreach ($items as $item) {
