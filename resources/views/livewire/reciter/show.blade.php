@@ -22,13 +22,13 @@
             </button>
             @endif
             @if ($reciter_reads[$active_read]['itunes'])
-            <a href="{{ $reciter_reads[$active_read]['itunes'] }}" target="_blank" type="button" class="btn btn-primary">
+            <a href="{{ $reciter_reads[$active_read]['itunes'] }}" target="_blank" class="btn btn-primary">
               <span class="uni-icon icon-headphones" style="color: #fff"></span>
               {{trans('text.itunes')}}
             </a>
             @endif
             @if ($reciter_reads[$active_read]['torrent'])
-            <a href="{{ $reciter_reads[$active_read]['torrent'] }}" target="_blank" type="button" class="btn btn-primary">
+            <a href="{{ $reciter_reads[$active_read]['torrent'] }}" target="_blank" class="btn btn-primary">
               <span class="uni-icon icon-cloud_download" style="color: #fff"></span>
               {{trans('text.torrent')}}
             </a>

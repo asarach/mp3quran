@@ -39,7 +39,7 @@
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                   @if ($video['type'] != '0')
-                  <a class="dropdown-item" href="{{ $video['url'] }} + '?download=1'" target="_blank" type="button" download>{{ trans("text.direct-download") }}</a>
+                  <a class="dropdown-item" href="{{ $video['url'] }} + '?download=1'" target="_blank" download>{{ trans("text.direct-download") }}</a>
                   @endif
                   <a class="dropdown-item" href="{{ route('video.download', ['download_id' => $video['id']]) }}">
                     {{ trans("text.download-with-logo") }}</a>
