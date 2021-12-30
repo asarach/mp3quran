@@ -119,7 +119,6 @@
         {{ trans("text.logo-video-generate-video") }}
       </button>
       <a
-        type="button"
         v-else-if="progress == 100"
         target="_blank"
         :href="video_generated_url + '?download=1'"
