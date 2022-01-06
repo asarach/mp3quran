@@ -2,19 +2,20 @@
 
 namespace App\Http\ViewComposers;
 
-use Illuminate\Contracts\View\View;
-use Illuminate\Http\Request;
-use Cache;
 use Auth;
-use App\Read;
-use App\App;
-use App\Radio;
-use App\Reciter;
+use Cache;
 use App\Tv;
+use App\App;
+use App\Read;
+use App\Radio;
 use App\Video;
 use App\Mushaf;
 use App\Rewaya;
+use App\Reciter;
 use App\Tadabor;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Contracts\View\View;
 
 class AdminComposer
 {
@@ -53,6 +54,7 @@ class AdminComposer
         $counts['reads'] = Read::count();
         $counts['reciters'] = Reciter::count();
         $counts['tadabors'] = Tadabor::count();
+        $counts['reports'] = DB::table('report_sora')->count();
 
         $view->with(compact('user', 'counts'));
     }

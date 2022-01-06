@@ -29,4 +29,4 @@ Route::get('/radio/item', array('as' => 'radio.item', 'uses' => 'RadioController
 Route::post('/favorites', array('as' => 'page.favorites.post', 'uses' => 'PageController@postFavorites'));
 Route::post('/video/download/{id}/generate', array('as' => 'video.download', 'uses' => 'VideoController@generate'));
 Route::get('/video/download/{id}/progress', array('as' => 'video.download', 'uses' => 'VideoController@progress'));
-Route::get('/{slug}/{sora}/report', array('as' => 'reciter.report', 'uses' => 'ReciterController@reportSora'));
+Route::post('/{slug}/{sora}/report', array('as' => 'reciter.report', 'uses' => 'ReciterController@reportSora'));

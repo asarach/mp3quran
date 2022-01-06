@@ -105,7 +105,11 @@ module.exports = [{
     path: routes_base + 'app/edit/:id',
     component: require('./components/app/Edit.vue').default
 },
-
+//reports
+{
+    path: routes_base + 'reports',
+    component: require('./components/report/Index.vue').default
+},
 
 //Radio
 {

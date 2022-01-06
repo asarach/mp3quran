@@ -98,6 +98,7 @@
               </div>
             </div>
           </div>
+          <report-sora></report-sora>
         </div>
       </div>
     </div>

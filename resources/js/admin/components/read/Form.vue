@@ -233,8 +233,8 @@
             >
             <div
               v-if="
-                report_soar[sora.id] > 0 ||
-                report_soar[sora.id] == '-1'
+                false &&
+                (report_soar[sora.id] > 0 || report_soar[sora.id] == '-1')
               "
               class="dropdown"
             >

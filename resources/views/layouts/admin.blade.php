@@ -144,6 +144,13 @@
                 <span class="badge badge-pill badge-info">{{$counts['tadabors']}}</span>
               </router-link>
             </li>
+            <li>
+              <router-link :to="prefix + 'reports'">
+                <i class="fas fa-exclamation-triangle"></i>
+                <span>{{ trans('text.reports')}}</span>
+                <span class="badge badge-pill badge-warning">{{$counts['reports']}}</span>
+              </router-link>
+            </li>
 
 
             <li class="header-menu">

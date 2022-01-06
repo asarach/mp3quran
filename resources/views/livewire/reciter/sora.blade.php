@@ -32,6 +32,7 @@
         @endif
         <div class="col-lg-19 pt-3" id="sticky-container">
           <sora-show :sora="{{ json_encode($sora) }}"></sora-show>
+          <report-sora></report-sora>
         </div>
       </div>
     </div>

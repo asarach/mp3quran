@@ -24,6 +24,11 @@ Route::get('/app/restore/{id}', array('as' => 'app.restore', 'uses' => 'AppContr
 Route::get('/app/{id}/status/{status}', array('as' => 'app.status', 'uses' => 'AppController@changeStatus'));
 Route::post('/app/actions', array('as' => 'app.actions', 'uses' => 'AppController@actions'));
 
+/* Reports  */
+Route::get('/reports', array('as' => 'report.index', 'uses' => 'ReportController@index'));
+Route::delete('/report/{id}', array('as' => 'report.destroy', 'uses' => 'ReportController@destroy'));
+Route::post('/report/actions', array('as' => 'report.actions', 'uses' => 'ReportController@actions'));
+
 
 /*  Newsletter         */
 Route::get("/newsletters",                       array("as"   => "newsletter.index",                 "uses" => "NewsletterController@index"));

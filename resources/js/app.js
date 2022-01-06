@@ -84,6 +84,7 @@ Vue.use(Notifications, { velocity })
 Vue.component('my-dplayer', require('./components/MdPlayer.vue').default);
 Vue.component('share-box', require('./components/Share.vue').default);
 Vue.component('confirmation', require('./components/Confirmation.vue').default);
+Vue.component('report-sora', require('./components/ReportSora.vue').default);
 Vue.component('quick-access', require('./components/QuickAccess.vue').default);
 Vue.component('search-form', require('./components/SearchForm.vue').default);
 Vue.component('mushafs-flipbook', require('./components/MushafsFlipbook.vue').default);

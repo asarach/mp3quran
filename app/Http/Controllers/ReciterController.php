@@ -4,23 +4,24 @@ namespace App\Http\Controllers;
 
 use App\Read;
 use App\Reciter;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class ReciterController extends Controller
 {
-    public function reportSora($read_slug, $item)
+    public function reportSora($read_slug, $item, Request $request)
     {
         try {
             $read = Read::where('slug', $read_slug)
                 ->where('status', 1)
                 ->firstOrFail();
-
-            $sora = DB::table('sura_read')->where('read_id', $read->id)->where('sura_id', $item)->first();
-
-            if ($sora && $sora->report != '-1') {
-                DB::table('sura_read')->where('read_id', $read->id)->where('sura_id', $item)->update(['report' => $sora->report + 1]);
-                return ['success' => true];
-            }
+            
+            DB::table('report_sora')->insert([
+                'read_id'=> $read->id,
+                'sura_id'=> $item,
+                'note'=> e($request->note)
+            ]);
+            return ['success' => true];
         } catch (\Throwable $th) {
             return ['success' => false];
         }
