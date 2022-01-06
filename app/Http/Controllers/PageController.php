@@ -67,7 +67,8 @@ class PageController extends Controller
         $input = $request->all();
         // dd($input);
         // $message = $this->contact->create($input);
-
+        // Mail::to('asaraach@gmail.com')->send(new ContactMail($input));
+        // dd('asa');
         try {
             //Try Sendgrid
             Mail::to(env('MAIL_TO_ADDRESS', 'mp3quran.net@gmail.com'))->send(new ContactMail($input));

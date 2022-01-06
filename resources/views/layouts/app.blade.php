@@ -41,15 +41,18 @@
     <script defer src="{{ mix('js/player2.0.js') }}" data-turbolinks-eval="false"></script>
     <script src="{{ mix('js/app2.0.js') }}" defer data-turbolinks-eval="true" data-turbolinks-track="reload"></script>
     @yield('headerScripts')
+    
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GB8TGFQ4MG"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-176648-2"></script>
     <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
-    gtag('config', 'G-GB8TGFQ4MG');
+    gtag('config', 'UA-176648-2');
     </script>
+        
+ 
 </head>
 
 <body class="{{ LocaleDirection() }}" dir="{{ LocaleDirection() }}">
