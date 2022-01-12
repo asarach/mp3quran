@@ -74,6 +74,14 @@ class RepositoriesServiceProvider extends ServiceProvider
                         'App\Repositories\Reciter\EloquentReciterRepository'
                 );
                 $this->app->singleton(
+                        'App\Repositories\Tafsir\TafsirRepository',
+                        'App\Repositories\Tafsir\EloquentTafsirRepository'
+                );
+                $this->app->singleton(
+                        'App\Repositories\Tsora\TsoraRepository',
+                        'App\Repositories\Tsora\EloquentTsoraRepository'
+                );
+                $this->app->singleton(
                         'App\Repositories\Ad\AdRepository',
                         'App\Repositories\Ad\EloquentAdRepository'
                 );

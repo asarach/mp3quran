@@ -151,6 +151,12 @@
                 <span class="badge badge-pill badge-warning">{{$counts['reports']}}</span>
               </router-link>
             </li>
+            <li>
+              <router-link :to="prefix + 'tafsirs'">
+                <i class="fas fa-exclamation-triangle"></i>
+                <span>{{ trans('text.tafsirs')}}</span>
+              </router-link>
+            </li>
 
 
             <li class="header-menu">

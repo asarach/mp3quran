@@ -219,6 +219,28 @@ Route::get('/reciter/restore/{id}', array('as' => 'reciter.restore', 'uses' => '
 Route::get('/reciter/{id}/status/{status}', array('as' => 'reciter.status', 'uses' => 'ReciterController@changeStatus'));
 Route::post('/reciter/actions', array('as' => 'reciter.actions', 'uses' => 'ReciterController@actions'));
 
+/* Tafsir  */
+Route::get('/tafsirs', array('as' => 'tafsir.index', 'uses' => 'TafsirController@index'));
+Route::post('/tafsir', array('as' => 'tafsir.store', 'uses' => 'TafsirController@store'));
+Route::post('/tafsir/translations/{id}', array('as' => 'tafsir.store', 'uses' => 'TafsirController@translations'));
+Route::get('/tafsir/edit/{id}', array('as' => 'tafsir.edit', 'uses' => 'TafsirController@edit'));
+Route::put('/tafsir/{id}', array('as' => 'tafsir.update', 'uses' => 'TafsirController@update'));
+Route::delete('/tafsir/{id}', array('as' => 'tafsir.destroy', 'uses' => 'TafsirController@destroy'));
+Route::get('/tafsir/restore/{id}', array('as' => 'tafsir.restore', 'uses' => 'TafsirController@restore'));
+Route::get('/tafsir/{id}/status/{status}', array('as' => 'tafsir.status', 'uses' => 'TafsirController@changeStatus'));
+Route::post('/tafsir/actions', array('as' => 'tafsir.actions', 'uses' => 'TafsirController@actions'));
+
+/* Tsora  */
+Route::get('/tsoras/{tafsir}', array('as' => 'tsora.index', 'uses' => 'TsoraController@index'));
+Route::post('/tsora', array('as' => 'tsora.store', 'uses' => 'TsoraController@store'));
+Route::post('/tsora/translations/{id}', array('as' => 'tsora.store', 'uses' => 'TsoraController@translations'));
+Route::get('/tsora/edit/{id}', array('as' => 'tsora.edit', 'uses' => 'TsoraController@edit'));
+Route::put('/tsora/{id}', array('as' => 'tsora.update', 'uses' => 'TsoraController@update'));
+Route::delete('/tsora/{id}', array('as' => 'tsora.destroy', 'uses' => 'TsoraController@destroy'));
+Route::get('/tsora/restore/{id}', array('as' => 'tsora.restore', 'uses' => 'TsoraController@restore'));
+Route::get('/tsora/{id}/status/{status}', array('as' => 'tsora.status', 'uses' => 'TsoraController@changeStatus'));
+Route::post('/tsora/actions', array('as' => 'tsora.actions', 'uses' => 'TsoraController@actions'));
+
 /* Rewaya  */
 Route::get('/rewayat', array('as' => 'rewaya.index', 'uses' => 'RewayaController@index'));
 Route::post('/rewaya', array('as' => 'rewaya.store', 'uses' => 'RewayaController@store'));

@@ -140,6 +140,26 @@ module.exports = [{
     path: routes_base + 'reciter/edit/:id',
     component: require('./components/reciter/Edit.vue').default
 },
+
+//tafsir
+{
+    path: routes_base + 'tafsirs',
+    component: require('./components/tafsir/Index.vue').default
+},
+{
+    path: routes_base + 'tafsir/edit/:id',
+    component: require('./components/tafsir/Edit.vue').default
+},
+
+//tsora
+{
+    path: routes_base + 'tsoras/:tafsir',
+    component: require('./components/tsora/Index.vue').default
+},
+{
+    path: routes_base + 'tsora/edit/:id',
+    component: require('./components/tsora/Edit.vue').default
+},
 //tvs
 {
     path: routes_base + 'tvs',
@@ -149,6 +169,7 @@ module.exports = [{
     path: routes_base + 'tv/edit/:id',
     component: require('./components/tv/Edit.vue').default
 },
+
 
 //ads
 {
