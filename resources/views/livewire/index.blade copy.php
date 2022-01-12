@@ -2,12 +2,12 @@
     <div class="show-header">
       <div class="container">
         <div class="row">
-          <div class="col-lg-5">
+          <div class="col-lg-5 order-2 order-md-1">
             <div v-if="style_version != 'm'" class="header-options">
               <quick-access inclass="btn btn-primary"></quick-access>
             </div>
           </div>
-          <div class="col-lg-19">
+          <div class="col-lg-19 order-1 order-md-2">
             <livewire:components.header-ads />
           </div>
         </div>

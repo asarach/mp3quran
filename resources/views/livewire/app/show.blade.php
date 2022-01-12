@@ -12,10 +12,10 @@
     <div class="show-header">
         <div class="container">
             <div class="row">
-                <div class="col-lg-13">
+                <div class="col-lg-13 order-2 order-md-1">
                     <h1>{{$app->getLocaleTitle()}}</h1>
                 </div>
-                <div class="col-lg-11 d-flex-cc">
+                <div class="col-lg-11 d-flex-cc order-1 order-md-2">
                     <livewire:components.header-ads />
                 </div>
             </div>

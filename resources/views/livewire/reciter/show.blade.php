@@ -12,11 +12,11 @@
   <div class="show-header">
     <div class="container">
       <div class="row">
-        <div class="col-lg-13">
+        <div class="col-lg-13  order-2 order-md-1">
           <h1>{{$reciter['name']}} - {{$reciter_reads[$active_read]['rewaya_name']}}</h1>
           <div class="header-options">
             @if ($reciter_reads[$active_read]['radio'])
-            <button type="button" class="btn btn-primary"@click.prevent="getItemAndPlay(ajax_prefix + '/radio/item?id=' + {{ $reciter_reads[$active_read]['radio'] }})">
+            <button type="button" class="btn btn-primary" @click.prevent="getItemAndPlay(ajax_prefix + '/radio/item?id=' + {{ $reciter_reads[$active_read]['radio'] }})">
               <span class="uni-icon icon-radio" style="color: #fff"></span>
               {{trans('text.listen-to-radio')}}
             </button>
@@ -27,7 +27,7 @@
               {{trans('text.itunes')}}
             </a>
             @endif
-            @if ($reciter_reads[$active_read]['torrent'])
+            @if ($reciter_reads[$active_read]['torrent'] && style_version() != 'm')
             <a href="{{ $reciter_reads[$active_read]['torrent'] }}" target="_blank" class="btn btn-primary">
               <span class="uni-icon icon-cloud_download" style="color: #fff"></span>
               {{trans('text.torrent')}}
@@ -35,7 +35,7 @@
             @endif
           </div>
         </div>
-        <div class="col-lg-11 d-flex-cc">
+        <div class="col-md-11 d-flex-cc order-1 order-md-2">
           <livewire:components.header-ads />
         </div>
       </div>
@@ -51,7 +51,7 @@
         @endif
         <div class="col-lg-19" id="sticky-container">
           <div class="show-filters">
-            
+
             <div class="filter-name">
               <input type="text" class="form-control" name="search" wire:model="search" placeholder="{{ trans('text.search-for-name') }}" />
             </div>

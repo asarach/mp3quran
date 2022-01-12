@@ -2,13 +2,13 @@
   <div class="show-header">
     <div class="container">
       <div class="row">
-        <div class="col-lg-5">
+        <div class="col-lg-5 order-2 order-md-1">
           <div class="header-right">
             <h1>{{ trans("text.download-video-with-logo") }}</h1>
             <div class="header-options"></div>
           </div>
         </div>
-        <div class="col-lg-19">
+        <div class="col-lg-19 order-1 order-md-2">
           <livewire:components.header-ads />
         </div>
       </div>

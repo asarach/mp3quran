@@ -1,7 +1,7 @@
 .mobile-ui {
   background: url(../img/m_bg.png) no-repeat;
   background-position: center center;
-  background-size: 100% auto;
+  background-size: 100% 100%;
   background-attachment: fixed;
 
   .top-bar {
@@ -38,14 +38,33 @@
   .main {
     margin-top: 40px;
     .show-header {
-      min-height: 1à0px;
+      min-height: 100px;
       // padding-bottom: 3rem;
+      padding: 0rem 0 1rem;
       height: auto;
+      
       h1 {
         margin: 0;
       }
       .header-ads .ha-item {
         margin: 0.5rem 0;
+        display: none;
+        // min-height: 22vw;
+        img{
+          max-width: 100%;
+          height: auto;
+        }
+      }
+      .header-ads .ha-item.show {
+        display: block;
+      }
+      .header-options{
+        display: flex;
+        .btn{
+          margin-left: 6px;
+          padding-left: 12px;
+          font-size: 13px;
+        }
       }
     }
     .show-body {

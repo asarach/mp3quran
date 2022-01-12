@@ -1,5 +1,7 @@
 jQuery(function ($) {
 
+    retateHeaderAds();
+
     $('img').each(function () {
         if (!$(this).attr('title') && $(this).attr('alt')) {
             $(this).attr('title', $(this).attr('alt'));
@@ -107,4 +109,33 @@ jQuery(function ($) {
 
 function handleClick(myRadio) {
 
+}
+function retateHeaderAds() {
+    var count = $(".mobile-ui .main .show-header .header-ads .ha-item").length;
+
+    var currentItem = 1;
+    if (count > 1) {
+        var nextItem = 2;
+    } else {
+        var nextItem = 1;
+    }
+
+    $(".mobile-ui .main .show-header .header-ads .ha-item:nth-child(" + currentItem + ")").addClass('show');
+    toggleHeaderAds(currentItem, nextItem, count);
+}
+
+function toggleHeaderAds(currentItem, nextItem, count) {
+    var soconds = 5;
+    window.setTimeout(function () {
+        $(".mobile-ui .main .show-header .header-ads .ha-item:nth-child(" + currentItem + ")").removeClass('show');
+        $(".mobile-ui .main .show-header .header-ads .ha-item:nth-child(" + nextItem + ")").addClass('show');
+        newCurrentItem = nextItem;
+        if (nextItem == count) {
+            newNextItem = 1;
+        } else {
+            newNextItem = nextItem + 1;
+        }
+       
+        toggleHeaderAds(newCurrentItem, newNextItem, count);
+    }, soconds * 1000);
 }

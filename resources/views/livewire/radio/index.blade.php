@@ -12,10 +12,10 @@
   <div class="show-header">
     <div class="container">
       <div class="row">
-        <div class="col-lg-5">
+        <div class="col-lg-5 order-2 order-md-1">
           <h1>{{trans('text.radios')}}</h1>
         </div>
-        <div class="col-lg-19">
+        <div class="col-lg-19 order-1 order-md-2">
           <livewire:components.header-ads />
         </div>
       </div>
