@@ -29,7 +29,8 @@ class ContactMail extends Mailable
     public function build()
     {
         return $this->markdown('emails.contact')
-                    ->from(env('MAIL_FROM_ADDRESS', 'asaraach@gmail.com'),env('MAIL_FROM_NAME', 'Mp3quran'))
+                    ->from(env('MAIL_FROM_ADDRESS', 'mp3quran.net@gmail.com'),env('MAIL_FROM_NAME', 'Mp3quran'))
+                    ->replyTo($this->data['email'], $this->data['name'])
                     ->subject('Mp3quran Contact : ' . $this->data['subject'])
                     ->with($this->data);
     }
