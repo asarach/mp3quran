@@ -32,7 +32,6 @@ class Tafsir extends Model
         } else {
             $array = [
                 'id' => $this->id,
-                'slug' => $this->getSlug(),
                 'name' => $this->getLocaleName(),
             ];
         }

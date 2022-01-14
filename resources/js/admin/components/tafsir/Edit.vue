@@ -98,7 +98,6 @@ export default {
       tafsir: {
         name: "",
         status: 0,
-        keywords: "",
         description: ""
       }
     };

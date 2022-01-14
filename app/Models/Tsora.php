@@ -30,8 +30,9 @@ class Tsora extends Model
         } else {
             $array = [
                 'id' => $this->id,
-                'slug' => $this->getSlug(),
+                'tafsir_id' => $this->tafsir_id,
                 'name' => $this->getLocaleName(),
+                'tafsir_name' => $this->getTafsirLocaleName(),
             ];
         }
         
@@ -64,6 +65,15 @@ class Tsora extends Model
         $name = trans('tsora-name.' . $this->id);
         if (strpos($name, 'tsora-name.') !== false) {
             return $this->name;
+        }
+        return $name;
+    }
+
+    public function getTafsirLocaleName()
+    {
+        $name = trans('tafsir-name.' . $this->tafsir_id);
+        if (strpos($name, 'tafsir-name.') !== false) {
+            return $this->tafsir->name;
         }
         return $name;
     }

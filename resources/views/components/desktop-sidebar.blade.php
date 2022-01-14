@@ -18,5 +18,14 @@
     </li>
     @endif
     @endforeach
+
+    @auth
+    <li>
+      <a href="{{ url('tafsirs') }}" class="menu-link">
+        <span class="mp3-icon icon-tafsir"></span>
+        {{trans('text.tafsirs')}}
+      </a>
+    </li>
+    @endauth
   </ul>
 </div>

@@ -79782,6 +79782,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_notification__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(vue_notification__WEBPACK_IMPORTED_MODULE_12__);
 /* harmony import */ var velocity_animate__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! velocity-animate */ "./node_modules/velocity-animate/velocity.js");
 /* harmony import */ var velocity_animate__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(velocity_animate__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 __webpack_require__(/*! ./livewire-vue */ "./resources/js/livewire-vue.js");
 
 
@@ -79889,6 +79896,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('card-radio', __webpack_req
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('card-tv', __webpack_require__(/*! ./components/TvsItem.vue */ "./resources/js/components/TvsItem.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('tadabor-item', __webpack_require__(/*! ./components/TadaborItem.vue */ "./resources/js/components/TadaborItem.vue")["default"]);
 
+
 function initiateVue() {
   window.appMain = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
     el: '#app',
@@ -79909,6 +79917,7 @@ function initiateVue() {
         }
       }
     },
+    computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_14__["mapGetters"])(["isPlaying", "isLoading"])),
     methods: {
       toggelLanguages: function toggelLanguages() {
         this.show_languages = !this.show_languages;
@@ -82917,10 +82926,10 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /opt/homebrew/var/www/mp3quran/resources/js/app.js */"./resources/js/app.js");
-__webpack_require__(/*! /opt/homebrew/var/www/mp3quran/resources/sass/app.scss */"./resources/sass/app.scss");
-__webpack_require__(/*! /opt/homebrew/var/www/mp3quran/resources/sass/errors.scss */"./resources/sass/errors.scss");
-module.exports = __webpack_require__(/*! /opt/homebrew/var/www/mp3quran/resources/sass/admin/admin.scss */"./resources/sass/admin/admin.scss");
+__webpack_require__(/*! C:\wnmp\nginx-bins\default\www\mp3quran\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\wnmp\nginx-bins\default\www\mp3quran\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\wnmp\nginx-bins\default\www\mp3quran\resources\sass\errors.scss */"./resources/sass/errors.scss");
+module.exports = __webpack_require__(/*! C:\wnmp\nginx-bins\default\www\mp3quran\resources\sass\admin\admin.scss */"./resources/sass/admin/admin.scss");
 
 
 /***/ })

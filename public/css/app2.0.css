@@ -10562,6 +10562,23 @@ a:hover {
   left: 0;
 }
 
+.mp3-icon {
+  display: block;
+  width: 22px;
+  height: 22px;
+  background-position: center;
+  background-repeat: no-repeat, repeat;
+  background-size: 80%;
+}
+
+.icon-haramain {
+  background-image: url("/img/icons/mekka.svg");
+}
+
+.icon-tafsir {
+  background-image: url("/img/icons/tafsir.svg");
+}
+
 #app {
   padding-left: 0;
   transition: all 0.2s ease;
@@ -11212,6 +11229,10 @@ footer .social-links .list-inline-item:not(:last-child) {
   fill: #636a6f;
 }
 
+.desktop-ui .desktop-sidebar .menu-link .mp3-icon {
+  opacity: 0.75;
+}
+
 .desktop-ui .desktop-sidebar .menu-link:hover,
 .desktop-ui .desktop-sidebar .menu-link.active {
   background-color: #f2f3f4;
@@ -11794,6 +11815,126 @@ footer .social-links .list-inline-item:not(:last-child) {
 }
 
 .card-radio:hover .radio-options {
+  opacity: 1;
+}
+
+.card-tafsir {
+  display: flex;
+  position: relative;
+  align-items: center;
+  cursor: pointer;
+  padding: 0.5rem;
+  background: #fff;
+  box-shadow: 0px 2px 8px 0px #a2a2a230;
+  margin-bottom: 0.75rem;
+  border-radius: 10px;
+}
+
+.card-tafsir svg {
+  width: 18px;
+}
+
+.card-tafsir .tafsir-btn {
+  padding: 1px 0.25rem;
+  cursor: pointer;
+  margin-right: 0.25rem;
+  line-height: 1;
+  height: 30px;
+  border-radius: 10px;
+  display: flex;
+  /* background: #ebedee; */
+  width: 30px;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-tafsir .tafsir-btn:hover {
+  background: #14aae2;
+  box-shadow: 0px 2px 8px 0px #74a8bb5e;
+}
+
+.card-tafsir .tafsir-btn:hover svg {
+  fill: #fff;
+}
+
+.card-tafsir .tafsir-name span {
+  color: #a1a7ab;
+  font-size: 12px;
+}
+
+.card-tafsir .more-btn {
+  position: absolute;
+  left: 0.5rem;
+  transition: all 0.1s ease;
+}
+
+.card-tafsir .ply-btn {
+  margin-left: 6px;
+  color: #f5b44b;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f2f3f4;
+  border-radius: 10px;
+}
+
+.card-tafsir .ply-btn svg {
+  fill: #f5b44b;
+}
+
+.card-tafsir .v-spinner {
+  margin: 2px !important;
+}
+
+.card-tafsir .v-spinner .v-scale {
+  margin: 1px !important;
+  background: #f5b44b !important;
+}
+
+.card-tafsir .tafsir-info {
+  display: flex;
+}
+
+.card-tafsir .tafsir-num {
+  margin-left: 6px;
+  color: #787d84;
+  font-size: 14px;
+}
+
+.card-tafsir .tafsir-tafsir {
+  margin-left: 6px;
+  font-weight: 500;
+}
+
+.card-tafsir .tafsir-reciter {
+  color: #787d84;
+  font-size: 14px;
+}
+
+.card-tafsir .tafsir-options {
+  display: flex;
+  opacity: 0;
+  position: absolute;
+  transition: all 0.1s ease;
+  left: 0.5rem;
+}
+
+.card-tafsir .tafsir-duration {
+  margin-left: 6px;
+}
+
+.card-tafsir .tafsir-like-btn {
+  margin-right: 0.5rem;
+}
+
+.card-tafsir:hover .more-btn {
+  opacity: 0;
+}
+
+.card-tafsir:hover .tafsir-options {
   opacity: 1;
 }
 
@@ -13043,6 +13184,7 @@ footer .social-links .list-inline-item:not(:last-child) {
   width: calc(100% - 380px);
   align-items: center;
   padding: 0 1rem;
+  position: relative;
 }
 
 .desktop-player .ply-body .ply-timer {
@@ -13056,6 +13198,28 @@ footer .social-links .list-inline-item:not(:last-child) {
 
 .desktop-player .ply-body .ply-progress {
   position: initial;
+}
+
+.desktop-player .ply-body .ply-bookmark {
+  position: absolute;
+  top: -1.25rem;
+  background: #f5b44b;
+  padding: 0.15rem 0.5rem;
+  color: #fff;
+  font-weight: 600;
+  right: 6rem;
+  cursor: pointer;
+}
+
+.desktop-player .ply-body .ply-bookmark::after {
+  content: '';
+  width: 0;
+  height: 0;
+  position: absolute;
+  border-bottom: 12px solid #d18f25;
+  border-left: 8px solid transparent;
+  left: -8px;
+  top: 0;
 }
 
 .desktop-player .ply-item-info {

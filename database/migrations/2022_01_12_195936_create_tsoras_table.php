@@ -21,6 +21,12 @@ class CreateTsorasTable extends Migration
             $table->string('url');
             $table->boolean('status')->default(0);
 
+            $table->unsignedBigInteger('tafsir_id')->nullable();
+            $table->foreign('tafsir_id')
+                    ->references('id')
+                    ->on('tafsirs')
+                    ->onDelete('cascade');
+
             $table->timestamps();
         });
     }

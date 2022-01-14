@@ -11,9 +11,9 @@
           </router-link>
         </li>
         <li class="breadcrumb-item">
-          <router-link :to="prefix + 'tsoras'">
+          <router-link :to="prefix + 'tafsirs'">
             <i class="fa fa-dashboard"></i>
-            {{ trans('text.tsoras')}}
+            {{ trans('text.tafsirs')}}
           </router-link>
         </li>
         <li class="breadcrumb-item active">{{ trans('admin.edit-tsora')}}</li>

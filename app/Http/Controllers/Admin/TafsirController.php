@@ -93,12 +93,6 @@ class TafsirController extends Controller
                 $arr['description'] = '';
             }
 
-            $keywords = DB::table('translator_translations')->where('locale', $language->locale)->where('group', 'tafsir-keywords')->where('item',  $id)->first();
-            if ($keywords) {
-                $arr['keywords'] = $keywords->text;
-            } else {
-                $arr['keywords'] = '';
-            }
             $translations[$language->locale] = $arr;
         }
 
@@ -183,12 +177,6 @@ class TafsirController extends Controller
                 DB::table('translator_translations')->insert(['locale' => $key, 'group' => 'tafsir-description', 'item' =>  $id, 'text' => $translation['description']]);
             }
 
-            $keywords = DB::table('translator_translations')->where('locale', $key)->where('group', 'tafsir-keywords')->where('item',  $id)->first();
-            if ($keywords) {
-                DB::table('translator_translations')->where('id', $keywords->id)->update(array('text' => $translation['keywords']));
-            } elseif ($translation['keywords']) {
-                DB::table('translator_translations')->insert(['locale' => $key, 'group' => 'tafsir-keywords', 'item' =>  $id, 'text' => $translation['keywords']]);
-            }
         }
         $result = true;
         flushTrans();

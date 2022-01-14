@@ -32,6 +32,7 @@
         </div>
       </div>
       <div class="ply-body">
+        <div v-if="source.type == 'tsora'" class="ply-bookmark" @click="bookmarkTsora">{{ trans('text.bookmark') }}</div>
         <div class="ply-timer">{{ currentTime }}</div>
         <div class="ply-progress">
           <vue-slider
@@ -282,6 +283,7 @@ export default {
       "clearPlaylist",
       "toggelePlaylist",
       "closePlaylist",
+      "bookmarkTsora",
       "toggeleMoreoptions",
       "clipboardErrorHandler",
       "clipboardSuccessHandler",

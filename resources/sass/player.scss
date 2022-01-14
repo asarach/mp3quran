@@ -490,6 +490,7 @@
     width: calc(100% - 380px);
     align-items: center;
     padding: 0 1rem;
+    position: relative;
     .ply-timer {
       border: none;
       margin-right: 0.5rem;
@@ -499,6 +500,27 @@
     }
     .ply-progress {
       position: initial;
+    }
+    .ply-bookmark{
+      position: absolute;
+      top: -1.25rem;
+      background: #f5b44b;
+      padding: 0.15rem 0.5rem;
+      color: #fff;
+      font-weight: 600;
+      right: 6rem;
+      cursor: pointer;
+    }
+    .ply-bookmark::after{
+      content: '';
+      width: 0;
+      height: 0;
+      position: absolute;
+      border-bottom: 12px solid #d18f25;
+      border-left: 8px solid transparent;
+      left: -8px;
+      top: 0;
+
     }
   }
   .ply-item-info {

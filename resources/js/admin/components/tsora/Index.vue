@@ -28,24 +28,7 @@
             <div class="card-head">
               <h3 class="card-title">{{ trans("text.all-tsoras") }}</h3>
               <div class="card-tools">
-                <div class="pull-left">
-                  <a
-                    v-if="trashed"
-                    @click.prevent="trashedCountires(false)"
-                    class="btn btn-info btn-sm"
-                  >
-                    <i class="fas fa-folder-open m-0"></i>
-                    {{ trans("text.all") }}
-                  </a>
-                  <a
-                    v-else
-                    @click.prevent="trashedCountires(true)"
-                    class="btn btn-info btn-sm"
-                  >
-                    <i class="fas fa-recycle m-0"></i>
-                    {{ trans("admin.trashed") }}
-                  </a>
-                </div>
+               
               </div>
             </div>
             <div class="card-body table-responsive p-0">
@@ -121,35 +104,8 @@
                       </a>
                     </td>
                     <td class="text-center">
-                      <ul v-if="trashed" class="list-inline p-0 m-0">
-                        <li class="list-inline-item">
-                          <a
-                            href="#"
-                            data-placement="left"
-                            class="tip btn-uni edit"
-                            data-toggle="tooltip"
-                            title
-                            :data-original-title="trans('admin.restore-tsora')"
-                            @click.prevent="restorCounty(tsora.id)"
-                          >
-                            <i class="fas fa-reply-all"></i>
-                          </a>
-                        </li>
-                        <li class="list-inline-item">
-                          <a
-                            href="#"
-                            data-placement="left"
-                            class="tip btn-uni delete"
-                            data-toggle="tooltip"
-                            title
-                            :data-original-title="trans('admin.delete-tsora')"
-                            @click.prevent="deleteTsora(tsora.id, item)"
-                          >
-                            <i class="fas fa-trash"></i>
-                          </a>
-                        </li>
-                      </ul>
-                      <ul v-else class="list-inline p-0 m-0">
+            
+                      <ul  class="list-inline p-0 m-0">
                         <li class="list-inline-item">
                           <router-link
                             :to="prefix + 'tsora/edit/' + tsora.id"
@@ -210,23 +166,14 @@
                       <a
                         class="dropdown-item"
                         href="#"
-                        v-if="!this.trashed"
                         @click.prevent="actionChangeStatus(1)"
                         >{{ trans("admin.activate-selected") }}</a
                       >
                       <a
                         class="dropdown-item"
                         href="#"
-                        v-if="!this.trashed"
                         @click.prevent="actionChangeStatus(0)"
                         >{{ trans("admin.deactivate-selected") }}</a
-                      >
-                      <a
-                        class="dropdown-item"
-                        href="#"
-                        @click.prevent="actionRestor()"
-                        v-if="this.trashed"
-                        >{{ trans("admin.restor-selected") }}</a
                       >
                     </div>
                   </div>
@@ -267,6 +214,7 @@ export default {
       tsora: {
         name: "",
         status: 0,
+        tafsir: this.$route.params.tafsir,
         url: ""
       },
       filters: {
@@ -274,7 +222,6 @@ export default {
         query: "",
         type: "",
       },
-      trashed: false,
       query: true,
       status: ["0", "1"],
       orders: [
@@ -328,11 +275,6 @@ export default {
       this.tsoras.current_page = undefined;
       this.getCountires();
     },
-    trashedCountires(trashed) {
-      this.tsoras.current_page = undefined;
-      this.trashed = trashed;
-      this.getCountires();
-    },
     orderCountires(order) {
       this.sort = order.sort;
       this.direction = order.direction;
@@ -350,9 +292,6 @@ export default {
       }
       if (this.direction) {
         base += "direction=" + this.direction + "&";
-      }
-      if (this.trashed) {
-        base += "trashed=" + this.trashed + "&";
       }
       if (this.filters.tsora) {
         base += "tsora=" + this.filters.tsora.id + "&";
@@ -388,9 +327,6 @@ export default {
     confirmDalete(id, key) {
       var self = this;
       var forced = "";
-      if (this.trashed) {
-        forced = "?forced=true";
-      }
       axios
         .delete(this.ajax_prefix + "tsora/" + id + forced)
         .then(function (response) {
@@ -441,7 +377,6 @@ export default {
       axios
         .get(this.ajax_prefix + "tsora/restore/" + id)
         .then(function (response) {
-          self.trashed = false;
           self.getCountires();
           self.$notify({
             group: "admin",
@@ -470,9 +405,6 @@ export default {
     confirmActionDelete() {
       var self = this;
       var forced = "";
-      if (this.trashed) {
-        forced = "?forced=true";
-      }
       var data = {
         action: "delete",
         items: this.actions_items,

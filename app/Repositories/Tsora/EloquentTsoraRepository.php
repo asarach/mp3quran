@@ -24,6 +24,10 @@ class EloquentTsoraRepository extends EloquentRepository implements TsoraReposit
         $item->status = $data['status'];
         $item->url = $data['url'];
 
+        if (!empty($data['tafsir']) and isset($data['tafsir'])) {
+            $item->tafsir()->associate($data['tafsir']);
+        }
+
         $item->save();
 
         return $item;

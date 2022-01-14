@@ -36,6 +36,9 @@ Route::get('/video/playlist/{playlist_id}', ['as' => 'video.playlist', 'uses' =>
 Route::get('/video/download/{download_id}', ['as' => 'video.download', 'uses' => Video\Download::class]);
 Route::get('/video/{slug}', ['as' => 'video.show', 'uses' => Video\Show::class]);
 
+/* tafsirs  */
+Route::get('/tafsirs', ['as' => 'tafsir.index', 'uses' => Tafsir\Index::class]);
+
 /* favorites  */
 Route::get('/favorites', ['as' => 'page.favorites', 'uses' => Page\Favorites::class]);
 

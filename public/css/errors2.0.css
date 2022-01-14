@@ -10562,6 +10562,23 @@ a:hover {
   left: 0;
 }
 
+.mp3-icon {
+  display: block;
+  width: 22px;
+  height: 22px;
+  background-position: center;
+  background-repeat: no-repeat, repeat;
+  background-size: 80%;
+}
+
+.icon-haramain {
+  background-image: url("/img/icons/mekka.svg");
+}
+
+.icon-tafsir {
+  background-image: url("/img/icons/tafsir.svg");
+}
+
 #app {
   padding-left: 0;
   transition: all 0.2s ease;
@@ -11210,6 +11227,10 @@ footer .social-links .list-inline-item:not(:last-child) {
 .desktop-ui .desktop-sidebar .menu-link svg {
   width: 20px;
   fill: #636a6f;
+}
+
+.desktop-ui .desktop-sidebar .menu-link .mp3-icon {
+  opacity: 0.75;
 }
 
 .desktop-ui .desktop-sidebar .menu-link:hover,

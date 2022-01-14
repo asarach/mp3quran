@@ -105,6 +105,8 @@ Vue.component('card-reciter', require('./components/ReciterItem.vue').default);
 Vue.component('card-radio', require('./components/RadioItem.vue').default);
 Vue.component('card-tv', require('./components/TvsItem.vue').default);
 Vue.component('tadabor-item', require('./components/TadaborItem.vue').default);
+import { mapActions, mapGetters, mapState } from "vuex";
+
 
 function initiateVue() {
   window.appMain = new Vue({
@@ -125,6 +127,9 @@ function initiateVue() {
           height: 0,
         },
       },
+    },
+    computed: {
+      ...mapGetters(["isPlaying", "isLoading"]),
     },
     methods: {
       toggelLanguages() {

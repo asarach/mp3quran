@@ -275,7 +275,7 @@ export default new Vuex.Store({
       state.audio.pause();
       state.audio.currentTime = 0;
       commit("setPlaying", { playing: false });
-      
+
     },
 
     setAudio({ state, dispatch, commit }, audioold) {
@@ -387,6 +387,16 @@ export default new Vuex.Store({
 
     closePlaylist({ state }) {
       state.show_playlist = false;
+    },
+    bookmarkTsora({ state }) {
+      if (state.source.type == 'tsora') {
+        let url = this.ajax_prefix + '/tsora/bookmark?id=' + state.source.read_id + '&time=' + state.currentSeconds;
+        console.log(url);
+        // axios.get(url).then(function (response) {
+
+        // }).catch(function (error) {
+        // });
+      }
     },
     clearPlaylist({ commit, dispatch }) {
       var source = {

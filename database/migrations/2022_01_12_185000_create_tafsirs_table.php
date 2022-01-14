@@ -20,9 +20,7 @@ class CreateTafsirsTable extends Migration
             $table->string('name');
             $table->text('about')->nullable();	
             $table->boolean('status')->default(0);
-
             $table->text('description')->nullable();
-            $table->text('keywords')->nullable();
 
             $table->softDeletes();
             $table->timestamps();

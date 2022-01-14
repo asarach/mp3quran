@@ -7,79 +7,36 @@ use Illuminate\Http\Request;
 
 class TsoraController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function item()
     {
-        //
-    }
+        $input = request()->all();
+        if (!isset($input['id'])) {
+            $input['id'] = '';
+        }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+        try {
+            $tsora = Tsora::where('status', 1)->findOrFail($input['id']);
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Tsora  $tsora
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Tsora $tsora)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Tsora  $tsora
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Tsora $tsora)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Tsora  $tsora
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Tsora $tsora)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Tsora  $tsora
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Tsora $tsora)
-    {
-        //
+            $item = [
+                'id' => "20000" . $tsora->tafsir_id . "-" . $tsora->id,
+                'read_id' => $tsora->id,
+                'sora_id' => "100002",
+                'read_slug' => '',
+                'num' => "000",
+                'name' => $tsora->getLocaleName(),
+                'reciter' => "",
+                'type' => "tsora",
+                'url' => '',
+                'description' => '',
+                'share_url' => '',
+                'share_title' => $tsora->getLocaleName(),
+                'share_description' => '',
+                'file' => $tsora->url,
+            ];
+        } catch (\Throwable $th) {
+            $item = [];
+            \Log::notice('Error Playing Tsora  with Id: ' . $input['id']);
+        }
+        return  $item;
     }
 }

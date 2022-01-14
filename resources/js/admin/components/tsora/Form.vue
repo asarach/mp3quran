@@ -98,7 +98,7 @@ export default {
         axios
           .put(this.ajax_prefix + "tsora/" + this.tsora.id, data)
           .then(response => {
-            self.$router.push(this.prefix + "tsoras");
+            self.$router.push(this.prefix + "tsoras/" + response.data.tsora.tafsir_id);
             self.$notify({
               group: "admin",
               text: self.trans("admin.tsora-edited"),
@@ -119,7 +119,7 @@ export default {
         axios
           .post(this.ajax_prefix + "tsora", data)
           .then(response => {
-            self.$router.push(this.prefix + "tsoras");
+            self.$router.push(this.prefix + "tsoras/" + response.data.tsora.tafsir_id);
             self.$emit("refrech");
             self.$notify({
               group: "admin",

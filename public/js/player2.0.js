@@ -426,6 +426,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -500,7 +501,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     currentPosition: "currentPosition",
     isLoading: "isLoading"
   })),
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])(["onDrop", "load", "pause", "nextItem", "prevItem", "loadAndPlayItem", "toggeleItem", "changeVolume", "clearPlaylist", "toggelePlaylist", "closePlaylist", "toggeleMoreoptions", "clipboardErrorHandler", "clipboardSuccessHandler", "removeItemFavorite", "addItemFavorite", "shareItem", "removeItem", "showFullplayer", "closeFullplayer"])),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])(["onDrop", "load", "pause", "nextItem", "prevItem", "loadAndPlayItem", "toggeleItem", "changeVolume", "clearPlaylist", "toggelePlaylist", "closePlaylist", "bookmarkTsora", "toggeleMoreoptions", "clipboardErrorHandler", "clipboardSuccessHandler", "removeItemFavorite", "addItemFavorite", "shareItem", "removeItem", "showFullplayer", "closeFullplayer"])),
   mounted: function mounted() {
     this.$store.dispatch("setAudio", this.$refs.audiofile);
   },
@@ -19904,6 +19905,17 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "ply-body" }, [
+          _vm.source.type == "tsora"
+            ? _c(
+                "div",
+                {
+                  staticClass: "ply-bookmark",
+                  on: { click: _vm.bookmarkTsora }
+                },
+                [_vm._v(_vm._s(_vm.trans("text.bookmark")))]
+              )
+            : _vm._e(),
+          _vm._v(" "),
           _c("div", { staticClass: "ply-timer" }, [
             _vm._v(_vm._s(_vm.currentTime))
           ]),
@@ -35870,9 +35882,19 @@ var convertTimeHHMMSS = function convertTimeHHMMSS(val) {
       var state = _ref31.state;
       state.show_playlist = false;
     },
-    clearPlaylist: function clearPlaylist(_ref32) {
-      var commit = _ref32.commit,
-          dispatch = _ref32.dispatch;
+    bookmarkTsora: function bookmarkTsora(_ref32) {
+      var state = _ref32.state;
+
+      if (state.source.type == 'tsora') {
+        var url = this.ajax_prefix + '/tsora/bookmark?id=' + state.source.read_id + '&time=' + state.currentSeconds;
+        console.log(url); // axios.get(url).then(function (response) {
+        // }).catch(function (error) {
+        // });
+      }
+    },
+    clearPlaylist: function clearPlaylist(_ref33) {
+      var commit = _ref33.commit,
+          dispatch = _ref33.dispatch;
       var source = {
         file: "empty",
         id: "",
@@ -35895,16 +35917,16 @@ var convertTimeHHMMSS = function convertTimeHHMMSS(val) {
       });
       dispatch("stop");
     },
-    shareItem: function shareItem(_ref33, title, url, description) {
-      _objectDestructuringEmpty(_ref33);
+    shareItem: function shareItem(_ref34, title, url, description) {
+      _objectDestructuringEmpty(_ref34);
 
       AppEvent.$emit("share", title, url, description);
     },
-    addItemFavorite: function addItemFavorite(_ref34, _ref35) {
-      _objectDestructuringEmpty(_ref34);
+    addItemFavorite: function addItemFavorite(_ref35, _ref36) {
+      _objectDestructuringEmpty(_ref35);
 
-      var item = _ref35.item,
-          type = _ref35.type;
+      var item = _ref36.item,
+          type = _ref36.type;
 
       switch (type) {
         case 'sora':
@@ -35916,11 +35938,11 @@ var convertTimeHHMMSS = function convertTimeHHMMSS(val) {
           break;
       }
     },
-    removeItemFavorite: function removeItemFavorite(_ref36, _ref37) {
-      _objectDestructuringEmpty(_ref36);
+    removeItemFavorite: function removeItemFavorite(_ref37, _ref38) {
+      _objectDestructuringEmpty(_ref37);
 
-      var item = _ref37.item,
-          type = _ref37.type;
+      var item = _ref38.item,
+          type = _ref38.type;
 
       switch (type) {
         case 'sora':
@@ -35932,17 +35954,17 @@ var convertTimeHHMMSS = function convertTimeHHMMSS(val) {
           break;
       }
     },
-    downloadMp3: function downloadMp3(_ref38, item) {
-      _objectDestructuringEmpty(_ref38);
+    downloadMp3: function downloadMp3(_ref39, item) {
+      _objectDestructuringEmpty(_ref39);
 
       window.appMain.$store.dispatch("download/downloadMp3", item);
     },
-    showFullplayer: function showFullplayer(_ref39) {
-      var state = _ref39.state;
+    showFullplayer: function showFullplayer(_ref40) {
+      var state = _ref40.state;
       state.show_fullplayer = true;
     },
-    closeFullplayer: function closeFullplayer(_ref40) {
-      var state = _ref40.state;
+    closeFullplayer: function closeFullplayer(_ref41) {
+      var state = _ref41.state;
       state.show_fullplayer = false;
     }
   }
@@ -35957,7 +35979,7 @@ var convertTimeHHMMSS = function convertTimeHHMMSS(val) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /opt/homebrew/var/www/mp3quran/resources/js/player/player.js */"./resources/js/player/player.js");
+module.exports = __webpack_require__(/*! C:\wnmp\nginx-bins\default\www\mp3quran\resources\js\player\player.js */"./resources/js/player/player.js");
 
 
 /***/ })
