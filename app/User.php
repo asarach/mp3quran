@@ -2,9 +2,11 @@
 
 namespace App;
 
+use App\Models\Tbookmark;
+use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Heroicpixels\Filterable\FilterableTrait;
-use Laravel\Passport\HasApiTokens;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -32,5 +34,14 @@ class User extends Authenticatable
         } else {
             return 'https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg';
         }
+    }
+    /**
+     * Get all of the tbookmarks for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function tbookmarks()
+    {
+        return $this->hasMany(Tbookmark::class);
     }
 }

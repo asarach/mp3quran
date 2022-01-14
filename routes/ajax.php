@@ -26,6 +26,7 @@ Route::get('/soar/list', array('as' => 'soar.list', 'uses' => 'SoraController@li
 Route::get('/soar/item', array('as' => 'soar.item', 'uses' => 'SoraController@item'));
 Route::get('/tadabor/item', array('as' => 'tadabor.item', 'uses' => 'TadaborController@item'));
 Route::get('/tsora/item', array('as' => 'tsora.item', 'uses' => 'TsoraController@item'));
+Route::get('/tsora/bookmark', array('as' => 'tsora.bookmark', 'uses' => 'TsoraController@bookmark'));
 Route::get('/radio/item', array('as' => 'radio.item', 'uses' => 'RadioController@item'));
 Route::post('/favorites', array('as' => 'page.favorites.post', 'uses' => 'PageController@postFavorites'));
 Route::post('/video/download/{id}/generate', array('as' => 'video.download', 'uses' => 'VideoController@generate'));

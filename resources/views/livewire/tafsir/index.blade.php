@@ -8,7 +8,7 @@
 <meta name="twitter:description" content="{{$page->description}}" />
 <meta name="keywords" content="{{$page->keywords}}" />
 @endsection
-<div class="main home-show">
+<div class="main tafsirs-show ">
     <div class="show-header">
         <div class="container">
             <div class="row">
@@ -30,6 +30,26 @@
                 </div>
                 @endif
                 <div class="col-lg-19" id="sticky-container">
+                    <div class="tafsirs-list tafsirs-bookmarks">
+                        <h3>{{ trans('text.tafsirs-bookmarks') }}</h3>
+                        <ul class="list-unstyled">
+                            @foreach ($tbookmarks as $tbookmark)
+                            <li>
+                                <div class="card-tafsir">
+                                    <div class="ply-btn" @click.prevent="getItemAndPlay(ajax_prefix + '/tsora/item?id={{ $tbookmark['tsora']['id'] }}&time={{ $tbookmark['time'] }}')">
+                                        <scale-loader v-if="isLoading({ type: 'tsora', id: '20000{{ $tbookmark['tsora']['tafsir_id'] }}-{{ $tbookmark['tsora']['id'] }}'  })" color="#0D3A4D" height="10px" width="2px"></scale-loader>
+                                        <span v-else-if="isPlaying({ type: 'tsora', id: '20000{{ $tbookmark['tsora']['tafsir_id'] }}-{{ $tbookmark['tsora']['id'] }}' })" class="uni-icon icon-pause" style="color: #f5b44b"></span>
+                                        <span v-else class="uni-icon icon-play_arrow" style="color: #f5b44b"></span>
+                                    </div>
+                                    <div class="tafsir-info">
+                                        <div class="tafsir-name">{{$tbookmark['tsora']['name']}}<span> - {{$tbookmark['tsora']['tafsir_name']}}</span></div>
+                                    </div>
+                                </div>
+                            </li>
+                            @endforeach
+                        </ul>
+                    </div>
+
                     <div class="show-filters">
                         <div class="filter-name">
                             <input type="text" class="form-control" name="search" wire:model="search" placeholder="{{ trans('text.search-for-name') }}" />

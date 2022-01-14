@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Tafsir;
 use App\Page;
 use App\Models\Tsora;
 use App\Models\Tafsir;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Illuminate\Support\Facades\Cache;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -23,6 +24,7 @@ class Index extends Component
     {
         //get tafsirs
         $tafsirsa = Tafsir::where('status', 1)->get();
+        $tafsirs = [];
         foreach ($tafsirsa as $tafsir) {
             $tafsirs[$tafsir->id] = ['id' => $tafsir->id,  'name' => $tafsir->getLocaleName()];
         }
@@ -36,8 +38,6 @@ class Index extends Component
         } else {
             $this->selected_tafsir['name'] = trans('text.all');
         }
-
-
 
         //get page info
         $page = Page::where('name', 'tafsir')->where('status', 1)->firstOrFail();
@@ -57,7 +57,9 @@ class Index extends Component
             });
         }
 
-        return view('livewire.tafsir.index', compact('page', 'tafsirs', 'tsoras'));
+        $tbookmarks = Auth::user()->tbookmarks()->with('tsora')->get()->toArray();
+
+        return view('livewire.tafsir.index', compact('page', 'tafsirs', 'tsoras', 'tbookmarks'));
     }
     public function preparword($q)
     {

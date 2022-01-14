@@ -201,11 +201,18 @@ export default new Vuex.Store({
       });
 
       commit('setSource', { source: item });
-      commit('setCurrentTime', { currentTime: 0 });
-      state.audio.currentTime = 0;
+      
       state.audio.pause();
       state.audio.setAttribute('src', state.source.file);
       state.audio.load();
+      if ('currentTime' in item) {
+        commit('setCurrentTime', { currentTime: item.currentTime });
+        state.audio.currentTime = item.currentTime;
+      } else {
+        commit('setCurrentTime', { currentTime: 0 });
+        state.audio.currentTime = 0;
+      }
+
       dispatch("play");
     },
     toggeleItem({ dispatch, state }) {
@@ -390,12 +397,11 @@ export default new Vuex.Store({
     },
     bookmarkTsora({ state }) {
       if (state.source.type == 'tsora') {
-        let url = this.ajax_prefix + '/tsora/bookmark?id=' + state.source.read_id + '&time=' + state.currentSeconds;
-        console.log(url);
-        // axios.get(url).then(function (response) {
+        let url = window.App.urlBase + '/' + window.App.current_language + '/ajax/tsora/bookmark?id=' + state.source.read_id + '&time=' + state.currentSeconds;
+        axios.get(url).then(function (response) {
 
-        // }).catch(function (error) {
-        // });
+        }).catch(function (error) {
+        });
       }
     },
     clearPlaylist({ commit, dispatch }) {
