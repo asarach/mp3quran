@@ -49,7 +49,7 @@ class TranslationController extends Controller
         if ($request->text) {
             $translations = $translations->where('text', 'like', '%' . $request->text . '%');
         }
-        $translations = $translations->orderBy('id', 'asc')->paginate(50);
+        $translations = $translations->orderBy('id', 'desc')->paginate(50);
 
         foreach ($translations as $translation) {
             
