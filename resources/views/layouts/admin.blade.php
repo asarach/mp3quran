@@ -280,7 +280,7 @@
   <!-- REQUIRED JS SCRIPTS -->
 
   <!-- AdminLTE App -->
-  <script src="{{ asset('js/trans/admin_'.LaravelLocalization::getCurrentLocale().'.22.js') }}"></script>
+  <script src="{{ asset('js/trans/admin_'.LaravelLocalization::getCurrentLocale().'.2.1.js') }}"></script>
   <script src="{{ mix('/js/admin2.0.js') }}"></script>
   <script src="{{ asset('plugins/ckeditor/ckeditor.js')}}" type="text/javascript"></script>
 </body>

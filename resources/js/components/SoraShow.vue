@@ -44,7 +44,7 @@
       <div
         class="sora-btn link-btn"
         v-tooltip="trans('text.copy-link')"
-        v-clipboard:copy="sora.url"
+        v-clipboard:copy="sora.file"
         v-clipboard:error="clipboardErrorHandler"
         v-clipboard:success="clipboardSuccessHandler"
       >
@@ -61,8 +61,7 @@
         v-else
         class="sora-btn download-btn"
         v-tooltip="trans('text.download')"
-        :href="sora.file"
-        target="_blank"
+        :href="sora.file  | downloadUrl"
         ><span class="uni-icon icon-cloud_download"></span
       ></a>
 

@@ -50,8 +50,7 @@
           v-else
           class="sora-btn download-btn"
           v-tooltip.top="trans('text.download-tadabor')"
-          :href="item.audio_url"
-          target="_blank"
+          :href="item.audio_url | downloadUrl"
           ><span class="uni-icon icon-cloud_download"></span
         ></a>
       </div>

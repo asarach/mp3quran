@@ -51,6 +51,11 @@ Vue.directive('click-outside', {
   },
 });
 
+Vue.filter('downloadUrl', function (value) {
+  if (!value) return ''
+  return value.replace('mp3quran.net/', 'mp3quran.net/download.php?file=')
+})
+
 import ScaleLoader from 'vue-spinner/src/ScaleLoader.vue'
 Vue.component('scale-loader', ScaleLoader);
 

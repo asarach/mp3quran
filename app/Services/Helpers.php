@@ -180,8 +180,8 @@ function flushTrans()
         }
         $text = json_encode($text_trans);
 
-        Storage::disk('public_html')->put('js/trans/admin_' . $language->locale . '.22.js', 'window.trans = {"admin" : ' . $admin . ',"front" : ' . $front . ',  "text" : ' . $text . '}');
-        Storage::disk('public_html')->put('js/trans/text_' . $language->locale . '.js', 'window.trans = {"text" : ' . $text . '}');
+        Storage::disk('public_html')->put('js/trans/admin_' . $language->locale . '.2.1.js', 'window.trans = {"admin" : ' . $admin . ',"front" : ' . $front . ',  "text" : ' . $text . '}');
+        Storage::disk('public_html')->put('js/trans/text_' . $language->locale . '.2.1.js', 'window.trans = {"text" : ' . $text . '}');
     }
 }
 
