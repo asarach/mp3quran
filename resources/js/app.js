@@ -67,9 +67,6 @@ Sentry.init({
   tracesSampleRate: 0.75,
 });
 
-console.log('Sentry.init');
-
-
 Vue.filter('downloadUrl', function (value) {
   if (!value) return ''
   return value.replace('mp3quran.net/', 'mp3quran.net/download.php?file=')
