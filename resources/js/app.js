@@ -67,6 +67,8 @@ Sentry.init({
   tracesSampleRate: 0.75,
 });
 
+console.log('Sentry.init');
+
 
 Vue.filter('downloadUrl', function (value) {
   if (!value) return ''
