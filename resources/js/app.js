@@ -3,6 +3,9 @@ require('./livewire-vue');
 import Vue from 'vue'
 import store from './store';
 import VuexPersist from 'vuex-persist'
+import * as Sentry from "@sentry/vue";
+import { Integrations } from "@sentry/tracing";
+
 require('./bootstrap');
 require('./main');
 var Turbolinks = require("turbolinks")
@@ -50,6 +53,20 @@ Vue.directive('click-outside', {
     document.body.removeEventListener('click', el.clickOutsideEvent)
   },
 });
+
+
+Sentry.init({
+  Vue,
+  dsn: "https://10d2a5e476d94cc9a533026780ff378c@o1119941.ingest.sentry.io/6171514",
+  integrations: [
+    new Integrations.BrowserTracing({
+      // routingInstrumentation: Sentry.vueRouterInstrumentation(router),
+      tracingOrigins: ["mp3quran.de", "mp3quran.com", /^\//],
+    }),
+  ],
+  tracesSampleRate: 0.75,
+});
+
 
 Vue.filter('downloadUrl', function (value) {
   if (!value) return ''
