@@ -96175,10 +96175,10 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\wnmp\nginx-bins\default\www\mp3quran\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! C:\wnmp\nginx-bins\default\www\mp3quran\resources\sass\app.scss */"./resources/sass/app.scss");
-__webpack_require__(/*! C:\wnmp\nginx-bins\default\www\mp3quran\resources\sass\errors.scss */"./resources/sass/errors.scss");
-module.exports = __webpack_require__(/*! C:\wnmp\nginx-bins\default\www\mp3quran\resources\sass\admin\admin.scss */"./resources/sass/admin/admin.scss");
+__webpack_require__(/*! /opt/homebrew/var/www/mp3quran/resources/js/app.js */"./resources/js/app.js");
+__webpack_require__(/*! /opt/homebrew/var/www/mp3quran/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /opt/homebrew/var/www/mp3quran/resources/sass/errors.scss */"./resources/sass/errors.scss");
+module.exports = __webpack_require__(/*! /opt/homebrew/var/www/mp3quran/resources/sass/admin/admin.scss */"./resources/sass/admin/admin.scss");
 
 
 /***/ })

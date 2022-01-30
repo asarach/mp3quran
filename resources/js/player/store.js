@@ -202,13 +202,16 @@ export default new Vuex.Store({
       state.audio.pause();
       state.audio.setAttribute('src', state.source.file);
       state.audio.load();
+      
       if ('currentTime' in item) {
+       
         commit('setCurrentSeconds', { currentSeconds: item.currentTime });
         state.audio.currentTime = item.currentTime;
       } else {
         commit('setCurrentSeconds', { currentSeconds: 0 });
         state.audio.currentTime = 0;
       }
+      
 
       dispatch("play");
     },
@@ -217,16 +220,18 @@ export default new Vuex.Store({
         dispatch("pause");
       } else {
         dispatch("play");
-      }
+      }''
     },
     load({ commit, state }, item) {
       if (state.audio.readyState >= 2) {
         state.loaded = true;
-        let currentSeconds = parseInt(state.audio.duration);
-        if (!currentSeconds || !currentSeconds.isInteger) {
-          currentSeconds = 0;
+
+        let durationSeconds = parseInt(state.audio.duration);
+        if (!durationSeconds) {
+          durationSeconds = 0;
         }
-        commit('setDurationSeconds', { currentSeconds: currentSeconds });
+
+        commit('setDurationSeconds', { durationSeconds: durationSeconds });
         
         commit("setState", {
           playing_state: 'loaded',

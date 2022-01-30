@@ -35674,6 +35674,8 @@ var convertTimeHHMMSS = function convertTimeHHMMSS(val) {
       } else {
         dispatch("play");
       }
+
+      '';
     },
     load: function load(_ref15, item) {
       var commit = _ref15.commit,
@@ -35681,14 +35683,14 @@ var convertTimeHHMMSS = function convertTimeHHMMSS(val) {
 
       if (state.audio.readyState >= 2) {
         state.loaded = true;
-        var currentSeconds = parseInt(state.audio.duration);
+        var durationSeconds = parseInt(state.audio.duration);
 
-        if (!currentSeconds || !currentSeconds.isInteger) {
-          currentSeconds = 0;
+        if (!durationSeconds) {
+          durationSeconds = 0;
         }
 
         commit('setDurationSeconds', {
-          currentSeconds: currentSeconds
+          durationSeconds: durationSeconds
         });
         commit("setState", {
           playing_state: 'loaded',
@@ -35992,7 +35994,7 @@ var convertTimeHHMMSS = function convertTimeHHMMSS(val) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\wnmp\nginx-bins\default\www\mp3quran\resources\js\player\player.js */"./resources/js/player/player.js");
+module.exports = __webpack_require__(/*! /opt/homebrew/var/www/mp3quran/resources/js/player/player.js */"./resources/js/player/player.js");
 
 
 /***/ })
