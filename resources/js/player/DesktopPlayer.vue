@@ -33,7 +33,7 @@
       </div>
       <div class="ply-body">
         <div v-if="source.type == 'tsora'" class="ply-bookmark" @click="bookmarkTsora">{{ trans('text.bookmark') }}</div>
-        <div class="ply-timer">{{ currentTime }}</div>
+        <div class="ply-timer">{{ displayedTime }}</div>
         <div class="ply-progress">
           <vue-slider
             :lazy="true"
@@ -42,7 +42,7 @@
             tooltip="none"
           />
         </div>
-        <div class="ply-duration">{{ durationTime }}</div>
+        <div class="ply-duration">{{ displayedDuration }}</div>
       </div>
 
       <div class="ply-options">
@@ -262,8 +262,8 @@ export default {
       show_moreoptions_item: (state) => state.show_moreoptions_item,
     }),
     ...mapGetters({
-      durationTime: "durationTime",
-      currentTime: "currentTime",
+      displayedDuration: "displayedDuration",
+      displayedTime: "displayedTime",
       favoriteIncludes: "favoriteIncludes",
       currentPosition: "currentPosition",
       isLoading: "isLoading",

@@ -6,10 +6,7 @@ const convertTimeHHMMSS = (val) => {
   let hhmmss = new Date(val * 1000).toISOString().substr(11, 8);
   return hhmmss.indexOf("00:") === 0 ? hhmmss.substr(3) : hhmmss;
 };
-
-
 export default new Vuex.Store({
-
   state: {
     audio: undefined,
     currentSeconds: 0,
@@ -48,9 +45,6 @@ export default new Vuex.Store({
     },
   },
   mutations: {
-    setCurrentTime(state, { currentTime }) {
-      state.currentTime = currentTime;
-    },
     setFavorite(state, { favorite }) {
       state.favorite = favorite;
     },
@@ -62,6 +56,9 @@ export default new Vuex.Store({
     },
     setCurrentSeconds(state, { currentSeconds }) {
       state.currentSeconds = currentSeconds;
+    },
+    setDurationSeconds(state, { durationSeconds }) {
+      state.durationSeconds = durationSeconds;
     },
     setSource(state, { source }) {
       state.source = source;
@@ -81,10 +78,10 @@ export default new Vuex.Store({
     },
   },
   getters: {
-    currentTime: (state) => {
+    displayedTime: (state) => {
       return convertTimeHHMMSS(state.currentSeconds);
     },
-    durationTime: (state) => {
+    displayedDuration: (state) => {
       return convertTimeHHMMSS(state.durationSeconds);
     },
     favoriteIncludes: (state, getters) => (item, type) => {
@@ -206,10 +203,10 @@ export default new Vuex.Store({
       state.audio.setAttribute('src', state.source.file);
       state.audio.load();
       if ('currentTime' in item) {
-        commit('setCurrentTime', { currentTime: item.currentTime });
+        commit('setCurrentSeconds', { currentSeconds: item.currentTime });
         state.audio.currentTime = item.currentTime;
       } else {
-        commit('setCurrentTime', { currentTime: 0 });
+        commit('setCurrentSeconds', { currentSeconds: 0 });
         state.audio.currentTime = 0;
       }
 
@@ -225,10 +222,12 @@ export default new Vuex.Store({
     load({ commit, state }, item) {
       if (state.audio.readyState >= 2) {
         state.loaded = true;
-        state.durationSeconds = parseInt(state.audio.duration);
-        if (!state.durationSeconds) {
-          state.durationSeconds = 0;
+        let currentSeconds = parseInt(state.audio.duration);
+        if (!currentSeconds || !currentSeconds.isInteger) {
+          currentSeconds = 0;
         }
+        commit('setDurationSeconds', { currentSeconds: currentSeconds });
+        
         commit("setState", {
           playing_state: 'loaded',
           playing_item: state.playing_item,
@@ -281,8 +280,8 @@ export default new Vuex.Store({
     stop({ commit, state }, products) {
       state.audio.pause();
       state.audio.currentTime = 0;
+      commit('setCurrentSeconds', { currentSeconds: 0 });
       commit("setPlaying", { playing: false });
-
     },
 
     setAudio({ state, dispatch, commit }, audioold) {

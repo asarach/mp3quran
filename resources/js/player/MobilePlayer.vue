@@ -59,11 +59,11 @@
         <div class="fply-sora">{{ source.name }}</div>
       </div>
       <div class="fply-body">
-        <div class="fply-timer">{{ currentTime }}</div>
+        <div class="fply-timer">{{ displayedTime }}</div>
         <div class="fply-progress">
           <vue-slider :lazy="true" v-model="percentComplete" tooltip="none" />
         </div>
-        <div class="fply-duration">{{ durationTime }}</div>
+        <div class="fply-duration">{{ displayedDuration }}</div>
       </div>
       <div class="fply-controls">
         <div
@@ -314,8 +314,8 @@ export default {
       show_moreoptions_item: (state) => state.show_moreoptions_item,
     }),
     ...mapGetters({
-      durationTime: "durationTime",
-      currentTime: "currentTime",
+      displayedDuration: "displayedDuration",
+      displayedTime: "displayedTime",
       favoriteIncludes: "favoriteIncludes",
       currentPosition: "currentPosition",
       isLoading: "isLoading",
