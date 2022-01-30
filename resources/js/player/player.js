@@ -7,7 +7,7 @@ window.PlayerVue = Vue
 window.appMain = {}
 
 new VuexPersist({
-  key: 'mp3quranb.net_player',
+  key: 'mp3quran_n.net_player',
   storage: window.localStorage
 }).plugin(store)
 

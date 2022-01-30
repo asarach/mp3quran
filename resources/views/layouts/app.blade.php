@@ -23,7 +23,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/animate.min.css') }}" rel="stylesheet">
     <link href="{{ asset('plugins/icomoon/style.css') }}" rel="stylesheet">
-    <link href="{{ mix('css/app2.0.css') }}" rel="stylesheet" type="text/css" charset="utf-8">
+    <link href="{{ mix('css/app2.1.css') }}" rel="stylesheet" type="text/css" charset="utf-8">
 
     <script>
         window.App = {!! json_encode([
@@ -38,8 +38,8 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
     <script src="{{ asset('js/trans/text_'.LaravelLocalization::getCurrentLocale().'.2.1.js') }}"></script>
-    <script defer src="{{ mix('js/player2.0.js') }}" data-turbolinks-eval="false"></script>
-    <script src="{{ mix('js/app2.0.js') }}" defer data-turbolinks-eval="true" data-turbolinks-track="reload"></script>
+    <script defer src="{{ mix('js/player2.1.js') }}" data-turbolinks-eval="false"></script>
+    <script src="{{ mix('js/app2.1.js') }}" defer data-turbolinks-eval="true" data-turbolinks-track="reload"></script>
     @yield('headerScripts')
     
     <!-- Global site tag (gtag.js) - Google Analytics -->

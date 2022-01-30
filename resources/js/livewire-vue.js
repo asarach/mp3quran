@@ -5,7 +5,7 @@ import store from './store';
 import VuexPersist from 'vuex-persist'
 
 new VuexPersist({
-    key: 'mp3quranb.net',
+    key: 'mp3quran_n.net',
     storage: window.localStorage,
     reducer: (state) => ({
         player: state.player,

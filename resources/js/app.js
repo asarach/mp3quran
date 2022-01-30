@@ -14,7 +14,7 @@ Turbolinks.start()
 window.AppEvent = new Vue();
 
 new VuexPersist({
-  key: 'mp3quranb.net',
+  key: 'mp3quran_n.net',
   storage: window.localStorage,
   reducer: (state) => ({
     favorite: state.favorite,

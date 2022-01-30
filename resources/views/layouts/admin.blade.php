@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="/plugins/icomoon_admin/styles.css">
 
   <!-- Theme style -->
-  <link rel="stylesheet" href="{{ mix('css/admin2.0.css') }}">
+  <link rel="stylesheet" href="{{ mix('css/admin2.1.css') }}">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -281,7 +281,7 @@
 
   <!-- AdminLTE App -->
   <script src="{{ asset('js/trans/admin_'.LaravelLocalization::getCurrentLocale().'.2.1.js') }}"></script>
-  <script src="{{ mix('/js/admin2.0.js') }}"></script>
+  <script src="{{ mix('/js/admin2.1.js') }}"></script>
   <script src="{{ asset('plugins/ckeditor/ckeditor.js')}}" type="text/javascript"></script>
 </body>
 
