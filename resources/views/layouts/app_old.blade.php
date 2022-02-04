@@ -31,7 +31,7 @@
 
   <!-- Styles -->
   <link href="{{ asset('css/animate.min.css') }}" rel="stylesheet">
-  <link href="{{ mix('css/app2.1.css') }}" rel="stylesheet" type="text/css" charset="utf-8">
+  <link href="{{ mix('css/app2.2.css') }}" rel="stylesheet" type="text/css" charset="utf-8">
     
   <script>
     @foreach($data as $key => $val)

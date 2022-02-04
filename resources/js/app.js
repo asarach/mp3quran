@@ -69,7 +69,7 @@ Sentry.init({
 
 Vue.filter('downloadUrl', function (value) {
   if (!value) return ''
-  return value.replace('mp3quran.net/', 'mp3quran.net/download.php?file=')
+  return value.replace('mp3quran.net/', 'mp3quran.net/__download.php?file=')
 })
 
 import ScaleLoader from 'vue-spinner/src/ScaleLoader.vue'
