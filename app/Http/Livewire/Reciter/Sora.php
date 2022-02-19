@@ -25,7 +25,6 @@ class Sora extends Component
             ->firstOrFail();
 
         $soar_item = $read->soar()->where('id', $this->sora_id)->orderBy('id', 'ASC')->withPivot(['duration', 'filename', 'report'])->firstOrFail();
-
         $sora = [];
         $sora['id'] = $soar_item->getNum() . '-' . $read->id;
         // $sora['id'] = $soar_item->id;
@@ -47,12 +46,12 @@ class Sora extends Component
         $sora['share_description'] = $read->getLocaleShareDescription();      
 
         $page = [
-            'title' => $read->getLocaleTitle() . ' - ' . $sora['name'] . ' | MP3 Quran',
-            'description' => trans('read.description-' . $read->id),
+            'title' => $soar_item->getSeoTitle($read->rewaya, $sora['reciter'], $sora['name']),
+            'description' => $soar_item->getDescriptionTitle($read->rewaya, $sora['reciter'], $sora['name']),
             'keywords' => trans('read.keywords-' . $read->id)
         ];
 
-        // dd($sora);
+        // dd($page);
 
         return view('livewire.reciter.sora', compact('page', 'sora', 'read'));
     }

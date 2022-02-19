@@ -31,6 +31,7 @@ class Show extends Component
             'reciter_name' => $full_video->geReciterName(),
             'image' => upload_url($full_video->getImage()),
         ];
+        
         $page = [
             'title' => $video['title'] . ' | MP3 Quran',
             'description' =>  trans('video.description-' . $full_video->id),

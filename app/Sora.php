@@ -86,4 +86,21 @@ class Sora extends Model
 
         return $this->num;
     }
+
+    public function getSeoTitle($rewaya = null, $reciter, $sora)
+    {
+        if ($rewaya->id == 1) {
+            return trans('seo.sora-title-hafs', ['sora' => $sora, 'reciter' => $reciter]);
+        } else {
+            return trans('seo.sora-title', ['sora' => $sora, 'reciter' => $reciter, 'rewaya' => $rewaya->getLocaleName()]);
+        }
+    }
+    public function getDescriptionTitle($rewaya = null, $reciter, $sora)
+    {
+        if ($rewaya->id == 1) {
+            return trans('seo.sora-description-hafs', ['sora' => $sora, 'reciter' => $reciter]);
+        } else {
+            return trans('seo.sora-description', ['sora' => $sora, 'reciter' => $reciter, 'rewaya' => $rewaya->getLocaleName()]);
+        }
+    }
 }

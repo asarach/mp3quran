@@ -16,20 +16,13 @@ class Index extends Component
         ->get();
    
         $path = request()->path();
-        $seo_page = $pageRepo->model->where('name', 'APP')->where('status', 1)->firstOrFail();
+        $page = $pageRepo->model->where('name', 'APP')->where('status', 1)->firstOrFail();
 
-        $page_title = $seo_page->getLocaleTitle();
+        $page->title = $page->getLocaleTitle();
+        $page->description = $page->getLocaleDescription();
+        $page->keywords = $page->getLocaleKeywords();
 
-        $page = 'apps';
-
-        $metas = getMetas([
-            'seo_title' => $seo_page->getLocaleTitle(),
-            'seo_description' => $seo_page->getLocaleDescription(),
-            'seo_keywords' => $seo_page->getLocaleKeywords()
-        ]);
-
-        $data = compact('metas','page', 'apps', 'path', 'page_title');
-
+        $data = compact('page', 'apps', 'path');
 
         return view('livewire.app.index', $data);
     }
