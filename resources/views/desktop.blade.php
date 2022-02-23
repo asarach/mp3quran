@@ -88,7 +88,7 @@
             <notifications position="bottom left" group="app" animation-type="velocity" :animation="animation" classes="desktop-notifications" />
         </div>
     </div>
-
+    
     <div id="appFooter">
         <footer id="footer" data-turbolinks-permanent>
             <div id="MainLoading">
@@ -196,7 +196,11 @@
                 @endif
 
             </div>
+            @auth
+            @include('components.desktop-player')
+            @else
             <audio-player type="desktop" class="audio-player"></audio-player>
+            @endauth
         </footer>
     </div>
 </div>

@@ -127,7 +127,6 @@ export default {
           window.appFoolter.$store.dispatch("addAndPlayItem", response.data);
         })
         .catch(function (error) {
-          console.log(error);
         });
     },
 

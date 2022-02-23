@@ -12,6 +12,7 @@ const mix = require('laravel-mix');
  */
 mix.js('resources/js/app.js', 'public/js/app2.2.js')
     .js('resources/js/player/player.js', 'public/js/player2.2.js')
+    .js('resources/js/howler-player/player.js', 'public/js/howler-player2.2.js')
     .sass('resources/sass/app.scss', 'public/css/app2.2.css')
     .sass('resources/sass/errors.scss', 'public/css/errors2.2.css')
     .version()

@@ -409,7 +409,6 @@ export default {
           });
         })
         .catch(function (error) {
-          console.log(error);
           self.$notify({
             group: "admin",
             text: self.trans("admin.tafsir-not-deleted"),

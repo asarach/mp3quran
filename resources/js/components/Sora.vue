@@ -149,21 +149,30 @@ export default {
     shareItem(title, url, description) {
       AppEvent.$emit("share", title, url, description);
     },
+
     getItemAndPlay(url, playing_item) {
-      if (this.current_playing_item != playing_item) {
-        window.appFoolter.$store.commit("setState", {
-          playing_state: "loading",
-          playing_item: playing_item,
-          playing_type: "sora",
-        });
+      if (window.App.auth !== null && this.style_version != "m") {
+        axios
+          .get(url)
+          .then(function (response) {
+            window.player.addAndPlayItem(response.data);
+          })
+          .catch(function (error) {});
+      } else {
+        if (this.current_playing_item != playing_item) {
+          window.appFoolter.$store.commit("setState", {
+            playing_state: "loading",
+            playing_item: playing_item,
+            playing_type: "sora",
+          });
+        }
+        axios
+          .get(url)
+          .then(function (response) {
+            window.appFoolter.$store.dispatch("addAndPlayItem", response.data);
+          })
+          .catch(function (error) {});
       }
-      axios
-        .get(url)
-        .then(function (response) {
-          window.appFoolter.$store.dispatch("addAndPlayItem", response.data);
-        })
-        .catch(function (error) {
-        });
     },
     addItem(url) {
       axios
@@ -171,8 +180,7 @@ export default {
         .then(function (response) {
           window.appFoolter.$store.dispatch("addItem", response.data);
         })
-        .catch(function (error) {
-        });
+        .catch(function (error) {});
     },
     ...mapActions([
       "clipboardErrorHandler",
