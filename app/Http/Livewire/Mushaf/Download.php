@@ -62,16 +62,15 @@ class Download extends Component
         }
 
         $downloads = $downloads->values()->all();
+        // $downloads = collect();
 
         $page = Page::where('name', 'downloads')->where('status', 1)->firstOrFail();
 
-        $metas = getMetas([
-            'seo_title' => $page->getLocaleTitle(),
-            'seo_description' => $page->getLocaleDescription(),
-            'seo_keywords' => $page->getLocaleKeywords()
-        ]);
+        $page->title = $page->getLocaleTitle();
+        $page->description = $page->getLocaleDescription();
+        $page->keywords = $page->getLocaleKeywords();
 
-        return view('livewire.mushaf.download', compact('downloads', 'metas'));
+        return view('livewire.mushaf.download', compact('downloads', 'page'));
     }
 
     public function orderDownloads($dir, $order)

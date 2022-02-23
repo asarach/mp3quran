@@ -208,4 +208,22 @@ class Read extends Model
         }
         return $url;
     }
+
+    public function getSeoTitle($rewaya = null, $reciter)
+    {
+        if ($rewaya->id == 1) {
+            return trans('seo.reciter-title-hafs', ['reciter' => $reciter]);
+        } else {
+            return trans('seo.reciter-title', ['reciter' => $reciter, 'rewaya' => $rewaya->getLocaleName()]);
+        }
+    }
+    public function getDescriptionTitle($rewaya = null, $reciter)
+    {
+        if ($rewaya->id == 1) {
+            return trans('seo.reciter-description-hafs', [ 'reciter' => $reciter]);
+        } else {
+            return trans('seo.reciter-description', ['reciter' => $reciter, 'rewaya' => $rewaya->getLocaleName()]);
+        }
+    }
+
 }

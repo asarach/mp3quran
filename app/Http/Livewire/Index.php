@@ -127,11 +127,13 @@ class Index extends Component
 
         $path = request()->path();
 
-        $seo_page =Page::where('name', 'index')->where('status', 1)->firstOrFail();
+        $page =Page::where('name', 'index')->where('status', 1)->firstOrFail();
 
-        $page_title = $seo_page->getLocaleTitle();
+        $page->title = $page->getLocaleTitle();
+        $page->description = $page->getLocaleDescription();
+        $page->keywords = $page->getLocaleKeywords();
 
-        $page = 'home';
+
 
         $show_tadabor = Cache::rememberForever('show_tadabor_' . App::getLocale(), function () {
             try {
@@ -143,11 +145,7 @@ class Index extends Component
             }
         });
 
-        $metas = getMetas([
-            'seo_title' => $seo_page->getLocaleTitle(),
-            'seo_description' => $seo_page->getLocaleDescription(),
-            'seo_keywords' => $seo_page->getLocaleKeywords()
-        ]);
-        return compact('page', 'reads', 'rewayat', 'path', 'page_title', 'show_tadabor', 'metas', 'metas');
+      
+        return compact('page', 'reads', 'rewayat', 'path',  'show_tadabor');
     }
 }

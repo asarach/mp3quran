@@ -1,3 +1,13 @@
+@section('meta-tags')
+<title>{{$page['title']}}</title>
+<meta property="og:title" content="{{$page['title']}}" />
+<meta name="twitter:title" content="{{$page['title']}}" />
+<meta property="og:title" content="{{$page['title']}}" />
+<meta name="description" content="{{$page['description']}}" />
+<meta property="og:description" content="{{$page['description']}}" />
+<meta name="twitter:description" content="{{$page['description']}}" />
+<meta name="keywords" content="{{$page['keywords']}}" />
+@endsection
 <div class="main video-show">
   <div class="show-header">
     <div class="container">

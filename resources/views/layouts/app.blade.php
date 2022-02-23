@@ -8,6 +8,7 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    @yield('meta-tags')
     <meta property="og:url" content="{{ request()->url()}}" />
     <meta property="og:site_name" content="{{ settings('name')}}" />
     <meta name="twitter:image" content="">
@@ -17,7 +18,7 @@
     <meta property="og:image" content="" />
     <meta property="og:type" content="" />
 
-    @yield('meta-tags')
+    
     <meta name="turbolinks-cache-control" content="no-cache">
 
     <!-- Styles -->

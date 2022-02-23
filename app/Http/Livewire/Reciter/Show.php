@@ -61,10 +61,12 @@ class Show extends Component
         $soar_part_b = array_slice($reciter_reads[$active_read]['soar'], $len / 2);
         //get page info
         $page = [
-            'title' => $read->getLocaleTitle() . ' | MP3 Quran',
-            'description' => trans('read.description-' . $read->id),
+            'title' => $read->getSeoTitle($read->rewaya, $reciter['name']),
+            'description' => $read->getDescriptionTitle($read->rewaya, $reciter['name']),
             'keywords' => trans('read.keywords-' . $read->id)
         ];
+
+           // dd($page);
 
 
         return view('livewire.reciter.show', compact('soar_part_a', 'soar_part_b', 'reciter_reads', 'reciter', 'active_read', 'read', 'page'));
