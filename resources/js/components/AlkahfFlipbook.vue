@@ -76,7 +76,12 @@ export default {
     },
     getAddPlayItem(item) {
       var url = this.ajax_prefix +'/soar/item?r=' + item.read + '&s=' + item.sora;
-      window.appFoolter.$store.dispatch("getItemAndPlay", url);
+      axios
+        .get(url)
+        .then(function (response) {
+          window.player.addAndPlayItem(response.data);
+        })
+        .catch(function (error) {});
     },
   },
 

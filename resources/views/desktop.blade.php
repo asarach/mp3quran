@@ -196,11 +196,7 @@
                 @endif
 
             </div>
-            @auth
             @include('components.desktop-player')
-            @else
-            <audio-player type="desktop" class="audio-player"></audio-player>
-            @endauth
         </footer>
     </div>
 </div>

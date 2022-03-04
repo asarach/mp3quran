@@ -165,7 +165,7 @@ export default {
       axios
         .get(url)
         .then(function (response) {
-          window.appFoolter.$store.dispatch("addAndPlayItem", response.data);
+          window.player.addAndPlayItem(response.data);
         })
         .catch(function (error) {});
     },

@@ -87,7 +87,7 @@
     <div id="MainLoading">
       <circle-spin></circle-spin>
     </div>
-    <audio-player type="mobile" class="audio-player"></audio-player>
+    @include('components.mobile-player')
   </div>
   <div class="expend-menu">
     <div class="row">

@@ -40,11 +40,7 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
     <script src="{{ asset('js/trans/text_'.LaravelLocalization::getCurrentLocale().'.2.2.js') }}"></script>
-    @if(Auth::check() && style_version()  != 'm')
     <script defer src="{{ mix('js/howler-player2.2.js') }}" data-turbolinks-eval="false"></script>
-    @else
-    <script defer src="{{ mix('js/player2.2.js') }}" data-turbolinks-eval="false"></script>
-    @endif
     <script src="{{ mix('js/app2.2.js') }}" defer data-turbolinks-eval="true" data-turbolinks-track="reload"></script>
     @yield('headerScripts')
     

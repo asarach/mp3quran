@@ -1,5 +1,5 @@
-<div class="audio-player-2">
-  <div class="desktop-player-2">
+<div class="audio-player">
+  <div class="desktop-player">
     <div class="container d-flex">
       <div class="ply-controls">
         <div class="ply-btn btn-previous">
@@ -50,6 +50,63 @@
       <div class="ply-item-info">
         <a id="reciterName" href="#" rel="alternate" hreflang=""></a>
         <div class="ply-sora" id="soraName"></div>
+      </div>
+
+      <div class="ply-fullplayer" id="fullPlayer">
+        <div id="fullPlayerToggle"></div>
+        <div class="sply-progress" id="playerProgressLine"></div>
+        <div class="fply-header">
+          <div class="fply-reader">
+            <span id="fplyReader"></span>
+          </div>
+          <div class="fply-sora" id="fplySora"></div>
+        </div>
+        <div class="fply-body">
+          <div id="playerLoading"></div>
+          <div id="fullPlayerLoading"></div>
+          <div class="fply-timer" id="playerTimer"></div>
+          <div class="fply-progress" id="playerProgressBar">
+            <div id="playerProgress"></div>
+            <div id="playerProgressPiont" data-down="false"></div>
+          </div>
+          <div class="fply-duration" id="playerDuration"></div>
+          <div id="playerBar"></div>
+        </div>
+        <div class="fply-controls">
+          <div class="ply-btn btn-previous">
+            <span class="uni-icon icon-skip_previous" id="fullPlayerPrevBtn" style="color: #fff"></span>
+          </div>
+          <div class="ply-btn btn-play-pause">
+            <span id="fullPlayerPauseBtn" class="uni-icon icon-pause" style=" display: none;"></span>
+            <span id="fullPlayerPlayBtn" class="uni-icon icon-play_arrow1" style=" display: block; color: #fff"></span>
+          </div>
+          <div class="ply-btn btn-next">
+            <span class="uni-icon icon-skip_next" id="fullPlayerNextBtn" style="color: #fff"></span>
+          </div>
+        </div>
+        <div class="fply-footer">
+         
+          <ul id="fullPlayerList" class="list-unstyled"></ul>
+          <template id="fullPlaylistItem">
+            <li>
+              <div class="playlist-avatar drag-handle">
+                <div class="ply-btn btn-pause" style="display: none;">
+                  <span class="uni-icon icon-pause"></span>
+                </div>
+                <div class="ply-btn btn-play">
+                  <span class="uni-icon icon-play_arrow1"></span>
+                </div>
+              </div>
+              <div class="read-info">
+                <div class="read-sora"></div>
+                <div class="read-reciter"></div>
+              </div>
+            </li>
+          </template>
+        </div>
+        <div class="fply-close" id="closeFullplayer">
+          <span class="uni-icon icon-keyboard_arrow_down" style="color: #fff"></span>
+        </div>
       </div>
 
       <div class="ply-playlist" id="playerPlaylist">

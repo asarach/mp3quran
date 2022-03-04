@@ -15,6 +15,10 @@ var Player = function () {
   this.current_item = null;
   this.current_index = 0;
 
+  this.playing_state = null;
+  this.playing_item = null;
+  this.playing_type = null;
+
   if (this.playerData.current_index != undefined && this.playlist.length > 0) {
     this.setCurrentItem(this.playerData.current_index);
     this.current_index = this.playerData.current_index;
@@ -65,11 +69,14 @@ Player.prototype = {
 
     this.playlist.forEach(function (item) {
       var clone = playlistItem.content.cloneNode(true);
+      var fullclone = fullPlaylistItem.content.cloneNode(true);
 
       //set text elements
       if (typeof item.name !== "undefined" && item.name != null) {
         var sora = clone.querySelectorAll(".read-sora")[0];
+        var fullsora = fullclone.querySelectorAll(".read-sora")[0];
         sora.innerHTML = item.name;
+        fullsora.innerHTML = item.name;
       }
 
       if (typeof item.num !== "undefined" && item.num != null) {
@@ -79,7 +86,9 @@ Player.prototype = {
 
       if (typeof item.reciter !== "undefined" && item.reciter != null) {
         var reciter = clone.querySelectorAll(".reciter-name")[0];
+        var fullreciter = fullclone.querySelectorAll(".read-reciter")[0];
         reciter.innerHTML = item.reciter;
+        fullreciter.innerHTML = item.reciter;
       }
 
       if (typeof item.rewaya !== "undefined" && item.rewaya != null) {
@@ -87,15 +96,23 @@ Player.prototype = {
         rewaya.innerHTML = item.rewaya;
       }
       clone.querySelectorAll("li")[0].id = "playerListItem-" + self.getItemIndex(item);
+      fullclone.querySelectorAll("li")[0].id = "fullPlayerListItem-" + self.getItemIndex(item);
 
       //add event and append
       clone.querySelectorAll(".btn-play")[0].onclick = function () {
         player.skipTo(self.playlist.indexOf(item));
       };
+      fullclone.querySelectorAll(".btn-play")[0].onclick = function () {
+        player.skipTo(self.playlist.indexOf(item));
+      };
       clone.querySelectorAll(".btn-pause")[0].onclick = function () {
         player.pause();
       };
+      fullclone.querySelectorAll(".btn-pause")[0].onclick = function () {
+        player.pause();
+      };
       playerList.appendChild(clone);
+      fullPlayerList.appendChild(fullclone);
 
       //update storage playlist
       const storageItem = Object.assign({}, item);
@@ -169,6 +186,9 @@ Player.prototype = {
 
     reciterName.innerHTML = self.current_item.reciter;
     soraName.innerHTML = self.current_item.name;
+
+    fplyReader.innerHTML = self.current_item.reciter;
+    fplySora.innerHTML = self.current_item.name;
   },
   setCurrentIndex: function (index) {
     if (typeof index === 'number') {
@@ -185,9 +205,20 @@ Player.prototype = {
     this.setCurrentItem(this.getItemIndex(item));
     this.play();
   },
+  addItem: function (item) {
+    this.addItemToPlaylist(item);
+  },
+  setState: function (state) {
+    this.playing_state = state.playing_state;
+    this.playing_item = state.playing_item;
+    this.playing_type = state.playing_type;
+  },
 
   togglePlaylist: function () {
     playerPlaylist.classList.toggle("opened");
+  },
+  toggleFullPlayer: function () {
+    fullPlayer.classList.toggle("opened");
   },
 
   /************************************
@@ -231,6 +262,7 @@ Player.prototype = {
 
     // Reset playerProgress.
     playerProgress.style.width = '0%';
+    playerProgressLine.style.width = '0%';
     playerProgressPiont.style.left = 'calc(0% - 6px)';
 
     // Play the new track.
@@ -294,9 +326,13 @@ Player.prototype = {
       case 'pause':
         playerPlayBtn.style.display = 'block';
         playerPauseBtn.style.display = 'none';
+        fullPlayerPlayBtn.style.display = 'block';
+        fullPlayerPauseBtn.style.display = 'none';
 
         $('#playerListItem-' + index + ' .btn-play').show();
         $('#playerListItem-' + index + ' .btn-pause').hide();
+        $('#fullPlayerListItem-' + index + ' .btn-play').show();
+        $('#fullPlayerListItem-' + index + ' .btn-pause').hide();
         break;
       case 'load':
         playerBar.style.display = 'none';
@@ -306,9 +342,12 @@ Player.prototype = {
       case 'play':
         playerBar.style.display = 'none';
         playerPauseBtn.style.display = 'block';
+        fullPlayerPauseBtn.style.display = 'block';
 
         $('#playerListItem-' + index + ' .btn-play').hide();
         $('#playerListItem-' + index + ' .btn-pause').show();
+        $('#fullPlayerListItem-' + index + ' .btn-play').hide();
+        $('#fullPlayerListItem-' + index + ' .btn-pause').show();
         break;
       case 'stop':
         playerBar.style.display = 'block';
@@ -317,10 +356,16 @@ Player.prototype = {
         if (self.sound.state() === 'loaded') {
           playerPlayBtn.style.display = 'none';
           playerPauseBtn.style.display = 'block';
+          fullPlayerPlayBtn.style.display = 'none';
+          fullPlayerPauseBtn.style.display = 'block';
         } else {
           playerLoading.style.display = 'block';
           playerPlayBtn.style.display = 'none';
           playerPauseBtn.style.display = 'none';
+
+          fullPlayerLoading.style.display = 'block';
+          fullPlayerPlayBtn.style.display = 'none';
+          fullPlayerPauseBtn.style.display = 'none';
         }
         break;
     }
@@ -345,6 +390,7 @@ Player.prototype = {
     var seek = this.sound.seek() || 0;
     playerTimer.innerHTML = this.formatTime(Math.round(seek));
     playerProgress.style.width = (((seek / this.sound.duration()) * 100) || 0) + '%';
+    playerProgressLine.style.width = (((seek / this.sound.duration()) * 100) || 0) + '%';
     playerProgressPiont.style.left = 'calc(' + (((seek / this.sound.duration()) * 100) || 0) + '% - 6px)';;
     if (this.sound.playing() && playerProgressPiont.dataset.down == 'false') {
       requestAnimationFrame(this.step.bind(this));

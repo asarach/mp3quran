@@ -108,8 +108,7 @@ export default {
         .then(function (response) {
           self.soar = response.data.soar;
         })
-        .catch(function (error) {
-        });
+        .catch(function (error) {});
     },
     setReads() {
       let self = this;
@@ -118,17 +117,15 @@ export default {
         .then(function (response) {
           self.reads = response.data.reads;
         })
-        .catch(function (error) {
-        });
+        .catch(function (error) {});
     },
     getItemAndPlay(url) {
       axios
         .get(url)
         .then(function (response) {
-          window.appFoolter.$store.dispatch("addAndPlayItem", response.data);
+          window.player.addAndPlayItem(response.data);
         })
-        .catch(function (error) {
-        });
+        .catch(function (error) {});
     },
   },
   mounted() {

@@ -115,7 +115,7 @@ export default {
     },
     getItemAndPlay(url, playing_item) {
       if (this.current_playing_item != playing_item) {
-        window.appFoolter.$store.commit("setState", {
+        window.player.setState({
           playing_state: "loading",
           playing_item: playing_item,
           playing_type: "radio",
@@ -124,7 +124,7 @@ export default {
       axios
         .get(url)
         .then(function (response) {
-          window.appFoolter.$store.dispatch("addAndPlayItem", response.data);
+          window.player.addAndPlayItem(response.data);
         })
         .catch(function (error) {
         });

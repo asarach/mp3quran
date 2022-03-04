@@ -69,7 +69,7 @@ Sentry.init({
 
 Vue.filter('downloadUrl', function (value) {
   if (!value) return ''
-  return value.replace('mp3quran.net/', 'mp3quran.net/__download.php?file=')
+  return value.replace('mp3quran.net/', 'mp3quran.net/downloadfile.php?file=')
 })
 
 import ScaleLoader from 'vue-spinner/src/ScaleLoader.vue'
@@ -163,10 +163,7 @@ function initiateVue() {
         axios
           .get(url)
           .then(function (response) {
-            window.appFoolter.$store.dispatch(
-              "addAndPlayItem",
-              response.data
-            );
+            window.player.addAndPlayItem(response.data);
           })
           .catch(function (error) {
           });
