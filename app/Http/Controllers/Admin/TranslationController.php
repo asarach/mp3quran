@@ -138,7 +138,6 @@ class TranslationController extends Controller
      */
     public function fixTranslations()
     {
-
         $result = $this->translationRepo->fixTranslations();
         $success = true;
 

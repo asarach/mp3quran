@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;
 use Waavi\Translation\Models\Language;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Facades\Storage;
 
 function getAssetTimestamp()
 {
@@ -157,6 +159,17 @@ function getMainMenu($locale, $version)
  */
 function flushTrans()
 {
+    $files =   Storage::disk('public_html')->allFiles('js/trans');
+    foreach ($files as $file) {
+        Storage::disk('public_html')->delete($file);
+    }
+
+    $translations_version = Setting::where('key', 'translations_version')->first();
+    $translations_version->value = $translations_version->value + 1;
+    $translations_version->save();
+
+    $translations_version_val = $translations_version->value;
+
     Waavi\Translation\Facades\TranslationCache::flushAll();
 
     $languages = Waavi\Translation\Models\Language::all();
@@ -180,8 +193,8 @@ function flushTrans()
         }
         $text = json_encode($text_trans);
 
-        Storage::disk('public_html')->put('js/trans/admin_' . $language->locale . '.2.2.js', 'window.trans = {"admin" : ' . $admin . ',"front" : ' . $front . ',  "text" : ' . $text . '}');
-        Storage::disk('public_html')->put('js/trans/text_' . $language->locale . '.2.2.js', 'window.trans = {"text" : ' . $text . '}');
+        Storage::disk('public_html')->put('js/trans/admin_' . $language->locale . '.2.' . $translations_version_val . '.js', 'window.trans = {"admin" : ' . $admin . ',"front" : ' . $front . ',  "text" : ' . $text . '}');
+        Storage::disk('public_html')->put('js/trans/text_' . $language->locale . '.2.' . $translations_version_val . '.js', 'window.trans = {"text" : ' . $text . '}');
     }
 }
 
