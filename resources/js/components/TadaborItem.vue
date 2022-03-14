@@ -17,43 +17,39 @@
       </div>
       <div class="databor-text" v-html="item.text"></div>
     </div>
+
+    <div class="ssi-btns">
+      <div class="ply-btn" v-if="isLoading">
+        <div class="la-line-scale la-sm">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+      <div class="ply-btn" v-else-if="isPlaying" @click="pauseItem()">
+        <span class="uni-icon icon-pause" style="color: #fff"></span>
+        {{ trans("text.pause") }}
+      </div>
+      <div
+        class="ply-btn"
+        v-else
+        @click="getItemAndPlay(ajax_prefix + '/tadabor/item?id=' + item.id, 'tb' + item.id)"
+      >
+        <span class="uni-icon icon-play_arrow" style="color: #fff"></span>
+        {{ trans("text.play") }}
+      </div>
+
+      <a class="download-btn" :href="item.audio_url | downloadUrl">
+        <div>
+          <span class="uni-icon icon-cloud_download"></span>
+          {{ trans("text.download") }}
+        </div>
+      </a>
+    </div>
+
     <div class="databor-options">
-      <div class="option-btn">
-        <div
-          class="ply-btn"
-          @click="getItemAndPlay(ajax_prefix + '/tadabor/item?id=' + item.id)"
-          v-tooltip.top="trans('text.play-tadabor')"
-        >
-          <scale-loader
-            v-if="isLoading"
-            color="#0D3A4D"
-            height="10px"
-            width="2px"
-          ></scale-loader>
-          <span v-else-if="isPlaying" class="uni-icon icon-pause"></span>
-          <span v-else class="uni-icon icon-play_arrow1"></span>
-        </div>
-      </div>
-      <div class="option-btn">
-        <div
-          v-if="downloading"
-          class="sora-btn downloading"
-          v-tooltip.top="trans('text.downloading')"
-        >
-          <scale-loader
-            color="#0D3A4D"
-            height="10px"
-            width="2px"
-          ></scale-loader>
-        </div>
-        <a
-          v-else
-          class="sora-btn download-btn"
-          v-tooltip.top="trans('text.download-tadabor')"
-          :href="item.audio_url | downloadUrl"
-          ><span class="uni-icon icon-cloud_download"></span
-        ></a>
-      </div>
       <div class="option-btn">
         <div
           v-tooltip.top="trans('text.share-text')"
@@ -129,11 +125,26 @@ export default {
     };
   },
   computed: {
-    isPlaying: function () {
-      return false;
+     isPlaying: function () {
+      if (
+        this.$root.player_state.playing_item == 'tb' + this.item.id &&
+        this.$root.player_state.playing_state == "playing"
+      ) {
+        return true;
+      } else {
+        return false;
+      }
     },
+
     isLoading: function () {
-      return false;
+      if (
+        this.$root.player_state.playing_item == 'tb' + this.item.id &&
+        this.$root.player_state.playing_state == "loading"
+      ) {
+        return true;
+      } else {
+        return false;
+      }
     },
   },
   methods: {
@@ -142,32 +153,22 @@ export default {
         Event.$emit("share", title, url, description);
       }
     },
-    download(url) {
-      var self = this;
-      var filename = url.substring(url.lastIndexOf("/") + 1).split("?")[0];
-      var xhr = new XMLHttpRequest();
-      xhr.responseType = "blob";
-      self.downloading = true;
-
-      xhr.onload = function () {
-        var a = document.createElement("a");
-        a.href = window.URL.createObjectURL(xhr.response);
-        a.download = filename;
-        a.style.display = "none";
-        document.body.appendChild(a);
-        a.click();
-        self.downloading = false;
-      };
-      xhr.open("GET", url);
-      xhr.send();
+   pauseItem() {
+      window.player.pause();
     },
-    getItemAndPlay(url) {
-      axios
-        .get(url)
-        .then(function (response) {
-          window.player.addAndPlayItem(response.data);
-        })
-        .catch(function (error) {});
+    getItemAndPlay(url, playing_item) {
+      if (this.$root.player_state.playing_item != playing_item) {
+        this.$root.player_state.playing_state = "loading";
+        this.$root.player_state.playing_item = playing_item;
+        axios
+          .get(url)
+          .then(function (response) {
+            window.player.addAndPlayItem(response.data);
+          })
+          .catch(function (error) {});
+      } else {
+        window.player.play();
+      }
     },
     ...mapActions(["clipboardErrorHandlerText", "clipboardSuccessHandlerText"]),
     ...mapActions("favorite", {

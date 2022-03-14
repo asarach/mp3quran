@@ -1,27 +1,5 @@
 <template>
   <div class="sora-item sora-show-item showoptions">
-    <div
-      class="ply-btn"
-      @click="
-        getItemAndPlay(
-          ajax_prefix + '/soar/item?r=' + sora.read_id + '&s=' + sora.sora_id,
-          sora.id
-        )
-      "
-    >
-      <scale-loader
-        v-if="isLoading({ type: 'sora', id: sora.id })"
-        color="#0D3A4D"
-        height="10px"
-        width="2px"
-      ></scale-loader>
-      <span
-        v-else-if="isPlaying({ type: 'sora', id: sora.id })"
-        class="uni-icon icon-pause"
-        style="color: #fff"
-      ></span>
-      <span v-else class="uni-icon icon-play_arrow" style="color: #fff"></span>
-    </div>
     <div class="sora-info">
       <div class="sora-name">
         {{ sora.name }}
@@ -33,11 +11,48 @@
         {{ sora.rewaya }}
       </div>
     </div>
+    <div class="ssi-btns">
+      <div class="ply-btn" v-if="isLoading">
+        <div class="la-line-scale la-sm">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+      <div class="ply-btn" v-else-if="isPlaying" @click="pauseItem()">
+        <span class="uni-icon icon-pause" style="color: #fff"></span>
+        {{ trans("text.pause") }}
+      </div>
+      <div
+        class="ply-btn"
+        v-else
+        @click="
+          getItemAndPlay(
+            ajax_prefix + '/soar/item?r=' + sora.read_id + '&s=' + sora.sora_id,
+            sora.id
+          )
+        "
+      >
+        <span class="uni-icon icon-play_arrow" style="color: #fff"></span>
+        {{ trans("text.play") }}
+      </div>
+
+      <a class="download-btn" :href="sora.file | downloadUrl">
+        <div>
+          <span class="uni-icon icon-cloud_download"></span>
+          {{ trans("text.download") }}
+        </div>
+      </a>
+    </div>
     <div class="sora-options">
       <div
         class="sora-btn share-btn"
         v-tooltip="trans('text.share')"
-        @click="shareItem(sora.share_title, sora.share_url, sora.share_description)"
+        @click="
+          shareItem(sora.share_title, sora.share_url, sora.share_description)
+        "
       >
         <span class="uni-icon icon-share"></span>
       </div>
@@ -50,20 +65,6 @@
       >
         <span class="uni-icon icon-link"></span>
       </div>
-      <div
-        v-if="downloading"
-        class="sora-btn downloading"
-        v-tooltip="trans('text.downloading')"
-      >
-        <img :src="'/img/icons/downloading.svg'" width="60" alt="" />
-      </div>
-      <a
-        v-else
-        class="sora-btn download-btn"
-        v-tooltip="trans('text.download')"
-        :href="sora.file  | downloadUrl"
-        ><span class="uni-icon icon-cloud_download"></span
-      ></a>
 
       <div
         class="sora-btn playlist-add"
@@ -114,12 +115,33 @@ import { mapState, mapActions, mapGetters } from "vuex";
 
 export default {
   props: ["sora"],
-
   computed: {
     soarIncludes: function () {
       return this.$store.state.favorite.soar.includes(this.sora.id);
     },
-    ...mapGetters(["isPlaying", "isLoading"]),
+
+    isPlaying: function () {
+      if (
+        this.$root.player_state.playing_item == this.sora.id &&
+        this.$root.player_state.playing_state == "playing"
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+
+    isLoading: function () {
+      if (
+        this.$root.player_state.playing_item == this.sora.id &&
+        this.$root.player_state.playing_state == "loading"
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+
     ...mapState({
       current_playing_item: (state) => state.playing_item,
       style_version: (state) => state.settings.style_version,
@@ -133,30 +155,31 @@ export default {
         AppEvent.$emit("share", title, url, description);
       }
     },
+
     addItem(url) {
       axios
         .get(url)
         .then(function (response) {
           window.player.addItem(response.data);
         })
-        .catch(function (error) {
-        });
+        .catch(function (error) {});
+    },
+    pauseItem() {
+      window.player.pause();
     },
     getItemAndPlay(url, playing_item) {
-      if (this.current_playing_item != playing_item) {
-        window.player.setState({
-          playing_state: "loading",
-          playing_item: playing_item,
-          playing_type: "sora",
-        });
+      if (this.$root.player_state.playing_item != playing_item) {
+        this.$root.player_state.playing_state = "loading";
+        this.$root.player_state.playing_item = playing_item;
+        axios
+          .get(url)
+          .then(function (response) {
+            window.player.addAndPlayItem(response.data);
+          })
+          .catch(function (error) {});
+      } else {
+        window.player.play();
       }
-      axios
-        .get(url)
-        .then(function (response) {
-          window.player.addAndPlayItem(response.data);
-        })
-        .catch(function (error) {
-        });
     },
     ...mapActions([
       "reportSora",

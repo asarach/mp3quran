@@ -1,6 +1,19 @@
 <template>
-  <div class="card-radio" :class="{show: radio.show}">
+  <div class="card-radio" :class="{ show: radio.show }">
+    <div class="ply-btn" v-if="isLoading">
+      <div class="la-line-scale la-sm" style="color: #f5b44a">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+    <div class="ply-btn" v-else-if="isPlaying" @click="pauseItem()">
+      <span class="uni-icon icon-pause" style="color: #f5b44b"></span>
+    </div>
     <div
+      v-else
       class="ply-btn"
       @click.prevent="
         getItemAndPlay(
@@ -9,23 +22,9 @@
         )
       "
     >
-      <scale-loader
-        v-if="isLoading({ type: 'radio', id: '100002-' + radio.id })"
-        color="#0D3A4D"
-        height="10px"
-        width="2px"
-      ></scale-loader>
-      <span
-        v-else-if="isPlaying({ type: 'radio', id: '100002-' + radio.id })"
-        class="uni-icon icon-pause"
-        style="color: #f5b44b"
-      ></span>
-      <span
-        v-else
-        class="uni-icon icon-play_arrow"
-        style="color: #f5b44b"
-      ></span>
+      <span class="uni-icon icon-play_arrow" style="color: #f5b44b"></span>
     </div>
+
     <div
       class="radio-info"
       @click.prevent="
@@ -89,7 +88,28 @@ export default {
     radiosIncludes: function () {
       return this.$store.state.favorite.radios.includes(this.radio.id);
     },
-    ...mapGetters(["isPlaying", "isLoading"]),
+    isPlaying: function () {
+      if (
+        this.$root.player_state.playing_item == "100002-" + this.radio.id &&
+        this.$root.player_state.playing_state == "playing"
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+
+    isLoading: function () {
+      if (
+        this.$root.player_state.playing_item == "100002-" + this.radio.id &&
+        this.$root.player_state.playing_state == "loading"
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+
     ...mapState({
       current_playing_item: (state) => state.playing_item,
     }),
@@ -98,40 +118,24 @@ export default {
     shareItem(title, url, description) {
       AppEvent.$emit("share", title, url, description);
     },
-    download(url) {
-      var filename = url.substring(url.lastIndexOf("/") + 1).split("?")[0];
-      var xhr = new XMLHttpRequest();
-      xhr.responseType = "blob";
-      xhr.onload = function () {
-        var a = document.createElement("a");
-        a.href = window.URL.createObjectURL(xhr.response);
-        a.download = filename;
-        a.style.display = "none";
-        document.body.appendChild(a);
-        a.click();
-      };
-      xhr.open("GET", url);
-      xhr.send();
+    pauseItem() {
+      window.player.pause();
     },
     getItemAndPlay(url, playing_item) {
-      if (this.current_playing_item != playing_item) {
-        window.player.setState({
-          playing_state: "loading",
-          playing_item: playing_item,
-          playing_type: "radio",
-        });
+      if (this.$root.player_state.playing_item != playing_item) {
+        this.$root.player_state.playing_state = "loading";
+        this.$root.player_state.playing_item = playing_item;
+        axios
+          .get(url)
+          .then(function (response) {
+            window.player.addAndPlayItem(response.data);
+          })
+          .catch(function (error) {});
+      } else {
+        window.player.play();
       }
-      axios
-        .get(url)
-        .then(function (response) {
-          window.player.addAndPlayItem(response.data);
-        })
-        .catch(function (error) {
-        });
     },
-
     ...mapActions(["clipboardErrorHandler", "clipboardSuccessHandler"]),
-
     ...mapActions("favorite", {
       addRadioFavorite: "addRadio",
       removeRadioFavorite: "removeRadio",

@@ -15,6 +15,7 @@ class Index extends Component
 
     public function render()
     {
+       
         //get page info
         $page = Page::where('name', 'reciters')->where('status', 1)->firstOrFail();
         $page->content = $page->getLocaleContent();

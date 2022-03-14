@@ -44,25 +44,65 @@
     text-align: center;
     font-family: Kitab, sans-serif;
   }
+  .ssi-btns {
+    display: flex;
+    justify-content: center;
+
+    .download-btn,
+    .ply-btn {
+      margin: 1rem;
+      border: 3px solid #ffe2b3;
+      border-radius: 18px;
+      height: 44px;
+      width: 150px;
+      color: #fff;
+      background: #f5b44b;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      .uni-icon {
+        margin-left: 0.5rem;
+        color: #fff;
+        font-size: 26px;
+      }
+      div {
+        justify-content: center;
+        align-items: center;
+        display: flex;
+      }
+      svg {
+        width: 24px;
+        fill: #fff;
+      }
+    }
+    .download-btn {
+      background: #64ad15;
+      border: 3px solid #c9e6a9;
+    }
+    .ply-btn:hover {
+      border: 3px solid #eca32b;
+    }
+    .download-btn:hover {
+      border: 3px solid #4f8e0a;
+    }
+  }
   .databor-options {
     display: flex;
     justify-content: center;
-    width: 360px;
     margin: 1rem auto;
-    background-color: #ebedee4d;
-    border-bottom: 1px solid #e6e6e6;
-    border-radius: 30px;
-    box-shadow: 0px 2px 8px 0px #a2a2a247;
+    background: #f1f2f3;
 
     .option-btn {
       width: 50px;
       cursor: pointer;
-      border-left: 1px solid #e6e6e6;
       text-align: center;
       display: flex;
       justify-content: center;
       align-items: center;
     }
+
+  
 
     .ply-btn {
       border-radius: 100px;
@@ -98,7 +138,6 @@
       width: 50px;
       height: 44px;
       cursor: pointer;
-      border-left: 1px solid #e6e6e6;
       text-align: center;
       display: flex;
       align-items: center;

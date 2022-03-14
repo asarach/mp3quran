@@ -1,10 +1,12 @@
 <template>
   <div class="content-wrapper">
-    <vue-headful :title="trans('admin.dashboard_title') + ' | ' + trans('admin.dashboard')" />
+    <vue-headful
+      :title="trans('admin.dashboard_title') + ' | ' + trans('admin.dashboard')"
+    />
     <section class="content-header">
-      <h1>{{ trans('admin.dashboard')}}</h1>
+      <h1>{{ trans("admin.dashboard") }}</h1>
       <ol class="breadcrumb">
-        <li class="breadcrumb-item active">{{ trans('admin.dashboard')}}</li>
+        <li class="breadcrumb-item active">{{ trans("admin.dashboard") }}</li>
       </ol>
     </section>
     <div v-if="show_spinner" class="loading-spinner">
@@ -17,54 +19,63 @@
       <div class="row">
         <div class="col-lg-4">
           <div class="card index-stats ins-blue">
-            <h3>{{stats.reciters}}</h3>
-            <p>{{trans('text.reciters')}}</p>
+            <h3>{{ stats.reciters }}</h3>
+            <p>{{ trans("text.reciters") }}</p>
             <router-link :to="prefix + 'reciters'">
               <i class="fas fa-radio"></i>
-              <span>{{ trans('admin.details')}}</span>
+              <span>{{ trans("admin.details") }}</span>
             </router-link>
           </div>
         </div>
         <div class="col-lg-4">
           <div class="card index-stats ins-teal">
-            <h3>{{stats.reads}}</h3>
-            <p>{{trans('text.reads')}}</p>
+            <h3>{{ stats.reads }}</h3>
+            <p>{{ trans("text.reads") }}</p>
             <router-link :to="prefix + 'reads'">
               <i class="fas fa-user-md"></i>
-              <span>{{ trans('admin.details')}}</span>
+              <span>{{ trans("admin.details") }}</span>
             </router-link>
           </div>
         </div>
         <div class="col-lg-4">
           <div class="card index-stats ins-teal">
-            <h3>{{stats.radios}}</h3>
-            <p>{{trans('text.radios')}}</p>
+            <h3>{{ stats.radios }}</h3>
+            <p>{{ trans("text.radios") }}</p>
             <router-link :to="prefix + 'radios'">
               <i class="fas fa-comment-medical"></i>
-              <span>{{ trans('admin.details')}}</span>
+              <span>{{ trans("admin.details") }}</span>
             </router-link>
           </div>
         </div>
         <div class="col-lg-4">
           <div class="card index-stats ins-orange">
-            <h3>{{stats.tvs}}</h3>
-            <p>{{trans('text.tvs')}}</p>
+            <h3>{{ stats.tvs }}</h3>
+            <p>{{ trans("text.tvs") }}</p>
             <router-link :to="prefix + 'tvs'">
               <i class="fas fa-file-medical"></i>
-              <span>{{ trans('admin.details')}}</span>
+              <span>{{ trans("admin.details") }}</span>
             </router-link>
           </div>
         </div>
         <div class="col-lg-4">
           <div class="card index-stats ins-green">
-            <h3>{{stats.videos}}</h3>
-            <p>{{trans('text.videos')}}</p>
+            <h3>{{ stats.videos }}</h3>
+            <p>{{ trans("text.videos") }}</p>
             <router-link :to="prefix + 'videos'">
               <i class="fas fa-camera"></i>
-              <span>{{ trans('admin.details')}}</span>
+              <span>{{ trans("admin.details") }}</span>
             </router-link>
           </div>
         </div>
+      </div>
+      <div class="row">
+        <button
+          type="button"
+          @click="generateSitemap()"
+          class="btn btn-primary"
+        >
+          Generate Sitemap
+        </button>
       </div>
     </section>
   </div>
@@ -75,26 +86,47 @@ export default {
     return {
       stats: {},
       show_spinner: true,
-      show_error: false
+      show_error: false,
     };
   },
   methods: {
+    generateSitemap() {
+      var self = this;
+      axios
+        .get(self.ajax_prefix + "generate-sitemap")
+        .then((response) => {
+          self.$notify({
+            group: "admin",
+            text: self.trans("admin.sitemap-generated"),
+            type: "success",
+            title: self.trans("admin.success"),
+          });
+        })
+        .catch((error) => {
+          self.$notify({
+            group: "admin",
+            text: self.trans("admin.sitemap-not-generated"),
+            type: "warning",
+            title: self.trans("admin.warning"),
+          });
+        });
+    },
     getIndex() {
       var self = this;
       axios
-        .get(this.ajax_prefix)
-        .then(response => {
+        .get(self.ajax_prefix)
+        .then((response) => {
           self.stats = response.data.stats;
           self.show_spinner = false;
         })
-        .catch(error => {
+        .catch((error) => {
           self.show_spinner = false;
           self.show_error = error.response.status;
         });
-    }
+    },
   },
   mounted() {
     this.getIndex();
-  }
+  },
 };
 </script>

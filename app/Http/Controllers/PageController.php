@@ -2,21 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Repositories\Page\PageRepository;
-use App\Repositories\Sora\SoraRepository;
-use App\Http\Requests\MessageRequest;
-use App\Repositories\Message\MessageRepository;
-use App\Repositories\Read\ReadRepository;
-use App\Repositories\Radio\RadioRepository;
-use App\Repositories\Mushaf\MushafRepository;
-use App\Repositories\Reciter\ReciterRepository;
-use App\Repositories\Video\VideoRepository;
-use App\Repositories\Rewaya\RewayaRepository;
+use Mail;
+use App\Read;
+use Honeypot;
+use Carbon\Carbon;
 use LaravelLocalization;
 use App\Mail\ContactMail;
-use Mail;
-use Honeypot;
+use Spatie\Sitemap\Sitemap;
+use Illuminate\Http\Request;
+use Spatie\Sitemap\Tags\Url;
+use App\Http\Requests\MessageRequest;
+use App\Repositories\Page\PageRepository;
+use App\Repositories\Read\ReadRepository;
+use App\Repositories\Sora\SoraRepository;
+use App\Repositories\Radio\RadioRepository;
+use App\Repositories\Video\VideoRepository;
+use App\Repositories\Mushaf\MushafRepository;
+use App\Repositories\Rewaya\RewayaRepository;
+use App\Repositories\Message\MessageRepository;
+use App\Repositories\Reciter\ReciterRepository;
 
 class PageController extends Controller
 {
@@ -56,12 +60,8 @@ class PageController extends Controller
         }
         return $results;
     }
-    public function sitemap()
-    {
-       
-
-        return view('layouts.app', $params);
-    }
+    
+    
     public function storeMessage(MessageRequest $request)
     {
         $input = $request->all();

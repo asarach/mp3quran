@@ -149,7 +149,7 @@
     margin-right: 0.5rem;
   }
 }
-.sora-item.show{
+.sora-item.show {
   display: flex;
 }
 .sora-item:hover {
@@ -165,23 +165,49 @@
 
 .sora-show-item {
   display: block;
+  cursor: initial;
+  padding: 2.5rem 0.5rem;
+  .ssi-btns {
+    display: flex;
+    justify-content: center;
+  }
+  .download-btn ,
   .ply-btn {
-    margin: 1rem auto;
+    margin: 1rem;
     border: 3px solid #ffe2b3;
     border-radius: 18px;
     height: 44px;
-    width: 44px;
+    width: 150px;
+    color: #fff;
+    background: #f5b44b;
+    display: flex;
     justify-content: center;
     align-items: center;
-    display: flex;
-    background: #f5b44b;
+    cursor: pointer;
+    .uni-icon{
+      margin-left: 0.5rem;
+      color: #fff;
+      font-size: 26px;
+    }
+    div {
+      justify-content: center;
+      align-items: center;
+      display: flex;
+    }
     svg {
       width: 24px;
       fill: #fff;
     }
   }
+  .download-btn{
+    background: #64ad15;
+    border: 3px solid #c9e6a9;
+  }
   .ply-btn:hover {
     border: 3px solid #eca32b;
+  }
+  .download-btn:hover{
+    border: 3px solid #4f8e0a;
   }
   .sora-info {
     display: block;
@@ -227,9 +253,9 @@
 
   h3 {
     font-size: 16px;
-    margin-bottom: 0.75rem;
-    border-bottom: 1px solid #cdd3d6;
-    padding-bottom: 0.75rem;
+    margin-bottom: 0;
+    /* border-bottom: 1px solid #cdd3d6; */
+    padding-bottom: 0;
     text-align: center;
   }
   .dplayer-controller {
@@ -476,7 +502,7 @@
     margin-right: 0.5rem;
   }
 }
-.card-radio.show{
+.card-radio.show {
   display: flex;
 }
 .card-radio:hover {
@@ -614,7 +640,7 @@
           margin: 0;
         }
       }
-      .form-group{
+      .form-group {
         margin-bottom: 0;
       }
     }

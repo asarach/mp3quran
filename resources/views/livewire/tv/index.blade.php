@@ -33,7 +33,11 @@
         <div class="col-lg-19" id="sticky-container">
           <div class="tvs-list">
             @foreach ($tvs as $tv)
-            <card-tv :tv="{{ json_encode($tv) }}"></card-tv>
+            <div class="card-tv">
+              <a href="{{ route('tv.show', ['tvid' =>$tv->id   ]) }}">
+                <h3>{{ $tv->name }}</h3>
+              </a>
+            </div>
             @endforeach
           </div>
         </div>

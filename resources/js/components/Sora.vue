@@ -4,7 +4,20 @@
     :class="{ showoptions: showoptions, show: sora.show }"
     v-click-outside="closeOptions"
   >
+    <div class="ply-btn" v-if="isLoading">
+      <div class="la-line-scale la-sm">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+    <div class="ply-btn" v-else-if="isPlaying" @click="pauseItem()">
+      <span class="uni-icon icon-pause" style="color: #fff"></span>
+    </div>
     <div
+      v-else
       class="ply-btn"
       @click="
         getItemAndPlay(
@@ -13,19 +26,9 @@
         )
       "
     >
-      <scale-loader
-        v-if="isLoading({ type: 'sora', id: sora.id })"
-        color="#0D3A4D"
-        height="10px"
-        width="2px"
-      ></scale-loader>
-      <span
-        v-else-if="isPlaying({ type: 'sora', id: sora.id })"
-        class="uni-icon icon-pause"
-        style="color: #fff"
-      ></span>
-      <span v-else class="uni-icon icon-play_arrow1" style="color: #fff"></span>
+      <span class="uni-icon icon-play_arrow1" style="color: #fff"></span>
     </div>
+
     <div class="sora-info">
       <div class="sora-num">{{ sora.sora_num }}</div>
       <div v-if="sora.reciter_name" class="sora-num">
@@ -134,8 +137,29 @@ export default {
     };
   },
   computed: {
+    isPlaying: function () {
+      if (
+        this.$root.player_state.playing_item == this.sora.id &&
+        this.$root.player_state.playing_state == "playing"
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+
+    isLoading: function () {
+      if (
+        this.$root.player_state.playing_item == this.sora.id &&
+        this.$root.player_state.playing_state == "loading"
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+
     ...mapGetters("favorite", ["soarIncludes"]),
-    ...mapGetters(["isPlaying", "isLoading"]),
     ...mapState({
       current_playing_item: (state) => state.playing_item,
       current_language: (state) => state.current_language,
@@ -149,24 +173,22 @@ export default {
     shareItem(title, url, description) {
       AppEvent.$emit("share", title, url, description);
     },
-
+    pauseItem() {
+      window.player.pause();
+    },
     getItemAndPlay(url, playing_item) {
-      console.log("asa");
-      if (this.current_playing_item != playing_item) {
-        window.player.setState({
-          playing_state: "loading",
-          playing_item: playing_item,
-          playing_type: "sora",
-        });
+      if (this.$root.player_state.playing_item != playing_item) {
+        this.$root.player_state.playing_state = "loading";
+        this.$root.player_state.playing_item = playing_item;
+        axios
+          .get(url)
+          .then(function (response) {
+            window.player.addAndPlayItem(response.data);
+          })
+          .catch(function (error) {});
+      } else {
+        window.player.play();
       }
-      axios
-        .get(url)
-        .then(function (response) {
-          window.player.addAndPlayItem(response.data);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
     },
     addItem(url) {
       axios

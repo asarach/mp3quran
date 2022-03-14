@@ -1,5 +1,4 @@
 const { Howl, Howler } = require('howler');
-
 var Player = function () {
 
   //Get old playlist
@@ -127,6 +126,9 @@ Player.prototype = {
   setCurrentItem: function (index) {
     var self = this;
     self.current_item = self.playlist[index];
+    self.playing_item = self.current_item.id;
+    self.playing_type = self.current_item.type;
+    self.setState();
     self.setCurrentIndex(index);
 
     var data = self.playlist[self.current_index];
@@ -150,34 +152,25 @@ Player.prototype = {
         src: [self.current_item.file],
         html5: true, // Force to HTML5 so that the audio can stream in (best for large files).
         onplay: function () {
-          // Display the playerDuration.
-
-          // Start updating the playerProgress of the track.
           requestAnimationFrame(self.step.bind(self));
-
-          self.setStyles('play', index);
+          self.playing_state = 'playing';
+          self.setState();
         },
         onload: function () {
-          // Start the wave animation.
           playerDuration.innerHTML = self.formatTime(Math.round(self.sound.duration()));
           playerTimer.innerHTML = self.formatTime(0);
-          self.setStyles('load', index);
         },
         onend: function () {
-          // Stop the wave animation.
           self.skip('next');
         },
         onpause: function () {
-          // Stop the wave animation.
-          self.setStyles('pause', index);
+          self.playing_state = 'paused';
+          self.setState();
         },
         onstop: function () {
-          // Stop the wave animation.
-          self.setStyles('stop', index);
-
+          self.setState();
         },
         onseek: function () {
-          // Start updating the playerProgress of the track.
           requestAnimationFrame(self.step.bind(self));
         }
       });
@@ -196,11 +189,10 @@ Player.prototype = {
       this.playerData.current_index = index;
       localStorage.setItem('mp3quran_player', JSON.stringify(this.playerData));
     }
-
-
   },
 
   addAndPlayItem: function (item) {
+    this.playing_state = 'loading';
     this.addItemToPlaylist(item);
     this.setCurrentItem(this.getItemIndex(item));
     this.play();
@@ -208,10 +200,18 @@ Player.prototype = {
   addItem: function (item) {
     this.addItemToPlaylist(item);
   },
-  setState: function (state) {
-    this.playing_state = state.playing_state;
-    this.playing_item = state.playing_item;
-    this.playing_type = state.playing_type;
+  setState: function () {
+    let self = this;
+    const changeStateEvent = new CustomEvent("changeState", {
+      'detail': {
+        playing_state: self.playing_state,
+        playing_item: self.playing_item,
+        playing_type: self.playing_type
+      }
+    });
+    window.dispatchEvent(changeStateEvent);
+
+    this.setStyles();
   },
 
   togglePlaylist: function () {
@@ -226,12 +226,10 @@ Player.prototype = {
    ************************************/
   play: function () {
     this.sound.play();
-    this.setStyles('init', this.current_index);
   },
 
   pause: function () {
     this.sound.pause();
-    this.setStyles('pause', this.current_index);
   },
 
   skip: function (direction) {
@@ -266,6 +264,7 @@ Player.prototype = {
     playerProgressPiont.style.left = 'calc(0% - 6px)';
 
     // Play the new track.
+    this.playing_state = 'loading';
     this.setCurrentItem(index);
     self.play(index);
   },
@@ -318,56 +317,59 @@ Player.prototype = {
     return this.playlist.indexOf(result[0]);
   },
 
-  setStyles: function (action, index) {
-    var self = this;
+  setStyles: function () {
+    const index = this.current_index;
     $('#playerList .btn-play').show();
     $('#playerList .btn-pause').hide();
-    switch (action) {
-      case 'pause':
-        playerPlayBtn.style.display = 'block';
-        playerPauseBtn.style.display = 'none';
-        fullPlayerPlayBtn.style.display = 'block';
-        fullPlayerPauseBtn.style.display = 'none';
 
-        $('#playerListItem-' + index + ' .btn-play').show();
-        $('#playerListItem-' + index + ' .btn-pause').hide();
-        $('#fullPlayerListItem-' + index + ' .btn-play').show();
-        $('#fullPlayerListItem-' + index + ' .btn-pause').hide();
-        break;
-      case 'load':
-        playerBar.style.display = 'none';
-        playerLoading.style.display = 'none';
+    if (this.playing_state == 'loading') {
+      playerLoading.style.display = 'block';
+      playerPlayBtn.style.display = 'none';
+      playerPauseBtn.style.display = 'none';
 
-        break;
-      case 'play':
-        playerBar.style.display = 'none';
-        playerPauseBtn.style.display = 'block';
-        fullPlayerPauseBtn.style.display = 'block';
+      fullPlayerLoading.style.display = 'block';
+      fullPlayerPlayBtn.style.display = 'none';
+      fullPlayerPauseBtn.style.display = 'none';
 
-        $('#playerListItem-' + index + ' .btn-play').hide();
-        $('#playerListItem-' + index + ' .btn-pause').show();
-        $('#fullPlayerListItem-' + index + ' .btn-play').hide();
-        $('#fullPlayerListItem-' + index + ' .btn-pause').show();
-        break;
-      case 'stop':
-        playerBar.style.display = 'block';
-        break;
-      default:
-        if (self.sound.state() === 'loaded') {
-          playerPlayBtn.style.display = 'none';
-          playerPauseBtn.style.display = 'block';
-          fullPlayerPlayBtn.style.display = 'none';
-          fullPlayerPauseBtn.style.display = 'block';
-        } else {
-          playerLoading.style.display = 'block';
-          playerPlayBtn.style.display = 'none';
-          playerPauseBtn.style.display = 'none';
+      $('#playerListItem-' + index + ' .btn-loading').show();
+      $('#playerListItem-' + index + ' .btn-play').hide();
+      $('#playerListItem-' + index + ' .btn-pause').hide();
 
-          fullPlayerLoading.style.display = 'block';
-          fullPlayerPlayBtn.style.display = 'none';
-          fullPlayerPauseBtn.style.display = 'none';
-        }
-        break;
+      $('#fullPlayerListItem-' + index + ' .btn-loading').show();
+      $('#fullPlayerListItem-' + index + ' .btn-play').hide();
+      $('#fullPlayerListItem-' + index + ' .btn-pause').hide();
+    } else if (this.playing_state == 'paused') {
+      playerLoading.style.display = 'none';
+      playerPlayBtn.style.display = 'block';
+      playerPauseBtn.style.display = 'none';
+
+      fullPlayerLoading.style.display = 'none';
+      fullPlayerPlayBtn.style.display = 'block';
+      fullPlayerPauseBtn.style.display = 'none';
+
+      $('#playerListItem-' + index + ' .btn-loading').hide();
+      $('#playerListItem-' + index + ' .btn-play').show();
+      $('#playerListItem-' + index + ' .btn-pause').hide();
+
+      $('#fullPlayerListItem-' + index + ' .btn-loading').hide();
+      $('#fullPlayerListItem-' + index + ' .btn-play').show();
+      $('#fullPlayerListItem-' + index + ' .btn-pause').hide();
+    } else if (this.playing_state == 'playing') {
+      playerLoading.style.display = 'none';
+      playerPlayBtn.style.display = 'none';
+      playerPauseBtn.style.display = 'block';
+
+      fullPlayerLoading.style.display = 'none';
+      fullPlayerPlayBtn.style.display = 'none';
+      fullPlayerPauseBtn.style.display = 'block';
+
+      $('#playerListItem-' + index + ' .btn-loading').hide();
+      $('#playerListItem-' + index + ' .btn-play').hide();
+      $('#playerListItem-' + index + ' .btn-pause').show();
+
+      $('#fullPlayerListItem-' + index + ' .btn-loading').hide();
+      $('#fullPlayerListItem-' + index + ' .btn-play').hide();
+      $('#fullPlayerListItem-' + index + ' .btn-pause').show();
     }
   },
 

@@ -83,7 +83,6 @@ class Sora extends Model
         } elseif ($this->num < 100) {
             return '0' . $this->num;
         }
-
         return $this->num;
     }
 
@@ -91,14 +90,23 @@ class Sora extends Model
     {
         if ($rewaya->id == 1) {
             return trans('seo.sora-title-hafs', ['sora' => $sora, 'reciter' => $reciter]);
+        } else if ($rewaya->id == 4) {
+            return trans('seo.sora-title-lmaalm', ['sora' => $sora, 'reciter' => $reciter]);
+        } else if ($rewaya->id == 6) {
+            return trans('seo.sora-title-lmgod', ['sora' => $sora, 'reciter' => $reciter]);
         } else {
             return trans('seo.sora-title', ['sora' => $sora, 'reciter' => $reciter, 'rewaya' => $rewaya->getLocaleName()]);
         }
     }
+
     public function getDescriptionTitle($rewaya = null, $reciter, $sora)
     {
         if ($rewaya->id == 1) {
             return trans('seo.sora-description-hafs', ['sora' => $sora, 'reciter' => $reciter]);
+        } else if ($rewaya->id == 4) {
+            return trans('seo.sora-title-lmaalm', ['sora' => $sora, 'reciter' => $reciter]);
+        } else if ($rewaya->id == 6) {
+            return trans('seo.sora-description-lmgod', ['sora' => $sora, 'reciter' => $reciter]);
         } else {
             return trans('seo.sora-description', ['sora' => $sora, 'reciter' => $reciter, 'rewaya' => $rewaya->getLocaleName()]);
         }

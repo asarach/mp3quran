@@ -55,17 +55,17 @@ Vue.directive('click-outside', {
 });
 
 
-Sentry.init({
-  Vue,
-  dsn: "https://10d2a5e476d94cc9a533026780ff378c@o1119941.ingest.sentry.io/6171514",
-  integrations: [
-    new Integrations.BrowserTracing({
-      // routingInstrumentation: Sentry.vueRouterInstrumentation(router),
-      tracingOrigins: ["mp3quran.de", "mp3quran.com", /^\//],
-    }),
-  ],
-  tracesSampleRate: 0.75,
-});
+// Sentry.init({
+//   Vue,
+//   dsn: "https://10d2a5e476d94cc9a533026780ff378c@o1119941.ingest.sentry.io/6171514",
+//   integrations: [
+//     new Integrations.BrowserTracing({
+//       // routingInstrumentation: Sentry.vueRouterInstrumentation(router),
+//       tracingOrigins: ["mp3quran.de", "mp3quran.com", /^\//],
+//     }),
+//   ],
+//   tracesSampleRate: 0.75,
+// });
 
 Vue.filter('downloadUrl', function (value) {
   if (!value) return ''
@@ -137,6 +137,11 @@ function initiateVue() {
     data: {
       errors: new Errors(),
       show_languages: false,
+      player_state: {
+        playing_state: null,
+        playing_item: null,
+        playing_type: null,
+      },
       animation: {
         enter: {
           opacity: [1, 0],
@@ -174,8 +179,12 @@ function initiateVue() {
       },
     },
     mounted() {
+      let self = this;
       var MainLoading = document.getElementById("MainLoading");
       MainLoading.style.display = "none";
+      window.addEventListener("changeState", (event) => {
+        self.player_state = event.detail;
+      });
     }
   });
 }

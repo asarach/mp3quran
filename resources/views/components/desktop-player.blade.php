@@ -6,6 +6,13 @@
           <span class="uni-icon icon-skip_previous" id="playerPrevBtn"></span>
         </div>
         <div class="ply-btn btn-play-pause">
+          <div id="playerLoading" style="color: #fff; display: none;" class="la-line-scale la-sm">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
           <span id="playerPauseBtn" style="color: #fff; display: none;" class="uni-icon icon-pause"></span>
           <span id="playerPlayBtn" class="uni-icon icon-play_arrow1" style="color: #fff; display: block;"></span>
         </div>
@@ -27,18 +34,18 @@
         <div class="ply-btn btn-volume" id="playerVolumeBtn">
           <span class="uni-icon icon-volume_off" style="display: none;"></span> {{-- 0 --}}
           <span class="uni-icon icon-volume_mute" style="display: none;"></span> {{-- 15 --}}
-          <span class="uni-icon icon-volume_down" ></span> {{-- 65 --}}
-          <span class="uni-icon icon-volume_up"style="display: none;"></span>
+          <span class="uni-icon icon-volume_down"></span> {{-- 65 --}}
+          <span class="uni-icon icon-volume_up" style="display: none;"></span>
           <div id="playerVolume" class="volume-selector">
 
             <div class="ply-volume" id="playerVolumeBar">
               <div id="playerVolumeInner"></div>
               <div id="playerVolumePiont" data-down="false"></div>
             </div>
-            
+
           </div>
         </div>
-        
+
 
         <div class="btn ply-btn btn-list" id="playerPlaylistBtn">
           <span class="uni-icon icon-playlist_play"></span>
@@ -85,11 +92,12 @@
           </div>
         </div>
         <div class="fply-footer">
-         
+
           <ul id="fullPlayerList" class="list-unstyled"></ul>
           <template id="fullPlaylistItem">
             <li>
               <div class="playlist-avatar drag-handle">
+                
                 <div class="ply-btn btn-pause" style="display: none;">
                   <span class="uni-icon icon-pause"></span>
                 </div>

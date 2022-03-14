@@ -6,7 +6,7 @@ var elms = [
   'playerVolumeBtn', 'playerProgress', 'playerBar', 'playerLoading', 'playerPlaylist',
   'playerList', 'playerVolume', 'playerBarFull', 'playerVolume', 'playerVolumeBar', 'playerVolumePiont',
   'playlistItem', 'playerProgressBar', 'playerProgressPiont', 'closePlaylist', 'playerProgressLine',
-  'fullPlayerToggle', 'fullPlayer', 'closeFullplayer', 'fullPlayerNextBtn', 'fullPlayerPrevBtn',
+  'fullPlayerToggle', 'fullPlayer', 'closeFullplayer', 'fullPlayerNextBtn', 'fullPlayerPrevBtn', 'playerLoading',
   'fullPlayerPauseBtn', 'fullPlayerPlayBtn', 'fplyReader', 'fplySora', 'fullPlaylistItem', 'fullPlayerList','fullPlayerLoading'
 
 ];

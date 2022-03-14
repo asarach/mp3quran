@@ -18,7 +18,11 @@
     <meta property="og:image" content="" />
     <meta property="og:type" content="" />
 
-    
+    @foreach ($languages as $key => $language)
+    <link rel="alternate" href="https://mp3quran.net{{ str_replace(LaravelLocalization::getCurrentLocale(), $key, Request::getRequestUri() ) }}" hreflang="{{ $language['regional']  }}" />
+    @endforeach
+    <link rel="canonical" href="https://mp3quran.net{{ Request::getRequestUri() }}" />
+
     <meta name="turbolinks-cache-control" content="no-cache">
 
     <!-- Styles -->

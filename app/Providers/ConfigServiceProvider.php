@@ -19,6 +19,7 @@ class ConfigServiceProvider extends ServiceProvider
                 $locales[$lang->locale] = [
                     'name' => $lang->name,
                     'script' => $lang->script,
+                    'regional' => $lang->regional,
                     'native' => $lang->native
                 ];
             }
@@ -28,10 +29,12 @@ class ConfigServiceProvider extends ServiceProvider
         if (empty($locales)) {
             $locales['ar'] = [
                 'name' => 'English',
+                'regional' => 'en_GB',
                 'script' => 'Latn',
                 'native' => 'English'
             ];
         }
+        // dd($locales);
 
         config([
             'laravellocalization.supportedLocales' => $locales,

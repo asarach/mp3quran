@@ -58,8 +58,6 @@ class AppComposer
             return LaravelLocalization::getSupportedLocales();
         });
 
-
-
         $view->with(compact('popup', 'languages'));
     }
 }

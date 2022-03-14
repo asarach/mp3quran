@@ -29,6 +29,7 @@ Route::get('/radios', ['as' => 'radio.index', 'uses' => Radio\Index::class]);
 
 /* live  */
 Route::get('/live', ['as' => 'tv.index', 'uses' => Tv\Index::class]);
+Route::get('/live/{tvid}', ['as' => 'tv.show', 'uses' => Tv\Show::class]);
 
 /* videos  */
 Route::get('/videos', ['as' => 'video.index', 'uses' => Video\Index::class]);
@@ -63,4 +64,5 @@ Route::get('/contact-us', ['as' => 'page.contact', 'uses' => Page\Contact::class
 /* reciters  */
 Route::get('/reciters', ['as' => 'reciter.index', 'uses' => Reciter\Index::class]);
 Route::get('/{slug}', ['as' => 'reciter.show', 'uses' => Reciter\Show::class]);
+Route::get('/{slug}/downloads', ['as' => 'reciter.download', 'uses' => Reciter\Download::class]);
 Route::get('/{slug}/{sora_id}', ['as' => 'reciter.sora', 'uses' => Reciter\Sora::class]);

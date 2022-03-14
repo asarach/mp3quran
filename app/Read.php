@@ -213,6 +213,10 @@ class Read extends Model
     {
         if ($rewaya->id == 1) {
             return trans('seo.reciter-title-hafs', ['reciter' => $reciter]);
+        } else if ($rewaya->id == 4) {
+            return trans('seo.reciter-title-lmaalm', ['reciter' => $reciter]);
+        } else if ($rewaya->id == 6) {
+            return trans('seo.reciter-title-lmgod', ['reciter' => $reciter]);
         } else {
             return trans('seo.reciter-title', ['reciter' => $reciter, 'rewaya' => $rewaya->getLocaleName()]);
         }
@@ -220,9 +224,38 @@ class Read extends Model
     public function getDescriptionTitle($rewaya = null, $reciter)
     {
         if ($rewaya->id == 1) {
-            return trans('seo.reciter-description-hafs', [ 'reciter' => $reciter]);
+            return trans('seo.reciter-description-hafs', ['reciter' => $reciter]);
+        } else if ($rewaya->id == 4) {
+            return trans('seo.reciter-description-lmaalm', ['reciter' => $reciter]);
+        } else if ($rewaya->id == 6) {
+            return trans('seo.reciter-description-lmgod', ['reciter' => $reciter]);
         } else {
             return trans('seo.reciter-description', ['reciter' => $reciter, 'rewaya' => $rewaya->getLocaleName()]);
+        }
+    }
+
+    public function getDownloadSeoTitle($rewaya = null, $reciter)
+    {
+        if ($rewaya->id == 1) {
+            return trans('seo.reciter-download-title-hafs', ['reciter' => $reciter]);
+        } else if ($rewaya->id == 4) {
+            return trans('seo.reciter-download-title-lmaalm', ['reciter' => $reciter]);
+        } else if ($rewaya->id == 6) {
+            return trans('seo.reciter-download-title-lmgod', ['reciter' => $reciter]);
+        } else {
+            return trans('seo.reciter-download-title', ['reciter' => $reciter, 'rewaya' => $rewaya->getLocaleName()]);
+        }
+    }
+    public function getDownloadDescriptionTitle($rewaya = null, $reciter)
+    {
+        if ($rewaya->id == 1) {
+            return trans('seo.reciter-download-description-hafs', ['reciter' => $reciter]);
+        } else if ($rewaya->id == 4) {
+            return trans('seo.reciter-download-description-lmaalm', ['reciter' => $reciter]);
+        } else if ($rewaya->id == 6) {
+            return trans('seo.reciter-download-description-lmgod', ['reciter' => $reciter]);
+        } else {
+            return trans('seo.reciter-download-description', ['reciter' => $reciter, 'rewaya' => $rewaya->getLocaleName()]);
         }
     }
 

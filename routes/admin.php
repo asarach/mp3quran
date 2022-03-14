@@ -1,6 +1,7 @@
 <?php
 /* Index  */
 Route::get('/', ['as' => 'index', 'uses' => 'HomeController@index']);
+Route::get('/generate-sitemap', array('as' => 'generate.sitemap', 'uses' => 'HomeController@sitemap'));
 
 /* Ads  */
 Route::get('/ads', array('as' => 'ad.index', 'uses' => 'AdController@index'));
