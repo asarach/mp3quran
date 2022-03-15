@@ -131,11 +131,11 @@ Player.prototype = {
 
     var data = self.playlist[self.current_index];
     //stop current playing item
-    // for (let i = 0; i < self.playlist.length; i++) {
-    //   if (self.playlist[i].howl) {
-    //     self.playlist[i].howl.stop();
-    //   }
-    // }
+    for (let i = 0; i < self.playlist.length; i++) {
+      if (self.playlist[i].howl) {
+        self.playlist[i].howl.stop();
+      }
+    }
 
     //if is howler and current is same as clicked just play else create and load 
     if (data.howl) {
@@ -143,11 +143,11 @@ Player.prototype = {
       self.sound = data.howl;
     } else {
       console.log('onend');
-      if (self.sound == null || self.sound.src !== self.current_item.file) {
-        if (self.sound != null) {
-          self.sound.unload();
-        }
-      }
+      // if (self.sound == null || self.sound.src !== self.current_item.file) {
+      //   if (self.sound != null) {
+      //     self.sound.unload();
+      //   }
+      // }
       self.sound = data.howl = new Howl({
         src: [self.current_item.file],
         html5: true, // Force to HTML5 so that the audio can stream in (best for large files).
