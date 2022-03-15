@@ -2,10 +2,10 @@ const { Howl, Howler } = require('howler');
 var Player = function () {
 
   //Get old playlist
-  // localStorage.removeItem('mp3quran_playlist');
-  // localStorage.removeItem('mp3quran_player');
-  const playlist = JSON.parse(localStorage.getItem("mp3quran_playlist") || "[]");
-  this.playerData = JSON.parse(localStorage.getItem("mp3quran_player") || "{}");
+  // localStorage.removeItem('mp3quran_playlist2');
+  // localStorage.removeItem('mp3quran_player2');
+  const playlist = JSON.parse(localStorage.getItem("mp3quran_playlist2") || "[]");
+  this.playerData = JSON.parse(localStorage.getItem("mp3quran_player2") || "{}");
 
   this.setPlaylist(playlist);
 
@@ -118,7 +118,7 @@ Player.prototype = {
       delete storageItem.howl
       storagePlaylist.push(storageItem);
     });
-    localStorage.setItem('mp3quran_playlist', JSON.stringify(storagePlaylist));
+    localStorage.setItem('mp3quran_playlist2', JSON.stringify(storagePlaylist));
   },
 
   setCurrentItem: function (index) {
@@ -197,7 +197,7 @@ Player.prototype = {
     if (typeof index === 'number') {
       this.current_index = index;
       this.playerData.current_index = index;
-      localStorage.setItem('mp3quran_player', JSON.stringify(this.playerData));
+      localStorage.setItem('mp3quran_player2', JSON.stringify(this.playerData));
     }
   },
 
@@ -209,6 +209,9 @@ Player.prototype = {
   },
   addItem: function (item) {
     this.addItemToPlaylist(item);
+    if (this.playlist.length == 1) {
+      this.setCurrentItem(this.getItemIndex(item));
+    }
   },
   setState: function () {
     let self = this;

@@ -87,7 +87,7 @@
         v-tooltip="trans('text.add-to-playlist')"
         @click="
           addItem(
-            ajax_prefix + '/soar/item?r=' + sora.read_id + '&s=' + sora.sora_id
+            ajax_prefix + '/soar/item?r=' + read_id + '&s=' + sora.sora_id
           )
         "
       >
