@@ -6,6 +6,13 @@
         <span class="uni-icon icon-skip_previous" id="playerPrevBtn"></span>
       </div>
       <div class="ply-btn btn-play-pause">
+        <div id="playerLoading" style="color: #0e3a4d; display: none;" class="la-line-scale la-sm">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
         <span id="playerPauseBtn" style=" display: none;" class="uni-icon icon-pause"></span>
         <span id="playerPlayBtn" class="uni-icon icon-play_arrow1" style=" display: block;"></span>
       </div>
@@ -57,6 +64,13 @@
           <span class="uni-icon icon-skip_previous" id="fullPlayerPrevBtn" style="color: #fff"></span>
         </div>
         <div class="ply-btn btn-play-pause">
+          <div id="fullPlayerLoading" style="color: #fff; display: none;" class="la-line-scale la-sm">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
           <span id="fullPlayerPauseBtn" class="uni-icon icon-pause" style=" display: none;"></span>
           <span id="fullPlayerPlayBtn" class="uni-icon icon-play_arrow1" style=" display: block; color: #fff"></span>
         </div>
@@ -69,6 +83,13 @@
         <template id="fullPlaylistItem">
           <li>
             <div class="playlist-avatar drag-handle">
+              <div style="color: #fff; display: none;" class="la-line-scale btn-loading la-sm">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
               <div class="ply-btn btn-pause" style="display: none;">
                 <span class="uni-icon icon-pause"></span>
               </div>
@@ -102,6 +123,13 @@
         <li>
           <div class="drag-handle bg"></div>
           <div class="playlist-avatar drag-handle">
+            <div style="color: #fff; display: none;" class="la-line-scale btn-loading la-sm">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
             <div class="ply-btn btn-pause" style="display: none;">
               <span class="uni-icon icon-pause"></span>
             </div>

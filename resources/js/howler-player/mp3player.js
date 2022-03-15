@@ -117,8 +117,6 @@ Player.prototype = {
       const storageItem = Object.assign({}, item);
       delete storageItem.howl
       storagePlaylist.push(storageItem);
-
-
     });
     localStorage.setItem('mp3quran_playlist', JSON.stringify(storagePlaylist));
   },
@@ -133,21 +131,23 @@ Player.prototype = {
 
     var data = self.playlist[self.current_index];
     //stop current playing item
-    for (let i = 0; i < self.playlist.length; i++) {
-      if (self.playlist[i].howl) {
-        self.playlist[i].howl.stop();
-      }
-    }
+    // for (let i = 0; i < self.playlist.length; i++) {
+    //   if (self.playlist[i].howl) {
+    //     self.playlist[i].howl.stop();
+    //   }
+    // }
 
     //if is howler and current is same as clicked just play else create and load 
     if (data.howl) {
+      console.log('onend');
       self.sound = data.howl;
     } else {
-
-      // if (self.sound == null || self.sound.src !== self.current_item.file) {
-      //   if (self.sound != null) {
-      //     self.sound.unload();
-      //   }
+      console.log('onend');
+      if (self.sound == null || self.sound.src !== self.current_item.file) {
+        if (self.sound != null) {
+          self.sound.unload();
+        }
+      }
       self.sound = data.howl = new Howl({
         src: [self.current_item.file],
         html5: true, // Force to HTML5 so that the audio can stream in (best for large files).
@@ -156,11 +156,19 @@ Player.prototype = {
           self.playing_state = 'playing';
           self.setState();
         },
+        onplayerror: function() {
+          console.log('onplayerror');
+        },
+        onloaderror: function() {
+          console.log('onloaderror');
+        },
         onload: function () {
+          console.log('onload');
           playerDuration.innerHTML = self.formatTime(Math.round(self.sound.duration()));
           playerTimer.innerHTML = self.formatTime(0);
         },
         onend: function () {
+          console.log('onend');
           self.skip('next');
         },
         onpause: function () {
@@ -171,6 +179,8 @@ Player.prototype = {
           self.setState();
         },
         onseek: function () {
+
+          console.log('onend');
           requestAnimationFrame(self.step.bind(self));
         }
       });
@@ -321,6 +331,10 @@ Player.prototype = {
     const index = this.current_index;
     $('#playerList .btn-play').show();
     $('#playerList .btn-pause').hide();
+    $('#playerList .btn-loading').hide();
+    $('#fullPlayerList .btn-play').show();
+    $('#fullPlayerList .btn-pause').hide();
+    $('#fullPlayerList .btn-loading').hide();
 
     if (this.playing_state == 'loading') {
       playerLoading.style.display = 'block';
@@ -338,22 +352,6 @@ Player.prototype = {
       $('#fullPlayerListItem-' + index + ' .btn-loading').show();
       $('#fullPlayerListItem-' + index + ' .btn-play').hide();
       $('#fullPlayerListItem-' + index + ' .btn-pause').hide();
-    } else if (this.playing_state == 'paused') {
-      playerLoading.style.display = 'none';
-      playerPlayBtn.style.display = 'block';
-      playerPauseBtn.style.display = 'none';
-
-      fullPlayerLoading.style.display = 'none';
-      fullPlayerPlayBtn.style.display = 'block';
-      fullPlayerPauseBtn.style.display = 'none';
-
-      $('#playerListItem-' + index + ' .btn-loading').hide();
-      $('#playerListItem-' + index + ' .btn-play').show();
-      $('#playerListItem-' + index + ' .btn-pause').hide();
-
-      $('#fullPlayerListItem-' + index + ' .btn-loading').hide();
-      $('#fullPlayerListItem-' + index + ' .btn-play').show();
-      $('#fullPlayerListItem-' + index + ' .btn-pause').hide();
     } else if (this.playing_state == 'playing') {
       playerLoading.style.display = 'none';
       playerPlayBtn.style.display = 'none';
@@ -370,6 +368,22 @@ Player.prototype = {
       $('#fullPlayerListItem-' + index + ' .btn-loading').hide();
       $('#fullPlayerListItem-' + index + ' .btn-play').hide();
       $('#fullPlayerListItem-' + index + ' .btn-pause').show();
+    } else {
+      playerLoading.style.display = 'none';
+      playerPlayBtn.style.display = 'block';
+      playerPauseBtn.style.display = 'none';
+
+      fullPlayerLoading.style.display = 'none';
+      fullPlayerPlayBtn.style.display = 'block';
+      fullPlayerPauseBtn.style.display = 'none';
+
+      $('#playerListItem-' + index + ' .btn-loading').hide();
+      $('#playerListItem-' + index + ' .btn-play').show();
+      $('#playerListItem-' + index + ' .btn-pause').hide();
+
+      $('#fullPlayerListItem-' + index + ' .btn-loading').hide();
+      $('#fullPlayerListItem-' + index + ' .btn-play').show();
+      $('#fullPlayerListItem-' + index + ' .btn-pause').hide();
     }
   },
 

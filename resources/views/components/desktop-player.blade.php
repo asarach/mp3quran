@@ -92,12 +92,17 @@
           </div>
         </div>
         <div class="fply-footer">
-
           <ul id="fullPlayerList" class="list-unstyled"></ul>
           <template id="fullPlaylistItem">
             <li>
               <div class="playlist-avatar drag-handle">
-                
+                <div style="color: #fff; display: none;" class="la-line-scale btn-loading la-sm">
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                </div>
                 <div class="ply-btn btn-pause" style="display: none;">
                   <span class="uni-icon icon-pause"></span>
                 </div>
@@ -132,6 +137,13 @@
           <li>
             <div class="drag-handle bg"></div>
             <div class="playlist-avatar drag-handle">
+              <div style="color: #fff; display: none;" class="la-line-scale btn-loading la-sm">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
               <div class="ply-btn btn-pause" style="display: none;">
                 <span class="uni-icon icon-pause"></span>
               </div>
