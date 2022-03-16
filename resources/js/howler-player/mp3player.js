@@ -6,7 +6,6 @@ var Player = function () {
   // localStorage.removeItem('mp3quran_player2');
   const playlist = JSON.parse(localStorage.getItem("mp3quran_playlist2") || "[]");
   this.playerData = JSON.parse(localStorage.getItem("mp3quran_player2") || "{}");
-
   this.setPlaylist(playlist);
 
   //Get old current item
@@ -22,8 +21,11 @@ var Player = function () {
     this.setCurrentItem(this.playerData.current_index);
     this.current_index = this.playerData.current_index;
   }
-
-  this.volume(0.5);
+  if (this.playerData.volume != undefined) {
+    this.volume(parseFloat(this.playerData.volume));
+  } else {
+    this.volume(0.7);
+  }
 };
 
 Player.prototype = {
@@ -156,10 +158,10 @@ Player.prototype = {
           self.playing_state = 'playing';
           self.setState();
         },
-        onplayerror: function() {
+        onplayerror: function () {
           console.log('onplayerror');
         },
-        onloaderror: function() {
+        onloaderror: function () {
           console.log('onloaderror');
         },
         onload: function () {
@@ -304,6 +306,12 @@ Player.prototype = {
       $('#playerVolumeBtn .uni-icon').hide();
       $('#playerVolumeBtn .icon-volume_up').show();
     }
+
+    this.playerData.volume = val;
+    localStorage.setItem('mp3quran_player2', JSON.stringify(this.playerData));
+    playerVolumeInner.style.height = (val * 100) + 'px';
+    playerVolumePiont.style.bottom = 'calc(' + (val * 100) + 'px - 6px)';
+
     // var barWidth = (val * 90) / 100;
     // playerBarFull.style.width = (barWidth * 100) + '%';
     // playerSliderBtn.style.left = (window.innerWidth * barWidth + window.innerWidth * 0.05 - 25) + 'px';
