@@ -62,8 +62,8 @@
                         </div>
                         @endif
 
-                        <div class="card-btn app-btn-share">
-                            <button class="btn btn-primary" @click=" shareItem('{{$page['title']}}', '{{ Request::url()}}', '{{$page['description']}}')" role="button">
+                        <div class="card-btn app-btn-share ">
+                            <button class="btn btn-primary m-0" @click=" shareItem('{{$page['title']}}', '{{ Request::url()}}', '{{$page['description']}}')" role="button">
                                 <span class="icon-share ml-2"></span>
                                 {{ trans('text.share') }}
                             </button>
