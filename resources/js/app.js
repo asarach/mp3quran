@@ -161,6 +161,9 @@ function initiateVue() {
       toggelLanguages() {
         this.show_languages = !this.show_languages;
       },
+      shareItem(title, url, description) {
+        AppEvent.$emit("share", title, url, description);
+      },
       emitEvent() {
 
       },

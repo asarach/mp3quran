@@ -19,6 +19,12 @@
         <div class="ply-btn btn-next">
           <span class="uni-icon icon-skip_next" id="playerNextBtn"></span>
         </div>
+        <div class="ply-btn btn-backward">
+          <span class="uni-icon icon-backward" id="playerBackwardBtn"></span>
+        </div>
+        <div class="ply-btn btn-forward">
+          <span class="uni-icon icon-forward" id="playerForwardBtn"></span>
+        </div>
       </div>
       <div class="ply-body">
         <div id="playerLoading"></div>

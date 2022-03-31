@@ -410,6 +410,18 @@ Player.prototype = {
     }
   },
 
+  forward: function (sec) {
+    var seek = this.sound.seek() || 0;
+    seek = Math.min(seek + sec, this.sound.duration() - 1 )
+    this.sound.seek(seek);
+  },
+  
+  backward: function (sec) {
+    var seek = this.sound.seek() || 0;
+    seek = Math.max(seek - sec, 0)
+    this.sound.seek(seek);
+  },
+
   /**
    * The step called within requestAnimationFrame to update the playback position.
    */

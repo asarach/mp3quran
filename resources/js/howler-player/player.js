@@ -8,7 +8,7 @@ var elms = [
   'playlistItem', 'playerProgressBar', 'playerProgressPiont', 'closePlaylist', 'playerProgressLine',
   'fullPlayerToggle', 'fullPlayer', 'closeFullplayer', 'fullPlayerNextBtn', 'fullPlayerPrevBtn', 'playerLoading',
   'fullPlayerPauseBtn', 'fullPlayerPlayBtn', 'fplyReader', 'fplySora', 'fullPlaylistItem', 'fullPlayerList','fullPlayerLoading',
-  'playerVolumeInner', 'playerVolumePiont'
+  'playerVolumeInner', 'playerVolumePiont', 'playerBackwardBtn', 'playerForwardBtn'
 
 ];
 
@@ -42,8 +42,16 @@ fullPlayerPrevBtn.addEventListener('click', function () {
 playerNextBtn.addEventListener('click', function () {
   player.skip('next');
 });
+
 fullPlayerNextBtn.addEventListener('click', function () {
   player.skip('next');
+});
+
+playerBackwardBtn.addEventListener('click', function () {
+  player.backward(5);
+});
+playerForwardBtn.addEventListener('click', function () {
+  player.forward(5);
 });
 
 clearPlaylist.addEventListener('click', function () {
