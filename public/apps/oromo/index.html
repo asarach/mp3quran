@@ -1,0 +1,20 @@
+<script>
+function redirectByMobileOS() {
+  var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+//for Android
+    if (/android/i.test(userAgent)) {
+        window.location.href = "https://play.google.com/store/apps/details?id=com.almaalem_ye.OromoQuran";
+    }
+
+//For iPhone / iPad / iPod  (iOS
+    else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+        window.location.href = "https://apps.apple.com/sa/app/oromo-quran-%D8%A7%D9%84%D9%85%D8%B5%D8%AD%D9%81-%D8%A7%D9%84%D8%A3%D9%88%D8%B1%D9%88%D9%85%D9%8A/id1585502308";
+    }
+else{
+	window.location.href = "https://mp3quran.net/ar/apps";
+}} 
+</script>
+<body onload="redirectByMobileOS()">
+
+</body>

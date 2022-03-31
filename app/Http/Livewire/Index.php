@@ -34,7 +34,7 @@ class Index extends Component
             $data  =  $this->getReads();
         } else {
             $cache_name = 'home_reads_index_rewaya' . $this->rewaya . '_type_' . $this->type . '_long_' .  LaravelLocalization::getCurrentLocale();
-            // Cache::forget($cache_name);
+            Cache::forget($cache_name);
             $data  =  Cache::rememberForever($cache_name, function () {
                 return $this->getReads();
             });
