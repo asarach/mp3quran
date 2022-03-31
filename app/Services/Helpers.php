@@ -121,7 +121,7 @@ function get_params($data)
 
 function getMainMenu($locale, $version)
 {
-    Cache::forget('main_menu_' . $locale . '_' . $version);
+    // Cache::forget('main_menu_' . $locale . '_' . $version);
     $menu = Cache::rememberForever('main_menu_' . $locale . '_' . $version, function () use ($locale, $version) {
         switch ($version) {
             case 'm':

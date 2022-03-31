@@ -51,7 +51,7 @@ class Index extends Component
             $tsoras = $this->getTsoras();
         } else {
             $cache_name = 'tsoras_index_tafsir' . $this->selected_tafsir['id'] . '_long_' .  LaravelLocalization::getCurrentLocale();
-            Cache::forget($cache_name);
+            // Cache::forget($cache_name);
             $tsoras = Cache::rememberForever($cache_name, function () {
                 return $this->getTsoras();
             });
