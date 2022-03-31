@@ -27,7 +27,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/animate.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('plugins/icomoon/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('plugins/icomoon2/style.css') }}" rel="stylesheet">
     <link href="{{ mix('css/app2.2.css') }}" rel="stylesheet" type="text/css" charset="utf-8">
 
     <script>

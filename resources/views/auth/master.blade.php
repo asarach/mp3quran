@@ -26,7 +26,7 @@
   <meta name="twitter:image" content="{{ $metas['image']}}">
 
   <!-- Fonts -->
-  <link href="{{ asset('plugins/icomoon/styles.css') }}" rel="stylesheet">
+  <link href="{{ asset('plugins/icomoon2/styles.css') }}" rel="stylesheet">
 
   <!-- Styles -->
   <link href="{{ mix('css/app2.2.css') }}" rel="stylesheet" type="text/css" charset="utf-8">
