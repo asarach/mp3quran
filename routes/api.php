@@ -19,3 +19,6 @@ $router->get('/api_2/read/{id}', array('as' => 'api_b.read', 'uses' => 'ApibCont
 $router->get('/api_2/tvs', array('as' => 'api_b.tvs', 'uses' => 'ApibController@tvs'));
 $router->get('/api_2/video_types', array('as' => 'api_b.video_types', 'uses' => 'ApibController@videoTypes'));
 $router->get('/api_2/videos', array('as' => 'api_b.videos', 'uses' => 'ApibController@videos'));
+
+$router->get('/api/ayat_timing', array('as' => 'api_b.videos', 'uses' => 'ApiTimingController@index'));
+
