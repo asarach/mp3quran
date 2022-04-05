@@ -21,4 +21,5 @@ $router->get('/api_2/video_types', array('as' => 'api_b.video_types', 'uses' => 
 $router->get('/api_2/videos', array('as' => 'api_b.videos', 'uses' => 'ApibController@videos'));
 
 $router->get('/api/ayat_timing', array('as' => 'api_b.videos', 'uses' => 'ApiTimingController@index'));
-
+$router->get('/api/ayat_timing/reads', array('as' => 'api_b.videos', 'uses' => 'ApiTimingController@reads'));
+$router->get('/api/ayat_timing/soar', array('as' => 'api_b.videos', 'uses' => 'ApiTimingController@soar'));

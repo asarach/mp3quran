@@ -51,12 +51,35 @@ class ApiTimingController extends Controller
                 $join->on('reads_timing.ayah', '=', 'quran_pages.ayah');
                 $join->on('reads_timing.sura_id', '=', 'quran_pages.sura_id');
             })
-            // ->join('quran_pages', )
             ->where('reads_timing.read_id', $read)
             ->where('reads_timing.sura_id', $sura)
-            ->select('reads_timing.sura_id', 'reads_timing.read_id', 'reads_timing.ayah', 'reads_timing.start_time', 'reads_timing.end_time', 'quran_pages.x', 'quran_pages.y')
+            ->select('reads_timing.ayah', 'reads_timing.start_time', 'reads_timing.end_time', 'quran_pages.x', 'quran_pages.y')
             ->get();
 
         return $data;
+    }
+    public function reads(Request $request)
+    {
+        $reads_ids = DB::table('reads_timing')
+            ->groupBy('read_id')
+            ->get()
+            ->pluck('read_id');
+
+        $reads = Read::whereIn('id', $reads_ids)->get();
+
+        return $reads;
+    }
+    public function soar(Request $request)
+    {
+
+        $read = $request->read;
+        $soar_ids = DB::table('reads_timing')
+            ->where('read_id', $read)
+            ->get()
+            ->pluck('sura_id');
+
+        $reads = Sora::whereIn('id', $soar_ids)->get();
+
+        return $reads;
     }
 }
