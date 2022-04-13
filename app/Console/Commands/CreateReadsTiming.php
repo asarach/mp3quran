@@ -41,13 +41,16 @@ class CreateReadsTiming extends Command
     public function handle()
     {
         $this->ReadsTiming();
-        $this->QuranPages();
+        // $this->QuranPages();
     }
     public function ReadsTiming()
     {
         $directories = Storage::allDirectories('/reads_timing');
         foreach ($directories as $key => $directory) {
             if (strpos($directory, '_on') !== false) {
+              
+                $read_id = str_replace('reads_timing/', '', $directory);
+                $read_id = str_replace('_on', '', $read_id);
                 $files = Storage::allFiles($directory);
                 foreach ($files as $key => $file) {
                     if (strpos($file, '.txt') !== false) {
@@ -64,7 +67,7 @@ class CreateReadsTiming extends Command
                             if ($end_time) {
                                 DB::table('reads_timing')->insert(
                                     [
-                                        'read_id' => '49',
+                                        'read_id' => $read_id ,
                                         'sura_id' => $sura,
                                         'ayah' => $ayah,
                                         'start_time' => $start_time,
