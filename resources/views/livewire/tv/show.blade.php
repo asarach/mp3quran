@@ -32,7 +32,7 @@
         @endif
         <div class="col-lg-19" id="sticky-container">
           <div class="tvs-list">
-            <card-tv :tv="{{ json_encode($tv) }}"></card-tv>
+            <card-tv :tv="{{ json_encode($tv[0]) }}"></card-tv>
           </div>
         </div>
       </div>
