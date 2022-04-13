@@ -11,6 +11,7 @@ export default {
     return {
       options: {
         live: true,
+         autoplay: true,
         video: {
             url: this.tv.url,
             pic: 'demo.jpg',
