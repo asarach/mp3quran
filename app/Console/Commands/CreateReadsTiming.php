@@ -40,15 +40,16 @@ class CreateReadsTiming extends Command
      */
     public function handle()
     {
-        $this->ReadsTiming();
+        // $this->ReadsTiming();
         // $this->QuranPages();
+        $this->QuranPagesPages();
     }
     public function ReadsTiming()
     {
         $directories = Storage::allDirectories('/reads_timing');
         foreach ($directories as $key => $directory) {
             if (strpos($directory, '_on') !== false) {
-              
+
                 $read_id = str_replace('reads_timing/', '', $directory);
                 $read_id = str_replace('_on', '', $read_id);
                 $files = Storage::allFiles($directory);
@@ -67,7 +68,7 @@ class CreateReadsTiming extends Command
                             if ($end_time) {
                                 DB::table('reads_timing')->insert(
                                     [
-                                        'read_id' => $read_id ,
+                                        'read_id' => $read_id,
                                         'sura_id' => $sura,
                                         'ayah' => $ayah,
                                         'start_time' => $start_time,
@@ -107,7 +108,32 @@ class CreateReadsTiming extends Command
                 //throw $th;
                 $this->info($file);
             }
-           
+        }
+    }
+    public function QuranPagesPages()
+    {
+        $files = Storage::allFiles('/quran_pages_pages');
+        foreach ($files as $file) {
+            try {
+                if (strpos($file, '.json') !== false) {
+
+                    $page = str_replace('quran_pages_pages/', '', $file);
+                    $page = str_replace('.json', '', $page);
+                    $items = json_decode(file_get_contents(storage_path('app/' . $file)), true);
+                   
+                    foreach ($items as $key => $item) {
+                        DB::table('quran_pages')->where('sura_id', $item['surahNumber'])->where('ayah', $item['ayahNumber'])->update(
+                            [
+                                'page' =>   $page ,
+                            ]
+                        );
+                    }
+                   
+                }
+            } catch (\Throwable $th) {
+                //throw $th;
+                $this->info($file);
+            }
         }
     }
 }
