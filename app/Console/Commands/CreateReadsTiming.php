@@ -42,7 +42,8 @@ class CreateReadsTiming extends Command
     {
         // $this->ReadsTiming();
         // $this->QuranPages();
-        $this->QuranPagesPages();
+        // $this->QuranPagesPages();
+        $this->QuranPagesPolygon();
     }
     public function ReadsTiming()
     {
@@ -125,6 +126,29 @@ class CreateReadsTiming extends Command
                         DB::table('quran_pages')->where('sura_id', $item['surahNumber'])->where('ayah', $item['ayahNumber'])->update(
                             [
                                 'page' =>   $page ,
+                            ]
+                        );
+                    }
+                   
+                }
+            } catch (\Throwable $th) {
+                //throw $th;
+                $this->info($file);
+            }
+        }
+    }
+    public function QuranPagesPolygon()
+    {
+        $files = Storage::allFiles('/quran_pages_polygons');
+        foreach ($files as $file) {
+            try {
+                if (strpos($file, '.json') !== false) {
+
+                    $items = json_decode(file_get_contents(storage_path('app/' . $file)), true);
+                    foreach ($items as $key => $item) {
+                        DB::table('quran_pages')->where('sura_id', $item['surahNumber'])->where('ayah', $item['ayahNumber'])->update(
+                            [
+                                'polygon' =>   $item['polygon'] ,
                             ]
                         );
                     }
