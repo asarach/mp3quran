@@ -56,7 +56,7 @@ class ApiTimingController extends Controller
                 })
                 ->where('reads_timing.read_id', $read)
                 ->where('reads_timing.sura_id', $sura)
-                ->select('reads_timing.ayah', 'reads_timing.start_time', 'reads_timing.end_time', 'quran_pages.x', 'quran_pages.y')
+                ->select('reads_timing.ayah', 'quran_pages.polygon', 'reads_timing.start_time', 'reads_timing.end_time', 'quran_pages.x', 'quran_pages.y', DB::raw('CONCAT("https://www.mp3quran.net/api/quran_pages_svg/", quran_pages.page,".svg") as page'))
                 ->get();
             return $data;
         });
