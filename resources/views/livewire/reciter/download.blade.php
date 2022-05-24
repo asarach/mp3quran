@@ -38,7 +38,7 @@
                             <div class="col-12">
                                 <ul class="list-unstyled px-2">
                                     @foreach ($soar_part_a as $sora_a)
-                                    <a href="{{ str_replace('mp3quran.net/' ,'mp3quran.net/download_mp3file.php?file=',   $sora_a['sora_audio']) }}">
+                                    <a href="{{ str_replace('mp3quran.net/' ,'mp3quran.net/download/',   $sora_a['sora_audio']) }}">
                                         <li class="sora-download">
                                             <span class="uni-icon icon-cloud_download"></span>
                                             {{ $sora_a['sora_name'] }}
@@ -50,7 +50,7 @@
                             <div class="col-12">
                                 <ul class="list-unstyled px-2">
                                     @foreach ($soar_part_b as $sora_b)
-                                    <a href="{{ str_replace('mp3quran.net/' ,'mp3quran.net/download_mp3file.php?file=',   $sora_a['sora_audio']) }}">
+                                    <a href="{{ str_replace('mp3quran.net/' ,'mp3quran.net/download/',   $sora_a['sora_audio']) }}">
 
                                     <li class="sora-download">
                                         <span class="uni-icon icon-cloud_download"></span>

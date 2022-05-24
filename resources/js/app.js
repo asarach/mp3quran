@@ -69,7 +69,7 @@ Vue.directive('click-outside', {
 
 Vue.filter('downloadUrl', function (value) {
   if (!value) return ''
-  return value.replace('mp3quran.net/', 'mp3quran.net/download_mp3file.php?file=')
+  return value.replace('mp3quran.net/', 'mp3quran.net/download/')
 })
 
 import ScaleLoader from 'vue-spinner/src/ScaleLoader.vue'
