@@ -13,11 +13,7 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-5 order-2 order-md-1">
-<<<<<<< HEAD
-          <h1>{{trans('text.live-playlists')}}</h1>
-=======
           <h1>{{trans('text.playlists')}}</h1>
->>>>>>> f73c1ce92ea89fbab95c77caf738af88b590ed3a
           <div class="header-options"></div>
         </div>
         <div class="col-lg-19 order-1 order-md-2">

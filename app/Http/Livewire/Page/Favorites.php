@@ -61,21 +61,6 @@ class Favorites extends Component
 
 
         $active_tab =  'reads';
-<<<<<<< HEAD
-        if (isset($this->input['videos'])) {
-            $videos = $videoRepo->getFavs($this->input['videos']);
-            $active_tab = 'videos';
-        }
-        if (isset($this->input['radios'])) {
-            $radios = $radioRepo->getFavs($this->input['radios']);
-            $active_tab = 'radios';
-        }
-        if (isset($this->input['soar'])) {
-            $soar = $readRepo->getFavsSoar($this->input['soar']);
-            $active_tab = 'soar';
-        }
-        if (isset($this->input['reads'])) {
-=======
         if (isset($this->input['videos']) && !empty($this->input['videos'])) {
             $videos = $videoRepo->getFavs($this->input['videos']);
             $active_tab = 'videos';
@@ -89,7 +74,6 @@ class Favorites extends Component
             $active_tab = 'soar';
         }
         if (isset($this->input['reads']) && !empty($this->input['reads'])) {
->>>>>>> f73c1ce92ea89fbab95c77caf738af88b590ed3a
             $reads = $readRepo->getFavs($this->input['reads']);
             $active_tab = 'reads';
         }
@@ -99,11 +83,6 @@ class Favorites extends Component
             'description' => trans('text.favorites-description'),
             'keywords' => trans('text.favorites-keywords'),
         ];
-<<<<<<< HEAD
-        // dd($reads);
-=======
-
->>>>>>> f73c1ce92ea89fbab95c77caf738af88b590ed3a
         return view('livewire.page.favorites', compact('page', 'active_tab', 'reads', 'soar', 'radios', 'videos'));
     }
 }
