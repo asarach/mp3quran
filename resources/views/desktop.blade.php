@@ -103,7 +103,7 @@
                         </div>
                     </div>
                     @else
-
+                    @if (false)
                     <div class="header-user">
                         <a class="btn-login" href="{{ route('login') }}">
                             <i class="far fa-user"></i> {{ trans('auth.login') }}
@@ -114,6 +114,7 @@
                         </a>
                         @endif
                     </div>
+                    @endif
                     @endauth
                 </div>
             </div>
