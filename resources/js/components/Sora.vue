@@ -95,7 +95,7 @@
       </div>
       <div
         class="sora-btn ike-btn"
-        v-if="soarIncludes(sora.id)"
+        v-if="inFavorites"
         v-tooltip="trans('text.remove-from-favorite')"
         @click="removeSoraFavorite(sora.id)"
       >
@@ -134,6 +134,7 @@ export default {
   data() {
     return {
       showoptions: false,
+      inFavorites: false,
     };
   },
   computed: {
@@ -159,7 +160,6 @@ export default {
       }
     },
 
-    ...mapGetters("favorite", ["soarIncludes"]),
     ...mapState({
       current_playing_item: (state) => state.playing_item,
       current_language: (state) => state.current_language,
@@ -206,11 +206,30 @@ export default {
     ...mapActions("download", {
       downloadMp3: "downloadMp3",
     }),
-    ...mapActions("favorite", {
-      addSoraFavorite: "addSora",
-      removeSoraFavorite: "removeSora",
-    }),
+    addSoraFavorite(sora_id) {
+      window.favorites.addItem(sora_id, "soar");
+      Vue.notify({
+        group: "app",
+        title: this.trans("text.added"),
+        type: "success",
+        text: this.trans("text.sora-added-favorites"),
+      });
+    },
+    removeSoraFavorite(sora_id) {
+      window.favorites.removeItem(sora_id, "soar");
+      Vue.notify({
+        group: "app",
+        title: this.trans("text.removed"),
+        type: "warn",
+        text: this.trans("text.sora-removed-favorites"),
+      });
+    },
   },
-  mounted() {},
+  mounted() {
+    this.inFavorites = window.favorites.soar.includes(this.sora.id);
+    window.addEventListener("favoritesChange", () => {
+      this.inFavorites = window.favorites.soar.includes(this.sora.id);
+    });
+  },
 };
 </script>

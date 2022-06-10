@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use Cache;
 use App\Tv;
+use App\App;
 use App\Read;
 use App\Radio;
 use App\Video;
-use App\App;
 use App\Mushaf;
 use App\Reciter;
 use Carbon\Carbon;
@@ -15,6 +15,7 @@ use Spatie\Sitemap\Sitemap;
 use Spatie\Sitemap\Tags\Url;
 use App\Http\Controllers\Controller;
 use Waavi\Translation\Models\Language;
+use Illuminate\Support\Facades\Artisan;
 
 class HomeController extends Controller
 {
@@ -96,5 +97,10 @@ class HomeController extends Controller
 
         $sitemap->add($urlObj);
         return $sitemap;
+    }
+
+    public function cacheClear(){
+        Artisan::call('cache:clear');
+        return redirect()->back();
     }
 }

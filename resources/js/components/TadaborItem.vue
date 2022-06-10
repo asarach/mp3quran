@@ -170,11 +170,8 @@ export default {
         window.player.play();
       }
     },
+    
     ...mapActions(["clipboardErrorHandlerText", "clipboardSuccessHandlerText"]),
-    ...mapActions("favorite", {
-      addSoraFavorite: "addSora",
-      removeSoraFavorite: "removeSora",
-    }),
   },
   mounted() {},
 };

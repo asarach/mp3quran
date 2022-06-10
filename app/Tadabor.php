@@ -215,4 +215,33 @@ class Tadabor extends Model implements ViewableContract
 
         return $this->id;
     }
+
+    public function getTadaborItem()
+    {
+        $item = [
+            'id' =>  'tb' . $this->id,
+            'read_id' => 'read_id',
+            'sora_id' => 'sora_id',
+            'num' => $this->getNum(),
+            'name' => $this->getLocaleTitle(),
+            'rewaya' => $this->getRewayaName(),
+
+            'read_slug' => '$this->slug',
+            'type' => 'tadabor',
+            'url' => 'url',
+            'description' => $this->getLocaleShareDescription(),
+            'share_url' => route('tadabor.show', ['slug' => $this->id]),
+            'share_description' => $this->getLocaleShareDescription(),
+            'share_title' => $this->getLocaleShareTitle(),
+            'file' => $this->audio_url,
+        ];
+
+        if ($this->reciter) {
+            $item['reciter'] = $this->reciter->getLocaleName();
+        } else {
+            $item['reciter'] = '';
+        }
+
+        return $item;
+    }
 }

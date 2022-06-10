@@ -36,6 +36,7 @@
         "hijri-js": "^1.0.25",
         "hls.js": "^0.13.2",
         "howler": "^2.2.3",
+        "html5sortable": "^0.13.3",
         "luxon": "^1.28.0",
         "moment": "^2.29.1",
         "moment-hijri": "^2.1.2",

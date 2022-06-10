@@ -62,7 +62,7 @@
       </div>
       <div
         class="radio-btn ike-btn"
-        v-if="radiosIncludes"
+        v-if="inFavorites"
         v-tooltip="trans('text.remove-from-favorite')"
         @click="removeRadioFavorite(radio.id)"
       >
@@ -84,10 +84,12 @@ import { mapActions, mapGetters, mapState } from "vuex";
 
 export default {
   props: ["radio"],
+  data() {
+    return {
+      inFavorites: false,
+    };
+  },
   computed: {
-    radiosIncludes: function () {
-      return this.$store.state.favorite.radios.includes(this.radio.id);
-    },
     isPlaying: function () {
       if (
         this.$root.player_state.playing_item == "100002-" + this.radio.id &&
@@ -136,11 +138,30 @@ export default {
       }
     },
     ...mapActions(["clipboardErrorHandler", "clipboardSuccessHandler"]),
-    ...mapActions("favorite", {
-      addRadioFavorite: "addRadio",
-      removeRadioFavorite: "removeRadio",
-    }),
+     addRadioFavorite(radio_id) {
+      window.favorites.addItem(radio_id, "radios");
+      Vue.notify({
+        group: "app",
+        title: this.trans("text.added"),
+        type: "success",
+        text: this.trans("text.radio-added-favorites"),
+      });
+    },
+    removeRadioFavorite(radio_id) {
+      window.favorites.removeItem(radio_id, "radios");
+      Vue.notify({
+        group: "app",
+        title: this.trans("text.removed"),
+        type: "warn",
+        text: this.trans("text.radio-removed-favorites"),
+      });
+    },
   },
-  mounted() {},
+   mounted() {
+    this.inFavorites = window.favorites.radios.includes('' +this.radio.id);
+    window.addEventListener("favoritesChange", () => {
+      this.inFavorites = window.favorites.radios.includes('' +this.radio.id);
+    });
+  },
 };
 </script>

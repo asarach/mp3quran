@@ -48,6 +48,7 @@
                 <th scope="col">#</th>
                 <th scope="col">{{ trans("admin.read") }}</th>
                 <th scope="col">{{ trans("admin.sora") }}</th>
+                <th scope="col">{{ trans("admin.rewaya") }}</th>
                 <th scope="col">{{ trans("admin.note") }}</th>
                 <th scope="col" style="width: 100px; text-align: center">
                   {{ trans("admin.options") }}
@@ -79,6 +80,7 @@
                   </router-link>
                 </td>
                 <td>{{ report.name }}</td>
+                <td>{{ report.rewaya_name }}</td>
                 <td>{{ report.note }}</td>
                 <td class="text-center">
                   <ul class="list-inline p-0 m-0">

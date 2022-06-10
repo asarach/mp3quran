@@ -61,21 +61,7 @@ class SoraController extends Controller
             $read = Read::where('id', $input['r'])
                 ->first();
 
-
-            $item = [
-                'id' => $sora->getNum() . '-' . $read->id,
-                'read_id' => $read->id,
-                'sora_id' => $sora->id,
-                'num' => $sora->getNum(),
-                'name' => $sora->getLocaleName(),
-                'reciter' => $read->reciter->getLocaleName(),
-                'read_slug' => $read->slug,
-                'type' => 'sora',
-                'share_url' => route('reciter.show', ['slug' => $read->slug]),
-                'share_description' => $read->getLocaleShareDescription($sora->getLocaleName()),
-                'share_title' => $read->getLocaleShareTitle($sora->getLocaleName()),
-                'file' => $read->getAudioUrl($sora->id),
-            ];
+            $item = $sora->getSoraItem($read);
         } catch (\Throwable $th) {
             $item = [];
             \Log::notice('Error sora Item with read: ' . $input['r'] . ' and sora : ' . $input['s']);
@@ -104,21 +90,8 @@ class SoraController extends Controller
             $read = Read::where('id', $input['1'])
                 ->first();
 
+            $item = $sora->getSoraItem($read);
 
-            $item = [
-                'id' => $sora->getNum() . '-' . $read->id,
-                'read_id' => $read->id,
-                'sora_id' => $sora->id,
-                'num' => $sora->getNum(),
-                'name' => $sora->getLocaleName(),
-                'reciter' => $read->reciter->getLocaleName(),
-                'read_slug' => $read->slug,
-                'type' => 'sora',
-                'share_url' => route('reciter.show', ['slug' => $read->slug]),
-                'share_description' => $read->getLocaleShareDescription($sora->getLocaleName()),
-                'share_title' => $read->getLocaleShareTitle($sora->getLocaleName()),
-                'file' => $read->getAudioUrl($sora->id),
-            ];
         } catch (\Throwable $th) {
             $item = [];
             \Log::notice('Error sora Item with read: ' . $input['r'] . ' and sora : ' . $input['s']);

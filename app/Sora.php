@@ -111,4 +111,23 @@ class Sora extends Model
             return trans('seo.sora-description', ['sora' => $sora, 'reciter' => $reciter, 'rewaya' => $rewaya->getLocaleName()]);
         }
     }
+    public function getSoraItem($read)
+    {
+        $item = [
+            'id' => $this->getNum() . '-' . $read->id,
+            'read_id' => $read->id,
+            'sora_id' => $this->id,
+            'num' => $this->getNum(),
+            'name' => $this->getLocaleName(),
+            'reciter' => $read->reciter->getLocaleName(),
+            'read_slug' => $read->slug,
+            'type' => 'sora',
+            'share_url' => route('reciter.show', ['slug' => $read->slug]),
+            'share_description' => $read->getLocaleShareDescription($this->getLocaleName()),
+            'share_title' => $read->getLocaleShareTitle($this->getLocaleName()),
+            'file' => $read->getAudioUrl($this->id),
+        ];
+
+        return $item;
+    }
 }

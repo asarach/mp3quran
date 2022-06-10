@@ -21,7 +21,8 @@ class ReportController extends Controller
         $reports = DB::table('report_sora')
             ->join('reads', 'reads.id', '=', 'report_sora.read_id')
             ->join('soar', 'soar.id', '=', 'report_sora.sura_id')
-            ->select('report_sora.id', 'report_sora.note', 'report_sora.read_id', 'report_sora.sura_id', 'reads.title', 'soar.name')
+            ->join('rewayat', 'rewayat.id', '=', 'reads.rewaya_id')
+            ->select('report_sora.id', 'report_sora.note', 'report_sora.read_id', 'report_sora.sura_id', 'reads.title', 'soar.name', 'rewayat.name as rewaya_name')
             ->orderBy('report_sora.id', 'desc')
             ->paginate(25);
 

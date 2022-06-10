@@ -16,6 +16,7 @@ var Player = function () {
   this.playing_state = null;
   this.playing_item = null;
   this.playing_type = null;
+  this.dragStartIndex = null;
 
   if (this.playerData.current_index != undefined && this.playlist.length > 0) {
     this.setCurrentItem(this.playerData.current_index);
@@ -39,7 +40,6 @@ Player.prototype = {
   },
 
   addItemToPlaylist: function (item) {
-
     let index = this.getItemIndex(item);
     if (index === -1) {
       this.playlist.push(item);
@@ -47,9 +47,19 @@ Player.prototype = {
     }
   },
 
-  removeItemToPlaylist: function (item) {
+  removeItemFromPlaylist: function (item) {
     let index = this.getItemIndex(item)
     this.playlist.splice(index, 1);
+    this.updatePlaylist();
+  },
+  swapItemsPlaylist: function (startIndex, EndIndex) {
+    if (startIndex > EndIndex) {
+      this.playlist.splice(EndIndex, 0, this.playlist[startIndex]);
+      this.playlist.splice(startIndex + 1, 1);
+    } else {
+      this.playlist.splice(EndIndex + 1, 0, this.playlist[startIndex]);
+      this.playlist.splice(startIndex, 1);
+    }
     this.updatePlaylist();
   },
 
@@ -112,6 +122,20 @@ Player.prototype = {
       fullclone.querySelectorAll(".btn-pause")[0].onclick = function () {
         player.pause();
       };
+      clone.querySelectorAll(".btn-delete-plitem")[0].onclick = function () {
+        player.removeItemFromPlaylist(item);
+      };
+      clone.querySelectorAll(".drag-handle")[0].closest('li').addEventListener('dragstart', function () {
+        self.dragStartIndex = self.playlist.indexOf(item);
+      });
+      clone.querySelectorAll(".drag-handle")[0].closest('li').addEventListener('dragover', function (event) {
+        event.preventDefault();
+      });
+      clone.querySelectorAll(".drag-handle")[0].closest('li').addEventListener('drop', function () {
+        let dragEndIndex = self.playlist.indexOf(item);
+        player.swapItemsPlaylist(self.dragStartIndex, dragEndIndex);
+      });
+
       playerList.appendChild(clone);
       fullPlayerList.appendChild(fullclone);
 
@@ -141,10 +165,8 @@ Player.prototype = {
 
     //if is howler and current is same as clicked just play else create and load 
     if (data.howl) {
-      console.log('onend');
       self.sound = data.howl;
     } else {
-      console.log('onend');
       // if (self.sound == null || self.sound.src !== self.current_item.file) {
       //   if (self.sound != null) {
       //     self.sound.unload();
@@ -159,18 +181,14 @@ Player.prototype = {
           self.setState();
         },
         onplayerror: function () {
-          console.log('onplayerror');
         },
         onloaderror: function () {
-          console.log('onloaderror');
         },
         onload: function () {
-          console.log('onload');
           playerDuration.innerHTML = self.formatTime(Math.round(self.sound.duration()));
           playerTimer.innerHTML = self.formatTime(0);
         },
         onend: function () {
-          console.log('onend');
           self.skip('next');
         },
         onpause: function () {
@@ -181,8 +199,6 @@ Player.prototype = {
           self.setState();
         },
         onseek: function () {
-
-          console.log('onend');
           requestAnimationFrame(self.step.bind(self));
         }
       });
@@ -207,6 +223,17 @@ Player.prototype = {
     this.playing_state = 'loading';
     this.addItemToPlaylist(item);
     this.setCurrentItem(this.getItemIndex(item));
+    this.play();
+  },
+  loadPalylist: function (items, id, name) {
+    this.setPlaylist([]);
+    this.playing_state = 'loading';
+    for (let index = 0; index < items.length; index++) {
+      this.addItemToPlaylist(items[index]);
+    }
+    playlistId.value = id;
+    playlistName.value = name;
+    this.setCurrentItem(this.getItemIndex(items[0]));
     this.play();
   },
   addItem: function (item) {
@@ -412,10 +439,10 @@ Player.prototype = {
 
   forward: function (sec) {
     var seek = this.sound.seek() || 0;
-    seek = Math.min(seek + sec, this.sound.duration() - 1 )
+    seek = Math.min(seek + sec, this.sound.duration() - 1)
     this.sound.seek(seek);
   },
-  
+
   backward: function (sec) {
     var seek = this.sound.seek() || 0;
     seek = Math.max(seek - sec, 0)

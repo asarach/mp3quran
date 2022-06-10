@@ -190,4 +190,26 @@ class Radio extends Model
     {
         // TODO: Implement scopeOrderByUniqueViews() method.
     }
+
+    public function getRadioItem()
+    {
+        $item = [
+            'id' => "100002-" . $this->id,
+            'read_id' => $this->id,
+            'sora_id' => "100002",
+            'read_slug' => '',
+            'num' => "000",
+            'name' => $this->getLocaleName(),
+            'reciter' => "",
+            'type' => "radio",
+            'url' => route('radio.index'),
+            'description' => $this->getLocaleShareDescription(),
+            'share_url' => route('radio.index'),
+            'share_title' => $this->getLocaleName(),
+            'share_description' => $this->getLocaleShareDescription(),
+            'file' => $this->url,
+        ];
+
+        return $item;
+    }
 }
