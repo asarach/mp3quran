@@ -53,22 +53,14 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <div class="navbar-nav navbar-right mr-auto">
             <div class="btn-group">
-              <button type="button" class="btn btn-navbar dropdown-toggle" data-toggle="dropdown" data-display="static"
-                aria-haspopup="true" aria-expanded="false">
-                <span class="user-menu">
-                  <div class="user-pic">
-                    <img class="img-responsive img-rounded" src="{{$user->getAvatar()}}" alt="User picture">
-                  </div>
-                </span>
-              </button>
-              <div class="dropdown-menu dropdown-menu-lg-right">
-                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                           document.getElementById('logout-form').submit();">{{ trans('front.logout')}}</a>
-                </a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                  {{ csrf_field() }}
-                </form>
-              </div>
+              <clear-cache></clear-cache>
+              <a href="{{ route('logout') }}" class="btn btn-navbar" onclick="event.preventDefault();
+                           document.getElementById('logout-form').submit();">
+                <span class="icon-switch" style="font-size: 18px;margin-top: 3px;"></span>
+              </a>
+              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                {{ csrf_field() }}
+              </form>
             </div>
             <div class="btn-group">
               <router-link :to="prefix + 'settings'" role="button" class="btn btn-navbar dropdown-toggle"

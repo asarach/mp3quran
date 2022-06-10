@@ -39,27 +39,6 @@ class PageController extends Controller
         $this->read = $read;
         $this->sora = $sora;
     }
-
-
-   
-    public function postFavorites(Request $request)
-    {
-        $input = $request->all();
-        $results = [];
-        if (isset($input['reads'])) {
-            $results['reads'] = $this->paginate($this->read->getFavs($input['reads']), $perPage = 25, $page = null, $options = []);
-        }
-        if (isset($input['radios'])) {
-            $results['radios'] = $this->paginate($this->radio->getFavs($input['radios']), $perPage = 25, $page = null, $options = []);
-        }
-        if (isset($input['videos'])) {
-            $results['videos'] = $this->paginate($this->video->getFavs($input['videos']), $perPage = 25, $page = null, $options = []);
-        }
-        if (isset($input['soar'])) {
-            $results['soar'] = $this->paginate($this->read->getFavsSoar($input['soar']), $perPage = 25, $page = null, $options = []);
-        }
-        return $results;
-    }
     
     
     public function storeMessage(MessageRequest $request)

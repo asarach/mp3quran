@@ -11,28 +11,8 @@ class TadaborController extends Controller
     {
         $tadabor =  Tadabor::find(request('id'));
 
-        $item = [
-            'id' =>  'tb' . $tadabor->id,
-            'read_id' => 'read_id',
-            'sora_id' => 'sora_id',
-            'num' => $tadabor->getNum(),
-            'name' => $tadabor->getLocaleTitle(),
-            'rewaya' => $tadabor->getRewayaName(),
-
-            'read_slug' => $tadabor->slug,
-            'type' => 'item',
-            'url' => 'url',
-            'description' => $tadabor->getLocaleShareDescription(),
-            'share_url' => route('tadabor.show', ['slug' => $tadabor->id]),
-            'share_description' => $tadabor->getLocaleShareDescription(),
-            'share_title' => $tadabor->getLocaleShareTitle(),
-            'file' => $tadabor->audio_url,
-        ];
-        if ($tadabor->reciter) {
-            $item['reciter'] = $tadabor->reciter->getLocaleName();
-        } else {
-            $item['reciter'] = '';
-        }
+        $item = $tadabor->getTadaborItem();
+        
 
         return  $item;
     }

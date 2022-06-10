@@ -107,6 +107,7 @@ Vue.component('server-form', require('./components/server/Form.vue').default);
 Vue.component('user-form', require('./components/user/Form.vue').default);
 Vue.component('menu-form', require('./components/menu/Form.vue').default);
 Vue.component('upload-avatar', require('./components/user/UploadAvatar.vue').default);
+Vue.component('clear-cache', require('./components/partials/Cache.vue').default);
 
 
 Vue.component('newsletter-form', require('./components/newsletter/NewsletterForm.vue').default);

@@ -7,9 +7,8 @@ var elms = [
   'playerList', 'playerVolume', 'playerBarFull', 'playerVolume', 'playerVolumeBar', 'playerVolumePiont',
   'playlistItem', 'playerProgressBar', 'playerProgressPiont', 'closePlaylist', 'playerProgressLine',
   'fullPlayerToggle', 'fullPlayer', 'closeFullplayer', 'fullPlayerNextBtn', 'fullPlayerPrevBtn', 'playerLoading',
-  'fullPlayerPauseBtn', 'fullPlayerPlayBtn', 'fplyReader', 'fplySora', 'fullPlaylistItem', 'fullPlayerList','fullPlayerLoading',
-  'playerVolumeInner', 'playerVolumePiont', 'playerBackwardBtn', 'playerForwardBtn'
-
+  'fullPlayerPauseBtn', 'fullPlayerPlayBtn', 'fplyReader', 'fplySora', 'fullPlaylistItem', 'fullPlayerList', 'fullPlayerLoading',
+  'playerVolumeInner', 'playerVolumePiont', 'playerBackwardBtn', 'playerForwardBtn', 'clearPlaylist', 'savePlaylist', 'playlistName', 'playlistId'
 ];
 
 elms.forEach(function (elm) {
@@ -56,7 +55,65 @@ playerForwardBtn.addEventListener('click', function () {
 
 clearPlaylist.addEventListener('click', function () {
   player.setPlaylist([]);
+  playlistId.value = '';
+  playlistName.value = '';
+
 });
+if (savePlaylist) {
+  savePlaylist.addEventListener('click', function () {
+    playlistName.classList.remove("error");
+    let savePlaylist = [];
+    for (let index = 0; index < player.playlist.length; index++) {
+      const item = player.playlist[index];
+      var saveItem = {};
+      switch (item.type) {
+        case 'tadabor':
+           saveItem = {
+            'type': item.type,
+            'tadabor_id': item.id.replace('tb', ''),
+          };
+          break;
+        case 'radio':
+           saveItem = {
+            'type': item.type,
+            'radio_id': item.id.replace('100002-', ''),
+          };
+          break;
+        default:
+           saveItem = {
+            'type': item.type,
+            'sora_id': item.sora_id,
+            'read_id': item.read_id,
+          };
+          break;
+      }
+      
+      savePlaylist.push(saveItem);
+    }
+    const name = playlistName.value
+    const id = playlistId.value
+    const data  = {
+      "_token": window.App.csrfToken, 
+      name: name, 
+      id: id, 
+      playlist: JSON.stringify(savePlaylist) 
+    }
+    $.post(window.App.urlBase + '/' + window.App.current_language + '/ajax/playlist',data,
+      function (data, textStatus, jqXHR) {
+        var loc = window.location.pathname;
+        if (loc.includes('playlists')) {
+          Turbolinks.visit(window.location.toString(), { action: 'replace' })
+        }
+      }).fail(function (jqXHR, textStatus, errorThrown) {
+        if (jqXHR.responseJSON && jqXHR.responseJSON.errors && jqXHR.responseJSON.errors.name) {
+          playlistName.classList.add("error");
+        }
+      });
+  });
+}
+
+
+
 playerPlaylistBtn.addEventListener('click', function () {
   player.togglePlaylist();
 });

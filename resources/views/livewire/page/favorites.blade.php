@@ -30,7 +30,72 @@
         </div>
         @endif
         <div class="col-lg-19" id="sticky-container">
-          <favorites></favorites>
+          <div>
+            <div class="nav-tabs-wrapper">
+              <ul class="nav nav-tabs" id="myTab" role="tablist">
+                @if (!empty($reads) )
+                <li class="nav-item" role="presentation">
+                  <a class="nav-link @if($active_tab == 'reads') active @endif  " id="reads-tab" data-toggle="tab" href="#reads" role="tab" aria-controls="reads" aria-selected="true">
+                    {{ trans("text.reciters") }}
+                  </a>
+                </li>
+                @endif
+                @if (!empty($soar) )
+                <li class="nav-item" role="presentation">
+                  <a class="nav-link @if($active_tab == 'soar') active @endif  " id="soar-tab" data-toggle="tab" href="#soar" role="tab" aria-controls="soar" aria-selected="false">
+                    {{ trans("text.soar") }}
+                  </a>
+                </li>
+                @endif
+                @if (!empty($radios) )
+                <li class="nav-item" role="presentation">
+                  <a class="nav-link @if($active_tab == 'radios') active @endif  " role="presentation" id="radios-tab" data-toggle="tab" href="#radios" role="tab" aria-controls="radios" aria-selected="false">
+                    {{ trans("text.radios") }}
+                  </a>
+                </li>
+                @endif
+                @if (!empty($videos) )
+                <li class="nav-item" role="presentation">
+                  <a class="nav-link @if($active_tab == 'videos') active @endif  " id="videos-tab" data-toggle="tab" href="#videos" role="tab" aria-controls="videos" aria-selected="false">
+                    {{ trans("text.videos") }}
+                  </a>
+                </li>
+                @endif
+              </ul>
+            </div>
+            <div class="tab-content" id="myTabContent">
+              <div class="favorite-tab-pane tab-pane fade  @if($active_tab == 'reads') show active @endif   " id="reads" role="tabpanel" aria-labelledby="reads-tab">
+                <div class="row">
+                  @foreach ($reads as $read)
+                  <div class="col-md-12">
+                    <read :read="{{ json_encode($read) }}"></read>
+                  </div>
+                  @endforeach
+                </div>
+              </div>
+              <div class="favorite-tab-pane tab-pane fade  @if($active_tab == 'soar') show active @endif " id="soar" role="tabpanel" aria-labelledby="soar-tab">
+                <div class="soar-list">
+                  <ul class="list-unstyled">
+                    @foreach ($soar as $sora)
+                    <li>
+                      <card-sora :sora="{{ json_encode($sora) }}" rewaya="{{ $sora['rewaya_name'] }}" read_id="{{$sora['read_id']}}" reciter="{{ $sora['reciter_name']}}" :share=" {{ json_encode(['title' =>  $sora['share_title'], 'url' => $sora['share_url'], 'description' =>  $sora['share_description'] ]) }} "></card-sora>
+                    </li>
+                    @endforeach
+                  </ul>
+                </div>
+              </div>
+              <div class="favorite-tab-pane tab-pane fade  @if($active_tab == 'radios') show active @endif " id="radios" role="tabpanel" aria-labelledby="radios-tab">
+                @foreach ($radios as $radio)
+                <card-radio :radio="{{ json_encode($radio) }}" :key="{{ $radio['id'] }}"></card-radio>
+                @endforeach
+              </div>
+              <div class="favorite-tab-pane tab-pane fade  @if($active_tab == 'videos') show active @endif " id="videos" role="tabpanel" aria-labelledby="videos-tab">
+                @foreach ($videos as $video)
+                <card-video :video="{{ json_encode($video) }}"></card-video>
+                @endforeach
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

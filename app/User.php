@@ -27,6 +27,16 @@ class User extends Authenticatable
             return false;
         }
     }
+
+        /**
+    * Get the language of the annonce.
+    */
+    public function playlists()
+    {
+        return $this->hasMany('App\Models\Playlist');
+    }
+
+
     public function getAvatar()
     {
         if ($this->avatar) {

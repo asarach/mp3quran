@@ -3,8 +3,9 @@ require('./livewire-vue');
 import Vue from 'vue'
 import store from './store';
 import VuexPersist from 'vuex-persist'
-import * as Sentry from "@sentry/vue";
-import { Integrations } from "@sentry/tracing";
+
+import Favorites from './favorites'
+window.favorites = new Favorites();
 
 require('./bootstrap');
 require('./main');
@@ -174,6 +175,51 @@ function initiateVue() {
             window.player.addAndPlayItem(response.data);
           })
           .catch(function (error) {
+          });
+      },
+      loadPalylist(id, name) {
+        let self = this;
+        axios
+          .get(this.ajax_prefix + "/playlist/" + id)
+          .then(function (response) {
+            window.player.loadPalylist(response.data, id, name);
+            Vue.notify({
+              group: 'app',
+              title: self.trans('text.done'),
+              type: 'success',
+              text: self.trans('text.playlist-loaded-text'),
+            })
+          })
+          .catch(function (error) {
+            Vue.notify({
+              group: 'app',
+              title: self.trans('text.error'),
+              type: 'success',
+              text: self.trans('text.playlist-not-loaded-text'),
+            })
+          });
+      },
+      deletePalylist(id) {
+        let self = this;
+        axios
+          .delete(this.ajax_prefix + "/playlist/" + id)
+          .then(function (response) {
+            // window.location.reload(false); 
+            Turbolinks.visit(window.location.toString(), { action: 'replace' })
+            Vue.notify({
+              group: 'app',
+              title: self.trans('text.done'),
+              type: 'success',
+              text: self.trans('text.playlist-deleted-text'),
+            })
+          })
+          .catch(function (error) {
+            Vue.notify({
+              group: 'app',
+              title: self.trans('text.error'),
+              type: 'success',
+              text: self.trans('text.playlist-not-deleted-text'),
+            })
           });
       },
       handleAbort() { },

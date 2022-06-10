@@ -43,6 +43,9 @@ Route::get('/tafsirs', ['as' => 'tafsir.index', 'uses' => Tafsir\Index::class]);
 /* favorites  */
 Route::get('/favorites', ['as' => 'page.favorites', 'uses' => Page\Favorites::class]);
 
+/* favorites  */
+Route::get('/playlists', ['as' => 'page.playlists', 'uses' => Page\Playlists::class]);
+
 /* about */
 Route::get('/about', ['as' => 'page.about', 'uses' => Page\About::class]);
 Route::get('/privacy', ['as' => 'page.privacy', 'uses' => Page\Privacy::class]);

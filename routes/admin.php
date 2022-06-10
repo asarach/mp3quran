@@ -2,6 +2,7 @@
 /* Index  */
 Route::get('/', ['as' => 'index', 'uses' => 'HomeController@index']);
 Route::get('/generate-sitemap', array('as' => 'generate.sitemap', 'uses' => 'HomeController@sitemap'));
+Route::get("/cache_clear", array("as" => "cache.clear", "uses" => "HomeController@cacheClear"));
 
 /* Ads  */
 Route::get('/ads', array('as' => 'ad.index', 'uses' => 'AdController@index'));

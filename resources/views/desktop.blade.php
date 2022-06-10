@@ -22,7 +22,7 @@
                             {{ trans("text.live-radio") }}
                         </button>
                         <span class="tb-radio-txt">{{ trans("text.listen-to-radio") }}</span>
-                        
+
                     </div>
                     @if (1)
                     <div class="header-newsletters mr-auto">
@@ -79,6 +79,42 @@
                             </div>
                         </div>
                     </div>
+                    @auth
+                    <div class="header-user dropdown">
+                        <button class="btn btn-profile-menu dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+                            <i class="uni-icon icon-account_circle"></i> {{ Auth::user()->name }}
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item   @if(request()->url()  == LaravelLocalization::localizeUrl('favorites') ) active @endif" href="{{ route('page.favorites') }}">
+                                <span class="icon-favorite"></span> 
+                                {{trans('text.favorites')}}
+                            </a>
+                            <a class="dropdown-item   @if(request()->url()  == LaravelLocalization::localizeUrl('playlists') ) active @endif" href="{{ route('page.playlists') }}">
+                                <span class="icon-playlist_play"></span> 
+                                {{trans('text.playlists')}}
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <span class="icon-signout"></span> 
+                                {{ trans('auth.logout') }}
+                            </a>
+                        </div>
+                    </div>
+                    @else
+
+                    <div class="header-user">
+                        <a class="btn-login" href="{{ route('login') }}">
+                            <i class="far fa-user"></i> {{ trans('auth.login') }}
+                        </a>
+                        @if(Route::has('register'))
+                        <a class="btn-register" href="{{ route('register') }}">
+                            <i class="far fa-user"></i> {{ trans('auth.register') }}
+                        </a>
+                        @endif
+                    </div>
+                    @endauth
                 </div>
             </div>
             <share-box></share-box>
@@ -88,7 +124,7 @@
             <notifications position="bottom left" group="app" animation-type="velocity" :animation="animation" classes="desktop-notifications" />
         </div>
     </div>
-    
+
     <div id="appFooter">
         <footer id="footer" data-turbolinks-permanent>
             <div id="MainLoading">

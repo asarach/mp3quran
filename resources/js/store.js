@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import quran from './modules/quran'
-import favorite from './modules/favorite'
+// import favorite from './modules/favorite'
 import download from './modules/download'
 
 Vue.use(Vuex)
@@ -10,7 +10,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   modules: {
     quran,
-    favorite,
+    // favorite,
     download
   },
   state: {
