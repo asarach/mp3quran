@@ -1,6 +1,7 @@
 /node_modules
 /.idea
 /public/uploads
+/public/apps
 /public/storage
 /public/newsitemap
 /public/video_social
