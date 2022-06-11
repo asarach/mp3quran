@@ -122,6 +122,15 @@
         <div class="ply-btn btn-next" id="clearPlaylist">
           <span class="uni-icon icon-delete_sweep"></span>
         </div>
+        @auth()
+        <div class="ply-btn btn-save" id="savePlaylist">
+          {{trans('text.save')}}
+        </div>
+        <div class="playlist-name">
+          <input type="hidden" id="playlistId" name="playlistid">
+          <input type="text" id="playlistName" name="playlistname">
+        </div>
+        @endauth
       </div>
       <ul id="playerList" class="list-unstyled"></ul>
 
@@ -149,6 +158,11 @@
             <div class="read-reciter">
               <span class="reciter-name"></span>
               <span class="rewaya-name"></span>
+            </div>
+          </div>
+          <div class="read-options">
+            <div class="ply-btn btn-delete-plitem">
+              <span class="uni-icon icon-delete"></span>
             </div>
           </div>
         </li>
