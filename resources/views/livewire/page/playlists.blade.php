@@ -39,7 +39,7 @@
               </div>
               <h3>{{ $playlist->name }}</h3>
               <div class="delete-btn"  @click.prevent="deletePalylist('{{ $playlist->id }}')">
-                <span class="uni-icon icon-delete"></span>
+                <span class="uni-icon icon-clear"></span>
               </div>
             </div>
             @endforeach

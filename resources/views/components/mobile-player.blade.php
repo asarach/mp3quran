@@ -117,10 +117,10 @@
     <div class="ply-playlist" id="playerPlaylist">
       <div class="ply-list-header">
         <div class="ply-btn btn-next" id="closePlaylist">
-          <span class="uni-icon icon-clear"></span>
+          <span class="uni-icon icon-minimize"  style="font-size: 10px;"></span>
         </div>
         <div class="ply-btn btn-next" id="clearPlaylist">
-          <span class="uni-icon icon-delete_sweep"></span>
+          <span class="uni-icon icon-clear"></span>
         </div>
         @auth()
         <div class="ply-btn btn-save" id="savePlaylist">
@@ -162,7 +162,7 @@
           </div>
           <div class="read-options">
             <div class="ply-btn btn-delete-plitem">
-              <span class="uni-icon icon-delete"></span>
+              <span class="uni-icon icon-clear"></span>
             </div>
           </div>
         </li>

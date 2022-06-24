@@ -22,34 +22,32 @@
       </div>
     </div>
   </div>
+
   <div class="show-body">
     <div class="container">
       <div class="row">
         <div class="col-md-5">
           <div class="api-nav">
-            @foreach ($page->content['api1'] as $key => $item)
-            <button type="button" class="btn btn-secondary @if($current_tab['key'] == $item['key']) active @endif" wire:click.prevent="showTab({{ $key }})">{{$item['key']}}</button>
+            @foreach ($api as $key => $item)
+            <button type="button" class="btn btn-secondary @if($index == $key) active @endif" wire:click.prevent="showTab({{ $key }})">{{$item['key']}}</button>
             @endforeach
           </div>
         </div>
         <div class="col-md-19" id="sticky-container">
           <div class="api-content">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
-              @foreach ($current_tab['content'] as $key => $item)
+              @foreach ($api[$index]['content'] as $key_current_tab => $item)
               <li class="nav-item">
-                <a class="nav-link @if($key == 'Description') active @endif" id="{{ $key }}tab" data-toggle="tab" href="#{{ $key }}" role="tab" ariaControls="{{ $key }}" aria-selected="true">{{ $key }}</a>
+                <a class="nav-link @if($key_current_tab == 'Description') active @endif" id="{{ $key_current_tab}}tab" data-toggle="tab" href="#{{ $key_current_tab}}" role="tab" ariaControls="{{ $key_current_tab}}" aria-selected="true">{{ $key_current_tab}}</a>
               </li>
               @endforeach
-
             </ul>
-            @if ($current_tab['content'])
-
-
+            @if ($api[$index]['content'])
             <div class="tab-content" id="myTabContent">
               <div class="tab-pane fade show active" id="Description" role="tabpanel" aria-labelledby="Description-tab">
                 <table class="table table-striped">
                   <tbody>
-                    @foreach ($current_tab['content']['Description'] as $desc)
+                    @foreach ($api[$index]['content']['Description'] as $desc)
                     <tr>
                       <th>{{$desc['name']}}</th>
                       <th>{!! $desc['val'] !!}</th>
@@ -59,7 +57,7 @@
                 </table>
               </div>
               <div class="tab-pane fade" id="Inputs" role="tabpanel" aria-labelledby="Inputs-tab">
-                @foreach ( $current_tab['content']['Inputs'] as $input)
+                @foreach ( $api[$index]['content']['Inputs'] as $input)
                 <table class="table table-bordered mt-3 mb-3">
                   <tbody>
                     @if (isset($input['root']))
@@ -109,7 +107,7 @@
                 @endforeach
               </div>
               <div class="tab-pane fade" id="Outputs" role="tabpanel" aria-labelledby="Outputs-tab">
-                @foreach ( $current_tab['content']['Outputs'] as $output)
+                @foreach ( $api[$index]['content']['Outputs'] as $output)
                 <table class="table table-bordered mt-3 mb-3">
                   <tbody>
                     @if (isset($input['root']))
