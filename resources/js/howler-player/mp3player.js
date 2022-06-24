@@ -2,10 +2,10 @@ const { Howl, Howler } = require('howler');
 var Player = function () {
 
   //Get old playlist
-  // localStorage.removeItem('mp3quran_playlist2');
-  // localStorage.removeItem('mp3quran_player2');
-  const playlist = JSON.parse(localStorage.getItem("mp3quran_playlist2") || "[]");
-  this.playerData = JSON.parse(localStorage.getItem("mp3quran_player2") || "{}");
+  // localStorage.removeItem('mp3quran_playlist_2');
+  // localStorage.removeItem('mp3quran_player_2');
+  const playlist = JSON.parse(localStorage.getItem("mp3quran_playlist_2") || "[]");
+  this.playerData = JSON.parse(localStorage.getItem("mp3quran_player_2") || "{}");
   this.setPlaylist(playlist);
 
   //Get old current item
@@ -144,7 +144,7 @@ Player.prototype = {
       delete storageItem.howl
       storagePlaylist.push(storageItem);
     });
-    localStorage.setItem('mp3quran_playlist2', JSON.stringify(storagePlaylist));
+    localStorage.setItem('mp3quran_playlist_2', JSON.stringify(storagePlaylist));
   },
 
   setCurrentItem: function (index) {
@@ -215,7 +215,7 @@ Player.prototype = {
     if (typeof index === 'number') {
       this.current_index = index;
       this.playerData.current_index = index;
-      localStorage.setItem('mp3quran_player2', JSON.stringify(this.playerData));
+      localStorage.setItem('mp3quran_player_2', JSON.stringify(this.playerData));
     }
   },
 
@@ -335,7 +335,7 @@ Player.prototype = {
     }
 
     this.playerData.volume = val;
-    localStorage.setItem('mp3quran_player2', JSON.stringify(this.playerData));
+    localStorage.setItem('mp3quran_player_2', JSON.stringify(this.playerData));
     playerVolumeInner.style.height = (val * 100) + 'px';
     playerVolumePiont.style.bottom = 'calc(' + (val * 100) + 'px - 6px)';
 
