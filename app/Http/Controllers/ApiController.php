@@ -118,6 +118,7 @@ class ApiController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function surah(Request $request) {
+        // dd('asa');
         $this->validate($request, [
             'surah' => 'required',
             'language' => 'required'
