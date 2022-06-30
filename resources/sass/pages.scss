@@ -27,7 +27,7 @@
       height: 32px;
       align-items: center;
       width: fit-content;
-      .uni-icon{
+      .uni-icon {
         color: rgb(255, 255, 255);
         margin-left: 8px;
       }
@@ -53,9 +53,9 @@
       width: calc(100% + 1rem);
       height: 3rem;
       margin-top: -3rem;
-      margin-right: -.5rem;
-      padding-right: .5rem;
-      padding-top: .5rem;
+      margin-right: -0.5rem;
+      padding-right: 0.5rem;
+      padding-top: 0.5rem;
     }
     /* width */
     .nav-tabs-wrapper::-webkit-scrollbar {
@@ -192,6 +192,7 @@
 /**************reciters*************/
 .search-show,
 .api-show,
+.api3-show,
 .favorite-show,
 .home-show {
   .header-ads {
@@ -233,7 +234,7 @@
       width: 100%;
     }
 
-    .sora-download{
+    .sora-download {
       padding: 0.5rem 1rem;
       overflow: hidden;
       background: #fff;
@@ -244,12 +245,12 @@
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      span{
+      span {
         margin: 0 1rem;
         color: #14aae2;
       }
     }
-    .download-all{
+    .download-all {
       padding: 0.5rem 1rem;
       overflow: hidden;
       background: #fff;
@@ -262,10 +263,10 @@
       cursor: pointer;
       width: 100%;
     }
-    .sora-download:hover{
+    .sora-download:hover {
       background-color: #14aae2;
       color: #fff;
-      span{
+      span {
         color: #fff;
       }
     }
@@ -273,12 +274,12 @@
 }
 
 /**************playlists*************/
-.playlists-show{
-  .playlists-list{
+.playlists-show {
+  .playlists-list {
     padding: 1rem 0;
   }
- 
-  .card-playlist{
+
+  .card-playlist {
     position: relative;
     align-items: center;
     cursor: pointer;
@@ -288,7 +289,7 @@
     margin-bottom: 0.75rem;
     border-radius: 10px;
     display: flex;
-    .load-btn{
+    .load-btn {
       margin-left: 6px;
       color: #f5b44b;
       width: 25px;
@@ -300,11 +301,11 @@
       background: #f2f3f4;
       border-radius: 10px;
     }
-    h3{
+    h3 {
       font-size: 1rem;
       margin: 0;
     }
-    .delete-btn{
+    .delete-btn {
       margin-right: auto;
     }
   }
@@ -369,12 +370,51 @@
     }
   }
 }
+/**************api3*************/
+.api3-show {
+  .show-body {
+    direction: ltr;
+    text-align: left;
+    display: flex;
+    .api3-nav {
+      padding: 1rem 0;
+      padding: 1rem 0;
+      margin-bottom: 0.75rem;
+      border-radius: 10px;
+      margin-top: 1rem;
+      .btn {
+        border-radius: 0;
+        display: block;
+        width: 100%;
+        margin-bottom: 4px;
+        text-align: left;
+        background: transparent;
+        border: none;
+        padding: 0.75rem 1rem;
+        border-radius: 0.5rem;
+      }
+      .btn.active,
+      .btn:hover {
+        background-color: #fdfdfd;
+        border-right: 2px solid #8ccfee;
+        box-shadow: 0px 2px 3px 0px #a2a2a230;
+      }
+    }
+    .api3-content {
+      padding: 2rem 1rem;
+      .section-title {
+        font-size: 1.5rem;
+        margin: .5rem 0;
+      }
+    }
+  }
+}
 
 /**************apps*************/
 .apps-show {
 }
 .app-show {
-  .card-app{
+  .card-app {
     padding: 2rem;
     overflow: hidden;
     background: #fff;
@@ -389,8 +429,8 @@
     justify-content: space-evenly;
     .app-btn-apple,
     .app-btn-huawei,
-    .app-btn-android{
-      .btn{
+    .app-btn-android {
+      .btn {
         background: #a4c639;
         border: #99bb2f 1px solid;
         box-shadow: 0px 2px 8px 0px #a4c6395e;
@@ -401,42 +441,42 @@
         align-items: center;
         width: 200px;
 
-        .icon-android{
+        .icon-android {
           font-size: 24px;
           margin-left: 1rem;
         }
       }
     }
-    .app-btn-huawei{
-      .btn{
+    .app-btn-huawei {
+      .btn {
         background: #f00;
         border: #db391f 1px solid;
         box-shadow: 0px 2px 8px 0px #f5220029;
-        .icon-huawei:before{
+        .icon-huawei:before {
           color: #fff;
         }
       }
     }
-    .app-btn-apple{
-      .btn{
+    .app-btn-apple {
+      .btn {
         background: #9da8b6;
         border: #8a97a7 1px solid;
         box-shadow: 0px 2px 8px 0px #9da8b654;
       }
     }
-    .app-btn-android:hover{
-      .btn{
+    .app-btn-android:hover {
+      .btn {
         background: #99bb2f;
       }
     }
-    .app-btn-huawei:hover{
-      .btn{
+    .app-btn-huawei:hover {
+      .btn {
         background: #db391f;
       }
     }
-    
-    .app-btn-apple:hover{
-      .btn{
+
+    .app-btn-apple:hover {
+      .btn {
         background: #8a97a7;
       }
     }
@@ -485,7 +525,7 @@
   .favorite-tab-pane {
     padding: 1rem;
   }
-  .sora-item{
+  .sora-item {
     display: flex;
   }
 }
@@ -595,7 +635,6 @@
         background: #fafafa;
         border: 1px solid #eaebeb;
         box-shadow: 0px 0px 3px 0px #ebedee;
-        
       }
     }
   }
@@ -627,10 +666,10 @@
 
 /**************tafsirs*************/
 .tafsirs-show {
-  .tafsirs-list{
-    h3{
+  .tafsirs-list {
+    h3 {
       font-size: 1rem;
-    margin: 1rem 0;
+      margin: 1rem 0;
     }
   }
 }

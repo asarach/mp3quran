@@ -1,0 +1,178 @@
+[
+    {
+        "key": "Reads",
+        "sections_groups": [
+            [
+                {
+                    "type": "text",
+                    "title": "Overview",
+                    "content": "Get a list of all avalibale reads ordered by reciters name."
+                },
+                {
+                    "type": "url",
+                    "title": "Resource URL",
+                    "content": "https://mp3quran.net/api/v3/reads"
+                },
+                {
+                    "type": "table",
+                    "title": "Parameters",
+                    "content": [
+                        {
+                            "Name": "language",
+                            "Required": "optional",
+                            "Description": "The language of texts in reads arrays. If is not set the default language of texts is arabic.",
+                            "Default Value": "",
+                            "Example": "'ar', 'en', 'fr'..."
+                        },
+                        {
+                            "Name": "reciter",
+                            "Required": "optional",
+                            "Description": "The id of the reciter you want to get its reads. If is not set it will return all reciters reads.",
+                            "Default Value": "",
+                            "Example": ""
+                        },
+                        {
+                            "Name": "rewaya",
+                            "Required": "optional",
+                            "Description": "The id of the rewaya you want to get its reads. If is not set it will return all reciters reads",
+                            "Default Value": "",
+                            "Example": ""
+                        },
+                        {
+                            "Name": "sura",
+                            "Required": "optional",
+                            "Description": "The id of the sura you want to get its reads. If is not set it will return all reciters reads",
+                            "Default Value": "",
+                            "Example": ""
+                        },
+                        {
+                            "Name": "last_updated_date",
+                            "Required": "optional",
+                            "Description": "The date of read last update. It allows to limit the reads returned to a given date",
+                            "Default Value": "",
+                            "Example": ""
+                        }
+                    ]
+                },
+                {
+                    "type": "request_url",
+                    "title": "Example Request",
+                    "content": "GET http://mp3quran.de/api/v3/reads?language=eng&reciter=168&rewaya=1&sura=1&last_updated_date=01/01/2020"
+                },
+                {
+                    "type": "response",
+                    "title": "Example Response",
+                    "content": {
+                        "reads": [
+                            {
+                                "id": 168,
+                                "name": "Hazza Al-Balushi",
+                                "Server": "",
+                                "letter": "H",
+                                "moshaf": [
+                                    {
+                                        "id": 187,
+                                        "moshaf_type": 116,
+                                        "name": "Rewayat Hafs A'n Assem - Murattal",
+                                        "Server": 6,
+                                        "sample": null,
+                                        "count": 75,
+                                        "suras": "1,13,14,15,18,19,25,29,30,31,36,37,38,39,40,42,44,47,49,50,51,52,53,54,55,56,57,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        ]
+    },
+    {
+        "key": "Recent reads",
+        "sections_groups": [
+            [
+                {
+                    "type": "text",
+                    "title": "Overview",
+                    "content": "Get a list of all avalibale reads ordered by added date."
+                },
+                {
+                    "type": "url",
+                    "title": "Resource URL",
+                    "content": "https://mp3quran.net/api/v3/recent_reads"
+                },
+                {
+                    "type": "table",
+                    "title": "Parameters",
+                    "content": [
+                        {
+                            "Name": "language",
+                            "Required": "optional",
+                            "Description": "The language of texts in reads arrays. If is not set the default language of texts is arabic.",
+                            "Default Value": "",
+                            "Example": "'ar', 'en', 'fr'..."
+                        },
+                        {
+                            "Name": "reciter",
+                            "Required": "optional",
+                            "Description": "The id of the reciter you want to get its reads. If is not set it will return all reciters reads.",
+                            "Default Value": "",
+                            "Example": ""
+                        },
+                        {
+                            "Name": "rewaya",
+                            "Required": "optional",
+                            "Description": "The id of the rewaya you want to get its reads. If is not set it will return all reciters reads",
+                            "Default Value": "",
+                            "Example": ""
+                        },
+                        {
+                            "Name": "sura",
+                            "Required": "optional",
+                            "Description": "The id of the sura you want to get its reads. If is not set it will return all reciters reads",
+                            "Default Value": "",
+                            "Example": ""
+                        },
+                        {
+                            "Name": "last_updated_date",
+                            "Required": "optional",
+                            "Description": "The date of read last update. It allows to limit the reads returned to a given date",
+                            "Default Value": "",
+                            "Example": ""
+                        }
+                    ]
+                },
+                {
+                    "type": "request_url",
+                    "title": "Example Request",
+                    "content": "GET http://mp3quran.de/api/v3/recent_reads?language=eng&reciter=168&rewaya=1&sura=1&last_updated_date=01/01/2020"
+                },
+                {
+                    "type": "response",
+                    "title": "Example Response",
+                    "content": {
+                        "reads": [
+                            {
+                                "id": 168,
+                                "name": "Hazza Al-Balushi",
+                                "Server": "",
+                                "letter": "H",
+                                "moshaf": [
+                                    {
+                                        "id": 187,
+                                        "moshaf_type": 116,
+                                        "name": "Rewayat Hafs A'n Assem - Murattal",
+                                        "Server": 6,
+                                        "sample": null,
+                                        "count": 75,
+                                        "suras": "1,13,14,15,18,19,25,29,30,31,36,37,38,39,40,42,44,47,49,50,51,52,53,54,55,56,57,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        ]
+    }
+]

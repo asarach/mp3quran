@@ -23,3 +23,12 @@ $router->get('/api_2/videos', array('as' => 'api_b.videos', 'uses' => 'ApibContr
 $router->get('/api/ayat_timing', array('as' => 'api_b.videos', 'uses' => 'ApiTimingController@index'));
 $router->get('/api/ayat_timing/reads', array('as' => 'api_b.videos', 'uses' => 'ApiTimingController@reads'));
 $router->get('/api/ayat_timing/soar', array('as' => 'api_b.videos', 'uses' => 'ApiTimingController@soar'));
+
+/*
+|--------------------------------------------------------------------------
+| API Version 3.0
+|--------------------------------------------------------------------------
+*/
+
+$router->get('/api/v3/reads', array('as' => 'api_b.reads', 'uses' => 'Api3\ReadController@reads'));
+$router->get('/api/v3/recent_reads', array('as' => 'api_b.reads', 'uses' => 'Api3\ReadController@recentReads'));

@@ -14,7 +14,11 @@
       <div class="row">
         <div class="col-lg-5 order-2 order-md-1">
           <h1>{{ trans('text.api') }}</h1>
-          <div class="header-options"></div>
+          <div class="header-options">
+            <a href="{{ route('page.api3') }}" class="btn btn-primary px-4 mb-4">
+              {{trans('text.api-3')}}
+            </a>
+          </div>
         </div>
         <div class="col-lg-19 order-1 order-md-2">
           <livewire:components.header-ads />

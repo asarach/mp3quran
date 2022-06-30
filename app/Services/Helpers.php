@@ -26,6 +26,20 @@ function getAssetTimestamp()
     return $html;
 }
 
+function transLocale($group, $item, $local)
+{
+    $trans = DB::table('translator_translations')
+        ->where('group', $group)
+        ->where('item', $item)
+        ->where('locale', $local)
+        ->first();
+
+    if (is_null($trans)) {
+        return $item;
+    }
+    return $trans->text;
+}
+
 function style_version()
 {
     $version = request()->cookie('style_version');
