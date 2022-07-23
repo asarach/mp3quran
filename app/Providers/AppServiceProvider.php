@@ -37,6 +37,9 @@ class AppServiceProvider extends ServiceProvider
         if (!env('APP_DEBUGBAR')) {
             \Debugbar::disable();
         }
+        if (env('APP_ENV') === 'production') {
+            URL::forceSchema('https');
+        }
     }
 
     /**
