@@ -64,7 +64,7 @@
             @if ($active_tab == 'reads' )
             <div class="search-tab-pane">
               @foreach ($reads as $read)
-              @include('components.card-sora', [ 'read' => $read])
+              @include('components.card-read', [ 'read' => $read])
               @endforeach
               @if ($reads->currentPage() < $reads->lastPage())
                 <button type="button" class="btn btn-success" @click="moreReads()">
