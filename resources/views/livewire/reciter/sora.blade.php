@@ -31,8 +31,67 @@
         </div>
         @endif
         <div class="col-lg-19 pt-3" id="sticky-container">
-          <sora-show :sora="{{ json_encode($sora) }}"></sora-show>
-          <report-sora></report-sora>
+          <div class="sora-item sora-show-item showoptions" id="sora-{{ $sora['id'] }}">
+            <div class="sora-info">
+              <div class="sora-name">
+                {{ trans('text.sora-name-text', ['sora' => $sora['name'] ])}}
+              </div>
+              <div class="sora-reciter">
+                {{ trans('text.sora-reciter-text', ['sora' => $sora['reciter'] ])}}
+              </div>
+              <div class="sora-rewaya">
+                {{ trans('text.sora-rewaya-text', ['rewaya' => $sora['rewaya'] ])}}
+              </div>
+            </div>
+            <div class="ssi-btns">
+              <div class="ply-btn btn-loading hiden-ply-btn">
+                <div class="la-line-scale la-sm">
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                </div>
+              </div>
+              <div class="ply-btn btn-pause hiden-ply-btn">
+                <span class="uni-icon icon-pause" style="color: #fff"></span>
+                {{ trans("text.pause") }}
+              </div>
+              <div class="ply-btn btn-play shown-ply-btn" data-url="{{ route('ajax::soar.item') . '?r=' . $sora['read_id'] . '&s=' . $sora['sora_id'] }}" data-item="{{ $sora['id'] }}" data-type="sora">
+                <span class="uni-icon icon-play_arrow" style="color: #fff"></span>
+                {{ trans("text.play") }}
+              </div>
+              <a class="download-btn" href="{{ downloadUrl($sora['file']) }}">
+                <div>
+                  <span class="uni-icon icon-cloud_download"></span>
+                  {{ trans("text.download") }}
+                </div>
+              </a>
+            </div>
+            <div class="sora-options">
+              <div class="sora-btn share-btn" v-tooltip="trans('text.share')" data-title="{{ $sora['share_title'] }}" data-url="{{ $sora['share_url'] }}" data-description="{{ $sora['share_description'] }}">
+                <span class="uni-icon icon-share"></span>
+              </div>
+              <div class="sora-btn link-btn clipboard-btn" v-tooltip="trans('text.copy-link')" data-text="{{ $sora['file'] }}">
+                <span class="uni-icon icon-link"></span>
+              </div>
+              <div class="sora-btn playlist-add" v-tooltip="trans('text.add-to-playlist')" data-url="{{ route('ajax::soar.item') . '?r=' . $sora['read_id'] . '&s=' . $sora['sora_id'] }}">
+                <span class="uni-icon icon-playlist_add"></span>
+              </div>
+              <div class="sora-btn like-btn" v-tooltip="trans('text.add-to-favorite')" data-id="{{ $sora['id'] }}" data-group="soar">
+                <span class="uni-icon icon-favorite_outline"></span>
+              </div>
+              <div class="sora-btn deslike-btn" v-tooltip="trans('text.remove-from-favorite')" data-id="{{ $sora['id'] }}" data-group="soar">
+                <span class="uni-icon icon-favorite" style="color: #f5b44b"></span>
+              </div>
+              <div class="sora-btn report-btn" v-tooltip="trans('text.report-sora')" data-read="{{ $sora['read_slug'] }}" data-sora="{{ $sora['id'] }}" :data-prefix="ajax_prefix">
+                <span class="uni-icon icon-warning"></span>
+              </div>
+            </div>
+          </div>
+
+          @include('components.report-sora')
+          @include('components.share')
         </div>
       </div>
     </div>

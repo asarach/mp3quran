@@ -1,52 +1,50 @@
 <template>
-  <div
-    class="sora-item"
-    :class="{ showoptions: showoptions, show: sora.show }"
-    v-click-outside="closeOptions"
-  >
-    <div class="ply-btn" v-if="isLoading">
-      <div class="la-line-scale la-sm">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-    </div>
-    <div class="ply-btn" v-else-if="isPlaying" @click="pauseItem()">
-      <span class="uni-icon icon-pause" style="color: #fff"></span>
-    </div>
-    <div
-      v-else
-      class="ply-btn"
-      @click="
-        getItemAndPlay(
-          ajax_prefix + '/soar/item?r=' + read_id + '&s=' + sora.sora_id,
-          sora.id
-        )
-      "
-    >
-      <span class="uni-icon icon-play_arrow1" style="color: #fff"></span>
-    </div>
-
+  <div class="sora-item sora-show-item showoptions">
     <div class="sora-info">
-      <div class="sora-num">{{ sora.sora_num }}</div>
-      <div v-if="sora.reciter_name" class="sora-num">
-        {{ sora.reciter_name }}
-      </div>
       <div class="sora-name">
-        <a
-          :href="prefix + sora.read_slug + '/' + sora.sora_id"
-          rel="alternate"
-          :hreflang="$store.state.current_language"
-          class="card-reciter-name"
-        >
-          {{ sora.sora_name }}
-        </a>
+        {{ sora.name }}
+      </div>
+      <div class="sora-reciter">
+        {{ sora.reciter }}
+      </div>
+      <div class="sora-rewaya">
+        {{ sora.rewaya }}
       </div>
     </div>
-    <div class="sora-btn more-btn" @click="showoptions = !showoptions">
-      <span class="uni-icon icon-more-horizontal"></span>
+    <div class="ssi-btns">
+      <div class="ply-btn" v-if="isLoading">
+        <div class="la-line-scale la-sm">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+      <div class="ply-btn" v-else-if="isPlaying" @click="pauseItem()">
+        <span class="uni-icon icon-pause" style="color: #fff"></span>
+        {{ trans("text.pause") }}
+      </div>
+      <div
+        class="ply-btn"
+        v-else
+        @click="
+          getItemAndPlay(
+            ajax_prefix + '/soar/item?r=' + sora.read_id + '&s=' + sora.sora_id,
+            sora.id
+          )
+        "
+      >
+        <span class="uni-icon icon-play_arrow" style="color: #fff"></span>
+        {{ trans("text.play") }}
+      </div>
+
+      <a class="download-btn" :href="sora.file | downloadUrl">
+        <div>
+          <span class="uni-icon icon-cloud_download"></span>
+          {{ trans("text.download") }}
+        </div>
+      </a>
     </div>
     <div class="sora-options">
       <div
@@ -61,33 +59,19 @@
       <div
         class="sora-btn link-btn"
         v-tooltip="trans('text.copy-link')"
-        v-clipboard:copy="sora.sora_audio"
+        v-clipboard:copy="sora.file"
         v-clipboard:error="clipboardErrorHandler"
         v-clipboard:success="clipboardSuccessHandler"
       >
         <span class="uni-icon icon-link"></span>
       </div>
-      <div
-        v-if="downloading"
-        class="sora-btn downloading"
-        v-tooltip="trans('text.downloading')"
-      >
-        <img :src="'/img/icons/downloading.svg'" width="60" alt="" />
-      </div>
-      <a
-        v-else
-        class="sora-btn download-btn"
-        v-tooltip="trans('text.download')"
-        :href="sora.sora_audio | downloadUrl"
-        ><span class="uni-icon icon-cloud_download"></span
-      ></a>
 
       <div
         class="sora-btn playlist-add"
         v-tooltip="trans('text.add-to-playlist')"
         @click="
           addItem(
-            ajax_prefix + '/soar/item?r=' + read_id + '&s=' + sora.sora_id
+            ajax_prefix + '/soar/item?r=' + sora.read_id + '&s=' + sora.sora_id
           )
         "
       >
@@ -99,7 +83,7 @@
         v-tooltip="trans('text.remove-from-favorite')"
         @click="removeSoraFavorite(sora.id)"
       >
-        <span class="uni-icon icon-favorite" style="color: #f2a01b"></span>
+        <span class="uni-icon icon-favorite" style="color: #f5b44b"></span>
       </div>
       <div
         class="sora-btn deslike-btn"
@@ -111,15 +95,11 @@
       </div>
       <div
         class="sora-btn report-btn"
-        v-if="sora.sora_report != '-1'"
+        v-if="sora.report != '-1'"
         v-tooltip="trans('text.report-sora')"
-        @click="
-          reportSora({
-            read: sora.read_slug,
-            sora: sora.id,
-            prefix: ajax_prefix,
-          })
-        "
+        :data-read="sora.read_slug"
+        :data-sora="sora.id"
+        :data-prefix="ajax_prefix"
       >
         <span class="uni-icon icon-warning"></span>
       </div>
@@ -130,10 +110,9 @@
 import { mapState, mapActions, mapGetters } from "vuex";
 
 export default {
-  props: ["sora", "read_id", "reciter", "rewaya"],
+  props: ["sora"],
   data() {
     return {
-      showoptions: false,
       inFavorites: false,
     };
   },
@@ -162,16 +141,25 @@ export default {
 
     ...mapState({
       current_playing_item: (state) => state.playing_item,
-      current_language: (state) => state.current_language,
+      style_version: (state) => state.settings.style_version,
       downloading: (state) => state.download.downloading,
     }),
   },
+
   methods: {
-    closeOptions() {
-      this.showoptions = false;
-    },
     shareItem(title, url, description) {
-      AppEvent.$emit("share", title, url, description);
+      if (typeof window !== "undefined") {
+        AppEvent.$emit("share", title, url, description);
+      }
+    },
+
+    addItem(url) {
+      axios
+        .get(url)
+        .then(function (response) {
+          window.player.addItem(response.data);
+        })
+        .catch(function (error) {});
     },
     pauseItem() {
       window.player.pause();
@@ -190,23 +178,15 @@ export default {
         window.player.play();
       }
     },
-    addItem(url) {
-      axios
-        .get(url)
-        .then(function (response) {
-          window.player.addItem(response.data);
-        })
-        .catch(function (error) {});
-    },
     ...mapActions([
       "clipboardErrorHandler",
       "clipboardSuccessHandler",
-      "reportSora",
     ]),
+
     ...mapActions("download", {
       downloadMp3: "downloadMp3",
     }),
-    addSoraFavorite(sora_id) {
+     addSoraFavorite(sora_id) {
       window.favorites.addItem(sora_id, "soar");
       Vue.notify({
         group: "app",
@@ -225,11 +205,14 @@ export default {
       });
     },
   },
-  mounted() {
+   mounted() {
     this.inFavorites = window.favorites.soar.includes(this.sora.id);
     window.addEventListener("favoritesChange", () => {
       this.inFavorites = window.favorites.soar.includes(this.sora.id);
     });
+  },
+  created() {
+    this.$store.state.loading = true;
   },
 };
 </script>

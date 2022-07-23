@@ -64,7 +64,7 @@
             @if ($active_tab == 'reads' )
             <div class="search-tab-pane">
               @foreach ($reads as $read)
-              <read :read="{{ json_encode($read) }}"></read>
+              @include('components.card-sora', [ 'read' => $read])
               @endforeach
               @if ($reads->currentPage() < $reads->lastPage())
                 <button type="button" class="btn btn-success" @click="moreReads()">
@@ -77,7 +77,7 @@
             @if ($active_tab == 'reciters' )
             <div class="search-tab-pane">
               @foreach ($reciters as $reciter)
-              <card-reciter :reciter="{{ json_encode($reciter) }}"></card-reciter>
+              @include('components.card-reciter ', [ 'reciter' => $reciter])
               @endforeach
               @if ($reciters->currentPage() < $reciters->lastPage())
                 <button type="button" class="btn btn-success" @click="moreReciters()">
@@ -90,7 +90,7 @@
             @if ($active_tab == 'radios' )
             <div class="search-tab-pane">
               @foreach ($radios as $radio)
-              <card-radio :radio="{{ json_encode($radio) }}"></card-radio>
+              @include('components.card-radio ', [ 'radio' => $radio])
               @endforeach
               @if ($radios->currentPage() < $radios->lastPage())
                 <button type="button" class="btn btn-success" @click="moreRadios()">
@@ -131,5 +131,6 @@
         </div>
       </div>
     </div>
+    @include('components.share')
   </div>
 </div>

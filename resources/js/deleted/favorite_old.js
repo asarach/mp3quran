@@ -19,7 +19,6 @@ export default {
             state.videos = videos;
         },
         setRadios(state, { radios }) {
-            console.log('mutations setRadios');
             state.radios = radios;
         },
         setReads(state, { reads }) {

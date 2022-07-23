@@ -68,7 +68,7 @@
                 <div class="row">
                   @foreach ($reads as $read)
                   <div class="col-md-12">
-                    <read :read="{{ json_encode($read) }}"></read>
+                    @include('components.card-sora', [ 'read' => $read])
                   </div>
                   @endforeach
                 </div>
@@ -78,7 +78,17 @@
                   <ul class="list-unstyled">
                     @foreach ($soar as $sora)
                     <li>
-                      <card-sora :sora="{{ json_encode($sora) }}" rewaya="{{ $sora['rewaya_name'] }}" read_id="{{$sora['read_id']}}" reciter="{{ $sora['reciter_name']}}" :share=" {{ json_encode(['title' =>  $sora['share_title'], 'url' => $sora['share_url'], 'description' =>  $sora['share_description'] ]) }} "></card-sora>
+                      @include('components.card-sora', [
+                      'sora' => $sora,
+                      'rewaya' => $sora['rewaya_name'],
+                      'reciter' => $sora['reciter_name'] ,
+                      'read_id' => $sora['read_id'] ,
+                      'share' => [
+                      'title' => $sora['share_title'],
+                      'url' => $sora['share_url'],
+                      'description' => $sora['share_description']
+                      ]
+                      ])
                     </li>
                     @endforeach
                   </ul>
@@ -86,7 +96,7 @@
               </div>
               <div class="favorite-tab-pane tab-pane fade  @if($active_tab == 'radios') show active @endif " id="radios" role="tabpanel" aria-labelledby="radios-tab">
                 @foreach ($radios as $radio)
-                <card-radio :radio="{{ json_encode($radio) }}" :key="{{ $radio['id'] }}"></card-radio>
+                @include('components.card-radio ', [ 'radio' => $radio])
                 @endforeach
               </div>
               <div class="favorite-tab-pane tab-pane fade  @if($active_tab == 'videos') show active @endif " id="videos" role="tabpanel" aria-labelledby="videos-tab">
@@ -100,4 +110,5 @@
       </div>
     </div>
   </div>
+  @include('components.share')
 </div>

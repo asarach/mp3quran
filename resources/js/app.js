@@ -4,9 +4,6 @@ import Vue from 'vue'
 import store from './store';
 import VuexPersist from 'vuex-persist'
 
-import Favorites from './favorites'
-window.favorites = new Favorites();
-
 require('./bootstrap');
 require('./main');
 var Turbolinks = require("turbolinks")
@@ -103,30 +100,19 @@ import velocity from 'velocity-animate'
 
 Vue.use(Notifications, { velocity })
 
-Vue.component('my-dplayer', require('./components/MdPlayer.vue').default);
-Vue.component('share-box', require('./components/Share.vue').default);
-Vue.component('confirmation', require('./components/Confirmation.vue').default);
-Vue.component('report-sora', require('./components/ReportSora.vue').default);
-Vue.component('quick-access', require('./components/QuickAccess.vue').default);
-Vue.component('search-form', require('./components/SearchForm.vue').default);
-Vue.component('mushafs-flipbook', require('./components/MushafsFlipbook.vue').default);
 Vue.component('alkahf-flipbook', require('./components/AlkahfFlipbook.vue').default);
-Vue.component('favorites', require('./components/Favorites.vue').default);
-Vue.component('card-sora', require('./components/Sora.vue').default);
-Vue.component('sora-show', require('./components/SoraShow.vue').default);
-Vue.component('read', require('./components/Read.vue').default);
 Vue.component('file-uploader', require('./components/FileUploader.vue').default);
 Vue.component('flip-book', require('./components/FlipBook.vue').default);
 Vue.component('flip-book-desktop', require('./components/FlipBookDesktop.vue').default);
+Vue.component('mushafs-flipbook', require('./components/MushafsFlipbook.vue').default);
+
+Vue.component('my-dplayer', require('./components/MdPlayer.vue').default);
+Vue.component('card-tv', require('./components/TvsItem.vue').default);
 Vue.component('upload-image', require('./components/UploadImage.vue').default);
-Vue.component('loading-spinner', require('./components/LoadingSpinner.vue').default);
+Vue.component('card-logo-video', require('./components/VideosCardLogoVideo.vue').default);
 Vue.component('card-video', require('./components/VideosItem.vue').default);
 Vue.component('card-playlist', require('./components/VideosItemPlaylist.vue').default);
-Vue.component('card-logo-video', require('./components/VideosCardLogoVideo.vue').default);
-Vue.component('card-reciter', require('./components/ReciterItem.vue').default);
-Vue.component('card-radio', require('./components/RadioItem.vue').default);
-Vue.component('card-tv', require('./components/TvsItem.vue').default);
-Vue.component('tadabor-item', require('./components/TadaborItem.vue').default);
+
 import { mapActions, mapGetters, mapState } from "vuex";
 
 
@@ -237,7 +223,6 @@ function initiateVue() {
     }
   });
 }
-
 initiateVue();
 
 document.addEventListener("turbolinks:before-visit", function (event) {
@@ -247,4 +232,3 @@ document.addEventListener("turbolinks:before-visit", function (event) {
 document.addEventListener("turbolinks:render", function (event) {
   initiateVue();
 });
-

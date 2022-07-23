@@ -21,7 +21,6 @@ Route::get('/main-radio', array('as' => 'soar.item', 'uses' => 'HomeController@m
 // favorites;
 Route::get('/favorites', array('as' => 'favorites.index', 'uses' => 'FavoriteController@getFavorites'));
 Route::post('/favorites', array('as' => 'favorites.post', 'uses' => 'FavoriteController@postFavorites'));
-
 Route::get('/playlist/{id}', array('as' => 'playlist.show', 'uses' => 'PlaylistController@show'));
 Route::delete('/playlist/{id}', array('as' => 'playlist.show', 'uses' => 'PlaylistController@destroy'));
 Route::post('/playlist', array('as' => 'playlist.store', 'uses' => 'PlaylistController@store'));

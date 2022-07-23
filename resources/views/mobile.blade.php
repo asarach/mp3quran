@@ -61,7 +61,6 @@
         </div>
       </div>
     </div>
-    <share-box></share-box>
     <div class="main-content">
       {{ $slot }}
     </div>

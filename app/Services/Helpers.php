@@ -13,6 +13,11 @@ use Illuminate\Support\Facades\Request;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Storage;
 
+function downloadUrl($file)
+{
+    return str_replace('mp3quran.net/', 'mp3quran.net/download/',  $file);
+}
+
 function getAssetTimestamp()
 {
     $setting = env('APP_ASSET_TIMESTAMP', false);

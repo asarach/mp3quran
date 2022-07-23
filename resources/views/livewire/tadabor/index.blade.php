@@ -49,7 +49,7 @@
             <div class="row">
               <div class="col-md-24">
                 @foreach ($items as $item)
-                <tadabor-item :item="{{ json_encode($item) }}" :islink="true"></tadabor-item>
+                @include('components.card-tadabor ', [ 'item' => $item->toArray(), 'islink' => true])
                 @endforeach
               </div>
             </div>

@@ -82,7 +82,17 @@
                 <ul class="list-unstyled">
                   @foreach ($soar_part_a as $sora_a)
                   <li>
-                    <card-sora :sora="{{ json_encode($sora_a) }}" rewaya="{{ $reciter_reads[$active_read]['rewaya_name'] }}" read_id="{{ $reciter_reads[$active_read]['read_id'] }}" reciter="{{ $reciter['name'] }}" :share=" {{ json_encode(['title' => $reciter_reads[$active_read]['share_title'], 'url' => $reciter_reads[$active_read]['share_url'], 'description' => $reciter_reads[$active_read]['share_description'] ]) }} "></card-sora>
+                    @include('components.card-sora', [
+                    'sora' => $sora_a,
+                    'rewaya' => $reciter_reads[$active_read]['rewaya_name'],
+                    'reciter' => $reciter['name'] ,
+                    'read_id' => $reciter_reads[$active_read]['read_id'] ,
+                    'share' => [
+                      'title' => $reciter_reads[$active_read]['share_title'],
+                      'url' => $reciter_reads[$active_read]['share_url'],
+                      'description' => $reciter_reads[$active_read]['share_description']
+                      ]
+                    ])
                   </li>
                   @endforeach
                 </ul>
@@ -91,14 +101,25 @@
                 <ul class="list-unstyled">
                   @foreach ($soar_part_b as $sora_b)
                   <li>
-                    <card-sora :sora="{{ json_encode($sora_b) }}" rewaya="{{ $reciter_reads[$active_read]['rewaya_name'] }}" read_id="{{ $reciter_reads[$active_read]['read_id'] }}" reciter="{{ $reciter['name'] }}" :share=" {{ json_encode(['title' => $reciter_reads[$active_read]['share_title'], 'url' => $reciter_reads[$active_read]['share_url'], 'description' => $reciter_reads[$active_read]['share_description'] ]) }} "></card-sora>
+                    @include('components.card-sora', [
+                    'sora' => $sora_b,
+                    'rewaya' => $reciter_reads[$active_read]['rewaya_name'],
+                    'reciter' => $reciter['name'] ,
+                    'read_id' => $reciter_reads[$active_read]['read_id'] ,
+                    'share' => [
+                      'title' => $reciter_reads[$active_read]['share_title'],
+                      'url' => $reciter_reads[$active_read]['share_url'],
+                      'description' => $reciter_reads[$active_read]['share_description']
+                      ]
+                    ])
                   </li>
                   @endforeach
                 </ul>
               </div>
             </div>
           </div>
-          <report-sora></report-sora>
+          @include('components.report-sora')
+          @include('components.share')
         </div>
       </div>
     </div>

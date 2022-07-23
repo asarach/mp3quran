@@ -21,8 +21,6 @@
                             <span class="uni-icon icon-radio" style="color: #fff"></span>
                             {{ trans("text.live-radio") }}
                         </button>
-                        <span class="tb-radio-txt">{{ trans("text.listen-to-radio") }}</span>
-
                     </div>
                     @if (1)
                     <div class="header-newsletters mr-auto">
@@ -118,7 +116,6 @@
                     @endauth
                 </div>
             </div>
-            <share-box></share-box>
             <div>
                 {{ $slot }}
             </div>

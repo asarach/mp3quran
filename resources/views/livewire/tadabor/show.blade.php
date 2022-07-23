@@ -31,7 +31,7 @@
         </div>
         @endif
         <div class="col-lg-19 pt-3" id="sticky-container">
-          <tadabor-item :item="{{json_encode($item)}}" :islink="false"></tadabor-item>
+          @include('components.card-tadabor ', [ 'item' => $item->toArray(), 'islink' => false])
         </div>
       </div>
     </div>

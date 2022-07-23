@@ -15,7 +15,12 @@
                 <div class="col-lg-5 order-2 order-md-1">
                     @if (style_version() != 'm')
                     <div class="header-options">
-                        <quick-access inclass="btn btn-primary"></quick-access>
+                        <div class="quick-access">
+                            <a href="#" class="btn btn-primary">
+                                <span class="uni-icon icon-slow_motion_video" style="color: #fff"></span>
+                                {{ trans("text.quick-access") }}
+                            </a>
+                        </div>
                     </div>
                     @endif
                 </div>
@@ -40,7 +45,7 @@
                                 <a href="#" class="nav-link active" class="nav-link">{{ trans("text.all") }}</a>
                             </li>
                             @if ($show_tadabor)
-                            <li  class="nav-item">
+                            <li class="nav-item">
                                 <a class="nav-link" href="{{ route('tadabor.index') }}" exact>
                                     {{ trans("text.tadabor-btn") }}
                                 </a>
@@ -48,7 +53,12 @@
                             @endif
                             @if (style_version() == 'm')
                             <li class="nav-item">
-                                <quick-access inclass="nav-link"></quick-access>
+                                <div class="quick-access">
+                                    <a href="#" class="nav-link">
+                                        <span class="uni-icon icon-slow_motion_video" style="color: #fff"></span>
+                                        {{ trans("text.quick-access") }}
+                                    </a>
+                                </div>
                             </li>
                             @endif
                             @if (style_version() == 'm')
@@ -74,9 +84,9 @@
                                     @endif
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="triggerIdrewaya">
-                                    <a class="dropdown-item" href.prevent="#" wire:click="$emit('selectRewaya', 0 )" >{{ trans("text.all") }}</a>
+                                    <a class="dropdown-item" href.prevent="#" wire:click="$emit('selectRewaya', 0 )">{{ trans("text.all") }}</a>
                                     @foreach ($rewayat as $rewaya)
-                                    <a class="dropdown-item" href.prevent="#"  wire:click="$emit('selectRewaya', {{ $rewaya['id'] }} )" >{{ $rewaya['name'] }}</a>
+                                    <a class="dropdown-item" href.prevent="#" wire:click="$emit('selectRewaya', {{ $rewaya['id'] }} )">{{ $rewaya['name'] }}</a>
                                     @endforeach
                                 </div>
                             </div>
@@ -118,9 +128,9 @@
 
                         <div class="side-letters">
                             <div id="#sticky-letters" style="width: 32px">
-                                <ul class="list-unstyled"  data-turbolinks="false">
+                                <ul class="list-unstyled" data-turbolinks="false">
                                     @foreach ($reads as $letter => $group)
-                                    <li >
+                                    <li>
                                         <a href="#letter_{{ $letter }}">{{ $letter }}</a>
                                     </li>
                                     @endforeach
@@ -129,7 +139,7 @@
                         </div>
                         @else
 
-                        <div  class="reads-list">
+                        <div class="reads-list">
                             <div class="row">
                                 @foreach ($reads as $read)
                                 @if ($read['reciter_name'])
@@ -152,4 +162,5 @@
             </div>
         </div>
     </div>
+    @include('components.quick-access')
 </div>

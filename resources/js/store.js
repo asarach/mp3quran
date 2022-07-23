@@ -2,16 +2,12 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import quran from './modules/quran'
-// import favorite from './modules/favorite'
-import download from './modules/download'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   modules: {
-    quran,
-    // favorite,
-    download
+    quran
   },
   state: {
     current_menu: {
@@ -127,10 +123,7 @@ export default new Vuex.Store({
         text: this.getters.getTrans('text.code-copied')
       })
     },
-    reportSora({ commit, state }, item) {
-      AppEvent.$emit("report-sora", item);
-    },
-
+    
     notify({ commit, state }, note) {
       Vue.notify({
         group: note.group,

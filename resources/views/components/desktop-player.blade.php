@@ -6,15 +6,15 @@
           <span class="uni-icon icon-skip_previous" id="playerPrevBtn"></span>
         </div>
         <div class="ply-btn btn-play-pause">
-          <div id="playerLoading" style="color: #fff; display: none;" class="la-line-scale la-sm">
+          <div id="playerLoading" style="color: #fff;" class="la-line-scale la-sm hiden-ply-btn">
             <div></div>
             <div></div>
             <div></div>
             <div></div>
             <div></div>
           </div>
-          <span id="playerPauseBtn" style="color: #fff; display: none;" class="uni-icon icon-pause"></span>
-          <span id="playerPlayBtn" class="uni-icon icon-play_arrow1" style="color: #fff; display: block;"></span>
+          <span id="playerPauseBtn" style="color: #fff;" class="uni-icon icon-pause hiden-ply-btn"></span>
+          <span id="playerPlayBtn" class="uni-icon icon-play_arrow1 shown-ply-btn" style="color: #fff;"></span>
         </div>
         <div class="ply-btn btn-next">
           <span class="uni-icon icon-skip_next" id="playerNextBtn"></span>
@@ -29,26 +29,24 @@
       <div class="ply-body">
         <div id="playerLoading"></div>
         <div class="ply-timer" id="playerTimer"></div>
-        <div class="ply-progress" id="playerProgressBar">
-          <div id="playerProgress"></div>
-          <div id="playerProgressPiont" data-down="false"></div>
+        <div class="qs-track quran-slider seek" data-control='progress'>
+          <div class="qs-progress"></div>
+          <div class="qs-point"></div>
         </div>
         <div class="ply-duration" id="playerDuration"></div>
       </div>
 
       <div class="ply-options">
-        <div class="ply-btn btn-volume" id="playerVolumeBtn">
+        <div class="ply-btn btn-volume " id="playerVolumeBtn">
           <span class="uni-icon icon-volume_off" style="display: none;"></span> {{-- 0 --}}
           <span class="uni-icon icon-volume_mute" style="display: none;"></span> {{-- 15 --}}
           <span class="uni-icon icon-volume_down"></span> {{-- 65 --}}
           <span class="uni-icon icon-volume_up" style="display: none;"></span>
           <div id="playerVolume" class="volume-selector">
-
-            <div class="ply-volume" id="playerVolumeBar">
-              <div id="playerVolumeInner"></div>
-              <div id="playerVolumePiont" data-down="false"></div>
+            <div class="qs-track quran-slider volume qs-vertical" data-control='volume'>
+              <div class="qs-progress"></div>
+              <div class="qs-point"></div>
             </div>
-
           </div>
         </div>
 
@@ -67,7 +65,7 @@
 
       <div class="ply-fullplayer" id="fullPlayer">
         <div id="fullPlayerToggle"></div>
-        <div class="sply-progress" id="playerProgressLine"></div>
+        <div class="sply-progress player-progress-line"></div>
         <div class="fply-header">
           <div class="fply-reader">
             <span id="fplyReader"></span>
@@ -153,17 +151,17 @@
           <li draggable="true">
             <div class="drag-handle bg"></div>
             <div class="playlist-avatar drag-handle">
-              <div style="color: #fff; display: none;" class="la-line-scale btn-loading la-sm">
+              <div style="color: #fff;" class="la-line-scale btn-loading la-sm hiden-ply-btn">
                 <div></div>
                 <div></div>
                 <div></div>
                 <div></div>
                 <div></div>
               </div>
-              <div class="ply-btn btn-pause" style="display: none;">
+              <div class="ply-btn btn-pause hiden-ply-btn">
                 <span class="uni-icon icon-pause"></span>
               </div>
-              <div class="ply-btn btn-play">
+              <div class="ply-btn btn-play shown-ply-btn">
                 <span class="uni-icon icon-play_arrow1"></span>
               </div>
             </div>
