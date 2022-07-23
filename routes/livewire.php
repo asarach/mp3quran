@@ -70,3 +70,4 @@ Route::get('/reciters', ['as' => 'reciter.index', 'uses' => Reciter\Index::class
 Route::get('/{slug}', ['as' => 'reciter.show', 'uses' => Reciter\Show::class]);
 Route::get('/{slug}/downloads', ['as' => 'reciter.download', 'uses' => Reciter\Download::class]);
 Route::get('/{slug}/{sora_id}', ['as' => 'reciter.sora', 'uses' => Reciter\Sora::class]);
+Route::get('/{slug}/{sora_id}/{verse}', ['as' => 'reciter.ayah', 'uses' => Reciter\Verse::class]);

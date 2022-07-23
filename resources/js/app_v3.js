@@ -59,7 +59,9 @@ function initiateLib() {
     const url = $(this).data("url");
     const item = $(this).data("item");
     const type = $(this).data("type");
-    getItemAndPlay(url, item, type);
+    const time = $(this).data("time");
+
+    getItemAndPlay(url, item, type, time);
   });
   $(".share-btn").on("click", function (e) {
     const params = {

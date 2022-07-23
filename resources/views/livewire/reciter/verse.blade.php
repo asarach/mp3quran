@@ -34,10 +34,13 @@
           <div class="sora-item sora-show-item showoptions" id="sora-{{ $sora['id'] }}">
             <div class="sora-info">
               <div class="sora-name">
-                {{ trans('text.sora-name-text', ['sora' => $sora['name'] ])}}
+                {{ trans('text.sora-name-text', ['sora' => $sora['name'] ])}} - {{ trans('text.sora-verse-nbr', ['nbr' => $sora['verse'] ])}}
               </div>
               <div class="sora-reciter">
                 {{ trans('text.sora-reciter-text', ['reciter' => $sora['reciter'] ])}}
+              </div>
+              <div class="sora-verse-text">
+                {{ $sora['text']}}
               </div>
               <div class="sora-rewaya">
                 {{ trans('text.sora-rewaya-text', ['rewaya' => $sora['rewaya'] ])}}
@@ -57,7 +60,7 @@
                 <span class="uni-icon icon-pause" style="color: #fff"></span>
                 {{ trans("text.pause") }}
               </div>
-              <div class="ply-btn btn-play shown-ply-btn" data-url="{{ route('ajax::soar.item') . '?r=' . $sora['read_id'] . '&s=' . $sora['sora_id'] }}" data-item="{{ $sora['id'] }}" data-type="sora">
+              <div class="ply-btn btn-play shown-ply-btn" data-url="{{ route('ajax::soar.item') . '?r=' . $sora['read_id'] . '&s=' . $sora['sora_id'] }}" data-item="{{ $sora['id'] }}" data-type="sora" data-time="{{ $sora['start_time'] }}">
                 <span class="uni-icon icon-play_arrow" style="color: #fff"></span>
                 {{ trans("text.play") }}
               </div>
@@ -88,23 +91,6 @@
                 <span class="uni-icon icon-warning"></span>
               </div>
             </div>
-            @if (!$verses->isEmpty())
-            <div class="sora-verses">
-              <h2>{{ trans('text.sora-verses-text', ['sora' => $sora['name'], 'reciter' => $sora['reciter'] ])}}</h2>
-              <ul class="list-inline">
-                @foreach ($verses as $verse)
-                @if ($verse->ayah != 0)
-                <li class="list-inline-item">
-                  <a href="{{ route('reciter.ayah', ['slug' => $sora['read_slug'], 'sora_id' => $sora['sora_id'], 'verse' => $verse->ayah]) }}" rel="alternate" hreflang="{{ LaravelLocalization::getCurrentLocale() }}" class="ayah-nbr">
-                    {{ $verse->ayah }}
-                  </a>
-                </li>
-                @endif
-                @endforeach
-              </ul>
-            </div>
-            @endif
-
           </div>
 
           @include('components.report-sora')

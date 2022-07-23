@@ -15,7 +15,6 @@ export default class QuickAccess {
             const item = sora;
             getItemAndPlay(url, item, 'sora');
             $("#quickAccessId").modal("hide");
-
         });
     }
     showModal() {

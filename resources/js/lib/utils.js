@@ -91,7 +91,7 @@ export function stateChange(state) {
             break;
     }
 }
-export function getItemAndPlay(url, item, type) {
+export function getItemAndPlay(url, item, type, time = null) {
     if (window.player.state.playing_item != item) {
         stateChange({ playing_type: type, playing_item: item, playing_state: "loading" })
         $.ajax({
@@ -99,6 +99,10 @@ export function getItemAndPlay(url, item, type) {
             url: url,
             success: function (response) {
                 window.player.addAndPlayItem(response);
+                if (time) {
+                    player.seek((time / 1000 ) / player.sound.duration());
+                    console.log('go to time ' + (time / 1000 ) / player.sound.duration());
+                }
             },
             error: function (response) {
             },

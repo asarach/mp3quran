@@ -7,31 +7,34 @@ use Livewire\Component;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cache;
 
-class Sora extends Component
+class Verse extends Component
 {
     public $slug;
     public $sora_id;
+    public $verse;
     public $search = null;
 
-    public function mount($slug, $sora_id)
+    public function mount($slug, $sora_id, $verse)
     {
         $this->slug = $slug;
         $this->sora_id = $sora_id;
+        $this->verse_nbr = $verse;
     }
 
     public function render()
     {
-
         $read = Read::where('slug', $this->slug)
             ->where('status', 1)
             ->firstOrFail();
-
         $soar_item = $read->soar()->where('id', $this->sora_id)->orderBy('id', 'ASC')->withPivot(['duration', 'filename', 'report'])->firstOrFail();
+        $verse = $this->getVerse($soar_item->id, $read->id, $this->verse);
         $sora = [];
-        $sora['id'] = $soar_item->getNum() . '-' . $read->id;
-        // $sora['id'] = $soar_item->id;
+        $sora['id'] = $soar_item->getNum() . '-' . $read->id . '-' . $verse->ayah;
         $sora['read_id'] = $read->id;
         $sora['sora_id'] = $soar_item->id;
+        $sora['verse'] = $verse->ayah;
+        $sora['start_time'] = $verse->start_time;
+        $sora['text'] = $verse->text;
         $sora['reciter'] = $read->getLocaleTitle();
         $sora['url'] = route('reciter.sora', ['slug' => $read->slug, 'sora_id' => $soar_item->id]);
         $sora['rewaya'] = $read->rewaya->getLocaleName();
@@ -52,29 +55,21 @@ class Sora extends Component
             'description' => $soar_item->getDescriptionTitle($read->rewaya, $sora['reciter'], $sora['name']),
             'keywords' => trans('read.keywords-' . $read->id)
         ];
-        $verses = $this->getVerses($soar_item->id, $read->id);
-        // dd(  $verses);
-        return view('livewire.reciter.sora', compact('page', 'sora', 'read', 'verses'));
+        // dd(  $sora);
+        return view('livewire.reciter.verse', compact('page', 'sora', 'read'));
     }
 
-
-    public function getVerses($sura, $read)
+    public function getVerse($sura, $read, $verse)
     {
-        // dd($sura);
-        // dd($read);
-        $name = 'ayat_timing_soar_read_' . $read . '_sura_' . $sura;
-        Cache::forget($name);
-        return Cache::rememberForever($name, function () use ($read,  $sura) {
-            $data = DB::table('reads_timing')
-                ->leftJoin('quran_pages', function ($join) {
-                    $join->on('reads_timing.ayah', '=', 'quran_pages.ayah');
-                    $join->on('reads_timing.sura_id', '=', 'quran_pages.sura_id');
-                })
-                ->where('reads_timing.read_id', $read)
-                ->where('reads_timing.sura_id', $sura)
-                ->select('reads_timing.ayah', 'quran_pages.polygon', 'reads_timing.start_time', 'reads_timing.end_time', 'quran_pages.x', 'quran_pages.y', DB::raw('CONCAT("https://www.mp3quran.net/api/quran_pages_svg/", quran_pages.page,".svg") as page'))
-                ->get();
-            return $data;
-        });
+        return DB::table('reads_timing')
+            ->leftJoin('quran_pages', function ($join) {
+                $join->on('reads_timing.ayah', '=', 'quran_pages.ayah');
+                $join->on('reads_timing.sura_id', '=', 'quran_pages.sura_id');
+            })
+            ->where('reads_timing.ayah', $verse)
+            ->where('reads_timing.read_id', $read)
+            ->where('reads_timing.sura_id', $sura)
+            ->select('reads_timing.ayah', 'quran_pages.text', 'reads_timing.start_time', 'reads_timing.end_time', 'quran_pages.x', 'quran_pages.y', DB::raw('CONCAT("https://www.mp3quran.net/api/quran_pages_svg/", quran_pages.page,".svg") as page'))
+            ->first();
     }
 }
