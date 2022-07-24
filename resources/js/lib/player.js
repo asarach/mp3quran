@@ -188,7 +188,6 @@ export default class Player {
       self.sound = data.howl = new Howl({
         src: [self.current_item.file],
         html5: true, // Force to HTML5 so that the audio can stream in (best for large files).
-        preload: true, 
         onplay: function () {
           requestAnimationFrame(self.step.bind(self));
           self.state.playing_state = 'playing';
@@ -217,7 +216,7 @@ export default class Player {
         }
       });
     }
-    // self.sound.load();
+    self.sound.load();
 
     $("#reciterName").html(self.current_item.reciter);
     $("#soraName").html(self.current_item.name);
