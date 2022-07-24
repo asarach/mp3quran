@@ -33,27 +33,27 @@
         <div class="col-lg-19" id="sticky-container">
           <div class="nav-tabs-wrapper">
             <ul class="nav nav-tabs">
-              @if (!$reads->isEmpty())
+              @if ( false and $reads['total'] > 0 )
               <li class="nav-item">
                 <a class="nav-link @if($active_tab == 'reads') active @endif" href="#" wire:click.prevent="showTab('reads')">{{trans('text.reads')}}</a>
               </li>
               @endif
-              @if (!$reciters->isEmpty())
+              @if ($reciters['total'] > 0)
               <li class="nav-item">
                 <a class="nav-link @if($active_tab == 'reciters') active @endif" href="#" wire:click.prevent="showTab('reciters')">{{trans('text.reciters')}}</a>
               </li>
               @endif
-              @if (!$radios->isEmpty())
+              @if ($radios['total'] > 0)
               <li class="nav-item">
                 <a class="nav-link @if($active_tab == 'radios') active @endif" href="#" wire:click.prevent="showTab('radios')">{{trans('text.radios')}}</a>
               </li>
               @endif
-              @if (!$videos->isEmpty())
+              @if ($videos['total'] > 0)
               <li class="nav-item">
                 <a class="nav-link @if($active_tab == 'videos') active @endif" href="#" wire:click.prevent="showTab('videos')">{{trans('text.videos')}}</a>
               </li>
               @endif
-              @if (!$tvs->isEmpty())
+              @if ($tvs['total'] > 0)
               <li class="nav-item">
                 <a class="nav-link @if($active_tab == 'tvs') active @endif" href="#" wire:click.prevent="showTab('tvs')">{{trans('text.tvs')}}</a>
               </li>
@@ -61,12 +61,12 @@
             </ul>
           </div>
           <div class="tab-content">
-            @if ($active_tab == 'reads' )
+            @if (false and $active_tab == 'reads' and false )
             <div class="search-tab-pane">
-              @foreach ($reads as $read)
+              @foreach ($reads['data'] as $read)
               @include('components.card-read', [ 'read' => $read])
               @endforeach
-              @if ($reads->currentPage() < $reads->lastPage())
+              @if ($reads['current_page'] < $reads['last_page'])
                 <button type="button" class="btn btn-success" @click="moreReads()">
                   <span class="uni-icon icon-more-horizontal" style="color: #fff"></span>
                   {{trans('text.lead-more')}}
@@ -76,10 +76,10 @@
             @endif
             @if ($active_tab == 'reciters' )
             <div class="search-tab-pane">
-              @foreach ($reciters as $reciter)
+              @foreach ($reciters['data'] as $reciter)
               @include('components.card-reciter ', [ 'reciter' => $reciter])
               @endforeach
-              @if ($reciters->currentPage() < $reciters->lastPage())
+              @if ($reciters['current_page'] < $reciters['last_page'])
                 <button type="button" class="btn btn-success" @click="moreReciters()">
                   <span class="uni-icon icon-more-horizontal" style="color: #fff"></span>
                   {{trans('text.lead-more')}}
@@ -89,10 +89,10 @@
             @endif
             @if ($active_tab == 'radios' )
             <div class="search-tab-pane">
-              @foreach ($radios as $radio)
+              @foreach ($radios['data'] as $radio)
               @include('components.card-radio ', [ 'radio' => $radio])
               @endforeach
-              @if ($radios->currentPage() < $radios->lastPage())
+              @if ($radios['current_page'] < $radios['last_page'])
                 <button type="button" class="btn btn-success" @click="moreRadios()">
                   <span class="uni-icon icon-more-horizontal" style="color: #fff"></span>
                   {{trans('text.lead-more')}}
@@ -102,10 +102,10 @@
             @endif
             @if ($active_tab == 'videos' )
             <div class="search-tab-pane">
-              @foreach ($videos as $video)
+              @foreach ($videos['data'] as $video)
               <card-video :video="{{ json_encode($video) }}"></card-video>
               @endforeach
-              @if ($videos->currentPage() < $videos->lastPage())
+              @if ($videos['current_page'] < $videos['last_page'])
                 <button type="button" class="btn btn-success" @click="moreVideos()">
                   <span class="uni-icon icon-more-horizontal" style="color: #fff"></span>
                   {{trans('text.lead-more')}}
@@ -116,10 +116,10 @@
 
             @if ($active_tab == 'tvs' )
             <div class="search-tab-pane">
-              @foreach ($tvs as $tv)
+              @foreach ($tvs['data'] as $tv)
               <card-tv :tv="{{ json_encode($tv) }}"></card-tv>
               @endforeach
-              @if ($tvs->currentPage() < $tvs->lastPage())
+              @if ($tvs['current_page'] < $tvs['last_page'])
                 <button type="button" class="btn btn-success" @click="moreTvs()">
                   <span class="uni-icon icon-more-horizontal" style="color: #fff"></span>
                   {{trans('text.lead-more')}}

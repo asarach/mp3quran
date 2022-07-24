@@ -21,35 +21,44 @@ class Show extends Component
 
         $q['s'] = $this->preparword($this->s);
         
-        $reads = $read->search($q, 'reads_index');
-        if (!$reads->isEmpty() && $this->active_tab == '') {
-            $this->active_tab = 'reads';
-        }
+        // $reads = $read->search($q, 'reads_index');
+        // if (!$reads->isEmpty() && $this->active_tab == '') {
+        //     $this->active_tab = 'reads';
+        // }
+        // $reads = $reads->toArray();
+
         $reciters = $reciter->search($q, 'reciters_index');
         if (!$reciters->isEmpty() && $this->active_tab == '') {
             $this->active_tab = 'reciters';
         }
+        $reciters = $reciters->toArray();
+
         $radios = $radio->search($q, 'radios_index');
         if (!$radios->isEmpty() && $this->active_tab == '') {
             $this->active_tab = 'radios';
         }
+        $radios = $radios->toArray();
+
         $videos = $video->search($q, 'videos_index');
         if (!$videos->isEmpty() && $this->active_tab == '') {
             $this->active_tab = 'videos';
         }
+        $videos = $videos->toArray();
+
         $tvs = $tv->search($q, 'tvs_index');
         if (!$tvs->isEmpty() && $this->active_tab == '') {
             $this->active_tab = 'tvs';
         }
+        $tvs = $tvs->toArray();
         
         $page = [
             'title' => trans('text.search-result-for', ['q' => $this->s]) . ' | MP3 Quran',
             'description' => '',
             'keywords' => ''
         ];
-        // dd($radios);
+        // dd($reads);
 
-        return view('livewire.search.show',  compact('page',  'videos', 'reciters', 'radios', 'tvs', 'reads'));
+        return view('livewire.search.show',  compact('page',  'videos', 'reciters', 'radios', 'tvs'));
     }
     public function preparword($q)
     {
