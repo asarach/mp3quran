@@ -23,7 +23,7 @@
   <div class="radio-btn more-btn">
     <span class="uni-icon icon-more-horizontal"></span>
   </div>
-  <div class="radio-options">
+  <div class="radio-options item-options">
     <div class="radio-btn share-btn" v-tooltip="trans('text.share')" data-title="{{ $radio['share_title'] }}" data-url="{{ $radio['share_url'] }}" data-description="{{ $radio['share_description'] }}">
       <span class="uni-icon icon-share"></span>
     </div>

@@ -30,7 +30,7 @@
     <div class="sora-btn more-btn">
         <span class="uni-icon icon-more-horizontal"></span>
     </div>
-    <div class="sora-options">
+    <div class="sora-options item-options">
         <div class="sora-btn share-btn" v-tooltip="trans('text.share')" data-title="{{ $sora['share_title'] }}" data-url="{{ $sora['share_url'] }}" data-description="{{ $sora['share_description'] }}">
             <span class="uni-icon icon-share"></span>
         </div>

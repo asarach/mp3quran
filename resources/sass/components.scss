@@ -160,6 +160,25 @@
     opacity: 1;
   }
 }
+.sora-item .more-btn:hover{
+  background: transparent !important;
+  box-shadow: none !important;
+}
+.sora-item .sora-options.show {
+  width: 200px;
+  background: #fff;
+}
+.card-radio .more-btn:hover{
+  background: transparent !important;
+  box-shadow: none !important;
+}
+.card-radio .radio-options.show {
+  opacity: 1;
+  width: 100px;
+  background: #fff;
+  margin-left: 40px;
+}
+
 
 /**** tv ****/
 
@@ -241,19 +260,19 @@
     font-size: 24px;
     color: #33aee4;
   }
-  .sora-verses{
+  .sora-verses {
     background: #f5f5f5;
     margin: 0 -0.5rem;
     text-align: center;
     padding: 1rem;
-    h2{
+    h2 {
       font-size: 1rem;
       margin-bottom: 1rem;
     }
-    li{
+    li {
       margin: 0;
     }
-    .ayah-nbr{
+    .ayah-nbr {
       display: flex;
       width: 24px;
       height: 32px;
@@ -265,7 +284,7 @@
       margin: 0 0.25rem;
     }
   }
-  .sora-verse-text{
+  .sora-verse-text {
     font-family: none;
     font-size: 1.5rem;
     padding: 0.5rem;
@@ -525,6 +544,8 @@
     position: absolute;
     transition: all 0.1s ease;
     left: 0.5rem;
+    width: 0;
+    overflow: hidden;
   }
   .radio-duration {
     margin-left: 6px;
@@ -537,9 +558,6 @@
   display: flex;
 }
 .card-radio:hover {
-  .more-btn {
-    opacity: 0;
-  }
   .radio-options {
     opacity: 1;
   }

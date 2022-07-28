@@ -180,15 +180,17 @@ export default class Player {
     if (data.howl) {
       self.sound = data.howl;
     } else {
-      // if (self.sound == null || self.sound.src !== self.current_item.file) {
-      //   if (self.sound != null) {
-      //     self.sound.unload();
-      //   }
-      // }
+      if (self.sound == null || self.sound.src !== self.current_item.file) {
+        if (self.sound != null) {
+          console.log('unload');
+          self.sound.unload();
+        }
+      }
       self.sound = data.howl = new Howl({
         src: [self.current_item.file],
         html5: true, // Force to HTML5 so that the audio can stream in (best for large files).
         preload: true, 
+        pool: 1, 
         onplay: function () {
           requestAnimationFrame(self.step.bind(self));
           self.state.playing_state = 'playing';

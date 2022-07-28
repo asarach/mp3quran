@@ -109,6 +109,10 @@ function initiateLib() {
     const group = $(this).data("group")
     favorites.removeItem(sora_id, group);
   });
+  $('.more-btn').on("click", function (e) {
+    $('.more-btn').not(this).next('.item-options').removeClass('show');
+    $(this).next('.item-options').toggleClass('show');
+  });
 }
 $(document).ready(function () {
   initiateLib();
@@ -205,7 +209,7 @@ if ($('#savePlaylist').length) {
 }
 $(".quran-slider").each(function (e) {
   let control = $(this).data("control");
-  new quranSlider(this,control);
+  new quranSlider(this, control);
 });
 
 
