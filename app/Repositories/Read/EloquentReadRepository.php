@@ -247,6 +247,7 @@ class EloquentReadRepository extends EloquentRepository implements ReadRepositor
                 $r_item['read_id'] = $read->id;
                 $r_item['read_slug'] =  $read->slug;
                 $r_item['reciter_name'] = $read->getReciter();
+                $r_item['show'] = 'show';
                 $r_item['rewaya_name'] = $read->getRewaya();
                 $r_item['share_url'] = route('reciter.show', ['slug' => $read->slug]);
                 $r_item['share_description'] = $read->getLocaleShareDescription($r_item['sora_name']);

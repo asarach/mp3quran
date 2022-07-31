@@ -111,7 +111,7 @@ function handleClick(myRadio) {
 
 }
 function retateHeaderAds() {
-    var count = $(".mobile-ui .main .show-header .header-ads .ha-item").length;
+    var count = $(" .main .show-header .header-ads .ha-item").length;
 
     var currentItem = 1;
     if (count > 1) {
@@ -120,15 +120,15 @@ function retateHeaderAds() {
         var nextItem = 1;
     }
 
-    $(".mobile-ui .main .show-header .header-ads .ha-item:nth-child(" + currentItem + ")").addClass('show');
+    $(" .main .show-header .header-ads .ha-item:nth-child(" + currentItem + ")").addClass('show');
     toggleHeaderAds(currentItem, nextItem, count);
 }
 
 function toggleHeaderAds(currentItem, nextItem, count) {
     var soconds = 5;
     window.setTimeout(function () {
-        $(".mobile-ui .main .show-header .header-ads .ha-item:nth-child(" + currentItem + ")").removeClass('show');
-        $(".mobile-ui .main .show-header .header-ads .ha-item:nth-child(" + nextItem + ")").addClass('show');
+        $(" .main .show-header .header-ads .ha-item:nth-child(" + currentItem + ")").removeClass('show');
+        $(" .main .show-header .header-ads .ha-item:nth-child(" + nextItem + ")").addClass('show');
         newCurrentItem = nextItem;
         if (nextItem == count) {
             newNextItem = 1;

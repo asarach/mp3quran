@@ -18,6 +18,7 @@ export function trans(string, args = {}) {
     return value;
 }
 export function stateChange(state) {
+    console.log('shown-ply-btn');
     $('.hiden-ply-btn').hide();
     $('.shown-ply-btn').show();
     switch (state.playing_state) {

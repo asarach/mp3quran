@@ -1,4 +1,4 @@
-<div class="sora-item show" id="sora-{{ $sora['id'] }}">
+<div class="sora-item {{ $sora['show'] }}" id="sora-{{ $sora['id'] }}">
     <div class="ply-btn btn-loading hiden-ply-btn">
         <div class="la-line-scale la-sm">
             <div></div>

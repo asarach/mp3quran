@@ -66,15 +66,13 @@ class Show extends Component
             'keywords' => trans('read.keywords-' . $read->id)
         ];
 
-           // dd($page);
-
-
+        $this->emit('changeDom');
         return view('livewire.reciter.show', compact('soar_part_a', 'soar_part_b', 'reciter_reads', 'reciter', 'active_read', 'read', 'page'));
     }
     public function preparword($q)
     {
-        $q = str_replace('أ', 'ا', $q);
-        $q = str_replace('إ', 'ا', $q);
+        // $q = str_replace('أ', 'ا', $q);
+        // $q = str_replace('إ', 'ا', $q);
 
         return $q;
     }
@@ -125,9 +123,9 @@ class Show extends Component
                 $soar_item['share_title'] = $read->getLocaleShareTitle($sora->getLocaleName());
                 $soar_item['share_description'] = $read->getLocaleShareDescription($sora->getLocaleName());
                 if (!$query || ($query && strpos(make_query($soar_item['sora_name']), make_query($query)) !== false)) {
-                    $soar_item['show'] = true;
+                    $soar_item['show'] = 'show';
                 } else {
-                    $soar_item['show'] = false;
+                    $soar_item['show'] = '';
                 }
                 $read_item['soar'][] = $soar_item;
             }
