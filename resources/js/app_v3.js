@@ -32,6 +32,7 @@ window.favorites = new Favorites();
 /************************* */
 
 function initiateLib() {
+ 
   $(".quick-access a").on("click", function (e) {
     e.preventDefault();
     window.quickAccess = new QuickAccess();
@@ -127,6 +128,12 @@ document.addEventListener("turbolinks:render", function (event) {
   player.stateChanged();
   favorites.favoritesChanged();
 });
+Livewire.on('changeDom', postId => {
+  console.log('changeDom');
+  initiateLib();
+  player.stateChanged();
+  favorites.favoritesChanged();
+})
 
 $("#playerPlayBtn").on("click", function (e) {
   e.preventDefault();

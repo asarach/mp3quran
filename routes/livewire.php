@@ -60,7 +60,7 @@ Route::get('/uploader', ['as' => 'uploader', 'uses' => Uploader\Show::class]);
 
 /* API */
 Route::get('/api', ['as' => 'page.api', 'uses' => Page\Api::class]);
-Route::get('/api3', ['as' => 'page.api3', 'uses' => Page\Api3::class]);
+Route::get('/api3', ['as' => 'page.api3', 'uses' => Page\ApiOld::class]);
 
 /* contact */
 Route::get('/contact-us', ['as' => 'page.contact', 'uses' => Page\Contact::class]);

@@ -56,19 +56,21 @@ class Show extends Component
             'description' => '',
             'keywords' => ''
         ];
-        // dd($reads);
+        // dd($reciters['data']);
 
         return view('livewire.search.show',  compact('page',  'videos', 'reciters', 'radios', 'tvs'));
     }
     public function preparword($q)
     {
-        $q = str_replace('أ', 'ا', $q);
-        $q = str_replace('إ', 'ا', $q);
+        // $q = utf8_decode($q);
+        // $q = str_replace('أ', 'ا', $q);
+        // $q = str_replace('إ', 'ا', $q);
 
         return $q;
     }
     public function showTab($tab)
     {
         $this->active_tab = $tab;
+        $this->emit('changeDom');
     }
 }

@@ -5,29 +5,26 @@ namespace App\Http\Livewire\Page;
 use Livewire\Component;
 use App\Page;
 
-class Api3 extends Component
+class ApiOld extends Component
 {
-    public $index  = 0;
     public $api  = [];
+    public $index  = 0;
     public function render()
     {
         $page = Page::where('name', 'API')->where('status', 1)->firstOrFail();
-        $this->api = json_decode(file_get_contents(storage_path() . "/api3.json"), true);
+        
+        $this->api = json_decode(file_get_contents(storage_path() . "/api1.json"), true);
+
         $page->title = $page->getLocaleTitle();
         $page->description = $page->getLocaleDescription();
         $page->keywords = $page->getLocaleKeywords();
 
-        $menu = [
-            'reads',
-            'recent_reads'
-        ];
-
-        return view('livewire.page.api3', compact('page', 'menu'));
+        return view('livewire.page.api_old', compact('page'));
     }
     public function showTab($key)
     {
         $this->index = $key;
-        $this->dispatchBrowserEvent('index-updated');
-
+        $api1 = json_decode(file_get_contents(storage_path() . "/api1.json"), true);
+        $this->current_tab = $api1[$key];
     }
 }
