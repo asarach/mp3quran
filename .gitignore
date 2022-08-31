@@ -18,6 +18,7 @@
 /public/sabda_rasul
 public/betamp3.zip
 /storage/app/video_progress
+/storage/framework
 /storage/*.key
 /storage/*.index
 
