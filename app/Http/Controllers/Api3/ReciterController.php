@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers\Api3;
 
-use App\Http\Controllers\Controller;
-
 use Illuminate\Http\Request;
 use Cache;
 use DB;
@@ -15,16 +13,8 @@ use App\Read;
 use Waavi\Translation\Models\Language;
 
 
-class ReadController extends Controller
+class ReciterController extends ApiController
 {
-
-    private $language = null;
-    private $language_code = 'ar';
-    private $reciter = null;
-    private $rewaya = null;
-    private $sura = null;
-    private $last_updated_date = null;
-
     /**
      * API 2 controller.
      *
@@ -90,6 +80,33 @@ class ReadController extends Controller
         return compact('reads');
     }
 
+
+    /**
+     * Reciters
+     *
+     * Get a list of all avalibale reciters ordered by added date
+     *
+     * @group API 2
+     *
+     * @bodyParam  language string The language of texts in reciters arrays. If is not set the default language of texts is arabic. exemple: 'ar', 'en', 'fr'...
+     *
+     * @return json
+     */
+    public function reciters(Request $request)
+    {
+        Cache::flush();
+
+        $this->setParams($request);
+
+        $reciters = Cache::rememberForever('reciters_' . $request->input('language'), function () {
+            return $this->getReciters();
+        });
+
+        return compact('reciters');
+    }
+
+
+
     public function getReads($order = 'name', $sort = 'asc')
     {
 
@@ -137,7 +154,7 @@ class ReadController extends Controller
             //         ->where('rewaya_translations.language_id', $this->language)
             //         ->select('reads.*', 'mushafs.id as mushaf_id', 'mushaf_translations.name as mushaf_name', 'mushaf.name as mushaf_server', 'rewaya_translations.name as rewaya_name');
             // } else {
-                $reads = $reads->select('reads.*', 'mushafs.id as mushaf_id', 'mushafs.name as mushaf_name', 'rewayat.name as rewaya_name');
+            $reads = $reads->select('reads.*', 'mushafs.id as mushaf_id', 'mushafs.name as mushaf_name', 'rewayat.name as rewaya_name');
             // }
 
             $reads = $reads->orderBy('id', 'desc')->get();
@@ -154,7 +171,7 @@ class ReadController extends Controller
                     ->toArray();
                 $moshaf['id'] = $read->id;
                 $moshaf['moshaf_type'] = intval($read->rewaya_id . $read->mushaf_id);
-                $moshaf['name'] =  transLocale('rewaya-name',  $read->rewaya_id, $this->language_code)  . ' - ' .transLocale('mushaf-name',  $read->mushaf_id, $this->language_code);
+                $moshaf['name'] =  transLocale('rewaya-name',  $read->rewaya_id, $this->language_code)  . ' - ' . transLocale('mushaf-name',  $read->mushaf_id, $this->language_code);
                 $moshaf['Server'] = $read->server_id;
                 $moshaf['sample'] = $read->sample;
                 $moshaf['count'] = count($soar);
@@ -187,38 +204,73 @@ class ReadController extends Controller
         return $results;
     }
 
-
-    public function setParams($request)
+    public function getReciters($order = 'name', $sort = 'asc')
     {
-        if ($request->input('language')) {
+        $reciters = Reciter::where('status', 1);
+        if ($this->language !== null) {
+            $reciters = $reciters->join('translator_translations', 'reciters.id', '=', 'translator_translations.item')
+                ->where('translator_translations.locale', $this->language_code)
+                ->where('translator_translations.group', 'reciter-name')
+                ->select('reciters.id', 'translator_translations.text as name');
+        }
+        $reciters = $reciters->get();
 
-            $language = Language::where('locale', $request->input('language'))->first();
-            if ($language) {
-                $this->language = $language->id;
-                $this->language_code = $language->locale;
+        $results = [];
+        foreach ($reciters as $reciter) {
+
+            $reads = Read::where('reads.status', 1);
+            if ($this->rewaya !== null) {
+                $reads = $reads->where('reads.rewaya_id', $this->rewaya);
+            }
+            if ($this->sura !== null) {
+                $reads = $reads
+                    ->join('sura_read', 'reads.id', '=', 'sura_read.read_id')
+                    ->where('sura_read.sura_id', $this->sura);
+            }
+            $reads = $reads->orderBy('id', 'desc')
+                ->where('reads.reciter_id', $reciter->id)
+                ->get();
+
+
+            $items = [];
+            foreach ($reads as $read) {
+
+                $moshaf = [];
+                $soar = DB::table('sura_read')
+                    ->where('read_id', $read->id)
+                    ->orderBy('sura_id', 'ASC')
+                    ->pluck('sura_id')
+                    ->toArray();
+
+                $moshaf['id'] = $read->id;
+                $moshaf['moshaf_type'] = intval($read->rewaya_id . $read->mushaf_id);
+                $moshaf['name'] =  transLocale('rewaya-name',  $read->rewaya_id, $this->language_code)  . ' - ' . transLocale('mushaf-name',  $read->mushaf_id, $this->language_code);
+                $moshaf['server'] = $read->server_id;
+                $moshaf['suwar_count'] = count($soar);
+                $moshaf['suwar'] = implode(",", $soar);
+                if (!empty($soar)) {
+                    $items[] = $moshaf;
+                }
+            }
+
+            $result['id'] = $reciter->id;
+            $result['name'] =  transLocale('reciter-name',  $reciter->id, $this->language_code);
+            $result['letter'] = mb_substr($result['name'], 0, 1, "UTF-8");
+
+            if ($order == 'updated_at') {
+                $result['recent_date'] = $reciter->updated_at;
+            }
+            $result['reads'] = $items;
+
+
+            if (!empty($items)) {
+
+                $results[] = $result;
             }
         }
 
-        if ($request->input('reciter')) {
-            $reciter = Reciter::where('status', 1)->where('id', $request->input('reciter'))->first();
-            if ($reciter) {
-                $this->reciter = $reciter->id;
-            }
-        }
-        if ($request->input('rewaya')) {
-            $rewaya = Rewaya::where('status', 1)->where('id', $request->input('rewaya'))->first();
-            if ($rewaya) {
-                $this->rewaya = $rewaya->id;
-            }
-        }
-        if ($request->input('sura')) {
-            $sura = Sora::where('status', 1)->where('id', $request->input('sura'))->first();
-            if ($sura) {
-                $this->sura = $sura->id;
-            }
-        }
-        if ($request->input('last_updated_date')) {
-            $this->last_updated_date = $request->input('last_updated_date');
-        }
+
+
+        return $results;
     }
 }
