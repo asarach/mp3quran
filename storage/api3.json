@@ -57,7 +57,7 @@
                 {
                     "type": "request_url",
                     "title": "Example Request",
-                    "content": "GET http://mp3quran.de/api/v3/reads?language=eng&reciter=168&rewaya=1&sura=1&last_updated_date=01/01/2020"
+                    "content": "GET http://www.mp3quran.net/api/v3/reads?language=eng&reciter=168&rewaya=1&sura=1&last_updated_date=01/01/2020"
                 },
                 {
                     "type": "response",
@@ -145,7 +145,7 @@
                 {
                     "type": "request_url",
                     "title": "Example Request",
-                    "content": "GET http://mp3quran.de/api/v3/recent_reads?language=eng&reciter=168&rewaya=1&sura=1&last_updated_date=01/01/2020"
+                    "content": "GET http://www.mp3quran.net/api/v3/recent_reads?language=eng&reciter=168&rewaya=1&sura=1&last_updated_date=01/01/2020"
                 },
                 {
                     "type": "response",

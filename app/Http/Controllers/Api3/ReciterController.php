@@ -44,7 +44,7 @@ class ReciterController extends ApiController
     public function reads(Request $request)
     {
         $this->setParams($request);
-        $name = 'reads_language_' . $this->language . '_last_updated_date_' . $this->last_updated_date . '_reciter_' . $this->reciter . '_rewaya_' . $this->rewaya . '_sura_' . $this->sura;
+        $name = 'api_v3_reads_language_' . $this->language . '_last_updated_date_' . $this->last_updated_date . '_reciter_' . $this->reciter . '_rewaya_' . $this->rewaya . '_sura_' . $this->sura;
         Cache::forget($name);
         $reads = Cache::rememberForever($name, function () {
             return $this->getReads();
@@ -71,8 +71,8 @@ class ReciterController extends ApiController
     public function recentReads(Request $request)
     {
         $this->setParams($request);
-        $name = 'recent_reads_language_' . $this->language . '_last_updated_date_' . $this->last_updated_date . '_reciter_' . $this->reciter . '_rewaya_' . $this->rewaya . '_sura_' . $this->sura;
-        //Cache::forget($name);
+        $name = 'api_v3_recent_reads_language_' . $this->language . '_last_updated_date_' . $this->last_updated_date . '_reciter_' . $this->reciter . '_rewaya_' . $this->rewaya . '_sura_' . $this->sura;
+        Cache::forget($name);
         $reads = Cache::rememberForever($name, function () {
             return $this->getReads('updated_at', 'desc');
         });
@@ -94,11 +94,10 @@ class ReciterController extends ApiController
      */
     public function reciters(Request $request)
     {
-        Cache::flush();
-
         $this->setParams($request);
-
-        $reciters = Cache::rememberForever('reciters_' . $request->input('language'), function () {
+        $name = 'api_v3_reads_language_' . $this->language . '_last_updated_date_' . $this->last_updated_date . '_reciter_' . $this->reciter . '_rewaya_' . $this->rewaya . '_sura_' . $this->sura;
+        Cache::forget($name);
+        $reciters = Cache::rememberForever($name, function () {
             return $this->getReciters();
         });
 

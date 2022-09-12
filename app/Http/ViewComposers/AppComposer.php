@@ -54,6 +54,7 @@ class AppComposer
         }
         $popup = $popup->orderBy('order_num', 'asc')
             ->first();
+        Cache::forget('languages');
         $languages  = Cache::rememberForever('languages', function () {
             return LaravelLocalization::getSupportedLocales();
         });
