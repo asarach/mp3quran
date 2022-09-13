@@ -1,5 +1,257 @@
 [
     {
+        "key": "Languages",
+        "sections_groups": [
+            [
+                {
+                    "type": "text",
+                    "title": "Overview",
+                    "content": "Get a list of all avalibale languages."
+                },
+                {
+                    "type": "url",
+                    "title": "Resource URL",
+                    "content": "https://mp3quran.net/api/v3/languages"
+                },
+                {
+                    "type": "request_url",
+                    "title": "Example Request",
+                    "content": "GET https://mp3quran.net/api/v3/languages"
+                },
+                {
+                    "type": "response",
+                    "title": "Example Response",
+                    "content": {
+                        "language": [
+                            {
+                                "id": "1",
+                                "language": "Arabic",
+                                "native": "العربية",
+                                "suwar": "https://www.mp3quran.net/api/v3/suwar?language=ar",
+                                "riwayat": "https://www.mp3quran.net/api/v3/riwayat?language=ar",
+                                "reciters": "https://www.mp3quran.net/api/v3/reciters?language=ar"
+                            },
+                            {
+                                "id": "2",
+                                "language": "English",
+                                "native": "English",
+                                "suwar": "https://www.mp3quran.net/api/v3/suwar?language=eng",
+                                "riwayat": "https://www.mp3quran.net/api/v3/riwayat?language=eng",
+                                "reciters": "https://www.mp3quran.net/api/v3/reciters?language=eng"
+                            }
+                        ]
+                    }
+                }
+            ]
+        ]
+    },
+    {
+        "key": "Suwar",
+        "sections_groups": [
+            [
+                {
+                    "type": "text",
+                    "title": "Overview",
+                    "content": "Get a list of all avalibale Suwar."
+                },
+                {
+                    "type": "url",
+                    "title": "Resource URL",
+                    "content": "https://mp3quran.net/api/v3/suwar"
+                },
+                {
+                    "type": "table",
+                    "title": "Parameters",
+                    "content": [
+                        {
+                            "Name": "language",
+                            "Required": "optional",
+                            "Description": "The language of texts in suwar arrays. If is not set the default language of texts is arabic.",
+                            "Default Value": "",
+                            "Example": "'eng', 'ar', 'en', 'fr'..."
+                        }
+                    ]
+                },
+                {
+                    "type": "request_url",
+                    "title": "Example Request",
+                    "content": "GET https://mp3quran.net/api/v3/suwar?language=eng"
+                },
+                {
+                    "type": "response",
+                    "title": "Example Response",
+                    "content": {
+                        "suwar": [
+                            {
+                                "id": 1,
+                                "name": "Al-Fatihah ",
+                                "start_page": 1,
+                                "end_page": 1,
+                                "makkia": 1
+                            },
+                            {
+                                "id": 2,
+                                "name": "Al-Baqarah ",
+                                "start_page": 2,
+                                "end_page": 49,
+                                "makkia": 0
+                            },
+                            {
+                                "id": 3,
+                                "name": "Al-Imran ",
+                                "start_page": 50,
+                                "end_page": 76,
+                                "makkia": 0
+                            }
+                        ]
+                    }
+                }
+            ]
+        ]
+    },
+    {
+        "key": "Riwayat",
+        "sections_groups": [
+            [
+                {
+                    "type": "text",
+                    "title": "Overview",
+                    "content": "Get a list of all avalibale Riwayat."
+                },
+                {
+                    "type": "url",
+                    "title": "Resource URL",
+                    "content": "https://mp3quran.net/api/v3/riwayat"
+                },
+                {
+                    "type": "table",
+                    "title": "Parameters",
+                    "content": [
+                        {
+                            "Name": "language",
+                            "Required": "optional",
+                            "Description": "The language of texts in riwayat arrays. If is not set the default language of texts is arabic.",
+                            "Default Value": "",
+                            "Example": "'ar', 'en', 'fr'..."
+                        }
+                    ]
+                },
+                {
+                    "type": "request_url",
+                    "title": "Example Request",
+                    "content": "GET https://mp3quran.net/api/v3/riwayat?language=eng"
+                },
+                {
+                    "type": "response",
+                    "title": "Example Response",
+                    "content": {
+                        "riwayat": [
+                            {
+                                "id": 1,
+                                "name": "Rewayat Hafs A'n Assem"
+                            },
+                            {
+                                "id": 10,
+                                "name": "Rewayat Warsh A'n Nafi' Men  Tariq Abi Baker Alasbahani"
+                            },
+                            {
+                                "id": 11,
+                                "name": "Rewayat Albizi and Qunbol A'n Ibn Katheer"
+                            }
+                        ]
+                    }
+                }
+            ]
+        ]
+    },
+    {
+        "key": "Reciters",
+        "sections_groups": [
+            [
+                {
+                    "type": "text",
+                    "title": "Overview",
+                    "content": "Get a list of all avalibale reciters ordered by reciters name."
+                },
+                {
+                    "type": "url",
+                    "title": "Resource URL",
+                    "content": "https://mp3quran.net/api/v3/reciters"
+                },
+                {
+                    "type": "table",
+                    "title": "Parameters",
+                    "content": [
+                        {
+                            "Name": "language",
+                            "Required": "optional",
+                            "Description": "The language of texts in reciters arrays. If is not set the default language of texts is arabic.",
+                            "Default Value": "",
+                            "Example": "'ar', 'en', 'fr'..."
+                        },
+                        {
+                            "Name": "rewaya",
+                            "Required": "optional",
+                            "Description": "The id of the rewaya you want to get its reciters. If is not set it will return all reciters",
+                            "Default Value": "",
+                            "Example": ""
+                        },
+                        {
+                            "Name": "sura",
+                            "Required": "optional",
+                            "Description": "The id of the sura you want to get its reciters. If is not set it will return all reciters",
+                            "Default Value": "",
+                            "Example": ""
+                        }
+                    ]
+                },
+                {
+                    "type": "request_url",
+                    "title": "Example Request",
+                    "content": "GET https://mp3quran.net/api/v3/reciters?language=eng&rewaya=1&sura=1"
+                },
+                {
+                    "type": "response",
+                    "title": "Example Response",
+                    "content": {
+                        "reciters": [
+                            {
+                                "id": 105,
+                                "name": "Mahmoud Khalil Al-Hussary",
+                                "letter": "M",
+                                "reads": [
+                                    {
+                                        "id": 115,
+                                        "moshaf_type": 216,
+                                        "name": "Rewayat Warsh A'n Nafi' - Murattal",
+                                        "server": 12,
+                                        "suwar_count": 114,
+                                        "suwar": "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": 129,
+                                "name": "Ibrahim Aldosari",
+                                "letter": "I",
+                                "reads": [
+                                    {
+                                        "id": 142,
+                                        "moshaf_type": 2,
+                                        "name": "Rewayat Warsh A'n Nafi' - ",
+                                        "server": 7,
+                                        "suwar_count": 114,
+                                        "suwar": "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        ]
+    },
+    {
         "key": "Reads",
         "sections_groups": [
             [
@@ -57,7 +309,7 @@
                 {
                     "type": "request_url",
                     "title": "Example Request",
-                    "content": "GET http://mp3quran.de/api/v3/reads?language=eng&reciter=168&rewaya=1&sura=1&last_updated_date=01/01/2020"
+                    "content": "GET https://mp3quran.net/api/v3/reads?language=eng&reciter=168&rewaya=1&sura=1&last_updated_date=01/01/2020"
                 },
                 {
                     "type": "response",
@@ -145,7 +397,7 @@
                 {
                     "type": "request_url",
                     "title": "Example Request",
-                    "content": "GET http://mp3quran.de/api/v3/recent_reads?language=eng&reciter=168&rewaya=1&sura=1&last_updated_date=01/01/2020"
+                    "content": "GET https://mp3quran.net/api/v3/recent_reads?language=eng&reciter=168&rewaya=1&sura=1&last_updated_date=01/01/2020"
                 },
                 {
                     "type": "response",
