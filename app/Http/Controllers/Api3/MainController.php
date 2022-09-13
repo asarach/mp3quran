@@ -36,9 +36,8 @@ class MainController extends ApiController
      */
     public function languages(Request $request)
     {
-        Cache::flush();
         $this->setParams($request);
-        $language = Cache::rememberForever('languages', function () {
+        $language = Cache::rememberForever('api_v3_languages', function () {
             return $this->getLanguages();
         });
 
@@ -58,10 +57,8 @@ class MainController extends ApiController
      */
     public function suwar(Request $request)
     {
-        Cache::flush();
-
         $this->setParams($request);
-        $suwar = Cache::rememberForever('suwar_' . $request->input('language'), function () {
+        $suwar = Cache::rememberForever('api_v3_suwar_' . $request->input('language'), function () {
             return $this->getSuwar();
         });
 
@@ -81,9 +78,8 @@ class MainController extends ApiController
      */
     public function riwayat(Request $request)
     {
-        Cache::flush();
         $this->setParams($request);
-        $riwayat = Cache::rememberForever('riwayat_' . $request->input('language'), function () {
+        $riwayat = Cache::rememberForever('api_v3_riwayat_' . $request->input('language'), function () {
             return $this->getRiwayat();
         });
 
