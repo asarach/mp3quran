@@ -40,64 +40,7 @@
 
     <div class="show-body">
         <div class="container">
-            <div class="row">
-                <div class="col-md-5">
-                    <div class="api3-nav">
-                        @foreach ($api as $menu_key => $menu_item)
-                        <button type="button" class="btn btn-secondary @if($index == $menu_key) active @endif" wire:click.prevent="showTab({{ $menu_key}})">{{$menu_item['key']}}</button>
-                        @endforeach
-                    </div>
-                </div>
-
-                <div class="col-md-19" id="sticky-container">
-                    <div class="api3-content">
-                        <div class="row">
-                            @foreach ($api[$index]['sections_groups'] as $section_group)
-                            <div class="col">
-                                @foreach ($section_group as $section)
-                                <section class="section-{{ $section['type'] }}">
-                                    <div class="section-title">
-                                        {{ $section['title'] }}
-                                    </div>
-                                    <div class="section-content">
-                                        @switch($section['type'])
-                                        @case('table')
-                                        <table class="table">
-                                            <thead>
-                                                <tr>
-                                                    @foreach ($section['content'][0] as $header => $headerVal)
-                                                    <th scope="col">{{ $header }}</th>
-                                                    @endforeach
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach ($section['content'] as $tbody)
-                                                <tr>
-                                                    @foreach ($tbody as $tbodyItem)
-                                                    <th scope="col">{{ $tbodyItem }}</th>
-                                                    @endforeach
-                                                </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                        @break
-                                        @case('response')
-                                        <pre>
-                                            <code class="language-json">{{ json_encode($section['content'], JSON_PRETTY_PRINT) }}</code>
-                                        </pre>
-                                        @break
-                                        @default
-                                        {{ $section['content'] }}
-                                        @endswitch
-                                    </div>
-                                </section>
-                                @endforeach
-                            </div>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {!! $docContent !!}
         </div>
     </div>
 </div>

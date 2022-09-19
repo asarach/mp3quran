@@ -7,27 +7,16 @@ use App\Page;
 
 class Api extends Component
 {
-    public $index  = 0;
-    public $api  = [];
     public function render()
     {
         $page = Page::where('name', 'API')->where('status', 1)->firstOrFail();
-        $this->api = json_decode(file_get_contents(storage_path() . "/api3.json"), true);
+        $docContent = file_get_contents(storage_path() . "/api3-doc/default.html");
         $page->title = $page->getLocaleTitle();
         $page->description = $page->getLocaleDescription();
         $page->keywords = $page->getLocaleKeywords();
 
-        $menu = [
-            'reads',
-            'recent_reads'
-        ];
+        // dd($html);
 
-        return view('livewire.page.api', compact('page', 'menu'));
-    }
-    public function showTab($key)
-    {
-        $this->index = $key;
-        $this->dispatchBrowserEvent('index-updated');
-
+        return view('livewire.page.api', compact('page', 'docContent'));
     }
 }

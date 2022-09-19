@@ -1,0 +1,600 @@
+<div class="row">
+    <div class="col-md-5">
+        <div class="api3-nav">
+            <ul class="nav flex-column" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="btn btn-secondary  active " id="Languages-tab" data-toggle="tab" data-target="#Languages" type="button" role="tab" aria-controls="Languages" aria-selected="true">Languages</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="btn btn-secondary " id="Suwar-tab" data-toggle="tab" data-target="#Suwar" type="button" role="tab" aria-controls="Suwar" aria-selected="true">Suwar</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="btn btn-secondary " id="Riwayat-tab" data-toggle="tab" data-target="#Riwayat" type="button" role="tab" aria-controls="Riwayat" aria-selected="true">Riwayat</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="btn btn-secondary " id="Reciters-tab" data-toggle="tab" data-target="#Reciters" type="button" role="tab" aria-controls="Reciters" aria-selected="true">Reciters</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="btn btn-secondary " id="Reads-tab" data-toggle="tab" data-target="#Reads" type="button" role="tab" aria-controls="Reads" aria-selected="true">Reads</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="btn btn-secondary " id="Recent reads-tab" data-toggle="tab" data-target="#Recent reads" type="button" role="tab" aria-controls="Recent reads" aria-selected="true">Recent reads</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="col-md-19" id="sticky-container">
+        <div class="api3-content">
+            <div class="row">
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade  show active  " id="Languages" role="tabpanel" aria-labelledby="Languages-tab">
+                        <div class="col">
+                            <section class="section-text">
+                                <div class="section-title">
+                                    Overview
+                                </div>
+                                <div class="section-content">
+                                    <p>Get a list of all avalibale languages.</p>
+                                    <p class="rtl">يمكنك هنا استعراض جميع اللغات المتاحة</p>
+                                </div>
+                            </section>
+                            <section class="section-url">
+                                <div class="section-title">
+                                    Resource URL
+                                </div>
+                                <div class="section-content">
+                                    https://mp3quran.net/api/v3/languages
+                                </div>
+                            </section>
+                            <section class="section-request_url">
+                                <div class="section-title">
+                                    Example Request
+                                </div>
+                                <div class="section-content">
+                                    GET https://mp3quran.net/api/v3/languages
+                                </div>
+                            </section>
+                            <section class="section-response">
+                                <div class="section-title">
+                                    Example Response
+                                </div>
+                                <div class="section-content">
+                                    <pre>
+                                <code class="language-json">{
+    &quot;language&quot;: [
+        {
+            &quot;id&quot;: &quot;1&quot;,
+            &quot;language&quot;: &quot;Arabic&quot;,
+            &quot;native&quot;: &quot;\u0627\u0644\u0639\u0631\u0628\u064a\u0629&quot;,
+            &quot;suwar&quot;: &quot;https:\/\/www.mp3quran.net\/api\/v3\/suwar?language=ar&quot;,
+            &quot;riwayat&quot;: &quot;https:\/\/www.mp3quran.net\/api\/v3\/riwayat?language=ar&quot;,
+            &quot;reciters&quot;: &quot;https:\/\/www.mp3quran.net\/api\/v3\/reciters?language=ar&quot;
+        },
+        {
+            &quot;id&quot;: &quot;2&quot;,
+            &quot;language&quot;: &quot;English&quot;,
+            &quot;native&quot;: &quot;English&quot;,
+            &quot;suwar&quot;: &quot;https:\/\/www.mp3quran.net\/api\/v3\/suwar?language=eng&quot;,
+            &quot;riwayat&quot;: &quot;https:\/\/www.mp3quran.net\/api\/v3\/riwayat?language=eng&quot;,
+            &quot;reciters&quot;: &quot;https:\/\/www.mp3quran.net\/api\/v3\/reciters?language=eng&quot;
+        }
+    ]
+}</code>
+                            </pre>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade  " id="Suwar" role="tabpanel" aria-labelledby="Suwar-tab">
+                        <div class="col">
+                            <section class="section-text">
+                                <div class="section-title">
+                                    Overview
+                                </div>
+                                <div class="section-content">
+                                    Get a list of all avalibale Suwar.
+                                </div>
+                            </section>
+                            <section class="section-url">
+                                <div class="section-title">
+                                    Resource URL
+                                </div>
+                                <div class="section-content">
+                                    https://mp3quran.net/api/v3/suwar
+                                </div>
+                            </section>
+                            <section class="section-table">
+                                <div class="section-title">
+                                    Parameters
+                                </div>
+                                <div class="section-content">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Required</th>
+                                                <th scope="col">Description</th>
+                                                <th scope="col">Default Value</th>
+                                                <th scope="col">Example</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="col">language</th>
+                                                <th scope="col">optional</th>
+                                                <th scope="col">The language of texts in suwar arrays. If is not set the default language of texts is arabic.</th>
+                                                <th scope="col"></th>
+                                                <th scope="col">&#039;eng&#039;, &#039;ar&#039;, &#039;en&#039;, &#039;fr&#039;...</th>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </section>
+                            <section class="section-request_url">
+                                <div class="section-title">
+                                    Example Request
+                                </div>
+                                <div class="section-content">
+                                    GET https://mp3quran.net/api/v3/suwar?language=eng
+                                </div>
+                            </section>
+                            <section class="section-response">
+                                <div class="section-title">
+                                    Example Response
+                                </div>
+                                <div class="section-content">
+                                    <pre>
+                                <code class="language-json">{
+    &quot;suwar&quot;: [
+        {
+            &quot;id&quot;: 1,
+            &quot;name&quot;: &quot;Al-Fatihah &quot;,
+            &quot;start_page&quot;: 1,
+            &quot;end_page&quot;: 1,
+            &quot;makkia&quot;: 1
+        },
+        {
+            &quot;id&quot;: 2,
+            &quot;name&quot;: &quot;Al-Baqarah &quot;,
+            &quot;start_page&quot;: 2,
+            &quot;end_page&quot;: 49,
+            &quot;makkia&quot;: 0
+        },
+        {
+            &quot;id&quot;: 3,
+            &quot;name&quot;: &quot;Al-Imran &quot;,
+            &quot;start_page&quot;: 50,
+            &quot;end_page&quot;: 76,
+            &quot;makkia&quot;: 0
+        }
+    ]
+}</code>
+                            </pre>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade  " id="Riwayat" role="tabpanel" aria-labelledby="Riwayat-tab">
+                        <div class="col">
+                            <section class="section-text">
+                                <div class="section-title">
+                                    Overview
+                                </div>
+                                <div class="section-content">
+                                    Get a list of all avalibale Riwayat.
+                                </div>
+                            </section>
+                            <section class="section-url">
+                                <div class="section-title">
+                                    Resource URL
+                                </div>
+                                <div class="section-content">
+                                    https://mp3quran.net/api/v3/riwayat
+                                </div>
+                            </section>
+                            <section class="section-table">
+                                <div class="section-title">
+                                    Parameters
+                                </div>
+                                <div class="section-content">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Required</th>
+                                                <th scope="col">Description</th>
+                                                <th scope="col">Default Value</th>
+                                                <th scope="col">Example</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="col">language</th>
+                                                <th scope="col">optional</th>
+                                                <th scope="col">The language of texts in riwayat arrays. If is not set the default language of texts is arabic.</th>
+                                                <th scope="col"></th>
+                                                <th scope="col">&#039;ar&#039;, &#039;en&#039;, &#039;fr&#039;...</th>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </section>
+                            <section class="section-request_url">
+                                <div class="section-title">
+                                    Example Request
+                                </div>
+                                <div class="section-content">
+                                    GET https://mp3quran.net/api/v3/riwayat?language=eng
+                                </div>
+                            </section>
+                            <section class="section-response">
+                                <div class="section-title">
+                                    Example Response
+                                </div>
+                                <div class="section-content">
+                                    <pre>
+                                <code class="language-json">{
+    &quot;riwayat&quot;: [
+        {
+            &quot;id&quot;: 1,
+            &quot;name&quot;: &quot;Rewayat Hafs A&#039;n Assem&quot;
+        },
+        {
+            &quot;id&quot;: 10,
+            &quot;name&quot;: &quot;Rewayat Warsh A&#039;n Nafi&#039; Men  Tariq Abi Baker Alasbahani&quot;
+        },
+        {
+            &quot;id&quot;: 11,
+            &quot;name&quot;: &quot;Rewayat Albizi and Qunbol A&#039;n Ibn Katheer&quot;
+        }
+    ]
+}</code>
+                            </pre>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade  " id="Reciters" role="tabpanel" aria-labelledby="Reciters-tab">
+                        <div class="col">
+                            <section class="section-text">
+                                <div class="section-title">
+                                    Overview
+                                </div>
+                                <div class="section-content">
+                                    Get a list of all avalibale reciters ordered by reciters name.
+                                </div>
+                            </section>
+                            <section class="section-url">
+                                <div class="section-title">
+                                    Resource URL
+                                </div>
+                                <div class="section-content">
+                                    https://mp3quran.net/api/v3/reciters
+                                </div>
+                            </section>
+                            <section class="section-table">
+                                <div class="section-title">
+                                    Parameters
+                                </div>
+                                <div class="section-content">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Required</th>
+                                                <th scope="col">Description</th>
+                                                <th scope="col">Default Value</th>
+                                                <th scope="col">Example</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="col">language</th>
+                                                <th scope="col">optional</th>
+                                                <th scope="col">The language of texts in reciters arrays. If is not set the default language of texts is arabic.</th>
+                                                <th scope="col"></th>
+                                                <th scope="col">&#039;ar&#039;, &#039;en&#039;, &#039;fr&#039;...</th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="col">rewaya</th>
+                                                <th scope="col">optional</th>
+                                                <th scope="col">The id of the rewaya you want to get its reciters. If is not set it will return all reciters</th>
+                                                <th scope="col"></th>
+                                                <th scope="col"></th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="col">sura</th>
+                                                <th scope="col">optional</th>
+                                                <th scope="col">The id of the sura you want to get its reciters. If is not set it will return all reciters</th>
+                                                <th scope="col"></th>
+                                                <th scope="col"></th>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </section>
+                            <section class="section-request_url">
+                                <div class="section-title">
+                                    Example Request
+                                </div>
+                                <div class="section-content">
+                                    GET https://mp3quran.net/api/v3/reciters?language=eng&amp;rewaya=1&amp;sura=1
+                                </div>
+                            </section>
+                            <section class="section-response">
+                                <div class="section-title">
+                                    Example Response
+                                </div>
+                                <div class="section-content">
+                                    <pre>
+                                <code class="language-json">{
+    &quot;reciters&quot;: [
+        {
+            &quot;id&quot;: 105,
+            &quot;name&quot;: &quot;Mahmoud Khalil Al-Hussary&quot;,
+            &quot;letter&quot;: &quot;M&quot;,
+            &quot;reads&quot;: [
+                {
+                    &quot;id&quot;: 115,
+                    &quot;moshaf_type&quot;: 216,
+                    &quot;name&quot;: &quot;Rewayat Warsh A&#039;n Nafi&#039; - Murattal&quot;,
+                    &quot;server&quot;: 12,
+                    &quot;suwar_count&quot;: 114,
+                    &quot;suwar&quot;: &quot;1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114&quot;
+                }
+            ]
+        },
+        {
+            &quot;id&quot;: 129,
+            &quot;name&quot;: &quot;Ibrahim Aldosari&quot;,
+            &quot;letter&quot;: &quot;I&quot;,
+            &quot;reads&quot;: [
+                {
+                    &quot;id&quot;: 142,
+                    &quot;moshaf_type&quot;: 2,
+                    &quot;name&quot;: &quot;Rewayat Warsh A&#039;n Nafi&#039; - &quot;,
+                    &quot;server&quot;: 7,
+                    &quot;suwar_count&quot;: 114,
+                    &quot;suwar&quot;: &quot;1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114&quot;
+                }
+            ]
+        }
+    ]
+}</code>
+                            </pre>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade  " id="Reads" role="tabpanel" aria-labelledby="Reads-tab">
+                        <div class="col">
+                            <section class="section-text">
+                                <div class="section-title">
+                                    Overview
+                                </div>
+                                <div class="section-content">
+                                    Get a list of all avalibale reads ordered by reciters name.
+                                </div>
+                            </section>
+                            <section class="section-url">
+                                <div class="section-title">
+                                    Resource URL
+                                </div>
+                                <div class="section-content">
+                                    https://mp3quran.net/api/v3/reads
+                                </div>
+                            </section>
+                            <section class="section-table">
+                                <div class="section-title">
+                                    Parameters
+                                </div>
+                                <div class="section-content">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Required</th>
+                                                <th scope="col">Description</th>
+                                                <th scope="col">Default Value</th>
+                                                <th scope="col">Example</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="col">language</th>
+                                                <th scope="col">optional</th>
+                                                <th scope="col">The language of texts in reads arrays. If is not set the default language of texts is arabic.</th>
+                                                <th scope="col"></th>
+                                                <th scope="col">&#039;ar&#039;, &#039;en&#039;, &#039;fr&#039;...</th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="col">reciter</th>
+                                                <th scope="col">optional</th>
+                                                <th scope="col">The id of the reciter you want to get its reads. If is not set it will return all reciters reads.</th>
+                                                <th scope="col"></th>
+                                                <th scope="col"></th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="col">rewaya</th>
+                                                <th scope="col">optional</th>
+                                                <th scope="col">The id of the rewaya you want to get its reads. If is not set it will return all reciters reads</th>
+                                                <th scope="col"></th>
+                                                <th scope="col"></th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="col">sura</th>
+                                                <th scope="col">optional</th>
+                                                <th scope="col">The id of the sura you want to get its reads. If is not set it will return all reciters reads</th>
+                                                <th scope="col"></th>
+                                                <th scope="col"></th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="col">last_updated_date</th>
+                                                <th scope="col">optional</th>
+                                                <th scope="col">The date of read last update. It allows to limit the reads returned to a given date</th>
+                                                <th scope="col"></th>
+                                                <th scope="col"></th>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </section>
+                            <section class="section-request_url">
+                                <div class="section-title">
+                                    Example Request
+                                </div>
+                                <div class="section-content">
+                                    GET http://www.mp3quran.net/api/v3/reads?language=eng&amp;reciter=168&amp;rewaya=1&amp;sura=1&amp;last_updated_date=01/01/2020
+                                </div>
+                            </section>
+                            <section class="section-response">
+                                <div class="section-title">
+                                    Example Response
+                                </div>
+                                <div class="section-content">
+                                    <pre>
+                                <code class="language-json">{
+    &quot;reads&quot;: [
+        {
+            &quot;id&quot;: 168,
+            &quot;name&quot;: &quot;Hazza Al-Balushi&quot;,
+            &quot;Server&quot;: &quot;&quot;,
+            &quot;letter&quot;: &quot;H&quot;,
+            &quot;moshaf&quot;: [
+                {
+                    &quot;id&quot;: 187,
+                    &quot;moshaf_type&quot;: 116,
+                    &quot;name&quot;: &quot;Rewayat Hafs A&#039;n Assem - Murattal&quot;,
+                    &quot;Server&quot;: 6,
+                    &quot;sample&quot;: null,
+                    &quot;count&quot;: 75,
+                    &quot;suras&quot;: &quot;1,13,14,15,18,19,25,29,30,31,36,37,38,39,40,42,44,47,49,50,51,52,53,54,55,56,57,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114&quot;
+                }
+            ]
+        }
+    ]
+}</code>
+                            </pre>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade  " id="Recent reads" role="tabpanel" aria-labelledby="Recent reads-tab">
+                        <div class="col">
+                            <section class="section-text">
+                                <div class="section-title">
+                                    Overview
+                                </div>
+                                <div class="section-content">
+                                    Get a list of all avalibale reads ordered by added date.
+                                </div>
+                            </section>
+                            <section class="section-url">
+                                <div class="section-title">
+                                    Resource URL
+                                </div>
+                                <div class="section-content">
+                                    https://mp3quran.net/api/v3/recent_reads
+                                </div>
+                            </section>
+                            <section class="section-table">
+                                <div class="section-title">
+                                    Parameters
+                                </div>
+                                <div class="section-content">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Required</th>
+                                                <th scope="col">Description</th>
+                                                <th scope="col">Default Value</th>
+                                                <th scope="col">Example</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="col">language</th>
+                                                <th scope="col">optional</th>
+                                                <th scope="col">The language of texts in reads arrays. If is not set the default language of texts is arabic.</th>
+                                                <th scope="col"></th>
+                                                <th scope="col">&#039;ar&#039;, &#039;en&#039;, &#039;fr&#039;...</th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="col">reciter</th>
+                                                <th scope="col">optional</th>
+                                                <th scope="col">The id of the reciter you want to get its reads. If is not set it will return all reciters reads.</th>
+                                                <th scope="col"></th>
+                                                <th scope="col"></th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="col">rewaya</th>
+                                                <th scope="col">optional</th>
+                                                <th scope="col">The id of the rewaya you want to get its reads. If is not set it will return all reciters reads</th>
+                                                <th scope="col"></th>
+                                                <th scope="col"></th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="col">sura</th>
+                                                <th scope="col">optional</th>
+                                                <th scope="col">The id of the sura you want to get its reads. If is not set it will return all reciters reads</th>
+                                                <th scope="col"></th>
+                                                <th scope="col"></th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="col">last_updated_date</th>
+                                                <th scope="col">optional</th>
+                                                <th scope="col">The date of read last update. It allows to limit the reads returned to a given date</th>
+                                                <th scope="col"></th>
+                                                <th scope="col"></th>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </section>
+                            <section class="section-request_url">
+                                <div class="section-title">
+                                    Example Request
+                                </div>
+                                <div class="section-content">
+                                    GET http://www.mp3quran.net/api/v3/recent_reads?language=eng&amp;reciter=168&amp;rewaya=1&amp;sura=1&amp;last_updated_date=01/01/2020
+                                </div>
+                            </section>
+                            <section class="section-response">
+                                <div class="section-title">
+                                    Example Response
+                                </div>
+                                <div class="section-content">
+                                    <pre>
+                                <code class="language-json">{
+    &quot;reads&quot;: [
+        {
+            &quot;id&quot;: 168,
+            &quot;name&quot;: &quot;Hazza Al-Balushi&quot;,
+            &quot;Server&quot;: &quot;&quot;,
+            &quot;letter&quot;: &quot;H&quot;,
+            &quot;moshaf&quot;: [
+                {
+                    &quot;id&quot;: 187,
+                    &quot;moshaf_type&quot;: 116,
+                    &quot;name&quot;: &quot;Rewayat Hafs A&#039;n Assem - Murattal&quot;,
+                    &quot;Server&quot;: 6,
+                    &quot;sample&quot;: null,
+                    &quot;count&quot;: 75,
+                    &quot;suras&quot;: &quot;1,13,14,15,18,19,25,29,30,31,36,37,38,39,40,42,44,47,49,50,51,52,53,54,55,56,57,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114&quot;
+                }
+            ]
+        }
+    ]
+}</code>
+                            </pre>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

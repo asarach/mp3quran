@@ -48,7 +48,17 @@ return [
             'root' => storage_path('app'),
         ],
 
-        'public' => [
+        'api3-doc' => [
+            'driver' => 'local',
+            'root' => storage_path('api3-doc'),
+        ],
+        
+        'local' => [
+            'driver' => 'local',
+            'root' => storage_path('app'),
+        ],
+
+        'public' => [ 
             'driver' => 'local',
             'root' => storage_path('app/public'),
             'url' => env('APP_URL').'/storage',
