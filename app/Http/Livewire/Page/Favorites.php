@@ -81,7 +81,6 @@ class Favorites extends Component
         $page = [
             'title' => trans('text.favorites') . ' | MP3 Quran',
             'description' => trans('text.favorites-description'),
-            'keywords' => trans('text.favorites-keywords'),
         ];
         return view('livewire.page.favorites', compact('page', 'active_tab', 'reads', 'soar', 'radios', 'videos'));
     }

@@ -28,7 +28,6 @@ class EloquentVideoRepository extends EloquentRepository implements VideoReposit
         $item->featured = $data['featured'];
         $item->status = $data['status'];
         $item->description = $data['description'];
-        $item->keywords = $data['keywords'];
         $item->uploaded = $data['uploaded'];
 
         if (!empty($data['reciter']) and isset($data['reciter']['id'])) {
@@ -56,7 +55,6 @@ class EloquentVideoRepository extends EloquentRepository implements VideoReposit
         $item->featured = $data['featured'];
         $item->status = $data['status'];
         $item->description = $data['description'];
-        $item->keywords = $data['keywords'];
 
         if (!empty($data['reciter']) and isset($data['reciter']['id'])) {
             $item->reciter()->associate($data['reciter']['id']);

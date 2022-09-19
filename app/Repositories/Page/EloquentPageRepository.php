@@ -21,7 +21,6 @@ class EloquentPageRepository extends EloquentRepository implements PageRepositor
         $item->slug = $data['slug'];
         $item->content = $data['content'];
         $item->description = $data['description'];
-        $item->keywords = $data['keywords'];
         $item->status = $data['status'];
 
         $item->save();
@@ -37,7 +36,6 @@ class EloquentPageRepository extends EloquentRepository implements PageRepositor
         $item->slug = $data['slug'];
         $item->content = $data['content'];
         $item->description = $data['description'];
-        $item->keywords = $data['keywords'];
         $item->status = $data['status'];
 
         $item->save();

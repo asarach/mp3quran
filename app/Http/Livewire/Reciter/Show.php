@@ -62,8 +62,7 @@ class Show extends Component
         //get page info
         $page = [
             'title' => $read->getSeoTitle($read->rewaya, $reciter['name']),
-            'description' => $read->getDescriptionTitle($read->rewaya, $reciter['name']),
-            'keywords' => trans('read.keywords-' . $read->id)
+            'description' => $read->getSeoDescription($read->rewaya, $reciter['name']),
         ];
 
         $this->emit('changeDom');

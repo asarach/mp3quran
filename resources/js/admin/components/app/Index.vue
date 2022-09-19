@@ -277,7 +277,6 @@ export default {
         huawei: "",
         image: "",
         type: "",
-        keywords: "",
         description: "",
         status: 0,
       },

@@ -79,10 +79,16 @@ class AppController extends Controller
         foreach ($languages as $language) {
             $arr = ['language' => $language->name];
             $title = DB::table('translator_translations')->where('locale', $language->locale)->where('group', 'app-title')->where('item', $id)->first();
+            $description  = DB::table('translator_translations')->where('locale', $language->locale)->where('group', 'app-description')->where('item', $id)->first();
             if ($title) {
                 $arr['title'] = $title->text;
             } else {
                 $arr['title'] = '';
+            }
+            if ($description ) {
+                $arr['description'] = $description->text;
+            } else {
+                $arr['description'] = '';
             }
 
             $translations[$language->locale] = $arr;
@@ -156,6 +162,12 @@ class AppController extends Controller
                 DB::table('translator_translations')->where('id', $title->id)->update(array('text' => $translation['title']));
             } elseif ($translation['title']) {
                 DB::table('translator_translations')->insert(['locale' => $key, 'group' => 'app-title', 'item' =>  $id, 'text' => $translation['title']]);
+            }
+            $description = DB::table('translator_translations')->where('locale', $key)->where('group', 'app-description')->where('item',  $id)->first();
+            if ($description) {
+                DB::table('translator_translations')->where('id', $description->id)->update(array('text' => $translation['description']));
+            } elseif ($translation['description']) {
+                DB::table('translator_translations')->insert(['locale' => $key, 'group' => 'app-description', 'item' =>  $id, 'text' => $translation['description']]);
             }
         }
         $result = true;

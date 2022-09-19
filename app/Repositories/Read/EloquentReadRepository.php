@@ -30,7 +30,6 @@ class EloquentReadRepository extends EloquentRepository implements ReadRepositor
         $item->video = $data['video'];
         $item->title = $data['title'];
         $item->description = $data['description'];
-        $item->keywords = $data['keywords'];
         $item->status = $data['status'];
         $item->featured = $data['featured'];
         $item->promoted = $data['promoted'];
@@ -66,7 +65,6 @@ class EloquentReadRepository extends EloquentRepository implements ReadRepositor
         $item->video = $data['video'];
         $item->title = $data['title'];
         $item->description = $data['description'];
-        $item->keywords = $data['keywords'];
         $item->status = $data['status'];
         $item->featured = $data['featured'];
         $item->promoted = $data['promoted'];

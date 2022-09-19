@@ -123,24 +123,15 @@ class Read extends Model
         $title = trans('read-title.' . $this->id);
         if (strpos($title, 'read-title.') !== false or $title == '') {
             try {
-                $title = trans('reciter-name.' . $this->reciter->id);
+                $title = trans('seo.reciter-title', ['reciter' => $this->reciter->getLocaleName(), 'rewaya' => $this->rewaya->getLocaleName()]);
             } catch (\Throwable $th) {
-                $title = '';
+                $title = $this->title;
             }
             if (strpos($title, 'reciter-name.') !== false) {
                 return $this->title;
             }
         }
         return $title;
-    }
-
-    public function getLocaleDescription()
-    {
-        $description = trans('read-description.' . $this->id);
-        if (strpos($description, 'read-description.') !== false) {
-            return $this->description;
-        }
-        return $description;
     }
 
     public function getLocaleShareDescription($sora = null)
@@ -221,7 +212,7 @@ class Read extends Model
             return trans('seo.reciter-title', ['reciter' => $reciter, 'rewaya' => $rewaya->getLocaleName()]);
         }
     }
-    public function getDescriptionTitle($rewaya = null, $reciter)
+    public function getSeoDescription($rewaya = null, $reciter)
     {
         if ($rewaya->id == 1) {
             return trans('seo.reciter-description-hafs', ['reciter' => $reciter]);

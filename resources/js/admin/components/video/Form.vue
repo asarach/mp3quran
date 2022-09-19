@@ -62,20 +62,6 @@
             v-if="errors.has('description')"
           >{{errors.get('description')}}</small>
         </div>
-        <div class="form-group">
-          <label class="col-form-label">{{ trans('admin.keywords')}}</label>
-          <textarea
-            name="keywords"
-            class="form-control"
-            v-model="video.keywords"
-            rows="3"
-            @change="errors.clear('keywords')"
-          ></textarea>
-          <small
-            class="form-text text-danger"
-            v-if="errors.has('keywords')"
-          >{{errors.get('keywords')}}</small>
-        </div>
 
         <div class="form-group">
           <multiselect

@@ -7,7 +7,6 @@
 <meta name="description" content="{{$page['description']}}" />
 <meta property="og:description" content="{{$page['description']}}" />
 <meta name="twitter:description" content="{{$page['description']}}" />
-<meta name="keywords" content="{{$page['keywords']}}" />
 @endsection
 <div class="main apps-show">
     <div class="show-header">

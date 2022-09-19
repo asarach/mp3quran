@@ -99,7 +99,7 @@ class Sora extends Model
         }
     }
 
-    public function getDescriptionTitle($rewaya = null, $reciter, $sora)
+    public function getSeoDescription($rewaya = null, $reciter, $sora)
     {
         if ($rewaya->id == 1) {
             return trans('seo.sora-description-hafs', ['sora' => $sora, 'reciter' => $reciter]);

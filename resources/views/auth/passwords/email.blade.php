@@ -1,7 +1,6 @@
 @extends('auth.master')
 @section('meta')
     <title>{{ trans('auth.reset-password') }} - {{ settings('app_name', 'News') }}</title>
-    <meta name="keywords" content="{{ settings('main_keywords', 'News') }}">
     <meta name="description" content="{{ settings('main_description', 'News') }}">
 @endsection
 @section('content')

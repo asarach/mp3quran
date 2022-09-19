@@ -6,8 +6,6 @@
 <meta name="description" content="{{$page->description}}" />
 <meta property="og:description" content="{{$page->description}}" />
 <meta name="twitter:description" content="{{$page->description}}" />
-<meta name="keywords" content="{{$page->keywords}}" />
-
 @endsection
 @section('page-scripts')
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">

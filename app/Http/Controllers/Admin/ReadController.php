@@ -154,13 +154,6 @@ class ReadController extends Controller
                 $arr['description'] = '';
             }
 
-            $keywords = DB::table('translator_translations')->where('locale', $language->locale)->where('group', 'read-keywords')->where('item',  $id)->first();
-            if ($keywords) {
-                $arr['keywords'] = $keywords->text;
-            } else {
-                $arr['keywords'] = '';
-            }
-
             $translations[$language->locale] = $arr;
         }
 
@@ -277,12 +270,6 @@ class ReadController extends Controller
                 DB::table('translator_translations')->insert(['locale' => $key, 'group' => 'read-description', 'item' =>  $id, 'text' => $translation['description']]);
             }
 
-            $keywords = DB::table('translator_translations')->where('locale', $key)->where('group', 'read-keywords')->where('item',   $id)->first();
-            if ($keywords) {
-                DB::table('translator_translations')->where('id', $keywords->id)->update(array('text' => $translation['keywords']));
-            } elseif ($translation['keywords']) {
-                DB::table('translator_translations')->insert(['locale' => $key, 'group' => 'read-keywords', 'item' =>   $id, 'text' => $translation['keywords']]);
-            }
         }
         $result = true;
         flushTrans();
@@ -308,11 +295,9 @@ class ReadController extends Controller
             if ($reciter_name and $rewaya_name) {
                 $arr['title'] = Lang::get('seo.read-title', ['reciter_name' => $reciter_name->text, 'rewaya_name' => $rewaya_name->text], $language->locale);
                 $arr['description'] = Lang::get('seo.read-description', ['reciter_name' => $reciter_name->text, 'rewaya_name' => $rewaya_name->text], $language->locale);
-                $arr['keywords'] = Lang::get('seo.read-keywords', ['reciter_name' => $reciter_name->text, 'rewaya_name' => $rewaya_name->text], $language->locale);
             } else {
                 $arr['title'] = '';
                 $arr['description'] = '';
-                $arr['keywords'] = '';
             }
 
             $translations[$language->locale] = $arr;

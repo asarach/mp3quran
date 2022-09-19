@@ -21,7 +21,6 @@ class Index extends Component
         $page->content = $page->getLocaleContent();
         $page->title = $page->getLocaleTitle();
         $page->description = $page->getLocaleDescription();
-        $page->keywords = $page->getLocaleKeywords();
 
         if ($this->search) {
             $reciters = $this->getReciters();

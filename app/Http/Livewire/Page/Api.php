@@ -13,8 +13,6 @@ class Api extends Component
         $docContent = file_get_contents(storage_path() . "/api3-doc/default.html");
         $page->title = $page->getLocaleTitle();
         $page->description = $page->getLocaleDescription();
-        $page->keywords = $page->getLocaleKeywords();
-
         // dd($html);
 
         return view('livewire.page.api', compact('page', 'docContent'));

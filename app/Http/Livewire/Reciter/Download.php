@@ -64,7 +64,6 @@ class Download extends Component
         $page = [
             'title' => $read->getDownloadSeoTitle($read->rewaya, $reciter['name']),
             'description' => $read->getDownloadDescriptionTitle($read->rewaya, $reciter['name']),
-            'keywords' => trans('read.keywords-' . $read->id)
         ];        
 
         return view('livewire.reciter.download', compact('soar_part_a', 'soar_part_b', 'reciter_reads', 'reciter', 'active_read', 'read', 'page'));

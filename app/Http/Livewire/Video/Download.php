@@ -30,8 +30,7 @@ class Download extends Component
 
         $page = [
             'title' =>  trans("text.download-video-with-logo") . ' | MP3 Quran',
-            'description' =>  trans('video.description-' . $full_video->id),
-            'keywords' => trans('video.keywords-' . $full_video->id)
+            'description' =>  trans('video.description-' . $full_video->id)
         ];
 
         return view('livewire.video.download', compact('page', 'video'));

@@ -54,7 +54,6 @@ class Show extends Component
         $page = [
             'title' => trans('text.search-result-for', ['q' => $this->s]) . ' | MP3 Quran',
             'description' => '',
-            'keywords' => ''
         ];
         // dd($reciters['data']);
 

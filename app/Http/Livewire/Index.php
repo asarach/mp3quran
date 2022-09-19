@@ -131,9 +131,6 @@ class Index extends Component
 
         $page->title = $page->getLocaleTitle();
         $page->description = $page->getLocaleDescription();
-        $page->keywords = $page->getLocaleKeywords();
-
-
 
         $show_tadabor = Cache::rememberForever('show_tadabor_' . App::getLocale(), function () {
             try {

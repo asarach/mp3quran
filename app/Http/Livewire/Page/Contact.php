@@ -29,7 +29,6 @@ class Contact extends Component
         $page->title = $page->getLocaleTitle();
         $page->content = $page->getLocaleContent();
         $page->description = $page->getLocaleDescription();
-        $page->keywords = $page->getLocaleKeywords();
 
         return view('livewire.page.contact', compact('page'));
     }

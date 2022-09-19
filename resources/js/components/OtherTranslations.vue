@@ -47,7 +47,6 @@
 
 {{trans('seo.read-title')}}
 {{trans('seo.read-description')}}
-{{trans('seo.read-keywords')}}
 
 {{trans('text.islam-on-telegram')}}
 {{trans('text.hisn-muslim')}}

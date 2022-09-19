@@ -58,7 +58,6 @@ class FixeRewayat extends Command
               'folder' => $rewaya->folderName,
               'slug' => SlugService::createSlug(Rewaya::class, 'slug', $rewaya->classificationNameAr),
               'description' => '',
-              'keywords' => '',
               'status' => $status ,
               ]);
               

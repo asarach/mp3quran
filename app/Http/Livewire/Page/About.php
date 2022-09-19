@@ -14,7 +14,6 @@ class About extends Component
         $page->content = $page->getLocaleContent();
         $page->title = $page->getLocaleTitle();
         $page->description = $page->getLocaleDescription();
-        $page->keywords = $page->getLocaleKeywords();
         
         return view('livewire.page.about', compact('page'));
     }

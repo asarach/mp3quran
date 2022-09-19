@@ -52,8 +52,7 @@ class Verse extends Component
 
         $page = [
             'title' => $soar_item->getSeoTitle($read->rewaya, $sora['reciter'], $sora['name']),
-            'description' => $soar_item->getDescriptionTitle($read->rewaya, $sora['reciter'], $sora['name']),
-            'keywords' => trans('read.keywords-' . $read->id)
+            'description' => $soar_item->getSeoDescription($read->rewaya, $sora['reciter'], $sora['name']),
         ];
         // dd(  $sora);
         return view('livewire.reciter.verse', compact('page', 'sora', 'read'));

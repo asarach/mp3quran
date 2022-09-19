@@ -64,7 +64,6 @@ class FixeVideos extends Command
               'slug' => SlugService::createSlug(Video::class, 'slug', $video->videoTitleAr),
               'url' => $video->videoURL,
               'description' => '',
-              'keywords' => '',
               'reciter_id' => $video->readerID,
               'created_at' => $video->add_date,
               'updated_at' => $video->add_date,

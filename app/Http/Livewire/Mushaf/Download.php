@@ -68,7 +68,6 @@ class Download extends Component
 
         $page->title = $page->getLocaleTitle();
         $page->description = $page->getLocaleDescription();
-        $page->keywords = $page->getLocaleKeywords();
 
         return view('livewire.mushaf.download', compact('downloads', 'page'));
     }

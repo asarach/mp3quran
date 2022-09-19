@@ -93,12 +93,7 @@ class TsoraController extends Controller
                 $arr['description'] = '';
             }
 
-            $keywords = DB::table('translator_translations')->where('locale', $language->locale)->where('group', 'tsora-keywords')->where('item',  $id)->first();
-            if ($keywords) {
-                $arr['keywords'] = $keywords->text;
-            } else {
-                $arr['keywords'] = '';
-            }
+            
             $translations[$language->locale] = $arr;
         }
 
@@ -183,12 +178,7 @@ class TsoraController extends Controller
                 DB::table('translator_translations')->insert(['locale' => $key, 'group' => 'tsora-description', 'item' =>  $id, 'text' => $translation['description']]);
             }
 
-            $keywords = DB::table('translator_translations')->where('locale', $key)->where('group', 'tsora-keywords')->where('item',  $id)->first();
-            if ($keywords) {
-                DB::table('translator_translations')->where('id', $keywords->id)->update(array('text' => $translation['keywords']));
-            } elseif ($translation['keywords']) {
-                DB::table('translator_translations')->insert(['locale' => $key, 'group' => 'tsora-keywords', 'item' =>  $id, 'text' => $translation['keywords']]);
-            }
+            
         }
         $result = true;
         flushTrans();

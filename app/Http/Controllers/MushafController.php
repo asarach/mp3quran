@@ -147,7 +147,6 @@ class MushafController extends Controller
         $params['metas'] = getMetas([
             'seo_title' => $seo_page->getLocaleTitle(),
             'seo_description' => $seo_page->getLocaleDescription(),
-            'seo_keywords' => $seo_page->getLocaleKeywords()
         ]);
 
         return view('layouts.app', $params);

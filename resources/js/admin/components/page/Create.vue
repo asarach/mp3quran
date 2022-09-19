@@ -46,7 +46,6 @@ export default {
         title: "",
         content: "",
         status: "",
-        keywords: "",
         description: ""
       }
     };

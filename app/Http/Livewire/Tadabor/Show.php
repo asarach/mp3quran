@@ -21,7 +21,6 @@ class Show extends Component
         $page = Page::where('name', 'tadabor')->where('status', 1)->firstOrFail();
         $page->title = $page->getLocaleTitle();
         $page->description = $page->getLocaleDescription();
-        $page->keywords = $page->getLocaleKeywords();
 
         return view('livewire.tadabor.show', compact('page', 'item'));
     }

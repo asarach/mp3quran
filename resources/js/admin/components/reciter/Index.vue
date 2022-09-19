@@ -247,7 +247,6 @@ export default {
       reciter: {
         name: "",
         status: 0,
-        keywords: "",
         description: ""
       },
       filters: {

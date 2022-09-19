@@ -17,7 +17,6 @@ class ApiOld extends Component
 
         $page->title = $page->getLocaleTitle();
         $page->description = $page->getLocaleDescription();
-        $page->keywords = $page->getLocaleKeywords();
 
         return view('livewire.page.api_old', compact('page'));
     }

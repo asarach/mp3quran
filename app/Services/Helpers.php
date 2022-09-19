@@ -251,12 +251,6 @@ function getMetas($data)
         $metas['seo_title'] = trans('text.main-title') . ' | MP3 Quran';
     }
 
-    if (isset($data['seo_keywords'])) {
-        $metas['seo_keywords'] =  $data['seo_keywords'];
-    } else {
-        $metas['seo_keywords'] =  trans('text.main-keywords');
-    }
-
     if (isset($data['seo_description'])) {
         $metas['seo_description'] =  $data['seo_description'];
     } else {

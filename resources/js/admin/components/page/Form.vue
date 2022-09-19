@@ -62,20 +62,6 @@
           </div>
           <div class="col-lg-7">
             <div class="form-group">
-              <label class="col-form-label">{{ trans('admin.keywords')}}</label>
-              <textarea
-                name="keywords"
-                class="form-control"
-                v-model="page.keywords"
-                rows="3"
-                @change="errors.clear('keywords')"
-              ></textarea>
-              <small
-                class="form-text text-danger"
-                v-if="errors.has('keywords')"
-              >{{errors.get('keywords')}}</small>
-            </div>
-            <div class="form-group">
               <label class="col-form-label">{{ trans('admin.description')}}</label>
               <textarea
                 name="description"

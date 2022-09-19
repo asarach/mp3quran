@@ -105,13 +105,12 @@ class Radio extends Model
         $name = trans('radio-name.' . $this->id);
         if (strpos($name, 'radio-name.') !== false or $name == '') {
             try {
-                $name = trans('reciter-name.' . $this->read->reciter->id);
+                $name = trans('seo.radio-name', ['name' => trans('reciter-name.' . $this->read->reciter->id)]);
             } catch (\Throwable $th) {
-
-                $name = 'reciter-name.asa';
+                $name = $this->name;
             }
             if (strpos($name, 'reciter-name.') !== false) {
-                return $this->name;
+                $name = $this->name;
             }
         }
         return $name;
@@ -129,15 +128,6 @@ class Radio extends Model
         $name = trim($name);
 
         return $name;
-    }
-
-    public function getLocaleDescription()
-    {
-        $description = trans('radio-description.' . $this->id);
-        if (strpos($description, 'radio-description.') !== false) {
-            return $this->description;
-        }
-        return $description;
     }
 
     public function getLocaleShareDescription()

@@ -33,8 +33,6 @@ class Index extends Component
 
         $page->title = $page->getLocaleTitle();
         $page->description = $page->getLocaleDescription();
-        $page->keywords = $page->getLocaleKeywords();
-
 
         return view('livewire.video.index', compact('page', 'playlists'));
     }

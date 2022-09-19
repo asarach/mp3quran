@@ -49,7 +49,6 @@ class FixeTv extends Command
                 'name' => $tv->name,
                 'slug' => $tv->slug,
                 'description' => '',
-                'keywords' => '',
                 'url' => $tv->url,
                 'status' =>  $tv->status ,
                 'created_at' => Carbon::now()->toDateTimeString() ,

@@ -11,7 +11,6 @@
 
   <title>{{ $metas['seo_title']}}</title>
   <meta name="description" content="{{ $metas['seo_description']}}" />
-  <meta name="keywords" content="{{ $metas['seo_keywords']}}" />
   <meta property="og:title" content="{{ $metas['seo_title']}}" />
   <meta property="og:type" content="" />
   <meta property="og:image" content="{{ $metas['image']}}" />

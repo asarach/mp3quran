@@ -63,7 +63,6 @@ class FixeReciters extends Command
               'about' => '',
               'status' => $status ,
               'description' => $reciter->meta_descriptionAr,
-              'keywords' => $reciter->meta_keysAr,
               
               'created_at' => Carbon::now()->toDateTimeString() ,
               'updated_at' => Carbon::now()->toDateTimeString() ,
@@ -87,15 +86,6 @@ class FixeReciters extends Command
                         'group' => 'reciter-description', 
                         'item' => $id, 
                         'text' => $description->val 
-                    ]);
-                }
-                $keys = DB::connection('old_database')->table('quran__translations')->where('languageID', $lang)->where('ressourceID', $reciter->ressourceMetaKeysID)->first();
-                if ($keys) {
-                    DB::table('translator_translations')->insert([
-                        'locale' => $language->locale, 
-                        'group' => 'reciter-keywords', 
-                        'item' =>  $id, 
-                        'text' => $keys->val 
                     ]);
                 }
                 

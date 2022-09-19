@@ -22,7 +22,6 @@ class EloquentReciterRepository extends EloquentRepository implements ReciterRep
 
         $item->name = $data['name'];
         $item->status = $data['status'];
-        $item->keywords = $data['keywords'];
         $item->description = $data['description'];
 
         $item->save();
@@ -36,7 +35,6 @@ class EloquentReciterRepository extends EloquentRepository implements ReciterRep
 
         $item->name = $data['name'];
         $item->status = $data['status'];
-        $item->keywords = $data['keywords'];
         $item->description = $data['description'];
 
         $item->save();

@@ -12,8 +12,7 @@ class Show extends Component
 
         $page = [
             'title' => 'File Uploader',
-            'description' =>  'File Uploader',
-            'keywords' => 'File Uploader'
+            'description' =>  'File Uploader'
         ];
 
         return view('livewire.uploader.show',  compact('page','uploads'));

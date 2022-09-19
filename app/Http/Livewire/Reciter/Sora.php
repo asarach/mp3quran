@@ -49,8 +49,7 @@ class Sora extends Component
 
         $page = [
             'title' => $soar_item->getSeoTitle($read->rewaya, $sora['reciter'], $sora['name']),
-            'description' => $soar_item->getDescriptionTitle($read->rewaya, $sora['reciter'], $sora['name']),
-            'keywords' => trans('read.keywords-' . $read->id)
+            'description' => $soar_item->getSeoDescription($read->rewaya, $sora['reciter'], $sora['name']),
         ];
         $verses = collect();
         // $verses = $this->getVerses($soar_item->id, $read->id);

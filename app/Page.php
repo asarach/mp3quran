@@ -44,12 +44,5 @@ class Page extends Model
         }
         return $description;
     }
-    public function getLocaleKeywords()
-    {
-        $keywords = trans('page-keywords.' . $this->id);
-        if (strpos($keywords, 'page-keywords.') !== false) {
-            return $this->keywords;
-        }
-        return $keywords;
-    }
+
 }

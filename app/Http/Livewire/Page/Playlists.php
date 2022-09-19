@@ -19,7 +19,6 @@ class Playlists extends Component
 
         $page->title = $page->getLocaleTitle();
         $page->description = $page->getLocaleDescription();
-        $page->keywords = $page->getLocaleKeywords();
 
         return view('livewire.page.playlists', compact('playlists', 'page'));
     }

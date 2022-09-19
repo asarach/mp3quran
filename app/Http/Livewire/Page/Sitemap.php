@@ -39,7 +39,6 @@ class Sitemap extends Component
         $page_content[] = ['text' => trans('text.videos'), 'url' => route('video.index'), 'sublinks' => $vi_sublinks];
         $page['title'] = trans('text.sitemap') . ' | MP3 Quran';
         $page['description'] = trans('text.sitemap-description');
-        $page['keywords'] = trans('text.sitemap-keywords');
         // dd($page_content);
         return view('livewire.page.sitemap', compact('page', 'page_content'));
     }

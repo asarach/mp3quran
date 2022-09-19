@@ -20,7 +20,6 @@ class Index extends Component
 
         $page->title = $page->getLocaleTitle();
         $page->description = $page->getLocaleDescription();
-        $page->keywords = $page->getLocaleKeywords();
 
         $data = compact('page', 'apps', 'path');
 

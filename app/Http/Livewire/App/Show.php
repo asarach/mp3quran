@@ -20,8 +20,7 @@ class Show extends Component
 
         $page = [
             'title' => $app->getLocaleTitle() . ' | MP3 Quran',
-            'description' => trans('app.description-' . $app->id),
-            'keywords' => trans('app.keywords-' . $app->id)
+            'description' => trans('app-description.' . $this->id),
         ];
 
         return view('livewire.app.show', compact('app', 'page'));

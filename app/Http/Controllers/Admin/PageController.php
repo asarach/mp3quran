@@ -92,12 +92,7 @@ class PageController extends Controller
                 $arr['description'] = '';
             }
 
-            $keywords = DB::table('translator_translations')->where('locale', $language->locale)->where('group', 'page-keywords')->where('item',  $id)->first();
-            if ($keywords) {
-                $arr['keywords'] = $keywords->text;
-            } else {
-                $arr['keywords'] = '';
-            }
+            
 
             $content = DB::table('translator_translations')->where('locale', $language->locale)->where('group', 'page-content')->where('item',  $id)->first();
             if ($content) {
@@ -195,13 +190,7 @@ class PageController extends Controller
                 DB::table('translator_translations')->insert(['locale' => $key, 'group' => 'page-description', 'item' =>  $id, 'text' => $translation['description']]);
             }
 
-            $keywords = DB::table('translator_translations')->where('locale', $key)->where('group', 'page-keywords')->where('item',  $id)->first();
-            if ($keywords) {
-                DB::table('translator_translations')->where('id', $keywords->id)->update(array('text' => $translation['keywords']));
-            } elseif ($translation['keywords']) {
-                DB::table('translator_translations')->insert(['locale' => $key, 'group' => 'page-keywords', 'item' =>   $id, 'text' => $translation['keywords']]);
-            }
-
+            
             $content = DB::table('translator_translations')->where('locale', $key)->where('group', 'page-content')->where('item',  $id)->first();
             if ($content) {
                 DB::table('translator_translations')->where('id', $content->id)->update(array('text' => $translation['content']));

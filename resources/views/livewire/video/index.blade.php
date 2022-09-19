@@ -6,7 +6,6 @@
 <meta name="description" content="{{$page->description}}" />
 <meta property="og:description" content="{{$page->description}}" />
 <meta name="twitter:description" content="{{$page->description}}" />
-<meta name="keywords" content="{{$page->keywords}}" />
 @endsection
 <div class="main videos-index">
   <div class="show-header">

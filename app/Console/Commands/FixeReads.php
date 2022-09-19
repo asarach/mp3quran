@@ -83,7 +83,6 @@ class FixeReads extends Command
                 'video' => $read->videoURL,
                 'title' => $read->readerNameAr,
                 'description' => $read->meta_descriptionAr,
-                'keywords' => $read->meta_keysAr,
                 'reciter_id' => $reciter->id,
                 'rewaya_id' => $rewaya_id,
                 'mushaf_id' => $mushaf_id,
@@ -126,15 +125,6 @@ class FixeReads extends Command
                         'group' => 'read-description',
                         'item' =>  $id,
                         'text' => $description->val
-                    ]);
-                }
-                $keys = DB::connection('old_database')->table('quran__translations')->where('languageID', $lang)->where('ressourceID', $read->ressourceMetaKeysID)->first();
-                if ($keys) {
-                    DB::table('translator_translations')->insert([
-                        'locale' => $language->locale,
-                        'group' => 'read-keywords',
-                        'item' =>  $id,
-                        'text' => $keys->val
                     ]);
                 }
             }

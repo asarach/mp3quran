@@ -105,7 +105,6 @@ export default {
         reciter: "",
         vgroup: "",
         description: "",
-        keywords: "",
         featured: 0,
         status: 0
       }

@@ -63,7 +63,6 @@ export default {
         itunes: "",
         video: "",
         description: "",
-        keywords: "",
         mushaf: {},
         reciter: {},
         rewaya: {},

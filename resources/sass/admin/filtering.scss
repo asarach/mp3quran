@@ -44,6 +44,9 @@
 
 .filtering .dropdown-menu {
     text-align: right;
+    height: 200px;
+    overflow: scroll;
+    background: #fff;
 }
 
 .filtering .dropdown-item {

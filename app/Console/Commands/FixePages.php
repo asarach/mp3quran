@@ -51,7 +51,6 @@ class FixePages extends Command
               'title' => $page->pageTitleAr, 
               'content' => $page->pageDescriptionAr , 
               'description' => $page->meta_descriptionAr,
-              'keywords' => $page->meta_keysAr ,
               'status' => 1 ,
               ]);
               foreach ($languages as $language) {

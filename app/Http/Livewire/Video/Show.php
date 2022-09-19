@@ -34,8 +34,7 @@ class Show extends Component
         
         $page = [
             'title' => $video['title'] . ' | MP3 Quran',
-            'description' =>  trans('video.description-' . $full_video->id),
-            'keywords' => trans('video.keywords-' . $full_video->id)
+            'description' =>  trans('video.description-' . $full_video->id)
         ];
 
         return view('livewire.video.show', compact('page', 'video_reads', 'video'));
