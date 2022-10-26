@@ -33,6 +33,7 @@
           <div class="card-page">
             <div class="page-text">
               {!! $page->content !!}
+              asa 33
             </div>
           </div>
         </div>
