@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Api3;
 
+use App\Tv;
+
 use App\Sora;
 
 use App\Rewaya;
-
 use App\Reciter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -84,5 +85,37 @@ class MainController extends ApiController
         });
 
         return compact('riwayat');
+    }
+    /**
+     * liveTv
+     *
+     * Get a list of all avalibale riwayat ordered by added date
+     *
+     * @group API 2
+     *
+     * @bodyParam  language string The language of texts in riwayat arrays. If is not set the default language of texts is arabic. exemple: 'ar', 'en', 'fr'...
+     *
+     * @return json
+     */
+    public function liveTv(Request $request)
+    {
+        $this->setParams($request);
+        $name = 'api_v3_live_tv_' . $request->input('language');
+        Cache::forget($name);
+        $livetv = Cache::rememberForever($name, function () {
+            $livetv = DB::table('tvs')->where('status', 1);
+            if ($this->language !== null) {
+                $livetv = $livetv->join('translator_translations', 'tvs.id', '=', 'translator_translations.item')
+                    ->where('translator_translations.locale', $this->language_code)
+                    ->where('translator_translations.group', 'tv-name')
+                    ->select('tvs.id', 'translator_translations.text as name', 'tvs.url');
+
+            } else {
+                $livetv = $livetv->select('tvs.id', 'tvs.name', 'tvs.url');
+            }
+            return $livetv->get();
+        });
+
+        return compact('livetv');
     }
 }

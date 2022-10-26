@@ -36,8 +36,8 @@ class ApiController extends BaseController
             $item['id'] = (string) $language->id;
             $item['language'] = $language->name_english;
             $item['native'] = $language->native;
-            $item['suwar'] = config('app.url') . '/api/v3/suwar?language=' . $language->locale;
-            $item['riwayat'] = config('app.url') . '/api/v3/riwayat?language=' . $language->locale;
+            $item['surah'] = config('app.url') . '/api/v3/suwar?language=' . $language->locale;
+            $item['rewayah'] = config('app.url') . '/api/v3/riwayat?language=' . $language->locale;
             $item['reciters'] = config('app.url') . '/api/v3/reciters?language=' . $language->locale;
             $langs[] = $item;
         }

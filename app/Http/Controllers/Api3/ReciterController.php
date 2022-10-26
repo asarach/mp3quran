@@ -86,7 +86,14 @@ class ReciterController extends ApiController
      *
      * Get a list of all avalibale reciters ordered by added date
      *
-     * @group API 2
+     * @group API 3
+     *
+     * @bodyParam  language string The language of texts in reads arrays. If is not set the default language of texts is arabic. exemple: 'ar', 'en', 'fr'...
+     * @bodyParam  reciter integer The id of the reciter you want to get its reads. If is not set it will return all reciters reads.
+     * @bodyParam  rewaya integer The id of the rewaya you want to get its reads. If is not set it will return all reciters reads.
+     * @bodyParam  sura integer The id of the sura you want to get its reads. If is not set it will return all reciters reads.
+     * @bodyParam  last_updated_date string The date of read last update. It allows to limit the reads returned to a given date.
+     *
      *
      * @bodyParam  language string The language of texts in reciters arrays. If is not set the default language of texts is arabic. exemple: 'ar', 'en', 'fr'...
      *
@@ -169,12 +176,11 @@ class ReciterController extends ApiController
                     ->pluck('sura_id')
                     ->toArray();
                 $moshaf['id'] = $read->id;
-                $moshaf['moshaf_type'] = intval($read->rewaya_id . $read->mushaf_id);
+                
                 $moshaf['name'] =  transLocale('rewaya-name',  $read->rewaya_id, $this->language_code)  . ' - ' . transLocale('mushaf-name',  $read->mushaf_id, $this->language_code);
-                $moshaf['Server'] = $read->server_id;
-                $moshaf['sample'] = $read->sample;
-                $moshaf['count'] = count($soar);
-                $moshaf['suras'] = implode(",", $soar);
+                $moshaf['server'] = $read->server->url . '/' . $read->url . '/';;
+                $moshaf['surah_total'] = count($soar);
+                $moshaf['surah_list'] = implode(",", $soar);
                 if (!empty($soar)) {
                     $moshafs[] = $moshaf;
                 }
@@ -183,7 +189,6 @@ class ReciterController extends ApiController
 
             $result['id'] = $reciter->id;
             $result['name'] =  transLocale('reciter-name',  $reciter->id, $this->language_code);
-            $result['Server'] = '';
             $result['letter'] = mb_substr($result['name'], 0, 1, "UTF-8");
 
             if ($order == 'updated_at') {
@@ -206,6 +211,17 @@ class ReciterController extends ApiController
     public function getReciters($order = 'name', $sort = 'asc')
     {
         $reciters = Reciter::where('status', 1);
+
+        if ($this->reciter !== null) {
+            $reciters = $reciters->where('reciters.id', $this->reciter);
+        }
+
+        if ($this->last_updated_date !== null) {
+            $date = Carbon::parse($this->last_updated_date)->toDateTimeString();
+
+            $reciters = $reciters->where('reciters.updated_at', '>=', $date);
+        }
+
         if ($this->language !== null) {
             $reciters = $reciters->join('translator_translations', 'reciters.id', '=', 'translator_translations.item')
                 ->where('translator_translations.locale', $this->language_code)
@@ -226,7 +242,7 @@ class ReciterController extends ApiController
                     ->join('sura_read', 'reads.id', '=', 'sura_read.read_id')
                     ->where('sura_read.sura_id', $this->sura);
             }
-            $reads = $reads->orderBy('id', 'desc')
+            $reads = $reads->orderBy('reads.id', 'desc')
                 ->where('reads.reciter_id', $reciter->id)
                 ->get();
 
@@ -242,11 +258,11 @@ class ReciterController extends ApiController
                     ->toArray();
 
                 $moshaf['id'] = $read->id;
-                $moshaf['moshaf_type'] = intval($read->rewaya_id . $read->mushaf_id);
+                
                 $moshaf['name'] =  transLocale('rewaya-name',  $read->rewaya_id, $this->language_code)  . ' - ' . transLocale('mushaf-name',  $read->mushaf_id, $this->language_code);
-                $moshaf['server'] = $read->server_id;
-                $moshaf['suwar_count'] = count($soar);
-                $moshaf['suwar'] = implode(",", $soar);
+                $moshaf['server'] = $read->server->url . '/' . $read->url . '/';;
+                $moshaf['surah_total'] = count($soar);
+                $moshaf['surah_list'] = implode(",", $soar);
                 if (!empty($soar)) {
                     $items[] = $moshaf;
                 }
@@ -259,7 +275,7 @@ class ReciterController extends ApiController
             if ($order == 'updated_at') {
                 $result['recent_date'] = $reciter->updated_at;
             }
-            $result['reads'] = $items;
+            $result['moshaf'] = $items;
 
 
             if (!empty($items)) {

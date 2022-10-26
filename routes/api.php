@@ -33,6 +33,7 @@ $router->get('/api/ayat_timing/soar', array('as' => 'api_b.videos', 'uses' => 'A
 $router->get('/api/v3/languages',    array('as' => 'api_3.languages',    'uses' => 'Api3\MainController@languages'));
 $router->get('/api/v3/suwar',        array('as' => 'api_3.suwar',        'uses' => 'Api3\MainController@suwar'));
 $router->get('/api/v3/riwayat',      array('as' => 'api_3.riwayat',      'uses' => 'Api3\MainController@riwayat'));
+$router->get('/api/v3/live-tv',      array('as' => 'api_3.liveTv',       'uses' => 'Api3\MainController@liveTv'));
 
 $router->get('/api/v3/reciters',     array('as' => 'api_3.reciters',     'uses' => 'Api3\ReciterController@reciters'));
 $router->get('/api/v3/reads',        array('as' => 'api_3.reads',        'uses' => 'Api3\ReciterController@reads'));
