@@ -49,6 +49,17 @@ class Sora extends Model
         ];
     }
 
+
+    /**
+    * Get the language of the annonce.
+    */
+    public function tafsirs()
+    {
+        return $this->hasMany('App\Models\Tafsir', 'sura_id');
+    }
+
+
+
     public function searchableAs()
     {
         return 'soar_index';

@@ -122,6 +122,10 @@
       font-weight: 600;
       right: 6rem;
       cursor: pointer;
+      display: none;
+    }
+    .ply-bookmark.show{
+      display: block;
     }
     .ply-bookmark::after {
       content: "";

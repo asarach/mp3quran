@@ -24,6 +24,10 @@ class EloquentTafsirRepository extends EloquentRepository implements TafsirRepos
         $item->status = $data['status'];
         $item->description = $data['description'];
 
+        if (!empty($data['sora']) and isset($data['sora']['id'])) {
+            $item->sora()->associate($data['sora']['id']);
+        }
+
         $item->save();
 
         return $item;
@@ -36,6 +40,12 @@ class EloquentTafsirRepository extends EloquentRepository implements TafsirRepos
         $item->name = $data['name'];
         $item->status = $data['status'];
         $item->description = $data['description'];
+
+        if (!empty($data['sora']) and isset($data['sora']['id'])) {
+            $item->sora()->associate($data['sora']['id']);
+        } else {
+            $item->sora()->dissociate();
+        }
 
         $item->save();
 

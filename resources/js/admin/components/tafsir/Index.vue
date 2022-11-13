@@ -52,6 +52,7 @@
               <filtering
                 :orders="orders"
                 :status="status"
+                :soar="soar"
                 :query="query"
                 @filter="filterCountires"
                 @order="orderCountires"
@@ -76,6 +77,7 @@
                     </th>
                     <th scope="col">#</th>
                     <th scope="col">{{ trans("text.name") }}</th>
+                    <th scope="col">{{ trans("text.sora") }}</th>
                     <th scope="col" style="width: 80px; text-align: center">
                       {{ trans("admin.status") }}
                     </th>
@@ -101,11 +103,16 @@
                       </div>
                     </td>
                     <td scope="row">{{ tafsir.id }}</td>
+
                     <td>
                       <router-link :to="prefix + 'tsoras/' + tafsir.id">
                         {{ tafsir.name }}
                       </router-link>
                     </td>
+                    <td v-if="tafsir.sora" scope="row">
+                      {{ tafsir.sora.name }}
+                    </td>
+                    <td v-else scope="row">-</td>
                     <td class="text-center">
                       <a
                         v-if="tafsir.status !== 1"
@@ -251,6 +258,7 @@
             :action="'create'"
             @refrech="getCountires()"
             :tafsir="tafsir"
+            :soar="soar"
           ></tafsir-form>
         </div>
       </div>
@@ -264,6 +272,7 @@ export default {
       show_spinner: true,
       show_error: false,
       tafsirs: {},
+      soar: {},
       actions_check: false,
       actions_items: {},
       sort: this.$route.params.sort,
@@ -313,6 +322,7 @@ export default {
         .get(url)
         .then((response) => {
           self.tafsirs = response.data.tafsirs;
+          self.soar = response.data.soar;
           self.show_spinner = false;
           window.scroll(0, 0);
         })
@@ -360,6 +370,9 @@ export default {
       }
       if (this.filters.tafsir) {
         base += "tafsir=" + this.filters.tafsir.id + "&";
+      }
+      if (this.filters.sora) {
+        base += "sora=" + this.filters.sora.id + "&";
       }
       if (this.filters.rewaya) {
         base += "rewaya=" + this.filters.rewaya.id + "&";
@@ -582,3 +595,14 @@ export default {
   },
 };
 </script>
+<style>
+.fiters-wrap {
+  width: 55%;
+}
+.filtering .dropdown-menu{
+  height: auto;
+}
+.filtering .multiselect__single {
+  width: 0;
+}
+</style>

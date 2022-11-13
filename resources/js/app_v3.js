@@ -5,7 +5,7 @@ import Favorites from './lib/favorites';
 import Clipboard from './lib/clipboard';
 import quranSlider from './lib/quran-slider';
 import Player from './lib/player';
-import { getItemAndPlay, addItem } from './lib/utils';
+import { getItemAndPlay, addItem, bookmarkTsora } from './lib/utils';
 import { savePlaylist } from './lib/playlist';
 
 /************************* */
@@ -32,7 +32,7 @@ window.favorites = new Favorites();
 /************************* */
 
 function initiateLib() {
- 
+
   $(".quick-access a").on("click", function (e) {
     e.preventDefault();
     window.quickAccess = new QuickAccess();
@@ -61,7 +61,6 @@ function initiateLib() {
     const item = $(this).data("item");
     const type = $(this).data("type");
     const time = $(this).data("time");
-
     getItemAndPlay(url, item, type, time);
   });
   $(".share-btn").on("click", function (e) {
@@ -114,6 +113,18 @@ function initiateLib() {
     $('.more-btn').not(this).next('.item-options').removeClass('show');
     $(this).next('.item-options').toggleClass('show');
   });
+
+  $(".ply-bookmark").off("click");
+  $(".ply-bookmark").on("click", function (e) {
+    try {
+      let time = window.player.current_item.howl.seek();
+      let url = window.ajax_prefix + '/tsora/bookmark?id=' + window.player.current_item.read_id + '&time=' + Math.round(time);
+      bookmarkTsora(url);
+    } catch (error) {
+      notify(trans("text.not-added"), 'warn', trans("text.bookmark-not-created"));
+    }
+  });
+
 }
 $(document).ready(function () {
   initiateLib();
@@ -129,7 +140,6 @@ document.addEventListener("turbolinks:render", function (event) {
   favorites.favoritesChanged();
 });
 Livewire.on('changeDom', postId => {
-  console.log('changeDom');
   initiateLib();
   player.stateChanged();
   favorites.favoritesChanged();

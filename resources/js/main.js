@@ -105,7 +105,26 @@ jQuery(function ($) {
         }, 'xml');
 
     });
+
+    initiateTafsir();
 });
+
+document.addEventListener("turbolinks:render", function (event) {
+    jQuery(function ($) {
+        initiateTafsir();
+    });
+});
+
+function initiateTafsir() {
+    $('.tafsir-sora-btn').click(function () {
+        const current_sora = $(this).data("sora");
+        $('.tafsir-sora-collapse').not($('#tafsirsSora-' + current_sora)).removeClass('show');
+        $('.tafsir-sora-btn').not($(this)).removeClass('show');
+        $('#tafsirsSora-' + current_sora).toggleClass('show')
+        $(this).toggleClass('show')
+    });
+
+}
 
 function handleClick(myRadio) {
 
@@ -135,7 +154,9 @@ function toggleHeaderAds(currentItem, nextItem, count) {
         } else {
             newNextItem = nextItem + 1;
         }
-       
+
         toggleHeaderAds(newCurrentItem, newNextItem, count);
     }, soconds * 1000);
 }
+
+

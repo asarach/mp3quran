@@ -47,7 +47,7 @@ class ApiTimingController extends Controller
         $sura = $request->surah;
         $read = $request->read;
         $name = 'ayat_timing_soar_read_' . $read . '_sura_' . $sura;
-        Cache::forget($name);
+        // Cache::forget($name);
         $data = Cache::rememberForever($name, function () use ($read,  $sura) {
             $data = DB::table('reads_timing')
                 ->leftJoin('quran_pages', function ($join) {
@@ -65,7 +65,7 @@ class ApiTimingController extends Controller
     public function reads(Request $request)
     {
         $name = 'ayat_timing_reads';
-        Cache::forget($name);
+        // Cache::forget($name);
         $reads = Cache::rememberForever($name, function () {
 
             $reads_ids = DB::table('reads_timing')
@@ -94,7 +94,7 @@ class ApiTimingController extends Controller
     {
         $read = $request->read;
         $name = 'ayat_timing_soar_read_' . $read;
-        Cache::forget($name);
+        // Cache::forget($name);
         $soar = Cache::rememberForever($name, function () use ($read) {
             $soar_ids = DB::table('reads_timing')
                 ->where('read_id', $read)

@@ -3,11 +3,13 @@
 namespace App\Http\Livewire\Tafsir;
 
 use App\Page;
+use App\Sora;
 use App\Models\Tsora;
 use App\Models\Tafsir;
-use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Database\Eloquent\Builder;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class Index extends Component
@@ -23,6 +25,7 @@ class Index extends Component
     public function render()
     {
         //get tafsirs
+        $soar = $this->getSoar();
         $tafsirsa = Tafsir::where('status', 1)->get();
         $tafsirs = [];
         foreach ($tafsirsa as $tafsir) {
@@ -58,7 +61,27 @@ class Index extends Component
 
         $tbookmarks = Auth::user()->tbookmarks()->with('tsora')->get()->toArray();
 
-        return view('livewire.tafsir.index', compact('page', 'tafsirs', 'tsoras', 'tbookmarks'));
+        return view('livewire.tafsir.index', compact('page', 'soar', 'tafsirs', 'tsoras', 'tbookmarks'));
+    }
+    public function getSoar()
+    {
+
+        if (style_version() != 'm') {
+            $size = 6;
+        } else {
+            $size = 3;
+        }
+
+
+        $soar = Sora::wherehas('tafsirs', function (Builder $query) {
+                    $query->where('status', 1);
+                })
+            ->with('tafsirs')
+            ->get()
+            ->chunk($size);
+
+            // $soar = Sora::wherehas('tafsirs')->chunk($size)->get();
+        return $soar;
     }
     public function preparword($q)
     {

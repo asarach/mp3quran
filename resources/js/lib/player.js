@@ -182,7 +182,6 @@ export default class Player {
     } else {
       if (self.sound == null || self.sound.src !== self.current_item.file) {
         if (self.sound != null) {
-          console.log('unload');
           self.sound.unload();
         }
       }
@@ -223,9 +222,15 @@ export default class Player {
 
     $("#reciterName").html(self.current_item.reciter);
     $("#soraName").html(self.current_item.name);
-
     $("#fplyReader").html(self.current_item.reciter);
     $("#fplySora").html(self.current_item.name);
+
+    if (self.current_item.type == "tsora") {
+      $("#bookmarkBtn").addClass('show');
+    } else {
+      $("#bookmarkBtn").removeClass('show');
+    }
+    
   }
   setCurrentIndex(index) {
     if (typeof index === 'number') {

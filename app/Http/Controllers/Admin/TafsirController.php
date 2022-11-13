@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\TafsirRequest;
 use App\Repositories\Tafsir\TafsirRepository;
 use App\Repositories\Rewaya\RewayaRepository;
+use App\Repositories\Sora\SoraRepository;
+
 use App\Tafsir;
 use Illuminate\Http\Request;
 use DB;
@@ -19,9 +21,10 @@ class TafsirController extends Controller
      *
      * @return void
      */
-    public function __construct(Search $search, TafsirRepository $tafsir,  RewayaRepository $rewaya)
+    public function __construct(Search $search, TafsirRepository $tafsir, SoraRepository $sora,  RewayaRepository $rewaya)
     {
         $this->tafsir = $tafsir;
+        $this->sora = $sora;
         $this->rewaya = $rewaya;
         $this->search = $search;
     }
@@ -33,7 +36,7 @@ class TafsirController extends Controller
      */
     public function index()
     {
-        $columns = ['statu' => 'status'];
+        $columns = ['statu' => 'status', 'sora' => 'tafsirs.sura_id'];
         $trashed = request('trashed');
         $q= request('q');
         $tafsirs = $this->tafsir->model
@@ -45,9 +48,10 @@ class TafsirController extends Controller
             $ids = $this->search->search($q, 'tafsirs_index');
             $tafsirs = $tafsirs->whereIn('id', $ids);
         }
-        $tafsirs = $tafsirs->paginate(250);
+        $tafsirs = $tafsirs->with('sora:id,name')->paginate(250);
+        $soar = $this->sora->list(['id', 'name']);
 
-        return compact('tafsirs');
+        return compact('tafsirs', 'soar');
     }
 
     /**

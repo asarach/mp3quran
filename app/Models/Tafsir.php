@@ -33,6 +33,7 @@ class Tafsir extends Model
             $array = [
                 'id' => $this->id,
                 'name' => $this->getLocaleName(),
+                'sora_name' => $this->getSoraName(),
             ];
         }
         
@@ -58,6 +59,28 @@ class Tafsir extends Model
     public function tsoar()
     {
         return $this->hasMany('App\Models\Tsora');
+    }
+
+     /**
+     * Get the language of the annonce.
+     */
+    public function sora()
+    {
+        return $this->belongsTo('App\Sora', 'sura_id');
+    }
+
+    public function getSoraName()
+    {
+        if ($this->sora) {
+            $name = trans('sora-name.' . $this->sura_id);
+            if (strpos($name, 'sora-name.') !== false) {
+                $name =  $this->sora->name;
+            }
+        } else {
+            $name = '';
+        }
+
+        return $name;
     }
 
     public function getLocaleName()

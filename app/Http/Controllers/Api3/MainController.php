@@ -101,7 +101,7 @@ class MainController extends ApiController
     {
         $this->setParams($request);
         $name = 'api_v3_live_tv_' . $request->input('language');
-        Cache::forget($name);
+        // Cache::forget($name);
         $livetv = Cache::rememberForever($name, function () {
             $livetv = DB::table('tvs')->where('status', 1);
             if ($this->language !== null) {

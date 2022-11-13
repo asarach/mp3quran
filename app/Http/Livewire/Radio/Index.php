@@ -30,7 +30,7 @@ class Index extends Component
             $radios = $this->getRadios();
         } else {
             $cache_name = 'radios_index_rewaya' . $this->selected_rewaya['id'] . '_long_' .  LaravelLocalization::getCurrentLocale();
-            Cache::forget($cache_name);
+            // Cache::forget($cache_name);
             $radios = Cache::rememberForever($cache_name, function () {
                 return $this->getRadios();
             });

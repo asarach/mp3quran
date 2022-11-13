@@ -45,7 +45,7 @@ class ReciterController extends ApiController
     {
         $this->setParams($request);
         $name = 'api_v3_reads_language_' . $this->language . '_last_updated_date_' . $this->last_updated_date . '_reciter_' . $this->reciter . '_rewaya_' . $this->rewaya . '_sura_' . $this->sura;
-        Cache::forget($name);
+        // Cache::forget($name);
         $reads = Cache::rememberForever($name, function () {
             return $this->getReads();
         });
@@ -72,7 +72,7 @@ class ReciterController extends ApiController
     {
         $this->setParams($request);
         $name = 'api_v3_recent_reads_language_' . $this->language . '_last_updated_date_' . $this->last_updated_date . '_reciter_' . $this->reciter . '_rewaya_' . $this->rewaya . '_sura_' . $this->sura;
-        Cache::forget($name);
+        // Cache::forget($name);
         $reads = Cache::rememberForever($name, function () {
             return $this->getReads('updated_at', 'desc');
         });
@@ -103,7 +103,7 @@ class ReciterController extends ApiController
     {
         $this->setParams($request);
         $name = 'api_v3_reads_language_' . $this->language . '_last_updated_date_' . $this->last_updated_date . '_reciter_' . $this->reciter . '_rewaya_' . $this->rewaya . '_sura_' . $this->sura;
-        Cache::forget($name);
+        // Cache::forget($name);
         $reciters = Cache::rememberForever($name, function () {
             return $this->getReciters();
         });

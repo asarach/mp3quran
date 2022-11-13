@@ -27,6 +27,7 @@
         </div>
       </div>
       <div class="ply-body">
+        <div id="bookmarkBtn" class="ply-bookmark" >{{ trans('text.bookmark') }}</div>
         <div id="playerLoading"></div>
         <div class="ply-timer" id="playerTimer"></div>
         <div class="qs-track quran-slider seek" data-control='progress'>

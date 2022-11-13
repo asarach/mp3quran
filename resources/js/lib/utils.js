@@ -18,7 +18,6 @@ export function trans(string, args = {}) {
     return value;
 }
 export function stateChange(state) {
-    console.log('shown-ply-btn');
     $('.hiden-ply-btn').hide();
     $('.shown-ply-btn').show();
     switch (state.playing_state) {
@@ -30,11 +29,11 @@ export function stateChange(state) {
             $("#playerLoading").show();
             $("#playerPauseBtn").hide();
             $("#playerPlayBtn").hide();
-            
+
             $("#fullPlayerLoading").show();
             $("#fullPlayerPauseBtn").hide();
             $("#fullPlayerPlayBtn").hide();
-            
+
 
             $('#playerListItem-' + state.index + ' .btn-loading').show();
             $('#playerListItem-' + state.index + ' .btn-pause').hide();
@@ -52,11 +51,11 @@ export function stateChange(state) {
             $("#playerLoading").hide();
             $("#playerPauseBtn").show();
             $("#playerPlayBtn").hide();
-            
+
             $("#fullPlayerLoading").hide();
             $("#fullPlayerPauseBtn").show();
             $("#fullPlayerPlayBtn").hide();
-            
+
 
             $('#playerListItem-' + state.index + ' .btn-loading').hide();
             $('#playerListItem-' + state.index + ' .btn-pause').show();
@@ -75,11 +74,11 @@ export function stateChange(state) {
             $("#playerLoading").hide();
             $("#playerPauseBtn").hide();
             $("#playerPlayBtn").show();
-            
+
             $("#fullPlayerLoading").hide();
             $("#fullPlayerPauseBtn").hide();
             $("#fullPlayerPlayBtn").show();
-            
+
 
             $('#playerListItem-' + state.index + ' .btn-loading').hide();
             $('#playerListItem-' + state.index + ' .btn-pause').hide();
@@ -101,8 +100,9 @@ export function getItemAndPlay(url, item, type, time = null) {
             success: function (response) {
                 window.player.addAndPlayItem(response);
                 if (time) {
-                    player.seek((time / 1000 ) / player.sound.duration());
-                    console.log('go to time ' + (time / 1000 ) / player.sound.duration());
+                    window.player.sound.on('play', function () {
+                      window.player.sound.seek(time);
+                    });
                 }
             },
             error: function (response) {
@@ -123,6 +123,18 @@ export function addItem(url) {
         },
         error: function (response) {
             notify(trans("text.not-added"), 'warn', trans("text.item-not-added-playlist"));
+        },
+    });
+}
+export function bookmarkTsora(url) {
+    $.ajax({
+        type: 'GET',
+        url: url,
+        success: function (response) {
+            notify(trans("text.added"), 'success', trans("text.bookmark-created"));
+        },
+        error: function (response) {
+            notify(trans("text.not-added"), 'warn', trans("text.bookmark-not-created"));
         },
     });
 }

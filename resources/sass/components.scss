@@ -1351,3 +1351,47 @@
     transform: rotateY(135deg);
   }
 }
+.tafsirs-soar-list{
+  .col{
+    max-width: 16%;
+  }
+  .collapse-row{
+    margin-bottom: .75rem ;
+  }
+  .tafsir-sora-btn{
+    border: none;
+    width: 100%;
+    /* border-radius: 0.75rem; */
+    display: flex;
+    position: relative;
+    align-items: center;
+    cursor: pointer;
+    padding: 0.5rem;
+    background: #fff;
+    box-shadow: 0px 2px 8px 0px #a2a2a230;
+    border-radius: 10px;
+    color: #333;
+    text-align: center;
+    justify-content: center;
+    border-radius: 10px;
+    margin-right: 0 !important;
+
+  }
+  .tafsir-sora-btn.show{
+    height: 2rem !important;
+    border-radius:  10px 10px 0 0 !important;
+  }
+  .tafsir-sora-collapse{
+    display: none;
+  }
+  .tafsir-sora-collapse:first-child .card{
+    border-top-right-radius: 0 !important;
+  }
+  .tafsir-sora-collapse:last-child .card{
+    border-top-left-radius: 0 !important;
+  }
+  .tafsir-sora-collapse.show{
+    display: block;
+  }
+
+}
