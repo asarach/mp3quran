@@ -99,8 +99,9 @@ class TafsirController extends Controller
 
             $translations[$language->locale] = $arr;
         }
+        $soar = $this->sora->list(['id', 'name']);
 
-        return compact('tafsir', 'translations');
+        return compact('tafsir', 'translations', 'soar');
     }
 
     /**
