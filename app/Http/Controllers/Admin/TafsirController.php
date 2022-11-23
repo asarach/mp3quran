@@ -76,7 +76,7 @@ class TafsirController extends Controller
      */
     public function edit($id)
     {
-        $tafsir = $this->tafsir->model->findOrFail($id);
+        $tafsir = $this->tafsir->model->with('sora:id,name')->findOrFail($id);
 
 
 
