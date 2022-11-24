@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use DB;
+use App\Tsora;
+use App\Models\Tafsir;
+use App\Services\Search;
+use Illuminate\Http\Request;
 use App\Http\Requests\TsoraRequest;
+use Illuminate\Support\Facades\App;
+use App\Http\Controllers\Controller;
 use App\Repositories\Tsora\TsoraRepository;
 use App\Repositories\Rewaya\RewayaRepository;
-use App\Tsora;
-use Illuminate\Http\Request;
-use DB;
-use App\Services\Search;
 
 class TsoraController extends Controller
 {
@@ -35,9 +37,9 @@ class TsoraController extends Controller
     {
         $columns = ['statu' => 'status'];
         $trashed = request('trashed');
-        $q= request('q');
+        $q = request('q');
         $tsoras = $this->tsora->model
-        ->sortable(['id' => 'desc'])->filterColumns($columns);
+            ->sortable(['id' => 'desc'])->filterColumns($columns);
         if ($trashed) {
             $tsoras = $tsoras->onlyTrashed();
         }
@@ -59,7 +61,48 @@ class TsoraController extends Controller
     public function store(TsoraRequest $request)
     {
         $input = $request->all();
+        $tafsir  = Tafsir::with('sora:id,name')->findOrFail($input['tafsir']);
+        $input_name = $input['name'];
+        if (!$input['name']) {
+            if ($input['full_sura']) {
+                if ($tafsir && $tafsir->sora) {
+                    $input['name'] = trans('text.tsora-full-sura', ['sora' => trim(preg_replace('/\s\s+/', ' ', $tafsir->sora->name))]);
+                }
+            } else if ($input['start_aya'] && $input['end_aya']) {
+                $input['name'] = trans('text.tsora-start-end', ['start' => $input['start_aya'], 'end' => $input['end_aya'], 'sora' => trim(preg_replace('/\s\s+/', ' ', $tafsir->sora->name))]);
+            }
+        }
+
         $tsora = $this->tsora->create($input);
+        // $tsora = $this->tsora->model->find(6);
+        $languages = DB::table('translator_languages')->where('locale', 'fr')->get();
+        $current_local = App::getLocale();
+        
+        foreach ($languages as $language) {
+
+            App::setLocale($language->locale);
+            if (!$input_name) {
+                if ($input['full_sura']) {
+                    if ($tafsir && $tafsir->sora) {
+                        $trans_name = trans('text.tsora-full-sura', ['sora' => trim(preg_replace('/\s\s+/', ' ', $tafsir->sora->getLocaleName()))]);
+                    }
+                } else if ($input['start_aya'] && $input['end_aya']) {
+                    $trans_name = trans('text.tsora-start-end', ['start' => $input['start_aya'], 'end' => $input['end_aya'], 'sora' => trim(preg_replace('/\s\s+/', ' ', $tafsir->sora->getLocaleName()))]);
+                }else{
+                    $trans_name = '';
+                }
+            }else{
+                $trans_name = $input_name;
+            }
+            DB::table('translator_translations')->insert([
+                'locale' => $language->locale, 
+                'group' => 'tsora-name', 
+                'item' =>  $tsora->id, 
+                'text' => $trans_name
+            ]);
+        }
+        App::setLocale($current_local);
+
         clearPostCache(['admin_home_stats']);
         return compact('tsora');
     }
@@ -93,7 +136,7 @@ class TsoraController extends Controller
                 $arr['description'] = '';
             }
 
-            
+
             $translations[$language->locale] = $arr;
         }
 
@@ -177,8 +220,6 @@ class TsoraController extends Controller
             } elseif ($translation['description']) {
                 DB::table('translator_translations')->insert(['locale' => $key, 'group' => 'tsora-description', 'item' =>  $id, 'text' => $translation['description']]);
             }
-
-            
         }
         $result = true;
         flushTrans();

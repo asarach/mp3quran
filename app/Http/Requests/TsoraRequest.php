@@ -29,14 +29,14 @@ class TsoraRequest extends FormRequest
       case 'POST':
 
         return [
-          'name' => 'required|string|max:255',
+          'url' => 'required|string|max:255',
         ];
 
         // Handle updates
       case 'put':
       case 'PUT':
         return [
-          'name' => 'required|string|max:255',
+          'url' => 'required|string|max:255',
         ];
     }
   }

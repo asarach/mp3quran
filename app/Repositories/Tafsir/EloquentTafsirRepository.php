@@ -19,7 +19,6 @@ class EloquentTafsirRepository extends EloquentRepository implements TafsirRepos
     public function create(array $data)
     {
         $item = new $this->model;
-
         $item->name = $data['name'];
         $item->status = $data['status'];
         $item->description = $data['description'];

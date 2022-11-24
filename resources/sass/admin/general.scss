@@ -251,11 +251,13 @@ a:hover {
 
 .content-header .breadcrumb-item + .breadcrumb-item::before {
 	color: #d4dae0;
+	float: right;
 	padding-left: 0.5rem;
 }
 
 .ltr .content-header .breadcrumb-item + .breadcrumb-item::before {
 	padding-left: auto;
+	float: left;
 	padding-right: 0.5rem;
 }
 

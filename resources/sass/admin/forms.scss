@@ -107,3 +107,32 @@
     }
   }
 }
+
+
+.custom-checkbox {
+  padding-right: 0;
+  .custom-control-input[type="checkbox"] {
+    margin: 0;
+    height: 1rem;
+    width: 1rem;
+    top: 5px;
+    right: 0;
+  }
+  .custom-control-label{
+
+  }
+  .custom-control-label::before {
+    right: 0;
+    right: -2rem;
+    top: 3px;
+  }
+  .custom-control-label::after {
+    right: -1rem;
+    top: 5px !important;
+  }
+  .custom-control-input:checked ~ .custom-control-label::before{
+      color: #fff;
+      border-color: #FE6C6C;
+      background-color: #FE6C6C;
+  }
+}
