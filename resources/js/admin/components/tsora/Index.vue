@@ -214,6 +214,9 @@ export default {
       tsora: {
         name: "",
         status: 0,
+        full_sura: false,
+        start_aya: '',
+        end_aya: '',
         tafsir: this.$route.params.tafsir,
         url: ""
       },

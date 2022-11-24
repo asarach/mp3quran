@@ -74,8 +74,7 @@ class TsoraController extends Controller
         }
 
         $tsora = $this->tsora->create($input);
-        // $tsora = $this->tsora->model->find(6);
-        $languages = DB::table('translator_languages')->where('locale', 'fr')->get();
+        $languages = DB::table('translator_languages')->get();
         $current_local = App::getLocale();
         
         foreach ($languages as $language) {
