@@ -58,6 +58,14 @@ class Sora extends Model
         return $this->hasMany('App\Models\Tafsir', 'sura_id');
     }
 
+    /**
+    * Get the language of the annonce.
+    */
+    public function tsoars()
+    {
+        return $this->hasMany('App\Models\Tsora', 'sura_id');
+    }
+
 
 
     public function searchableAs()

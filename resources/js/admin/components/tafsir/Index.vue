@@ -52,7 +52,7 @@
               <filtering
                 :orders="orders"
                 :status="status"
-                :soar="soar"
+                
                 :query="query"
                 @filter="filterCountires"
                 @order="orderCountires"
@@ -77,7 +77,7 @@
                     </th>
                     <th scope="col">#</th>
                     <th scope="col">{{ trans("text.name") }}</th>
-                    <th scope="col">{{ trans("text.sora") }}</th>
+                    
                     <th scope="col" style="width: 80px; text-align: center">
                       {{ trans("admin.status") }}
                     </th>
@@ -109,10 +109,7 @@
                         {{ tafsir.name }}
                       </router-link>
                     </td>
-                    <td v-if="tafsir.sora" scope="row">
-                      {{ tafsir.sora.name }}
-                    </td>
-                    <td v-else scope="row">-</td>
+                   
                     <td class="text-center">
                       <a
                         v-if="tafsir.status !== 1"
@@ -258,7 +255,7 @@
             :action="'create'"
             @refrech="getCountires()"
             :tafsir="tafsir"
-            :soar="soar"
+            
           ></tafsir-form>
         </div>
       </div>
@@ -272,7 +269,7 @@ export default {
       show_spinner: true,
       show_error: false,
       tafsirs: {},
-      soar: {},
+      
       actions_check: false,
       actions_items: {},
       sort: this.$route.params.sort,
@@ -322,7 +319,7 @@ export default {
         .get(url)
         .then((response) => {
           self.tafsirs = response.data.tafsirs;
-          self.soar = response.data.soar;
+          
           self.show_spinner = false;
           window.scroll(0, 0);
         })

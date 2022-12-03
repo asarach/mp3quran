@@ -47,7 +47,7 @@
                             <div class="tafsir-sora-collapse" id="tafsirsSora-{{ $sora->id }}">
                                 <div class="card card-body">
                                     @foreach ($sora->tafsirs as $tafsir)
-                                    <a href="{{ route('tafsir.show', ['tafsir_id'=> $tafsir->id]) }}">
+                                    <a href="{{ route('tafsir.show', ['tafsir_id'=> $tafsir->id, 'sura_id'=> $sora->id]) }}">
                                          {{ $tafsir->name }}
                                     </a>
                                     @endforeach

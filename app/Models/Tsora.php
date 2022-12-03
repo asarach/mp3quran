@@ -78,4 +78,13 @@ class Tsora extends Model
         return $name;
     }
 
+      /**
+     * Get the language of the annonce.
+     */
+    public function sora()
+    {
+        return $this->belongsTo('App\Sora', 'sura_id');
+    }
+
+
 }

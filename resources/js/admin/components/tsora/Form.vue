@@ -8,6 +8,26 @@
         <h3 v-else class="card-title">{{ trans("admin.edit-tsora") }}</h3>
       </div>
       <div class="card-body table-responsive">
+        <div class="form-group">
+          <label class="col-form-label">{{ trans("admin.sora") }}</label>
+          <multiselect
+            v-model="tsora.sora"
+            selected-label
+            select-label
+            deselect-label
+            :options="soar"
+            :placeholder="trans('admin.sora')"
+            label="name"
+            track-by="id"
+            :multiple="false"
+          >
+            <span slot="noResult">{{ trans("admin.no-item-found") }}</span>
+          </multiselect>
+          <small class="form-text text-danger" v-if="errors.has('sora')">{{
+            errors.get("sora")
+          }}</small>
+        </div>
+        
         <div  v-if="action == 'create'" class="custom-control custom-checkbox">
           <input
             type="checkbox"
@@ -143,7 +163,7 @@
 const Errors = require("../../errors.js");
 
 export default {
-  props: ["action", "tsora"],
+  props: ["action", "soar","tsora"],
   data() {
     return {
       errors: new Errors(),

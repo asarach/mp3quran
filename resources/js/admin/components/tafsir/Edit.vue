@@ -28,7 +28,7 @@
     <section v-else class="content">
       <div class="row">
         <div class="col-lg-24">
-          <tafsir-form :action="'edit'" :tafsir="tafsir"  :soar="soar"></tafsir-form>
+          <tafsir-form :action="'edit'" :tafsir="tafsir" ></tafsir-form>
         </div>
       </div>
       <div class="row">
@@ -95,7 +95,7 @@ export default {
       show_spinner: true,
       show_error: false,
       translations: [],
-      soar: {},
+      
       tafsir: {
         name: "",
         status: 0,
@@ -110,7 +110,7 @@ export default {
         .get(this.ajax_prefix + "tafsir/edit/" + self.$route.params.id)
         .then(function(response) {
           self.tafsir = response.data.tafsir;
-          self.soar = response.data.soar;
+          
           self.translations = response.data.translations;
           self.show_spinner = false;
         })

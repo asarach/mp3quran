@@ -17,25 +17,7 @@
           />
           <small class="form-text text-danger" v-if="errors.has('name')">{{errors.get('name')}}</small>
         </div>
-        <div class="form-group">
-          <label class="col-form-label">{{ trans("admin.sora") }}</label>
-          <multiselect
-            v-model="tafsir.sora"
-            selected-label
-            select-label
-            deselect-label
-            :options="soar"
-            :placeholder="trans('admin.sora')"
-            label="name"
-            track-by="id"
-            :multiple="false"
-          >
-            <span slot="noResult">{{ trans("admin.no-item-found") }}</span>
-          </multiselect>
-          <small class="form-text text-danger" v-if="errors.has('sora')">{{
-            errors.get("sora")
-          }}</small>
-        </div>
+        
         <div class="form-group">
           <label class="col-form-label">{{ trans('admin.description')}}</label>
           <textarea
@@ -105,7 +87,7 @@
 const Errors = require("../../errors.js");
 
 export default {
-  props: ["action", "soar",  "tafsir"],
+  props: ["action",   "tafsir"],
   data() {
     return {
       errors: new Errors()

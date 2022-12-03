@@ -37,6 +37,7 @@
                 :status="status"
                 :query="query"
                 @filter="filterCountires"
+                :soar="soar"
                 @order="orderCountires"
               ></filtering>
               <table class="table table-hover table-striped">
@@ -59,6 +60,7 @@
                     </th>
                     <th scope="col">#</th>
                     <th scope="col">{{ trans("text.name") }}</th>
+                    <th scope="col">{{ trans("text.sora") }}</th>
                     <th scope="col" style="width: 80px; text-align: center">
                       {{ trans("admin.status") }}
                     </th>
@@ -85,6 +87,10 @@
                     </td>
                     <td scope="row">{{ tsora.id }}</td>
                     <td>{{ tsora.name }}</td>
+                    <td v-if="tsora.sora" scope="row">
+                      {{ tsora.sora.name }}
+                    </td>
+                    <td v-else scope="row">-</td>
                     <td class="text-center">
                       <a
                         v-if="tsora.status !== 1"
@@ -192,6 +198,7 @@
         <div class="col-lg-8">
           <tsora-form
             :action="'create'"
+            :soar="soar"
             @refrech="getCountires()"
             :tsora="tsora"
           ></tsora-form>
@@ -209,6 +216,7 @@ export default {
       tsoras: {},
       actions_check: false,
       actions_items: {},
+      soar: {},
       sort: this.$route.params.sort,
       direction: this.$route.params.direction,
       tsora: {
@@ -259,6 +267,7 @@ export default {
         .get(url)
         .then((response) => {
           self.tsoras = response.data.tsoras;
+          self.soar = response.data.soar;
           self.show_spinner = false;
           window.scroll(0, 0);
         })

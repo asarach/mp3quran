@@ -27,6 +27,9 @@ class EloquentTsoraRepository extends EloquentRepository implements TsoraReposit
         if (!empty($data['tafsir']) and isset($data['tafsir'])) {
             $item->tafsir()->associate($data['tafsir']);
         }
+        if (!empty($data['sora']) and isset($data['sora']['id'])) {
+            $item->sora()->associate($data['sora']['id']);
+        }
 
         $item->save();
 
@@ -40,6 +43,12 @@ class EloquentTsoraRepository extends EloquentRepository implements TsoraReposit
         $item->name = $data['name'];
         $item->status = $data['status'];
         $item->url = $data['url'];
+
+        if (!empty($data['sora']) and isset($data['sora']['id'])) {
+            $item->sora()->associate($data['sora']['id']);
+        } else {
+            $item->sora()->dissociate();
+        }
 
         $item->save();
 

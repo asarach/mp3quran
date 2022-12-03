@@ -20,23 +20,24 @@ class Show extends Component
     ];
 
     public $tafsir_id;
-    public function mount($tafsir_id)
+    public $sura_id;
+    public function mount($tafsir_id, $sura_id)
     {
         $this->tafsir_id = $tafsir_id;
+        $this->sura_id = $sura_id;
     }
 
     public function render()
     {
-
         //get tafsirs
         $tafsir = Tafsir::where('id', $this->tafsir_id)->where('status', 1)->firstOrFail();
 
         //get tsoras
         $cache_name = 'tsoras_index_tafsir_' . $tafsir->id . '_long_' .  LaravelLocalization::getCurrentLocale();
-        // Cache::forget($cache_name);
+        Cache::forget($cache_name);
         $tsoras = Cache::rememberForever($cache_name, function () use ($tafsir) {
             $tsoras = Tsora::where('status', 1);
-            $tsoras = $tsoras->where('tafsir_id', $tafsir->id);
+            $tsoras = $tsoras->where('tafsir_id', $tafsir->id)->where('sura_id', $this->sura_id);
             $tsoras = $tsoras->get();
             return $tsoras->sortBy('name')->values()->toArray();
         });
