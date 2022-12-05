@@ -38,7 +38,7 @@ class MainController extends ApiController
     public function languages(Request $request)
     {
         $this->setParams($request);
-        Cache::forget('api_v3_languages');
+        // Cache::forget('api_v3_languages');
         $language = Cache::rememberForever('api_v3_languages', function () {
             return $this->getLanguages();
         });
@@ -122,7 +122,7 @@ class MainController extends ApiController
     {
         $this->setParams($request);
         $name = 'api_v3_radios_' . $request->input('language');
-        Cache::forget($name);
+        // Cache::forget($name);
         $radios = Cache::rememberForever($name, function () {
             $radios = DB::table('radios')->where('status', 1);
             if ($this->language !== null) {
