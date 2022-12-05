@@ -60,8 +60,14 @@ class Index extends Component
         //         return $this->getTsoras();
         //     });
         // }
+        if (Auth::check()) {
+            $tbookmarks = Auth::user()->tbookmarks()->with('tsora')->get()->toArray();
+        } else {
+            $tbookmarks = [];
+        }
+        
 
-        $tbookmarks = Auth::user()->tbookmarks()->with('tsora')->get()->toArray();
+        
         // dd($tbookmarks);
 
         return view('livewire.tafsir.index', compact('page', 'soar','tbookmarks'));

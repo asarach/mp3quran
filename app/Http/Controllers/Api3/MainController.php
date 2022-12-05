@@ -38,6 +38,7 @@ class MainController extends ApiController
     public function languages(Request $request)
     {
         $this->setParams($request);
+        Cache::forget('api_v3_languages');
         $language = Cache::rememberForever('api_v3_languages', function () {
             return $this->getLanguages();
         });
@@ -109,7 +110,6 @@ class MainController extends ApiController
                     ->where('translator_translations.locale', $this->language_code)
                     ->where('translator_translations.group', 'tv-name')
                     ->select('tvs.id', 'translator_translations.text as name', 'tvs.url');
-
             } else {
                 $livetv = $livetv->select('tvs.id', 'tvs.name', 'tvs.url');
             }
@@ -117,5 +117,25 @@ class MainController extends ApiController
         });
 
         return compact('livetv');
+    }
+    public function radios(Request $request)
+    {
+        $this->setParams($request);
+        $name = 'api_v3_radios_' . $request->input('language');
+        Cache::forget($name);
+        $radios = Cache::rememberForever($name, function () {
+            $radios = DB::table('radios')->where('status', 1);
+            if ($this->language !== null) {
+                $radios = $radios->join('translator_translations', 'radios.id', '=', 'translator_translations.item')
+                    ->where('translator_translations.locale', $this->language_code)
+                    ->where('translator_translations.group', 'radio-name')
+                    ->select('radios.id', 'translator_translations.text as name', 'radios.url');
+            } else {
+                $radios = $radios->select('radios.id', 'radios.name', 'radios.url');
+            }
+            return $radios->get();
+        });
+
+        return compact('radios');
     }
 }

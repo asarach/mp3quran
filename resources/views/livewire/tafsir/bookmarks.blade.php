@@ -33,4 +33,6 @@
         @endforeach
     </ul>
 </div>
+@else
+<div class="mb-3"></div>
 @endif
