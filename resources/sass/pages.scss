@@ -827,10 +827,12 @@
     top: 0.5rem;
     left: 0;
   }
+  .dropzone-box,
   .dropzone {
     border: none;
     background: none;
   }
+  .dropzone-box .dz-clickable ,
   .dropzone .dz-clickable {
     margin: 0;
   }

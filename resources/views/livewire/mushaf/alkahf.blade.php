@@ -30,9 +30,31 @@
                 </div>
                 @endif
                 <div class="col-lg-19" id="sticky-container">
-                    <alkahf-flipbook></alkahf-flipbook>
+                    <div ref="fullscreen" id="fullscreen">
+                        <div class="alkahf-flipbook" data-start="293" data-end="305" data-page="293" data-kahf="true" @if(style_version()==='m' ) data-mobile="true" @else data-mobile="false" @endif>
+                            <div class="mushafs-options">
+                                <div class="form-group">
+                                    <label>{{ trans("text.listen") }}</label>
+                                    <select class="custom-select read">
+                                        <option value class="d-none" disabled selected>
+                                            {{ trans("text.read") }}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="btn share-btn mr-auto" v-tooltip="trans('text.share')" data-title="" data-url="" data-description="">
+                                    <span>{{ trans("text.share") }}</span>
+                                    <span class="uni-icon icon-share" style="color: #fff"></span>
+                                </div>
+                                <div class="btn fullscreen-btn" id="fullscreenToggle">
+                                    <span class="uni-icon icon-fullscreen" style="color: #fff"></span>
+                                </div>
+                            </div>
+                            @include('components.flip-book')
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+@include('components.share')

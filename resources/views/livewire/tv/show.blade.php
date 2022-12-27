@@ -31,7 +31,10 @@
         @endif
         <div class="col-lg-19" id="sticky-container">
           <div class="tvs-list">
-            <card-tv :tv="{{ json_encode($tv[0]) }}"></card-tv>
+            <div class="card-tv">
+              <h3>{{$tv[0]['name']}}</h3>
+              <div class="dplayer" data-url="{{$tv[0]['url']}}" data-live="true" data-autoplay="true"></div>
+            </div>
           </div>
         </div>
       </div>

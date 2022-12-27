@@ -33,7 +33,29 @@
           <div class="videos-list pt-3">
             <div class="card-deck">
               @foreach ($videos as $key => $video)
-              <card-video :video="{{ json_encode($video) }}"></card-video>
+              <div class="card card-video">
+                <a
+                  href="{{ route('video.show', ['slug'=> $video->slug]) }}"
+                  rel="alternate"
+                  hreflang="{{ LaravelLocalization::getCurrentLocale() }}"
+                >
+                  <img
+                    src="{{$video->getImage()}}"
+                    class="card-img-top"
+                    alt="{{$video->getLocaleTitle()}}"
+                    title="{{$video->getLocaleTitle()}}"
+                  />
+                </a>
+                <div class="card-body">
+                  <a
+                    href="{{ route('video.show', ['slug'=> $video->slug]) }}"
+                    rel="alternate"
+                    hreflang="{{ LaravelLocalization::getCurrentLocale() }}"
+                  >
+                    <h4 class="card-title">{{ $video->geReciterName() }}</h4>
+                  </a>
+                </div>
+              </div>
               @if (($key + 1) % 4 == 0)
             </div>
             <div class="card-deck">

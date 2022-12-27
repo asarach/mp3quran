@@ -30,9 +30,40 @@
                 </div>
                 @endif
                 <div class="col-lg-19" id="sticky-container">
-                    <mushafs-flipbook></mushafs-flipbook>
+                    <div ref="fullscreen" id="fullscreen">
+                        <div class="mushafs-flipbook" data-start="1" data-end="607" data-page="0" data-kahf="false" @if(style_version()==='m' ) data-mobile="true" @else data-mobile="false" @endif>
+                            <div class="mushafs-options">
+                                <div class="form-group">
+                                    <select class="custom-select sora">
+                                        <option value class="d-none" disabled selected>
+                                            {{ trans("text.sora") }}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <select class="custom-select read">
+                                        <option value class="d-none" disabled selected>
+                                            {{ trans("text.read") }}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="form-group  mr-auto">
+                                    <select class="custom-select part">
+                                        <option value="0" class="d-none" disabled selected>
+                                            {{ trans("text.part") }}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="btn fullscreen-btn" id="fullscreenToggle">
+                                    <span class="uni-icon icon-fullscreen" style="color: #fff;"></span>
+                                </div>
+                            </div>
+                            @include('components.flip-book')
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+@include('components.share')

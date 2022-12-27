@@ -1,12 +1,18 @@
 import ReportSora from './lib/report-sora';
 import QuickAccess from './lib/quick-access';
+import FlipBook from './lib/flipbook';
 import Share from './lib/share';
 import Favorites from './lib/favorites';
 import Clipboard from './lib/clipboard';
+import FileUploader from './lib/file-uploader';
+import ImageUploader from './lib/image-uploader';
+import VidPlayer from './lib/vid-player';
+import VideoLogo  from './lib/logo-video';
 import quranSlider from './lib/quran-slider';
 import Player from './lib/player';
 import { getItemAndPlay, addItem, bookmarkTsora } from './lib/utils';
 import { savePlaylist } from './lib/playlist';
+import screenfull from './lib/screenfull';
 
 /************************* */
 /***       EVENTS        ***/
@@ -24,6 +30,7 @@ $.ajaxSetup({
   }
 });
 window.ajax_prefix = window.App.urlBase + '/' + window.App.current_language + '/ajax';
+window.prefix = window.App.urlBase + '/' + window.App.current_language ;
 window.player = new Player();
 window.favorites = new Favorites();
 
@@ -124,6 +131,66 @@ function initiateLib() {
       notify(trans("text.not-added"), 'warn', trans("text.bookmark-not-created"));
     }
   });
+
+  // ********* card logo video ********* //
+  $(".card-logo-video").each(function (index) {
+    window.videoLogo = new VideoLogo(this);
+  });
+
+  // ********* file uploader ********* //
+  $(".file-uploader").each(function (index) {
+    new FileUploader(this);
+  });
+  // ********* file uploader ********* //
+  $(".image-uploader").each(function (index) {
+    window.imageUploader  = new ImageUploader(this);
+  });
+
+  // ********* video player ********* //
+  $(".dplayer").each(function (index) {
+    new VidPlayer(this);
+  });
+
+
+
+  // ********* fullscreen ********* //
+  const fullscreenElement = document.getElementById('fullscreen');
+  if (fullscreenElement) {
+    document.getElementById('fullscreenToggle').addEventListener('click', () => {
+      if (screenfull.isEnabled) {
+        screenfull.toggle(fullscreenElement);
+      }
+    });
+  
+  }
+
+
+
+  // ********* alkahf flipbook ********* //
+  var alkahfFlipbook = document.querySelector('div.alkahf-flipbook');
+  if (alkahfFlipbook) {
+    window.flipbook = new FlipBook(alkahfFlipbook);
+    flipbook.setAlkahfReads();
+
+    var flipbookObserver = new MutationObserver(function (event) {
+      flipbook.watchPage(alkahfFlipbook.dataset.page);  
+    })
+    flipbookObserver.observe(alkahfFlipbook, {
+      attributes: true, 
+      attributeFilter: ['data-page'],
+      childList: false, 
+      characterData: false
+    })
+  }
+  // ********* mushafs flipbook ********* //
+  var mushafsFlipbook = document.querySelector('div.mushafs-flipbook');
+  if (mushafsFlipbook) {
+    window.flipbook = new FlipBook(mushafsFlipbook);
+    flipbook.setSoar();
+    flipbook.setParts();
+  }
+
+
 
 }
 $(document).ready(function () {

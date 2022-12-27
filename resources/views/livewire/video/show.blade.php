@@ -35,7 +35,7 @@
               @if ($video['type'] == '0')
               <youtube video-id="{{ $video['youtube_id'] }}"></youtube>
               @elseif(!empty($video['url']))
-              <my-dplayer url="{{ $video['url'] }}"></my-dplayer>
+              <div class="dplayer" data-url="{{$video['url']}}"></div>
               @endif
             </div>
             <div class="card-videotitle">

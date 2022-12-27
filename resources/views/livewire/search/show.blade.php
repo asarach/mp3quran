@@ -65,10 +65,9 @@
               @foreach ($reads['data'] as $read)
               @include('components.card-read', [ 'read' => $read])
               @endforeach
-              @if ($reads['current_page'] < $reads['last_page'])
-                <button type="button" class="btn btn-success" @click="moreReads()">
-                  <span class="uni-icon icon-more-horizontal" style="color: #fff"></span>
-                  {{trans('text.lead-more')}}
+              @if ($reads['current_page'] < $reads['last_page']) <button type="button" class="btn btn-success" @click="moreReads()">
+                <span class="uni-icon icon-more-horizontal" style="color: #fff"></span>
+                {{trans('text.lead-more')}}
                 </button>
                 @endif
             </div>
@@ -78,10 +77,9 @@
               @foreach ($reciters['data'] as $reciter)
               @include('components.card-reciter ', [ 'reciter' => $reciter])
               @endforeach
-              @if ($reciters['current_page'] < $reciters['last_page'])
-                <button type="button" class="btn btn-success" @click="moreReciters()">
-                  <span class="uni-icon icon-more-horizontal" style="color: #fff"></span>
-                  {{trans('text.lead-more')}}
+              @if ($reciters['current_page'] < $reciters['last_page']) <button type="button" class="btn btn-success" @click="moreReciters()">
+                <span class="uni-icon icon-more-horizontal" style="color: #fff"></span>
+                {{trans('text.lead-more')}}
                 </button>
                 @endif
             </div>
@@ -91,10 +89,9 @@
               @foreach ($radios['data'] as $radio)
               @include('components.card-radio ', [ 'radio' => $radio])
               @endforeach
-              @if ($radios['current_page'] < $radios['last_page'])
-                <button type="button" class="btn btn-success" @click="moreRadios()">
-                  <span class="uni-icon icon-more-horizontal" style="color: #fff"></span>
-                  {{trans('text.lead-more')}}
+              @if ($radios['current_page'] < $radios['last_page']) <button type="button" class="btn btn-success" @click="moreRadios()">
+                <span class="uni-icon icon-more-horizontal" style="color: #fff"></span>
+                {{trans('text.lead-more')}}
                 </button>
                 @endif
             </div>
@@ -102,12 +99,20 @@
             @if ($active_tab == 'videos' )
             <div class="search-tab-pane">
               @foreach ($videos['data'] as $video)
-              <card-video :video="{{ json_encode($video) }}"></card-video>
+              <div class="card card-video">
+                <a href="{{ route('video.show', ['slug'=> $video['slug']]) }}" rel="alternate" hreflang="{{ LaravelLocalization::getCurrentLocale() }}">
+                  <img src="{{$video['image']}}" class="card-img-top" alt="{{$video['title']}}" title="{{$video['title']}}" />
+                </a>
+                <div class="card-body">
+                  <a href="{{ route('video.show', ['slug'=> $video['slug']]) }}" rel="alternate" hreflang="{{ LaravelLocalization::getCurrentLocale() }}">
+                    <h4 class="card-title">{{ $video['reciter_name'] }}</h4>
+                  </a>
+                </div>
+              </div>
               @endforeach
-              @if ($videos['current_page'] < $videos['last_page'])
-                <button type="button" class="btn btn-success" @click="moreVideos()">
-                  <span class="uni-icon icon-more-horizontal" style="color: #fff"></span>
-                  {{trans('text.lead-more')}}
+              @if ($videos['current_page'] < $videos['last_page']) <button type="button" class="btn btn-success" @click="moreVideos()">
+                <span class="uni-icon icon-more-horizontal" style="color: #fff"></span>
+                {{trans('text.lead-more')}}
                 </button>
                 @endif
             </div>
@@ -116,12 +121,14 @@
             @if ($active_tab == 'tvs' )
             <div class="search-tab-pane">
               @foreach ($tvs['data'] as $tv)
-              <card-tv :tv="{{ json_encode($tv) }}"></card-tv>
+              <div class="card-tv">
+                <h3>{{$tv['name']}}</h3>
+                <div class="dplayer" data-url="{{$tv['url']}}" data-live="true" data-autoplay="true"></div>
+              </div>
               @endforeach
-              @if ($tvs['current_page'] < $tvs['last_page'])
-                <button type="button" class="btn btn-success" @click="moreTvs()">
-                  <span class="uni-icon icon-more-horizontal" style="color: #fff"></span>
-                  {{trans('text.lead-more')}}
+              @if ($tvs['current_page'] < $tvs['last_page']) <button type="button" class="btn btn-success" @click="moreTvs()">
+                <span class="uni-icon icon-more-horizontal" style="color: #fff"></span>
+                {{trans('text.lead-more')}}
                 </button>
                 @endif
             </div>

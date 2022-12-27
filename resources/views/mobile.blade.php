@@ -64,7 +64,6 @@
     <div class="main-content">
       {{ $slot }}
     </div>
-    <notifications position="bottom left" group="app" animation-type="velocity" :animation="animation" classes="desktop-notifications" />
   </div>
 </div>
 
