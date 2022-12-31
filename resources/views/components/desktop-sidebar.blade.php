@@ -2,9 +2,16 @@
 
   <ul class="list-unstyled">
     @foreach ($main_menu as $menu)
-    @if (filter_var($menu['slug'], FILTER_VALIDATE_URL))
+    @if (str_contains($menu['slug'], 'atheer-radio.com'))
     <li>
-      <a href="{{ url($menu['slug']) }}" target="_blank" class="menu-link">
+      <a href="{{ url($menu['slug']) . '/' . str_replace( 'eng', 'en' , LaravelLocalization::getCurrentLocale()) }}" target="_blank" class="menu-link">
+        {!! $menu['icon'] !!}
+        {{trans('text.' . $menu['title'])}}
+      </a>
+    </li>
+    @elseif (filter_var($menu['slug'], FILTER_VALIDATE_URL))
+    <li>
+      <a href="{{ url($menu['slug']) }}/aa" target="_blank" class="menu-link">
         {!! $menu['icon'] !!}
         {{trans('text.' . $menu['title'])}}
       </a>

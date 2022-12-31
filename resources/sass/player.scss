@@ -8,13 +8,137 @@
     margin: 0 auto;
     display: flex;
     width: 25%;
+    justify-content: center;
+    align-items: center;
   }
 
   .ply-progress,
   .fply-progress {
     width: 100%;
   }
+  .player-progress-tooltip{
+    display: block;
+    width: 30px;
+    height: 12px;
+    position: absolute;
+    bottom: 10px;
+    background: #33333359;
+    border-radius: 3px;
+    margin-left: -10px;
+    left: 0;
+  }
 
+  .ply-body {
+    display: flex;
+    width: calc(100% - 380px);
+    align-items: center;
+    padding: 0 1rem;
+    position: relative;
+    .ply-timer {
+      border: none;
+      margin-right: 0.5rem;
+    }
+    .ply-duration {
+      margin-left: 0.5rem;
+    }
+    .ply-progress {
+      position: initial;
+      background: #eee;
+      border-radius: 5px;
+      position: relative;
+      cursor: pointer;
+
+      #playerProgress {
+        height: 4px;
+        background: #333;
+        border-radius: 5px;
+        width: 0;
+      }
+      #playerProgressPiont {
+        width: 12px;
+        height: 12px;
+        border-radius: 5px;
+        display: block;
+        position: absolute;
+        border: #333333 2px solid;
+        top: -4px;
+        left: 0;
+        background: #fff;
+        cursor: pointer;
+      }
+    }
+    .slider {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 4px;
+      background: #dbe1e3;
+      outline: none;
+      opacity: 0.7;
+      border-radius: 5px;
+      transition: opacity 0.2s;
+    }
+
+    /* Mouse-over effects */
+    .slider:hover {
+      opacity: 1; /* Fully shown on mouse-over */
+    }
+
+    /* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+    .slider::-webkit-slider-thumb {
+      -webkit-appearance: none; /* Override default look */
+      appearance: none;
+      width: 15px; /* Set a specific slider handle width */
+      height: 15px; /* Slider handle height */
+      border-radius: 50%;
+      background: #fff; /* Green background */
+      border: 2px solid #31aae2;
+      cursor: pointer; /* Cursor on hover */
+      transition: all 0.2s;
+    }
+
+    .slider::-moz-range-thumb {
+      width: 15px; /* Set a specific slider handle width */
+      height: 15px; /* Slider handle height */
+      border-radius: 50%;
+      background: #fff; /* Green background */
+      border: 2px solid #31aae2;
+      cursor: pointer; /* Cursor on hover */
+      transition: all 0.2s;
+    }
+    .slider:hover::-webkit-slider-thumb {
+      background: #31aae2;
+    }
+    .slider:hover::-moz-range-thumb {
+      background: #31aae2;
+    }
+    
+  }
+  .ply-bookmark {
+    position: absolute;
+    top: -1.25rem;
+    background: #f5b44b;
+    padding: 0.15rem 0.5rem;
+    color: #fff;
+    font-weight: 600;
+    right: 6rem;
+    cursor: pointer;
+    display: none;
+  }
+  .ply-bookmark.show{
+    display: block;
+  }
+  .ply-bookmark::after {
+    content: "";
+    width: 0;
+    height: 0;
+    position: absolute;
+    border-bottom: 12px solid #d18f25;
+    border-left: 8px solid transparent;
+    left: -8px;
+    top: 0;
+  }
 
   .ply-btn {
     width: 24px;
@@ -31,19 +155,33 @@
       color: #bcbfc1;
     }
   }
+  .btn-forward,
+  .btn-backward {
+    .uni-icon {
+      font-size: 16px;
+    }
+  }
   .ply-item-info {
     width: 50%;
-    display: flex;
     color: $gray-700;
     position: relative;
     text-align: center;
     padding: 2px;
+
+    margin: -0.65rem 0 -0.25rem;
+    display: block;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
     .ply-reader {
       font-weight: 700;
+      color: $primary;
     }
     .ply-sora {
       width: 100%;
-      font-size: 13px;
+      font-size: 11px;
+      line-height: 13px;
     }
   }
   .ply-timer {
@@ -81,11 +219,42 @@
         border-radius: 0.25rem;
         display: none;
         border: 1px solid #d9dde2;
+        cursor: initial;
+      }
+      .volume-selector.show {
+        display: flex;
+      }
+
+      .ply-volume {
+        background: #d8dadb;
+        border-radius: 7px;
+        margin: 5px 13px 5px 10px;
+        position: relative;
+      }
+      #playerVolumeInner {
+        width: 4px;
+        background: #333;
+        border-radius: 5px;
+        height: 0px;
+        bottom: 0;
+        position: absolute;
+      }
+      #playerVolumePiont {
+        width: 12px;
+        height: 12px;
+        border-radius: 5px;
+        display: block;
+        position: absolute;
+        border: #333333 2px solid;
+        bottom: 0;
+        left: -4px;
+        background: #fff;
+        cursor: pointer;
       }
     }
     .btn-volume:hover {
       margin-left: auto;
-      .volume-selector {
+      .volume-selector.dtp {
         display: flex;
       }
     }
@@ -96,7 +265,7 @@
     }
   }
 
-  .ply-playlist {
+  #playerPlaylist {
     position: absolute;
     bottom: -400px;
     width: calc(100% - 1rem);
@@ -107,6 +276,7 @@
     z-index: -1;
     border-radius: 10px;
     border: 1px solid #dee4ea;
+    min-height: 100px;
     .ply-list-header {
       padding: 0.75rem;
       display: flex;
@@ -202,6 +372,7 @@
         font-size: 11px;
         line-height: 1;
         color: $gray-500;
+        text-align: right;
       }
       .read-info {
         width: 80%;
@@ -219,6 +390,10 @@
         transition: all 0.3s ease;
         .ply-btn {
           margin-right: 0.5rem;
+          cursor: pointer;
+        }
+        .icon-delete:hover {
+          color: #fb4959;
         }
       }
       .read-options.opened {
@@ -231,33 +406,34 @@
         background-color: #f7f9fb;
       }
     }
+    .btn-save {
+      background: #8aa0af;
+      width: 50px;
+      color: #fff;
+      margin-left: auto;
+      margin-right: 0 !important;
+      border-radius: 8px 0 0 8px;
+    }
+    #playlistName {
+      border-radius: 0 8px 8px 0;
+      border: 1px solid #dfe2e3;
+      height: 28px;
+      border-left: none;
+      &.error{
+        border-color: #fb4959;
+      }
+    }
   }
-  .ply-playlist.opened {
+  #playerPlaylist.opened {
     bottom: 57px;
   }
-}
 
-.mobile-player {
-  display: flex;
-  background: $white;
-  padding: 0.75rem 0.5rem 0.5rem;
-  direction: ltr;
-  border-bottom: 1px solid #f0f4f8;
-
-  border-top: 1px solid #dee4ea;
-  margin-bottom: 2px;
-  position: relative;
-  box-shadow: 0px -2px 8px 2px #a2a2a230;
   .sply-progress {
     height: 2px;
     position: absolute;
     bottom: -1px;
     left: 0;
     background: #00a2ff;
-  }
-  .ply-item-info {
-    margin: -0.65rem 0 -0.25rem;
-    display: block;
   }
 
   .ply-fullplayer {
@@ -352,7 +528,29 @@
       color: #fff;
     }
     .fply-progress {
-      padding: 0 1rem;
+      background: #ffffff45;
+      height: 5px;
+      border-radius: 6px;
+      margin: 0.75rem;
+      padding: 0;
+      position: relative;
+      #playerProgress {
+        background: rgb(245, 180, 74);
+        height: 5px;
+        border-radius: 6px;
+      }
+      #playerProgressPiont {
+        width: 16px;
+        height: 16px;
+        border-radius: 10px;
+        display: block;
+        position: absolute;
+        border: #b88025 2px solid;
+        top: -5px;
+        left: 0;
+        background: #fce8c9;
+        cursor: pointer;
+      }
     }
 
     .ply-btn {
@@ -366,16 +564,27 @@
     height: 13vh;
     justify-content: space-around;
     align-items: center;
-
-    .btn-play-pause {
-      background: #f5b44b;
-      border-radius: 40px;
+    .ply-btn {
       width: 40px;
       height: 40px;
-      /* padding-top: 3px; */
+      background: #ffffff3d;
+      border-radius: 12px;
+    }
+
+    .btn-play-pause {
+      width: 40px;
+      height: 40px;
+      background: $secondary;
+      border-radius: 12px;
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
+      margin: 0 0.5rem;
+      cursor: pointer;
+      svg {
+        fill: #fff;
+        width: 20px;
+      }
     }
   }
   .fply-footer {
@@ -392,8 +601,7 @@
       cursor: pointer;
       align-items: center;
     }
-    
-    .playlist-avatar{
+    .playlist-avatar {
       width: 28px;
       height: 26px;
       background: #ffffff30;
@@ -428,6 +636,7 @@
     .read-options {
       margin-right: auto;
     }
+    .uni-icon,
     .ply-btn {
       color: $white;
     }
@@ -449,6 +658,21 @@
     background: #dae5e9;
   }
 }
+
+.mobile-player {
+  display: flex;
+  background: $white;
+  padding: 0.75rem 0.5rem 0.5rem;
+  direction: ltr;
+  border-bottom: 1px solid #f0f4f8;
+  border-top: 1px solid #dee4ea;
+  margin-bottom: 2px;
+  position: relative;
+  box-shadow: 0px -2px 8px 2px #a2a2a230;
+  .ply-controls {
+    width: 33%;
+  }
+}
 .desktop-player {
   display: flex;
   background: $white;
@@ -464,27 +688,29 @@
   .container {
     position: relative;
   }
-  .ply-playlist {
+  .btn-volume .volume-selector {
+    height: 132px !important;
+  }
+  #playerPlaylist {
     width: 360px;
     right: 0;
     box-shadow: 0px 0px 6px 3px #3333331f;
+    .playlist-avatar .uni-icon {
+      color: #fff;
+    }
   }
+
   .ply-btn {
     width: 28px;
     height: 28px;
-  }
-  .ply-controls {
-    width: 100px;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
+    border-radius: 8px;
   }
 
   .btn-play-pause {
-    box-shadow: 0px 2px 8px 0px #74a8bb5e;
-
+    width: 36px;
+    height: 36px;
     background: $secondary;
-    border-radius: 16px;
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -495,52 +721,82 @@
       width: 20px;
     }
   }
-  .ply-body {
-    display: flex;
-    width: calc(100% - 380px);
-    align-items: center;
-    padding: 0 1rem;
-    position: relative;
-    .ply-timer {
-      border: none;
-      margin-right: 0.5rem;
-    }
-    .ply-duration {
-      margin-left: 0.5rem;
-    }
-    .ply-progress {
-      position: initial;
-    }
-    .ply-bookmark {
-      position: absolute;
-      top: -1.25rem;
-      background: #f5b44b;
-      padding: 0.15rem 0.5rem;
-      color: #fff;
-      font-weight: 600;
-      right: 6rem;
-      cursor: pointer;
-    }
-    .ply-bookmark::after {
-      content: "";
-      width: 0;
-      height: 0;
-      position: absolute;
-      border-bottom: 12px solid #d18f25;
-      border-left: 8px solid transparent;
-      left: -8px;
-      top: 0;
-    }
+
+  .btn-previous,
+  .btn-next {
+    background: #eaedee;
   }
+
+  .btn-backward {
+    margin-left: 1rem;
+  }
+
   .ply-item-info {
     width: 220px;
-    display: block;
+    display: flex;
     margin: -0.5rem 0;
     background: #ebedee;
     padding: 0.25rem 1rem;
+    justify-content: center;
+    flex-direction: column;
   }
+  
 
   .ply-options {
     width: 60px;
+  }
+}
+
+.quran-slider {
+  width: 100%;
+  height: 4px;
+  background: #eee;
+  border-radius: 5px;
+  position: relative;
+  cursor: pointer;
+  .qs-progress {
+    height: 4px;
+    background: #333;
+    border-radius: 5px;
+    width: 0;
+  }
+  .qs-point {
+    width: 12px;
+    height: 12px;
+    border-radius: 5px;
+    display: block;
+    position: absolute;
+    border: #333333 2px solid;
+    top: -4px;
+    left: 0;
+    background: #fff;
+    cursor: pointer;
+  }
+  &.qs-vertical {
+    width: 24px;
+    height: 100%;
+    background: none;
+    &::before{
+      content: '';
+      height: 100%;
+      width: 4px;
+      background: #eee;
+      display: block;
+      left: 10px;
+      position: absolute;
+    }
+    .qs-progress {
+      width: 4px;
+      height: 0;
+      position: absolute;
+      bottom: 0;
+      left: 10px;
+    }
+    .qs-point {
+      bottom: 0;
+      position: absolute;
+      top: auto;
+      left: 6px;
+    }
   }
 }

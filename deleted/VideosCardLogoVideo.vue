@@ -2,7 +2,7 @@
   <div class="card-logo-video">
     <div class="video">
       <h3 class="mb-3">{{ trans("text.logo-video-title-1") }}</h3>
-      <my-dplayer :url="video.url"></my-dplayer>
+      <div class="dplayer" :data-url="video.url"></div>
     </div>
     <div class="image">
       <h3>{{ trans("text.logo-video-select-logo") }}</h3>

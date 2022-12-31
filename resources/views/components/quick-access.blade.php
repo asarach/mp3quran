@@ -4,7 +4,7 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-10">
-                        <div class="form-group mb-0">
+                        <div class="form-group mb-md-0">
                             <select class="custom-select read" name="read">
                                 <option value class="d-none" disabled selected>
                                     {{ trans("text.read") }}
@@ -13,7 +13,7 @@
                         </div>
                     </div>
                     <div class="col-md-10">
-                        <div class="form-group mb-0">
+                        <div class="form-group mb-md-0">
                             <select class="custom-select sora"></select>
                         </div>
                     </div>

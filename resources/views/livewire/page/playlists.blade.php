@@ -33,11 +33,11 @@
           <div class="playlists-list">
             @foreach ($playlists as $playlist)
             <div class="card-playlist">
-              <div class="load-btn"  @click.prevent="loadPalylist('{{ $playlist->id }}', '{{ $playlist->name }}')" >
+              <div class="load-btn" data-id="{{ $playlist->id }}" data-name="{{ $playlist->name }}" >
                 <span class="uni-icon icon-play_arrow1" style="color: #f5b44b"></span>
               </div>
               <h3>{{ $playlist->name }}</h3>
-              <div class="delete-btn"  @click.prevent="deletePalylist('{{ $playlist->id }}')">
+              <div class="delete-btn" data-id="{{ $playlist->id }}" >
                 <span class="uni-icon icon-clear"></span>
               </div>
             </div>

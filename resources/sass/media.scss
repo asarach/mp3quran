@@ -155,7 +155,7 @@
 /* Medium Devices, Desktops */
 @media only screen and (max-width: 991.98px) {
   .tafsirs-soar-list .col {
-    max-width: 33%;
+    max-width: 100%;
   }
 
   .top-bar .social-links .list-inline-item:not(:last-child) {
@@ -522,10 +522,11 @@
     padding-bottom: 20px;
   }
   .ltr .mobile-ui .contact-show form {
-    margin: -16px -16px -16px 0;
+    margin: 0 -16px -16px -16px ;
+    border-radius: 0 0 10px 10px ;
   }
   .mobile-ui .contact-show form {
-    margin: -1rem 0rem -1rem -1rem;
+    // margin: -1rem 0rem -1rem -1rem;
   }
   .ltr .card-radio .radio-options,
   .ltr .sora-item .sora-options {

@@ -17,44 +17,44 @@
             </form>
           </div>
           <div class="tb-languages">
-            <a id="languagesToggl">
+            <a class="tbl-btn" id="languagesToggl">
               <span class="uni-icon icon-earth"></span>
             </a>
           </div>
           @auth
           <div class="header-user dropdown">
-              <button class="btn btn-profile-menu dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
-                  <i class="uni-icon icon-account_circle"></i> 
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item   @if(request()->url()  == LaravelLocalization::localizeUrl('favorites') ) active @endif" href="{{ route('page.favorites') }}">
-                      <span class="icon-favorite"></span> 
-                      {{trans('text.favorites')}}
-                  </a>
-                  <a class="dropdown-item   @if(request()->url()  == LaravelLocalization::localizeUrl('playlists') ) active @endif" href="{{ route('page.playlists') }}">
-                      <span class="icon-playlist_play"></span> 
-                      {{trans('text.playlists')}}
-                  </a>
-                  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                      @csrf
-                  </form>
-                  <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                      <span class="icon-signout"></span> 
-                      {{ trans('auth.logout') }}
-                  </a>
-              </div>
+            <button class="btn btn-profile-menu dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+              <i class="uni-icon icon-account_circle"></i>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item   @if(request()->url()  == LaravelLocalization::localizeUrl('favorites') ) active @endif" href="{{ route('page.favorites') }}">
+                <span class="icon-favorite"></span>
+                {{trans('text.favorites')}}
+              </a>
+              <a class="dropdown-item   @if(request()->url()  == LaravelLocalization::localizeUrl('playlists') ) active @endif" href="{{ route('page.playlists') }}">
+                <span class="icon-playlist_play"></span>
+                {{trans('text.playlists')}}
+              </a>
+              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+              </form>
+              <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <span class="icon-signout"></span>
+                {{ trans('auth.logout') }}
+              </a>
+            </div>
           </div>
           @else
           @if (false)
           <div class="header-user">
-              <a class="btn-login" href="{{ route('login') }}">
-                  <i class="far fa-user"></i> {{ trans('auth.login') }}
-              </a>
-              @if(Route::has('register'))
-              <a class="btn-register" href="{{ route('register') }}">
-                  <i class="far fa-user"></i> {{ trans('auth.register') }}
-              </a>
-              @endif
+            <a class="btn-login" href="{{ route('login') }}">
+              <i class="far fa-user"></i> {{ trans('auth.login') }}
+            </a>
+            @if(Route::has('register'))
+            <a class="btn-register" href="{{ route('register') }}">
+              <i class="far fa-user"></i> {{ trans('auth.register') }}
+            </a>
+            @endif
           </div>
           @endif
           @endauth
@@ -64,7 +64,6 @@
     <div class="main-content">
       {{ $slot }}
     </div>
-    <notifications position="bottom left" group="app" animation-type="velocity" :animation="animation" classes="desktop-notifications" />
   </div>
 </div>
 
@@ -121,7 +120,7 @@
   </div>
   <div id="appFooter" data-turbolinks-permanent>
     <div id="MainLoading">
-      <circle-spin></circle-spin>
+      @include('components.circle-spin')
     </div>
     @include('components.mobile-player')
   </div>
@@ -143,8 +142,8 @@
     </div>
   </div>
   <div class="tb-languages">
-    <div class="tbl-dropdown" :class="{ opened: show_languages }">
-      <div class="close-lan" @click="closeLanguages">
+    <div class="tbl-dropdown">
+      <div class="close-lan">
         <span class="uni-icon icon-clear"></span>
       </div>
       <div class="row">
@@ -161,7 +160,7 @@
       <span class="uni-icon icon-home"></span>
       {{ trans("text.home") }}
     </a>
-    <a href="{{ route('radio.index') }}" class="menu-link">
+    <a blam target="_blank" href="https://www.atheer-radio.com/home/{{ str_replace( 'eng', 'en' , LaravelLocalization::getCurrentLocale()) }}" class="menu-link">
       <span class="uni-icon icon-radio"></span>
       {{ trans("text.radios") }}
     </a>
@@ -175,26 +174,3 @@
     </a>
   </nav>
 </footer>
-
-
-<!-- Begin Inspectlet Asynchronous Code -->
-<script type="text/javascript">
-  $(document).ready(function () {
-  $('#languagesToggl').click(function (e) { 
-    e.preventDefault();
-    $('.tb-languages .tbl-dropdown').toggleClass('opened');
-    $('#footer .expend-menu').removeClass('expended');
-  });
-  $('#toggelExpended').click(function (e) { 
-    e.preventDefault();
-    $('#footer .expend-menu').toggleClass('expended');
-    $('.tb-languages .tbl-dropdown').removeClass('opened');
-  });
-  // $('#footer .expend-menu').click(function (e) { 
-  //   $('.ply-fullplayer').removeClass('opened');
-  // });
-  // $('#footer .main-menu').click(function (e) { 
-  //   $('.ply-fullplayer').removeClass('opened');
-  // });
- });
-</script>

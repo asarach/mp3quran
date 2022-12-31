@@ -100,7 +100,29 @@
               </div>
               <div class="favorite-tab-pane tab-pane fade  @if($active_tab == 'videos') show active @endif " id="videos" role="tabpanel" aria-labelledby="videos-tab">
                 @foreach ($videos as $video)
-                <card-video :video="{{ json_encode($video) }}"></card-video>
+                <div class="card card-video">
+                  <a
+                    href="{{ route('video.show', ['slug'=> $video['slug']]) }}"
+                    rel="alternate"
+                    hreflang="{{ LaravelLocalization::getCurrentLocale() }}"
+                  >
+                    <img
+                      src="{{$video['image']}}"
+                      class="card-img-top"
+                      alt="{{$video['title']}}"
+                      title="{{$video['title']}}"
+                    />
+                  </a>
+                  <div class="card-body">
+                    <a
+                      href="{{ route('video.show', ['slug'=> $video['slug']]) }}"
+                      rel="alternate"
+                      hreflang="{{ LaravelLocalization::getCurrentLocale() }}"
+                    >
+                      <h4 class="card-title">{{ $video['reciter_name'] }}</h4>
+                    </a>
+                  </div>
+                </div>
                 @endforeach
               </div>
             </div>

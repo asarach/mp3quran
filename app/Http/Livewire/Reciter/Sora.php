@@ -52,7 +52,7 @@ class Sora extends Component
             'description' => $soar_item->getSeoDescription($read->rewaya, $sora['reciter'], $sora['name']),
         ];
         $verses = collect();
-        // $verses = $this->getVerses($soar_item->id, $read->id);
+        $verses = $this->getVerses($soar_item->id, $read->id);
         // dd(  $verses);
         return view('livewire.reciter.sora', compact('page', 'sora', 'read', 'verses'));
     }

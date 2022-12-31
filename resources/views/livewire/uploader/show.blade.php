@@ -31,7 +31,7 @@
         @endif
         <div class="col-lg-19" id="sticky-container">
           <div class="card-page">
-            <file-uploader></file-uploader>
+            @include('components.file-uploader')
             <div class="uploads-list">
               <div class="row">
                 @foreach ($uploads as $upload)

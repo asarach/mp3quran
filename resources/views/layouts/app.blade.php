@@ -44,7 +44,6 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
     <script src="{{ asset('js/trans/text_'.LaravelLocalization::getCurrentLocale().'.2.'. settings('translations_version').'.js') }}"></script>
     <script defer src="{{ mix('js/app_v3.0.1.js') }}" data-turbolinks-eval="false"></script>
-    <script src="{{ mix('js/app2.2.js') }}" defer data-turbolinks-eval="true" data-turbolinks-track="reload"></script>
     @yield('headerScripts')
     
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -78,7 +77,6 @@
     @endif
     <div class="notifications"></div>
     @if ($popup)
-    
     <div class="popupOverlay">
         <div class="popupBox" id="popupBox">
             <a class="close" data-id="{{ $popup->id }}">X</a>

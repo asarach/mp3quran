@@ -41,7 +41,7 @@ class VideoController extends Controller
                 Storage::disk('local')->delete('video_progress/vid_' . session('progress_key') . '.txt');
             }
         } else {
-            $progress =  100;
+            $progress =  100 ;
         }
 
 

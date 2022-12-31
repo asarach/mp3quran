@@ -31,22 +31,42 @@
                 @endif
                 <div class="col-lg-19" id="sticky-container">
                     <div class="tafsirs-list pt-3">
-                        <ul class="list-unstyled">
-                            @foreach ($tsoras as $tsora)
-                            <li>
-                                <div class="card-tafsir">
-                                    <div class="ply-btn" @click.prevent="getItemAndPlay(ajax_prefix + '/tsora/item?id={{ $tsora['id'] }}')">
-                                        <scale-loader v-if="isLoading({ type: 'tsora', id: '20000{{ $tsora['tafsir_id'] }}-{{ $tsora['id'] }}'  })" color="#0D3A4D" height="10px" width="2px"></scale-loader>
-                                        <span v-else-if="isPlaying({ type: 'tsora', id: '20000{{ $tsora['tafsir_id'] }}-{{ $tsora['id'] }}' })" class="uni-icon icon-pause" style="color: #f5b44b"></span>
-                                        <span v-else class="uni-icon icon-play_arrow" style="color: #f5b44b"></span>
-                                    </div>
-                                    <div class="tafsir-info">
-                                        <div class="tafsir-name">{{$tsora['name']}}<span> - {{$tsora['tafsir_name']}}</span></div>
-                                    </div>
-                                </div>
-                            </li>
+                        <div class="row">
+                        @foreach ($tsoras as $tsora_chunk)
+                            <div class="col">
+                                <ul class="list-unstyled">
+                                    @foreach ($tsora_chunk as $tsora)
+                                    <li>
+                                        <div class="card-tafsir  spib-tsora-20000{{ $tsora['tafsir_id'] }}-{{ $tsora['id'] }}"  id="tsora-20000{{ $tsora['tafsir_id'] }}-{{ $tsora['id'] }}">
+                                            <div class="ply-btn btn-loading hiden-ply-btn spib-loading">
+                                                <div class="la-line-scale la-sm">
+                                                    <div></div>
+                                                    <div></div>
+                                                    <div></div>
+                                                    <div></div>
+                                                    <div></div>
+                                                </div>
+                                            </div>
+                                            <div class="ply-btn btn-pause hiden-ply-btn spib-pause">
+                                                <span class="uni-icon icon-pause" style="color: #fff"></span>
+                                            </div>
+                                            <div class="ply-btn  btn-play shown-ply-btn spib-play" data-url="{{ route('ajax::tsora.item') . '?id=' . $tsora['id']}}" data-item="20000{{ $tsora['tafsir_id'] }}-{{ $tsora['id'] }}" data-type="tsora">
+                                                <span class="uni-icon icon-play_arrow1" style="color: #fff"></span>
+                                            </div>
+                                            <div class="tafsir-info">
+                                                <div class="tafsir-name">{{$tsora['name']}}</div>
+                                            </div>
+                                            <div class="btn-tbookmark spib-pause btn-bookmark-tafsir">
+                                                {{ trans('text.bookmark-tafsir') }}
+                                            </div>
+                                        </div>
+                                    </li>
+                                    @endforeach
+                                </ul>
+                            </div>
                             @endforeach
-                        </ul>
+                        </div>
+                        
                     </div>
                 </div>
             </div>

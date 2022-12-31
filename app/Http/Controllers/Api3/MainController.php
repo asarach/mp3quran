@@ -38,7 +38,7 @@ class MainController extends ApiController
     public function languages(Request $request)
     {
         $this->setParams($request);
-        // Cache::forget('api_v3_languages');
+        Cache::forget('api_v3_languages');
         $language = Cache::rememberForever('api_v3_languages', function () {
             return $this->getLanguages();
         });

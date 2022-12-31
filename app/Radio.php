@@ -53,7 +53,7 @@ class Radio extends Model
                 'slug' => $this->slug,
                 'url' => $this->url,
                 'rewaya_id' => $this->rewaya_id,
-                'show' => true,
+                'show' => 'show',
                 'share_description' => $this->getLocaleShareDescription(),
                 'share_title' => $this->getLocaleShareTitle(),
                 'share_url' => route('radio.index')  . '?play=' . $this->slug

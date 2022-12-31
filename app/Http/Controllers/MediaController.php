@@ -31,6 +31,7 @@ class MediaController extends Controller
         $input = $request->all();
         $data = [];
         $data['file'] = $request->file('file');
+
         $file = $this->upload->image($data, $request->type);
 
         return response()->json(array('success' => true, 'image_id' => $file));

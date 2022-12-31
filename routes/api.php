@@ -39,3 +39,6 @@ $router->get('/api/v3/radios',       array('as' => 'api_3.radios',       'uses' 
 $router->get('/api/v3/reciters',     array('as' => 'api_3.reciters',     'uses' => 'Api3\ReciterController@reciters'));
 $router->get('/api/v3/reads',        array('as' => 'api_3.reads',        'uses' => 'Api3\ReciterController@reads'));
 $router->get('/api/v3/recent_reads', array('as' => 'api_3.recent_reads', 'uses' => 'Api3\ReciterController@recentReads'));
+
+$router->get('/api/v3/tafasir',      array('as' => 'api_3.tafasir',       'uses' => 'Api3\TafsirController@tafasir'));
+$router->get('/api/v3/tafsir',       array('as' => 'api_3.tafsir',        'uses' => 'Api3\TafsirController@tafsir'));

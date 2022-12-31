@@ -60,17 +60,17 @@
                             </a>
                         </div>
                         @endif
-
+                        
                         <div class="card-btn app-btn-share ">
-                            <button class="btn btn-primary m-0" @click=" shareItem('{{$page['title']}}', '{{ Request::url()}}', '{{$page['description']}}')" role="button">
+                            <button class="btn btn-primary m-0  share-btn"  data-title="{{ $page['title']}}" data-url="{{  Request::url() }}" data-description="{{ $page['description']}}" role="button">
                                 <span class="icon-share ml-2"></span>
                                 {{ trans('text.share') }}
                             </button>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+@include('components.share')

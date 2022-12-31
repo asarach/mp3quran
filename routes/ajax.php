@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Redirect;
 Route::get('/get_audio_details/{id}', array('as' => 'soar.details', 'uses' => 'SoraController@audioDetails'));
 /* lists  */
 // dd('asa');
-Route::get('/main-radio', array('as' => 'soar.item', 'uses' => 'HomeController@mainRadio'));
+Route::get('/main-radio', array('as' => 'main.radio', 'uses' => 'HomeController@mainRadio'));
 
 // favorites;
 Route::get('/favorites', array('as' => 'favorites.index', 'uses' => 'FavoriteController@getFavorites'));

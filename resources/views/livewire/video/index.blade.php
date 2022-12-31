@@ -37,7 +37,17 @@
           </div>
           <div class="videos-list">
             @foreach ($playlists as $playlist)
-            <card-playlist :playlist="{{ json_encode($playlist) }}"></card-playlist>
+            <div class="card card-playlist">
+              <div class="card-body">
+                <a
+                  href="{{ route('video.playlist', ['playlist_id'=> $playlist['id']]) }}"
+                  rel="alternate"
+                  hreflang="{{ LaravelLocalization::getCurrentLocale() }}"
+                >
+                  <h4 class="card-title">{{ $playlist['name']  }}</h4>
+                </a>
+              </div>
+            </div>
             @endforeach
           </div>
           @if ($playlists->currentPage() < $playlists->lastPage())

@@ -24,6 +24,9 @@
 				<li class="nav-item" role="presentation">
                     <button class="btn btn-secondary " id="radio-tab" data-toggle="tab" data-target="#radio" type="button" role="tab" aria-controls="radio" aria-selected="true">Radios</button>
                 </li>
+				<li class="nav-item" role="presentation">
+                    <button class="btn btn-secondary " id="tafasir-tab" data-toggle="tab" data-target="#tafasir" type="button" role="tab" aria-controls="tafasir" aria-selected="true">Tafasir</button>
+                </li>
             </ul>
         </div>
     </div>
@@ -804,6 +807,181 @@ url: "https://win.holol.com/live/sunnah/playlist.m3u8"
         "url": "https://Qurango.net/radio/ahmad_khader_altarabulsi"
         }
         ...
+    ]
+}
+
+</code>
+                            </pre>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+
+
+                    <div class="tab-pane fade  " id="tafasir" role="tabpanel" aria-labelledby="tafasir-tab">
+                        <div class="col">
+                            <section class="section-text">
+                                <div class="section-title">
+                                    Overview
+                                </div>
+                                <div class="section-content">
+                                    Get a list of all avalibale Tafasirs.
+									<p><span style="color:#27ae60;"><u><strong>عرض الروابط التفاسير</strong></u></span></p>
+                                </div>
+                            </section>
+                            <section class="section-url">
+                                <div class="section-title">
+                                    Resource URL
+                                </div>
+                                <div class="section-content">
+                                    https://mp3quran.net/api/v3/tafasir
+                                </div>
+                            </section>
+                            <section class="section-table">
+                                <div class="section-title">
+                                    Parameters
+                                </div>
+                                <div class="section-content">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Required</th>
+                                                <th scope="col">Description</th>
+                                                <th scope="col">Default Value</th>
+                                                <th scope="col">Example</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="col">language</th>
+                                                <th scope="col">optional</th>
+                                                <th scope="col">The language of texts in reads arrays. If is not set the default language of texts is arabic.</th>
+                                                <th scope="col"></th>
+                                                <th scope="col">&#39;ar&#39;, &#39;eng&#39;, &#39;fr&#39;, &#39;ru&#39;, &#39;de&#39;,&nbsp; &#39;es&#39;,&nbsp; &#39;tr&#39;,&nbsp; &#39;cn&#39;,&nbsp; &#39;th&#39;,&nbsp; &#39;ur&#39;,&nbsp; &#39;bn&#39;,&nbsp; &#39;bs&#39;,&nbsp; &#39;ug&#39;,&nbsp; &#39;fa&#39;,&nbsp; &#39;tg&#39;,&nbsp; &#39;ml&#39;,&nbsp; &#39;tl&#39;,&nbsp; &#39;id&#39;,&nbsp; &#39;pt&#39;,&nbsp; &#39;ha&#39;,&nbsp; &#39;sw&#39;,&nbsp;</th>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </section>
+                            <section class="section-request_url">
+                                <div class="section-title">
+                                    Example Request
+                                </div>
+                                <div class="section-content">
+                                    GET https://mp3quran.net/api/v3/tafasir?language=eng
+                                </div>
+                            </section>
+                            <section class="section-response">
+                                <div class="section-title">
+                                    Example Response
+                                </div>
+                                <div class="section-content">
+                                    <pre>
+                                <code class="language-json">
+{
+    "tafasir": [
+        {
+            "id": 4,
+            "name": "tafsir 1",
+            "url": "https://mp3quran.net/api/v3/tafsir?tafsir=4&language=ar"
+        },
+        {
+            "id": 5,
+            "name": "tafsir 2",
+            "url": "https://mp3quran.net/api/v3/tafsir?tafsir=5&language=ar"
+        }
+    ]
+}
+                                        
+
+</code>
+                            </pre>
+                                </div>
+                            </section>
+
+
+                            <section class="section-text">
+                                <div class="section-title">
+                                    Overview
+                                </div>
+                                <div class="section-content">
+                                    Get a list of all soar of Tafsir.
+									<p><span style="color:#27ae60;"><u><strong>عرض الروابط سور التفسير</strong></u></span></p>
+                                </div>
+                            </section>
+                            <section class="section-url">
+                                <div class="section-title">
+                                    Resource URL
+                                </div>
+                                <div class="section-content">
+                                    https://mp3quran.net/api/v3/tafsir
+                                </div>
+                            </section>
+                            <section class="section-table">
+                                <div class="section-title">
+                                    Parameters
+                                </div>
+                                <div class="section-content">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Required</th>
+                                                <th scope="col">Description</th>
+                                                <th scope="col">Default Value</th>
+                                                <th scope="col">Example</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="col">tafsir</th>
+                                                <th scope="col">required</th>
+                                                <th scope="col">tafsir id</th>
+                                                <th scope="col"></th>
+                                                <th scope="col">5</th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="col">sura</th>
+                                                <th scope="col">optional</th>
+                                                <th scope="col">sura number to filter by</th>
+                                                <th scope="col"></th>
+                                                <th scope="col">1,2,3,...</th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="col">language</th>
+                                                <th scope="col">optional</th>
+                                                <th scope="col">The language of texts in reads arrays. If is not set the default language of texts is arabic.</th>
+                                                <th scope="col"></th>
+                                                <th scope="col">&#39;ar&#39;, &#39;eng&#39;, &#39;fr&#39;, &#39;ru&#39;, &#39;de&#39;,&nbsp; &#39;es&#39;,&nbsp; &#39;tr&#39;,&nbsp; &#39;cn&#39;,&nbsp; &#39;th&#39;,&nbsp; &#39;ur&#39;,&nbsp; &#39;bn&#39;,&nbsp; &#39;bs&#39;,&nbsp; &#39;ug&#39;,&nbsp; &#39;fa&#39;,&nbsp; &#39;tg&#39;,&nbsp; &#39;ml&#39;,&nbsp; &#39;tl&#39;,&nbsp; &#39;id&#39;,&nbsp; &#39;pt&#39;,&nbsp; &#39;ha&#39;,&nbsp; &#39;sw&#39;,&nbsp;</th>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </section>
+                            <section class="section-request_url">
+                                <div class="section-title">
+                                    Example Request
+                                </div>
+                                <div class="section-content">
+                                    GET https://mp3quran.net/api/v3/tafsir?tafsir=5&sura=3&language=ar
+                                </div>
+                            </section>
+                            <section class="section-response">
+                                <div class="section-title">
+                                    Example Response
+                                </div>
+                                <div class="section-content">
+                                    <pre>
+                                <code class="language-json">
+{
+    "tafasir": [
+        {
+            "id": 16,
+            "tafsir_id": 5,
+            "name": "سورة آل عمران كاملة",
+            "tafsir_name": "tafsir 2"
+        }
     ]
 }
 
