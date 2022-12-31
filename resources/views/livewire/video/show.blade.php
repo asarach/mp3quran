@@ -32,8 +32,10 @@
         <div class="col-lg-19" id="sticky-container">
           <div class="card-video full-width">
             <div class="card-videoplayer">
-              @if ($video['type'] == '0')
-              <youtube video-id="{{ $video['youtube_id'] }}"></youtube>
+              @if ($video['type'] == '0' || $video['type'] == '1')
+              <iframe width="420" height="315"
+              src="https://www.youtube.com/embed/{{ $video['youtube_id'] }}">
+              </iframe>
               @elseif(!empty($video['url']))
               <div class="dplayer" data-url="{{$video['url']}}"></div>
               @endif

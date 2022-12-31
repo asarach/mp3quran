@@ -17,7 +17,7 @@
                         </form>
                     </div>
                     <div class="tb-radio">
-                        <button type="button" class="btn btn-success" @click.prevent="getItemAndPlay(ajax_prefix + '/main-radio')">
+                        <button type="button" class="btn btn-success ply-btn btn-play" data-url="{{ route('ajax::main.radio')}}" data-item="0000000" data-type="main_radio">
                             <span class="uni-icon icon-radio" style="color: #fff"></span>
                             {{ trans("text.live-radio") }}
                         </button>
@@ -60,12 +60,12 @@
 
 
                     <div class="tb-languages">
-                        <div class="tbl-btn" @click="toggelLanguages()">
+                        <div class="tbl-btn">
                             <span class="uni-icon icon-earth" style="color: #b5bbbf"></span>
                             English
                         </div>
-                        <div class="tbl-dropdown" :class="{ opened: show_languages }">
-                            <div class="close-lan" @click="closeLanguages">
+                        <div class="tbl-dropdown">
+                            <div class="close-lan">
                                 <span class="uni-icon icon-clear"></span>
                             </div>
                             <div class="row">
@@ -84,24 +84,23 @@
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item   @if(request()->url()  == LaravelLocalization::localizeUrl('favorites') ) active @endif" href="{{ route('page.favorites') }}">
-                                <span class="icon-favorite"></span> 
+                                <span class="icon-favorite"></span>
                                 {{trans('text.favorites')}}
                             </a>
                             <a class="dropdown-item   @if(request()->url()  == LaravelLocalization::localizeUrl('playlists') ) active @endif" href="{{ route('page.playlists') }}">
-                                <span class="icon-playlist_play"></span> 
+                                <span class="icon-playlist_play"></span>
                                 {{trans('text.playlists')}}
                             </a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf
                             </form>
                             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                <span class="icon-signout"></span> 
+                                <span class="icon-signout"></span>
                                 {{ trans('auth.logout') }}
                             </a>
                         </div>
                     </div>
                     @else
-                    @if (false)
                     <div class="header-user">
                         <a class="btn-login" href="{{ route('login') }}">
                             <i class="far fa-user"></i> {{ trans('auth.login') }}
@@ -112,7 +111,6 @@
                         </a>
                         @endif
                     </div>
-                    @endif
                     @endauth
                 </div>
             </div>
@@ -125,7 +123,7 @@
     <div id="appFooter">
         <footer id="footer" data-turbolinks-permanent>
             <div id="MainLoading">
-                <circle-spin></circle-spin>
+                @include('components.circle-spin')
             </div>
             <div class="container d-flex">
                 <div class="helpful-links">

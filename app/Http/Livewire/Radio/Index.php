@@ -64,7 +64,7 @@ class Index extends Component
         if ($this->selected_rewaya['id']) {
             foreach ($radios as $key => $radio) {
                 if ($radio['rewaya_id'] != $this->selected_rewaya['id']) {
-                    $radio['show'] = false;
+                    $radio['show'] = '';
                     $radios[$key] = $radio;
                 }
             }
@@ -74,7 +74,7 @@ class Index extends Component
             $q = $this->preparword($this->search);
             foreach ($radios as $key => $radio) {
                 if (false === stristr($this->preparword($radio['name']), $q)) {
-                    $radio['show'] = false;
+                    $radio['show'] = '';
                     $radios[$key] = $radio;
                 }
 

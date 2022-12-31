@@ -15,7 +15,7 @@
           <h1>{{$reciter['name']}} - {{$reciter_reads[$active_read]['rewaya_name']}}</h1>
           <div class="header-options">
             @if ($reciter_reads[$active_read]['radio'])
-            <button type="button" class="btn btn-primary" @click.prevent="getItemAndPlay(ajax_prefix + '/radio/item?id=' + {{ $reciter_reads[$active_read]['radio'] }})">
+            <button type="button" class="btn btn-primary ply-btn btn-play" data-url="{{ route('ajax::radio.item') . '?id=' .   $reciter_reads[$active_read]['radio'] }}" data-item="100002-{{ $reciter_reads[$active_read]['radio'] }}" data-type="radio">
               <span class="uni-icon icon-radio" style="color: #fff"></span>
               {{trans('text.listen-to-radio')}}
             </button>
@@ -54,12 +54,6 @@
             <div class="filter-name">
               <input type="text" class="form-control" name="search" wire:model="search" placeholder="{{ trans('text.search-for-name') }}" />
             </div>
-            {{-- <div class="filter-soar like-btn" v-if="soarIncludes(read.read_id)" @click="removeReadFavorite(read.read_id)">
-              <span class="uni-icon icon-favorite" style="color: #f5b44b"></span>
-            </div>tofixe
-            <div class="filter-soar deslike-btn" v-else @click="addReadFavorite(read.read_id)">
-              <span class="uni-icon icon-favorite_outline" style="color: #ff0D3A4Df"></span>
-            </div> --}}
             @if ($reciter['reads'] && count($reciter['reads']) > 1)
             <div class="filter-rewaya mr-auto">
               <div class="dropdown">

@@ -587,7 +587,7 @@
     /* min-height: 600px; */
     padding: 0.5rem;
     display: flex;
-
+    gap: .5rem;
     .btn {
       cursor: pointer;
       color: #fff;
@@ -602,7 +602,7 @@
       align-items: center;
       line-height: 1;
       width: 36px;
-      margin-right: 0.5rem;
+      margin-right: 0;
       justify-content: center;
 
       span.fullscreen-icon,
@@ -626,7 +626,7 @@
       align-items: center;
       width: 100%;
       margin-bottom: 0;
-      margin-right: 0.5rem;
+      margin-right: 0;
       max-width: 200px;
       label {
         margin: 0 0.5rem;
@@ -719,7 +719,9 @@
     margin-top: 1rem;
     iframe {
       width: 100%;
-      height: 481px;
+      border: none;
+      height: initial;
+      aspect-ratio: 16/9;
     }
     .card-videotitle {
       padding: 0.5rem 0;

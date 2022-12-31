@@ -1,4 +1,4 @@
-export default class Clipboard {
+export default class quranSlider {
     constructor(slider, control) {
         let self = this;
         this.control = control;

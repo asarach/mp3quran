@@ -1,5 +1,4 @@
-import { postPlaylist } from './services';
-
+import { notify, trans } from './utils';
 
 export function savePlaylist() {
     $("#playlistName").removeClass("error");
@@ -39,5 +38,47 @@ export function savePlaylist() {
     }
     const url = window.App.urlBase + '/' + window.App.current_language + '/ajax/playlist';
 
-    postPlaylist(url, data);
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data: data,
+        success: function (response) {
+            var loc = window.location.pathname;
+            if (loc.includes('playlists')) {
+                Turbolinks.visit(window.location.toString(), { action: 'replace' })
+            }
+        },
+        error: function (data) {
+            if (data.responseJSON && data.responseJSON.errors && data.responseJSON.errors.name) {
+                $("#playlistName").addClass("error");
+            }
+        },
+    });
+}
+
+export function loadPalylist(id, name) {
+    $.ajax({
+        type: 'GET',
+        url: window.App.urlBase + '/' + window.App.current_language + '/ajax/playlist/' + id,
+        success: function (response) {
+            window.player.loadPalylist(response, id, name);
+            notify(trans("text.done"), 'success', trans("text.playlist-loaded-text"));
+        },
+        error: function (data) {
+            notify(trans("text.error"), 'warn', trans("text.playlist-not-loaded-text"));
+        },
+    });
+}
+export function deletePalylist(id) {
+    $.ajax({
+        type: 'DELETE',
+        url: window.App.urlBase + '/' + window.App.current_language + '/ajax/playlist/' + id,
+        success: function (response) {
+            Turbolinks.visit(window.location.toString(), { action: 'replace' })
+            notify(trans("text.done"), 'success', trans("text.playlist-deleted-text"));
+        },
+        error: function (data) {
+            notify(trans("text.error"), 'warn', trans("text.playlist-not-deleted-text"));
+        },
+    });
 }

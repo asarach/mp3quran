@@ -41,7 +41,7 @@
                                         </option>
                                     </select>
                                 </div>
-                                <div class="btn share-btn mr-auto" v-tooltip="trans('text.share')" data-title="" data-url="" data-description="">
+                                <div class="btn share-btn mr-auto" data-toggle="tooltip" data-placement="bottom" title="{{ trans('text.share') }}" data-title="" data-url="" data-description="">
                                     <span>{{ trans("text.share") }}</span>
                                     <span class="uni-icon icon-share" style="color: #fff"></span>
                                 </div>

@@ -12,10 +12,7 @@ export default class VidPlayer {
     if (item.dataset.autoplay) {
       autoplay = true;
     }
-    console.log('autoplay');
-    console.log(autoplay);
-    console.log('live');
-    console.log(live);
+    
     this.dp = new DPlayer({
       container: item,
       live: live,
@@ -26,13 +23,6 @@ export default class VidPlayer {
         thumbnails: 'thumbnails.jpg',
       },
     });
-  }
-
-  /************************************
-  * Playlist Controles
-  ************************************/
-  seek(per) {
-    this.sound.seek(this.sound.duration() * per);
   }
 
 }

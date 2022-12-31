@@ -1,20 +1,20 @@
 <div class="audio-player">
   <div class="mobile-player">
-    <div class="sply-progress" id="playerProgressLine"></div>
-    <div class="ply-controls">
+    <div class="sply-progress sply-progress-mobile" id="playerProgressLine"></div>
+    <div class="ply-controls spib-controls">
       <div class="ply-btn btn-previous">
         <span class="uni-icon icon-skip_previous" id="playerPrevBtn"></span>
       </div>
       <div class="ply-btn btn-play-pause">
-        <div id="playerLoading" style="color: #0e3a4d; display: none;" class="la-line-scale la-sm">
+        <div id="playerLoading" style="color: #0e3a4d; display: none;" class="la-line-scale la-sm spib-loading">
           <div></div>
           <div></div>
           <div></div>
           <div></div>
           <div></div>
         </div>
-        <span id="playerPauseBtn" style=" display: none;" class="uni-icon icon-pause"></span>
-        <span id="playerPlayBtn" class="uni-icon icon-play_arrow1" style=" display: block;"></span>
+        <span id="playerPauseBtn" style=" display: none;" class="uni-icon icon-pause spib-pause"></span>
+        <span id="playerPlayBtn" class="uni-icon icon-play_arrow1 spib-play" style=" display: block;"></span>
       </div>
       <div class="ply-btn btn-next">
         <span class="uni-icon icon-skip_next" id="playerNextBtn"></span>
@@ -26,20 +26,23 @@
         <span class="uni-icon icon-forward" id="playerForwardBtn"></span>
       </div>
     </div>
+    @auth
+        <div id="bookmarkBtn" class="ply-bookmark  btn-bookmark-tafsir" >{{ trans('text.bookmark-tafsir') }}</div>
+        @endauth
     <div class="ply-item-info" id="fullPlayerToggle">
       <div id="reciterName" class="ply-reader"></div>
       <div id="soraName" class="ply-sora"></div>
     </div>
     <div class="ply-options">
-      <div class="ply-btn btn-volume" id="playerVolumeBtn">
-        <span class="uni-icon icon-volume_off" style="display: none;"></span>
-        <span class="uni-icon icon-volume_mute" style="display: none;"></span>
-        <span class="uni-icon icon-volume_down"></span>
+      <div class="ply-btn btn-volume " id="playerVolumeBtnMbl">
+        <span class="uni-icon icon-volume_off" style="display: none;"></span> {{-- 0 --}}
+        <span class="uni-icon icon-volume_mute" style="display: none;"></span> {{-- 15 --}}
+        <span class="uni-icon icon-volume_down"></span> {{-- 65 --}}
         <span class="uni-icon icon-volume_up" style="display: none;"></span>
-        <div id="playerVolume" class="volume-selector">
-          <div class="ply-volume" id="playerVolumeBar">
-            <div id="playerVolumeInner"></div>
-            <div id="playerVolumePiont" data-down="false"></div>
+        <div id="playerVolume" class="volume-selector" >
+          <div class="qs-track quran-slider volume qs-vertical" data-control='volume'>
+            <div class="qs-progress"></div>
+            <div class="qs-point"></div>
           </div>
         </div>
       </div>
@@ -55,30 +58,31 @@
         <div class="fply-sora" id="fplySora"></div>
       </div>
       <div class="fply-body">
+        
         <div id="playerLoading"></div>
         <div id="fullPlayerLoading"></div>
         <div class="fply-timer" id="playerTimer"></div>
-        <div class="fply-progress" id="playerProgressBar">
-          <div id="playerProgress"></div>
-          <div id="playerProgressPiont" data-down="false"></div>
+        <div class="fply-progress quran-slider seek" id="playerProgressBar"  data-control='progress'>
+          <div class="qs-progress" id="playerProgress"></div>
+          <div class="qs-point" id="playerProgressPiont" data-down="false"></div>
         </div>
         <div class="fply-duration" id="playerDuration"></div>
         <div id="playerBar"></div>
       </div>
-      <div class="fply-controls">
+      <div class="fply-controls spib-controls">
         <div class="ply-btn btn-previous">
           <span class="uni-icon icon-skip_previous" id="fullPlayerPrevBtn" style="color: #fff"></span>
         </div>
         <div class="ply-btn btn-play-pause">
-          <div id="fullPlayerLoading" style="color: #fff; display: none;" class="la-line-scale la-sm">
+          <div id="fullPlayerLoading" style="color: #fff; display: none;" class="la-line-scale la-sm spib-loading">
             <div></div>
             <div></div>
             <div></div>
             <div></div>
             <div></div>
           </div>
-          <span id="fullPlayerPauseBtn" class="uni-icon icon-pause" style=" display: none;"></span>
-          <span id="fullPlayerPlayBtn" class="uni-icon icon-play_arrow1" style=" display: block; color: #fff"></span>
+          <span id="fullPlayerPauseBtn" class="uni-icon icon-pause spib-pause" style=" display: none;"></span>
+          <span id="fullPlayerPlayBtn" class="uni-icon icon-play_arrow1 spib-play" style=" display: block; color: #fff"></span>
         </div>
         <div class="ply-btn btn-next">
           <span class="uni-icon icon-skip_next" id="fullPlayerNextBtn" style="color: #fff"></span>
@@ -89,17 +93,17 @@
         <template id="fullPlaylistItem">
           <li>
             <div class="playlist-avatar drag-handle">
-              <div style="color: #fff; display: none;" class="la-line-scale btn-loading la-sm">
+              <div style="color: #fff; display: none;" class="la-line-scale plylist-btn spib-loading btn-loading la-sm">
                 <div></div>
                 <div></div>
                 <div></div>
                 <div></div>
                 <div></div>
               </div>
-              <div class="ply-btn btn-pause" style="display: none;">
+              <div class="plylist-btn btn-pause spib-pause" style="display: none;">
                 <span class="uni-icon icon-pause"></span>
               </div>
-              <div class="ply-btn btn-play">
+              <div class="plylist-btn btn-play spib-play">
                 <span class="uni-icon icon-play_arrow1"></span>
               </div>
             </div>
@@ -138,17 +142,17 @@
         <li>
           <div class="drag-handle bg"></div>
           <div class="playlist-avatar drag-handle">
-            <div style="color: #fff; display: none;" class="la-line-scale btn-loading la-sm">
+            <div style="color: #fff; display: none;" class="la-line-scale spib-loading btn-loading la-sm">
               <div></div>
               <div></div>
               <div></div>
               <div></div>
               <div></div>
             </div>
-            <div class="ply-btn btn-pause" style="display: none;">
+            <div class="spib-pause btn-pause" style="display: none;">
               <span class="uni-icon icon-pause"></span>
             </div>
-            <div class="ply-btn btn-play">
+            <div class="spib-play btn-play">
               <span class="uni-icon icon-play_arrow1"></span>
             </div>
           </div>

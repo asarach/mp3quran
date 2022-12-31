@@ -33,23 +33,20 @@ class Show extends Component
         $tafsir = Tafsir::where('id', $this->tafsir_id)->where('status', 1)->firstOrFail();
 
         //get tsoras
-        $cache_name = 'tsoras_index_tafsir_' . $tafsir->id . '_long_' .  LaravelLocalization::getCurrentLocale();
-        Cache::forget($cache_name);
-        $tsoras = Cache::rememberForever($cache_name, function () use ($tafsir) {
-            $tsoras = Tsora::where('status', 1);
-            $tsoras = $tsoras->where('tafsir_id', $tafsir->id)->where('sura_id', $this->sura_id);
-            $tsoras = $tsoras->get();
-            return $tsoras->sortBy('name')->values()->toArray();
-        });
+        $tsoras = $this->getTsoar($tafsir);
+
         // dd($tsoras);
         //get page info
         $page = Page::where('name', 'tafsir')->where('status', 1)->firstOrFail();
         $page->content = $page->getLocaleContent();
-        $page->title = $page->getLocaleTitle() . ' - '. $tafsir->getLocaleName(); 
+        $page->title = $page->getLocaleTitle() . ' - ' . $tafsir->getLocaleName();
         $page->description = $page->getLocaleDescription();
 
-
-        $tbookmarks = Auth::user()->tbookmarks()->with('tsora')->get()->toArray();
+        if (Auth::check()) {
+            $tbookmarks = Auth::user()->tbookmarks()->with('tsora')->get()->toArray();
+        } else {
+            $tbookmarks = [];
+        }
 
         return view('livewire.tafsir.show', compact('page', 'tafsir', 'tsoras', 'tbookmarks'));
     }
@@ -59,5 +56,23 @@ class Show extends Component
         $q = str_replace('إ', 'ا', $q);
 
         return $q;
+    }
+    public function getTsoar($tafsir)
+    {
+        $cache_name = 'tsoras_index_tafsir_' . $tafsir->id . '_long_' .  LaravelLocalization::getCurrentLocale();
+        Cache::forget($cache_name);
+        $tsoras = Cache::rememberForever($cache_name, function () use ($tafsir) {
+            $tsoras = Tsora::where('status', 1);
+            $tsoras = $tsoras->where('tafsir_id', $tafsir->id)->where('sura_id', $this->sura_id);
+            $tsoras = $tsoras->get();
+            return $tsoras->sortBy('name')->values()->toArray();
+        });
+        $half = ceil(count($tsoras) / 2);
+
+        if (style_version() != 'm' && count($tsoras) > 0) {
+            return array_chunk($tsoras, $half);
+        } else {
+            return [$tsoras];
+        }
     }
 }

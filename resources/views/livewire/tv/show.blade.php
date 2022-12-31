@@ -33,7 +33,7 @@
           <div class="tvs-list">
             <div class="card-tv">
               <h3>{{$tv[0]['name']}}</h3>
-              <div class="dplayer" data-url="{{$tv[0]['url']}}" data-live="true" data-autoplay="true"></div>
+              <div id="dplayerss" class="dplayer" data-url="{{$tv[0]['url']}}" data-live="true" data-autoplay="true"></div>
             </div>
           </div>
         </div>

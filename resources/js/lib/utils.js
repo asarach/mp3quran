@@ -17,91 +17,18 @@ export function trans(string, args = {}) {
     }
     return value;
 }
-export function stateChange(state) {
-    $('.hiden-ply-btn').hide();
-    $('.shown-ply-btn').show();
-    switch (state.playing_state) {
-        case "loading":
-            $("#" + state.playing_type + '-' + state.playing_item + ' .ply-btn.btn-loading').show();
-            $("#" + state.playing_type + '-' + state.playing_item + ' .ply-btn.btn-pause').hide();
-            $("#" + state.playing_type + '-' + state.playing_item + ' .ply-btn.btn-play').hide();
 
-            $("#playerLoading").show();
-            $("#playerPauseBtn").hide();
-            $("#playerPlayBtn").hide();
-
-            $("#fullPlayerLoading").show();
-            $("#fullPlayerPauseBtn").hide();
-            $("#fullPlayerPlayBtn").hide();
-
-
-            $('#playerListItem-' + state.index + ' .btn-loading').show();
-            $('#playerListItem-' + state.index + ' .btn-pause').hide();
-            $('#playerListItem-' + state.index + ' .btn-play').hide();
-
-            $('#fullPlayerListItem-' + state.index + ' .btn-loading').show();
-            $('#fullPlayerListItem-' + state.index + ' .btn-pause').hide();
-            $('#fullPlayerListItem-' + state.index + ' .btn-play').hide();
-            break;
-        case "playing":
-            $("#" + state.playing_type + '-' + state.playing_item + ' .ply-btn.btn-loading').hide();
-            $("#" + state.playing_type + '-' + state.playing_item + ' .ply-btn.btn-pause').show();
-            $("#" + state.playing_type + '-' + state.playing_item + ' .ply-btn.btn-play').hide();
-
-            $("#playerLoading").hide();
-            $("#playerPauseBtn").show();
-            $("#playerPlayBtn").hide();
-
-            $("#fullPlayerLoading").hide();
-            $("#fullPlayerPauseBtn").show();
-            $("#fullPlayerPlayBtn").hide();
-
-
-            $('#playerListItem-' + state.index + ' .btn-loading').hide();
-            $('#playerListItem-' + state.index + ' .btn-pause').show();
-            $('#playerListItem-' + state.index + ' .btn-play').hide();
-
-            $('#fullPlayerListItem-' + state.index + ' .btn-loading').hide();
-            $('#fullPlayerListItem-' + state.index + ' .btn-pause').show();
-            $('#fullPlayerListItem-' + state.index + ' .btn-play').hide();
-
-            break;
-        default:
-            $("#" + state.playing_type + '-' + state.playing_item + ' .ply-btn.btn-loading').hide();
-            $("#" + state.playing_type + '-' + state.playing_item + ' .ply-btn.btn-pause').hide();
-            $("#" + state.playing_type + '-' + state.playing_item + ' .ply-btn.btn-play').show();
-
-            $("#playerLoading").hide();
-            $("#playerPauseBtn").hide();
-            $("#playerPlayBtn").show();
-
-            $("#fullPlayerLoading").hide();
-            $("#fullPlayerPauseBtn").hide();
-            $("#fullPlayerPlayBtn").show();
-
-
-            $('#playerListItem-' + state.index + ' .btn-loading').hide();
-            $('#playerListItem-' + state.index + ' .btn-pause').hide();
-            $('#playerListItem-' + state.index + ' .btn-play').show();
-
-            $('#fullPlayerListItem-' + state.index + ' .btn-loading').hide();
-            $('#fullPlayerListItem-' + state.index + ' .btn-pause').hide();
-            $('#fullPlayerListItem-' + state.index + ' .btn-play').show();
-
-            break;
-    }
-}
 export function getItemAndPlay(url, item, type, time = null) {
-    if (window.player.state.playing_item != item) {
-        stateChange({ playing_type: type, playing_item: item, playing_state: "loading" })
+    if (window.player.state.playing_item != item && url) {
+        window.player.stateChange({ playing_type: type, playing_item: item, playing_state: "loading" })
         $.ajax({
             type: 'GET',
             url: url,
             success: function (response) {
                 window.player.addAndPlayItem(response);
                 if (time) {
-                    window.player.sound.on('play', function () {
-                      window.player.sound.seek(time);
+                    window.player.sound.once('play', function () {
+                        window.player.sound.seek(time / 1000);
                     });
                 }
             },

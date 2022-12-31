@@ -222,4 +222,17 @@
       }
     }
   }
+  .audio-player .ply-bookmark{
+    left: 1rem;
+    top: -1rem;
+    right: auto;
+  }
+  .audio-player .ply-bookmark::after{
+    top: 0;
+    border-right: 10px solid transparent;
+    border-left: none;
+    right: -10px;
+    left: initial;
+    border-bottom: 16px solid #d18f25;
+  }
 }

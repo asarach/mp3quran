@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api3;
 use App\Sora;
 use App\Rewaya;
 use App\Reciter;
+use App\Models\Tafsir;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\LazyCollection;
@@ -24,6 +25,7 @@ class ApiController extends BaseController
     public $reciter = null;
     public $rewaya = null;
     public $sura = null;
+    public $tafsir = null;
     public $last_updated_date = null;
 
 
@@ -40,6 +42,7 @@ class ApiController extends BaseController
             $item['rewayah'] = config('app.url') . '/api/v3/riwayat?language=' . $language->locale;
             $item['reciters'] = config('app.url') . '/api/v3/reciters?language=' . $language->locale;
             $item['radios'] = config('app.url') . '/api/v3/radios?language=' . $language->locale;
+            $item['tafasir'] = config('app.url') . '/api/v3/tafasir?language=' . $language->locale;
             $langs[] = $item;
         }
 
@@ -101,6 +104,13 @@ class ApiController extends BaseController
             $sura = Sora::where('status', 1)->where('id', $request->input('sura'))->first();
             if ($sura) {
                 $this->sura = $sura->id;
+            }
+        }
+
+        if ($request->input('tafsir')) {
+            $tafsir = Tafsir::where('status', 1)->where('id', $request->input('tafsir'))->first();
+            if ($tafsir) {
+                $this->tafsir = $tafsir->id;
             }
         }
         if ($request->input('last_updated_date')) {

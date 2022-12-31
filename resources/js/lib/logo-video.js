@@ -61,7 +61,6 @@ export default class VideoLogo {
                     url: window.ajax_prefix + "/video/download/" + self.video_id + "/progress",
                     success: function (response) {
                         self.progress = response.progress;
-                        console.log(self.progress);
                         $("#progressVideo .progress-bar").html(self.progress);
                         $("#progressVideo .progress-bar").attr('ariaValuenow', self.progress);
                         $("#progressVideo .progress-bar").attr('style','width: '+  self.progress + '%;');
@@ -96,11 +95,9 @@ export default class VideoLogo {
         }
 
         if (this.image.length == 0) {
-            console.log('imageError');
             $("#imageError").show();
             valid = false;
         }
-        console.log(this.image.length);
 
         return valid;
     }

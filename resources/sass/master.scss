@@ -144,6 +144,7 @@
     opacity: 0;
     display: none;
     transition: all 0.2s ease;
+    max-width: calc(100vw - 16px);
     .tbl-item {
       text-align: center;
       padding: 0.5rem;
@@ -358,6 +359,8 @@ footer {
 }
 .card-page.header-newsletters {
   justify-content: center;
+  min-height: 220px !important;
+  align-items: center;
   h5 {
     font-size: 1rem;
     font-weight: 600;
@@ -368,7 +371,19 @@ footer {
     background: #ebedee;
     z-index: 9;
   }
+  .dropdown-menu{
+    position: relative !important;
+    transform: none !important;
+    box-shadow: none !important;
+    display: block;
+    margin: 0;
+    
+  }
+  .dropdown-toggle{
+    display: none;
+  }
 }
+
 .footer-newsletters {
   .newsletter {
     display: flex;

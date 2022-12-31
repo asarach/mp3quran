@@ -5,7 +5,7 @@ import store from './store';
 import VuexPersist from 'vuex-persist'
 
 require('./bootstrap');
-require('./main');
+require('../resources/js/main');
 var Turbolinks = require("turbolinks")
 Turbolinks.start()
 
@@ -20,7 +20,6 @@ new VuexPersist({
 }).plugin(store)
 
 
-const Errors = require("./errors.js");
 
 window.Vue = Vue
 
@@ -45,13 +44,6 @@ Vue.component('scale-loader', ScaleLoader);
       Vue.use(VueYouTubeEmbed);
 
 
-
-    import 'vue-directive-tooltip/dist/vueDirectiveTooltip.css';
-    import Tooltip from 'vue-directive-tooltip';
-    Vue.use(Tooltip);
-
-
-
 import { mapActions, mapGetters, mapState } from "vuex";
 
 
@@ -61,7 +53,6 @@ function initiateVue() {
     store: store,
     delimiters: ['${', '}'],
     data: {
-      errors: new Errors(),
       show_languages: false,
       player_state: {
         playing_state: null,

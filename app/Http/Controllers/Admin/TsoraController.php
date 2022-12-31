@@ -41,6 +41,8 @@ class TsoraController extends Controller
         $columns = ['statu' => 'status'];
         $trashed = request('trashed');
         $q = request('q');
+        $tafsir = request('tafsir');
+        // dd($tafsir);
         $tsoras = $this->tsora->model
             ->sortable(['id' => 'desc'])->filterColumns($columns);
         if ($trashed) {
@@ -50,6 +52,10 @@ class TsoraController extends Controller
             $ids = $this->search->search($q, 'tsoras_index');
             $tsoras = $tsoras->whereIn('id', $ids);
         }
+        if ($tafsir) {
+            $tsoras = $tsoras->where('tafsir_id', $tafsir);
+        }
+
         $tsoras = $tsoras->with('sora:id,name')->paginate(250);
         $soar = $this->sora->list(['id', 'name']);
 

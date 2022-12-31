@@ -1,8 +1,8 @@
-<div class="dropdown">
+<div class="dropdown {{ $show }}">
     <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
         {{ trans("text.newsletter") }}
     </button>
-    <div class="dropdown-menu">
+    <div class="dropdown-menu {{ $show }}">
         <div class="newsletter">
             <h5 class="mb-0">{{ trans("text.newsletter") }}</h5>
             @if ($subscribed)
