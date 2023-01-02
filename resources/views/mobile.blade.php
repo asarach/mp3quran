@@ -139,6 +139,10 @@
       </a>
       @endif
       @endforeach
+        <a href="{{ url('tafsirs') }}" class="menu-link">
+          <span class="mp3-icon icon-tafsir"></span>
+          {{trans('text.tafsirs')}}
+        </a>
     </div>
   </div>
   <div class="tb-languages">
