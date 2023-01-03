@@ -55,6 +55,11 @@ class FixeTranslation extends Command
     ];
 
     $trans = $this->getTrans($folders);
+    $other_trans = $this->getOtherTrans($folders, []);
+    foreach ($other_trans as $other_tran) {
+      $trans[] =  $other_tran;
+    }
+
     $this->deleteNonNeededTrans($trans);
 
     $languages = DB::table('translator_languages')->get();
@@ -214,4 +219,81 @@ class FixeTranslation extends Command
       }
     }
   }
+
+  public function getOtherTrans($folders, $other_trans)
+  {
+    foreach ($folders as $folder) {
+      $dir = $folder;
+      foreach (glob("$dir/*") as $file) {
+        $ext = strtolower(pathinfo($file, PATHINFO_EXTENSION));
+        if (in_array($ext, ['php', 'vue', 'js'])) {
+          $content = file_get_contents("$file");
+          foreach ($this->other_translations as  $other_translation) {
+            if (strpos($content, $other_translation['item']) !== false) {
+              $other_trans[$other_translation['group'] . '.' . $other_translation['item']] = $other_translation;
+            }
+          }
+          $content = null;
+        } else {
+          $other_trans = array_merge($other_trans, $this->getOtherTrans([$file], $other_trans));
+        }
+      }
+    }
+
+
+    return $other_trans;
+  }
+
+  protected $other_translations = [
+    ['group' => 'text', 'item' => 'app-type-1'],
+    ['group' => 'text', 'item' => 'app-type-2'],
+    ['group' => 'text', 'item' => 'placement-header'],
+    ['group' => 'text', 'item' => 'menu-desktop'],
+    ['group' => 'text', 'item' => 'menu-mobile'],
+    ['group' => 'text', 'item' => 'error'],
+    ['group' => 'text', 'item' => 'error-copying-text'],
+    ['group' => 'text', 'item' => 'copied'],
+    ['group' => 'text', 'item' => 'text-copied'],
+    ['group' => 'text', 'item' => 'added'],
+    ['group' => 'text', 'item' => 'removed'],
+    ['group' => 'text', 'item' => 'video-added-favorites'],
+    ['group' => 'text', 'item' => 'video-removed-favorites'],
+    ['group' => 'text', 'item' => 'radio-added-favorites'],
+    ['group' => 'text', 'item' => 'radio-removed-favorites'],
+    ['group' => 'text', 'item' => 'read-added-favorites'],
+    ['group' => 'text', 'item' => 'read-removed-favorites'],
+    ['group' => 'text', 'item' => 'sora-added-favorites'],
+    ['group' => 'text', 'item' => 'sora-removed-favorites'],
+    ['group' => 'text', 'item' => 'item-added-playlist'],
+    ['group' => 'text', 'item' => 'select-rewaya'],
+    ['group' => 'text', 'item' => 'islam-on-telegram'],
+    ['group' => 'text', 'item' => 'hisn-muslim'],
+    ['group' => 'text', 'item' => 'haramain'],
+
+
+    ['group' => 'admin', 'item' => 'order-by-order_num-desc'],
+    ['group' => 'admin', 'item' => 'order-by-order_num-asc'],
+    ['group' => 'admin', 'item' => 'order-by-name-desc'],
+    ['group' => 'admin', 'item' => 'order-by-name-asc'],
+    ['group' => 'admin', 'item' => 'order-by-newest'],
+    ['group' => 'admin', 'item' => 'order-by-oldest'],
+    ['group' => 'admin', 'item' => 'order-by-title-desc'],
+    ['group' => 'admin', 'item' => 'order-by-title-asc'],
+    ['group' => 'admin', 'item' => 'order-by-new_url-desc'],
+    ['group' => 'admin', 'item' => 'order-by-new_url-asc'],
+    ['group' => 'admin', 'item' => 'order-by-old_url-desc'],
+    ['group' => 'admin', 'item' => 'order-by-old_url-asc'],
+    ['group' => 'admin', 'item' => 'order-by-rewaya-desc'],
+    ['group' => 'admin', 'item' => 'order-by-rewaya-asc'],
+    ['group' => 'admin', 'item' => 'order-by-reciter-desc'],
+    ['group' => 'admin', 'item' => 'order-by-reciter-asc'],
+    ['group' => 'admin', 'item' => 'order-by-mushaf-desc'],
+    ['group' => 'admin', 'item' => 'order-by-mushaf-asc'],
+    ['group' => 'admin', 'item' => 'order-by-ayat_count-desc'],
+    ['group' => 'admin', 'item' => 'order-by-ayat_count-asc'],
+
+
+    ['group' => 'seo', 'item' => 'read-title'],
+    ['group' => 'seo', 'item' => 'read-description'],
+  ];
 }
