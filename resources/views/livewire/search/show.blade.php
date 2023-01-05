@@ -6,6 +6,7 @@
 <meta name="description" content="{{$page['description']}}" />
 <meta property="og:description" content="{{$page['description']}}" />
 <meta name="twitter:description" content="{{$page['description']}}" />
+<link href="https://vjs.zencdn.net/7.20.3/video-js.css" rel="stylesheet" />
 @endsection
 <div class="main search-show">
   <div class="show-header">
@@ -123,7 +124,9 @@
               @foreach ($tvs['data'] as $tv)
               <div class="card-tv">
                 <h3>{{$tv['name']}}</h3>
-                <div class="dplayer" data-url="{{$tv['url']}}" data-live="true" data-autoplay="true"></div>
+                <video id="my-video" class="video-js" controls preload="auto" width="720" height="405" poster="/img/{{$tv['slug']}}.webp" data-setup='{"liveui": true}'>
+                  <source src="{{$tv['url']}}" type="application/x-mpegURL" />
+                </video>
               </div>
               @endforeach
               @if ($tvs['current_page'] < $tvs['last_page']) <button type="button" class="btn btn-success" @click="moreTvs()">
@@ -140,3 +143,6 @@
     @include('components.share')
   </div>
 </div>
+@section('page-scripts')
+<script src="https://vjs.zencdn.net/7.20.3/video.min.js"></script>
+@endsection
