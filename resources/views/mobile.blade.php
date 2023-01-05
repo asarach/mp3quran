@@ -139,7 +139,7 @@
       </a>
       @endif
       @endforeach
-        <a href="{{ url('tafsirs') }}" class="menu-link">
+        <a href="{{ LaravelLocalization::localizeUrl('tafsirs') }}" class="menu-link">
           <span class="mp3-icon icon-tafsir"></span>
           {{trans('text.tafsirs')}}
         </a>
