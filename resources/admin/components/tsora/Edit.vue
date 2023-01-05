@@ -28,7 +28,7 @@
     <section v-else class="content">
       <div class="row">
         <div class="col-lg-24">
-          <tsora-form :action="'edit'" :tsora="tsora" ></tsora-form>
+          <tsora-form :action="'edit'" :tsora="tsora" :soar="soar"></tsora-form>
         </div>
       </div>
       <div class="row">
@@ -99,6 +99,7 @@ export default {
       tsora: {
         name: "",
         status: 0,
+        order: 1,
         url: ""
       }
     };

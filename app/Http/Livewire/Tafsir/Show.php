@@ -62,10 +62,13 @@ class Show extends Component
         $cache_name = 'tsoras_index_tafsir_' . $tafsir->id . '_long_' .  LaravelLocalization::getCurrentLocale();
         Cache::forget($cache_name);
         $tsoras = Cache::rememberForever($cache_name, function () use ($tafsir) {
-            $tsoras = Tsora::where('status', 1);
-            $tsoras = $tsoras->where('tafsir_id', $tafsir->id)->where('sura_id', $this->sura_id);
-            $tsoras = $tsoras->get();
-            return $tsoras->sortBy('name')->values()->toArray();
+            $tsoras = Tsora::where('status', 1)
+                ->where('tafsir_id', $tafsir->id)
+                ->where('sura_id', $this->sura_id)
+                ->orderBy('order', 'asc')
+                ->get();
+
+            return $tsoras->values()->toArray();
         });
         $half = ceil(count($tsoras) / 2);
 

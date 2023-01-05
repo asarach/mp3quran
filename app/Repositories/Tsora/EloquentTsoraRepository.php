@@ -22,6 +22,7 @@ class EloquentTsoraRepository extends EloquentRepository implements TsoraReposit
 
         $item->name = $data['name'];
         $item->status = $data['status'];
+        $item->order = $data['order'];
         $item->url = $data['url'];
 
         if (!empty($data['tafsir']) and isset($data['tafsir'])) {
@@ -42,6 +43,7 @@ class EloquentTsoraRepository extends EloquentRepository implements TsoraReposit
 
         $item->name = $data['name'];
         $item->status = $data['status'];
+        $item->order = $data['order'];
         $item->url = $data['url'];
 
         if (!empty($data['sora']) and isset($data['sora']['id'])) {

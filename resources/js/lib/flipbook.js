@@ -179,6 +179,10 @@ export default class FlipBook {
     setImages() {
         let odd = 0;
         let add = 1;
+        let count = 29;
+        if (this.mobile == 'true') {
+            count = 12;
+        }
         if (this.page === 0) {
             odd = 1;
             add = 0;
@@ -188,7 +192,7 @@ export default class FlipBook {
             add = 0;
         }
         let first_page = Math.max(1, this.start - add, this.page - 5 - odd);
-        let last_page = Math.min(this.end + add, this.page + 29 - odd);
+        let last_page = Math.min(this.end + add, this.page + count - odd);
         this.images = [];
         for (let i = first_page; i < last_page; i++) {
             this.images.push(i);

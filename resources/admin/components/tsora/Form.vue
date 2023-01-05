@@ -104,6 +104,19 @@
             errors.get("url")
           }}</small>
         </div>
+        <div class="form-group">
+          <label class="col-form-label">{{ trans("text.order") }}</label>
+          <input
+            type="text"
+            name="order"
+            class="form-control"
+            v-model="tsora.order"
+            @keydown="errors.clear('order')"
+          />
+          <small class="form-text text-danger" v-if="errors.has('order')">{{
+            errors.get("order")
+          }}</small>
+        </div>
 
         <div class="form-group">
           <label>{{ trans("admin.status") }}</label>

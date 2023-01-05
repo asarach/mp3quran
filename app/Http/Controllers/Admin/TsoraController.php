@@ -42,9 +42,10 @@ class TsoraController extends Controller
         $trashed = request('trashed');
         $q = request('q');
         $tafsir = request('tafsir');
-        // dd($tafsir);
+        $tsora = request('tsora');
         $tsoras = $this->tsora->model
-            ->sortable(['id' => 'desc'])->filterColumns($columns);
+            ->orderBY('order', 'asc')
+            ->filterColumns($columns);
         if ($trashed) {
             $tsoras = $tsoras->onlyTrashed();
         }
@@ -54,6 +55,9 @@ class TsoraController extends Controller
         }
         if ($tafsir) {
             $tsoras = $tsoras->where('tafsir_id', $tafsir);
+        }
+        if ($tsora) {
+            $tsoras = $tsoras->where('sura_id', $tsora);
         }
 
         $tsoras = $tsoras->with('sora:id,name')->paginate(250);
@@ -125,9 +129,7 @@ class TsoraController extends Controller
      */
     public function edit($id)
     {
-        $tsora = $this->tsora->model->findOrFail($id);
-
-
+        $tsora = $this->tsora->model->with(['sora:id,name'])->findOrFail($id);
 
         $languages = DB::table('translator_languages')->get();
         $translations = [];

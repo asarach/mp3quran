@@ -226,6 +226,7 @@ export default {
         start_aya: '',
         end_aya: '',
         tafsir: this.$route.params.tafsir,
+        order: 1,
         url: ""
       },
       filters: {
@@ -294,6 +295,7 @@ export default {
       this.getCountires();
     },
     preparUrl() {
+      console.log(this.filters);
       var base = this.ajax_prefix + "tsoras/" + this.$route.params.tafsir + "?";
       var page = this.tsoras.current_page;
       if (page !== undefined) {
@@ -311,8 +313,8 @@ export default {
       if (this.filters.rewaya) {
         base += "rewaya=" + this.filters.rewaya.id + "&";
       }
-      if (this.filters.tsora) {
-        base += "tsora=" + this.filters.tsora.id + "&";
+      if (this.filters.sora) {
+        base += "tsora=" + this.filters.sora.id + "&";
       }
       if (this.filters.statu) {
         base += "statu=" + this.filters.statu + "&";
