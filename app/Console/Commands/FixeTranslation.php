@@ -49,8 +49,8 @@ class FixeTranslation extends Command
 
     $folders = [
       base_path('app'), //114
-      base_path('resources/js/admin/components'), //638
-      base_path('resources/js/components'), //638
+      base_path('resources/admin'), //638
+      base_path('resources/js'), //638
       base_path('resources/views'), //1179
     ];
 
