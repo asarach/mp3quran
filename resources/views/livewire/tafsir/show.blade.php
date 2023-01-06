@@ -56,9 +56,16 @@
                                             <div class="tafsir-info">
                                                 <div class="tafsir-name">{{$tsora['name']}}</div>
                                             </div>
-                                            <div class="btn-tbookmark spib-pause btn-bookmark-tafsir">
+                                            @auth
+                                            <div class="btn-tbookmark btn-bookmark-tafsir" data-toggle="tooltip" data-placement="bottom" title="{{ trans('text.play-to-bookmark') }}">
                                                 {{ trans('text.bookmark-tafsir') }}
                                             </div>
+                                            @else
+                                            <div class="btn-tbookmark" data-toggle="tooltip" data-placement="bottom" title="{{ trans('text.login-and-play-to-bookmark') }}">
+                                                {{ trans('text.bookmark-tafsir') }}
+                                            </div>
+                                            @endif
+                                           
                                         </div>
                                     </li>
                                     @endforeach

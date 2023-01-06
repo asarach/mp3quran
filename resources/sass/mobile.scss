@@ -78,6 +78,9 @@
         }
       }
     }
+    .show-header.has-nav-tabs{
+      padding-bottom: 3rem;
+    }
     .show-body {
       .nav-tabs .nav-link {
         padding: 0.5rem 0.75rem;
@@ -109,9 +112,11 @@
     padding: 1rem 0;
   }
   .card-tv {
-    background: none;
-    padding: 0;
-    box-shadow: none;
+    border-radius: 6px;
+    padding: 0.5rem 0 6px 0px;
+    .pb-3{
+      padding-bottom: 0.5rem !important;
+    }
   }
   .reciters-show .show-filters {
     display: block;

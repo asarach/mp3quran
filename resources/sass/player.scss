@@ -670,7 +670,14 @@
   position: relative;
   box-shadow: 0px -2px 8px 2px #a2a2a230;
   .ply-controls {
-    width: 33%;
+    width: 120px;
+  }
+   .ply-options{
+    width: 34px;
+  }
+  .ply-item-info{
+    width: calc(100% - 154px);
+    margin: 0;
   }
 }
 .desktop-player {

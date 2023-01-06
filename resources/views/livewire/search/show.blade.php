@@ -9,7 +9,7 @@
 <link href="https://vjs.zencdn.net/7.20.3/video-js.css" rel="stylesheet" />
 @endsection
 <div class="main search-show">
-  <div class="show-header">
+  <div class="show-header has-nav-tabs">
     <div class="container">
       <div class="row">
         <div class="col-lg-5 order-2 order-md-1">
@@ -123,7 +123,7 @@
             <div class="search-tab-pane">
               @foreach ($tvs['data'] as $tv)
               <div class="card-tv">
-                <h3>{{$tv['name']}}</h3>
+                <h3 class="pb-3">{{$tv['name']}}</h3>
                 <video id="my-video" class="video-js" controls preload="auto" width="720" height="405" poster="/img/{{$tv['slug']}}.webp" data-setup='{"liveui": true}'>
                   <source src="{{$tv['url']}}" type="application/x-mpegURL" />
                 </video>

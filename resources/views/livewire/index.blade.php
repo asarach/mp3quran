@@ -8,7 +8,7 @@
 <meta name="twitter:description" content="{{$page->description}}" />
 @endsection
 <div class="main home-show">
-    <div class="show-header">
+    <div class="show-header has-nav-tabs">
         <div class="container">
             <div class="row">
                 <div class="col-lg-5 order-2 order-md-1">

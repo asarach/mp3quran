@@ -58,10 +58,10 @@ export function bookmarkTsora(url) {
         type: 'GET',
         url: url,
         success: function (response) {
-            notify(trans("text.added"), 'success', trans("text.bookmark-created"));
+            notify(trans("text.done"), 'success', trans("text.bookmark-created"));
         },
         error: function (response) {
-            notify(trans("text.not-added"), 'warn', trans("text.bookmark-not-created"));
+            notify(trans("text.error"), 'warn', trans("text.bookmark-not-created"));
         },
     });
 }

@@ -31,9 +31,13 @@
                 <span class="icon-favorite"></span>
                 {{trans('text.favorites')}}
               </a>
-              <a class="dropdown-item   @if(request()->url()  == LaravelLocalization::localizeUrl('playlists') ) active @endif" href="{{ route('page.playlists') }}">
-                <span class="icon-playlist_play"></span>
-                {{trans('text.playlists')}}
+              <a class="dropdown-item   @if(request()->url()  == LaravelLocalization::localizeUrl('tafsirs') ) active @endif" href="{{ route('tafsir.index') }}">
+                <span class="mp3-icon icon-tafsir""></span>
+                {{trans('text.tafsirs')}}
+            </a>
+              <a class=" dropdown-item @if(request()->url() == LaravelLocalization::localizeUrl('playlists') ) active @endif" href="{{ route('page.playlists') }}">
+                  <span class="icon-playlist_play"></span>
+                  {{trans('text.playlists')}}
               </a>
               <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf
@@ -139,10 +143,10 @@
       </a>
       @endif
       @endforeach
-        <a href="{{ LaravelLocalization::localizeUrl('tafsirs') }}" class="menu-link">
-          <span class="mp3-icon icon-tafsir"></span>
-          {{trans('text.tafsirs')}}
-        </a>
+      <a href="{{ LaravelLocalization::localizeUrl('tafsirs') }}" class="menu-link">
+        <span class="mp3-icon icon-tafsir"></span>
+        {{trans('text.tafsirs')}}
+      </a>
     </div>
   </div>
   <div class="tb-languages">

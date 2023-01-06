@@ -170,6 +170,8 @@ export default class Player {
     var self = this;
     var storagePlaylist = [];
     $("#playerList").html('');
+    $("#fullPlayerList").html('');
+    console.log('updatePlaylist');
 
     if (this.playlist.length > 0) {
       $('.audio-player').show();
@@ -374,6 +376,8 @@ export default class Player {
     $('.spib-loading').hide();
     $('.spib-pause').hide();
     $('.spib-play').show();
+    $('.btn-bookmark-tafsir').removeClass('show');
+
     switch (state.playing_state) {
       case "loading":
         $(".spib-" + state.playing_type + '-' + state.playing_item + ' .spib-loading').show();
@@ -388,6 +392,7 @@ export default class Player {
         $(".spib-" + state.playing_type + '-' + state.playing_item + ' .spib-loading').hide();
         $(".spib-" + state.playing_type + '-' + state.playing_item + ' .spib-pause').show();
         $(".spib-" + state.playing_type + '-' + state.playing_item + ' .spib-play').hide();
+        $(".spib-" + state.playing_type + '-' + state.playing_item + ' .btn-bookmark-tafsir').addClass('show');
 
         $('.spib-controls .spib-loading').hide();
         $('.spib-controls .spib-pause').show();

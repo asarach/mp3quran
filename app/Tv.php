@@ -47,6 +47,7 @@ class Tv extends Model implements ViewableContract
             $array = [
                 'id' => $this->id,
                 'url' => $this->url,
+                'slug' => $this->slug,
                 'name' => $this->getLocaleName(),
             ];
         }

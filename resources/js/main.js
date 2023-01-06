@@ -74,12 +74,12 @@ export function initiateLib() {
         player.pause();
     });
     $(".ply-btn.btn-play").off('click').on("click", function (e) {
-        
+
         const url = $(this).data("url");
         const item = $(this).data("item");
         const type = $(this).data("type");
         const time = $(this).data("time");
-        
+
         getItemAndPlay(url, item, type, time);
     });
     $(".share-btn").off('click').on("click", function (e) {
@@ -134,13 +134,14 @@ export function initiateLib() {
     });
 
     $(".btn-bookmark-tafsir").off('click').on("click", function (e) {
-        try {
-            let time = window.player.current_item.howl.seek();
-            console.log(time);
-            let url = window.ajax_prefix + '/tsora/bookmark?id=' + window.player.current_item.read_id + '&time=' + Math.round(time);
-            bookmarkTsora(url);
-        } catch (error) {
-            notify(trans("text.not-added"), 'warn', trans("text.bookmark-not-created"));
+        if ($(this).hasClass('show')) {
+            try {
+                let time = window.player.current_item.howl.seek();
+                let url = window.ajax_prefix + '/tsora/bookmark?id=' + window.player.current_item.read_id + '&time=' + Math.round(time);
+                bookmarkTsora(url);
+            } catch (error) {
+                notify(trans("text.not-added"), 'warn', trans("text.bookmark-not-created"));
+            }
         }
     });
 
@@ -260,7 +261,7 @@ function toggleHeaderAds(currentItem, nextItem, count) {
         $(" .main .show-header .header-ads .ha-item:nth-child(" + currentItem + ")").removeClass('show');
         $(" .main .show-header .header-ads .ha-item:nth-child(" + nextItem + ")").addClass('show');
         let newCurrentItem = nextItem;
-        let newNextItem; 
+        let newNextItem;
         if (nextItem == count) {
             newNextItem = 1;
         } else {

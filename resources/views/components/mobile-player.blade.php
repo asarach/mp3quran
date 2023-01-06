@@ -34,6 +34,7 @@
       <div id="soraName" class="ply-sora"></div>
     </div>
     <div class="ply-options">
+      @if (false)
       <div class="ply-btn btn-volume " id="playerVolumeBtnMbl">
         <span class="uni-icon icon-volume_off" style="display: none;"></span> {{-- 0 --}}
         <span class="uni-icon icon-volume_mute" style="display: none;"></span> {{-- 15 --}}
@@ -45,7 +46,9 @@
             <div class="qs-point"></div>
           </div>
         </div>
-      </div>
+      </div> 
+      @endif
+      
       <div class="ply-btn btn-list" id="playerPlaylistBtn">
         <span class="uni-icon icon-playlist_play"></span>
       </div>

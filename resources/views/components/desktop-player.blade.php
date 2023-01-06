@@ -28,7 +28,7 @@
       </div>
       <div class="ply-body">
         @auth
-        <div id="bookmarkBtn" class="ply-bookmark  btn-bookmark-tafsir" >{{ trans('text.bookmark-tafsir') }}</div>
+        <div id="bookmarkBtn" class="ply-bookmark  btn-bookmark-tafsir">{{ trans('text.bookmark-tafsir') }}</div>
         @endauth
         <div id="playerLoading"></div>
         <div class="ply-timer" id="playerTimer"></div>
@@ -40,12 +40,14 @@
       </div>
 
       <div class="ply-options">
-        <div class="ply-btn btn-volume " id="playerVolumeBtn">
-          <span class="uni-icon icon-volume_off" style="display: none;"></span> {{-- 0 --}}
-          <span class="uni-icon icon-volume_mute" style="display: none;"></span> {{-- 15 --}}
-          <span class="uni-icon icon-volume_down"></span> {{-- 65 --}}
-          <span class="uni-icon icon-volume_up" style="display: none;"></span>
-          <div id="playerVolume" class="volume-selector dtp" >
+        <div class="ply-btn btn-volume">
+          <div id="playerVolumeBtn">
+            <span class="uni-icon icon-volume_off" style="display: none;"></span> {{-- 0 --}}
+            <span class="uni-icon icon-volume_mute" style="display: none;"></span> {{-- 15 --}}
+            <span class="uni-icon icon-volume_down"></span> {{-- 65 --}}
+            <span class="uni-icon icon-volume_up" style="display: none;"></span>
+          </div>
+          <div id="playerVolume" class="volume-selector dtp">
             <div class="qs-track quran-slider volume qs-vertical" data-control='volume'>
               <div class="qs-progress"></div>
               <div class="qs-point"></div>

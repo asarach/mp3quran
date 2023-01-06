@@ -33,7 +33,7 @@
         <div class="col-lg-19" id="sticky-container">
           <div class="tvs-list">
             <div class="card-tv">
-              <h3>{{$tv[0]['name']}}</h3>
+              <h3 class="pb-3">{{$tv[0]['name']}}</h3>
               <video id="my-video" class="video-js" controls preload="auto" width="720" height="405" poster="/img/{{$tv[0]['slug']}}.webp" data-setup='{"liveui": true}'>
                 <source src="{{$tv[0]['url']}}" type="application/x-mpegURL" />
               </video>
