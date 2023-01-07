@@ -51,6 +51,7 @@ class FixeTranslation extends Command
       base_path('app'), //114
       base_path('resources/admin'), //638
       base_path('resources/js'), //638
+      base_path('resources/js/lib'), //638
       base_path('resources/views'), //1179
     ];
 
@@ -75,7 +76,7 @@ class FixeTranslation extends Command
       $dir = $folder;
       foreach (glob("$dir/*") as $file) {
         $ext = strtolower(pathinfo($file, PATHINFO_EXTENSION));
-        if (in_array($ext, ['php', 'vue'])) {
+        if (in_array($ext, ['php', 'vue', 'js'])) {
           $content = file_get_contents("$file");
           preg_match_all('/trans\(["\'][a-zA-Z0-9_.-]+["\']/', $content, $matches, 0);
           try {
@@ -208,7 +209,7 @@ class FixeTranslation extends Command
   {
     foreach (glob("$dir/*") as $file) {
       $ext = strtolower(pathinfo($file, PATHINFO_EXTENSION));
-      if (in_array($ext, ['php', 'vue'])) {
+      if (in_array($ext, ['php', 'vue', 'js'])) {
         $content = file_get_contents("$file");
         $content = str_replace("trans('" . $tran['group'] . "." . $tran['item'], "trans('" . $text . "." . $tran['item'], $content);
         $file_handle = fopen("$file", 'w');
