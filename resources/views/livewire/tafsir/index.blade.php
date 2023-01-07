@@ -14,6 +14,11 @@
             <div class="row">
                 <div class="col-lg-5 order-2 order-md-1">
                     <h1>{{trans('text.tafsirs')}}</h1>
+                    <div class="header-options">
+                        <a href="{{ route('tafsir.bookmarks') }}" class="btn btn-primary">
+                            {{ trans("text.tafsir-bookmarks") }}
+                        </a>
+                    </div>
                 </div>
                 <div class="col-lg-19 order-1 order-md-2">
                     <livewire:components.header-ads />
@@ -30,7 +35,6 @@
                 </div>
                 @endif
                 <div class="col-lg-19" id="sticky-container">
-                    @include('livewire.tafsir.bookmarks')
                     <div class="show-filters">
                         <div class="filter-soar">
                         </div>

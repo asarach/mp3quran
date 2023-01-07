@@ -39,6 +39,7 @@ Route::get('/video/{slug}', ['as' => 'video.show', 'uses' => Video\Show::class])
 
 /* tafsirs  */
 Route::get('/tafsirs', ['as' => 'tafsir.index', 'uses' => Tafsir\Index::class]);
+Route::get('/tafsir/bookmarks', ['as' => 'tafsir.bookmarks', 'uses' => Tafsir\Bookmarks::class]);
 Route::get('/tafsir/{tafsir_id}/{sura_id}', ['as' => 'tafsir.show', 'uses' => Tafsir\Show::class]);
 
 /* favorites  */

@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Database\Eloquent\Builder;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
-class Index extends Component
+class IndexB extends Component
 {
     public $search = null;
     public $t = '';

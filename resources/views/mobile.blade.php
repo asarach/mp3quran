@@ -31,9 +31,9 @@
                 <span class="icon-favorite"></span>
                 {{trans('text.favorites')}}
               </a>
-              <a class="dropdown-item   @if(request()->url()  == LaravelLocalization::localizeUrl('tafsirs') ) active @endif" href="{{ route('tafsir.index') }}">
+              <a class="dropdown-item   @if(request()->url()  == LaravelLocalization::localizeUrl('tafsir/bookmarks') ) active @endif" href="{{ route('tafsir.bookmarks') }}">
                 <span class="mp3-icon icon-tafsir""></span>
-                {{trans('text.tafsirs')}}
+                {{ trans("text.tafsir-bookmarks") }}
             </a>
               <a class=" dropdown-item @if(request()->url() == LaravelLocalization::localizeUrl('playlists') ) active @endif" href="{{ route('page.playlists') }}">
                   <span class="icon-playlist_play"></span>

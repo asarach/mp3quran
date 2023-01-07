@@ -8,7 +8,9 @@
 
   <!-- CSRF Token -->
   <meta name="csrf-token" content="{{ csrf_token() }}"> @yield('meta')
-
+ @php
+     $metas = getMetas([]);
+ @endphp
   <title>{{ $metas['seo_title']}}</title>
   <meta name="description" content="{{ $metas['seo_description']}}" />
   <meta property="og:title" content="{{ $metas['seo_title']}}" />

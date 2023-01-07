@@ -40,7 +40,6 @@ class LoginController extends Controller
     public function showLoginForm()
     {
         $params = get_params([]);
-        $params['metas'] = getMetas([]);
 
         return view('auth.login', $params);
     }
