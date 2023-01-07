@@ -50,10 +50,12 @@ class FixeTranslationC extends Command
                 ->first();
 
             if ($current) {
-                $translation->text = $current->text;
-                $translation->save();
+                DB::table('translator_translations')
+                    ->where('locale', $translation->locale)
+                    ->where('group', $translation->group)
+                    ->where('item', $translation->item)
+                    ->update(['text' => $current->text]);
             }
-            
         }
     }
 }
