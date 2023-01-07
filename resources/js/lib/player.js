@@ -397,6 +397,8 @@ export default class Player {
         $('.spib-controls .spib-loading').hide();
         $('.spib-controls .spib-pause').show();
         $('.spib-controls .spib-play').hide();
+        $('.ply-body .btn-bookmark-tafsir').addClass('show');
+
         break;
       default:
         $(".spib-" + state.playing_type + '-' + state.playing_item + ' .spib-loading').hide();
