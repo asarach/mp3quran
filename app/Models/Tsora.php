@@ -27,6 +27,12 @@ class Tsora extends Model
     {
         if (strpos(url()->current(), 'admin') !== false) {
             $array = parent::ToArray();
+        } else  if (strpos(url()->current(), 'api') !== false) {
+            $array = [
+                'sura_id' => $this->sura_id,
+                'tafsir_id' => $this->tafsir_id,
+                'name' => $this->getLocaleName(),
+            ];
         } else {
             $array = [
                 'id' => $this->id,
@@ -35,7 +41,7 @@ class Tsora extends Model
                 'tafsir_name' => $this->getTafsirLocaleName(),
             ];
         }
-        
+
         return $array;
     }
 
@@ -46,15 +52,15 @@ class Tsora extends Model
         $array['name'] = $this->name;
         $langs = LaravelLocalization::getSupportedLocales();
         foreach ($langs as $key => $lang) {
-            $array['name_' . $key ] = Lang::get('tsora.name-' . $this->id, [], $key);
+            $array['name_' . $key] = Lang::get('tsora.name-' . $this->id, [], $key);
         }
 
         return $array;
     }
-   
+
     /**
-    * Get the language of the annonce.
-    */
+     * Get the language of the annonce.
+     */
     public function tafsir()
     {
         return $this->belongsTo('App\Models\Tafsir');
@@ -78,13 +84,11 @@ class Tsora extends Model
         return $name;
     }
 
-      /**
+    /**
      * Get the language of the annonce.
      */
     public function sora()
     {
         return $this->belongsTo('App\Sora', 'sura_id');
     }
-
-
 }
