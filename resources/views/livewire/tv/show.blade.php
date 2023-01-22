@@ -6,7 +6,6 @@
 <meta name="description" content="{{$page->description}}" />
 <meta property="og:description" content="{{$page->description}}" />
 <meta name="twitter:description" content="{{$page->description}}" />
-<link href="https://vjs.zencdn.net/7.20.3/video-js.css" rel="stylesheet" />
 @endsection
 <div class="main tvs-show">
   <div class="show-header">
@@ -34,7 +33,7 @@
           <div class="tvs-list">
             <div class="card-tv">
               <h3 class="pb-3">{{$tv[0]['name']}}</h3>
-              <video id="my-video" class="video-js" controls preload="auto" width="720" height="405" poster="/img/{{$tv[0]['slug']}}.webp" data-setup='{"liveui": true}'>
+              <video id="videoPlayer" class="video-js" controls preload="auto" width="720" height="405" poster="/img/{{$tv[0]['slug']}}.webp" data-setup='{"liveui": true}'>
                 <source src="{{$tv[0]['url']}}" type="application/x-mpegURL" />
               </video>
             </div>
@@ -44,6 +43,3 @@
     </div>
   </div>
 </div>
-@section('page-scripts')
-<script src="https://vjs.zencdn.net/7.20.3/video.min.js"></script>
-@endsection

@@ -10,11 +10,17 @@ import VideoLogo from './lib/logo-video';
 import { getItemAndPlay, addItem, bookmarkTsora } from './lib/utils';
 import { loadPalylist, deletePalylist } from './lib/playlist';
 import screenfull from './lib/screenfull';
+import videojs from 'video.js';
 
 export function initiateLib() {
     document.getElementById("MainLoading").style.display = "none";
 
     retateHeaderAds();
+    if (document.getElementById('videoPlayer')) {
+        videojs('videoPlayer');
+    }
+
+
 
     $('.tafsir-sora-btn').off('click').click(function () {
         const current_sora = $(this).data("sora");
