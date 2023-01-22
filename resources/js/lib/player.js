@@ -377,6 +377,7 @@ export default class Player {
     $('.spib-pause').hide();
     $('.spib-play').show();
     $('.btn-bookmark-tafsir').removeClass('show');
+    $('.btn-bookmark-tafsir').tooltip('enable');
 
     switch (state.playing_state) {
       case "loading":
@@ -393,6 +394,7 @@ export default class Player {
         $(".spib-" + state.playing_type + '-' + state.playing_item + ' .spib-pause').show();
         $(".spib-" + state.playing_type + '-' + state.playing_item + ' .spib-play').hide();
         $(".spib-" + state.playing_type + '-' + state.playing_item + ' .btn-bookmark-tafsir').addClass('show');
+        $(".spib-" + state.playing_type + '-' + state.playing_item + ' .btn-bookmark-tafsir').tooltip('disable');
 
         $('.spib-controls .spib-loading').hide();
         $('.spib-controls .spib-pause').show();

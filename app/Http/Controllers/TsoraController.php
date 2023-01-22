@@ -49,16 +49,24 @@ class TsoraController extends Controller
     public function bookmark()
     {
         $input = request()->all();
+        $exist = Tbookmark::where('tsora_id', $input['id'])->where('user_id',Auth::user()->id)->first();
 
+        if ($exist) {
+            $exist->time = $input['time'];
+            $result = $exist->save();
+        } else {
+            $tbookmark = new Tbookmark;
 
+            $tbookmark->time = $input['time'];
+            $tbookmark->user()->associate(Auth::user()->id);
+            $tbookmark->tsora()->associate($input['id']);
+    
+            $result = $tbookmark->save();
+        }
+        
+        
         // try {
-        $tbookmark = new Tbookmark;
-
-        $tbookmark->time = $input['time'];
-        $tbookmark->user()->associate(Auth::user()->id);
-        $tbookmark->tsora()->associate($input['id']);
-
-        $result = $tbookmark->save();
+       
 
 
         // } catch (\Throwable $th) {
