@@ -7,9 +7,7 @@ export function notify(title, type, text) {
 }
 export function trans(string, args = {}) {
     const stringArray = string.split(".");
-    console.log(stringArray);
     var value = window.trans;
-    console.log(value);
     for (let index = 0; index < stringArray.length; index++) {
         value = value[stringArray[index]];
     }

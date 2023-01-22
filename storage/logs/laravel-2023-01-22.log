@@ -23307,3 +23307,120 @@
 [2023-01-22 19:39:27] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/atheer.jpg"} 
 [2023-01-22 19:39:27] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/ma-la-ysaa-atfal-almslmyn-jhlh-01.jpg"} 
 >>>>>>> 90677f063f0f5e1ea4f1366876ca7c5ace2d9a0f
+[2023-01-22 19:45:54] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/atheer.jpg"} 
+[2023-01-22 19:45:54] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/ma-la-ysaa-atfal-almslmyn-jhlh-01.jpg"} 
+[2023-01-22 19:45:57] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/ma-la-ysaa-atfal-almslmyn-jhlh-01.jpg"} 
+[2023-01-22 19:45:57] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/atheer.jpg"} 
+[2023-01-22 19:46:01] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/atheer.jpg"} 
+[2023-01-22 19:46:01] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/ma-la-ysaa-atfal-almslmyn-jhlh-01.jpg"} 
+[2023-01-22 19:46:23] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/ma-la-ysaa-atfal-almslmyn-jhlh-01.jpg"} 
+[2023-01-22 19:46:23] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/atheer.jpg"} 
+[2023-01-22 19:46:24] dev.INFO: No query results for model [App\Read]. {"url":"http://mp3quran.de/ar/js/DPlayer.min.js.map"} 
+[2023-01-22 19:46:27] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/ma-la-ysaa-atfal-almslmyn-jhlh-01.jpg"} 
+[2023-01-22 19:46:27] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/atheer.jpg"} 
+[2023-01-22 19:46:29] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/atheer.jpg"} 
+[2023-01-22 19:46:29] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/ma-la-ysaa-atfal-almslmyn-jhlh-01.jpg"} 
+[2023-01-22 19:50:34] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/atheer.jpg"} 
+[2023-01-22 19:50:34] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/ma-la-ysaa-atfal-almslmyn-jhlh-01.jpg"} 
+[2023-01-22 19:50:34] dev.INFO: No query results for model [App\Read]. {"url":"http://mp3quran.de/ar/js/DPlayer.min.js.map"} 
+[2023-01-22 19:50:55] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/atheer.jpg"} 
+[2023-01-22 19:50:55] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/ma-la-ysaa-atfal-almslmyn-jhlh-01.jpg"} 
+[2023-01-22 19:50:56] dev.INFO: No query results for model [App\Read]. {"url":"http://mp3quran.de/ar/js/DPlayer.min.js.map"} 
+[2023-01-22 19:51:03] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/ma-la-ysaa-atfal-almslmyn-jhlh-01.jpg"} 
+[2023-01-22 19:51:03] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/atheer.jpg"} 
+[2023-01-22 19:51:04] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/atheer.jpg"} 
+[2023-01-22 19:51:04] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/ma-la-ysaa-atfal-almslmyn-jhlh-01.jpg"} 
+[2023-01-22 19:52:03] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/atheer.jpg"} 
+[2023-01-22 19:52:03] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/ma-la-ysaa-atfal-almslmyn-jhlh-01.jpg"} 
+[2023-01-22 19:52:04] dev.INFO: No query results for model [App\Read]. {"url":"http://mp3quran.de/ar/js/DPlayer.min.js.map"} 
+[2023-01-22 19:52:16] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/atheer.jpg"} 
+[2023-01-22 19:52:16] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/ma-la-ysaa-atfal-almslmyn-jhlh-01.jpg"} 
+[2023-01-22 19:52:16] dev.INFO: No query results for model [App\Read]. {"url":"http://mp3quran.de/ar/js/DPlayer.min.js.map"} 
+[2023-01-22 19:52:29] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/atheer.jpg"} 
+[2023-01-22 19:52:29] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/ma-la-ysaa-atfal-almslmyn-jhlh-01.jpg"} 
+[2023-01-22 19:52:31] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/ma-la-ysaa-atfal-almslmyn-jhlh-01.jpg"} 
+[2023-01-22 19:52:31] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/atheer.jpg"} 
+[2023-01-22 19:56:05] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/atheer.jpg"} 
+[2023-01-22 19:56:05] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/ma-la-ysaa-atfal-almslmyn-jhlh-01.jpg"} 
+[2023-01-22 19:56:05] dev.INFO: No query results for model [App\Read]. {"url":"http://mp3quran.de/ar/js/DPlayer.min.js.map"} 
+[2023-01-22 19:56:15] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/atheer.jpg"} 
+[2023-01-22 19:56:15] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/ma-la-ysaa-atfal-almslmyn-jhlh-01.jpg"} 
+[2023-01-22 19:56:21] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/ma-la-ysaa-atfal-almslmyn-jhlh-01.jpg"} 
+[2023-01-22 19:56:21] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/atheer.jpg"} 
+[2023-01-22 19:57:49] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/ma-la-ysaa-atfal-almslmyn-jhlh-01.jpg"} 
+[2023-01-22 19:57:49] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/atheer.jpg"} 
+[2023-01-22 19:57:49] dev.INFO: No query results for model [App\Read]. {"url":"http://mp3quran.de/ar/js/DPlayer.min.js.map"} 
+[2023-01-22 19:57:54] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/ma-la-ysaa-atfal-almslmyn-jhlh-01.jpg"} 
+[2023-01-22 19:57:54] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/atheer.jpg"} 
+[2023-01-22 19:57:57] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/atheer.jpg"} 
+[2023-01-22 19:57:57] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/ma-la-ysaa-atfal-almslmyn-jhlh-01.jpg"} 
+[2023-01-22 19:58:24] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/atheer.jpg"} 
+[2023-01-22 19:58:24] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/ma-la-ysaa-atfal-almslmyn-jhlh-01.jpg"} 
+[2023-01-22 19:58:25] dev.INFO: No query results for model [App\Read]. {"url":"http://mp3quran.de/ar/js/DPlayer.min.js.map"} 
+[2023-01-22 19:58:33] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/ma-la-ysaa-atfal-almslmyn-jhlh-01.jpg"} 
+[2023-01-22 19:58:33] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/atheer.jpg"} 
+[2023-01-22 19:58:38] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/ma-la-ysaa-atfal-almslmyn-jhlh-01.jpg"} 
+[2023-01-22 19:58:38] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/atheer.jpg"} 
+[2023-01-22 19:59:16] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/atheer.jpg"} 
+[2023-01-22 19:59:16] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/ma-la-ysaa-atfal-almslmyn-jhlh-01.jpg"} 
+[2023-01-22 19:59:28] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/atheer.jpg"} 
+[2023-01-22 19:59:28] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/ma-la-ysaa-atfal-almslmyn-jhlh-01.jpg"} 
+[2023-01-22 19:59:54] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/atheer.jpg"} 
+[2023-01-22 19:59:54] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/ma-la-ysaa-atfal-almslmyn-jhlh-01.jpg"} 
+[2023-01-22 19:59:54] dev.INFO: No query results for model [App\Read]. {"url":"http://mp3quran.de/ar/js/DPlayer.min.js.map"} 
+[2023-01-22 20:00:01] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/atheer.jpg"} 
+[2023-01-22 20:00:01] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/ma-la-ysaa-atfal-almslmyn-jhlh-01.jpg"} 
+[2023-01-22 20:00:04] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/ma-la-ysaa-atfal-almslmyn-jhlh-01.jpg"} 
+[2023-01-22 20:00:04] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/atheer.jpg"} 
+[2023-01-22 20:00:11] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/atheer.jpg"} 
+[2023-01-22 20:00:11] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/ma-la-ysaa-atfal-almslmyn-jhlh-01.jpg"} 
+[2023-01-22 20:00:14] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/ma-la-ysaa-atfal-almslmyn-jhlh-01.jpg"} 
+[2023-01-22 20:00:14] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/atheer.jpg"} 
+[2023-01-22 20:00:22] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/ma-la-ysaa-atfal-almslmyn-jhlh-01.jpg"} 
+[2023-01-22 20:00:22] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/atheer.jpg"} 
+[2023-01-22 20:00:24] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/atheer.jpg"} 
+[2023-01-22 20:00:24] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/ma-la-ysaa-atfal-almslmyn-jhlh-01.jpg"} 
+[2023-01-22 20:00:50] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/ma-la-ysaa-atfal-almslmyn-jhlh-01.jpg"} 
+[2023-01-22 20:00:50] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/atheer.jpg"} 
+[2023-01-22 20:01:40] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/ma-la-ysaa-atfal-almslmyn-jhlh-01.jpg"} 
+[2023-01-22 20:01:40] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/atheer.jpg"} 
+[2023-01-22 20:01:40] dev.INFO: No query results for model [App\Read]. {"url":"http://mp3quran.de/ar/js/DPlayer.min.js.map"} 
+[2023-01-22 20:03:14] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/ma-la-ysaa-atfal-almslmyn-jhlh-01.jpg"} 
+[2023-01-22 20:03:14] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/atheer.jpg"} 
+[2023-01-22 20:03:15] dev.INFO: No query results for model [App\Read]. {"url":"http://mp3quran.de/ar/js/DPlayer.min.js.map"} 
+[2023-01-22 20:03:22] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/atheer.jpg"} 
+[2023-01-22 20:03:22] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/ma-la-ysaa-atfal-almslmyn-jhlh-01.jpg"} 
+[2023-01-22 20:03:22] dev.INFO: No query results for model [App\Read]. {"url":"http://mp3quran.de/ar/js/DPlayer.min.js.map"} 
+[2023-01-22 20:03:24] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/ma-la-ysaa-atfal-almslmyn-jhlh-01.jpg"} 
+[2023-01-22 20:03:24] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/atheer.jpg"} 
+[2023-01-22 20:03:34] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/atheer.jpg"} 
+[2023-01-22 20:03:34] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/ma-la-ysaa-atfal-almslmyn-jhlh-01.jpg"} 
+[2023-01-22 20:04:11] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/ma-la-ysaa-atfal-almslmyn-jhlh-01.jpg"} 
+[2023-01-22 20:04:11] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/atheer.jpg"} 
+[2023-01-22 20:04:11] dev.INFO: No query results for model [App\Read]. {"url":"http://mp3quran.de/ar/js/DPlayer.min.js.map"} 
+[2023-01-22 20:04:46] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/atheer.jpg"} 
+[2023-01-22 20:04:46] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/ma-la-ysaa-atfal-almslmyn-jhlh-01.jpg"} 
+[2023-01-22 20:04:46] dev.INFO: No query results for model [App\Read]. {"url":"http://mp3quran.de/ar/js/DPlayer.min.js.map"} 
+[2023-01-22 20:04:48] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/atheer.jpg"} 
+[2023-01-22 20:04:48] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/ma-la-ysaa-atfal-almslmyn-jhlh-01.jpg"} 
+[2023-01-22 20:04:57] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/ma-la-ysaa-atfal-almslmyn-jhlh-01.jpg"} 
+[2023-01-22 20:04:57] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/atheer.jpg"} 
+[2023-01-22 20:04:59] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/ma-la-ysaa-atfal-almslmyn-jhlh-01.jpg"} 
+[2023-01-22 20:04:59] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/atheer.jpg"} 
+[2023-01-22 20:05:07] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/atheer.jpg"} 
+[2023-01-22 20:05:07] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/ma-la-ysaa-atfal-almslmyn-jhlh-01.jpg"} 
+[2023-01-22 20:05:07] dev.INFO: No query results for model [App\Read]. {"url":"http://mp3quran.de/ar/js/DPlayer.min.js.map"} 
+[2023-01-22 20:05:23] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/atheer.jpg"} 
+[2023-01-22 20:05:23] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/ma-la-ysaa-atfal-almslmyn-jhlh-01.jpg"} 
+[2023-01-22 20:05:27] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/atheer.jpg"} 
+[2023-01-22 20:05:27] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/ma-la-ysaa-atfal-almslmyn-jhlh-01.jpg"} 
+[2023-01-22 20:05:50] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/ma-la-ysaa-atfal-almslmyn-jhlh-01.jpg"} 
+[2023-01-22 20:05:50] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/atheer.jpg"} 
+[2023-01-22 20:05:54] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/ma-la-ysaa-atfal-almslmyn-jhlh-01.jpg"} 
+[2023-01-22 20:05:54] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/atheer.jpg"} 
+[2023-01-22 20:05:57] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/atheer.jpg"} 
+[2023-01-22 20:05:57] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/ma-la-ysaa-atfal-almslmyn-jhlh-01.jpg"} 
+[2023-01-22 20:06:09] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/ma-la-ysaa-atfal-almslmyn-jhlh-01.jpg"} 
+[2023-01-22 20:06:09] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/atheer.jpg"} 
+[2023-01-22 20:06:12] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/ma-la-ysaa-atfal-almslmyn-jhlh-01.jpg"} 
+[2023-01-22 20:06:12] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/atheer.jpg"} 

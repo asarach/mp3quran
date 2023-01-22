@@ -171,7 +171,6 @@ export default class Player {
     var storagePlaylist = [];
     $("#playerList").html('');
     $("#fullPlayerList").html('');
-    console.log('updatePlaylist');
 
     if (this.playlist.length > 0) {
       $('.audio-player').show();

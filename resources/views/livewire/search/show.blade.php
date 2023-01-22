@@ -124,7 +124,7 @@
               @foreach ($tvs['data'] as $tv)
               <div class="card-tv">
                 <h3 class="pb-3">{{$tv['name']}}</h3>
-                <video id="videoPlayer" class="video-js" controls preload="auto" width="720" height="405" poster="/img/{{$tv['slug']}}.webp" data-setup='{"liveui": true}'>
+                <video id="videoPlayer" class="video-player video-js" controls preload="auto" width="720" height="405" poster="/img/{{$tv['slug']}}.webp" data-setup='{"liveui": true}'>
                   <source src="{{$tv['url']}}" type="application/x-mpegURL" />
                 </video>
               </div>

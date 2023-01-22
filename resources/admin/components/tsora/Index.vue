@@ -295,7 +295,6 @@ export default {
       this.getCountires();
     },
     preparUrl() {
-      console.log(this.filters);
       var base = this.ajax_prefix + "tsoras/" + this.$route.params.tafsir + "?";
       var page = this.tsoras.current_page;
       if (page !== undefined) {

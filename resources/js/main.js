@@ -16,10 +16,14 @@ export function initiateLib() {
     document.getElementById("MainLoading").style.display = "none";
 
     retateHeaderAds();
+
+    //Live Player 
+    if (videojs.players.videoPlayer) {
+        videojs.players.videoPlayer.dispose()
+    }
     if (document.getElementById('videoPlayer')) {
         videojs('videoPlayer');
     }
-
 
 
     $('.tafsir-sora-btn').off('click').click(function () {
