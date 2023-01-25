@@ -31,6 +31,7 @@ class Tsora extends Model
             $array = [
                 'sura_id' => $this->sura_id,
                 'tafsir_id' => $this->tafsir_id,
+                'url' => $this->url,
                 'name' => $this->getLocaleName(),
             ];
         } else {
