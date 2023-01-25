@@ -137,3 +137,4 @@ ginx-bins\\default\\www\\mp3quran\\public\\index.php(55): Illuminate\\Foundation
 [2023-01-25 20:49:06] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/ma-la-ysaa-atfal-almslmyn-jhlh-01.jpg"} 
 [2023-01-25 20:49:07] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/atheer.jpg"} 
 [2023-01-25 20:49:07] dev.INFO:  {"url":"http://mp3quran.de/uploads/mpa/lg/ma-la-ysaa-atfal-almslmyn-jhlh-01.jpg"} 
+[2023-01-25 20:52:49] production.INFO: No query results for model [App\Read]. {"url":"http://www.mp3quran.net/ar/images/mp3quran.jpg"} 
