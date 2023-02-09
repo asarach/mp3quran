@@ -43,6 +43,16 @@ class Tadabor extends Model implements ViewableContract
     {
         if (strpos(url()->current(), 'admin') !== false) {
             $array = parent::ToArray();
+        } else  if (strpos(url()->current(), 'api') !== false) {
+            $array = [
+                'id' => $this->id,
+                'audio_url' => $this->audio_url,
+                'image_url' => $this->image_url,
+                'text' => html_entity_decode($this->text),
+                'sora_name' => $this->getSoraName(),
+                'rewaya_name' => $this->getRewayaName(),
+                'reciter_name' => $this->getReciterName()
+            ];
         } else {
             $array = [
                 'id' => $this->id,
