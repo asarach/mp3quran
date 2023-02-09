@@ -42,3 +42,5 @@ $router->get('/api/v3/recent_reads', array('as' => 'api_3.recent_reads', 'uses' 
 
 $router->get('/api/v3/tafasir',      array('as' => 'api_3.tafasir',       'uses' => 'Api3\TafsirController@tafasir'));
 $router->get('/api/v3/tafsir',       array('as' => 'api_3.tafsir',        'uses' => 'Api3\TafsirController@tafsir'));
+
+$router->get('/api/v3/tadabor',       array('as' => 'api_3.tadabor',        'uses' => 'Api3\TadaborController@tadabor'));
