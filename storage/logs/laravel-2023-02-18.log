@@ -8288,3 +8288,4 @@ Stack trace:
 [2023-02-18 13:24:09] production.INFO: No query results for model [App\Read]. {"url":"http://mp3quran.net/ar/apple-touch-icon-precomposed.png"} 
 [2023-02-18 13:24:11] production.INFO: No query results for model [App\Read]. {"url":"http://mp3quran.net/ar/apple-touch-icon-precomposed.png"} 
 [2023-02-18 13:24:15] production.INFO: No query results for model [App\Read]. {"url":"http://www.mp3quran.net/ar/images/quraan-logo.png"} 
+[2023-02-18 13:25:01] production.INFO: No query results for model [App\Read]. {"url":"http://mp3quran.net/ar/cart.json"} 
