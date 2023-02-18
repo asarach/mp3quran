@@ -8261,3 +8261,15 @@ Stack trace:
 [2023-02-18 13:18:21] production.INFO: No query results for model [App\Read]. {"url":"http://www.mp3quran.net/ar/imges/logo_.gif"} 
 [2023-02-18 13:18:21] production.INFO: No query results for model [App\Video]. {"url":"http://mp3quran.net/ar/video/thumbnails.jpg"} 
 [2023-02-18 13:18:23] production.INFO: No query results for model [App\Read]. {"url":"http://www.mp3quran.net/ar/apple-touch-icon-120x120-precomposed.png"} 
+[2023-02-18 13:20:41] production.INFO: No query results for model [App\Read]. {"url":"http://mp3quran.net/ar/maher.h"} 
+[2023-02-18 13:20:51] production.INFO: No query results for model [App\Read]. {"url":"http://www.mp3quran.net/ar/images/header-bg.jpg"} 
+[2023-02-18 13:20:51] production.INFO: No query results for model [App\Read]. {"url":"http://www.mp3quran.net/ar/images/mp3quran.jpg"} 
+[2023-02-18 13:20:59] production.INFO: No query results for model [App\Read]. {"url":"http://www.mp3quran.net/ar/js/trans/text_fr.2.134.js"} 
+[2023-02-18 13:21:00] production.INFO: No query results for model [App\Read]. {"url":"http://www.mp3quran.net/ar/s"} 
+[2023-02-18 13:21:11] production.INFO: No query results for model [App\Read]. {"url":"http://www.mp3quran.net/ar/images/mp3quran.jpg"} 
+[2023-02-18 13:21:31] production.INFO: No query results for model [App\Read]. {"url":"http://www.mp3quran.net/ar/images/mp3quran.jpg"} 
+[2023-02-18 13:21:37] production.INFO: No query results for model [App\Read]. {"url":"http://www.mp3quran.net/ar/images/header-bg.jpg"} 
+[2023-02-18 13:21:51] production.INFO: No query results for model [App\Read]. {"url":"http://mp3quran.net/ar/podcast/ajm.txt"} 
+[2023-02-18 13:21:58] production.INFO: No query results for model [App\Read]. {"url":"http://www.mp3quran.net/ar/images/mp3quran.jpg"} 
+[2023-02-18 13:22:00] production.INFO: No query results for model [App\Read]. {"url":"http://www.mp3quran.net/ar/images/mp3quran.jpg"} 
+[2023-02-18 13:22:14] production.INFO: No query results for model [App\Read]. {"url":"http://www.mp3quran.net/ar/podcast/ajm.txt"} 
