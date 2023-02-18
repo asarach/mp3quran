@@ -408,8 +408,47 @@
       padding: 2rem 1rem;
       .section-title {
         font-size: 1.5rem;
-        margin: .5rem 0;
+        margin: 0.5rem 0;
       }
+    }
+  }
+  .tab-content {
+    width: 100%;
+  }
+  table {
+    background-color: #fdfdfd;
+    box-shadow: 0px 2px 3px 0px #a2a2a230;
+    border-radius: 0.5rem;
+    thead th {
+      border-top: none;
+    }
+  }
+  .section-url,
+  .section-request_url{
+    .section-content{
+      background-color: #fdfdfd;
+      box-shadow: 0px 2px 3px 0px #a2a2a230;
+      border-radius: 0.5rem;
+      padding: 0.75rem;
+    }
+  }
+  .hljs {
+    background: #233659;
+    color: #df81a8;
+    border-radius: 6px;
+    .hljs-punctuation,
+    .hljs-tag {
+      color: #66d9ef;
+    }
+    .hljs-deletion,
+    .hljs-number,
+    .hljs-quote,
+    .hljs-selector-class,
+    .hljs-selector-id,
+    .hljs-string,
+    .hljs-template-tag,
+    .hljs-type {
+      color: #e6db74;
     }
   }
 }
@@ -587,7 +626,7 @@
     /* min-height: 600px; */
     padding: 0.5rem;
     display: flex;
-    gap: .5rem;
+    gap: 0.5rem;
     .btn {
       cursor: pointer;
       color: #fff;
@@ -834,7 +873,7 @@
     border: none;
     background: none;
   }
-  .dropzone-box .dz-clickable ,
+  .dropzone-box .dz-clickable,
   .dropzone .dz-clickable {
     margin: 0;
   }

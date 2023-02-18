@@ -44,3 +44,7 @@ $router->get('/api/v3/tafasir',      array('as' => 'api_3.tafasir',       'uses'
 $router->get('/api/v3/tafsir',       array('as' => 'api_3.tafsir',        'uses' => 'Api3\TafsirController@tafsir'));
 
 $router->get('/api/v3/tadabor',       array('as' => 'api_3.tadabor',        'uses' => 'Api3\TadaborController@tadabor'));
+
+$router->get('/api/v3/ayat_timing', array('as' => 'api_b.videos', 'uses' => 'Api3\ApiTimingController@index'));
+$router->get('/api/v3/ayat_timing/reads', array('as' => 'api_b.videos', 'uses' => 'Api3\ApiTimingController@reads'));
+$router->get('/api/v3/ayat_timing/soar', array('as' => 'api_b.videos', 'uses' => 'Api3\ApiTimingController@soar'));

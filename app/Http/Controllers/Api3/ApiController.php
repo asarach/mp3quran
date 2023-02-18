@@ -25,6 +25,7 @@ class ApiController extends BaseController
     public $reciter = null;
     public $rewaya = null;
     public $sura = null;
+    public $read = null;
     public $tafsir = null;
     public $last_updated_date = null;
 
@@ -104,6 +105,18 @@ class ApiController extends BaseController
             $sura = Sora::where('status', 1)->where('id', $request->input('sura'))->first();
             if ($sura) {
                 $this->sura = $sura->id;
+            }
+        }
+        if ($request->input('surah')) {
+            $sura = Sora::where('status', 1)->where('id', $request->input('surah'))->first();
+            if ($sura) {
+                $this->sura = $sura->id;
+            }
+        }
+        if ($request->input('read')) {
+            $read = Sora::where('status', 1)->where('id', $request->input('read'))->first();
+            if ($read) {
+                $this->read = $read->id;
             }
         }
 
