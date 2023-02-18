@@ -8280,3 +8280,11 @@ Stack trace:
 [2023-02-18 13:23:24] production.INFO: No query results for model [App\Read]. {"url":"http://www.mp3quran.net/ar/images/mp3quran.jpg"} 
 [2023-02-18 13:23:24] production.INFO: No query results for model [App\Read]. {"url":"http://www.mp3quran.net/ar/images/mp3quran.jpg"} 
 [2023-02-18 13:23:29] production.INFO: No query results for model [App\Read]. {"url":"http://www.mp3quran.net/ar/images/mp3quran.jpg"} 
+[2023-02-18 13:23:42] production.INFO: No query results for model [App\Read]. {"url":"http://www.mp3quran.net/ar/imges/logo_.gif"} 
+[2023-02-18 13:23:57] production.INFO: No query results for model [App\Read]. {"url":"http://www.mp3quran.net/ar/apple-touch-icon-precomposed.png"} 
+[2023-02-18 13:23:58] production.INFO: No query results for model [App\Read]. {"url":"http://www.mp3quran.net/ar/apple-touch-icon-precomposed.png"} 
+[2023-02-18 13:24:02] production.INFO: No query results for model [App\Read]. {"url":"http://www.mp3quran.net/ar/frs"} 
+[2023-02-18 13:24:06] production.INFO: No query results for model [App\Read]. {"url":"http://mp3quran.net/ar/podcast/ajm.txt"} 
+[2023-02-18 13:24:09] production.INFO: No query results for model [App\Read]. {"url":"http://mp3quran.net/ar/apple-touch-icon-precomposed.png"} 
+[2023-02-18 13:24:11] production.INFO: No query results for model [App\Read]. {"url":"http://mp3quran.net/ar/apple-touch-icon-precomposed.png"} 
+[2023-02-18 13:24:15] production.INFO: No query results for model [App\Read]. {"url":"http://www.mp3quran.net/ar/images/quraan-logo.png"} 
