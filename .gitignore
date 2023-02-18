@@ -19,6 +19,7 @@
 public/betamp3.zip
 /storage/app/video_progress
 /storage/framework
+/storage/logs/*
 /storage/*.key
 /storage/*.index
 
