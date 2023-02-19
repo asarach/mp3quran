@@ -56,6 +56,10 @@
                                             <div class="tafsir-info">
                                                 <div class="tafsir-name">{{$tsora['name']}}</div>
                                             </div>
+                                            <a class=" download-btn" data-toggle="tooltip" data-placement="bottom" title="{{ trans('text.download') }}"  href="{{ downloadUrl($tsora['url']) }}">
+                                                <span class="uni-icon icon-cloud_download"></span>
+                                            </a>
+
                                             @auth
                                             <div class="btn-tbookmark btn-bookmark-tafsir" data-toggle="tooltip" data-placement="bottom" title="{{ trans('text.play-to-bookmark') }}">
                                                 {{ trans('text.bookmark-tafsir') }}

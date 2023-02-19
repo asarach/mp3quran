@@ -39,6 +39,7 @@ class Tsora extends Model
                 'id' => $this->id,
                 'tafsir_id' => $this->tafsir_id,
                 'name' => $this->getLocaleName(),
+                'url' => $this->url,
                 'tafsir_name' => $this->getTafsirLocaleName(),
             ];
         }

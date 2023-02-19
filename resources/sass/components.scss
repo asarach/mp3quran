@@ -569,8 +569,22 @@
   box-shadow: 0px 2px 8px 0px #a2a2a230;
   margin-bottom: 0.75rem;
   border-radius: 10px;
+  padding-left: 170px;
   svg {
     width: 18px;
+  }
+  .download-btn {
+    padding: 0px 0.5rem;
+    height: 20px;
+    position: absolute;
+    left: 140px;
+    background: #ffffff;
+    .uni-icon {
+      color: #bcc3c6;
+    }
+    .uni-icon:hover {
+      color: #0d3a4d;
+    }
   }
   .btn-tbookmark {
     margin-right: auto;
@@ -582,7 +596,7 @@
     font-size: 12px;
     background: #95dfb5;
   }
-  .btn-tbookmark.show{
+  .btn-tbookmark.show {
     background: $green;
   }
   .tafsir-btn {
@@ -1502,7 +1516,6 @@
   align-items: center;
   padding: 0;
   left: calc(50% - 22px);
-  
 }
 .video-js:hover .vjs-big-play-button {
   border-color: $primary;
@@ -1517,7 +1530,7 @@
   height: 34px;
   color: $secondary;
 }
-.video-js  .vjs-big-play-button .vjs-icon-placeholder:before {
+.video-js .vjs-big-play-button .vjs-icon-placeholder:before {
   line-height: 1;
   height: auto;
   width: auto;

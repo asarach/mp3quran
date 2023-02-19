@@ -256,7 +256,7 @@ function retateHeaderAds() {
 
     var currentItem = 1;
     if (count > 1) {
-        var nextItem = 2;
+        var nextItem = currentItem + 1;
     } else {
         var nextItem = 1;
     }
