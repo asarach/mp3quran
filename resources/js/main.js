@@ -250,6 +250,7 @@ export function initiateLib() {
 
 }
 
+let headerAdsTimeout = null ;
 
 function retateHeaderAds() {
     var count = $(" .main .show-header .header-ads .ha-item").length;
@@ -260,14 +261,19 @@ function retateHeaderAds() {
     } else {
         var nextItem = 1;
     }
+    clearTimeout(headerAdsTimeout)
 
+    console.log('retateHeaderAds');
+    $(" .main .show-header .header-ads .ha-item").removeClass('show');
     $(" .main .show-header .header-ads .ha-item:nth-child(" + currentItem + ")").addClass('show');
     toggleHeaderAds(currentItem, nextItem, count);
 }
 
 function toggleHeaderAds(currentItem, nextItem, count) {
     var soconds = 5;
-    window.setTimeout(function () {
+    console.log('toggleHeaderAds');
+
+    headerAdsTimeout = window.setTimeout(function () {
         $(" .main .show-header .header-ads .ha-item:nth-child(" + currentItem + ")").removeClass('show');
         $(" .main .show-header .header-ads .ha-item:nth-child(" + nextItem + ")").addClass('show');
         let newCurrentItem = nextItem;
@@ -277,7 +283,7 @@ function toggleHeaderAds(currentItem, nextItem, count) {
         } else {
             newNextItem = nextItem + 1;
         }
-
+        
         toggleHeaderAds(newCurrentItem, newNextItem, count);
     }, soconds * 1000);
 }
