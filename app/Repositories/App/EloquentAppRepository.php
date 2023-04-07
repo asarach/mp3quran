@@ -25,6 +25,7 @@ class EloquentAppRepository extends EloquentRepository implements AppRepository
         $item->android = $data['android'];
         $item->apple = $data['apple'];
         $item->huawei = $data['huawei'];
+        $item->share_link = $data['share_link'];
         $item->url = $data['url'];
         $item->type = $data['type'];
         $item->status = $data['status'];
@@ -46,6 +47,7 @@ class EloquentAppRepository extends EloquentRepository implements AppRepository
         $item->android = $data['android'];
         $item->apple = $data['apple'];
         $item->huawei = $data['huawei'];
+        $item->share_link = $data['share_link'];
         $item->url = $data['url'];
         $item->type = $data['type'];
         $item->status = $data['status'];

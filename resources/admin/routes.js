@@ -96,6 +96,7 @@ module.exports = [{
     path: routes_base + 'read/edit/:id',
     component: require('./components/read/Edit.vue').default
 },
+
 //apps
 {
     path: routes_base + 'apps',
@@ -239,7 +240,28 @@ module.exports = [{
     path: routes_base + 'rewaya/edit/:id',
     component: require('./components/rewaya/Edit.vue').default
 },
-
+//twenty_rewayat
+{
+    path: routes_base + 'twenty_rewayat',
+    component: require('./components/twenty_rewaya/Index.vue').default
+},
+{
+    path: routes_base + 'twenty_rewaya/edit/:id',
+    component: require('./components/twenty_rewaya/Edit.vue').default
+},
+//twenty_reads
+{
+    path: routes_base + 'twenty_reads',
+    component: require('./components/twenty_read/Index.vue').default
+},
+{
+    path: routes_base + 'twenty_read/create',
+    component: require('./components/twenty_read/Create.vue').default
+},
+{
+    path: routes_base + 'twenty_read/edit/:id',
+    component: require('./components/twenty_read/Edit.vue').default
+},
 
 //Message
 {

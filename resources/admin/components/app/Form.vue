@@ -87,6 +87,17 @@
           <small class="form-text text-danger" v-if="errors.has('huawei')">{{errors.get('huawei')}}</small>
         </div>
         <div class="form-group">
+          <label class="col-form-label">{{ trans("admin.share_link") }}</label>
+          <input
+            type="text"
+            name="share_link"
+            class="form-control"
+            v-model="app.share_link"
+            @keydown="errors.clear('share_link')"
+          />
+          <small class="form-text text-danger" v-if="errors.has('share_link')">{{errors.get('share_link')}}</small>
+        </div>
+        <div class="form-group">
           <label class="col-form-label">{{ trans("admin.order_num") }}</label>
           <input
             type="number"

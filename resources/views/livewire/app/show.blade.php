@@ -60,13 +60,14 @@
                             </a>
                         </div>
                         @endif
-                        
+                        @if ($app->share_link)
                         <div class="card-btn app-btn-share ">
-                            <button class="btn btn-primary m-0  share-btn"  data-title="{{ $page['title']}}" data-url="{{  Request::url() }}" data-description="{{ $page['description']}}" role="button">
+                            <button class="btn btn-primary m-0  share-btn"  data-title="{{ $page['title']}}" data-url="{{ $app->share_link }}" data-description="{{ $page['description']}}" role="button">
                                 <span class="icon-share ml-2"></span>
                                 {{ trans('text.share') }}
                             </button>
                         </div>
+                        @endif
                     </div>
                 </div>
             </div>

@@ -115,6 +115,7 @@ export default {
         android: "",
         apple: "",
         huawei: "",
+        share_link: "",
         image: "",
         type: "",
         status: 0,

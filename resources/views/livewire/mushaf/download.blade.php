@@ -169,7 +169,7 @@
                   <td class="th-index">{{ $index + 1 }}</td>
                   <td scope="row" class="th-file">{{ $download['name'] }}</td>
                   <td class="th-download">
-                    <a href="{{ $download['url'] }}" class="btn btn-sm btn-info">
+                    <a href="{{ str_replace('http://', 'https://', $download['url']) }}" class="btn btn-sm btn-info">
                       {{ trans("text.download") }}
                     </a>
                   </td>

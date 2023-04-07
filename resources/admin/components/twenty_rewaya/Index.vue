@@ -1,18 +1,16 @@
 <template>
   <div class="content-wrapper">
-    <vue-headful
-      :title="trans('admin.dashboard_title') + ' | ' + trans('text.apps')"
-    />
+    <vue-headful :title="trans('admin.dashboard_title') + ' | ' + trans('front.twenty_rewayat')" />
     <section class="content-header">
-      <h1>{{ trans("text.apps") }}</h1>
+      <h1>{{ trans('front.twenty_rewayat')}}</h1>
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
           <router-link :to="prefix">
             <i class="fa fa-dashboard"></i>
-            {{ trans("admin.dashboard") }}
+            {{ trans('admin.dashboard')}}
           </router-link>
         </li>
-        <li class="breadcrumb-item active">{{ trans("text.apps") }}</li>
+        <li class="breadcrumb-item active">{{ trans('front.twenty_rewayat')}}</li>
       </ol>
     </section>
     <div v-if="show_spinner" class="loading-spinner">
@@ -26,24 +24,20 @@
         <div class="col-lg-16">
           <div class="card">
             <div class="card-head">
-              <h3 class="card-title">{{ trans("text.all-apps") }}</h3>
+              <h3 class="card-title">{{ trans('text.all-twenty_rewayat')}}</h3>
               <div class="card-tools">
                 <div class="pull-left">
                   <a
                     v-if="trashed"
-                    @click.prevent="trashedApps(false)"
+                    @click.prevent="trashedtwenty_rewayat(false)"
                     class="btn btn-info btn-sm"
                   >
                     <i class="fas fa-folder-open m-0"></i>
-                    {{ trans("text.all") }}
+                    {{ trans('text.all')}}
                   </a>
-                  <a
-                    v-else
-                    @click.prevent="trashedApps(true)"
-                    class="btn btn-info btn-sm"
-                  >
+                  <a v-else @click.prevent="trashedtwenty_rewayat(true)" class="btn btn-info btn-sm">
                     <i class="fas fa-recycle m-0"></i>
-                    {{ trans("admin.trashed") }}
+                    {{ trans('admin.trashed')}}
                   </a>
                 </div>
               </div>
@@ -51,10 +45,9 @@
             <div class="card-body table-responsive p-0">
               <filtering
                 :orders="orders"
-                :types="types"
                 :status="status"
-                @filter="filterApps"
-                @order="orderApps"
+                @filter="filterRewayat"
+                @order="ordertwenty_rewayat"
               ></filtering>
               <table class="table table-hover table-striped">
                 <thead>
@@ -68,50 +61,43 @@
                           @change="actionsChange()"
                           id="actionsCheck"
                         />
-                        <label
-                          class="custom-control-label"
-                          for="actionsCheck"
-                        ></label>
+                        <label class="custom-control-label" for="actionsCheck"></label>
                       </div>
                     </th>
+
                     <th scope="col">#</th>
-                    <th scope="col">{{ trans("admin.title") }}</th>
-                    <th scope="col">{{ trans("admin.order_num") }}</th>
-                    <th scope="col">{{ trans("admin.type") }}</th>
-                    <th scope="col" style="width: 80px; text-align: center">
-                      {{ trans("admin.status") }}
-                    </th>
-                    <th scope="col" style="width: 100px; text-align: center">
-                      {{ trans("admin.options") }}
-                    </th>
+                    <th scope="col">{{ trans('text.name')}}</th>
+                    <th
+                      scope="col"
+                      style="width: 80px;text-align: center;"
+                    >{{ trans('admin.status')}}</th>
+                    <th
+                      scope="col"
+                      style="width: 100px;text-align: center;"
+                    >{{ trans('admin.options')}}</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="(app, item) in apps.data" :key="app.id">
+                  <tr v-for="(twenty_rewaya, item, index) in twenty_rewayat.data" :key="twenty_rewaya.id">
                     <td scope="row" class="actions-check">
                       <div class="custom-control custom-checkbox">
                         <input
                           type="checkbox"
-                          v-model="actions_items[app.id]"
+                          v-model="actions_items[twenty_rewaya.id]"
                           class="custom-control-input"
-                          :id="'actionsCheckbox' + app.id"
+                          :id="'actionsCheckbox' + twenty_rewaya.id"
                         />
-                        <label
-                          class="custom-control-label"
-                          :for="'actionsCheckbox' + app.id"
-                        ></label>
+                        <label class="custom-control-label" :for="'actionsCheckbox'+twenty_rewaya.id"></label>
                       </div>
                     </td>
-                    <td scope="row">{{ app.id }}</td>
-                    <td>{{ app.title }}</td>
-                    <td>{{ app.order_num }}</td>
-                    <td>{{ trans("admin.app-type-" + app.type) }}</td>
+                    <td scope="row">{{twenty_rewaya.id}}</td>
+                    <td>{{twenty_rewaya.name}}</td>
                     <td class="text-center">
                       <a
-                        v-if="app.status !== 1"
+                        v-if="twenty_rewaya.status !== 1"
                         href="#"
                         class="text-danger"
-                        @click.prevent="changeStatus(app.id, 1, item)"
+                        @click.prevent="changeStatus(twenty_rewaya.id, 1, item)"
                       >
                         <i class="fas fa-ban"></i>
                       </a>
@@ -119,7 +105,7 @@
                         v-else
                         href="#"
                         class="text-success"
-                        @click.prevent="changeStatus(app.id, 0, item)"
+                        @click.prevent="changeStatus(twenty_rewaya.id, 0, item)"
                       >
                         <i class="fas fa-check"></i>
                       </a>
@@ -133,8 +119,8 @@
                             class="tip btn-uni edit"
                             data-toggle="tooltip"
                             title
-                            :data-original-title="trans('admin.restore-app')"
-                            @click.prevent="restorApp(app.id)"
+                            :data-original-title="trans('admin.restore-twenty_rewaya')"
+                            @click.prevent="restorRewaya(twenty_rewaya.id)"
                           >
                             <i class="fas fa-reply-all"></i>
                           </a>
@@ -146,8 +132,8 @@
                             class="tip btn-uni delete"
                             data-toggle="tooltip"
                             title
-                            :data-original-title="trans('admin.delete-app')"
-                            @click.prevent="deleteApp(app.id, item)"
+                            :data-original-title="trans('admin.delete-twenty_rewaya')"
+                            @click.prevent="deleteRewaya(twenty_rewaya.id, item)"
                           >
                             <i class="fas fa-trash"></i>
                           </a>
@@ -156,12 +142,12 @@
                       <ul v-else class="list-inline p-0 m-0">
                         <li class="list-inline-item">
                           <router-link
-                            :to="prefix + 'app/edit/' + app.id"
+                            :to="prefix + 'twenty_rewaya/edit/' + twenty_rewaya.id "
                             data-placement="left"
                             class="tip btn-uni edit"
                             data-toggle="tooltip"
                             title
-                            :data-original-title="trans('admin.edit-app')"
+                            :data-original-title="trans('admin.edit-twenty_rewaya')"
                           >
                             <i class="fas fa-pen"></i>
                           </router-link>
@@ -173,8 +159,8 @@
                             class="tip btn-uni delete"
                             data-toggle="tooltip"
                             title
-                            :data-original-title="trans('admin.delete-app')"
-                            @click.prevent="deleteApp(app.id, item)"
+                            :data-original-title="trans('admin.delete-twenty_rewaya')"
+                            @click.prevent="deleteRewaya(twenty_rewaya.id, item)"
                           >
                             <i class="fas fa-trash"></i>
                           </a>
@@ -197,9 +183,7 @@
                       aria-haspopup="true"
                       aria-expanded="false"
                     >
-                      <span class="text-muted">{{
-                        trans("admin.actions")
-                      }}</span>
+                      <span class="text-muted">{{trans('admin.actions')}}</span>
                     </button>
                     <div
                       class="dropdown-menu dropdown-menu-right"
@@ -209,49 +193,37 @@
                         class="dropdown-item"
                         href="#"
                         @click.prevent="actionDelete()"
-                        >{{ trans("admin.delete-selected") }}</a
-                      >
+                      >{{ trans('admin.delete-selected') }}</a>
                       <a
                         class="dropdown-item"
                         href="#"
                         v-if="!this.trashed"
                         @click.prevent="actionChangeStatus(1)"
-                        >{{ trans("admin.activate-selected") }}</a
-                      >
+                      >{{ trans('admin.activate-selected') }}</a>
                       <a
                         class="dropdown-item"
                         href="#"
                         v-if="!this.trashed"
                         @click.prevent="actionChangeStatus(0)"
-                        >{{ trans("admin.deactivate-selected") }}</a
-                      >
+                      >{{ trans('admin.deactivate-selected') }}</a>
                       <a
                         class="dropdown-item"
                         href="#"
                         @click.prevent="actionRestor()"
                         v-if="this.trashed"
-                        >{{ trans("admin.restor-selected") }}</a
-                      >
+                      >{{ trans('admin.restor-selected') }}</a>
                     </div>
                   </div>
                 </div>
                 <div class="col">
-                  <pagination
-                    :pagination="apps"
-                    @paginate="getApps()"
-                    :offset="4"
-                  ></pagination>
+                  <pagination :pagination="twenty_rewayat" @paginate="getRewayat()" :offset="4"></pagination>
                 </div>
               </div>
             </div>
           </div>
         </div>
         <div class="col-lg-8">
-          <app-form
-            :action="'create'"
-            @refrech="getApps()"
-            :app="app"
-          ></app-form>
+          <twenty_rewaya-form :action="'create'" @refrech="getRewayat()" :twenty_rewaya="twenty_rewaya"></twenty_rewaya-form>
         </div>
       </div>
     </section>
@@ -263,106 +235,87 @@ export default {
     return {
       show_spinner: true,
       show_error: false,
-      apps: {},
       actions_check: false,
       actions_items: {},
+
       sort: this.$route.params.sort,
       direction: this.$route.params.direction,
-      app: {
-        title: "",
-        order_num: "",
-        url: "",
-        android: "",
-        apple: "",
-        huawei: "",
-        share_link: "",
-        image: "",
-        type: "",
-        description: "",
-        status: 0,
-      },
       filters: {
-        statu: "",
-        type: "",
+        statu: ""
       },
-      trashed: false,
+      twenty_rewayat: {},
       status: ["0", "1"],
-      types: ["1", "2"],
+      trashed: false,
+      twenty_rewaya: {
+        name: "",
+        slug: "",
+        status: 0
+      },
       orders: [
         {
-          sort: "order_num",
+          sort: "name",
           direction: "desc",
-          text: "order-by-order_num-desc"
+          text: "order-by-name-desc"
         },
         {
-          sort: "order_num",
+          sort: "name",
           direction: "asc",
-          text: "order-by-order_num-asc"
-        },
-        {
-          sort: "title",
-          direction: "desc",
-          text: "order-by-title-desc",
-        },
-        {
-          sort: "title",
-          direction: "asc",
-          text: "order-by-title-asc",
+          text: "order-by-name-asc"
         },
         {
           sort: "id",
           direction: "desc",
-          text: "order-by-newest",
+          text: "order-by-newest"
         },
         {
           sort: "id",
           direction: "asc",
-          text: "order-by-oldest",
-        },
-      ],
+          text: "order-by-oldest"
+        }
+      ]
     };
   },
   methods: {
-    getApps() {
+    getRewayat() {
       var self = this;
       var url = this.preparUrl();
       axios
         .get(url)
-        .then((response) => {
-          self.apps = response.data.apps;
+        .then(response => {
+          self.twenty_rewayat = response.data.twenty_rewayat;
           self.show_spinner = false;
           window.scroll(0, 0);
         })
-        .catch((error) => {
+        .catch(error => {
           self.show_spinner = false;
           self.show_error = error.response.status;
         });
     },
+    filterRewayat(filters) {
+      this.filters = filters;
+      this.twenty_rewayat.current_page = undefined;
+      this.getRewayat();
+    },
     actionsChange() {
       var items = {};
-      for (let index = 0; index < this.apps.data.length; index++) {
-        this.actions_items[this.apps.data[index].id] = this.actions_check;
+      for (let index = 0; index < this.twenty_rewayat.data.length; index++) {
+        this.actions_items[this.twenty_rewayat.data[index].id] = this.actions_check;
       }
     },
-    filterApps(filters) {
-      this.filters = filters;
-      this.apps.current_page = undefined;
-      this.getApps();
-    },
-    trashedApps(trashed) {
-      this.apps.current_page = undefined;
+    trashedtwenty_rewayat(trashed) {
+      this.twenty_rewayat.current_page = undefined;
       this.trashed = trashed;
-      this.getApps();
+      this.getRewayat();
     },
-    orderApps(order) {
+    ordertwenty_rewayat(order) {
       this.sort = order.sort;
       this.direction = order.direction;
-      this.apps.current_page = undefined;
-      this.getApps();
+      this.twenty_rewayat.current_page = undefined;
+      this.getRewayat();
     },
     preparUrl() {
-      var base = this.ajax_prefix + "apps?";
-      var page = this.apps.current_page;
+      var base = this.ajax_prefix + "twenty_rewayat?";
+      var page = this.twenty_rewayat.current_page;
       if (page !== undefined) {
         base += "page=" + page + "&";
       }
@@ -375,30 +328,18 @@ export default {
       if (this.trashed) {
         base += "trashed=" + this.trashed + "&";
       }
-      if (this.filters.app) {
-        base += "app=" + this.filters.app.id + "&";
-      }
-      if (this.filters.rewaya) {
-        base += "rewaya=" + this.filters.rewaya.id + "&";
-      }
-      if (this.filters.reciter) {
-        base += "reciter=" + this.filters.reciter.id + "&";
-      }
       if (this.filters.statu) {
         base += "statu=" + this.filters.statu + "&";
-      }
-      if (this.filters.type) {
-        base += "type=" + this.filters.type + "&";
       }
 
       return base.slice(0, -1);
     },
 
-    deleteApp(id, key) {
+    deleteRewaya(id, key) {
       var self = this;
       Event.$off("confirmed");
       Event.$emit("confirm");
-      Event.$on("confirmed", function () {
+      Event.$on("confirmed", function() {
         self.confirmDalete(id, key);
       });
     },
@@ -410,69 +351,68 @@ export default {
         forced = "?forced=true";
       }
       axios
-        .delete(this.ajax_prefix + "app/" + id + forced)
-        .then(function (response) {
-          self.$delete(self.apps.data, key);
-          self.actions_items[self.apps.data[key].id] = false;
-
+        .delete(this.ajax_prefix + "twenty_rewaya/" + id + forced)
+        .then(function(response) {
+          self.actions_items[self.twenty_rewayat.data[key].id] = false;
+          self.$delete(self.twenty_rewayat.data, key);
           self.$notify({
             group: "admin",
-            text: self.trans("admin.app-deleted"),
+            text: self.trans("admin.twenty_rewaya-deleted"),
             type: "success",
-            title: self.trans("admin.success"),
+            title: self.trans("admin.success")
           });
         })
-        .catch(function (error) {
+        .catch(function(error) {
           self.$notify({
             group: "admin",
-            text: self.trans("admin.app-not-deleted"),
+            text: self.trans("admin.twenty_rewaya-not-deleted"),
             type: "warning",
-            title: self.trans("admin.warning"),
+            title: self.trans("admin.warning")
           });
         });
     },
-    changeStatus: function (id, status, item) {
+    changeStatus: function(id, status, item) {
       var self = this;
       axios
-        .get(this.ajax_prefix + "app/" + id + "/status/" + status)
-        .then((response) => {
-          self.apps.data[item].status = parseInt(response.data.status);
+        .get(this.ajax_prefix + "twenty_rewaya/" + id + "/status/" + status)
+        .then(response => {
+          self.twenty_rewayat.data[item].status = parseInt(response.data.status);
           self.$notify({
             group: "admin",
-            text: self.trans("admin.app-status-changed"),
+            text: self.trans("admin.twenty_rewaya-status-changed"),
             type: "success",
-            title: self.trans("admin.success"),
+            title: self.trans("admin.success")
           });
         })
-        .catch((error) => {
+        .catch(error => {
           self.$notify({
             group: "admin",
-            text: self.trans("admin.app-status-not-changed"),
+            text: self.trans("admin.twenty_rewaya-status-not-changed"),
             type: "warning",
-            title: self.trans("admin.warning"),
+            title: self.trans("admin.warning")
           });
         });
     },
-    restorApp(id) {
+    restorRewaya(id) {
       var self = this;
       axios
-        .get(this.ajax_prefix + "app/restore/" + id)
-        .then(function (response) {
+        .get(this.ajax_prefix + "twenty_rewaya/restore/" + id)
+        .then(function(response) {
           self.trashed = false;
-          self.getApps();
+          self.getRewayat();
           self.$notify({
             group: "admin",
-            text: self.trans("admin.app-restored"),
+            text: self.trans("admin.twenty_rewaya-restored"),
             type: "success",
-            title: self.trans("admin.success"),
+            title: self.trans("admin.success")
           });
         })
-        .catch(function (error) {
+        .catch(function(error) {
           self.$notify({
             group: "admin",
-            text: self.trans("admin.app-not-restored"),
+            text: self.trans("admin.twenty_rewaya-not-restored"),
             type: "warning",
-            title: self.trans("admin.warning"),
+            title: self.trans("admin.warning")
           });
         });
     },
@@ -480,7 +420,7 @@ export default {
       var self = this;
       Event.$off("confirmed");
       Event.$emit("confirm");
-      Event.$on("confirmed", function () {
+      Event.$on("confirmed", function() {
         self.confirmActionDelete();
       });
     },
@@ -492,31 +432,31 @@ export default {
       }
       var data = {
         action: "delete",
-        items: this.actions_items,
+        items: this.actions_items
       };
       axios
-        .post(this.ajax_prefix + "app/actions" + forced, data)
-        .then(function (response) {
+        .post(this.ajax_prefix + "twenty_rewaya/actions" + forced, data)
+        .then(function(response) {
           for (let index = 0; index < response.data.results.length; index++) {
-            let key = self.apps.data
-              .map((item) => item.id)
+            let key = self.twenty_rewayat.data
+              .map(item => item.id)
               .indexOf(response.data.results[index]); // find index of your object
-            self.$delete(self.apps.data, key);
+            self.$delete(self.twenty_rewayat.data, key);
             self.actions_items[response.data.results[index]] = false;
           }
           self.$notify({
             group: "admin",
-            text: self.trans("admin.app-deleted"),
+            text: self.trans("admin.twenty_rewaya-deleted"),
             type: "success",
-            title: self.trans("admin.success"),
+            title: self.trans("admin.success")
           });
         })
-        .catch(function (error) {
+        .catch(function(error) {
           self.$notify({
             group: "admin",
-            text: self.trans("admin.app-not-deleted"),
+            text: self.trans("admin.twenty_rewaya-not-deleted"),
             type: "warning",
-            title: self.trans("admin.warning"),
+            title: self.trans("admin.warning")
           });
         });
     },
@@ -524,30 +464,30 @@ export default {
       var self = this;
       var data = {
         action: "restor",
-        items: this.actions_items,
+        items: this.actions_items
       };
       axios
-        .post(this.ajax_prefix + "app/actions", data)
-        .then(function (response) {
+        .post(this.ajax_prefix + "twenty_rewaya/actions", data)
+        .then(function(response) {
           for (let index = 0; index < response.data.results.length; index++) {
-            let key = self.apps.data
-              .map((item) => item.id)
+            let key = self.twenty_rewayat.data
+              .map(item => item.id)
               .indexOf(response.data.results[index]); // find index of your object
-            self.$delete(self.apps.data, key);
+            self.$delete(self.twenty_rewayat.data, key);
           }
           self.$notify({
             group: "admin",
-            text: self.trans("admin.app-restored"),
+            text: self.trans("admin.twenty_rewaya-restored"),
             type: "success",
-            title: self.trans("admin.success"),
+            title: self.trans("admin.success")
           });
         })
-        .catch(function (error) {
+        .catch(function(error) {
           self.$notify({
             group: "admin",
-            text: self.trans("admin.app-not-restored"),
+            text: self.trans("admin.twenty_rewaya-not-restored"),
             type: "warning",
-            title: self.trans("admin.warning"),
+            title: self.trans("admin.warning")
           });
         });
     },
@@ -560,37 +500,39 @@ export default {
       }
       var data = {
         action: action,
-        items: this.actions_items,
+        items: this.actions_items
       };
       axios
-        .post(this.ajax_prefix + "app/actions", data)
-        .then(function (response) {
+        .post(this.ajax_prefix + "twenty_rewaya/actions", data)
+        .then(function(response) {
           for (let index = 0; index < response.data.results.length; index++) {
             var item = response.data.results[index];
 
-            let key = self.apps.data.map((item) => item.id).indexOf(item["id"]);
+            let key = self.twenty_rewayat.data
+              .map(item => item.id)
+              .indexOf(item["id"]);
 
-            self.apps.data[key].status = item["status"];
+            self.twenty_rewayat.data[key].status = item["status"];
           }
           self.$notify({
             group: "admin",
-            text: self.trans("admin.app-status-changed"),
+            text: self.trans("admin.twenty_rewaya-status-changed"),
             type: "success",
-            title: self.trans("admin.success"),
+            title: self.trans("admin.success")
           });
         })
-        .catch(function (error) {
+        .catch(function(error) {
           self.$notify({
             group: "admin",
-            text: self.trans("admin.app-status-not-changed"),
+            text: self.trans("admin.twenty_rewaya-status-not-changed"),
             type: "warning",
-            title: self.trans("admin.warning"),
+            title: self.trans("admin.warning")
           });
         });
-    },
+    }
   },
   mounted() {
-    this.getApps();
-  },
+    this.getRewayat();
+  }
 };
 </script>

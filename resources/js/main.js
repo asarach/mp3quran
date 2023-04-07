@@ -263,7 +263,6 @@ function retateHeaderAds() {
     }
     clearTimeout(headerAdsTimeout)
 
-    console.log('retateHeaderAds');
     $(" .main .show-header .header-ads .ha-item").removeClass('show');
     $(" .main .show-header .header-ads .ha-item:nth-child(" + currentItem + ")").addClass('show');
     toggleHeaderAds(currentItem, nextItem, count);
@@ -271,8 +270,6 @@ function retateHeaderAds() {
 
 function toggleHeaderAds(currentItem, nextItem, count) {
     var soconds = 5;
-    console.log('toggleHeaderAds');
-
     headerAdsTimeout = window.setTimeout(function () {
         $(" .main .show-header .header-ads .ha-item:nth-child(" + currentItem + ")").removeClass('show');
         $(" .main .show-header .header-ads .ha-item:nth-child(" + nextItem + ")").addClass('show');

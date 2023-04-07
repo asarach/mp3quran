@@ -161,6 +161,7 @@ export default {
         android: "",
         reportle: "",
         huawei: "",
+        share_link: "",
         image: "",
         type: "",
         description: "",

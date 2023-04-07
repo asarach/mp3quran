@@ -62,6 +62,10 @@ class RepositoriesServiceProvider extends ServiceProvider
                         'App\Repositories\Read\EloquentReadRepository'
                 );
                 $this->app->singleton(
+                        'App\Repositories\TwentyRead\TwentyReadRepository',
+                        'App\Repositories\TwentyRead\EloquentTwentyReadRepository'
+                );
+                $this->app->singleton(
                         'App\Repositories\Radio\RadioRepository',
                         'App\Repositories\Radio\EloquentRadioRepository'
                 );
@@ -112,6 +116,10 @@ class RepositoriesServiceProvider extends ServiceProvider
                 $this->app->singleton(
                         'App\Repositories\Rewaya\RewayaRepository',
                         'App\Repositories\Rewaya\EloquentRewayaRepository'
+                );
+                $this->app->singleton(
+                        'App\Repositories\TwentyRewaya\TwentyRewayaRepository',
+                        'App\Repositories\TwentyRewaya\EloquentTwentyRewayaRepository'
                 );
                 $this->app->singleton(
                         'App\Repositories\Setting\SettingRepository',

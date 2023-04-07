@@ -56,7 +56,7 @@
                                             <div class="tafsir-info">
                                                 <div class="tafsir-name">{{$tsora['name']}}</div>
                                             </div>
-                                            <a class=" download-btn" data-toggle="tooltip" data-placement="bottom" title="{{ trans('text.download') }}"  href="{{ $tsora['url'] }}">
+                                            <a class=" download-btn ddf" data-toggle="tooltip" data-placement="bottom" title="{{ trans('text.download') }}"  href="{{ downloadUrl($tsora['url']) }}">
                                                 <span class="uni-icon icon-cloud_download"></span>
                                             </a>
 
