@@ -182,7 +182,7 @@ function flushTrans()
     foreach ($files as $file) {
         Storage::disk('public_html')->delete($file);
     }
-
+    Cache::forget('settings');
     $translations_version = Setting::where('key', 'translations_version')->first();
     $translations_version->value = $translations_version->value + 1;
     $translations_version->save();
