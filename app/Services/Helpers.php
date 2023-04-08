@@ -7,10 +7,7 @@ use App\Media;
 use App\Setting;
 use Jenssegers\Agent\Agent;
 use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Log;
 use Waavi\Translation\Models\Language;
-use Illuminate\Support\Facades\Request;
-use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Storage;
 
 function downloadUrl($file)

@@ -181,7 +181,7 @@
             <li>
               <router-link :to="prefix + 'twenty_reads'">
                 <i class="uni-icon icon-mic2"></i>
-                <span>{{ trans('text.twenty_reads')}}</span>
+                <span>{{ trans('front.twenty_reads')}}</span>
               </router-link>
             </li>
             <li>
