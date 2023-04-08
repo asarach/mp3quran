@@ -26,7 +26,7 @@ class TwentyRead extends Model
 
     public function searchableAs()
     {
-        return 'reads_index';
+        return 'twenty_reads_index';
     }
 
     public function sluggable(): array
@@ -94,7 +94,7 @@ class TwentyRead extends Model
      */
     public function soar()
     {
-        return $this->belongsToMany('App\Sora', 'sura_read', 'read_id', 'sura_id')->withPivot('duration', 'filename', 'report');
+        return $this->belongsToMany('App\Sora', 'sura_twenty_read', 'twenty_read_id', 'sura_id')->withPivot('duration', 'filename', 'report');
     }
 
     public function getRewaya()
@@ -115,8 +115,8 @@ class TwentyRead extends Model
 
     public function getLocaleTitle()
     {
-        $title = trans('read-title.' . $this->id);
-        if (strpos($title, 'read-title.') !== false or $title == '') {
+        $title = trans('twenty-read-title.' . $this->id);
+        if (strpos($title, 'twenty-twenty_read-title.') !== false or $title == '') {
             try {
                 $title = trans('seo.reciter-title', ['reciter' => $this->reciter->getLocaleName(), 'rewaya' => $this->rewaya->getLocaleName()]);
             } catch (\Throwable $th) {

@@ -40,7 +40,7 @@
           ></twenty_read-form>
         </div>
       </div>
-      <div class="row">
+      <div v-if="false" class="row">
         <div class="col-lg-24">
           <div class="card">
             <form role="form" @submit.prevent="translatePage()">

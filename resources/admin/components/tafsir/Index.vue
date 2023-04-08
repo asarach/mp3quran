@@ -593,13 +593,9 @@ export default {
 };
 </script>
 <style>
-.fiters-wrap {
-  width: 55%;
-}
+
 .filtering .dropdown-menu{
   height: auto;
 }
-.filtering .multiselect__single {
-  width: 0;
-}
+
 </style>

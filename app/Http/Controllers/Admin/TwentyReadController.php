@@ -11,7 +11,7 @@ use App\Repositories\Server\ServerRepository;
 use App\Repositories\Sora\SoraRepository;
 use App\Repositories\Reciter\ReciterRepository;
 use Illuminate\Http\Request;
-use App\TwentyRead;
+use App\Models\TwentyRead;
 use DB;
 use App\Services\Search;
 use Cviebrock\EloquentSluggable\Services\SlugService;
