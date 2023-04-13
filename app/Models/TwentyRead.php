@@ -115,18 +115,18 @@ class TwentyRead extends Model
 
     public function getLocaleTitle()
     {
-        $title = trans('twenty-read-title.' . $this->id);
-        if (strpos($title, 'twenty-twenty_read-title.') !== false or $title == '') {
-            try {
-                $title = trans('seo.reciter-title', ['reciter' => $this->reciter->getLocaleName(), 'rewaya' => $this->rewaya->getLocaleName()]);
-            } catch (\Throwable $th) {
-                $title = $this->title;
-            }
-            if (strpos($title, 'reciter-name.') !== false) {
-                return $this->title;
-            }
-        }
-        return $title;
+        // $title = trans('twenty-read-title.' . $this->id);
+        // if (strpos($title, 'twenty-twenty_read-title.') !== false or $title == '') {
+        //     try {
+        //         $title = trans('seo.reciter-title', ['reciter' => $this->reciter->getLocaleName(), 'rewaya' => $this->rewaya->getLocaleName()]);
+        //     } catch (\Throwable $th) {
+        //         $title = $this->title;
+        //     }
+        //     if (strpos($title, 'reciter-name.') !== false) {
+        //         return $this->title;
+        //     }
+        // }
+        return $this->title;
     }
 
     public function countSoars()
