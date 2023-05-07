@@ -29,6 +29,7 @@ class Tsora extends Model
             $array = parent::ToArray();
         } else  if (strpos(url()->current(), 'api') !== false) {
             $array = [
+                'id' => $this->id,
                 'sura_id' => $this->sura_id,
                 'tafsir_id' => $this->tafsir_id,
                 'url' => $this->url,

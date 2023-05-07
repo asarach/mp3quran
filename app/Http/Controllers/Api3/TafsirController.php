@@ -21,7 +21,6 @@ class TafsirController extends ApiController
     }
     public function tafasir(Request $request)
     {
-
         $this->setParams($request);
         Cache::forget('api_v3_tafasir_' . $request->input('language'));
         $tafasir = Cache::rememberForever('api_v3_tafasir_' . $request->input('language'), function () {
@@ -74,12 +73,15 @@ class TafsirController extends ApiController
         } else {
             $result = [];
             $suras_ids = range(1, 114);
-            $tsoras = $tsoras->get();
-
-            foreach ($suras_ids as $sura_id) {
-                $result[$sura_id] = $tsoras->where('sura_id', $sura_id)->sortBy('order')->values()->toArray();
-            }
-            $result['others'] = $tsoras->whereNotIN('sura_id', $suras_ids)->sortBy('order')->values()->toArray();
+            $result = $tsoras->orderBY('sura_id', 'asc')->orderBY('order', 'asc')->get();
+            // dd( $tsoras->toArray());
+            // foreach ($suras_ids as $sura_id) {
+            //     foreach ($tsoras->where('sura_id', $sura_id)->sortBy('order')->values() as $key => $value) {
+            //         $result[] =  $value;
+            //     }
+              
+            // }
+            // $result[] = $tsoras->whereNotIN('sura_id', $suras_ids)->sortBy('order')->values()->toArray();
         }
 
         return ['name' => $tsoras->first()->getTafsirLocaleName(), 'soar' => $result];
