@@ -47,6 +47,7 @@ class Tadabor extends Model implements ViewableContract
             $array = [
                 'id' => $this->id,
                 'audio_url' => $this->audio_url,
+                'video_url' => $this->video_url,
                 'image_url' => $this->image_url,
                 'text' => html_entity_decode($this->text),
                 'sora_name' => $this->getSoraName(),
@@ -57,6 +58,7 @@ class Tadabor extends Model implements ViewableContract
             $array = [
                 'id' => $this->id,
                 'audio_url' => $this->audio_url,
+                'video_url' => $this->video_url,
                 'image_url' => $this->image_url,
                 'text' => html_entity_decode($this->text),
                 'title' => $this->getLocaleTitle(),
@@ -244,6 +246,7 @@ class Tadabor extends Model implements ViewableContract
             'share_description' => $this->getLocaleShareDescription(),
             'share_title' => $this->getLocaleShareTitle(),
             'file' => $this->audio_url,
+            'video' => $this->video_url,
         ];
 
         if ($this->reciter) {

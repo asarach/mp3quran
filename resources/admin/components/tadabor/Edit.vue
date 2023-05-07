@@ -28,7 +28,7 @@
     <section v-else class="content">
       <div class="row">
         <div class="col-lg-24">
-          <tadabor-form :action="'edit'" :soar="soar" :rewayat="rewayat" :reciters="reciters" :tadabor="tadabor"></tadabor-form>
+          <tadabor-form :action="'edit'" :soar="soar"  :reciters="reciters" :tadabor="tadabor"></tadabor-form>
         </div>
       </div>
       <div class="row">
@@ -85,16 +85,15 @@ export default {
       show_error: false,
       translations: [],
       soar: {},
-      rewayat: {},
       reciters: {},
       tadabor: {
         title: "",
         audio_url: "",
+        video_url: "",
         image_url: "",
         text: "",
         sora: {},
         reciter: {},
-        rewaya: {},
         status: 0
       }
     };
@@ -108,7 +107,6 @@ export default {
           self.tadabor = response.data.tadabor;
           self.translations = response.data.translations;
           self.soar = response.data.soar;
-          self.rewayat = response.data.rewayat;
           self.reciters = response.data.reciters;
           self.show_spinner = false;
         })

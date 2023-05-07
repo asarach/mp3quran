@@ -29,16 +29,18 @@ class TadaborRequest extends FormRequest
       case 'POST':
 
         return [
-          'audio_url' => 'required|string|max:255',
-          'image_url' => 'required|string|max:255',
+          'audio_url' => 'nullable|string|max:255',
+          'video_url' => 'nullable|string|max:255',
+          'image_url' => 'nullable|string|max:255',
         ];
 
         // Handle updates
       case 'put':
       case 'PUT':
         return [
-          'audio_url' => 'required|string|max:255',
-          'image_url' => 'required|string|max:255',
+          'audio_url' => 'nullable|string|max:255',
+          'video_url' => 'nullable|string|max:255',
+          'image_url' => 'nullable|string|max:255',
         ];
     }
   }

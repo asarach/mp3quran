@@ -22,6 +22,7 @@ class EloquentTadaborRepository extends EloquentRepository implements TadaborRep
 
         $item->title = $data['title'];
         $item->audio_url = $data['audio_url'];
+        $item->video_url = $data['video_url'];
         $item->image_url = $data['image_url'];
         $item->text = e($data['text']);
         $item->status = $data['status'];
@@ -49,6 +50,7 @@ class EloquentTadaborRepository extends EloquentRepository implements TadaborRep
 
         $item->title = $data['title'];
         $item->audio_url = $data['audio_url'];
+        $item->video_url = $data['video_url'];
         $item->image_url = $data['image_url'];
         $item->text = e($data['text']);
         $item->status = $data['status'];

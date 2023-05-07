@@ -78,6 +78,7 @@ class CmdFixe extends Command
         foreach ($items as $item) {
             DB::table('tadabors')->insert([
                 'audio_url' => $item->audio_url,
+                'video_url' => $item->video_url,
                 'image_url' => $item->image_url,
                 'text' => $item->text,
                 'text' => $item->text,

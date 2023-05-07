@@ -475,6 +475,12 @@ function getYoutubeId($url)
 
     return $match[1];
 }
+function isYoutube($value)
+{
+    return (bool) preg_match('/^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/',$value);
+}
+
+
 
 function formatBytes($bytes, $precision = 2)
 {

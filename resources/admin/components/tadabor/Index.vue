@@ -53,7 +53,6 @@
                 :orders="orders"
                 :status="status"
                 :query="query"
-                :rewayat="rewayat"
                 :reciters="reciters"
                 :soar="soar"
                 @filter="filterTadabors"
@@ -81,7 +80,6 @@
                     <th scope="col">{{ trans("text.title") }}</th>
                     <th scope="col">{{ trans("admin.sora") }}</th>
                     <th scope="col">{{ trans("admin.reciter") }}</th>
-                    <th scope="col">{{ trans("admin.rewaya") }}</th>
                     <th scope="col" style="width: 80px; text-align: center">
                       {{ trans("admin.status") }}
                     </th>
@@ -119,11 +117,6 @@
 
                     <td v-if="tadabor.reciter">
                       {{ tadabor.reciter.name }}
-                    </td>
-                    <td v-else>-</td>
-
-                    <td v-if="tadabor.rewaya">
-                      {{ tadabor.rewaya.name }}
                     </td>
                     <td v-else>-</td>
 
@@ -272,7 +265,6 @@
         <div class="col-lg-8">
           <tadabor-form
             :action="'create'"
-            :rewayat="rewayat"
             @refrech="getTadabors()"
             :soar="soar"
             :reciters="reciters"
@@ -343,7 +335,6 @@ export default {
       languages: {},
       selected_languages: [],
       languages_check: false,
-      rewayat: {},
       reciters: {},
       actions_check: false,
       actions_items: {},
@@ -352,17 +343,16 @@ export default {
       tadabor: {
         title: "",
         audio_url: "",
+        video_url: "",
         image_url: "",
         text: "",
         sora: {},
         reciter: {},
-        rewaya: {},
         status: 0,
       },
       filters: {
         statu: "",
         query: "",
-        rewaya: "",
         sora: "",
         reciter: "",
         type: "",
@@ -401,16 +391,6 @@ export default {
           sort: "sora.name",
           direction: "asc",
           text: "order-by-sora-asc",
-        },
-        {
-          sort: "rewaya.name",
-          direction: "desc",
-          text: "order-by-rewaya-desc",
-        },
-        {
-          sort: "rewaya.name",
-          direction: "asc",
-          text: "order-by-rewaya-asc",
         },
         {
           sort: "id",
@@ -468,7 +448,6 @@ export default {
           self.soar = response.data.soar;
           self.languages = response.data.languages;
           self.selected_languages = response.data.tadabor_languages;
-          self.rewayat = response.data.rewayat;
           self.reciters = response.data.reciters;
           self.show_spinner = false;
           window.scroll(0, 0);
@@ -517,9 +496,6 @@ export default {
       }
       if (this.filters.tadabor) {
         base += "tadabor=" + this.filters.tadabor.id + "&";
-      }
-      if (this.filters.rewaya) {
-        base += "rewaya=" + this.filters.rewaya.id + "&";
       }
       if (this.filters.reciter) {
         base += "reciter=" + this.filters.reciter.id + "&";

@@ -35,6 +35,8 @@
             errors.get("audio_url")
           }}</small>
         </div>
+
+        
         <div class="form-group">
           <label class="col-form-label">{{ trans("admin.image_url") }}</label>
           <input
@@ -46,6 +48,19 @@
           />
           <small class="form-text text-danger" v-if="errors.has('image_url')">{{
             errors.get("image_url")
+          }}</small>
+        </div>
+        <div class="form-group">
+          <label class="col-form-label">{{ trans("admin.video_url") }}</label>
+          <input
+            type="text"
+            name="video_url"
+            class="form-control"
+            v-model="tadabor.video_url"
+            @keydown="errors.clear('video_url')"
+          />
+          <small class="form-text text-danger" v-if="errors.has('video_url')">{{
+            errors.get("video_url")
           }}</small>
         </div>
         <div class="form-group">
@@ -100,25 +115,7 @@
             errors.get("reciter")
           }}</small>
         </div>
-        <div class="form-group">
-          <label class="col-form-label">{{ trans("admin.rewaya") }}</label>
-          <multiselect
-            v-model="tadabor.rewaya"
-            selected-label
-            select-label
-            deselect-label
-            :options="rewayat"
-            :placeholder="trans('admin.rewaya')"
-            label="name"
-            track-by="id"
-            :multiple="false"
-          >
-            <span slot="noResult">{{ trans("admin.no-item-found") }}</span>
-          </multiselect>
-          <small class="form-text text-danger" v-if="errors.has('rewaya')">{{
-            errors.get("rewaya")
-          }}</small>
-        </div>
+
 
         <div class="form-group">
           <label>{{ trans("admin.status") }}</label>
@@ -182,7 +179,7 @@
 const Errors = require("../../errors.js");
 
 export default {
-  props: ["action", "soar", "rewayat", "reciters", "tadabor"],
+  props: ["action", "soar",  "reciters", "tadabor"],
   data() {
     return {
       errors: new Errors(),
