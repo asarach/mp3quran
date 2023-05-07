@@ -27,7 +27,7 @@
   <div class="databor-text">{!! html_entity_decode($item['text']) !!}</div>
   @endif
 
-
+  @if (!$item['video_url'])
   <div class="ssi-btns">
     <div class="ply-btn btn-loading hiden-ply-btn spib-loading">
       <div class="la-line-scale la-sm">
@@ -53,6 +53,7 @@
       </div>
     </a>
   </div>
+  @endif
 
   <div class="databor-options">
     <div class="option-btn">
