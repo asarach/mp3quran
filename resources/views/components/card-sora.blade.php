@@ -49,7 +49,7 @@
         <div class="sora-btn deslike-btn" data-toggle="tooltip" data-placement="bottom" title="{{ trans('text.remove-from-favorite') }}"  data-id="{{ $sora['id'] }}" data-group="soar">
             <span class="uni-icon icon-favorite" style="color: #f5b44b"></span>
         </div>
-        <div class="sora-btn report-btn" data-toggle="tooltip" data-placement="bottom" title="{{ trans('text.report-sora') }}"  data-read="{{ $sora['read_slug'] }}" data-sora="{{ $sora['id'] }}" :data-prefix="ajax_prefix">
+        <div class="sora-btn report-btn" data-toggle="tooltip" data-placement="bottom" title="{{ trans('text.report-sora') }}"  data-read="{{ $sora['read_slug'] }}" data-sora="{{ $sora['id'] }}" data-prefix="ajax">
             <span class="uni-icon icon-warning"></span>
         </div>
     </div>
