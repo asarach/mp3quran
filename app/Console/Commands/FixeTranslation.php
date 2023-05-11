@@ -61,7 +61,7 @@ class FixeTranslation extends Command
       $trans[] =  $other_tran;
     }
 
-    $this->deleteNonNeededTrans($trans);
+    // $this->deleteNonNeededTrans($trans);
 
     $languages = DB::table('translator_languages')->get();
     foreach ($languages as $language) {
