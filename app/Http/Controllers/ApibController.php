@@ -334,11 +334,10 @@ class ApibController extends Controller
             $rewayat = $rewayat->join('rewaya_translations', 'rewayat.id', '=', 'rewaya_translations.rewaya_id')
                 ->where('language_id', $this->language->id)
                 ->select('rewayat.id', 'rewaya_translations.name as name');
-                
-        }else{
+        } else {
             $rewayat = $rewayat->select('rewayat.id', 'rewayat.name');
         }
-        
+
         return $rewayat->get();
     }
 
@@ -430,6 +429,7 @@ class ApibController extends Controller
             foreach ($reciters as $reciter) {
 
                 $reads = Read::where('status', 1)
+                    ->whereNull('reads.special_rewaya_id')
                     ->leftJoin('rewayat', 'rewayat.id', '=', 'reads.rewaya_id')
                     ->leftJoin('mushafs', 'mushafs.id', '=', 'reads.mushaf_id')
                     ->where('reads.reciter_id', $reciter->id);
@@ -463,6 +463,7 @@ class ApibController extends Controller
 
                     $moshaf = [];
                     $soar = Read::where('status', 1)
+                        ->whereNull('special_rewaya_id')
                         ->table('sura_read')
                         ->where('read_id', $read->id)
                         ->orderBy('sura_id', 'ASC')
@@ -562,14 +563,14 @@ class ApibController extends Controller
         $videos_group = Vgroup::where('status', 1);
 
         if ($this->language !== null) {
-            $videos_group = $videos_group->join('translator_translations', "vgroups.id" , '=', 'translator_translations.item')
+            $videos_group = $videos_group->join('translator_translations', "vgroups.id", '=', 'translator_translations.item')
                 ->where('locale', $this->language->locale)
                 ->where('group', 'vgroup-name')
-                ->select( 'vgroups.id as id', 'translator_translations.text as video_type');
+                ->select('vgroups.id as id', 'translator_translations.text as video_type');
         } else {
             $videos_group = $videos_group->select('id', 'name as video_type');
         }
-        
+
         $videos_group = $videos_group->get();
 
         return  ['Videos_Type' => $videos_group];
@@ -581,16 +582,16 @@ class ApibController extends Controller
         $this->setParams($request);
 
         $videos = Video::where('status', 1)
-                        ->join('translator_translations', "videos.reciter_id" , '=', 'translator_translations.item')
-                        ->where('group', 'reciter-name');
+            ->join('translator_translations', "videos.reciter_id", '=', 'translator_translations.item')
+            ->where('group', 'reciter-name');
 
         if ($this->language !== null) {
             $videos = $videos->where('locale', $this->language->locale);
-        }else{
-            $videos = $videos->where('locale','ar');
+        } else {
+            $videos = $videos->where('locale', 'ar');
         }
 
-        $videos = $videos->select( 'videos.*', 'translator_translations.text as reciter_name')->get()->groupBy('reciter_id');
+        $videos = $videos->select('videos.*', 'translator_translations.text as reciter_name')->get()->groupBy('reciter_id');
         $id = 1;
         $results = [];
         foreach ($videos as $key => $item) {

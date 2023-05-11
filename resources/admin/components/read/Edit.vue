@@ -32,6 +32,7 @@
             :action="'edit'"
             :soar="soar"
             :rewayat="rewayat"
+            :special_rewayat="special_rewayat"
             :report_soar="report_soar"
             :servers="servers"
             :mushafs="mushafs"
@@ -106,6 +107,7 @@ export default {
       show_error: false,
       mushafs: {},
       rewayat: {},
+      special_rewayat: {},
       servers: {},
       reciters: {},
       soar: {},
@@ -120,6 +122,7 @@ export default {
         mushaf: {},
         reciter: {},
         rewaya: {},
+        special_rewaya: {},
         server: {},
         soar: {},
         status: 0,
@@ -140,6 +143,7 @@ export default {
           self.mushafs = response.data.mushafs;
           self.report_soar = response.data.report_soar;
           self.rewayat = response.data.rewayat;
+          self.special_rewayat = response.data.special_rewayat;
           self.servers = response.data.servers;
           self.reciters = response.data.reciters;
           self.soar = response.data.soar;

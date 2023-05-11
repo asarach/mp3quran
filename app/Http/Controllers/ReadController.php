@@ -20,7 +20,7 @@ class ReadController extends Controller
         $cache_name = 'reads_list_sora_' .  $sora  . '_long_' .  LaravelLocalization::getCurrentLocale();
         // Cache::forget($cache_name);
         $reads  =  Cache::rememberForever($cache_name, function () use ($sora) {
-            $reads = Read::where('status', 1);
+            $reads = Read::where('status', 1)->whereNull('special_rewaya_id');
             if ($sora) {
                 $reads = $reads
                     ->leftJoin('sura_read', 'reads.id', '=', 'sura_read.read_id')

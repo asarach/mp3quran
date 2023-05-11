@@ -38,7 +38,7 @@ Route::get('/video/download/{download_id}', ['as' => 'video.download', 'uses' =>
 Route::get('/video/{slug}', ['as' => 'video.show', 'uses' => Video\Show::class]);
 
 /* special_rewayat  */
-Route::get('/special_rewayat', ['as' => 'twenty_rewayat.index', 'uses' => TwentyRewayat\Index::class]);
+Route::get('/special_rewayat', ['as' => 'special_rewayat.index', 'uses' => SpecialRewayat\Index::class]);
 /* tafsirs  */
 Route::get('/tafsirs', ['as' => 'tafsir.index', 'uses' => Tafsir\Index::class]);
 Route::get('/tafsir/bookmarks', ['as' => 'tafsir.bookmarks', 'uses' => Tafsir\Bookmarks::class]);

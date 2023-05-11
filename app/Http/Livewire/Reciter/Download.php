@@ -21,6 +21,7 @@ class Download extends Component
     {
        
         $read = Read::where('slug', $this->slug)
+            ->whereNull('special_rewaya_id')
             ->where('status', 1)
             ->firstOrFail();
 

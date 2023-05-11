@@ -104,6 +104,7 @@
         <div class="row">
           <div class="col">
             <div class="form-group">
+              <label class="col-form-label">{{ trans("admin.mushaf") }}</label>
               <multiselect
                 v-model="read.mushaf"
                 selected-label
@@ -126,6 +127,7 @@
           </div>
           <div class="col">
             <div class="form-group">
+              <label class="col-form-label">{{ trans("admin.reciter") }}</label>
               <multiselect
                 v-model="read.reciter"
                 selected-label
@@ -148,6 +150,7 @@
           </div>
           <div class="col">
             <div class="form-group">
+              <label class="col-form-label">{{ trans("admin.rewaya") }}</label>
               <multiselect
                 v-model="read.rewaya"
                 selected-label
@@ -170,6 +173,7 @@
           </div>
           <div class="col">
             <div class="form-group">
+              <label class="col-form-label">{{ trans("admin.server") }}</label>
               <multiselect
                 v-model="read.server"
                 selected-label
@@ -385,6 +389,30 @@
             errors.get("promoted")
           }}</small>
         </div>
+        <div class="form-group">
+          <label class="col-form-label">{{
+            trans("admin.special_rewaya")
+          }}</label>
+          <multiselect
+            style="max-width: 300px"
+            v-model="read.special_rewaya"
+            selected-label
+            select-label
+            deselect-label
+            :options="special_rewayat"
+            :placeholder="trans('admin.special_rewaya')"
+            label="name"
+            track-by="id"
+            :multiple="false"
+          >
+            <span slot="noResult">{{ trans("admin.no-item-found") }}</span>
+          </multiselect>
+          <small
+            class="form-text text-danger"
+            v-if="errors.has('special_rewaya')"
+            >{{ errors.get("special_rewaya") }}</small
+          >
+        </div>
       </div>
       <div class="card-footer clearfix">
         <div class="float-right">
@@ -412,6 +440,7 @@ export default {
     "read",
     "mushafs",
     "rewayat",
+    "special_rewayat",
     "report_soar",
     "servers",
     "reciters",

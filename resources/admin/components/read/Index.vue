@@ -1,16 +1,18 @@
 <template>
   <div class="content-wrapper">
-    <vue-headful :title="trans('admin.dashboard_title') + ' | ' + trans('text.reads')" />
+    <vue-headful
+      :title="trans('admin.dashboard_title') + ' | ' + trans('text.reads')"
+    />
     <section class="content-header">
-      <h1>{{ trans('text.reads')}}</h1>
+      <h1>{{ trans("text.reads") }}</h1>
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
           <router-link :to="prefix">
             <i class="fa fa-dashboard"></i>
-            {{ trans('admin.dashboard')}}
+            {{ trans("admin.dashboard") }}
           </router-link>
         </li>
-        <li class="breadcrumb-item active">{{ trans('text.reads')}}</li>
+        <li class="breadcrumb-item active">{{ trans("text.reads") }}</li>
       </ol>
     </section>
     <div v-if="show_spinner" class="loading-spinner">
@@ -24,11 +26,13 @@
         <div class="col-lg-24">
           <div class="card">
             <div class="card-head">
-              <h3 class="card-title">{{ trans('text.all-reads')}}</h3>
+              <h3 class="card-title">{{ trans("text.all-reads") }}</h3>
               <div class="card-tools">
                 <div class="pull-left">
                   <router-link :to="prefix + 'read/create'">
-                    <button class="btn btn-primary btn-sm">{{ trans('admin.add-read')}}</button>
+                    <button class="btn btn-primary btn-sm">
+                      {{ trans("admin.add-read") }}
+                    </button>
                   </router-link>
                   <a
                     v-if="trashed"
@@ -36,11 +40,15 @@
                     class="btn btn-info btn-sm"
                   >
                     <i class="fas fa-folder-open m-0"></i>
-                    {{ trans('text.all')}}
+                    {{ trans("text.all") }}
                   </a>
-                  <a v-else @click.prevent="trashedReads(true)" class="btn btn-info btn-sm">
+                  <a
+                    v-else
+                    @click.prevent="trashedReads(true)"
+                    class="btn btn-info btn-sm"
+                  >
                     <i class="fas fa-recycle m-0"></i>
-                    {{ trans('admin.trashed')}}
+                    {{ trans("admin.trashed") }}
                   </a>
                 </div>
               </div>
@@ -68,22 +76,23 @@
                           @change="actionsChange()"
                           id="actionsCheck"
                         />
-                        <label class="custom-control-label" for="actionsCheck"></label>
+                        <label
+                          class="custom-control-label"
+                          for="actionsCheck"
+                        ></label>
                       </div>
                     </th>
                     <th scope="col">#</th>
-                    <th scope="col">{{ trans('admin.title')}}</th>
-                    <th scope="col">{{ trans('admin.reciter')}}</th>
-                    <th scope="col">{{ trans('admin.rewaya')}}</th>
-                    <th scope="col">{{ trans('admin.mushaf')}}</th>
-                    <th
-                      scope="col"
-                      style="width: 80px;text-align: center;"
-                    >{{ trans('admin.status')}}</th>
-                    <th
-                      scope="col"
-                      style="width: 100px;text-align: center;"
-                    >{{ trans('admin.options')}}</th>
+                    <th scope="col">{{ trans("admin.title") }}</th>
+                    <th scope="col">{{ trans("admin.reciter") }}</th>
+                    <th scope="col">{{ trans("admin.rewaya") }}</th>
+                    <th scope="col">{{ trans("admin.mushaf") }}</th>
+                    <th scope="col" style="width: 80px; text-align: center">
+                      {{ trans("admin.status") }}
+                    </th>
+                    <th scope="col" style="width: 100px; text-align: center">
+                      {{ trans("admin.options") }}
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -96,16 +105,19 @@
                           class="custom-control-input"
                           :id="'actionsCheckbox' + read.id"
                         />
-                        <label class="custom-control-label" :for="'actionsCheckbox'+read.id"></label>
+                        <label
+                          class="custom-control-label"
+                          :for="'actionsCheckbox' + read.id"
+                        ></label>
                       </div>
                     </td>
-                    <td scope="row">{{read.id}}</td>
-                    <td>{{read.title}}</td>
-                    <td v-if="read.reciter">{{read.reciter.name}}</td>
+                    <td scope="row">{{ read.id }}</td>
+                    <td>{{ read.title }}</td>
+                    <td v-if="read.reciter">{{ read.reciter.name }}</td>
                     <td v-else>-</td>
-                    <td v-if="read.rewaya">{{read.rewaya.name}}</td>
+                    <td v-if="read.rewaya">{{ read.rewaya.name }}</td>
                     <td v-else>-</td>
-                    <td v-if="read.mushaf">{{read.mushaf.name}}</td>
+                    <td v-if="read.mushaf">{{ read.mushaf.name }}</td>
                     <td v-else>-</td>
                     <td class="text-center">
                       <a
@@ -157,7 +169,7 @@
                       <ul v-else class="list-inline p-0 m-0">
                         <li class="list-inline-item">
                           <router-link
-                            :to="prefix + 'read/edit/' + read.id "
+                            :to="prefix + 'read/edit/' + read.id"
                             data-placement="left"
                             class="tip btn-uni edit"
                             data-toggle="tooltip"
@@ -198,7 +210,9 @@
                       aria-haspopup="true"
                       aria-expanded="false"
                     >
-                      <span class="text-muted">{{trans('admin.actions')}}</span>
+                      <span class="text-muted">{{
+                        trans("admin.actions")
+                      }}</span>
                     </button>
                     <div
                       class="dropdown-menu dropdown-menu-right"
@@ -208,30 +222,38 @@
                         class="dropdown-item"
                         href="#"
                         @click.prevent="actionDelete()"
-                      >{{ trans('admin.delete-selected') }}</a>
+                        >{{ trans("admin.delete-selected") }}</a
+                      >
                       <a
                         class="dropdown-item"
                         href="#"
                         v-if="!this.trashed"
                         @click.prevent="actionChangeStatus(1)"
-                      >{{ trans('admin.activate-selected') }}</a>
+                        >{{ trans("admin.activate-selected") }}</a
+                      >
                       <a
                         class="dropdown-item"
                         href="#"
                         v-if="!this.trashed"
                         @click.prevent="actionChangeStatus(0)"
-                      >{{ trans('admin.deactivate-selected') }}</a>
+                        >{{ trans("admin.deactivate-selected") }}</a
+                      >
                       <a
                         class="dropdown-item"
                         href="#"
                         @click.prevent="actionRestor()"
                         v-if="this.trashed"
-                      >{{ trans('admin.restor-selected') }}</a>
+                        >{{ trans("admin.restor-selected") }}</a
+                      >
                     </div>
                   </div>
                 </div>
                 <div class="col">
-                  <pagination :pagination="reads" @paginate="getReads()" :offset="4"></pagination>
+                  <pagination
+                    :pagination="reads"
+                    @paginate="getReads()"
+                    :offset="4"
+                  ></pagination>
                 </div>
               </div>
             </div>
@@ -247,6 +269,7 @@ export default {
     return {
       show_spinner: true,
       show_error: false,
+      special_reads: false,
       reads: {},
       actions_check: false,
       actions_items: {},
@@ -257,7 +280,7 @@ export default {
         reciter: "",
         rewaya: "",
         query: "",
-        mushaf: ""
+        mushaf: "",
       },
       reciters: {},
       rewayat: {},
@@ -269,44 +292,44 @@ export default {
         {
           sort: "reciter.name",
           direction: "desc",
-          text: "order-by-reciter-desc"
+          text: "order-by-reciter-desc",
         },
         {
           sort: "reciter.name",
           direction: "asc",
-          text: "order-by-reciter-asc"
+          text: "order-by-reciter-asc",
         },
         {
           sort: "rewaya.name",
           direction: "desc",
-          text: "order-by-rewaya-desc"
+          text: "order-by-rewaya-desc",
         },
         {
           sort: "rewaya.name",
           direction: "asc",
-          text: "order-by-rewaya-asc"
+          text: "order-by-rewaya-asc",
         },
         {
           sort: "mushaf.name",
           direction: "desc",
-          text: "order-by-mushaf-desc"
+          text: "order-by-mushaf-desc",
         },
         {
           sort: "mushaf.name",
           direction: "asc",
-          text: "order-by-mushaf-asc"
+          text: "order-by-mushaf-asc",
         },
         {
           sort: "id",
           direction: "desc",
-          text: "order-by-newest"
+          text: "order-by-newest",
         },
         {
           sort: "id",
           direction: "asc",
-          text: "order-by-oldest"
-        }
-      ]
+          text: "order-by-oldest",
+        },
+      ],
     };
   },
   methods: {
@@ -315,7 +338,7 @@ export default {
       var url = this.preparUrl();
       axios
         .get(url)
-        .then(response => {
+        .then((response) => {
           self.reads = response.data.reads;
           self.reciters = response.data.reciters;
           self.rewayat = response.data.rewayat;
@@ -323,7 +346,7 @@ export default {
           self.show_spinner = false;
           window.scroll(0, 0);
         })
-        .catch(error => {
+        .catch((error) => {
           self.show_spinner = false;
           self.show_error = error.response.status;
         });
@@ -350,8 +373,15 @@ export default {
       this.reads.current_page = undefined;
       this.getReads();
     },
+
     preparUrl() {
-      var base = this.ajax_prefix + "reads?";
+      var base = this.ajax_prefix;
+      if (this.special_reads) {
+        base = base + "special_reads?";
+      } else {
+        base = base + "reads?";
+      }
+
       var page = this.reads.current_page;
       if (page !== undefined) {
         base += "page=" + page + "&";
@@ -388,7 +418,7 @@ export default {
       var self = this;
       Event.$off("confirmed");
       Event.$emit("confirm");
-      Event.$on("confirmed", function() {
+      Event.$on("confirmed", function () {
         self.confirmDalete(id, key);
       });
     },
@@ -401,7 +431,7 @@ export default {
       }
       axios
         .delete(this.ajax_prefix + "read/" + id + forced)
-        .then(function(response) {
+        .then(function (response) {
           self.$delete(self.reads.data, key);
           self.actions_items[self.reads.data[key].id] = false;
 
@@ -409,37 +439,37 @@ export default {
             group: "admin",
             text: self.trans("admin.read-deleted"),
             type: "success",
-            title: self.trans("admin.success")
+            title: self.trans("admin.success"),
           });
         })
-        .catch(function(error) {
+        .catch(function (error) {
           self.$notify({
             group: "admin",
             text: self.trans("admin.read-not-deleted"),
             type: "warning",
-            title: self.trans("admin.warning")
+            title: self.trans("admin.warning"),
           });
         });
     },
-    changeStatus: function(id, status, item) {
+    changeStatus: function (id, status, item) {
       var self = this;
       axios
         .get(this.ajax_prefix + "read/" + id + "/status/" + status)
-        .then(response => {
+        .then((response) => {
           self.reads.data[item].status = parseInt(response.data.status);
           self.$notify({
             group: "admin",
             text: self.trans("admin.read-status-changed"),
             type: "success",
-            title: self.trans("admin.success")
+            title: self.trans("admin.success"),
           });
         })
-        .catch(error => {
+        .catch((error) => {
           self.$notify({
             group: "admin",
             text: self.trans("admin.read-status-not-changed"),
             type: "warning",
-            title: self.trans("admin.warning")
+            title: self.trans("admin.warning"),
           });
         });
     },
@@ -447,22 +477,22 @@ export default {
       var self = this;
       axios
         .get(this.ajax_prefix + "read/restore/" + id)
-        .then(function(response) {
+        .then(function (response) {
           self.trashed = false;
           self.getReads();
           self.$notify({
             group: "admin",
             text: self.trans("admin.read-restored"),
             type: "success",
-            title: self.trans("admin.success")
+            title: self.trans("admin.success"),
           });
         })
-        .catch(function(error) {
+        .catch(function (error) {
           self.$notify({
             group: "admin",
             text: self.trans("admin.read-not-restored"),
             type: "warning",
-            title: self.trans("admin.warning")
+            title: self.trans("admin.warning"),
           });
         });
     },
@@ -470,7 +500,7 @@ export default {
       var self = this;
       Event.$off("confirmed");
       Event.$emit("confirm");
-      Event.$on("confirmed", function() {
+      Event.$on("confirmed", function () {
         self.confirmActionDelete();
       });
     },
@@ -482,14 +512,14 @@ export default {
       }
       var data = {
         action: "delete",
-        items: this.actions_items
+        items: this.actions_items,
       };
       axios
         .post(this.ajax_prefix + "read/actions" + forced, data)
-        .then(function(response) {
+        .then(function (response) {
           for (let index = 0; index < response.data.results.length; index++) {
             let key = self.reads.data
-              .map(item => item.id)
+              .map((item) => item.id)
               .indexOf(response.data.results[index]); // find index of your object
             self.$delete(self.reads.data, key);
             self.actions_items[response.data.results[index]] = false;
@@ -498,15 +528,15 @@ export default {
             group: "admin",
             text: self.trans("admin.read-deleted"),
             type: "success",
-            title: self.trans("admin.success")
+            title: self.trans("admin.success"),
           });
         })
-        .catch(function(error) {
+        .catch(function (error) {
           self.$notify({
             group: "admin",
             text: self.trans("admin.read-not-deleted"),
             type: "warning",
-            title: self.trans("admin.warning")
+            title: self.trans("admin.warning"),
           });
         });
     },
@@ -514,14 +544,14 @@ export default {
       var self = this;
       var data = {
         action: "restor",
-        items: this.actions_items
+        items: this.actions_items,
       };
       axios
         .post(this.ajax_prefix + "read/actions", data)
-        .then(function(response) {
+        .then(function (response) {
           for (let index = 0; index < response.data.results.length; index++) {
             let key = self.reads.data
-              .map(item => item.id)
+              .map((item) => item.id)
               .indexOf(response.data.results[index]); // find index of your object
             self.$delete(self.reads.data, key);
           }
@@ -529,15 +559,15 @@ export default {
             group: "admin",
             text: self.trans("admin.read-restored"),
             type: "success",
-            title: self.trans("admin.success")
+            title: self.trans("admin.success"),
           });
         })
-        .catch(function(error) {
+        .catch(function (error) {
           self.$notify({
             group: "admin",
             text: self.trans("admin.read-not-restored"),
             type: "warning",
-            title: self.trans("admin.warning")
+            title: self.trans("admin.warning"),
           });
         });
     },
@@ -550,15 +580,17 @@ export default {
       }
       var data = {
         action: action,
-        items: this.actions_items
+        items: this.actions_items,
       };
       axios
         .post(this.ajax_prefix + "read/actions", data)
-        .then(function(response) {
+        .then(function (response) {
           for (let index = 0; index < response.data.results.length; index++) {
             var item = response.data.results[index];
 
-            let key = self.reads.data.map(item => item.id).indexOf(item["id"]);
+            let key = self.reads.data
+              .map((item) => item.id)
+              .indexOf(item["id"]);
 
             self.reads.data[key].status = item["status"];
           }
@@ -566,21 +598,36 @@ export default {
             group: "admin",
             text: self.trans("admin.read-status-changed"),
             type: "success",
-            title: self.trans("admin.success")
+            title: self.trans("admin.success"),
           });
         })
-        .catch(function(error) {
+        .catch(function (error) {
           self.$notify({
             group: "admin",
             text: self.trans("admin.read-status-not-changed"),
             type: "warning",
-            title: self.trans("admin.warning")
+            title: self.trans("admin.warning"),
           });
         });
-    }
+    },
   },
   mounted() {
+    if (this.$route.name == "special_reads") {
+      this.special_reads = true;
+    }
     this.getReads();
-  }
+  },
+  watch: {
+    $route(to, from) {
+      console.log(to);
+      this.show_spinner = true;
+      if (to.name == "special_reads") {
+        this.special_reads = true;
+      }else{
+        this.special_reads = false;
+      }
+      this.getReads();
+    },
+  },
 };
 </script>

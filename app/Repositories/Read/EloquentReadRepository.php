@@ -40,6 +40,9 @@ class EloquentReadRepository extends EloquentRepository implements ReadRepositor
         if (!empty($data['rewaya']) and isset($data['rewaya']['id'])) {
             $item->rewaya()->associate($data['rewaya']['id']);
         }
+        if (!empty($data['special_rewaya']) and isset($data['special_rewaya']['id'])) {
+            $item->special_rewaya()->associate($data['special_rewaya']['id']);
+        }
         if (!empty($data['mushaf']) and isset($data['mushaf']['id'])) {
             $item->mushaf()->associate($data['mushaf']['id']);
         }
@@ -79,6 +82,11 @@ class EloquentReadRepository extends EloquentRepository implements ReadRepositor
             $item->rewaya()->associate($data['rewaya']['id']);
         } else {
             $item->rewaya()->dissociate();
+        }
+        if (!empty($data['special_rewaya']) and isset($data['special_rewaya']['id'])) {
+            $item->special_rewaya()->associate($data['special_rewaya']['id']);
+        } else {
+            $item->special_rewaya()->dissociate();
         }
         if (!empty($data['server']) and isset($data['server']['id'])) {
             $item->server()->associate($data['server']['id']);
@@ -133,17 +141,19 @@ class EloquentReadRepository extends EloquentRepository implements ReadRepositor
     public function getRecommendations($nbr)
     {
         $recommendationsA = $this->model
-        ->where('status', 1)
-        ->inRandomOrder()
-        ->take($nbr)
-        ->get();
+            ->where('status', 1)
+            ->whereNull('special_rewaya_id')
+            ->inRandomOrder()
+            ->take($nbr)
+            ->get();
+
         $recommendations = [];
         foreach ($recommendationsA as $recommendationA) {
             $sora = $recommendationA
-            ->soar()
-            ->inRandomOrder()
-            ->withPivot(['duration', 'filename'])
-            ->first();
+                ->soar()
+                ->inRandomOrder()
+                ->withPivot(['duration', 'filename'])
+                ->first();
 
             if ($sora and $recommendationA->reciter) {
                 $r_item = [];
@@ -213,6 +223,7 @@ class EloquentReadRepository extends EloquentRepository implements ReadRepositor
 
         $mushafs =  $this->model
             ->where('status', 1)
+            ->whereNull('special_rewaya_id')
             ->whereIn('id', $ids)
             ->sortable(['date' => 'desc'])
             ->paginate(24);
@@ -222,7 +233,7 @@ class EloquentReadRepository extends EloquentRepository implements ReadRepositor
 
     public function getFavs($keys)
     {
-        return $this->model->whereIn('id', $keys)->where('status', 1)->get()->toArray();
+        return $this->model->whereNull('special_rewaya_id')->whereIn('id', $keys)->where('status', 1)->get()->toArray();
     }
 
     public function getFavsSoar($keys)

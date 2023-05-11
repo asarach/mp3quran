@@ -109,6 +109,14 @@
               </router-link>
             </li>
             <li>
+              <router-link :to="prefix + 'special_reads'">
+                <i class="uni-icon icon-mic2"></i>
+                <span>{{ trans('text.special_reads')}}</span>
+                <span class="badge badge-pill badge-info">{{$counts['special_reads']}}</span>
+
+              </router-link>
+            </li>
+            <li>
               <router-link :to="prefix + 'videos'">
                 <i class="uni-icon icon-clapboard-play"></i>
                 <span>{{ trans('text.videos')}}</span>
@@ -173,17 +181,12 @@
               </router-link>
             </li>
             <li>
-              <router-link :to="prefix + 'twenty_rewayat'">
+              <router-link :to="prefix + 'special_rewayat'">
                 <i class="uni-icon icon-stack2"></i>
-                <span>{{ trans('front.twenty_rewayat')}}</span>
+                <span>{{ trans('front.special_rewayat')}}</span>
               </router-link>
             </li>
-            <li>
-              <router-link :to="prefix + 'twenty_reads'">
-                <i class="uni-icon icon-mic2"></i>
-                <span>{{ trans('text.twenty_reads')}}</span>
-              </router-link>
-            </li>
+            
             <li>
               <router-link :to="prefix + 'mushafs'">
                 <i class="uni-icon icon-more2"></i>

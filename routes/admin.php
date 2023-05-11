@@ -198,6 +198,7 @@ Route::post("/menu/actions", array("as" => "menu.actions", "uses" => "MenuContro
 
 /* Read  */
 Route::get('/reads', array('as' => 'read.index', 'uses' => 'ReadController@index'));
+Route::get('/special_reads', array('as' => 'read.special', 'uses' => 'ReadController@special'));
 Route::get('/read/create', array('as' => 'read.create', 'uses' => 'ReadController@create'));
 Route::post('/read', array('as' => 'read.store', 'uses' => 'ReadController@store'));
 Route::get('/read/translations/generate', array('as' => 'read.translations.generate', 'uses' => 'ReadController@generateTranslations'));
@@ -210,19 +211,7 @@ Route::get('/read/restore/{id}', array('as' => 'read.restore', 'uses' => 'ReadCo
 Route::get('/read/{id}/status/{status}', array('as' => 'read.status', 'uses' => 'ReadController@changeStatus'));
 Route::post('/read/actions', array('as' => 'read.actions', 'uses' => 'ReadController@actions'));
 
-/* Twenty_read  */
-Route::get('/twenty_reads', array('as' => 'twenty_read.index', 'uses' => 'TwentyReadController@index'));
-Route::get('/twenty_read/create', array('as' => 'twenty_read.create', 'uses' => 'TwentyReadController@create'));
-Route::post('/twenty_read', array('as' => 'twenty_read.store', 'uses' => 'TwentyReadController@store'));
-Route::get('/twenty_read/translations/generate', array('as' => 'twenty_read.translations.generate', 'uses' => 'TwentyReadController@generateTranslations'));
-Route::post('/twenty_read/translations/{id}', array('as' => 'twenty_read.translations', 'uses' => 'TwentyReadController@translations'));
-Route::get('/twenty_read/edit/{id}', array('as' => 'twenty_read.edit', 'uses' => 'TwentyReadController@edit'));
-Route::get('/twenty_read/{id}/report/{change}/{sora}', array('as' => 'twenty_read.report', 'uses' => 'TwentyReadController@report'));
-Route::put('/twenty_read/{id}', array('as' => 'twenty_read.update', 'uses' => 'TwentyReadController@update'));
-Route::delete('/twenty_read/{id}', array('as' => 'twenty_read.destroy', 'uses' => 'TwentyReadController@destroy'));
-Route::get('/twenty_read/restore/{id}', array('as' => 'twenty_read.restore', 'uses' => 'TwentyReadController@restore'));
-Route::get('/twenty_read/{id}/status/{status}', array('as' => 'twenty_read.status', 'uses' => 'TwentyReadController@changeStatus'));
-Route::post('/twenty_read/actions', array('as' => 'twenty_read.actions', 'uses' => 'TwentyReadController@actions'));
+
 /* Reciter  */
 Route::get('/reciters', array('as' => 'reciter.index', 'uses' => 'ReciterController@index'));
 Route::post('/reciter', array('as' => 'reciter.store', 'uses' => 'ReciterController@store'));
@@ -268,16 +257,16 @@ Route::get('/rewaya/{id}/status/{status}', array('as' => 'rewaya.status', 'uses'
 Route::post('/rewaya/actions', array('as' => 'rewaya.actions', 'uses' => 'RewayaController@actions'));
 
 
-/* Twenty_rewaya  */
-Route::get('/twenty_rewayat', array('as' => 'twenty_rewaya.index', 'uses' => 'TwentyRewayaController@index'));
-Route::post('/twenty_rewaya', array('as' => 'twenty_rewaya.store', 'uses' => 'TwentyRewayaController@store'));
-Route::post('/twenty_rewaya/translations/{id}', array('as' => 'twenty_rewaya.store', 'uses' => 'TwentyRewayaController@translations'));
-Route::get('/twenty_rewaya/edit/{id}', array('as' => 'twenty_rewaya.edit', 'uses' => 'TwentyRewayaController@edit'));
-Route::put('/twenty_rewaya/{id}', array('as' => 'twenty_rewaya.update', 'uses' => 'TwentyRewayaController@update'));
-Route::delete('/twenty_rewaya/{id}', array('as' => 'twenty_rewaya.destroy', 'uses' => 'TwentyRewayaController@destroy'));
-Route::get('/twenty_rewaya/restore/{id}', array('as' => 'twenty_rewaya.restore', 'uses' => 'TwentyRewayaController@restore'));
-Route::get('/twenty_rewaya/{id}/status/{status}', array('as' => 'twenty_rewaya.status', 'uses' => 'TwentyRewayaController@changeStatus'));
-Route::post('/twenty_rewaya/actions', array('as' => 'twenty_rewaya.actions', 'uses' => 'TwentyRewayaController@actions'));
+/* Special_rewaya  */
+Route::get('/special_rewayat', array('as' => 'special_rewaya.index', 'uses' => 'SpecialRewayaController@index'));
+Route::post('/special_rewaya', array('as' => 'special_rewaya.store', 'uses' => 'SpecialRewayaController@store'));
+Route::post('/special_rewaya/translations/{id}', array('as' => 'special_rewaya.store', 'uses' => 'SpecialRewayaController@translations'));
+Route::get('/special_rewaya/edit/{id}', array('as' => 'special_rewaya.edit', 'uses' => 'SpecialRewayaController@edit'));
+Route::put('/special_rewaya/{id}', array('as' => 'special_rewaya.update', 'uses' => 'SpecialRewayaController@update'));
+Route::delete('/special_rewaya/{id}', array('as' => 'special_rewaya.destroy', 'uses' => 'SpecialRewayaController@destroy'));
+Route::get('/special_rewaya/restore/{id}', array('as' => 'special_rewaya.restore', 'uses' => 'SpecialRewayaController@restore'));
+Route::get('/special_rewaya/{id}/status/{status}', array('as' => 'special_rewaya.status', 'uses' => 'SpecialRewayaController@changeStatus'));
+Route::post('/special_rewaya/actions', array('as' => 'special_rewaya.actions', 'uses' => 'SpecialRewayaController@actions'));
 
 /* Server  */
 Route::get('/servers', array('as' => 'server.index', 'uses' => 'ServerController@index'));

@@ -25,7 +25,7 @@ class Sitemap extends Component
         $page_content[] = ['text' => trans('text.radios'), 'url' => route('radio.index'), 'sublinks' => []];
 
         $re_sublinks = [];
-        $reads = Read::where('status', 1)->get();
+        $reads = Read::where('status', 1)->whereNull('special_rewaya_id')->get();
         foreach ($reads as $read) {
             $re_sublinks[] = ['text' => $read->getLocaleTitle(), 'url' => route('reciter.show', ['slug' => $read->slug])];
         }

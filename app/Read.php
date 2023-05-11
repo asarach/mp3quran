@@ -97,6 +97,14 @@ class Read extends Model
     /**
      * Get the language of the annonce.
      */
+    public function special_rewaya()
+    {
+        return $this->belongsTo('App\Models\SpecialRewaya');
+    }
+
+    /**
+     * Get the language of the annonce.
+     */
     public function server()
     {
         return $this->belongsTo('App\Server');

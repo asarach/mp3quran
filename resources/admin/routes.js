@@ -86,6 +86,12 @@ module.exports = [{
 //reads
 {
     path: routes_base + 'reads',
+    name: 'reads',
+    component: require('./components/read/Index.vue').default
+},
+{
+    path: routes_base + 'special_reads',
+    name: 'special_reads',
     component: require('./components/read/Index.vue').default
 },
 {
@@ -240,27 +246,14 @@ module.exports = [{
     path: routes_base + 'rewaya/edit/:id',
     component: require('./components/rewaya/Edit.vue').default
 },
-//twenty_rewayat
+//special_rewayat
 {
-    path: routes_base + 'twenty_rewayat',
-    component: require('./components/twenty_rewaya/Index.vue').default
+    path: routes_base + 'special_rewayat',
+    component: require('./components/special_rewaya/Index.vue').default
 },
 {
-    path: routes_base + 'twenty_rewaya/edit/:id',
-    component: require('./components/twenty_rewaya/Edit.vue').default
-},
-//twenty_reads
-{
-    path: routes_base + 'twenty_reads',
-    component: require('./components/twenty_read/Index.vue').default
-},
-{
-    path: routes_base + 'twenty_read/create',
-    component: require('./components/twenty_read/Create.vue').default
-},
-{
-    path: routes_base + 'twenty_read/edit/:id',
-    component: require('./components/twenty_read/Edit.vue').default
+    path: routes_base + 'special_rewaya/edit/:id',
+    component: require('./components/special_rewaya/Edit.vue').default
 },
 
 //Message

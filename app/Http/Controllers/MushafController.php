@@ -88,6 +88,7 @@ class MushafController extends Controller
         $read_soar = Cache::rememberForever('alkahf_read_soar_' . LaravelLocalization::getCurrentLocale(), function () {
             $read_soar = [];
             $reads = $this->read->model
+                ->whereNull('special_rewaya_id')
                 ->where('status', 1)
                 ->get();
             foreach ($reads as $read) {
@@ -107,7 +108,7 @@ class MushafController extends Controller
             'title' => $seo_page->getLocaleTitle(),
             'url' => route('alkahf'),
             'description' =>  $seo_page->getLocaleDescription(),
-        ];        
+        ];
 
         return compact('read_soar', 'page_share');
     }
@@ -198,7 +199,7 @@ class MushafController extends Controller
             ->select('namemap.info_hash', 'namemap.filename', 'namemap.reciter_id',  'namemap.url', 'namemap.category', 'namemap.data', 'namemap.size', 'summary.seeds', 'summary.leechers', 'summary.finished', DB::raw("count(comments.id) as comments"))
             ->groupBy('namemap.info_hash');
         if (isset($input['search'])) {
-            $files = $files->where('namemap.filename', 'like', '%' .$input['search'] . '%');
+            $files = $files->where('namemap.filename', 'like', '%' . $input['search'] . '%');
         }
         if (isset($input['category'])) {
             $files = $files->where('namemap.category', $input['category']);
@@ -212,10 +213,10 @@ class MushafController extends Controller
         $torrents = collect();
         foreach ($items as $item) {
             $torrent = [];
-            $torrent['name'] = $this->getLocaleName($item); 
+            $torrent['name'] = $this->getLocaleName($item);
             $torrent['comments'] = $item->comments;
-            $torrent['url'] = 'http://torrent.mp3quran.net/download.php?id='.$item->info_hash. '&f=' .$item->filename. '.torrent';
-            $torrent['added'] = Carbon::parse($item->data)->format('d/m/Y') ;
+            $torrent['url'] = 'http://torrent.mp3quran.net/download.php?id=' . $item->info_hash . '&f=' . $item->filename . '.torrent';
+            $torrent['added'] = Carbon::parse($item->data)->format('d/m/Y');
             $torrent['date'] = $item->data;
             $torrent['size'] = $this->formatBytes($item->size);
             $torrent['sizeb'] = $item->size;
@@ -228,8 +229,7 @@ class MushafController extends Controller
         return $torrents;
     }
     public function getLocaleName($item)
-    {
-        {
+    { {
             $name = trans('downloads.' . trim($item->filename));
             if (strpos($name, 'downloads.') !== false or $name == '') {
                 $name = trans('reciter-name.' . $item->reciter_id);
@@ -242,32 +242,22 @@ class MushafController extends Controller
         return $name;
     }
 
-    public function formatBytes($bytes, $precision = 2) { 
-        if ($bytes >= 1073741824)
-        {
+    public function formatBytes($bytes, $precision = 2)
+    {
+        if ($bytes >= 1073741824) {
             $bytes = number_format($bytes / 1073741824, 2) . ' GB';
-        }
-        elseif ($bytes >= 1048576)
-        {
+        } elseif ($bytes >= 1048576) {
             $bytes = number_format($bytes / 1048576, 2) . ' MB';
-        }
-        elseif ($bytes >= 1024)
-        {
+        } elseif ($bytes >= 1024) {
             $bytes = number_format($bytes / 1024, 2) . ' KB';
-        }
-        elseif ($bytes > 1)
-        {
+        } elseif ($bytes > 1) {
             $bytes = $bytes . ' bytes';
-        }
-        elseif ($bytes == 1)
-        {
+        } elseif ($bytes == 1) {
             $bytes = $bytes . ' byte';
-        }
-        else
-        {
+        } else {
             $bytes = '0 bytes';
         }
 
         return $bytes;
-    } 
+    }
 }

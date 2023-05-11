@@ -7,6 +7,7 @@ use App\Http\Requests\ReadRequest;
 use App\Repositories\Read\ReadRepository;
 use App\Repositories\Mushaf\MushafRepository;
 use App\Repositories\Rewaya\RewayaRepository;
+use App\Repositories\SpecialRewaya\SpecialRewayaRepository;
 use App\Repositories\Server\ServerRepository;
 use App\Repositories\Sora\SoraRepository;
 use App\Repositories\Reciter\ReciterRepository;
@@ -25,12 +26,13 @@ class ReadController extends Controller
      *
      * @return void
      */
-    public function __construct(Search $search, ReadRepository $read, ReciterRepository $reciter, SoraRepository $sora, ServerRepository $server, RewayaRepository $rewaya, MushafRepository $mushaf)
+    public function __construct(Search $search, ReadRepository $read, ReciterRepository $reciter, SoraRepository $sora, ServerRepository $server, SpecialRewayaRepository $special_rewaya, RewayaRepository $rewaya, MushafRepository $mushaf)
     {
         $this->read = $read;
         $this->reciter = $reciter;
         $this->sora = $sora;
         $this->rewaya = $rewaya;
+        $this->special_rewaya = $special_rewaya;
         $this->server = $server;
         $this->search = $search;
         $this->mushaf = $mushaf;
@@ -47,6 +49,7 @@ class ReadController extends Controller
         $trashed = request('trashed');
         $q = request('q');
         $reads = $this->read->model
+            ->whereNull('special_rewaya_id')
             ->with(['reciter:id,name', 'rewaya:id,name', 'mushaf:id,name'])
             ->sortable(['id' => 'desc'])
             ->filterColumns($columns);
@@ -66,6 +69,37 @@ class ReadController extends Controller
 
         return compact('reads', 'reciters', 'rewayat', 'mushafs', 'servers');
     }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function special()
+    {
+        $columns = ['statu' => 'reads.status', 'special_rewaya' => 'reads.special_rewaya_id', 'mushaf' => 'reads.mushaf_id', 'reciter' => 'reads.reciter_id'];
+        $trashed = request('trashed');
+        $q = request('q');
+        $reads = $this->read->model
+            ->whereNotNull('special_rewaya_id')
+            ->with(['reciter:id,name', 'special_rewaya:id,name', 'mushaf:id,name'])
+            ->sortable(['id' => 'desc'])
+            ->filterColumns($columns);
+        if ($trashed) {
+            $reads = $reads->onlyTrashed();
+        }
+        if ($q) {
+            $ids = $this->search->search($q, 'reads_index');
+            $reads = $reads->whereIn('id', $ids);
+        }
+        $reads = $reads->paginate(250);
+
+        $reciters = $this->reciter->list(['id', 'name']);
+        $special_rewayat = $this->special_rewaya->list(['id', 'name']);
+        $servers = $this->server->list(['id', 'name']);
+        $mushafs = $this->mushaf->list(['id', 'name']);
+
+        return compact('reads', 'reciters', 'special_rewayat', 'mushafs', 'servers');
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -76,6 +110,7 @@ class ReadController extends Controller
     {
         $reciters = $this->reciter->list(['id', 'name']);
         $rewayat = $this->rewaya->list(['id', 'name']);
+        $special_rewayat = $this->special_rewaya->list(['id', 'name']);
         $mushafs = $this->mushaf->list(['id', 'name']);
         $servers = $this->server->list(['id', 'name']);
         $soar = $this->sora->list(['id', 'name']);
@@ -83,7 +118,7 @@ class ReadController extends Controller
         $old_soar = [];
         $report_soar = [];
 
-        return compact('reciters', 'report_soar', 'old_soar', 'rewayat', 'mushafs', 'soar', 'servers');
+        return compact('reciters', 'report_soar', 'old_soar', 'rewayat', 'special_rewayat',  'mushafs', 'soar', 'servers');
     }
 
     /**
@@ -121,10 +156,11 @@ class ReadController extends Controller
      */
     public function edit($id)
     {
-        $read = $this->read->model->with(['soar:id,name', 'reciter:id,name', 'rewaya:id,name', 'mushaf:id,name', 'server:id,name'])->findOrFail($id);
+        $read = $this->read->model->with(['soar:id,name', 'reciter:id,name', 'special_rewaya:id,name','rewaya:id,name', 'mushaf:id,name', 'server:id,name'])->findOrFail($id);
 
         $reciters = $this->reciter->list(['id', 'name']);
         $rewayat = $this->rewaya->list(['id', 'name']);
+        $special_rewayat = $this->special_rewaya->list(['id', 'name']);
         $servers = $this->server->list(['id', 'name']);
         $mushafs = $this->mushaf->list(['id', 'name']);
         $soar = $this->sora->list(['id', 'name']);
@@ -157,7 +193,7 @@ class ReadController extends Controller
             $translations[$language->locale] = $arr;
         }
 
-        return compact('read', 'report_soar','reciters', 'rewayat', 'mushafs', 'soar', 'servers', 'translations');
+        return compact('read', 'report_soar', 'reciters', 'rewayat','special_rewayat', 'mushafs', 'soar', 'servers', 'translations');
     }
 
     public function report($id, $change, $sora)
@@ -269,7 +305,6 @@ class ReadController extends Controller
             } elseif ($translation['description']) {
                 DB::table('translator_translations')->insert(['locale' => $key, 'group' => 'read-description', 'item' =>  $id, 'text' => $translation['description']]);
             }
-
         }
         $result = true;
         flushTrans();

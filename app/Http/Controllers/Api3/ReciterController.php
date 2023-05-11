@@ -139,6 +139,7 @@ class ReciterController extends ApiController
         foreach ($reciters as $reciter) {
 
             $reads = Read::where('reads.status', 1)
+                ->whereNull('reads.special_rewaya_id')
                 ->leftJoin('rewayat', 'rewayat.id', '=', 'reads.rewaya_id')
                 ->leftJoin('mushafs', 'mushafs.id', '=', 'reads.mushaf_id')
                 ->where('reads.reciter_id', $reciter->id);
@@ -233,7 +234,7 @@ class ReciterController extends ApiController
         $results = [];
         foreach ($reciters as $reciter) {
 
-            $reads = Read::where('reads.status', 1);
+            $reads = Read::where('reads.status', 1)->whereNull('special_rewaya_id');
             if ($this->rewaya !== null) {
                 $reads = $reads->where('reads.rewaya_id', $this->rewaya);
             }

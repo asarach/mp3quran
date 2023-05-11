@@ -51,7 +51,8 @@ class AdminComposer
         $counts['radios'] = Radio::count();
         $counts['tvs'] = Tv::count();
         $counts['videos'] = Video::count();
-        $counts['reads'] = Read::count();
+        $counts['reads'] = Read::whereNull('special_rewaya_id')->count();
+        $counts['special_reads'] = Read::whereNotNull('special_rewaya_id')->count();
         $counts['reciters'] = Reciter::count();
         $counts['tadabors'] = Tadabor::count();
         $counts['reports'] = DB::table('report_sora')->count();

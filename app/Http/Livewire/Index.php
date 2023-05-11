@@ -50,6 +50,7 @@ class Index extends Component
     public function getReads()
     {
         $reads = Read::where('status', 1)
+            ->whereNull('special_rewaya_id')
             ->groupBy('reciter_id')
             ->select('id', 'rewaya_id', 'slug', 'reciter_id');
 

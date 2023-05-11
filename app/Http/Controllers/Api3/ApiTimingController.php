@@ -91,7 +91,7 @@ class ApiTimingController extends ApiController
             ->get()
             ->pluck('read_id');
 
-        $reads = Read::whereIn('id', $reads_ids)->get();
+        $reads = Read::whereIn('id', $reads_ids)->whereNull('special_rewaya_id')->get();
 
         $items = [];
         foreach ($reads as  $read) {

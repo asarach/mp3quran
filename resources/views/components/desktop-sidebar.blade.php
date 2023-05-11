@@ -36,8 +36,8 @@
 
     <li>
       <a href="{{ LaravelLocalization::localizeUrl('special_rewayat') }}" class="menu-link">
-        <span class="mp3-icon icon-headphones"></span>
-        {{trans('front.twenty_rewayat')}}
+        <span class="icon-star"></span>
+        {{trans('front.special_rewayat')}}
       </a>
     </li>
 
