@@ -8,6 +8,7 @@ use App\Sora;
 
 use App\Rewaya;
 use App\Reciter;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -144,7 +145,7 @@ class MainController extends ApiController
     public function radios(Request $request)
     {
         $this->setParams($request);
-        $name = 'api_v3_radios_' . $request->input('language');
+        $name = 'api_v3_radios_' . '_last_updated_date_' . $this->last_updated_date . $request->input('language');
         // Cache::forget($name);
         $radios = Cache::rememberForever($name, function () {
             $radios = DB::table('radios')->where('status', 1);
@@ -156,6 +157,12 @@ class MainController extends ApiController
             } else {
                 $radios = $radios->select('radios.id', 'radios.name', 'radios.url');
             }
+
+            if ($this->last_updated_date !== null) {
+                $date = Carbon::parse($this->last_updated_date)->toDateTimeString();
+                $radios = $radios->where('radios.updated_at', '>=', $date);
+            }
+
             return $radios->get();
         });
 
