@@ -87,6 +87,29 @@ class MainController extends ApiController
 
         return compact('riwayat');
     }
+
+    /**
+     * Riwayat
+     *
+     * Get a list of all avalibale riwayat ordered by added date
+     *
+     * @group API 2
+     *
+     * @bodyParam  language string The language of texts in riwayat arrays. If is not set the default language of texts is arabic. exemple: 'ar', 'en', 'fr'...
+     *
+     * @return json
+     */
+    public function moshaf(Request $request)
+    {
+        return $this->getMoshaf();
+
+        $this->setParams($request);
+        $riwayat = Cache::rememberForever('api_v3_riwayat_' . $request->input('language'), function () {
+            return $this->getMoshaf();
+        });
+
+        return compact('riwayat');
+    }
     /**
      * liveTv
      *
@@ -129,7 +152,7 @@ class MainController extends ApiController
                 $radios = $radios->join('translator_translations', 'radios.id', '=', 'translator_translations.item')
                     ->where('translator_translations.locale', $this->language_code)
                     ->where('translator_translations.group', 'radio-name')
-                    ->select('radios.id', 'translator_translations.text as name', 'radios.url');
+                    ->select('radios.id', 'translator_translations.text as name', 'radios.url', 'radios.created_at as recent_date');
             } else {
                 $radios = $radios->select('radios.id', 'radios.name', 'radios.url');
             }
