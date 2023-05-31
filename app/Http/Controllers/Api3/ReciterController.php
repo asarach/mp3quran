@@ -45,7 +45,7 @@ class ReciterController extends ApiController
     {
         $this->setParams($request);
         $name = 'api_v3_reads_language_' . $this->language . '_last_updated_date_' . $this->last_updated_date . '_reciter_' . $this->reciter . '_rewaya_' . $this->rewaya . '_sura_' . $this->sura;
-        // Cache::forget($name);
+        Cache::forget($name);
         $reads = Cache::rememberForever($name, function () {
             return $this->getReads();
         });
@@ -72,7 +72,7 @@ class ReciterController extends ApiController
     {
         $this->setParams($request);
         $name = 'api_v3_recent_reads_language_' . $this->language . '_last_updated_date_' . $this->last_updated_date . '_reciter_' . $this->reciter . '_rewaya_' . $this->rewaya . '_sura_' . $this->sura;
-        // Cache::forget($name);
+        Cache::forget($name);
         $reads = Cache::rememberForever($name, function () {
             return $this->getReads('updated_at', 'desc');
         });
@@ -103,7 +103,7 @@ class ReciterController extends ApiController
     {
         $this->setParams($request);
         $name = 'api_v3_reads_language_' . $this->language . '_last_updated_date_' . $this->last_updated_date . '_reciter_' . $this->reciter . '_rewaya_' . $this->rewaya . '_sura_' . $this->sura;
-        // Cache::forget($name);
+        Cache::forget($name);
         $reciters = Cache::rememberForever($name, function () {
             return $this->getReciters();
         });
@@ -115,7 +115,6 @@ class ReciterController extends ApiController
 
     public function getReads($order = 'name', $sort = 'asc')
     {
-
         $reciters = Reciter::where('status', 1);
         if ($this->reciter !== null) {
             $reciters = $reciters->where('id', $this->reciter);
@@ -181,6 +180,7 @@ class ReciterController extends ApiController
                 $moshaf['name'] =  transLocale('rewaya-name',  $read->rewaya_id, $this->language_code)  . ' - ' . transLocale('mushaf-name',  $read->mushaf_id, $this->language_code);
                 $moshaf['server'] = $read->server->url . '/' . $read->url . '/';;
                 $moshaf['surah_total'] = count($soar);
+                $moshaf['moshaf_type'] = intval($read->rewaya_id . $read->mushaf_id);
                 $moshaf['surah_list'] = implode(",", $soar);
                 if (!empty($soar)) {
                     $moshafs[] = $moshaf;
@@ -263,6 +263,7 @@ class ReciterController extends ApiController
                 $moshaf['name'] =  transLocale('rewaya-name',  $read->rewaya_id, $this->language_code)  . ' - ' . transLocale('mushaf-name',  $read->mushaf_id, $this->language_code);
                 $moshaf['server'] = $read->server->url . '/' . $read->url . '/';;
                 $moshaf['surah_total'] = count($soar);
+                $moshaf['moshaf_type'] = intval($read->rewaya_id . $read->mushaf_id);
                 $moshaf['surah_list'] = implode(",", $soar);
                 if (!empty($soar)) {
                     $items[] = $moshaf;

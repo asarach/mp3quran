@@ -20,9 +20,9 @@ $router->get('/api_2/tvs', array('as' => 'api_b.tvs', 'uses' => 'ApibController@
 $router->get('/api_2/video_types', array('as' => 'api_b.video_types', 'uses' => 'ApibController@videoTypes'));
 $router->get('/api_2/videos', array('as' => 'api_b.videos', 'uses' => 'ApibController@videos'));
 
-$router->get('/api/ayat_timing', array('as' => 'api_b.videos', 'uses' => 'ApiTimingController@index'));
-$router->get('/api/ayat_timing/reads', array('as' => 'api_b.videos', 'uses' => 'ApiTimingController@reads'));
-$router->get('/api/ayat_timing/soar', array('as' => 'api_b.videos', 'uses' => 'ApiTimingController@soar'));
+$router->get('/api/ayat_timing', array('as' => 'api_b.ayat_timing', 'uses' => 'ApiTimingController@index'));
+$router->get('/api/ayat_timing/reads', array('as' => 'api_b.ayat_timing_reads', 'uses' => 'ApiTimingController@reads'));
+$router->get('/api/ayat_timing/soar', array('as' => 'api_b.ayat_timing_soar', 'uses' => 'ApiTimingController@soar'));
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +33,7 @@ $router->get('/api/ayat_timing/soar', array('as' => 'api_b.videos', 'uses' => 'A
 $router->get('/api/v3/languages',    array('as' => 'api_3.languages',    'uses' => 'Api3\MainController@languages'));
 $router->get('/api/v3/suwar',        array('as' => 'api_3.suwar',        'uses' => 'Api3\MainController@suwar'));
 $router->get('/api/v3/riwayat',      array('as' => 'api_3.riwayat',      'uses' => 'Api3\MainController@riwayat'));
+$router->get('/api/v3/moshaf',       array('as' => 'api_3.moshaf',      'uses' => 'Api3\MainController@moshaf'));
 $router->get('/api/v3/live-tv',      array('as' => 'api_3.liveTv',       'uses' => 'Api3\MainController@liveTv'));
 $router->get('/api/v3/radios',       array('as' => 'api_3.radios',       'uses' => 'Api3\MainController@radios'));
 
@@ -45,6 +46,9 @@ $router->get('/api/v3/tafsir',       array('as' => 'api_3.tafsir',        'uses'
 
 $router->get('/api/v3/tadabor',       array('as' => 'api_3.tadabor',        'uses' => 'Api3\TadaborController@tadabor'));
 
-$router->get('/api/v3/ayat_timing', array('as' => 'api_b.videos', 'uses' => 'Api3\ApiTimingController@index'));
-$router->get('/api/v3/ayat_timing/reads', array('as' => 'api_b.videos', 'uses' => 'Api3\ApiTimingController@reads'));
-$router->get('/api/v3/ayat_timing/soar', array('as' => 'api_b.videos', 'uses' => 'Api3\ApiTimingController@soar'));
+$router->get('/api/v3/ayat_timing', array('as' => 'api_3.ayat_timing', 'uses' => 'Api3\ApiTimingController@index'));
+$router->get('/api/v3/ayat_timing/reads', array('as' => 'api_3.ayat_timing_reads', 'uses' => 'Api3\ApiTimingController@reads'));
+$router->get('/api/v3/ayat_timing/soar', array('as' => 'api_3.ayat_timing_soar', 'uses' => 'Api3\ApiTimingController@soar'));
+
+$router->get('/api/v3/video_types', array('as' => 'api_3.video_types', 'uses' => 'Api3\VideoController@types'));
+$router->get('/api/v3/videos', array('as' => 'api_3.videos', 'uses' => 'Api3\VideoController@videos'));

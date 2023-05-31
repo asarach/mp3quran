@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Api3;
 
+use App\Read;
 use App\Sora;
+use App\Mushaf;
 use App\Rewaya;
 use App\Reciter;
 use App\Models\Tafsir;
@@ -57,7 +59,7 @@ class ApiController extends BaseController
             $suwar = $suwar->join('translator_translations', 'soar.id', '=', 'translator_translations.item')
                 ->where('translator_translations.locale', $this->language_code)
                 ->where('translator_translations.group', 'sora-name')
-                ->select('soar.id', 'translator_translations.text as name', 'soar.start_page', 'soar.end_page', 'soar.makkia');
+                ->select('soar.id', 'translator_translations.text as name', 'soar.start_page', 'soar.end_page', 'soar.makkia',  DB::raw('!soar.makkia  as type'));
         }
         return $suwar->orderBy('id')->get();
     }
@@ -75,6 +77,44 @@ class ApiController extends BaseController
         }
 
         return $riwayat->get();
+    }
+
+    public function getMoshaf()
+    {
+        $rewayat = Rewaya::where('status', 1);
+        if ($this->language !== null) {
+            $rewayat = $rewayat->join('rewaya_translations', 'rewayat.id', '=', 'rewaya_translations.rewaya_id')
+                ->where('language_id', $this->language->id)
+                ->select('rewayat.id', 'rewaya_translations.name as name');
+        }
+        $rewayat = $rewayat->orderBy('id')->get();
+
+        $mushaf = Mushaf::where('status', 1);
+        if ($this->language !== null) {
+            $mushaf = $mushaf->join('mushaf_translations', 'mushafs.id', '=', 'mushaf_translations.mushaf_id')
+                ->where('language_id', $this->language->id)
+                ->select('mushafs.id', 'mushaf_translations.name as name');
+        }
+        $mushafs = $mushaf->orderBy('id')->get();
+
+        $results = [];
+
+        foreach ($rewayat as $rewaya) {
+            foreach ($mushafs as $mushaf) {
+                $soars = Read::where('status', 1)->where('rewaya_id', $rewaya->id)->where('mushaf_id', $mushaf->id)->get();
+                if ($soars->isNotEmpty()) {
+                    $item = [];
+                    $item['id'] = intval($rewaya->id . $mushaf->id);
+                    $item['moshaf_type'] = $rewaya->id;
+                    $item['moshaf_id'] = $mushaf->id;
+                    $item['name'] = $rewaya->name . ' - ' . $mushaf->name;
+                    $results[] = $item;
+                }
+            }
+        }
+
+
+        return $results;
     }
 
     public function setParams($request)
