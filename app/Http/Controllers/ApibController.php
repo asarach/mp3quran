@@ -92,7 +92,7 @@ class ApibController extends Controller
         $this->setParams($request);
 
         $name = 'reads_language_' . $request->input('language') . '_last_updated_date_' . $request->input('last_updated_date') . '_reciter_' . $request->input('reciter') . '_rewaya_' . $request->input('rewaya') . '_sura_' . $request->input('sura');
-
+       
         $reads = Cache::rememberForever($name, function () {
             return $this->getReads();
         });
