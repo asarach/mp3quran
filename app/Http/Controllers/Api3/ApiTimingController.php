@@ -101,7 +101,7 @@ class ApiTimingController extends ApiController
                 'rewaya' => $read->getRewaya(),
                 'folder_url' => $read->server->url . '/' . $read->url . '/',
                 'soar_count' => $read->soar->count(),
-                'soar_link' => request()->getSchemeAndHttpHost()  . '/api/v3/ayat_timing/soar?read=' . $read->id,
+                'soar_link' => 'https://www.mp3quran.net/api/v3/ayat_timing/soar?read=' . $read->id,
             ];
         }
         return $items;
@@ -119,7 +119,7 @@ class ApiTimingController extends ApiController
                 $items[] = [
                     'id' => $sorah->id,
                     'name' => $sorah->getLocaleName(),
-                    'timing_link' => request()->getSchemeAndHttpHost()  . '/api/v3/ayat_timing?surah=' . $sorah->id . '&read=' . $this->read,
+                    'timing_link' => 'https://www.mp3quran.net/api/v3/ayat_timing?surah=' . $sorah->id . '&read=' . $this->read,
                 ];
             }
             return $items;

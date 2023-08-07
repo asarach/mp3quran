@@ -4,7 +4,7 @@
   @if (isYoutube($item['video_url']))
   <iframe width="100%" height="auto" style="aspect-ratio: 16/9;" src="https://www.youtube.com/embed/{{ getYoutubeId($item['video_url']) }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
   @else
-  <video src="{{ $item['video_url'] }}"></video>
+  <video controls="controls" src="{{ $item['video_url'] }}"  style=" margin: 0 auto; display: block;     max-width: 100%;"></video>
   @endif
 
   @elseif($islink)
