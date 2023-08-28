@@ -154,7 +154,7 @@ class ApiController extends BaseController
             }
         }
         if ($request->input('read')) {
-            $read = Sora::where('status', 1)->where('id', $request->input('read'))->first();
+            $read = Read::where('status', 1)->where('id', $request->input('read'))->first();
             if ($read) {
                 $this->read = $read->id;
             }

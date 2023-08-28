@@ -62,6 +62,7 @@ class ApiTimingController extends ApiController
         $this->setParams($request);
         $name = 'ayat_timing_v3_soar_read_' . $this->read;
         Cache::forget($name);
+
         $soar = Cache::rememberForever($name, function ()  {
             return $this->getTimingSoar();            
         });
@@ -113,7 +114,7 @@ class ApiTimingController extends ApiController
                 ->get()
                 ->pluck('sura_id');
 
-            $soar = Sora::whereIn('id', $soar_ids)->get();
+                $soar = Sora::whereIn('id', $soar_ids)->get();
             $items = [];
             foreach ($soar as $key => $sorah) {
                 $items[] = [

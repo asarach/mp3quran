@@ -40,10 +40,10 @@ class CreateReadsTiming extends Command
      */
     public function handle()
     {
-        // $this->ReadsTiming();
+        $this->ReadsTiming();
         // $this->QuranPages();
         // $this->QuranPagesPages();
-        $this->QuranPagesPolygon();
+        // $this->QuranPagesPolygon();
     }
     public function ReadsTiming()
     {
