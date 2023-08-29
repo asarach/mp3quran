@@ -44,17 +44,12 @@
               <div class="card-videotitle-name">{{ $video['title'] }}</div>
               <div class="card-videotitle-job">{{ $video['reciter_name'] }}</div>
               <div class="dropdown btn-download">
-                <button class="btn btn-primary  dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                @if ($video['type'] != '0')
+                <a class="btn btn-primary " href="{{ $video['url'] }}?download=1" target="_blank" download>
                   <span class="uni-icon icon-file_download" style="color: #fff"></span>
                   {{ trans("text.download") }}
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  @if ($video['type'] != '0')
-                  <a class="dropdown-item" href="{{ $video['url'] }} + '?download=1'" target="_blank" download>{{ trans("text.direct-download") }}</a>
-                  @endif
-                  <a class="dropdown-item" href="{{ route('video.download', ['download_id' => $video['id']]) }}">
-                    {{ trans("text.download-with-logo") }}</a>
-                </div>
+                </a>
+                @endif
               </div>
             </div>
           </div>
