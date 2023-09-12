@@ -1,0 +1,78 @@
+version: "3.9"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: mp3quran.de
+    container_name: mp3quran_app
+    restart: unless-stopped
+    tty: true
+    environment:
+      SERVICE_NAME: app
+      SERVICE_TAGS: dev
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+      - ./docker-compose/php.ini:/usr/local/etc/php/conf.d/local.ini
+
+  webserver:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./:/var/www
+      - ./docker-compose/nginx/:/etc/nginx/conf.d/
+
+  #MySQL Service
+  db:
+    platform: linux/x86_64
+    image: mysql:5.7
+    restart: unless-stopped
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: mp3quran
+      MYSQL_ROOT_PASSWORD:
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - dbdata:/var/lib/mysql/
+      - ./docker-compose/mysql.cnf:/etc/mysql/my.cnf
+      - ./docker-compose/mysql:/tmp/database
+    # command: mysql -u root mp3quran < /tmp/database/init_db.sql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: pma
+    links:
+      - db
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+      UPLOAD_LIMIT: 300M
+    restart: always
+    ports:
+      - 8081:80
+
+  npm:
+    image: node:14
+    container_name: laravel-npm
+    volumes:
+      - ./:/var/www
+    working_dir: /var/www
+    depends_on:
+      - app
+    command: tail -f /dev/null
+
+#Docker Networks
+networks:
+  app-network:
+    driver: bridge
+#Volumes
+volumes:
+  dbdata:
+    driver: local
