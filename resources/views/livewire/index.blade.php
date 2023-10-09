@@ -110,7 +110,7 @@
                                     <div class="col-md-8">
                                         <div class="card-read" title="{{ $read['soar_count'] }}">
                                             <div class="card-read-title">
-                                                <a rel="alternate" href="{{ route('reciter.show', ['slug'=> $read['slug']]) }}">
+                                                <a rel="alternate" href=" {{ LaravelLocalization::localizeUrl(route('reciter.show', ['slug'=> $read['slug']]) ) }} ">
                                                     {{ $read['reciter_name'] }}
                                                 </a>
                                             </div>
@@ -145,7 +145,7 @@
                                 <div class="col-md-8">
                                     <div class="card-read">
                                         <div class="card-read-title">
-                                            <a rel="alternate" href="{{ route('reciter.show', ['slug'=> $read['slug']]) }}">
+                                            <a rel="alternate" href=" {{ LaravelLocalization::localizeUrl(route('reciter.show', ['slug'=> $read['slug']]) ) }} ">
                                                 {{ $read['reciter_name'] }}
                                             </a>
                                         </div>

@@ -45,7 +45,7 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapApiRoutes();
 
-        $this->mapRedirectRoutes();
+        // $this->mapRedirectRoutes();
 
         $this->mapAjaxRoutes();
 
