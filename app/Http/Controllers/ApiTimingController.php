@@ -65,7 +65,7 @@ class ApiTimingController extends Controller
     public function reads(Request $request)
     {
         $name = 'ayat_timing_reads';
-        // Cache::forget($name);
+        Cache::forget($name);
         $reads = Cache::rememberForever($name, function () {
 
             $reads_ids = DB::table('reads_timing')
@@ -77,6 +77,10 @@ class ApiTimingController extends Controller
 
             $items = [];
             foreach ($reads as  $read) {
+                $soar = $read->soar()->orderBy('sura_id', 'ASC')
+                    ->pluck('sura_id')
+                    ->toArray();
+
                 $items[] = [
                     'id' => $read->id,
                     'name' => $read->getReciter(),
@@ -84,6 +88,9 @@ class ApiTimingController extends Controller
                     'folder_url' => $read->server->url . '/' . $read->url . '/',
                     'soar_count' => $read->soar->count(),
                     'soar_link' => request()->getSchemeAndHttpHost()  . '/api/ayat_timing/soar?read=' . $read->id,
+                    'letter' => mb_substr($read->reciter->name, 0, 1, "UTF-8"),
+                    'sura_name' => 'https://www.mp3quran.net/api/tvs/arabic_sura.json',
+                    'suras' => implode(",", $soar),
                 ];
             }
             return $items;
