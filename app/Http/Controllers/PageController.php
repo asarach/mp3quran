@@ -44,10 +44,8 @@ class PageController extends Controller
     public function storeMessage(MessageRequest $request)
     {
         $input = $request->all();
-        // dd($input);
         // $message = $this->contact->create($input);
         // Mail::to('asaraach@gmail.com')->send(new ContactMail($input));
-        // dd('asa');
         try {
             //Try Sendgrid
             Mail::to(env('MAIL_TO_ADDRESS', 'mp3quran.net@gmail.com'))->send(new ContactMail($input));
@@ -55,10 +53,9 @@ class PageController extends Controller
             //Use mail
             $to = env('MAIL_TO_ADDRESS', 'mp3quran.net@gmail.com');
             $subject = 'mp3quran contact us : ' . $input['subject'];
-            $txt = $input['body'];
+            $message = $input['body'];
             $headers = "From: ".$input['email'];
-    
-            mail($to, $subject, $txt, $headers);
+            mail($to, $subject, $message, $headers);
         }
 
         return redirect()->back();
