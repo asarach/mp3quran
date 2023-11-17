@@ -551,6 +551,24 @@
       padding: 4px 16px;
     }
   }
+  .alert-danger{
+    color: #853737;
+    background-color: #fff0f1;
+    border-color: #ffd5d5;
+    box-shadow: 0 2px 8px 0 #f3a8a830;
+    margin-top: 0.75rem;
+    margin-bottom: 0;
+    text-align: center;
+  }
+  .alert-success{
+    color: #1d643b;
+    background-color: #eafff3;
+    border-color: #c7eed8;
+    box-shadow: 0 0px 6px 0 #b5f3c487;
+    margin-top: 0.75rem;
+    margin-bottom: 0;
+    text-align: center;
+  }
 }
 
 /**************downloads*************/

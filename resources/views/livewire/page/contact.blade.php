@@ -21,8 +21,14 @@
       </div>
     </div>
   </div>
+
   <div class="show-body">
     <div class="container">
+      @if(session('message'))
+      <div class="alert alert-{{ session('status') }}">
+        {{ session('message') }}
+      </div>
+      @endif
       <div class="row">
         @if (style_version() == 'r')
         <div class="col-md-5">

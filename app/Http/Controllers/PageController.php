@@ -39,8 +39,8 @@ class PageController extends Controller
         $this->read = $read;
         $this->sora = $sora;
     }
-    
-    
+
+
     public function storeMessage(MessageRequest $request)
     {
         $input = $request->all();
@@ -49,15 +49,23 @@ class PageController extends Controller
         try {
             //Try Sendgrid
             Mail::to(env('MAIL_TO_ADDRESS', 'mp3quran.net@gmail.com'))->send(new ContactMail($input));
+            $note = trans("text.contact-success-message"); // 'Your message has been sent successfully';
+            $status = 'success';
         } catch (\Throwable $th) {
+            $note  = trans("text.contact-error-message"); //'Error sending message, please try again later';
+            $status = 'danger';
+
             //Use mail
-            $to = env('MAIL_TO_ADDRESS', 'mp3quran.net@gmail.com');
-            $subject = 'mp3quran contact us : ' . $input['subject'];
-            $message = $input['body'];
-            $headers = "From: ".$input['email'];
-            mail($to, $subject, $message, $headers);
+            // $to = env('MAIL_TO_ADDRESS', 'mp3quran.net@gmail.com');
+            // $subject = 'mp3quran contact us : ' . $input['subject'];
+            // $message = $input['body'];
+            // $headers = "From: ".$input['email'];
+            // mail($to, $subject, $message, $headers);
         }
 
-        return redirect()->back();
+        return redirect()->back()->with([
+            'message' => $note,
+            'status' => $status,
+        ]);
     }
 }
