@@ -77,7 +77,7 @@
         </li>
         <li class="list-inline-item">
           <a href="{{settings('twitter')}}" class="twitter-icon" target="_blank" title="Twitter">
-            <span class="uni-icon icon-twitter" style="color: #37B1E1"></span>
+            <span class="uni-icon icon-x" style="color: #000"></span>
           </a>
         </li>
         <li class="list-inline-item">

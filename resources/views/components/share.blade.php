@@ -17,7 +17,7 @@
                 </span>
                 <span class="share-on twitter" data-network='twitter'>
                     <div class="share-icon twitter">
-                        <span class="uni-icon icon-twitter" style="color: #fff"></span>
+                        <span class="uni-icon icon-x" style="color: #fff"></span>
                     </div>
                     <span class="text">{{ trans("text.share-twitter") }}</span>
                 </span>

@@ -7,6 +7,8 @@ use App\Read;
 use App\Sora;
 use Auth;
 use App\Services\Search;
+use Illuminate\Support\Facades\Cache;
+use Waavi\Translation\Models\Language;
 
 class EloquentReadRepository extends EloquentRepository implements ReadRepository
 {
@@ -101,8 +103,10 @@ class EloquentReadRepository extends EloquentRepository implements ReadRepositor
         }
 
         $result = $item->save();
-
+        $item->soar()->sync([]);
         $item->soar()->sync($data['soar']);
+
+        $this->clearReadCache($item->id);
 
         return $result;
     }
@@ -268,5 +272,14 @@ class EloquentReadRepository extends EloquentRepository implements ReadRepositor
         }
 
         return $faves;
+    }
+
+    public function clearReadCache($id)
+    {
+        $languages = Language::get();
+        foreach ($languages as $language) {
+            $cache_name = 'reciter_reads_index_read_' . $id . '_long_' .  $language->locale;
+            Cache::forget($cache_name);
+        }
     }
 }

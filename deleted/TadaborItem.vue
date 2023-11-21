@@ -73,7 +73,7 @@
               class="share-icon twitter"
               v-tooltip.top="trans('text.share-twitter')"
             >
-              <span class="uni-icon icon-twitter" style="color: #52a7e7"></span>
+              <span class="uni-icon icon-x" style="color: #000"></span>
             </div>
           </network>
           <network network="whatsapp" class="whatsapp">

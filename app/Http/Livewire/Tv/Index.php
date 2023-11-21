@@ -12,7 +12,8 @@ class Index extends Component
     {
         $tvs = Tv::where('status', 1)
             ->sortable(['created_at' => 'desc'])
-            ->paginate(30);
+            ->paginate(30)
+            ->toArray();
 
         $page = Page::where('name', 'live')->where('status', 1)->firstOrFail();
 

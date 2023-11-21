@@ -31,7 +31,7 @@
             </network>
             <network network="twitter" class="twitter">
               <div class="share-icon twitter">
-                <span class="uni-icon icon-twitter" style="color: #fff"></span>
+                <span class="uni-icon icon-x" style="color: #fff"></span>
               </div>
               <span class="text">{{ trans("text.share-twitter") }}</span>
             </network>

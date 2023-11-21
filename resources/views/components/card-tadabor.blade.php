@@ -64,7 +64,7 @@
     <div class="show-share" data-url="{{ $item['share_url'] }}" data-title="{{ $item['share_title'] }}" data-description="{{ $item['share_description'] }}">
       <span class="direct-share twitter" data-network='twitter'>
         <div class="share-icon twitter" data-toggle="tooltip" data-placement="top" title="{{ trans('text.share-twitter') }}">
-          <span class="uni-icon icon-twitter" style="color: #52a7e7"></span>
+          <span class="uni-icon icon-x" style="color: #000"></span>
         </div>
       </span>
       <span class="direct-share whatsapp" data-network='whatsapp'>

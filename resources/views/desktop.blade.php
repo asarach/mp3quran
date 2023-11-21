@@ -36,7 +36,7 @@
                             </li>
                             <li class="list-inline-item">
                                 <a href="{{settings('twitter')}}" class="twitter-icon" target="_blank" title="Twitter">
-                                    <span class="uni-icon icon-twitter" style="color: #37B1E1"></span>
+                                    <span class="uni-icon icon-x" style="color: #000"></span>
                                 </a>
                             </li>
                             <li class="list-inline-item">
@@ -158,7 +158,7 @@
                         </li>
                         <li class="list-inline-item">
                             <a href="{{settings('twitter')}}" class="twitter-icon" target="_blank" title="Twitter">
-                                <span class="uni-icon icon-twitter" style="color: #37B1E1"></span>
+                                <span class="uni-icon icon-x" style="color: #000"></span>
                             </a>
                         </li>
                         <li class="list-inline-item">
@@ -190,12 +190,12 @@
                                 </li>
                                 <li class="list-inline-item">
                                     <a href="{{settings('twitter')}}" class="twitter-icon" target="_blank" title="Twitter">
-                                        <span class="uni-icon icon-twitter" style="color: #37B1E1"></span>
+                                        <span class="uni-icon icon-x" style="color: #000"></span>
                                     </a>
                                 </li>
                                 <li class="list-inline-item">
                                     <a href="{{settings('instagram')}}" class="instagram-icon" target="_blank" title="Instagram">
-                                        <span class="uni-icon icon-twitter" style="color: #C83466"></span>
+                                        <span class="uni-icon icon-instagram" style="color: #C83466"></span>
                                     </a>
                                 </li>
                                 <li class="list-inline-item">
