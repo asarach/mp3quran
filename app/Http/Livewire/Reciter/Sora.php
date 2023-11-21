@@ -46,14 +46,14 @@ class Sora extends Component
         $sora['share_title'] = $read->getLocaleShareTitle();
         $sora['share_url'] = route('reciter.sora', ['slug' => $read->slug, 'sora_id' => $soar_item->id]);
         $sora['share_description'] = $read->getLocaleShareDescription();
-
+        
         $page = [
             'title' => $soar_item->getSeoTitle($read->rewaya, $sora['reciter'], $sora['name']),
             'description' => $soar_item->getSeoDescription($read->rewaya, $sora['reciter'], $sora['name']),
         ];
         $verses = collect();
         $verses = $this->getVerses($soar_item->id, $read->id);
-        // dd(  $verses);
+
         return view('livewire.reciter.sora', compact('page', 'sora', 'read', 'verses'));
     }
 
@@ -63,7 +63,7 @@ class Sora extends Component
         // dd($sura);
         // dd($read);
         $name = 'ayat_timing_soar_read_' . $read . '_sura_' . $sura;
-        // Cache::forget($name);
+        Cache::forget($name);
         return Cache::rememberForever($name, function () use ($read,  $sura) {
             $data = DB::table('reads_timing')
                 ->leftJoin('quran_pages', function ($join) {

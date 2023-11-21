@@ -26,8 +26,10 @@ class Verse extends Component
         $read = Read::where('slug', $this->slug)
             ->where('status', 1)
             ->firstOrFail();
+            
         $soar_item = $read->soar()->where('id', $this->sora_id)->orderBy('id', 'ASC')->withPivot(['duration', 'filename', 'report'])->firstOrFail();
         $verse = $this->getVerse($soar_item->id, $read->id, $this->verse);
+
         $sora = [];
         $sora['id'] = $soar_item->getNum() . '-' . $read->id . '-' . $verse->ayah;
         $sora['read_id'] = $read->id;
@@ -60,7 +62,7 @@ class Verse extends Component
 
     public function getVerse($sura, $read, $verse)
     {
-        return DB::table('reads_timing')
+        $verse =  DB::table('reads_timing')
             ->leftJoin('quran_pages', function ($join) {
                 $join->on('reads_timing.ayah', '=', 'quran_pages.ayah');
                 $join->on('reads_timing.sura_id', '=', 'quran_pages.sura_id');
@@ -70,5 +72,11 @@ class Verse extends Component
             ->where('reads_timing.sura_id', $sura)
             ->select('reads_timing.ayah', 'quran_pages.text', 'reads_timing.start_time', 'reads_timing.end_time', 'quran_pages.x', 'quran_pages.y', DB::raw('CONCAT("https://www.mp3quran.net/api/quran_pages_svg/", quran_pages.page,".svg") as page'))
             ->first();
+        if ($verse) {
+            return $verse;
+        } else {
+            abort(404);
+        }
+        
     }
 }

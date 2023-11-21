@@ -53,7 +53,7 @@ class Show extends Component
                 $active_read = $i;
             }
             $i++;
-        }
+        }   
 
         $len = count($reciter_reads[$active_read]['soar']);
 
