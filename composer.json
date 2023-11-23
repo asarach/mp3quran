@@ -19,6 +19,7 @@
         "fideloper/proxy": "^4.0",
         "heroicpixels/filterable": "dev-master",
         "intervention/image": "^2.4",
+        "james-heinrich/getid3": "^1.9",
         "jenssegers/agent": "^2.6",
         "kislota/laravel_8_translation": "^1.0",
         "kyslik/column-sortable": "^6.0",

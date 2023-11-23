@@ -3,8 +3,10 @@
 namespace App\Console\Commands;
 
 use DB;
+use App\Read;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
+use getID3;
 
 
 class CreateReadsTiming extends Command
@@ -40,10 +42,64 @@ class CreateReadsTiming extends Command
      */
     public function handle()
     {
-        $this->ReadsTiming();
+        // $this->ReadsTiming();
+        $this->fixeReadsTiming();
         // $this->QuranPages();
         // $this->QuranPagesPages();
         // $this->QuranPagesPolygon();
+    }
+    public function fixeReadsTiming()
+    {
+        $reads = Read::whereIn('id', [1])->get();
+        foreach ($reads as $read) {
+            foreach ($read->soar as $sura) {
+
+                $times  =  DB::table('reads_timing')->where('read_id', $read->id)->where('sura_id',  $sura->id)->get();
+                $ayah = 0;
+                foreach ($times as $time) {
+                    $ayah = $time->ayah + 1;
+                    DB::table('reads_timing')
+                        ->where('id', $time->id) // Assuming 'id' is the primary key of the 'quran_pages' table
+                        ->update(['ayah' => $ayah]);
+                }
+
+                $remoteFileUrl =  $read->getAudioUrl($sura->id);
+
+                $mp3FilePath = $this->downloadRemoteFile($remoteFileUrl, $read->id);
+
+                // Initialize getID3
+                $getID3 = new getID3;
+
+                // Analyze the file
+                $fileInfo = $getID3->analyze($mp3FilePath);
+
+                $durationMilliseconds = round($fileInfo['playtime_seconds'] * 1000);
+                $ayah = $ayah + 1;
+                DB::table('reads_timing')->insert(
+                    [
+                        'read_id' => $read->id,
+                        'sura_id' => $sura->id,
+                        'ayah' => $ayah,
+                        'start_time' => $time->end_time,
+                        'end_time' => $durationMilliseconds,
+                    ]
+                );
+
+                dd($durationMilliseconds);
+            }
+        }
+    }
+    // Function to download a remote file locally
+    private function downloadRemoteFile($url, $read)
+    {
+        $localFilePath = storage_path('app/public/tmp/')  . $read  . '/';
+        if (!file_exists($localFilePath)) {
+            mkdir($localFilePath, 0755, true);
+        }
+
+        file_put_contents($localFilePath . basename($url), file_get_contents($url));
+
+        return $localFilePath . basename($url);
     }
     public function ReadsTiming()
     {
@@ -121,15 +177,14 @@ class CreateReadsTiming extends Command
                     $page = str_replace('quran_pages_pages/', '', $file);
                     $page = str_replace('.json', '', $page);
                     $items = json_decode(file_get_contents(storage_path('app/' . $file)), true);
-                   
+
                     foreach ($items as $key => $item) {
                         DB::table('quran_pages')->where('sura_id', $item['surahNumber'])->where('ayah', $item['ayahNumber'])->update(
                             [
-                                'page' =>   $page ,
+                                'page' =>   $page,
                             ]
                         );
                     }
-                   
                 }
             } catch (\Throwable $th) {
                 //throw $th;
@@ -148,11 +203,10 @@ class CreateReadsTiming extends Command
                     foreach ($items as $key => $item) {
                         DB::table('quran_pages')->where('sura_id', $item['surahNumber'])->where('ayah', $item['ayahNumber'])->update(
                             [
-                                'polygon' =>   $item['polygon'] ,
+                                'polygon' =>   $item['polygon'],
                             ]
                         );
                     }
-                   
                 }
             } catch (\Throwable $th) {
                 //throw $th;
