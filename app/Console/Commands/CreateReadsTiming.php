@@ -85,7 +85,6 @@ class CreateReadsTiming extends Command
                     ]
                 );
 
-                dd($durationMilliseconds);
             }
         }
     }
