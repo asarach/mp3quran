@@ -50,17 +50,37 @@ class CreateReadsTiming extends Command
     }
     public function fixeReadsTiming()
     {
-        $reads = Read::whereIn('id', [1])->get();
-        foreach ($reads as $read) {
+        $reads_map = [
+            // 's_bud' => [1], // DONE DELTED
+            // 'sds' => [1], // DONE DELTED
+            // 'ahmad_huth' => [1],  // DONE DELTED
+            // 'qht' => [1],  // DONE DELTED
+            // 'hthfi' => [1],// DONE DELTED
+            // 'ahmd-dyb-n-4' => [1], //  DONE DELTED
+            // 'ibrahim-dosri' => [1],//  DONE DELTED
+
+            // 'hafz' => [1, 9], // DONE
+            // 'mohna' => [1, 9], // DONE
+            // 'shaheen' => [1, 9],// DONE
+            // 'akdr' => [1, 9], // DONE
+            // 'bsfr' => [1, 9],// DONE
+
+            // 'husr' => [1], // to add TXT
+        ];
+        
+        foreach ($reads_map as $read_key => $read_map) {
+            $read = Read::where('slug', $read_key)->first();
             foreach ($read->soar as $sura) {
 
                 $times  =  DB::table('reads_timing')->where('read_id', $read->id)->where('sura_id',  $sura->id)->get();
                 $ayah = 0;
                 foreach ($times as $time) {
                     $ayah = $time->ayah + 1;
-                    DB::table('reads_timing')
+                    if (in_array($time->sura_id, $read_map)) {
+                        DB::table('reads_timing')
                         ->where('id', $time->id) // Assuming 'id' is the primary key of the 'quran_pages' table
                         ->update(['ayah' => $ayah]);
+                    }
                 }
 
                 $remoteFileUrl =  $read->getAudioUrl($sura->id);
@@ -74,7 +94,7 @@ class CreateReadsTiming extends Command
                 $fileInfo = $getID3->analyze($mp3FilePath);
 
                 $durationMilliseconds = round($fileInfo['playtime_seconds'] * 1000);
-                $ayah = $ayah + 1;
+                $ayah = $time->ayah + 1;
                 DB::table('reads_timing')->insert(
                     [
                         'read_id' => $read->id,
