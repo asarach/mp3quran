@@ -56,16 +56,15 @@ class CreateReadsTiming extends Command
             // 'ahmad_huth' => [1],  // DONE DELTED
             // 'qht' => [1],  // DONE DELTED
             // 'hthfi' => [1],// DONE DELTED
-            // 'ahmd-dyb-n-4' => [1], //  DONE DELTED
-            // 'ibrahim-dosri' => [1],//  DONE DELTED
+            // 'ahmd-dyb-n-4' => [1, 9],  //  DONE DELTED
+            'ibrahim-dosri' => [1, 9], //  DONE DELTED
 
             // 'hafz' => [1, 9], // DONE
             // 'mohna' => [1, 9], // DONE
             // 'shaheen' => [1, 9],// DONE
             // 'akdr' => [1, 9], // DONE
             // 'bsfr' => [1, 9],// DONE
-
-            // 'husr' => [1], // to add TXT
+            // 'husr' => [1], // DONE
         ];
         
         foreach ($reads_map as $read_key => $read_map) {
