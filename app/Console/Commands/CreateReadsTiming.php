@@ -57,7 +57,7 @@ class CreateReadsTiming extends Command
             // 'qht' => [1],  // DONE DELTED
             // 'hthfi' => [1],// DONE DELTED
             // 'ahmd-dyb-n-4' => [1, 9],  //  DONE DELTED
-            'ibrahim-dosri' => [1, 9], //  DONE DELTED
+            'ibrahim-dosri' => [1, 9], //  DONE DELTED // 75 , 74 , 73 , 71 , 67 , 58 , 57 , 56, 55, 53, 47, 46, 45, 44, 42, 41, 40, 39, 38, , 36, 35, 30 /////// 25, 21, 16, 10, 7
 
             // 'hafz' => [1, 9], // DONE
             // 'mohna' => [1, 9], // DONE
@@ -74,35 +74,40 @@ class CreateReadsTiming extends Command
                 $times  =  DB::table('reads_timing')->where('read_id', $read->id)->where('sura_id',  $sura->id)->get();
                 $ayah = 0;
                 foreach ($times as $time) {
-                    $ayah = $time->ayah + 1;
-                    if (in_array($time->sura_id, $read_map)) {
+                    // $ayah = $time->ayah + 1;
+                    // if (in_array($time->sura_id, $read_map)) {
+                    //     DB::table('reads_timing')
+                    //     ->where('id', $time->id) // Assuming 'id' is the primary key of the 'quran_pages' table
+                    //     ->update(['ayah' => $ayah]);
+                    // }
+                    if ($time->start_time == $time->end_time) {
                         DB::table('reads_timing')
                         ->where('id', $time->id) // Assuming 'id' is the primary key of the 'quran_pages' table
-                        ->update(['ayah' => $ayah]);
+                        ->delete();
                     }
                 }
 
-                $remoteFileUrl =  $read->getAudioUrl($sura->id);
+                // $remoteFileUrl =  $read->getAudioUrl($sura->id);
 
-                $mp3FilePath = $this->downloadRemoteFile($remoteFileUrl, $read->id);
+                // $mp3FilePath = $this->downloadRemoteFile($remoteFileUrl, $read->id);
 
-                // Initialize getID3
-                $getID3 = new getID3;
+                // // Initialize getID3
+                // $getID3 = new getID3;
 
-                // Analyze the file
-                $fileInfo = $getID3->analyze($mp3FilePath);
+                // // Analyze the file
+                // $fileInfo = $getID3->analyze($mp3FilePath);
 
-                $durationMilliseconds = round($fileInfo['playtime_seconds'] * 1000);
-                $ayah = $time->ayah + 1;
-                DB::table('reads_timing')->insert(
-                    [
-                        'read_id' => $read->id,
-                        'sura_id' => $sura->id,
-                        'ayah' => $ayah,
-                        'start_time' => $time->end_time,
-                        'end_time' => $durationMilliseconds,
-                    ]
-                );
+                // $durationMilliseconds = round($fileInfo['playtime_seconds'] * 1000);
+                // $ayah = $time->ayah + 1;
+                // DB::table('reads_timing')->insert(
+                //     [
+                //         'read_id' => $read->id,
+                //         'sura_id' => $sura->id,
+                //         'ayah' => $ayah,
+                //         'start_time' => $time->end_time,
+                //         'end_time' => $durationMilliseconds,
+                //     ]
+                // );
 
             }
         }

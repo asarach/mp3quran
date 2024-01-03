@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e5de8f706bf7714d5786206e79e62a31",
+    "content-hash": "00ed0f152f25ba3fb4db4eedb4c808ee",
     "packages": [
         {
             "name": "bhutanio/laravel-bencode",
