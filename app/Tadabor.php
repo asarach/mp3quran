@@ -48,11 +48,16 @@ class Tadabor extends Model implements ViewableContract
                 'id' => $this->id,
                 'audio_url' => $this->audio_url,
                 'video_url' => $this->video_url,
-                'image_url' => $this->image_url,
+                'image_url' => $this->image_url ?? asset("uploads/apps/lg/mp3-quran-maine-2-1-1.png"),
                 'text' => html_entity_decode($this->text),
                 'sora_name' => $this->getSoraName(),
                 'rewaya_name' => $this->getRewayaName(),
-                'reciter_name' => $this->getReciterName()
+                'reciter_name' => $this->getReciterName(),
+
+                'title' => $this->getLocaleTitle(),
+                'share_description' => $this->getLocaleShareDescription(),
+                'share_title' => $this->getLocaleShareTitle(),
+                'share_url' =>  route('tadabor.show', ['slug' => $this->id])
             ];
         } else {
             $array = [

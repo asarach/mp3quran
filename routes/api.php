@@ -52,3 +52,5 @@ $router->get('/api/v3/ayat_timing/soar', array('as' => 'api_3.ayat_timing_soar',
 
 $router->get('/api/v3/video_types', array('as' => 'api_3.video_types', 'uses' => 'Api3\VideoController@types'));
 $router->get('/api/v3/videos', array('as' => 'api_3.videos', 'uses' => 'Api3\VideoController@videos'));
+
+$router->get('/api/v3/verses_timings/updated', "Api3\VersesTimingsController@index");
