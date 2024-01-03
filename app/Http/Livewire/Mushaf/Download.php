@@ -121,7 +121,7 @@ class Download extends Component
 
     public function getTorrentsDatabase()
     {
-
+        dd( DB::connection('torrent')->table('namemap')->get());
         $files = DB::connection('torrent')->table('namemap')
             ->join('summary', 'namemap.info_hash', '=', 'summary.info_hash')
             ->leftJoin('comments', 'namemap.info_hash', '=', 'comments.info_hash')

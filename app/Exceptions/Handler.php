@@ -61,6 +61,13 @@ class Handler extends ExceptionHandler
         if ($request->expectsJson() OR strpos($request->path(), "api/v1") === 0) {
             return response()->json(['message' => 'Action not authorized!'], 401);
         }
+        if ($request->expectsJson() OR strpos($request->path(), "api/radio") === 0) {
+            return response()->json([
+                'code' => 10100,
+                'message' => 'Action not authorized!',
+                'data' => null
+            ], 401);
+        }
 
         return redirect()->guest(route('login'));
     }

@@ -41,6 +41,8 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapAdminRoutes();
 
+        $this->mapImoRoutes();
+
         $this->mapAuthRoutes();
 
         $this->mapApiRoutes();
@@ -52,28 +54,27 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapWebRoutes();
 
         $this->mapLivewireRoutes();
-
     }
 
     protected function mapAdminAjaxRoutes()
     {
-        Route::prefix(LaravelLocalization::setLocale() .'/admin/ajax')
+        Route::prefix(LaravelLocalization::setLocale() . '/admin/ajax')
             ->name('admin::')
             ->middleware('web', 'admin', 'admin.vue', 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath')
             ->namespace($this->namespace . '\Admin')
             ->group(base_path('routes/admin.php'));
     }
-   
+
     protected function mapAdminRoutes()
     {
-        Route::prefix(LaravelLocalization::setLocale() .'/admin')
+        Route::prefix(LaravelLocalization::setLocale() . '/admin')
             ->name('admin::')
             ->middleware('web', 'admin', 'admin.vue', 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath')
             ->namespace($this->namespace . '\Admin')
             ->group(base_path('routes/admin.php'));
     }
-    
-    
+
+
     protected function mapWebRoutes()
     {
         Route::prefix(LaravelLocalization::setLocale())
@@ -82,12 +83,19 @@ class RouteServiceProvider extends ServiceProvider
             ->group(base_path('routes/web.php'));
     }
 
-    
+
     protected function mapApiRoutes()
     {
-        Route::middleware('web', 'front' )
+        Route::middleware('web', 'front')
             ->namespace($this->namespace)
             ->group(base_path('routes/api.php'));
+    }
+
+    protected function mapImoRoutes()
+    {
+        Route::prefix('/api/radio')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/imo.php'));
     }
 
     protected function mapAuthRoutes()
@@ -100,14 +108,14 @@ class RouteServiceProvider extends ServiceProvider
 
     protected function mapAjaxRoutes()
     {
-        Route::prefix(LaravelLocalization::setLocale() .'/ajax')
+        Route::prefix(LaravelLocalization::setLocale() . '/ajax')
             ->name('ajax::')
             ->middleware('web', 'front', 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath')
             ->namespace($this->namespace)
             ->group(base_path('routes/ajax.php'));
     }
 
-    
+
     protected function mapRedirectRoutes()
     {
         Route::middleware('web', 'front', 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath')
@@ -115,7 +123,7 @@ class RouteServiceProvider extends ServiceProvider
             ->namespace($this->namespaceLivewire)
             ->group(base_path('routes/redirect.php'));
     }
-    
+
     protected function mapLivewireRoutes()
     {
         Route::middleware('web', 'front', 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath')
