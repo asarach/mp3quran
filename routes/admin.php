@@ -333,3 +333,9 @@ Route::delete('/video/{id}', array('as' => 'video.destroy', 'uses' => 'VideoCont
 Route::get('/video/restore/{id}', array('as' => 'video.restore', 'uses' => 'VideoController@restore'));
 Route::get('/video/{id}/status/{status}', array('as' => 'video.status', 'uses' => 'VideoController@changeStatus'));
 Route::post('/video/actions', array('as' => 'video.actions', 'uses' => 'VideoController@actions'));
+
+
+/* Advice  */
+Route::get('/imo', array('as' => 'radio.index', 'uses' => 'ImoController@index'));
+Route::get('/imo/{id}', array('as' => 'radio.read', 'uses' => 'ImoController@read'));
+Route::post('/imo/', array('as' => 'radio.store', 'uses' => 'ImoController@store'));

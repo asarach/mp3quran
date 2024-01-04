@@ -107,6 +107,7 @@ Vue.component('special_rewaya-form', require('./components/special_rewaya/Form.v
 Vue.component('server-form', require('./components/server/Form.vue').default);
 Vue.component('user-form', require('./components/user/Form.vue').default);
 Vue.component('menu-form', require('./components/menu/Form.vue').default);
+Vue.component('imo-form', require('./components/imo/Form.vue').default);
 Vue.component('upload-avatar', require('./components/user/UploadAvatar.vue').default);
 Vue.component('clear-cache', require('./components/partials/Cache.vue').default);
 

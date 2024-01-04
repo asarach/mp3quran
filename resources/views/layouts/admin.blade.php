@@ -260,6 +260,12 @@
                 <span>{{ trans('front.links')}}</span>
               </router-link>
             </li>
+            <li>
+              <router-link :to="prefix + 'imo'" exact>
+                <i class="fa fa-server"></i>
+                <span>{{ trans('front.imo-apis')}}</span>
+              </router-link>
+            </li>
           </ul>
         </div>
         <!-- sidebar-menu  -->

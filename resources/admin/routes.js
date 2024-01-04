@@ -321,5 +321,10 @@ module.exports = [{
     component: require('./components/user/Create.vue').default
 },
 
+//imo
+{
+    path: routes_base + 'imo',
+    component: require('./components/imo/Index.vue').default
+},
 
 ];
