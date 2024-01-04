@@ -544,10 +544,20 @@ export default {
     },
     totalSeconds(time) {
       let parts = time.split(":");
-      let minutes = parseInt(parts[0]);
-      let seconds = parseInt(parts[1]);
+      let hours = 0,
+        minutes = 0,
+        seconds = 0;
 
-      return minutes * 60 + seconds;
+      if (parts.length === 3) {
+        hours = parseInt(parts[0]);
+        minutes = parseInt(parts[1]);
+        seconds = parseInt(parts[2]);
+      } else if (parts.length === 2) {
+        minutes = parseInt(parts[0]);
+        seconds = parseInt(parts[1]);
+      }
+
+      return hours * 3600 + minutes * 60 + seconds;
     },
     storeAlbum() {
       var self = this;
