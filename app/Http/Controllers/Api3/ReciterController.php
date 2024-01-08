@@ -153,15 +153,15 @@ class ReciterController extends ApiController
                     ->where('sura_read.sura_id', $this->sura);
             }
 
-            // if ($this->language !== null) {
-            //     $reads = $reads->join('mushaf_translations', 'reads.mushaf_id', '=', 'mushaf_translations.mushaf_id')
-            //         ->join('rewaya_translations', 'reads.rewaya_id', '=', 'rewaya_translations.rewaya_id')
-            //         ->where('mushaf_translations.language_id', $this->language)
-            //         ->where('rewaya_translations.language_id', $this->language)
-            //         ->select('reads.*', 'mushafs.id as mushaf_id', 'mushaf_translations.name as mushaf_name', 'mushaf.name as mushaf_server', 'rewaya_translations.name as rewaya_name');
-            // } else {
+            if ($this->language !== null) {
+               $reads = $reads->join('mushaf_translations', 'reads.mushaf_id', '=', 'mushaf_translations.mushaf_id')
+                    ->join('rewaya_translations', 'reads.rewaya_id', '=', 'rewaya_translations.rewaya_id')
+                    ->where('mushaf_translations.language_id', $this->language)
+                    ->where('rewaya_translations.language_id', $this->language)
+                    ->select('reads.*', 'mushafs.id as mushaf_id', 'mushaf_translations.name as mushaf_name', 'mushafs.name as mushaf_server', 'rewaya_translations.name as rewaya_name');
+            } else {
             $reads = $reads->select('reads.*', 'mushafs.id as mushaf_id', 'mushafs.name as mushaf_name', 'rewayat.name as rewaya_name');
-            // }
+             }
 
             $reads = $reads->orderBy('id', 'desc')->get();
 
