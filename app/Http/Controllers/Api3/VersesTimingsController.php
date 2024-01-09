@@ -168,13 +168,13 @@ class VersesTimingsController extends Controller
                     "verses_timings" => $surah_timings->map(function($v) {
                         return [
                             'id'         => $v->id,
-                            'track_id'   => $v->read_id,
+                            'mushaf_id'   => $v->read_id,
                             'aya'        => $v->ayah,
                             'end_time'   => $v->end_time,
                             'start_time' => $v->start_time,
                             'created_at' => null,
                             'updated_at' => null,
-                            'mushaf_id'  => $v->quran?->mushaf_id,
+                            'mushaf_type'  => $v->quran?->mushaf_id,
                             'sura_id'    => $v->sura_id,
                         ];
                     })
