@@ -44,12 +44,12 @@ class ReciterController extends ApiController
     public function reads(Request $request)
     {
         $this->setParams($request);
-        $name = 'api_v3_reads_language_' . $this->language . '_last_updated_date_' . $this->last_updated_date . '_reciter_' . $this->reciter . '_rewaya_' . $this->rewaya . '_sura_' . $this->sura;
+      /*  $name = 'api_v3_reads_language_' . $this->language . '_last_updated_date_' . $this->last_updated_date . '_reciter_' . $this->reciter . '_rewaya_' . $this->rewaya . '_sura_' . $this->sura;
         Cache::forget($name);
         $reads = Cache::rememberForever($name, function () {
             return $this->getReads();
-        });
-
+        });*/
+        $reads = $this->getReads();
         return compact('reads');
     }
 
@@ -71,11 +71,13 @@ class ReciterController extends ApiController
     public function recentReads(Request $request)
     {
         $this->setParams($request);
-        $name = 'api_v3_recent_reads_language_' . $this->language . '_last_updated_date_' . $this->last_updated_date . '_reciter_' . $this->reciter . '_rewaya_' . $this->rewaya . '_sura_' . $this->sura;
+       /* $name = 'api_v3_recent_reads_language_' . $this->language . '_last_updated_date_' . $this->last_updated_date . '_reciter_' . $this->reciter . '_rewaya_' . $this->rewaya . '_sura_' . $this->sura;
         Cache::forget($name);
         $reads = Cache::rememberForever($name, function () {
             return $this->getReads('updated_at', 'desc');
-        });
+        });*/
+
+        $reads = $this->getReads('updated_at', 'desc');
 
         return compact('reads');
     }
@@ -102,12 +104,12 @@ class ReciterController extends ApiController
     public function reciters(Request $request)
     {
         $this->setParams($request);
-        $name = 'api_v3_reads_language_' . $this->language . '_last_updated_date_' . $this->last_updated_date . '_reciter_' . $this->reciter . '_rewaya_' . $this->rewaya . '_sura_' . $this->sura;
+        /*$name = 'api_v3_reads_language_' . $this->language . '_last_updated_date_' . $this->last_updated_date . '_reciter_' . $this->reciter . '_rewaya_' . $this->rewaya . '_sura_' . $this->sura;
         Cache::forget($name);
         $reciters = Cache::rememberForever($name, function () {
             return $this->getReciters();
-        });
-
+        });*/
+        $reciters = $this->getReciters();
         return compact('reciters');
     }
 
@@ -143,6 +145,12 @@ class ReciterController extends ApiController
                 ->leftJoin('mushafs', 'mushafs.id', '=', 'reads.mushaf_id')
                 ->where('reads.reciter_id', $reciter->id);
 
+            if (request()->last_update) {
+                $date = Carbon::parse(request()->last_update)->format('Y-m-d');
+
+                $reads->whereDate('reads.updated_at', '>=', $date);
+            }
+
             if ($this->rewaya !== null) {
                 $reads = $reads->where('reads.rewaya_id', $this->rewaya);
             }
@@ -153,14 +161,14 @@ class ReciterController extends ApiController
                     ->where('sura_read.sura_id', $this->sura);
             }
 
-            if ($this->language !== null) {
-               $reads = $reads->join('mushaf_translations', 'reads.mushaf_id', '=', 'mushaf_translations.mushaf_id')
-                    ->join('rewaya_translations', 'reads.rewaya_id', '=', 'rewaya_translations.rewaya_id')
-                    ->where('mushaf_translations.language_id', $this->language)
-                    ->where('rewaya_translations.language_id', $this->language)
-                    ->select('reads.*', 'mushafs.id as mushaf_id', 'mushaf_translations.name as mushaf_name', 'mushafs.name as mushaf_server', 'rewaya_translations.name as rewaya_name');
-            } else {
-            $reads = $reads->select('reads.*', 'mushafs.id as mushaf_id', 'mushafs.name as mushaf_name', 'rewayat.name as rewaya_name');
+             if ($this->language !== null) {
+                 $reads = $reads->join('mushaf_translations', 'reads.mushaf_id', '=', 'mushaf_translations.mushaf_id')
+                     ->join('rewaya_translations', 'reads.rewaya_id', '=', 'rewaya_translations.rewaya_id')
+                     ->where('mushaf_translations.language_id', $this->language)
+                     ->where('rewaya_translations.language_id', $this->language)
+                     ->select('reads.*', 'mushafs.id as mushaf_id', 'mushaf_translations.name as mushaf_name', 'mushaf.name as mushaf_server', 'rewaya_translations.name as rewaya_name');
+             } else {
+                 $reads = $reads->select('reads.*', 'mushafs.id as mushaf_id', 'mushafs.name as mushaf_name', 'rewayat.name as rewaya_name');
              }
 
             $reads = $reads->orderBy('id', 'desc')->get();
@@ -212,6 +220,12 @@ class ReciterController extends ApiController
     public function getReciters($order = 'name', $sort = 'asc')
     {
         $reciters = Reciter::where('status', 1);
+
+        if (request()->last_update) {
+            $date = Carbon::parse(request()->last_update)->format('Y-m-d');
+
+            $reciters->whereDate('reciters.updated_at', '>=', $date);
+        }
 
         if ($this->reciter !== null) {
             $reciters = $reciters->where('reciters.id', $this->reciter);

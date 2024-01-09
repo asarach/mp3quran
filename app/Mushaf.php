@@ -18,7 +18,7 @@ class Mushaf extends Model
 
     protected $dates = ['deleted_at'];
 
-    public  $timestamps  = false;
+    //public  $timestamps  = false;
 
     protected $table = 'mushafs';
 

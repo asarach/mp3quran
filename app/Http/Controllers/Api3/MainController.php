@@ -39,11 +39,12 @@ class MainController extends ApiController
     public function languages(Request $request)
     {
         $this->setParams($request);
-        Cache::forget('api_v3_languages');
+      /*  Cache::forget('api_v3_languages');
         $language = Cache::rememberForever('api_v3_languages', function () {
             return $this->getLanguages();
-        });
+        });*/
 
+        $language = $this->getLanguages();
         return compact('language');
     }
 
@@ -125,30 +126,64 @@ class MainController extends ApiController
     public function liveTv(Request $request)
     {
         $this->setParams($request);
-        $name = 'api_v3_live_tv_' . $request->input('language');
-        // Cache::forget($name);
-        $livetv = Cache::rememberForever($name, function () {
-            $livetv = DB::table('tvs')->where('status', 1);
-            if ($this->language !== null) {
-                $livetv = $livetv->join('translator_translations', 'tvs.id', '=', 'translator_translations.item')
-                    ->where('translator_translations.locale', $this->language_code)
-                    ->where('translator_translations.group', 'tv-name')
-                    ->select('tvs.id', 'translator_translations.text as name', 'tvs.url');
-            } else {
-                $livetv = $livetv->select('tvs.id', 'tvs.name', 'tvs.url');
-            }
-            return $livetv->get();
-        });
+        /* $name = 'api_v3_live_tv_' . $request->input('language');
+         // Cache::forget($name);
+       /*$livetv = Cache::rememberForever($name, function () {
+             $livetv = DB::table('tvs')->where('status', 1);
+
+             if (request()->last_update) {
+                 $date = Carbon::parse(request()->last_update)->format('Y-m-d');
+
+                 $livetv->whereDate('tvs.updated_at', '>=', $date);
+             }
+
+             if ($this->language !== null) {
+                 $livetv = $livetv->join('translator_translations', 'tvs.id', '=', 'translator_translations.item')
+                     ->where('translator_translations.locale', $this->language_code)
+                     ->where('translator_translations.group', 'tv-name')
+                     ->select('tvs.id', 'translator_translations.text as name', 'tvs.url');
+             } else {
+                 $livetv = $livetv->select('tvs.id', 'tvs.name', 'tvs.url');
+             }
+             return $livetv->get();
+         });*/
+
+        $livetv = DB::table('tvs')->where('status', 1);
+
+        if (request()->last_update) {
+            $date = Carbon::parse(request()->last_update)->format('Y-m-d');
+
+            $livetv->whereDate('tvs.updated_at', '>=', $date);
+        }
+
+        if ($this->language !== null) {
+            $livetv = $livetv->join('translator_translations', 'tvs.id', '=', 'translator_translations.item')
+                ->where('translator_translations.locale', $this->language_code)
+                ->where('translator_translations.group', 'tv-name')
+                ->select('tvs.id', 'translator_translations.text as name', 'tvs.url');
+        } else {
+            $livetv = $livetv->select('tvs.id', 'tvs.name', 'tvs.url');
+        }
+
+        $livetv = $livetv->get();
 
         return compact('livetv');
     }
+
     public function radios(Request $request)
     {
         $this->setParams($request);
-        $name = 'api_v3_radios_' . '_last_updated_date_' . $this->last_updated_date . $request->input('language');
+       /* $name = 'api_v3_radios_' . '_last_updated_date_' . $this->last_updated_date . $request->input('language');
         // Cache::forget($name);
         $radios = Cache::rememberForever($name, function () {
             $radios = DB::table('radios')->where('status', 1);
+
+            if (request()->last_update) {
+                $date = Carbon::parse(request()->last_update)->format('Y-m-d');
+
+                $radios->whereDate('radios.updated_at', '>=', $date);
+            }
+
             if ($this->language !== null) {
                 $radios = $radios->join('translator_translations', 'radios.id', '=', 'translator_translations.item')
                     ->where('translator_translations.locale', $this->language_code)
@@ -164,7 +199,31 @@ class MainController extends ApiController
             }
 
             return $radios->get();
-        });
+        });*/
+
+        $radios = DB::table('radios')->where('status', 1);
+
+        if (request()->last_update) {
+            $date = Carbon::parse(request()->last_update)->format('Y-m-d');
+
+            $radios->whereDate('radios.updated_at', '>=', $date);
+        }
+
+        if ($this->language !== null) {
+            $radios = $radios->join('translator_translations', 'radios.id', '=', 'translator_translations.item')
+                ->where('translator_translations.locale', $this->language_code)
+                ->where('translator_translations.group', 'radio-name')
+                ->select('radios.id', 'translator_translations.text as name', 'radios.url', 'radios.created_at as recent_date');
+        } else {
+            $radios = $radios->select('radios.id', 'radios.name', 'radios.url');
+        }
+
+        if ($this->last_updated_date !== null) {
+            $date = Carbon::parse($this->last_updated_date)->toDateTimeString();
+            $radios = $radios->where('radios.updated_at', '>=', $date);
+        }
+
+        $radios = $radios->get();
 
         return compact('radios');
     }

@@ -38,22 +38,28 @@ class ApiTimingController extends ApiController
     public function index(Request $request)
     {
         $this->setParams($request);
-        $name = 'ayat_timing_v3_soar_read_' . $this->read . '_sura_' . $this->sura;
+      /*  $name = 'ayat_timing_v3_soar_read_' . $this->read . '_sura_' . $this->sura;
         Cache::forget($name);
         $data = Cache::rememberForever($name, function () {
             return $this->getTimings();
-        });
+        });*/
+
+        $data = $this->getTimings();
+
         return $data;
     }
 
     public function reads(Request $request)
     {
         $this->setParams($request);
-        $name = 'ayat_timing_v3_reads';
+       /* $name = 'ayat_timing_v3_reads';
         Cache::forget($name);
         $reads = Cache::rememberForever($name, function () {
             return $this->getTimingReads();
-        });
+        });*/
+
+        $reads = $this->getTimingReads();
+
         return $reads;
     }
 
@@ -72,17 +78,22 @@ class ApiTimingController extends ApiController
 
     public function getTimings()
     {
-        $data = DB::table('reads_timing')
+        $builder = DB::table('reads_timing')
             ->leftJoin('quran_pages', function ($join) {
                 $join->on('reads_timing.ayah', '=', 'quran_pages.ayah');
                 $join->on('reads_timing.sura_id', '=', 'quran_pages.sura_id');
             })
             ->where('reads_timing.read_id', $this->read)
             ->where('reads_timing.sura_id', $this->sura)
-            ->select('reads_timing.ayah', 'quran_pages.polygon', 'reads_timing.start_time', 'reads_timing.end_time', 'quran_pages.x', 'quran_pages.y', DB::raw('CONCAT("https://www.mp3quran.net/api/quran_pages_svg/", quran_pages.page,".svg") as page'))
-            ->get();
+            ->select('reads_timing.ayah', 'quran_pages.polygon', 'reads_timing.start_time', 'reads_timing.end_time', 'quran_pages.x', 'quran_pages.y', DB::raw('CONCAT("https://www.mp3quran.net/api/quran_pages_svg/", quran_pages.page,".svg") as page'));
 
-        return $data;
+        if (request()->last_update) {
+            $date = Carbon::parse(request()->last_update)->format('Y-m-d');
+
+            $builder->whereDate('reads_timing.updated_at', '>=', $date);
+        }
+
+        return $builder->get();
     }
 
     public function getTimingReads()
@@ -92,7 +103,15 @@ class ApiTimingController extends ApiController
             ->get()
             ->pluck('read_id');
 
-        $reads = Read::whereIn('id', $reads_ids)->whereNull('special_rewaya_id')->get();
+        $builder = Read::whereIn('id', $reads_ids)->whereNull('special_rewaya_id');
+
+        if (request()->last_update) {
+            $date = Carbon::parse(request()->last_update)->format('Y-m-d');
+
+            $builder->whereDate('updated_at', '>=', $date);
+        }
+
+        $reads = $builder->get();
 
         $items = [];
         foreach ($reads as  $read) {

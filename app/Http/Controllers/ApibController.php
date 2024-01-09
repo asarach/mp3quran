@@ -448,7 +448,7 @@ class ApibController extends Controller
                         ->join('rewaya_translations', 'reads.rewaya_id', '=', 'rewaya_translations.rewaya_id')
                         ->where('mushaf_translations.language_id', $this->language->id)
                         ->where('rewaya_translations.language_id', $this->language->id)
-                        ->select('reads.*', 'mushafs.id as mushaf_id', 'mushaf_translations.name as mushaf_name', 'mushaf.name as mushaf_server', 'rewaya_translations.name as rewaya_name');
+                        ->select('reads.*', 'mushafs.id as mushaf_id', 'mushaf_translations.name as mushaf_name', 'mushafs.name as mushaf_server', 'rewaya_translations.name as rewaya_name');
                 } else {
                     $reads = $reads->select('reads.*', 'mushafs.id as mushaf_id', 'mushafs.name as mushaf_name', 'rewayat.name as rewaya_name');
                 }

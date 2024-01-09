@@ -12,11 +12,16 @@ class Author extends Model
 
     public function qurans()
     {
-        return $this->hasMany(Quran::class, 'reciter_id', 'id');
+        return $this->hasMany(Mushaf::class, 'reciter_id', 'id');
     }
 
     public function quran()
     {
-        return $this->hasOne(Quran::class, 'reciter_id', 'id');
+        return $this->hasOne(Mushaf::class, 'reciter_id', 'id');
+    }
+
+    public function translations()
+    {
+        return $this->hasMany(AuthorTranslation::class,'reciter_id','id');
     }
 }

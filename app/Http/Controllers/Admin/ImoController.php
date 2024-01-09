@@ -38,8 +38,6 @@ class ImoController extends Controller
 
     public function index()
     {
-        // \App::setLocale('eng');
-        dd(LaravelLocalization::getCurrentLocale());
         $reads = $this->read->model->get();
         $rewayat = $this->rewaya->model->get();
 
@@ -75,7 +73,9 @@ class ImoController extends Controller
 
     public function read($id)
     {
-        \App::setLocale('eng');
+        
+
+        // \App::setLocale('eng');
 
         $read = $this->read->model
             ->with(['soar', 'reciter', 'special_rewaya:id,name', 'rewaya:id,name', 'mushaf:id,name', 'server'])
@@ -92,7 +92,11 @@ class ImoController extends Controller
             $sora->name = $sora->getLocaleName();
         }
 
-        $lang = App::getLocale();
+        $lang = LaravelLocalization::getCurrentLocale();
+        if ($lang == 'eng') {
+            $lang = 'en';
+        }
+        
         $read->time = $read->created_at->timestamp;
         $read->base_url = $read->server->url . '/' . $read->url . '/';
         return compact('read', 'lang');

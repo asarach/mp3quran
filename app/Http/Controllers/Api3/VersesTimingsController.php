@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Api3;
 use App\Http\Controllers\Controller;
 use App\Models\Author;
 use App\Models\Mushaf;
-use App\Models\Quran;
 use App\Models\QuranVerseTiming;
+use App\Models\SurahRead;
 use Illuminate\Http\Request;
 
 class VersesTimingsController extends Controller
@@ -21,8 +21,10 @@ class VersesTimingsController extends Controller
         $limit = request()->filled("limit") ? request()->get("limit") : 10;
 
         // Tracks
-        $builder = Quran::orderBy("id", "asc")
-            ->has("verses_timing");//single relation
+        /*$builder = Quran::orderBy("id", "asc")
+            ->has("verses_timing");*///single relation
+
+        $builder = SurahRead::orderBy("id", "asc");
 
         if ($request->filled("last_update")) {
 
@@ -41,10 +43,12 @@ class VersesTimingsController extends Controller
         $tracks = $tracks->map(function ($track) {
             return [
                 "id" => $track->id,
-                "mushaf_id" => $track->mushaf_id,
-                "sura" => $track->verses_timing?->sura_id,
-                "created_at" => $track->created_at,
-                "updated_at" => $track->updated_at,
+                "mushaf_id" => $track->read_id,
+                "sura" => $track->sura_id,
+                'duration' => $track->duration,
+                'filename' => $track->filename,
+                "created_at" => $track->created_at?->format("Y-m-d H:i:s"),
+                "updated_at" => $track->updated_at?->format("Y-m-d H:i:s"),
                 "qualities" => []/*$track->sounds->map(function($sound) {
                     return [
                         "bitrate" => $sound->quality,
@@ -56,11 +60,10 @@ class VersesTimingsController extends Controller
             ];
         });
 
-
         // Authors
         $builder = Author::orderBy("id", "asc")
-            ->with('quran')
-            ->has("qurans.verses_timings");
+            ->with(['translations']);
+            //->has("qurans.verses_timings");
 
         if ($request->filled("last_update")) {
 
@@ -79,30 +82,43 @@ class VersesTimingsController extends Controller
         $authors = $authors->map(function ($author) {
             return [
                 "id" => $author->id,
-                "slug" => $author->quran?->slug,
+                "slug" => "",
                 "country_iso" => "",
-                "website_url" => $author->quran?->url,
+                "website_url" => "",
                 "facebook_url" => "",
                 "twitter_url" => "",
                 "google_plus_url" => "",
                 "youtube_url" => "",
-                "soundcloud_url" => $author->quran?->itunes,
-                "is_active" => $author->quran?->status,
+                "soundcloud_url" => "",
+                "is_active" => $author?->status,
                 "created_at" => $author->created_at,
                 "updated_at" => $author->updated_at,
-                "translations" => [[
-                    "locale"        => 'ar',
-                    "name"          => $author->quran?->title ?? $author->name,
-                    "name_search"   => $author->name,
-                    "about"         => $author->quran?->description,
-                ]]
+                "translations" => $author->translations->isNotEmpty() ?
+                    $author->translations?->map(function($translation) {
+                        return [
+                            "locale"        => $translation->language_id,
+                            "language_id"   => $translation->language_id,
+                            "name"          => $translation->name,
+                            "name_search"   => $translation->name,
+                            "about"         => "",
+                            "letter"         => $translation->letter,
+                        ];
+                    })
+                    : [
+                        [
+                            "locale"        => 'ar',
+                            "name"          => $author->name,
+                            "name_search"   => $author->name,
+                            "about"         => $author?->description,
+                        ]
+                    ]
             ];
         });
 
         // Mushafs
         $query = Mushaf::orderBy("id", "asc")
-            ->with("authors")
-            ->has("qurans.verses_timings");
+            ->with("authors");
+           // ->has("qurans.verses_timings");
 
         if ($request->filled("last_update")) {
 
@@ -121,25 +137,25 @@ class VersesTimingsController extends Controller
             return [
                 "id" => $mushaf->id,
                 "slug" => $mushaf->slug,
-                "narration_id"=> null,
-                "type_id"    => null,
-                "reciter_id" => $mushaf->authors->count() ? $mushaf->authors->first()?->id : 0,
+                "narration_id"=> $mushaf->special_rewaya_id,
+                "type_id"    => $mushaf->mushaf_id,
+                "reciter_id" => $mushaf->reciter_id,
                 "locale"     => 'ar',
                 "is_active"  => $mushaf->status,
-                "created_at" => null,
-                "updated_at" => null,
+                "created_at" => $mushaf->created_at?->format("Y-m-d H:i:s"),
+                "updated_at" => $mushaf->updated_at?->format("Y-m-d H:i:s"),
                 "translations" => [
                     [
                         "locale"      => 'ar',
-                        "name"        => $mushaf->name,
-                        "description" => "",
+                        "name"        => $mushaf->title,
+                        "description" => $mushaf->description,
                     ]
                 ]
             ];
         });
 
         // Verses Timings
-        $query = QuranVerseTiming::orderBy("id", "asc")->with("quran");
+        $query = QuranVerseTiming::orderBy("id", "asc")->with(["moshaf"]);
 
         if ($request->filled("last_update")) {
 
@@ -168,13 +184,14 @@ class VersesTimingsController extends Controller
                     "verses_timings" => $surah_timings->map(function($v) {
                         return [
                             'id'         => $v->id,
-                            'mushaf_id'   => $v->read_id,
+                            'track_id'   => $v->track()->where('sura_id', $v->sura_id)->first()?->id,
+                            'mushaf_id'  => $v->read_id,
                             'aya'        => $v->ayah,
                             'end_time'   => $v->end_time,
                             'start_time' => $v->start_time,
-                            'created_at' => null,
-                            'updated_at' => null,
-                            'mushaf_type'  => $v->quran?->mushaf_id,
+                            'created_at' => $v->created_at?->format("Y-m-d H:i:s"),
+                            'updated_at' => $v->updated_at?->format("Y-m-d H:i:s"),
+                            'mushaf_type'=> $v->moshaf?->mushaf_id,
                             'sura_id'    => $v->sura_id,
                         ];
                     })
@@ -183,3 +200,5 @@ class VersesTimingsController extends Controller
         ];
     }
 }
+// reads => musahf table (id is mushaf id)
+// sura_read is the track table, track id should be filename

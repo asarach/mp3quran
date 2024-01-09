@@ -2,17 +2,20 @@
 
 namespace App\Models;
 
-use App\Models\Quran;
 use Illuminate\Database\Eloquent\Model;
 
 class QuranVerseTiming extends Model
 {
     protected $table = 'reads_timing';
     protected $guarded = ['id'];
-    public $timestamps = false;
 
-    public function quran()
+    public function moshaf()
     {
-        return $this->belongsTo(Quran::class, "read_id", "id");
+        return $this->belongsTo(Mushaf::class, "read_id", "id");
+    }
+
+    public function track()
+    {
+        return $this->hasOne(SurahRead::class, "read_id", "read_id");
     }
 }

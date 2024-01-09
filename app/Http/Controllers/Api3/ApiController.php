@@ -8,6 +8,7 @@ use App\Mushaf;
 use App\Rewaya;
 use App\Reciter;
 use App\Models\Tafsir;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\LazyCollection;
@@ -34,7 +35,16 @@ class ApiController extends BaseController
 
     public function getLanguages()
     {
-        $languages = Language::get();
+        $builder = Language::query();
+
+        if (request()->last_update) {
+            $date = Carbon::parse(request()->last_update)->format('Y-m-d');
+
+            $builder->whereDate('updated_at', '>=', $date);
+        }
+
+        $languages = $builder->get();
+
         $langs = [];
         foreach ($languages as $language) {
             $item = [];
@@ -90,6 +100,13 @@ class ApiController extends BaseController
         $rewayat = $rewayat->orderBy('id')->get();
 
         $mushaf = Mushaf::where('status', 1);
+
+        if (request()->last_update) {
+            $date = Carbon::parse(request()->last_update)->format('Y-m-d');
+
+            $mushaf->whereDate('updated_at', '>=', $date);
+        }
+
         if ($this->language !== null) {
             $mushaf = $mushaf->join('mushaf_translations', 'mushafs.id', '=', 'mushaf_translations.mushaf_id')
                 ->where('language_id', $this->language->id)

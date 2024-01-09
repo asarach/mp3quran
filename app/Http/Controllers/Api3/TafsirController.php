@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api3;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use App\Http\Controllers\Api3\ApiController;
@@ -22,10 +23,12 @@ class TafsirController extends ApiController
     public function tafasir(Request $request)
     {
         $this->setParams($request);
-        Cache::forget('api_v3_tafasir_' . $request->input('language'));
+       /* Cache::forget('api_v3_tafasir_' . $request->input('language'));
         $tafasir = Cache::rememberForever('api_v3_tafasir_' . $request->input('language'), function () {
             return $this->getTafasir();
-        });
+        });*/
+
+        $tafasir = $this->getTafasir();
 
         return compact('tafasir');
     }
@@ -33,11 +36,13 @@ class TafsirController extends ApiController
     {
         $this->setParams($request);
 
-        $name = 'api_v3_tafsir_' . $request->input('language') . '_tafsir_id_' . $request->input('tafsir_id');
+        /*$name = 'api_v3_tafsir_' . $request->input('language') . '_tafsir_id_' . $request->input('tafsir_id');
         Cache::forget($name);
         $tafasir = Cache::rememberForever($name, function () {
             return $this->getTafsir();
-        });
+        });*/
+
+        $tafasir = $this->getTafsir();
 
         return compact('tafasir');
     }
@@ -53,6 +58,13 @@ class TafsirController extends ApiController
         } else {
             $tafasir = $tafasir->select('tafsirs.id', 'tafsirs.name');
         }
+
+        if (request()->last_update) {
+            $date = Carbon::parse(request()->last_update)->format('Y-m-d');
+
+            $tafasir->whereDate('tafsirs.updated_at', '>=', $date);
+        }
+
         $tafasir = $tafasir->get()->toArray();
         $result = [];
         foreach ($tafasir as  $tafsir) {
@@ -65,6 +77,13 @@ class TafsirController extends ApiController
     public function getTafsir()
     {
         $tsoras = Tsora::where('status', 1);
+
+        if (request()->last_update) {
+            $date = Carbon::parse(request()->last_update)->format('Y-m-d');
+
+            $tsoras->whereDate('updated_at', '>=', $date);
+        }
+
         if ($this->tafsir !== null) {
             $tsoras = $tsoras->where('tafsir_id', $this->tafsir);
         }
@@ -84,6 +103,6 @@ class TafsirController extends ApiController
             // $result[] = $tsoras->whereNotIN('sura_id', $suras_ids)->sortBy('order')->values()->toArray();
         }
 
-        return ['name' => $tsoras->first()->getTafsirLocaleName(), 'soar' => $result];
+        return ['name' => $tsoras->first()?->getTafsirLocaleName(), 'soar' => $result];
     }
 }
