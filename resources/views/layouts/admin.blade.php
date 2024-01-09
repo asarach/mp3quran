@@ -32,6 +32,7 @@
               'name' => settings('app_name'),
               'urlBase' => getUrlBase(),
               'appUrl' => config('app.url'),
+              'current_language' => LaravelLocalization::getCurrentLocale(),
               'user' => Auth::user()
       ]) !!};
   </script>

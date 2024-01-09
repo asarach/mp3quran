@@ -22,10 +22,14 @@ Vue.prototype.trans = (string, args) => {
 
 import Vuex from 'vuex'
 Vue.use(Vuex)
+let lang = window.App.current_language;
+if (!lang) {
+  lang = 'ar';
+}
 
 const store = new Vuex.Store({
   state: {
-    current_language: 'ar',
+    current_language: lang,
     current_menu: {
       name: '',
       id: '',

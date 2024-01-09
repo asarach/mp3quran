@@ -83,6 +83,13 @@
                             <i class="uni-icon icon-account_circle"></i> {{ Auth::user()->name }}
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            
+                            @if (Auth::user()->hasRole(['admin', 'super-admin']))
+                            <a class="dropdown-item   @if(request()->url()  == LaravelLocalization::localizeUrl('admin') ) active @endif"  data-turbolinks="false" href="{{ route('admin::index') }}">
+                                <span class="icon-settings"></span>
+                                {{trans('front.dashboard')}}
+                            </a>
+                            @endif
                             <a class="dropdown-item   @if(request()->url()  == LaravelLocalization::localizeUrl('favorites') ) active @endif" href="{{ route('page.favorites') }}">
                                 <span class="icon-favorite"></span>
                                 {{trans('text.favorites')}}
