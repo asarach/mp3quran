@@ -242,18 +242,18 @@
             >
           </div>
           <div class="form-group mx-2">
-            <label class="col-form-label">author_level</label>
+            <label class="col-form-label">album_level</label>
             <input
               type="text"
-              name="author_level"
+              name="album_level"
               class="form-control"
-              v-model="album.author_level"
-              @keydown="errors.clear('author_level')"
+              v-model="album.album_level"
+              @keydown="errors.clear('album_level')"
             />
             <small
               class="form-text text-danger"
-              v-if="errors.has('album_list.' + 0 + '.author_level')"
-              >{{ errors.get("album_list." + 0 + ".author_level") }}</small
+              v-if="errors.has('album_list.' + 0 + '.album_level')"
+              >{{ errors.get("album_list." + 0 + ".album_level") }}</small
             >
           </div>
           <div class="form-group mx-2">
@@ -465,7 +465,7 @@ export default {
         author_name: "",
         author_avatar: "",
         author_desc: "",
-        author_level: "",
+        album_level: "",
         item_type: "",
       },
       action: "create",
@@ -499,7 +499,7 @@ export default {
           self.album.author_name = response.data.read.reciter.name;
           self.album.author_avatar = "";
           self.album.author_desc = response.data.read.reciter.description;
-          self.album.author_level = "3+";
+          self.album.album_level = "3+";
           self.album.item_type = "audio";
 
           // add each item of response.data.read.soar to soar array

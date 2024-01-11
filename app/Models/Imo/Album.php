@@ -14,7 +14,7 @@ class Album extends Model
     protected $fillable = [
         'album_id', 'album_cover', 'album_title', 'album_desc', 'album_lang', 'album_type', 
         'album_label', 'album_nature', 'album_duration', 'album_score', 'album_time', 
-        'author_name', 'author_avatar', 'author_desc', 'author_level', 'item_type'
+        'author_name', 'author_avatar', 'author_desc', 'album_level', 'item_type'
     ];
 
 }

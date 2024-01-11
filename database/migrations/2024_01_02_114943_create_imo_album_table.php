@@ -28,7 +28,7 @@ class CreateImoAlbumTable extends Migration
             $table->string('author_name')->nullable();
             $table->string('author_avatar')->nullable();
             $table->text('author_desc')->nullable();
-            $table->string('author_level')->nullable();
+            $table->string('album_level')->nullable();
             $table->string('item_type')->nullable();
             $table->timestamps();
         });

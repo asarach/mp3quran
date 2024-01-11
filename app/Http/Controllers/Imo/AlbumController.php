@@ -61,7 +61,7 @@ class AlbumController extends ImoController
                 'album_list.*.author_name' => 'required',
                 'album_list.*.author_avatar' => 'required',
                 'album_list.*.author_desc' => 'required',
-                'album_list.*.author_level' => 'required',
+                'album_list.*.album_level' => 'required',
                 'album_list.*.item_type' => 'required'
             ]);
         } catch (ValidationException $e) {
@@ -102,7 +102,7 @@ class AlbumController extends ImoController
                 'album_list.*.author_name' => 'required',
                 'album_list.*.author_avatar' => 'required',
                 'album_list.*.author_desc' => 'required',
-                'album_list.*.author_level' => 'required',
+                'album_list.*.album_level' => 'required',
                 'album_list.*.item_type' => 'required'
             ]);
         } catch (ValidationException $e) {
