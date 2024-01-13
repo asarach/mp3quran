@@ -569,6 +569,25 @@ export default {
       axios
         .post(this.ajax_prefix + "imo", data)
         .then((response) => {
+          if (response.message == "success") {
+            self.$notify({
+              group: "admin",
+              text: self.trans("admin.album-added"),
+              type: "success",
+              title: self.trans("admin.success"),
+            });
+          } else {
+            self.errors.record({
+              response: { data: { errors: response.data.data } },
+            });
+            self.$notify({
+              group: "admin",
+              text: self.trans("admin.album-not-added"),
+              type: "warning",
+              title: self.trans("admin.warning"),
+            });
+          }
+
           self.$notify({
             group: "admin",
             text: self.trans("admin.album-added"),
