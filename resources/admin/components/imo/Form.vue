@@ -571,7 +571,8 @@ export default {
       axios
         .post(this.ajax_prefix + "imo", data)
         .then((response) => {
-          if (response.message && response.message == "Validation error") {
+          console.log(response);
+          if (response.data.message && response.data.message == "Validation error") {
             self.errors.record({
               response: { data: { errors: response.data.data } },
             });
