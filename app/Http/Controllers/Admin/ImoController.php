@@ -57,7 +57,7 @@ class ImoController extends Controller
     public function setAccessToken()
     {
         $ImoAccessTokena = session('ImoAccessTokena');
-        // dd(env('IMO_CLIENT_DOMAIN') );
+
         if (!$ImoAccessTokena) {
             $response = Http::withHeaders([
                 'Content-Type' => 'application/json',
@@ -76,9 +76,6 @@ class ImoController extends Controller
 
     public function read($id)
     {
-        
-
-        // \App::setLocale('eng');
 
         $read = $this->read->model
             ->with(['soar', 'reciter', 'special_rewaya:id,name', 'rewaya:id,name', 'mushaf:id,name', 'server'])
@@ -113,13 +110,14 @@ class ImoController extends Controller
         ])->post(env('IMO_CLIENT_DOMAIN') . '/api/radio/album/add', [
             'album_list'    => [$input['album']]
         ]);
-        dd( $response->json());
+
         if ($response['message'] == 'success') {
             return  $this->storeItems($input['items'], $input['album']['album_id']);
         } else {
             return $response->json();
         }
     }
+    
     public function storeItems($items, $album_id)
     {
         foreach ($items as $key => $item) {

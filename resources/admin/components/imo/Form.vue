@@ -475,7 +475,9 @@ export default {
       errors: new Errors(),
     };
   },
-  mounted() {},
+  mounted() {
+    console.log("asa");
+  },
   methods: {
     selectRead(item, index) {
       var self = this;
@@ -582,20 +584,14 @@ export default {
             });
             self.$notify({
               group: "admin",
-              text: self.trans("admin.album-not-added"),
+              text: self.trans("admin.error-not-added"),
               type: "warning",
               title: self.trans("admin.warning"),
             });
           }
-
-          self.$notify({
-            group: "admin",
-            text: self.trans("admin.album-added"),
-            type: "success",
-            title: self.trans("admin.success"),
-          });
         })
         .catch((error) => {
+
           self.$notify({
             group: "admin",
             text: self.trans("admin.album-not-added"),
