@@ -48,7 +48,7 @@ class AlbumController extends ImoController
     {
         try {
             $request->validate([
-                'album_list.*.album_cover' => 'required',
+                'album_list.*.album_cover' => 'required|url',
                 'album_list.*.album_title' => 'required',
                 'album_list.*.album_desc' => 'required',
                 'album_list.*.album_lang' => 'required',
@@ -59,7 +59,7 @@ class AlbumController extends ImoController
                 'album_list.*.album_score' => 'required|numeric',
                 'album_list.*.album_time' => 'required|integer',
                 'album_list.*.author_name' => 'required',
-                'album_list.*.author_avatar' => 'required',
+                'album_list.*.author_avatar' => 'nullable|url',
                 'album_list.*.author_desc' => 'required',
                 'album_list.*.album_level' => 'required',
                 'album_list.*.item_type' => 'required'
@@ -100,7 +100,7 @@ class AlbumController extends ImoController
                 'album_list.*.album_score' => 'required|numeric',
                 'album_list.*.album_time' => 'required|integer',
                 'album_list.*.author_name' => 'required',
-                'album_list.*.author_avatar' => 'required',
+                'album_list.*.author_avatar' => 'nullable|url',
                 'album_list.*.author_desc' => 'required',
                 'album_list.*.album_level' => 'required',
                 'album_list.*.item_type' => 'required'

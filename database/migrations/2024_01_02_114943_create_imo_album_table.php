@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use DB ;
 
 class CreateImoAlbumTable extends Migration
 {
@@ -14,7 +15,7 @@ class CreateImoAlbumTable extends Migration
     public function up()
     {
         Schema::create('imo_albums', function (Blueprint $table) {
-            $table->id('album_id');
+            $table->id('album_id')->autoIncrement(false);
             $table->string('album_cover');
             $table->string('album_title')->nullable();
             $table->text('album_desc')->nullable();
@@ -32,6 +33,8 @@ class CreateImoAlbumTable extends Migration
             $table->string('item_type')->nullable();
             $table->timestamps();
         });
+        DB::statement('ALTER TABLE imo_albums ADD PRIMARY KEY (album_id, album_lang);');
+
     }
 
     /**
@@ -42,5 +45,6 @@ class CreateImoAlbumTable extends Migration
     public function down()
     {
         Schema::dropIfExists('imo_albums');
+        
     }
 }

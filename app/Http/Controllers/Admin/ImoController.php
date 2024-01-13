@@ -57,17 +57,20 @@ class ImoController extends Controller
     public function setAccessToken()
     {
         $ImoAccessTokena = session('ImoAccessTokena');
-
+        // dd(env('IMO_CLIENT_DOMAIN') );
         if (!$ImoAccessTokena) {
             $response = Http::withHeaders([
                 'Content-Type' => 'application/json',
-            ])->post(env('IMO_CLIENT_DOMAIN') . '/api/oauth/token', [
+            // ])->post(env('IMO_CLIENT_DOMAIN') . '/api/oauth/token', [
+            ])->post(env('IMO_CLIENT_DOMAIN') . '/oauth/token', [
                 'grant_type' => 'client_credentials',
                 'client_id' => env('IMO_CLIENT_ID'),
                 'client_secret' =>  env('IMO_CLIENT_SECRET'),
                 'scope' => 'radio',
             ]);
-            session(['ImoAccessTokena' => $response->json()['data']['access_token']]);
+
+            session(['ImoAccessTokena' => $response->json()['access_token']]);
+            // session(['ImoAccessTokena' => $response->json()['data']['access_token']]);
         }
     }
 
@@ -110,6 +113,7 @@ class ImoController extends Controller
         ])->post(env('IMO_CLIENT_DOMAIN') . '/api/radio/album/add', [
             'album_list'    => [$input['album']]
         ]);
+        dd( $response->json());
         if ($response['message'] == 'success') {
             return  $this->storeItems($input['items'], $input['album']['album_id']);
         } else {
