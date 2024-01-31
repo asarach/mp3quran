@@ -26,8 +26,9 @@ class Sora extends Component
             ->where('status', 1)
             ->firstOrFail();
 
-        $soar_item = $read->soar()->where('id', $this->sora_id)->orderBy('id', 'ASC')->withPivot(['duration', 'filename', 'report'])->firstOrFail();
+        $soar_item = $read->soar()->where('soar.id', $this->sora_id)->orderBy('id', 'ASC')->withPivot(['duration', 'filename', 'report'])->firstOrFail();
         $sora = [];
+
         $sora['id'] = $soar_item->getNum() . '-' . $read->id;
         // $sora['id'] = $soar_item->id;
         $sora['read_id'] = $read->id;

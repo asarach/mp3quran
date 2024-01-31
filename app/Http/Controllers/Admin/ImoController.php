@@ -42,10 +42,10 @@ class ImoController extends Controller
         $rewayat = $this->rewaya->model->get();
 
         foreach ($reads as $key => $read) {
-            $read->title = $read->getLocaleTitle();
+            // $read->title = $read->getLocaleTitle();
         }
         foreach ($rewayat as $key => $rewaya) {
-            $rewaya->name = $rewaya->getLocaleName();
+            // $rewaya->name = $rewaya->getLocaleName();
         }
 
         $this->setAccessToken();
