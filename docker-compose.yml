@@ -21,6 +21,7 @@ services:
     volumes:
       - ./:/var/www/html
       - /var/www/html/vendor
+      - /var/www/html/storage/framework
     command: sh -c "php-fpm"
     # run : " composer install"
 
