@@ -38,7 +38,7 @@ class ImoController extends Controller
 
     public function index()
     {
-        $reads = $this->read->model->get();
+        $reads = $this->read->model->where('id', 21)->get();
         $rewayat = $this->rewaya->model->get();
 
         foreach ($reads as $key => $read) {
