@@ -46,7 +46,7 @@ class ImoApi extends Command
     public function handle()
     {
     //   $this->getDuplicateIndex();
-    //   $this->setToken();
+      $this->setToken();
     //   $this->addAlbum();
       $this->addItems();
     }
@@ -81,7 +81,7 @@ class ImoApi extends Command
     }
 
     public function addItems(){
-        $imo_items = Item::where('item_lang', 'bn')->select([
+        $imo_items = Item::where('item_id','>' ,'4586')->where('item_lang', 'bn')->select([
             'item_id',
             'album_id',
             'item_index',
@@ -94,7 +94,7 @@ class ImoApi extends Command
         ])
             ->get()
             ->toArray();
-            dd(count($imo_items));
+
         $progressBar = $this->output->createProgressBar(count($imo_items));
 
         foreach ($imo_items as $imo_item) {
@@ -104,6 +104,7 @@ class ImoApi extends Command
             ])->post(env('IMO_CLIENT_DOMAIN2') . '/api/radio/item/add', [
                 'item_list'    => [$imo_item]
             ]);
+
 
             if ($response['message'] != 'success') {
                 $this->info("Error: " . $imo_item['item_id'] . " - " . $imo_item['item_lang']);
