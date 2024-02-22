@@ -27,7 +27,7 @@ class Verse extends Component
             ->where('status', 1)
             ->firstOrFail();
             
-        $soar_item = $read->soar()->where('id', $this->sora_id)->orderBy('id', 'ASC')->withPivot(['duration', 'filename', 'report'])->firstOrFail();
+        $soar_item = $read->soar()->where('sura_read.sura_id', $this->sora_id)->orderBy('id', 'ASC')->withPivot(['duration', 'filename', 'report'])->firstOrFail();
         $verse = $this->getVerse($soar_item->id, $read->id, $this->verse);
 
         $sora = [];
