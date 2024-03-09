@@ -78,7 +78,7 @@ class VideoController extends ApiController
         }
 
         if ($this->language !== null) {
-            $videos = $videos->where('locale', $this->language->locale);
+            $videos = $videos->where('locale', $this->language_code);
         } else {
             $videos = $videos->where('locale', 'ar');
         }

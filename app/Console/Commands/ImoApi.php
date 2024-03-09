@@ -7,6 +7,8 @@ use DB;
 use Carbon\Carbon;
 use App\Models\Imo\Album;
 use App\Models\Imo\Item;
+use App\Read;
+use App\Sora;
 use Illuminate\Support\Facades\Http;
 
 
@@ -45,10 +47,10 @@ class ImoApi extends Command
      */
     public function handle()
     {
-    //   $this->getDuplicateIndex();
-      $this->setToken();
-    //   $this->addAlbum();
-      $this->addItems();
+        //   $this->getDuplicateIndex();
+        $this->setToken();
+        //   $this->addAlbum();
+        $this->addItems();
     }
 
     /**
@@ -70,18 +72,20 @@ class ImoApi extends Command
         $this->token = $response->json()['data']['access_token'];
     }
 
-    public function getDuplicateIndex(){
+    public function getDuplicateIndex()
+    {
         $imo_items = Item::get();
         foreach ($imo_items as $imo_item) {
             $item = Item::where('item_index', $imo_item->item_index)->where('album_id', $imo_item->album_id)->where('item_lang', $imo_item->item_lang)->where('item_id', '!=', $imo_item->item_id)->first();
-            if($item){
-                $this->info("Duplicated Index : " . $imo_item->item_id );
+            if ($item) {
+                $this->info("Duplicated Index : " . $imo_item->item_id);
             }
         }
     }
 
-    public function addItems(){
-        $imo_items = Item::where('item_id','>' ,'4586')->where('item_lang', 'bn')->select([
+    public function addItems()
+    {
+        $imo_items = Item::where('item_id', '>', '3506')->where('item_lang', 'bn')->select([
             'item_id',
             'album_id',
             'item_index',
@@ -98,6 +102,16 @@ class ImoApi extends Command
         $progressBar = $this->output->createProgressBar(count($imo_items));
 
         foreach ($imo_items as $imo_item) {
+            $read = Read::with(['soar', 'reciter', 'special_rewaya:id,name', 'rewaya:id,name', 'mushaf:id,name', 'server'])
+            ->findOrFail($imo_item['album_id']);
+
+            $sora = Sora::where('id', $imo_item['item_index'])->first();
+
+            $imo_item['item_title'] = $sora->getLocaleName();
+            $imo_item['item_lang'] = 'ar';
+            $imo_item['item_desc'] =  $sora->getLocaleName() . " - " . $read->getLocaleTitle() . " - " . $read->getRewaya();
+
+
             $response = Http::withHeaders([
                 'Content-Type' => 'application/json',
                 'Authorization' => 'Bearer ' .  $this->token,
@@ -114,8 +128,8 @@ class ImoApi extends Command
         }
         $progressBar->finish();
         $this->info("\nAll albums have been processed.");
-
     }
+
 
     public function addAlbum()
     {
@@ -128,7 +142,14 @@ class ImoApi extends Command
             ->get()
             ->toArray();
 
-        foreach ($imo_albums as $imo_album) {
+        foreach ($imo_albums as $key => $imo_album) {
+            $read = Read::with(['soar', 'reciter', 'special_rewaya:id,name', 'rewaya:id,name', 'mushaf:id,name', 'server'])
+                ->findOrFail($imo_album['album_id']);
+            $imo_album['album_title'] =  $read->getLocaleTitle() . " - " . $read->getRewaya();
+            $imo_album['$imo_item'] = $read->description;
+            $imo_album['author_name'] =  $read->reciter->getLocaleName();
+            $imo_album['album_lang'] = 'ar';
+            $imo_album['album_cover'] = str_replace('.jpg', '-ar.jpg', $imo_album['album_cover']);
 
             $response = Http::withHeaders([
                 'Content-Type' => 'application/json',

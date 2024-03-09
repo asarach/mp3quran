@@ -51,6 +51,7 @@ class ApiController extends BaseController
             $item['id'] = (string) $language->id;
             $item['language'] = $language->name_english;
             $item['native'] = $language->native;
+            $item['locale'] = $language->locale;
             $item['surah'] = config('app.url') . '/api/v3/suwar?language=' . $language->locale;
             $item['rewayah'] = config('app.url') . '/api/v3/riwayat?language=' . $language->locale;
             $item['reciters'] = config('app.url') . '/api/v3/reciters?language=' . $language->locale;
@@ -92,11 +93,14 @@ class ApiController extends BaseController
     public function getMoshaf()
     {
         $rewayat = Rewaya::where('status', 1);
+
         if ($this->language !== null) {
-            $rewayat = $rewayat->join('rewaya_translations', 'rewayat.id', '=', 'rewaya_translations.rewaya_id')
-                ->where('language_id', $this->language->id)
-                ->select('rewayat.id', 'rewaya_translations.name as name');
+            $rewayat = $rewayat->join('translator_translations', 'rewayat.id', '=', 'translator_translations.item')
+                ->where('translator_translations.locale', $this->language_code)
+                ->where('translator_translations.group', "rewaya-name")
+                ->select('rewayat.id', 'translator_translations.text as name');
         }
+
         $rewayat = $rewayat->orderBy('id')->get();
 
         $mushaf = Mushaf::where('status', 1);
@@ -108,10 +112,12 @@ class ApiController extends BaseController
         }
 
         if ($this->language !== null) {
-            $mushaf = $mushaf->join('mushaf_translations', 'mushafs.id', '=', 'mushaf_translations.mushaf_id')
-                ->where('language_id', $this->language->id)
-                ->select('mushafs.id', 'mushaf_translations.name as name');
+            $mushaf = $mushaf->join('translator_translations', 'mushafs.id', '=', 'translator_translations.item')
+                ->where('translator_translations.locale', $this->language_code)
+                ->where('translator_translations.group', "mushaf-name")
+                ->select('mushafs.id', 'translator_translations.text as name');
         }
+
         $mushafs = $mushaf->orderBy('id')->get();
 
         $results = [];
@@ -138,6 +144,12 @@ class ApiController extends BaseController
     {
         if ($request->input('language')) {
             $language = Language::where('locale', $request->input('language'))->first();
+            if ($language) {
+                $this->language = $language->id;
+                $this->language_code = $language->locale;
+            }
+        } else {
+            $language = Language::where('locale', 'ar')->first();
             if ($language) {
                 $this->language = $language->id;
                 $this->language_code = $language->locale;

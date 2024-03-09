@@ -103,6 +103,8 @@ class MainController extends ApiController
      */
     public function moshaf(Request $request)
     {
+        $this->setParams($request);
+
         return $this->getMoshaf();
 
         $this->setParams($request);

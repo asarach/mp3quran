@@ -38,7 +38,9 @@ class ImoController extends Controller
 
     public function index()
     {
-        $reads = $this->read->model->where('id', 21)->get();
+        $items =[252, 314, 254, 217, 181, 20, 159, 33, 298, 32, 4, 300, 42, 225, 55, 258, 56, 244, 267, 66];
+        $reads = $this->read->model->whereIn('id', $items)->get();
+
         $rewayat = $this->rewaya->model->get();
 
         foreach ($reads as $key => $read) {

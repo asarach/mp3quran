@@ -241,8 +241,9 @@ class ReciterController extends ApiController
             $reciters = $reciters->join('translator_translations', 'reciters.id', '=', 'translator_translations.item')
                 ->where('translator_translations.locale', $this->language_code)
                 ->where('translator_translations.group', 'reciter-name')
-                ->select('reciters.id', 'translator_translations.text as name');
+                ->select('reciters.*', 'translator_translations.text as name');
         }
+
         $reciters = $reciters->get();
 
         $results = [];
@@ -287,11 +288,13 @@ class ReciterController extends ApiController
             $result['id'] = $reciter->id;
             $result['name'] =  transLocale('reciter-name',  $reciter->id, $this->language_code);
             $result['letter'] = mb_substr($result['name'], 0, 1, "UTF-8");
+            $result['date'] = $reciter->updated_at;
 
             if ($order == 'updated_at') {
                 $result['recent_date'] = $reciter->updated_at;
             }
             $result['moshaf'] = $items;
+
 
 
             if (!empty($items)) {
