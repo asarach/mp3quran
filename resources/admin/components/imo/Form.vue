@@ -480,6 +480,7 @@ export default {
   },
   methods: {
     selectRead(item, index) {
+      this.items = [];
       var self = this;
       var url = this.ajax_prefix + "imo/" + item.id;
       axios
@@ -487,22 +488,21 @@ export default {
         .then((response) => {
           // self.read = response.data.read;
           self.album.album_id = response.data.read.id;
-          self.album.album_cover = response.data.read.cover;
-          self.album.album_title =
-            response.data.read.title + " - " + response.data.read.rewaya.name;
-          self.album.album_desc = response.data.read.description;
-          self.album.album_lang = response.data.lang;
-          self.album.album_type = response.data.read.rewaya.name;
-          self.album.album_label = "";
-          self.album.album_nature = "";
+          self.album.album_cover = response.data.read.album_cover;
+          self.album.album_title = response.data.read.album_title;
+          self.album.album_desc = response.data.read.album_desc;
+          self.album.album_lang = response.data.read.album_lang;
+          self.album.album_type = response.data.read.album_type;
+          self.album.album_label = response.data.read.album_label;
+          self.album.album_nature = response.data.read.album_nature;
           self.album.album_duration = 0;
-          self.album.album_score = "4.2";
-          self.album.album_time = response.data.read.time;
-          self.album.author_name = response.data.read.reciter.name;
-          self.album.author_avatar = "";
-          self.album.author_desc = response.data.read.reciter.description;
-          self.album.album_level = "3+";
-          self.album.item_type = "audio";
+          self.album.album_score = response.data.read.album_score;
+          self.album.album_time = response.data.read.album_time;
+          self.album.author_name = response.data.read.author_name;
+          self.album.author_avatar = response.data.read.author_avatar;
+          self.album.author_desc = response.data.read.author_desc;
+          self.album.album_level = response.data.read.album_level;
+          self.album.item_type = response.data.read.item_type;
 
           // add each item of response.data.read.soar to soar array
           let album_duration = 0;
@@ -511,15 +511,10 @@ export default {
               item_id: sora.id,
               item_index: sora.num,
               item_title: sora.name,
-              item_lang: response.data.lang,
-              item_desc:
-                sora.name +
-                " - " +
-                response.data.read.title +
-                " - " +
-                response.data.read.rewaya.name,
+              item_lang: response.data.read.album_lang,
+              item_desc: sora.name + " - " + response.data.read.item_desc,
               item_duration: this.totalSeconds(sora.pivot.duration),
-              item_time: response.data.read.time,
+              item_time: response.data.read.album_time,
               item_url: response.data.read.base_url + this.itemUrl(sora.num),
             };
             // add item to soar object
@@ -572,7 +567,10 @@ export default {
         .post(this.ajax_prefix + "imo", data)
         .then((response) => {
           console.log(response);
-          if (response.data.message && response.data.message == "Validation error") {
+          if (
+            response.data.message &&
+            response.data.message == "Validation error"
+          ) {
             self.errors.record({
               response: { data: { errors: response.data.data } },
             });
@@ -589,12 +587,9 @@ export default {
               type: "success",
               title: self.trans("admin.success"),
             });
-
-            
           }
         })
         .catch((error) => {
-
           self.$notify({
             group: "admin",
             text: self.trans("admin.album-not-added"),

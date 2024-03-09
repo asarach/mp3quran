@@ -38,7 +38,7 @@ class ImoController extends Controller
 
     public function index()
     {
-        $items =[252, 314, 254, 217, 181, 20, 159, 33, 298, 32, 4, 300, 42, 225, 55, 258, 56, 244, 267, 66];
+        $items = [252, 314, 254, 217, 181, 20, 159, 33, 298, 32, 4, 300, 42, 225, 55, 258, 56, 244, 267, 66];
         $reads = $this->read->model->whereIn('id', $items)->get();
 
         $rewayat = $this->rewaya->model->get();
@@ -63,7 +63,7 @@ class ImoController extends Controller
         if (!$ImoAccessTokena) {
             $response = Http::withHeaders([
                 'Content-Type' => 'application/json',
-            // ])->post(env('IMO_CLIENT_DOMAIN') . '/api/oauth/token', [
+                // ])->post(env('IMO_CLIENT_DOMAIN') . '/api/oauth/token', [
             ])->post(env('IMO_CLIENT_DOMAIN') . '/oauth/token', [
                 'grant_type' => 'client_credentials',
                 'client_id' => env('IMO_CLIENT_ID'),
@@ -95,12 +95,32 @@ class ImoController extends Controller
         }
 
         $lang = LaravelLocalization::getCurrentLocale();
+        $read->album_desc = "আল-কুরআন";
         if ($lang == 'eng') {
             $lang = 'en';
+            $read->album_desc = "Holy Quran";
         }
-        
+
         $read->time = $read->created_at->timestamp;
         $read->base_url = $read->server->url . '/' . $read->url . '/';
+
+        $read->album_title = $read->title . " - " . $read->rewaya->name;;
+       
+        
+        $read->album_cover = "https://mp3quran.net/album_cover/" . $read->id . ".jpg";
+        $read->album_lang = $lang;
+        $read->album_type = "Religion";
+        $read->album_label =  "Islamic";
+        $read->album_nature = "pro_podcast";
+        $read->author_avatar = "";
+        $read->album_score = "4.2";
+        $read->album_level = "3+";
+        $read->item_type = "audio";
+        $read->album_time = $read->time;
+        $read->author_name = $read->reciter->name;
+        $read->author_desc = '.';
+        $read->item_desc = $read->album_title;
+
         return compact('read', 'lang');
     }
     public function store(Request $request)
@@ -119,11 +139,11 @@ class ImoController extends Controller
             return $response->json();
         }
     }
-    
+
     public function storeItems($items, $album_id)
     {
         foreach ($items as $key => $item) {
-            $item['album_id'] =$album_id;
+            $item['album_id'] = $album_id;
             $items[$key] = $item;
         }
 
