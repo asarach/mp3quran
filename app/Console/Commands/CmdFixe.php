@@ -41,28 +41,44 @@ class CmdFixe extends Command
     {
 
         //checkUrls$this->fixRadios();
-        $this->fixMediable();
+        // $this->fixMediable();
         // $this->fixSoraRead();
         // $this->fixTadabor();
         // $this->fixDownloadTransltion();
         // $this->fixSoar();
+        $this->fixTorrents();
     }
 
-    public function fixMediable(){
+
+    public function fixTorrents()
+    {
+        $namemaps = DB::table('namemap')->get();
+
+        foreach ($namemaps as $namemap) {
+
+            DB::table('torrent')->where('url', $namemap->url)->update([
+                'info_hash' => $namemap->info_hash,
+            ]);
+        }
+    }
+
+    public function fixMediable()
+    {
         $items = DB::table('mediable')->get();
         foreach ($items as $item) {
             $type = str_replace("Mp3quran\\", "App\\", $item->mediable_type);
 
             DB::table('mediable')
-            ->where('media_id',$item->media_id)
-            ->where('mediable_id',$item->mediable_id)
-            ->where('mediable_type',$item->mediable_type)
-            ->update([
-                'mediable_type' => $type,
-            ]);
+                ->where('media_id', $item->media_id)
+                ->where('mediable_id', $item->mediable_id)
+                ->where('mediable_type', $item->mediable_type)
+                ->update([
+                    'mediable_type' => $type,
+                ]);
         }
     }
-    public function fixSoraRead(){
+    public function fixSoraRead()
+    {
         $items = DB::table('sura_read')->get();
         foreach ($items as $item) {
             DB::table('sura_read')->insert([
@@ -73,7 +89,8 @@ class CmdFixe extends Command
             ]);
         }
     }
-    public function fixTadabor(){
+    public function fixTadabor()
+    {
         $items = DB::table('tadabors2')->get();
         foreach ($items as $item) {
             DB::table('tadabors')->insert([
@@ -101,16 +118,17 @@ class CmdFixe extends Command
             if (trans('downloads.' . $file->filename) == 'downloads.' . $file->filename) {
                 foreach ($languages as $language) {
                     dd($file->filename);
-                    DB::table('translator_translations')->insert([
-                        'group' => 'downloads', 
-                        'item' => $file->filename, 
-                        'text' => $file->filename, 
-                        'locale' => $language->locale]
+                    DB::table('translator_translations')->insert(
+                        [
+                            'group' => 'downloads',
+                            'item' => $file->filename,
+                            'text' => $file->filename,
+                            'locale' => $language->locale
+                        ]
                     );
                 }
             }
         }
-
     }
     public function fixSoar()
     {

@@ -52,10 +52,7 @@ class Download extends Component
 
     public function render()
     {
-       
-        
-        $items = $this->getTorrentsDatabase();
-        $downloads = $this->getTorrents($items);
+        $downloads = $this->getTorrents();
 
         if ($this->downloads_dir == 'desc') {
             $downloads = $downloads->sortByDesc($this->downloads_order);
@@ -126,55 +123,45 @@ class Download extends Component
         $items = [];
         try {
             $files = DB::connection('torrent')->table('namemap')
-            ->join('summary', 'namemap.info_hash', '=', 'summary.info_hash')
-            ->leftJoin('comments', 'namemap.info_hash', '=', 'comments.info_hash')
-            ->select('namemap.info_hash', 'namemap.filename', 'namemap.reciter_id',  'namemap.url', 'namemap.category', 'namemap.data', 'namemap.size', 'summary.seeds', 'summary.leechers', 'summary.finished', DB::raw("count(comments.id) as comments"))
-            ->groupBy('namemap.info_hash');
-        if ($this->search) {
-            $files = $files->where('namemap.filename', 'like', '%' .  $this->search . '%');
-        }
-        if ($this->category['id']) {
-            $files = $files->where('namemap.category',  $this->category['id']);
-            $items = $files->get()->toArray();
-        }
-
+                ->join('summary', 'namemap.info_hash', '=', 'summary.info_hash')
+                ->leftJoin('comments', 'namemap.info_hash', '=', 'comments.info_hash')
+                ->select('namemap.info_hash', 'namemap.filename', 'namemap.reciter_id',  'namemap.url', 'namemap.category', 'namemap.data', 'namemap.size', 'summary.seeds', 'summary.leechers', 'summary.finished', DB::raw("count(comments.id) as comments"))
+                ->groupBy('namemap.info_hash');
+            if ($this->search) {
+                $files = $files->where('namemap.filename', 'like', '%' .  $this->search . '%');
+            }
+            if ($this->category['id']) {
+                $files = $files->where('namemap.category',  $this->category['id']);
+                $items = $files->get()->toArray();
+            }
         } catch (\Throwable $th) {
             //throw $th;
         }
-        
-        return $items ;
+
+        return $items;
     }
 
-    public function getTorrents($items)
+    public function getTorrents()
     {
-        $torrents = collect();
-        foreach ($items as $item) {
-            $torrent = [];
-            $torrent['name'] = $this->getLocaleName($item);
-            $torrent['comments'] = $item->comments;
-            $torrent['url'] = 'http://torrent.mp3quran.net/download.php?id=' . $item->info_hash . '&f=' . $item->filename . '.torrent';
-            $torrent['added'] = Carbon::parse($item->data)->format('d/m/Y');
-            $torrent['date'] = $item->data;
-            $torrent['size'] = $this->formatBytes($item->size);
-            $torrent['sizeb'] = $item->size;
-            $torrent['seeders'] = $item->seeds;
-            $torrent['leechers'] = $item->leechers;
-            $torrent['completed'] = $item->finished;
-
-            $torrents->push($torrent);
+        $torrents = DB::table('torrent')->get();
+        foreach ($torrents as $torrent) {
+            $torrent->name = $this->getLocaleName($torrent);
+            $torrent->url = 'http://torrent.mp3quran.net/download.php?id=' . $torrent->info_hash . '&f=' . $torrent->filename . '.torrent';
+            $torrent->date = Carbon::parse($torrent->date)->format('d/m/Y');
+            $torrent->sizeb = $torrent->size;
+            $torrent->size = $this->formatBytes($torrent->size);
         }
+
         return $torrents;
     }
     public function getLocaleName($item)
-    { {
-            $name = trans('downloads.' . trim($item->filename));
-            if (strpos($name, 'downloads.') !== false or $name == '') {
-                $name = trans('reciter-name.' . $item->reciter_id);
-                if (strpos($name, 'reciter-name.') !== false) {
-                    return $this->filename;
-                }
+    {
+        $name = trans('downloads.' . trim($item->filename));
+        if (strpos($name, 'downloads.') !== false or $name == '') {
+            $name = trans('reciter-name.' . $item->reciter_id);
+            if (strpos($name, 'reciter-name.') !== false) {
+                return $this->filename;
             }
-            return $name;
         }
         return $name;
     }

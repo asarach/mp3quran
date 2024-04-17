@@ -110,83 +110,20 @@
                       @endif
                     </span>
                   </th>
-                  <th scope="col" class="th-seeders">
-                    <span class="sortable-col">{{ trans("text.seeders") }}
-                      @if ($downloads_order == 'seeders' && $downloads_dir == 'asc')
-                      <a href="#" wire:click.prevent="orderDownloads('desc',  'seeders')">
-                        <span class="uni-icon icon-arrow_upward"></span>
-                      </a>
-                      @elseif( $downloads_order == 'seeders' && $downloads_dir == 'desc' )
-                      <a href="#" wire:click.prevent="orderDownloads('asc',  'seeders')">
-                        <span class="uni-icon icon-arrow_downward"></span>
-                      </a>
-                      @else
-                      <a href="#" wire:click.prevent="orderDownloads('desc',  'seeders')">
-                        <span class="uni-icon icon-swap_vert"></span>
-                      </a>
-                      @endif
-                    </span>
-                  </th>
-                  <th scope="col" class="th-leechers">
-                    <span class="sortable-col">{{ trans("text.leechers") }}
-                      @if ( $downloads_order == 'leechers' && $downloads_dir == 'asc' )
-                      <a href="#" wire:click.prevent="orderDownloads('desc',  'leechers')">
-                        <span class="uni-icon icon-arrow_upward"></span>
-                      </a>
-                      @elseif( $downloads_order == 'leechers' && $downloads_dir == 'desc' )
-                      <a href="#" wire:click.prevent="orderDownloads('asc',  'leechers')">
-                        <span class="uni-icon icon-arrow_downward"></span>
-                      </a>
-                      @else
-                      <a href="#" wire:click.prevent="orderDownloads('desc',  'leechers')">
-                        <span class="uni-icon icon-swap_vert"></span>
-                      </a>
-                      @endif
-                    </span>
-                  </th>
-                  <th scope="col" class="th-completed">
-                    <span class="sortable-col">{{ trans("text.completed") }}
-                      @if ($downloads_order == 'completed' && $downloads_dir == 'asc')
-                      <a href="#" wire:click.prevent="orderDownloads('desc',  'completed')">
-                        <span class="uni-icon icon-arrow_upward"></span>
-                      </a>
-                      @elseif($downloads_order == 'completed' && $downloads_dir == 'desc')
-                      <a href="#" wire:click.prevent="orderDownloads('asc',  'completed')">
-                        <span class="uni-icon icon-arrow_downward"></span>
-                      </a>
-                      @else
-                      <a href="#" wire:click.prevent="orderDownloads('desc',  'completed')">
-                        <span class="uni-icon icon-swap_vert"></span>
-                      </a>
-                      @endif
-                    </span>
-                  </th>
                 </tr>
               </thead>
               <tbody>
                 @foreach ($downloads as $index => $download)
                 <tr>
                   <td class="th-index">{{ $index + 1 }}</td>
-                  <td scope="row" class="th-file">{{ $download['name'] }}</td>
+                  <td scope="row" class="th-file">{{ $download->name }}</td>
                   <td class="th-download">
-                    <a href="{{ str_replace('http://', 'https://', $download['url']) }}" class="btn btn-sm btn-info">
+                    <a href="{{ str_replace('http://', 'https://', $download->url) }}" class="btn btn-sm btn-info">
                       {{ trans("text.download") }}
                     </a>
                   </td>
-                  <td class="th-added">{{ $download['added'] }}</td>
-                  <td class="th-size">{{ $download['size'] }}</td>
-                  <td class="th-seeders green">{{ $download['seeders'] }}</td>
-                  <td class="th-leechers 
-                  @if ( $download['leechers'] < 1)
-                      red
-                  @elseif($download['leechers'] >= 2)
-                      green
-                  @else
-                      orangered  
-                  @endif">
-                    {{ $download['leechers'] }}
-                  </td>
-                  <td class="th-completed">{{ $download['completed'] }}</td>
+                  <td class="th-added">{{ $download->date }}</td>
+                  <td class="th-size">{{ $download->size }}</td>
                 </tr>
                 @endforeach
               </tbody>
