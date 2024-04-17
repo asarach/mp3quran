@@ -143,7 +143,13 @@ class Download extends Component
 
     public function getTorrents()
     {
-        $torrents = DB::table('torrent')->get();
+        $torrents = DB::table('torrent');
+
+        if ($this->category['id']) {
+            $torrents =  $torrents->where('category', $this->category['id']);
+        }
+        $torrents = $torrents->get();
+
         foreach ($torrents as $torrent) {
             $torrent->name = $this->getLocaleName($torrent);
             $torrent->url = 'http://torrent.mp3quran.net/download.php?id=' . $torrent->info_hash . '&f=' . $torrent->filename . '.torrent';
