@@ -49,7 +49,7 @@ class ImoApi extends Command
     {
         //   $this->getDuplicateIndex();
         $this->setToken();
-        //   $this->addAlbum();
+        // $this->addAlbum();
         $this->addItems();
     }
 
@@ -83,27 +83,72 @@ class ImoApi extends Command
         }
     }
 
-    public function addItems()
+
+
+    public function addAlbum()
     {
-        $imo_items = Item::where('item_id', '>', '3506')->where('item_lang', 'bn')->select([
-            'item_id',
-            'album_id',
-            'item_index',
-            'item_title',
-            'item_lang',
-            'item_desc',
-            'item_duration',
-            'item_time',
-            'item_url',
+        $items = [252, 314, 254, 217, 181, 20, 159, 33, 298, 32, 4, 300, 42, 225, 55, 258, 56, 244, 267, 66];
+
+
+        // get all columns from table eexcept created_at and updated_at
+        $imo_albums = Album::where('album_lang', 'bn')->select([
+            'album_id', 'album_cover', 'album_title', 'album_desc', 'album_lang', 'album_type',
+            'album_label', 'album_nature', 'album_duration', 'album_score', 'album_time',
+            'author_name', 'author_avatar', 'author_desc', 'album_level', 'item_type'
         ])
+            ->whereIn('album_id', $items)
             ->get()
             ->toArray();
+        foreach ($imo_albums as $key => $imo_album) {
+            $read = Read::with(['soar', 'reciter', 'special_rewaya:id,name', 'rewaya:id,name', 'mushaf:id,name', 'server'])
+                ->findOrFail($imo_album['album_id']);
+            $imo_album['album_title'] =  $read->getLocaleTitle() . " - " . $read->getRewaya();
+            $imo_album['album_desc'] = "القرآن الكريم";
+            $imo_album['author_name'] =  $read->reciter->getLocaleName();
+            $imo_album['album_lang'] = 'ar';
+            $imo_album['album_cover'] = str_replace('.jpg', '-ar.jpg', $imo_album['album_cover']);
+            // dd($imo_album);
 
+            $response = Http::withHeaders([
+                'Content-Type' => 'application/json',
+                'Authorization' => 'Bearer ' . $this->token,
+            ])->post(env('IMO_CLIENT_DOMAIN2') . '/api/radio/album/add', [
+                'album_list'    => [$imo_album]
+            ]);
+
+            if ($response['message'] == 'success') {
+                $this->info("Success: " . $imo_album['album_id'] . " - " . $imo_album['album_lang']);
+            } else {
+                $this->info("Error: " . $imo_album['album_id'] . " - " . $imo_album['album_lang']);
+            }
+        }
+    }
+
+
+    public function addItems()
+    {
+        $items = [252, 314, 254, 217, 181, 20, 159, 33, 298, 32, 4, 300, 42, 225, 55, 258, 56, 244, 267, 66];
+        $imo_items = Item::whereIn('album_id', $items)
+            ->where('item_id', '>', '5794')
+            ->select([
+                'item_id',
+                'album_id',
+                'item_index',
+                'item_title',
+                'item_lang',
+                'item_desc',
+                'item_duration',
+                'item_time',
+                'item_url',
+            ])
+            ->get()
+            ->toArray();
+                
         $progressBar = $this->output->createProgressBar(count($imo_items));
 
         foreach ($imo_items as $imo_item) {
             $read = Read::with(['soar', 'reciter', 'special_rewaya:id,name', 'rewaya:id,name', 'mushaf:id,name', 'server'])
-            ->findOrFail($imo_item['album_id']);
+                ->findOrFail($imo_item['album_id']);
 
             $sora = Sora::where('id', $imo_item['item_index'])->first();
 
@@ -111,7 +156,7 @@ class ImoApi extends Command
             $imo_item['item_lang'] = 'ar';
             $imo_item['item_desc'] =  $sora->getLocaleName() . " - " . $read->getLocaleTitle() . " - " . $read->getRewaya();
 
-
+            // dd($imo_item);
             $response = Http::withHeaders([
                 'Content-Type' => 'application/json',
                 'Authorization' => 'Bearer ' .  $this->token,
@@ -128,41 +173,5 @@ class ImoApi extends Command
         }
         $progressBar->finish();
         $this->info("\nAll albums have been processed.");
-    }
-
-
-    public function addAlbum()
-    {
-        // get all columns from table eexcept created_at and updated_at
-        $imo_albums = Album::where('album_lang', 'bn')->select([
-            'album_id', 'album_cover', 'album_title', 'album_desc', 'album_lang', 'album_type',
-            'album_label', 'album_nature', 'album_duration', 'album_score', 'album_time',
-            'author_name', 'author_avatar', 'author_desc', 'album_level', 'item_type'
-        ])
-            ->get()
-            ->toArray();
-
-        foreach ($imo_albums as $key => $imo_album) {
-            $read = Read::with(['soar', 'reciter', 'special_rewaya:id,name', 'rewaya:id,name', 'mushaf:id,name', 'server'])
-                ->findOrFail($imo_album['album_id']);
-            $imo_album['album_title'] =  $read->getLocaleTitle() . " - " . $read->getRewaya();
-            $imo_album['$imo_item'] = $read->description;
-            $imo_album['author_name'] =  $read->reciter->getLocaleName();
-            $imo_album['album_lang'] = 'ar';
-            $imo_album['album_cover'] = str_replace('.jpg', '-ar.jpg', $imo_album['album_cover']);
-
-            $response = Http::withHeaders([
-                'Content-Type' => 'application/json',
-                'Authorization' => 'Bearer ' . $this->token,
-            ])->post(env('IMO_CLIENT_DOMAIN2') . '/api/radio/album/add', [
-                'album_list'    => [$imo_album]
-            ]);
-
-            if ($response['message'] == 'success') {
-                $this->info("Success: " . $imo_album['album_id'] . " - " . $imo_album['album_lang']);
-            } else {
-                $this->info("Error: " . $imo_album['album_id'] . " - " . $imo_album['album_lang']);
-            }
-        }
     }
 }

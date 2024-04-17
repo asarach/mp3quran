@@ -192,6 +192,7 @@ class MushafController extends Controller
 
     public function getTorrentsDatabase($input)
     {
+        dd('asa');
 
         $files = DB::connection('torrent')->table('namemap')
             ->join('summary', 'namemap.info_hash', '=', 'summary.info_hash')

@@ -138,6 +138,7 @@ class ApiController extends BaseController
 
 
         return $results;
+		
     }
 
     public function setParams($request)

@@ -15,6 +15,8 @@ use App\Services\Search;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Http;
 use LaravelLocalization;
+use getID3;
+use Illuminate\Support\Facades\Storage;
 
 
 class ImoController extends Controller
@@ -38,6 +40,7 @@ class ImoController extends Controller
 
     public function index()
     {
+        $items = [];
         $items = [252, 314, 254, 217, 181, 20, 159, 33, 298, 32, 4, 300, 42, 225, 55, 258, 56, 244, 267, 66];
         $reads = $this->read->model->whereIn('id', $items)->get();
 
@@ -92,6 +95,27 @@ class ImoController extends Controller
 
         foreach ($read->soar as $key => $sora) {
             $sora->name = $sora->getLocaleName();
+            if ($sora->pivot->duration == null) {
+                $url = "";
+                if ($sora->num < 10) {
+                    $url .= "00" . $sora->num . ".mp3";
+                } else if ($sora->num < 100) {
+                    $url .= "0" . $sora->num . ".mp3";
+                } else {
+                    $url .= $sora->num . ".mp3";
+                }
+                $response = Http::get($read->server->url . '/' . $read->url . '/' . $url);
+             
+                if ($response->successful()) {
+                    Storage::disk('local')->put('timing_tmp/' . $read->url . '/' . $url, $response->body());
+                }
+                $getid3path = storage_path('app/timing_tmp/' . $read->url . '/' . $url);
+
+                $getid3 = new getID3;
+                $file = $getid3->analyze($getid3path);
+                $sora->pivot->duration = $file['playtime_string'];
+                $sora->pivot->save();
+            }
         }
 
         $lang = LaravelLocalization::getCurrentLocale();
@@ -104,9 +128,9 @@ class ImoController extends Controller
         $read->time = $read->created_at->timestamp;
         $read->base_url = $read->server->url . '/' . $read->url . '/';
 
-        $read->album_title = $read->title . " - " . $read->rewaya->name;;
-       
-        
+        $read->album_title = $read->reciter->name . " - " . $read->rewaya->name;;
+
+
         $read->album_cover = "https://mp3quran.net/album_cover/" . $read->id . ".jpg";
         $read->album_lang = $lang;
         $read->album_type = "Religion";
