@@ -51,9 +51,9 @@ class VideoController extends ApiController
     {
         $videos_group = Vgroup::where('status', 1);
 
-        if ($this->language !== null) {
+        if (request()->language && $this->language !== null) {
             $videos_group = $videos_group->join('translator_translations', "vgroups.id", '=', 'translator_translations.item')
-                ->where('locale', $this->language->locale)
+                ->where('locale', $this->language_code)
                 ->where('group', 'vgroup-name')
                 ->select('vgroups.id as id', 'translator_translations.text as video_type');
         } else {

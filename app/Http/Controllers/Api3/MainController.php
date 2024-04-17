@@ -105,10 +105,7 @@ class MainController extends ApiController
     {
         $this->setParams($request);
 
-        return $this->getMoshaf();
-
-        $this->setParams($request);
-        $riwayat = Cache::rememberForever('api_v3_riwayat_' . $request->input('language'), function () {
+        $riwayat = Cache::rememberForever('api_v3_moshaf_' . $request->input('language'), function () {
             return $this->getMoshaf();
         });
 

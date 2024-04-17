@@ -52,6 +52,8 @@ class Download extends Component
 
     public function render()
     {
+       
+        
         $items = $this->getTorrentsDatabase();
         $downloads = $this->getTorrents($items);
 
@@ -121,8 +123,9 @@ class Download extends Component
 
     public function getTorrentsDatabase()
     {
-        dd( DB::connection('torrent')->table('namemap')->get());
-        $files = DB::connection('torrent')->table('namemap')
+        $items = [];
+        try {
+            $files = DB::connection('torrent')->table('namemap')
             ->join('summary', 'namemap.info_hash', '=', 'summary.info_hash')
             ->leftJoin('comments', 'namemap.info_hash', '=', 'comments.info_hash')
             ->select('namemap.info_hash', 'namemap.filename', 'namemap.reciter_id',  'namemap.url', 'namemap.category', 'namemap.data', 'namemap.size', 'summary.seeds', 'summary.leechers', 'summary.finished', DB::raw("count(comments.id) as comments"))
@@ -132,9 +135,14 @@ class Download extends Component
         }
         if ($this->category['id']) {
             $files = $files->where('namemap.category',  $this->category['id']);
+            $items = $files->get()->toArray();
         }
 
-        return $files->get()->toArray();
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+        
+        return $items ;
     }
 
     public function getTorrents($items)

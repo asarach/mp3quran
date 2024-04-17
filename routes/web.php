@@ -11,3 +11,15 @@ Route::get('/mpa_closed/{adId}', array('as' => 'ads.closed', 'uses' => 'HomeCont
 Route::get("/newsletter/unsubscribe", array("as" => "newsletter.unsubscribe", "uses" => "NewsletterController@unsubscribe"));
 Route::post('/contact', array('as' => 'page.store.contact', 'uses' => 'PageController@storeMessage'))->middleware(ProtectAgainstSpam::class);
 Route::post('/uploader', array('as' => 'uploader', 'uses' => 'UploaderController@upload'));
+
+// laravel route to function  withoput controller 
+Route::get('/torrent_test', function () {
+
+    try {
+        \DB::connection('torrent')->getPdo();
+    } catch (\Exception $e) {
+        dd($e);
+    }
+
+});
+
