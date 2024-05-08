@@ -34,6 +34,40 @@
         </div>
 
         <div class="form-group">
+          <label class="col-form-label">{{ trans("admin.type") }}</label>
+          <select
+            name="type"
+            v-model="tafsir.type"
+            class="form-control"
+            @change="errors.clear('type')"
+          >
+            <option
+              v-for="(type,item, index) in types"
+              :value="type"
+              :key="index"
+            >
+            {{ trans('admin.audio-type-' + type)}}
+            </option>
+          </select>
+          <small class="form-text text-danger" v-if="errors.has('type')">{{
+            errors.get("type")
+          }}</small>
+        </div>
+        <div class="form-group" v-if="tafsir.type == 'podcast'">
+          <label class="col-form-label">{{ trans("text.url") }}</label>
+          <input
+            type="text"
+            name="url"
+            class="form-control"
+            v-model="tafsir.url"
+            @keydown="errors.clear('url')"
+          />
+          <small class="form-text text-danger" v-if="errors.has('url')">{{
+            errors.get("url")
+          }}</small>
+        </div>
+
+        <div class="form-group">
           <label>{{ trans('admin.status')}}</label>
           <div class="row">
             <div class="col">
@@ -90,7 +124,8 @@ export default {
   props: ["action",   "tafsir"],
   data() {
     return {
-      errors: new Errors()
+      errors: new Errors(),
+      types: ["quran", "podcast"]
     };
   },
   mounted() {},

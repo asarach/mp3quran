@@ -2,21 +2,21 @@
   <div class="content-wrapper">
     <vue-headful :title="trans('admin.dashboard_title') + ' | ' + trans('text.tafsirs')" />
     <section class="content-header">
-      <h1>{{ trans('text.tafsirs')}}</h1>
+      <h1>{{ trans('text.tafsirs') }}</h1>
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
           <router-link :to="prefix">
             <i class="fa fa-dashboard"></i>
-            {{ trans('admin.dashboard')}}
+            {{ trans('admin.dashboard') }}
           </router-link>
         </li>
         <li class="breadcrumb-item">
           <router-link :to="prefix + 'tafsirs'">
             <i class="fa fa-dashboard"></i>
-            {{ trans('text.tafsirs')}}
+            {{ trans('text.tafsirs') }}
           </router-link>
         </li>
-        <li class="breadcrumb-item active">{{ trans('admin.edit-tafsir')}}</li>
+        <li class="breadcrumb-item active">{{ trans('admin.edit-tafsir') }}</li>
       </ol>
     </section>
     <div v-if="show_spinner" class="loading-spinner">
@@ -28,7 +28,7 @@
     <section v-else class="content">
       <div class="row">
         <div class="col-lg-24">
-          <tafsir-form :action="'edit'" :tafsir="tafsir" ></tafsir-form>
+          <tafsir-form :action="'edit'" :tafsir="tafsir"></tafsir-form>
         </div>
       </div>
       <div class="row">
@@ -36,38 +36,29 @@
           <div class="card">
             <form role="form" @submit.prevent="translatePage()">
               <div class="card-head">
-                <h3 class="card-title">{{ trans('front.translations')}}</h3>
+                <h3 class="card-title">{{ trans('front.translations') }}</h3>
               </div>
               <div class="card-body table-responsive">
                 <table class="table table-striped">
                   <thead>
                     <tr>
-                      <th scope="col" style="width: 10%">{{ trans('admin.language')}}</th>
-                      <th scope="col" style="width: 20%">{{ trans('text.name')}}</th>
-                      <th scope="col" style="width: 35%">{{ trans('admin.description')}}</th>
+                      <th scope="col" style="width: 10%">{{ trans('admin.language') }}</th>
+                      <th scope="col" style="width: 20%">{{ trans('text.name') }}</th>
+                      <th scope="col" style="width: 35%">{{ trans('admin.description') }}</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr v-for="translation in translations" :key="translation.id">
-                      <th scope="row">{{translation.language}}</th>
+                      <th scope="row">{{ translation.language }}</th>
                       <td>
                         <div class="form-group">
-                          <input
-                            type="text"
-                            name="name"
-                            class="form-control"
-                            v-model="translation.name"
-                          />
+                          <input type="text" name="name" class="form-control" v-model="translation.name" />
                         </div>
                       </td>
                       <td>
                         <div class="form-group">
-                          <textarea
-                            name="description"
-                            class="form-control"
-                            v-model="translation.description"
-                            rows="4"
-                          ></textarea>
+                          <textarea name="description" class="form-control" v-model="translation.description"
+                            rows="4"></textarea>
                         </div>
                       </td>
                     </tr>
@@ -76,7 +67,7 @@
               </div>
               <div class="card-footer clearfix">
                 <div class="float-left">
-                  <button type="submit" class="btn btn-info btn-sm">{{ trans('admin.save')}}</button>
+                  <button type="submit" class="btn btn-info btn-sm">{{ trans('admin.save') }}</button>
                 </div>
               </div>
             </form>
@@ -95,9 +86,11 @@ export default {
       show_spinner: true,
       show_error: false,
       translations: [],
-      
+
       tafsir: {
         name: "",
+        type: "",
+        url: "",
         status: 0,
         description: ""
       }
@@ -108,13 +101,15 @@ export default {
       var self = this;
       axios
         .get(this.ajax_prefix + "tafsir/edit/" + self.$route.params.id)
-        .then(function(response) {
+        .then(function (response) {
           self.tafsir = response.data.tafsir;
-          
-          self.translations = response.data.translations;
+
+          self.translations = self.setTranslations(response.data.translations);
+          console.log(self.translations);
           self.show_spinner = false;
         })
-        .catch(function(error) {
+        .catch(function (error) {
+          console.log(error);
           self.show_spinner = false;
           self.show_error = error.response.status;
         });
@@ -127,7 +122,7 @@ export default {
           this.ajax_prefix + "tafsir/translations/" + self.$route.params.id,
           data
         )
-        .then(function(response) {
+        .then(function (response) {
           self.$notify({
             group: "admin",
             text: self.trans("admin.tafsir-edited"),
@@ -135,7 +130,7 @@ export default {
             title: self.trans("admin.success")
           });
         })
-        .catch(function(error) {
+        .catch(function (error) {
           self.$notify({
             group: "admin",
             text: self.trans("admin.tafsir-not-edited"),
@@ -143,6 +138,19 @@ export default {
             title: self.trans("admin.warning")
           });
         });
+    },
+    setTranslations(translations) {
+      console.log(translations);
+      for (let language in translations) {
+        console.log(translations[language]);
+        if (!translations[language].name) {
+          translations[language].name = this.tafsir.name;
+        }
+        if (!translations[language].description) {
+          translations[language].description = this.tafsir.description;
+        }
+      }
+      return translations;
     }
   },
   mounted() {

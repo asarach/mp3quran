@@ -32,6 +32,18 @@ class TafsirController extends ApiController
 
         return compact('tafasir');
     }
+    public function podcasts(Request $request)
+    {
+        $this->setParams($request);
+       /* Cache::forget('api_v3_tafasir_' . $request->input('language'));
+        $tafasir = Cache::rememberForever('api_v3_tafasir_' . $request->input('language'), function () {
+            return $this->getTafasir();
+        });*/
+        
+        $podcasts = $this->getPodcasts();
+
+        return compact('podcasts');
+    }
     public function tafsir(Request $request)
     {
         $this->setParams($request);
@@ -49,7 +61,7 @@ class TafsirController extends ApiController
 
     public function getTafasir()
     {
-        $tafasir = Tafsir::where('status', 1);
+        $tafasir = Tafsir::where('status', 1)->where('type', 'quran');
         if ($this->language !== null) {
             $tafasir = $tafasir->join('translator_translations', 'tafsirs.id', '=', 'translator_translations.item')
                 ->where('translator_translations.locale', $this->language_code)
@@ -73,6 +85,26 @@ class TafsirController extends ApiController
         }
 
         return $result;
+    }
+    public function getPodcasts()
+    {
+        $podcasts = Tafsir::where('status', 1)->where('type', 'podcast');
+
+        if ($this->language !== null) {
+            $podcasts = $podcasts->join('translator_translations', 'tafsirs.id', '=', 'translator_translations.item')
+                ->where('translator_translations.locale', $this->language_code)
+                ->where('translator_translations.group', 'tafsir-name')
+                ->select('tafsirs.id' , 'tafsirs.url', 'translator_translations.text as name');
+        } else {
+            $podcasts = $podcasts->select('tafsirs.id', 'tafsirs.name' , 'tafsirs.url');
+        }
+        if (request()->last_update) {
+            $date = Carbon::parse(request()->last_update)->format('Y-m-d');
+
+            $podcasts->whereDate('tafsirs.updated_at', '>=', $date);
+        }
+
+        return $podcasts->get()->toArray();
     }
     public function getTafsir()
     {

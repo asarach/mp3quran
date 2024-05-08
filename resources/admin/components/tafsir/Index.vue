@@ -104,10 +104,13 @@
                     </td>
                     <td scope="row">{{ tafsir.id }}</td>
 
-                    <td>
+                    <td  v-if="tafsir.type == 'quran'">
                       <router-link :to="prefix + 'tsoras/' + tafsir.id">
                         {{ tafsir.name }}
                       </router-link>
+                    </td>
+                    <td  v-else>
+                        {{ tafsir.name }}
                     </td>
                    
                     <td class="text-center">
@@ -276,6 +279,8 @@ export default {
       direction: this.$route.params.direction,
       tafsir: {
         name: "",
+        type: "",
+        url: "",
         status: 0,
         description: "",
       },

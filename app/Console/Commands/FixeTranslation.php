@@ -296,5 +296,8 @@ class FixeTranslation extends Command
 
     ['group' => 'seo', 'item' => 'read-title'],
     ['group' => 'seo', 'item' => 'read-description'],
+
+    ['group' => 'admin', 'item' => 'audio-type-quran'],
+    ['group' => 'admin', 'item' => 'audio-type-podcast'],
   ];
 }
