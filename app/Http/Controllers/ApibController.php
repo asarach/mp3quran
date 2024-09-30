@@ -427,7 +427,7 @@ class ApibController extends Controller
         if ($this->sura == null) {
             foreach ($reciters as $reciter) {
 
-                $reads = Read::where('status', 1)
+                $reads = Read::where('reads.status', 1)
                     ->whereNull('reads.special_rewaya_id')
                     ->leftJoin('rewayat', 'rewayat.id', '=', 'reads.rewaya_id')
                     ->leftJoin('mushafs', 'mushafs.id', '=', 'reads.mushaf_id')
@@ -461,13 +461,12 @@ class ApibController extends Controller
                 foreach ($reads as $read) {
 
                     $moshaf = [];
-                    $soar = Read::where('status', 1)
-                        ->whereNull('special_rewaya_id')
-                        ->table('sura_read')
+                    $soar = DB::table('sura_read')
                         ->where('read_id', $read->id)
                         ->orderBy('sura_id', 'ASC')
                         ->pluck('sura_id')
                         ->toArray();
+
                     $moshaf['id'] = $read->id;
                     $moshaf['moshaf_type'] = intval($read->rewaya_id . $read->mushaf_id);
                     $moshaf['name'] = $read->rewaya_name . ' - ' . $read->mushaf_name;
@@ -480,7 +479,7 @@ class ApibController extends Controller
                     }
                 }
 
-
+               
                 $result['id'] = $reciter->id;
                 $result['name'] = $reciter->name;
                 $result['Server'] = '';

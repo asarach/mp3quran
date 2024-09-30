@@ -113,8 +113,6 @@ class ReciterController extends ApiController
         return compact('reciters');
     }
 
-
-
     public function getReads($order = 'name', $sort = 'asc')
     {
         $reciters = Reciter::where('status', 1);
@@ -205,15 +203,10 @@ class ReciterController extends ApiController
             }
             $result['moshaf'] = $moshafs;
 
-
             if (!empty($moshafs)) {
-
                 $results[] = $result;
             }
         }
-
-
-
         return $results;
     }
 
