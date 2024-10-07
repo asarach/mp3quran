@@ -165,8 +165,18 @@ Route::get('/radio/edit/{id}', array('as' => 'radio.edit', 'uses' => 'RadioContr
 Route::put('/radio/{id}', array('as' => 'radio.update', 'uses' => 'RadioController@update'));
 Route::delete('/radio/{id}', array('as' => 'radio.destroy', 'uses' => 'RadioController@destroy'));
 Route::get('/radio/restore/{id}', array('as' => 'radio.restore', 'uses' => 'RadioController@restore'));
-Route::get('/radio/{id}/status/{status}', array('as' => 'radio.status', 'uses' => 'RadioController@changeStatus'));
-Route::post('/radio/actions', array('as' => 'radio.actions', 'uses' => 'RadioController@actions'));
+Route::get('/radio/{id}/list/{list}', array('as' => 'radio.list', 'uses' => 'RadioController@changeList'));
+
+/* Radio_cat  */
+Route::get('/radio_cats', array('as' => 'radio_cat.index', 'uses' => 'RadioCatController@index'));
+Route::post('/radio_cat', array('as' => 'radio_cat.store', 'uses' => 'RadioCatController@store'));
+Route::post('/radio_cat/translations/{id}', array('as' => 'radio_cat.store', 'uses' => 'RadioCatController@translations'));
+Route::get('/radio_cat/edit/{id}', array('as' => 'radio_cat.edit', 'uses' => 'RadioCatController@edit'));
+Route::put('/radio_cat/{id}', array('as' => 'radio_cat.update', 'uses' => 'RadioCatController@update'));
+Route::delete('/radio_cat/{id}', array('as' => 'radio_cat.destroy', 'uses' => 'RadioCatController@destroy'));
+Route::get('/radio_cat/restore/{id}', array('as' => 'radio_cat.restore', 'uses' => 'RadioCatController@restore'));
+Route::get('/radio_cat/{id}/list/{list}', array('as' => 'radio_cat.list', 'uses' => 'RadioCatController@changeList'));
+Route::post('/radio_cat/actions', array('as' => 'radio_cat.actions', 'uses' => 'RadioCatController@actions'));
 
 /* Tadabor  */
 Route::get('/tadabors', array('as' => 'tadabor.index', 'uses' => 'TadaborController@index'));

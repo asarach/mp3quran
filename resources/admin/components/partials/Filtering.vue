@@ -64,6 +64,21 @@
           <span slot="noResult">{{ trans("admin.no-item-found") }}</span>
         </multiselect>
       </div>
+      <div v-if="radio_cats" class="filter radio_cats-filter">
+        <multiselect
+          v-model="filter_model.radio_cat"
+          selected-label
+          select-label
+          deselect-label
+          :options="radio_cats"
+          :placeholder="trans('admin.radio_cat')"
+          label="name"
+          track-by="id"
+          :multiple="false"
+        >
+          <span slot="noResult">{{ trans("admin.no-item-found") }}</span>
+        </multiselect>
+      </div>
 
       <div v-if="languages" class="filter dropdown language-filter">
         <button
@@ -342,6 +357,7 @@ export default {
     languages: "",
     groups: "",
     rewayat: "",
+    radio_cats: "",
     soar: "",
     mushafs: "",
     reciters: "",

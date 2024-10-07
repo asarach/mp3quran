@@ -95,6 +95,7 @@ Vue.component('page-form', require('./components/page/Form.vue').default);
 Vue.component('sora-form', require('./components/sora/Form.vue').default);
 Vue.component('language-form', require('./components/language/Form.vue').default);
 Vue.component('radio-form', require('./components/radio/Form.vue').default);
+Vue.component('radio-cat-form', require('./components/radio_cat/Form.vue').default);
 Vue.component('tadabor-form', require('./components/tadabor/Form.vue').default);
 Vue.component('reciter-form', require('./components/reciter/Form.vue').default);
 Vue.component('tafsir-form', require('./components/tafsir/Form.vue').default);

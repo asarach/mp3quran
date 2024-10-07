@@ -128,6 +128,16 @@ module.exports = [{
     component: require('./components/radio/Edit.vue').default
 },
 
+//Radio_cats
+{
+    path: routes_base + 'radio_cats',
+    component: require('./components/radio_cat/Index.vue').default
+},
+{
+    path: routes_base + 'radio_cat/edit/:id',
+    component: require('./components/radio_cat/Edit.vue').default
+},
+
 //Tadabor
 {
     path: routes_base + 'tadabors',

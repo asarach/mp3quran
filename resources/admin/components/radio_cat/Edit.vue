@@ -1,10 +1,10 @@
 <template>
   <div class="content-wrapper">
     <vue-headful
-      :title="trans('admin.dashboard_title') + ' | ' + trans('text.radios')"
+      :title="trans('admin.dashboard_title') + ' | ' + trans('text.radio_cats')"
     />
     <section class="content-header">
-      <h1>{{ trans("text.radios") }}</h1>
+      <h1>{{ trans("text.radio_cats") }}</h1>
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
           <router-link :to="prefix">
@@ -13,12 +13,12 @@
           </router-link>
         </li>
         <li class="breadcrumb-item">
-          <router-link :to="prefix + 'radios'">
+          <router-link :to="prefix + 'radio_cats'">
             <i class="fa fa-dashboard"></i>
-            {{ trans("text.radios") }}
+            {{ trans("text.radio_cats") }}
           </router-link>
         </li>
-        <li class="breadcrumb-item active">{{ trans("admin.edit-radio") }}</li>
+        <li class="breadcrumb-item active">{{ trans("admin.edit-radio_cat") }}</li>
       </ol>
     </section>
     <div v-if="show_spinner" class="loading-spinner">
@@ -30,17 +30,13 @@
     <section v-else class="content">
       <div class="row">
         <div class="col-lg-24">
-          <radio-form
+          <radio-cat-form
             :action="'edit'"
-            :radio_cats="radio_cats"
-            :reciters="reciters"
-            :rewayat="rewayat"
-            :mushafs="mushafs"
-            :radio="radio"
-          ></radio-form>
+            :radio_cat="radio_cat"
+          ></radio-cat-form>
         </div>
       </div>
-      <div v-if="false" class="row">
+      <div class="row">
         <div class="col-lg-24">
           <div class="card">
             <form role="form" @submit.prevent="translatePage()">
@@ -101,34 +97,20 @@ export default {
     return {
       show_spinner: true,
       show_error: false,
-      // translations: [],
-      mushafs: {},
-      rewayat: {},
-      reciters: {},
-      radio_cats: {},
-      radio: {
-        name: "",
-        slug: "",
-        url: "",
-        image: "",
-        read: {},
-        rewaya: {},
-        status: 0,
+      translations: [],
+      radio_cat: {
+        name: ""
       },
     };
   },
   methods: {
-    editradio() {
+    editradio_cat() {
       var self = this;
       axios
-        .get(this.ajax_prefix + "radio/edit/" + self.$route.params.id)
+        .get(this.ajax_prefix + "radio_cat/edit/" + self.$route.params.id)
         .then(function (response) {
-          self.radio = response.data.radio;
-          // self.translations = response.data.translations;
-          self.reciters = response.data.reciters;
-          self.mushafs = response.data.mushafs;
-          self.rewayat = response.data.rewayat;
-          self.radio_cats = response.data.radio_cats;
+          self.radio_cat = response.data.radio_cat;
+          self.translations = response.data.translations;
 
           self.show_spinner = false;
         })
@@ -142,13 +124,13 @@ export default {
       var data = this.translations;
       axios
         .post(
-          this.ajax_prefix + "radio/translations/" + self.$route.params.id,
+          this.ajax_prefix + "radio_cat/translations/" + self.$route.params.id,
           data
         )
         .then(function (response) {
           self.$notify({
             group: "admin",
-            text: self.trans("admin.radio-edited"),
+            text: self.trans("admin.radio_cat-edited"),
             type: "success",
             title: self.trans("admin.success"),
           });
@@ -156,7 +138,7 @@ export default {
         .catch(function (error) {
           self.$notify({
             group: "admin",
-            text: self.trans("admin.radio-not-edited"),
+            text: self.trans("admin.radio_cat-not-edited"),
             type: "warning",
             title: self.trans("admin.warning"),
           });
@@ -164,7 +146,7 @@ export default {
     },
   },
   mounted() {
-    this.editradio();
+    this.editradio_cat();
   },
 };
 </script>

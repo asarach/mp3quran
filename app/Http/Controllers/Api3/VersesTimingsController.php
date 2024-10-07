@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api3;
 
 use App\Http\Controllers\Controller;
 use App\Models\Author;
-use App\Models\Mushaf;
+use App\Mushaf;
 use App\Models\QuranVerseTiming;
 use App\Models\SurahRead;
 use Illuminate\Http\Request;
