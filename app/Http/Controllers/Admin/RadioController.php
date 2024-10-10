@@ -36,14 +36,17 @@ class RadioController extends Controller
 
         $radios = DB::connection('apimp3')->table('radios')
             ->join('reciters', 'reciters.id', '=', 'radios.reciter_id')
-            ->join('mushaf', 'mushaf.id', '=', 'radios.mushaf_id')
+            ->leftJoin('mushaf', 'mushaf.id', '=', 'radios.mushaf_id')
             ->join('radio_cats', 'radio_cats.id', '=', 'radios.radio_cat_id')
             ->join('reciter_translations', 'reciters.id', '=', 'reciter_translations.reciter_id')
             ->join('radio_cats_translations', 'radio_cats.id', '=', 'radio_cats_translations.radio_cat_id')
-            ->join('mushaf_translations', 'mushaf.id', '=', 'mushaf_translations.mushaf_id')
+            ->leftJoin('mushaf_translations', 'mushaf.id', '=', 'mushaf_translations.mushaf_id')
             ->where('reciter_translations.language_id', 1)
             ->where('radio_cats_translations.language_id', 1)
-            ->where('mushaf_translations.language_id', 1);
+            ->where(function ($query) {
+                $query->where('mushaf_translations.language_id', 1)
+                    ->orWhereNull('mushaf_translations.language_id');
+            });
 
         if ($radio_cat) {
             $radios->where('radios.radio_cat_id', $radio_cat);
@@ -94,9 +97,9 @@ class RadioController extends Controller
             'name' => 'required|string|max:255',
             'url' => 'required|url',
             'list' => 'required|integer',
-            'mushaf.id' => 'required|integer',
             'reciter.id' => 'required|integer',
-            'rewaya.id' => 'required|integer',
+            'mushaf.id' => 'nullable|integer',
+            'rewaya.id' => 'nullable|integer',
             'radio_cat.id' => 'required|integer',
         ]);
 
@@ -104,9 +107,9 @@ class RadioController extends Controller
             'name' => $validatedData['name'],
             'url' => $validatedData['url'],
             'list' => $validatedData['list'],
-            'mushaf_id' => $validatedData['mushaf']['id'],
+            'mushaf_id' => $validatedData['mushaf']['id'] ?? null,
             'reciter_id' => $validatedData['reciter']['id'],
-            'rewaya_id' => $validatedData['rewaya']['id'],
+            'rewaya_id' => $validatedData['rewaya']['id'] ?? null,
             'radio_cat_id' => $validatedData['radio_cat']['id'],
         ];
 
@@ -127,8 +130,8 @@ class RadioController extends Controller
     {
         $radio = DB::connection('apimp3')->table('radios')
             ->join('reciters', 'reciters.id', '=', 'radios.reciter_id')
-            ->join('mushaf', 'mushaf.id', '=', 'radios.mushaf_id')
-            ->join('rewayat', 'rewayat.id', '=', 'radios.rewaya_id')
+            ->leftJoin('mushaf', 'mushaf.id', '=', 'radios.mushaf_id')
+            ->leftJoin('rewayat', 'rewayat.id', '=', 'radios.rewaya_id')
             ->join('radio_cats', 'radio_cats.id', '=', 'radios.radio_cat_id')
             ->where('radios.id', $id)
             ->select(
@@ -183,8 +186,11 @@ class RadioController extends Controller
         $mushafs = DB::connection('apimp3')->table('mushaf')->select(['id', 'name'])->get();
         $rewayat = DB::connection('apimp3')->table('rewayat')->select(['id', 'name'])->get();
 
+        $listItems = DB::connection('apimp3')->table('radio_list')->where('radio_id', $radio['id'])->get();
 
-        return compact('radio', 'reciters', 'radio_cats', 'mushafs', 'rewayat');
+
+
+        return compact('radio', 'reciters', 'radio_cats', 'mushafs', 'rewayat', 'listItems');
     }
 
     /**
@@ -201,9 +207,9 @@ class RadioController extends Controller
             'name' => 'required|string|max:255',
             'url' => 'required|url',
             'list' => 'required|integer',
-            'mushaf.id' => 'required|integer',
+            'mushaf.id' => 'nullable|integer',
             'reciter.id' => 'required|integer',
-            'rewaya.id' => 'required|integer',
+            'rewaya.id' => 'nullable|integer',
             'radio_cat.id' => 'required|integer',
         ]);
 
@@ -219,9 +225,9 @@ class RadioController extends Controller
             'name' => $validatedData['name'],
             'url' => $validatedData['url'],
             'list' => $validatedData['list'],
-            'mushaf_id' => $validatedData['mushaf']['id'],
+            'mushaf_id' => $validatedData['mushaf']['id'] ?? null,
             'reciter_id' => $validatedData['reciter']['id'],
-            'rewaya_id' => $validatedData['rewaya']['id'],
+            'rewaya_id' => $validatedData['rewaya']['id'] ?? null,
             'radio_cat_id' => $validatedData['radio_cat']['id'],
         ];
 
@@ -262,5 +268,60 @@ class RadioController extends Controller
             ->update(['list' => $list]);
 
         return compact('list');
+    }
+    public function list(Request $request, $id)
+    {
+        $input = $request->all();
+        // Collect all existing seq_ids for the given radio_id
+        $existingSeqIds = DB::connection('apimp3')->table('radio_list')
+            ->where('radio_id', $id)
+            ->pluck('seq_id')
+            ->toArray();
+
+        // Collect new seq_ids from the input
+        $newSeqIds = array_column($input, 'seq_id');
+
+        // Determine seq_ids to delete
+        $seqIdsToDelete = array_diff($existingSeqIds, $newSeqIds);
+
+        // Delete items that are not in the new array
+        if (!empty($seqIdsToDelete)) {
+            DB::connection('apimp3')->table('radio_list')
+                ->where('radio_id', $id)
+                ->whereIn('seq_id', $seqIdsToDelete)
+                ->delete();
+        }
+
+        foreach ($input as $key => $listItem) {
+            $existingItem = DB::connection('apimp3')->table('radio_list')
+                ->where('radio_id', $id)
+                ->where('seq_id', $listItem['seq_id'])
+                ->first();
+
+            if ($existingItem) {
+                DB::connection('apimp3')->table('radio_list')
+                    ->where('radio_id', $id)
+                    ->where('seq_id', $listItem['seq_id'])
+                    ->update([
+                        'name' => $listItem['name'],
+                        'url' => $listItem['url'],
+                        'language' => $listItem['language'],
+                        'seq_id' => $listItem['seq_id'],
+                        'radio_id' => $id
+                    ]);
+            } else {
+                DB::connection('apimp3')->table('radio_list')
+                    ->insert([
+                        'name' => $listItem['name'],
+                        'url' => $listItem['url'],
+                        'language' => $listItem['language'],
+                        'seq_id' => $listItem['seq_id'],
+                        'radio_id' => $id
+                    ]);
+            }
+        }
+        $result = true;
+
+        return compact('result');
     }
 }

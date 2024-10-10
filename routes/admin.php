@@ -161,6 +161,7 @@ Route::post('/page/actions', array('as' => 'page.actions', 'uses' => 'PageContro
 Route::get('/radios', array('as' => 'radio.index', 'uses' => 'RadioController@index'));
 Route::post('/radio', array('as' => 'radio.store', 'uses' => 'RadioController@store'));
 Route::post('/radio/translations/{id}', array('as' => 'radio.store', 'uses' => 'RadioController@translations'));
+Route::post('/radio/list/{id}', array('as' => 'radio.list', 'uses' => 'RadioController@list'));
 Route::get('/radio/edit/{id}', array('as' => 'radio.edit', 'uses' => 'RadioController@edit'));
 Route::put('/radio/{id}', array('as' => 'radio.update', 'uses' => 'RadioController@update'));
 Route::delete('/radio/{id}', array('as' => 'radio.destroy', 'uses' => 'RadioController@destroy'));

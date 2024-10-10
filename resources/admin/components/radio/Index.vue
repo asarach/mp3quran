@@ -182,8 +182,8 @@ export default {
         .then(response => {
           self.radios = response.data.radios;
           self.reciters = response.data.reciters;
-          self.mushafs = response.data.mushafs;
-          self.rewayat = response.data.rewayat;
+          self.mushafs = [{ id: null, name: 'None' }, ...response.data.mushafs];
+          self.rewayat = [{ id: null, name: 'None' }, ...response.data.rewayat];
           self.radio_cats = response.data.radio_cats;
           self.show_spinner = false;
           window.scroll(0, 0);

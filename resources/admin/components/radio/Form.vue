@@ -41,6 +41,7 @@
 
          <!-- reciter -->
         <div class="form-group">
+          <label class="col-form-label">{{ trans("text.reciter") }}</label>
           <multiselect
             v-model="radio.reciter"
             selected-label
@@ -61,6 +62,7 @@
 
         <!-- rewaya -->
         <div class="form-group">
+          <label class="col-form-label">{{ trans("text.rewaya") }}</label>
           <multiselect
             v-model="radio.rewaya"
             selected-label
@@ -81,6 +83,7 @@
 
         <!-- mushaf -->
         <div class="form-group">
+          <label class="col-form-label">{{ trans("text.mushaf") }}</label>
           <multiselect
             v-model="radio.mushaf"
             selected-label
@@ -101,6 +104,7 @@
 
         <!-- radio_cat -->
         <div class="form-group">
+          <label class="col-form-label">{{ trans("text.radio_cat") }}</label>
           <multiselect
             v-model="radio.radio_cat"
             selected-label
@@ -134,7 +138,7 @@
                   v-model="radio.list"
                 />
                 <label class="custom-control-label" for="customRadiolist1">{{
-                  trans("admin.active")
+                  trans("admin.with-list")
                 }}</label>
               </div>
             </div>
@@ -148,7 +152,7 @@
                   v-model="radio.list"
                 />
                 <label class="custom-control-label" for="customRadiolist2">{{
-                  trans("admin.deactive")
+                  trans("admin.without-list")
                 }}</label>
               </div>
             </div>
